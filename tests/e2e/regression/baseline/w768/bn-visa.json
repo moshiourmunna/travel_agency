@@ -1,0 +1,42 @@
+{
+ "path": "/visa",
+ "lang": "bn",
+ "dir": "ltr",
+ "title": "ভিসা সেবা | Blessing Hajj Agency",
+ "headings": [
+  "H1:ভিসা সেবা",
+  "H3:ভিসার জন্য আবেদন",
+  "H3:ভিসা স্ট্যাটাস দেখুন"
+ ],
+ "nav": [
+  "/",
+  "/hajj",
+  "/umrah",
+  "/flights",
+  "/hotels",
+  "/visa",
+  "/tours",
+  "/guide",
+  "/about",
+  "/contact",
+  "/login",
+  "/booking",
+  "/dashboard"
+ ],
+ "forms": [
+  "post /visa/apply [_token,applicants,name,passport,phone,visa_type_id]",
+  "get /visa/track [ref]"
+ ],
+ "buttons": [
+  "☰",
+  "আবেদন",
+  "আবেদন",
+  "আবেদন",
+  "আবেদন",
+  "আবেদন",
+  "আবেদন",
+  "আবেদন জমা দিন",
+  "ট্র্যাক"
+ ],
+ "images": 2
+}

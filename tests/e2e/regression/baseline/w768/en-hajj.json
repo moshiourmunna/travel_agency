@@ -1,0 +1,38 @@
+{
+ "path": "/hajj",
+ "lang": "en",
+ "dir": "ltr",
+ "title": "Hajj Packages 2027 | Blessing Hajj Agency",
+ "headings": [
+  "H1:Hajj Packages 2027",
+  "H3:Economy Hajj 2027",
+  "H3:Standard Hajj 2027",
+  "H3:Premium Shifting-free Hajj",
+  "H3:VIP Hajj – Clock Tower"
+ ],
+ "nav": [
+  "/",
+  "/hajj",
+  "/umrah",
+  "/flights",
+  "/hotels",
+  "/visa",
+  "/tours",
+  "/guide",
+  "/about",
+  "/contact",
+  "/login",
+  "/booking",
+  "/dashboard"
+ ],
+ "forms": [],
+ "buttons": [
+  "☰",
+  "Reset filters",
+  "View Details",
+  "View Details",
+  "View Details",
+  "View Details"
+ ],
+ "images": 2
+}

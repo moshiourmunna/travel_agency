@@ -1,0 +1,34 @@
+{
+ "path": "/pre-registration",
+ "lang": "en",
+ "dir": "ltr",
+ "title": "Hajj 2027 Pre-registration | Blessing Hajj Agency",
+ "headings": [
+  "H1:Hajj 2027 Pre-registration",
+  "H3:Pre-registration form"
+ ],
+ "nav": [
+  "/",
+  "/hajj",
+  "/umrah",
+  "/flights",
+  "/hotels",
+  "/visa",
+  "/tours",
+  "/guide",
+  "/about",
+  "/contact",
+  "/login",
+  "/booking",
+  "/dashboard"
+ ],
+ "forms": [
+  "post /pre-registration [_token,agree,district,dob,name,nid,package_class,passport,phone,pilgrims]"
+ ],
+ "buttons": [
+  "Login",
+  "Book Now",
+  "Submit pre-registration"
+ ],
+ "images": 2
+}

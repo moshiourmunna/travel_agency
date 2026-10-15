@@ -1,0 +1,38 @@
+{
+ "path": "/packages/vip-hajj-clock-tower",
+ "lang": "bn",
+ "dir": "ltr",
+ "title": "ভিআইপি হজ্জ – ক্লক টাওয়ার | Blessing Hajj Agency",
+ "headings": [
+  "H1:ভিআইপি হজ্জ – ক্লক টাওয়ার",
+  "H3:দিনভিত্তিক ভ্রমণসূচি",
+  "H3:হোটেল",
+  "H3:কিস্তি পরিকল্পনা (রুম ও যাত্রী অনুযায়ী আপডেট হয়)",
+  "H3:রিভিউ ★ 5"
+ ],
+ "nav": [
+  "/",
+  "/hajj",
+  "/umrah",
+  "/flights",
+  "/hotels",
+  "/visa",
+  "/tours",
+  "/guide",
+  "/about",
+  "/contact",
+  "/login",
+  "/booking",
+  "/dashboard"
+ ],
+ "forms": [
+  "get /booking [package,pax,room]"
+ ],
+ "buttons": [
+  "☰",
+  "প্যাকেজ বুক করুন",
+  "জিজ্ঞাসা পাঠান",
+  "বুক করুন"
+ ],
+ "images": 2
+}

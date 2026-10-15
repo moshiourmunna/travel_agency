@@ -1,0 +1,19 @@
+{
+ "path": "/login",
+ "lang": "bn",
+ "dir": "ltr",
+ "title": "লগইন | Blessing Hajj Agency",
+ "headings": [
+  "H2:আপনার পবিত্র যাত্রা, আমাদের বিশ্বস্ত যত্ন",
+  "H2:স্বাগতম"
+ ],
+ "nav": [],
+ "forms": [
+  "post /login [_token,login,password,remember]",
+  "post /register [_token,email,name,password,password_confirmation,phone]"
+ ],
+ "buttons": [
+  "লগইন"
+ ],
+ "images": 1
+}

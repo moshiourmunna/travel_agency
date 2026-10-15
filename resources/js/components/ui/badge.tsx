@@ -1,0 +1,14 @@
+import { cn } from '@/lib/utils';
+import type { Tone } from '@/types';
+
+const tones: Record<Tone | 'muted', string> = {
+  ok: 'bg-emerald-50 text-emerald-800 ring-emerald-600/20 dark:bg-emerald-950 dark:text-emerald-300',
+  no: 'bg-red-50 text-red-800 ring-red-600/20 dark:bg-red-950 dark:text-red-300',
+  pen: 'bg-amber-50 text-amber-800 ring-amber-600/20 dark:bg-amber-950 dark:text-amber-300',
+  inf: 'bg-sky-50 text-sky-800 ring-sky-600/20 dark:bg-sky-950 dark:text-sky-300',
+  muted: 'bg-slate-100 text-slate-700 ring-slate-500/20 dark:bg-slate-800 dark:text-slate-300',
+};
+
+export function Badge({ tone = 'muted', className, children }: { tone?: Tone | 'muted'; className?: string; children: React.ReactNode }) {
+  return <span className={cn('inline-flex max-w-full items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium ring-1 ring-inset whitespace-nowrap', tones[tone], className)}>{children}</span>;
+}

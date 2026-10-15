@@ -1,0 +1,39 @@
+{
+ "path": "/faq",
+ "lang": "bn",
+ "dir": "ltr",
+ "title": "সাধারণ জিজ্ঞাসা | Blessing Hajj Agency",
+ "headings": [
+  "H1:সাধারণ জিজ্ঞাসা",
+  "H2:ডাকে সাড়া দিতে প্রস্তুত?"
+ ],
+ "nav": [
+  "/",
+  "/hajj",
+  "/umrah",
+  "/flights",
+  "/hotels",
+  "/visa",
+  "/tours",
+  "/guide",
+  "/about",
+  "/contact",
+  "/login",
+  "/booking",
+  "/dashboard"
+ ],
+ "forms": [],
+ "buttons": [
+  "লগইন",
+  "বুক করুন",
+  "সব",
+  "হজ্জ",
+  "উমরাহ",
+  "পেমেন্ট",
+  "ভিসা",
+  "নারী",
+  "বিনামূল্যে পরামর্শ",
+  "💬 WhatsApp"
+ ],
+ "images": 2
+}

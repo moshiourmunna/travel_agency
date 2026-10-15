@@ -1,0 +1,17 @@
+@extends('layouts.app')
+@php($title = t3('Hajj & Umrah Guide','হজ্জ ও উমরাহ গাইড','دليل الحج والعمرة'))
+@section('title', $title)
+@section('content')
+<x-page-header :title="$title" :img="4"/>
+@php($guides = [
+ 'hajj' => [t3('Hajj step by step','ধাপে ধাপে হজ্জ','الحج خطوة بخطوة'), [['8 Dhul Hijjah – Ihram & Mina','Enter Ihram from your residence, recite Talbiyah, move to Mina and pray Zuhr to Fajr there.'],['9 Dhul Hijjah – Arafah','The pillar of Hajj. Stand in Arafat from Zuhr until sunset in dua; then go to Muzdalifah and collect pebbles.'],['10 Dhul Hijjah – Eid day',"Stone Jamarat al-Aqabah (7), Qurbani, shave/trim hair, Tawaf al-Ifadah and Sa'i."],['11–12 (13) Dhul Hijjah – Tashreeq','Stone all three Jamarat daily after Zuhr, stay nights in Mina.'],['Farewell','Perform Tawaf al-Wada before leaving Makkah.']]],
+ 'umrah' => [t3('Umrah step by step','ধাপে ধাপে উমরাহ','العمرة خطوة بخطوة'), [['1. Ihram','Make intention at the Miqat, wear Ihram and recite Talbiyah.'],['2. Tawaf','Seven circuits around the Kaaba starting from the Black Stone.'],['3. Two rak\'ah','Pray two rak\'ah behind Maqam Ibrahim and drink Zamzam.'],["4. Sa'i",'Seven rounds between Safa and Marwah.'],['5. Halq / Taqsir','Shave or trim the hair – your Umrah is complete.']]],
+ 'women' => [t3('For women','নারীদের জন্য','للنساء'), [['Ihram for women','Regular modest clothing; face and hands uncovered; no special colour.'],['Menstruation','All rites except Tawaf may be performed; wait for purity before Tawaf.'],['Group travel','Women above 45 may travel in an organised group – our female guide accompanies every group.']]],
+])
+<section><div class="wrap side r"><div><div class="chips" style="margin-bottom:22px">@foreach($guides as $k => [$label])<button @class(['chip', 'on' => $loop->first]) data-cat="{{ $k }}">{{ $label }}</button>@endforeach</div>
+@foreach($guides as $k => [$label, $steps])<div data-cat-item="{{ $k }}" @if(!$loop->first) hidden @endif><h2 style="margin-bottom:18px">{{ $label }}</h2><div class="itin">@foreach($steps as [$a,$b])<div class="d"><b>{{ $a }}</b><p>{{ $b }}</p></div>@endforeach</div></div>@endforeach
+<h2 style="margin:30px 0 10px">{{ t3('Essential duas','প্রয়োজনীয় দোয়া','أدعية مهمة') }}</h2>
+<div class="dua"><b>Talbiyah</b><div class="ar">لَبَّيْكَ اللَّهُمَّ لَبَّيْكَ، لَبَّيْكَ لَا شَرِيكَ لَكَ لَبَّيْكَ</div><i style="color:var(--mut)">Here I am, O Allah, here I am. You have no partner, here I am.</i></div>
+<div class="dua"><b>Between Rukn Yamani & Black Stone</b><div class="ar">رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ</div><i style="color:var(--mut)">Our Lord, give us good in this world and good in the Hereafter and protect us from the Fire.</i></div></div>
+<aside class="panel sticky" id="checklist"><h4>🧳 {{ t3('Packing checklist','প্যাকিং চেকলিস্ট','قائمة التجهيز') }} <small data-check-count style="color:var(--mut);font-weight:400"></small></h4>@foreach(['Passport (6+ months) & 4 photos','Ihram (2 sets) / modest clothing','Comfortable sandals','Unscented soap & toiletries','Personal medicine + prescription','Small bag for pebbles','Power bank & Saudi SIM','Umbrella & foldable mat',"Dua book & pocket Qur'an"] as $i => $c)<label class="chk"><input type="checkbox" data-check="{{ $i }}"> {{ $c }}</label>@endforeach<button type="button" class="btn btn-out btn-block" style="margin-top:14px" onclick="window.print()">⬇ {{ t3('Print / save as PDF','প্রিন্ট / পিডিএফ','طباعة / PDF') }}</button></aside></div></section>
+@endsection

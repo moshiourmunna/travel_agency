@@ -1,0 +1,39 @@
+{
+ "path": "/faq",
+ "lang": "ar",
+ "dir": "rtl",
+ "title": "الأسئلة الشائعة | Blessing Hajj Agency",
+ "headings": [
+  "H1:الأسئلة الشائعة",
+  "H2:هل أنت مستعد لتلبية النداء؟"
+ ],
+ "nav": [
+  "/",
+  "/hajj",
+  "/umrah",
+  "/flights",
+  "/hotels",
+  "/visa",
+  "/tours",
+  "/guide",
+  "/about",
+  "/contact",
+  "/login",
+  "/booking",
+  "/dashboard"
+ ],
+ "forms": [],
+ "buttons": [
+  "دخول",
+  "احجز الآن",
+  "الكل",
+  "الحج",
+  "العمرة",
+  "الدفع",
+  "التأشيرة",
+  "النساء",
+  "استشارة مجانية",
+  "💬 WhatsApp"
+ ],
+ "images": 2
+}

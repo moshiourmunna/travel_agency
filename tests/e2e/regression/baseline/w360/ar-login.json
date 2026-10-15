@@ -1,0 +1,18 @@
+{
+ "path": "/login",
+ "lang": "ar",
+ "dir": "rtl",
+ "title": "دخول | Blessing Hajj Agency",
+ "headings": [
+  "H2:مرحباً بعودتك"
+ ],
+ "nav": [],
+ "forms": [
+  "post /login [_token,login,password,remember]",
+  "post /register [_token,email,name,password,password_confirmation,phone]"
+ ],
+ "buttons": [
+  "دخول"
+ ],
+ "images": 1
+}

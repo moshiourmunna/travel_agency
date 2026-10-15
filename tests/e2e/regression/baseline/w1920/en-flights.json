@@ -1,0 +1,44 @@
+{
+ "path": "/flights",
+ "lang": "en",
+ "dir": "ltr",
+ "title": "Flight Booking | Blessing Hajj Agency",
+ "headings": [
+  "H1:Flight Booking"
+ ],
+ "nav": [
+  "/",
+  "/hajj",
+  "/umrah",
+  "/flights",
+  "/hotels",
+  "/visa",
+  "/tours",
+  "/guide",
+  "/about",
+  "/contact",
+  "/login",
+  "/booking",
+  "/dashboard"
+ ],
+ "forms": [
+  "get [date,from,pax,to]"
+ ],
+ "buttons": [
+  "Login",
+  "Book Now",
+  "Round trip",
+  "One way",
+  "Search",
+  "Cheapest",
+  "Fastest",
+  "Earliest",
+  "Select",
+  "Select",
+  "Select",
+  "Select",
+  "Select",
+  "Select"
+ ],
+ "images": 2
+}

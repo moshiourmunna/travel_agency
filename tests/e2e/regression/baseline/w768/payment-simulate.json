@@ -1,0 +1,32 @@
+{
+ "path": "/payment/<ID>/simulate",
+ "lang": "en",
+ "dir": "ltr",
+ "title": "Payment | Blessing Hajj Agency",
+ "headings": [
+  "H2:bKash"
+ ],
+ "nav": [
+  "/",
+  "/hajj",
+  "/umrah",
+  "/flights",
+  "/hotels",
+  "/visa",
+  "/tours",
+  "/guide",
+  "/about",
+  "/contact",
+  "/dashboard",
+  "/booking"
+ ],
+ "forms": [
+  "post /payment/callback/14 [_token,status]"
+ ],
+ "buttons": [
+  "☰",
+  "Pay ৳ 98,000",
+  "Cancel"
+ ],
+ "images": 2
+}

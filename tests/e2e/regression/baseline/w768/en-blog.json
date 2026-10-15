@@ -1,0 +1,37 @@
+{
+ "path": "/blog",
+ "lang": "en",
+ "dir": "ltr",
+ "title": "Blog & Guides | Blessing Hajj Agency",
+ "headings": [
+  "H1:Blog & Guides",
+  "H3:Hajj 2027 registration: deadlines and fees explained",
+  "H<TIME> things to pack for Umrah",
+  "H3:Ziyarah in Madinah: the places you should not miss",
+  "H3:Women and Hajj: Mahram rules for 2027",
+  "H3:Paying for Hajj in installments: how to plan your budget",
+  "H3:Staying healthy in the Hajj heat"
+ ],
+ "nav": [
+  "/",
+  "/hajj",
+  "/umrah",
+  "/flights",
+  "/hotels",
+  "/visa",
+  "/tours",
+  "/guide",
+  "/about",
+  "/contact",
+  "/login",
+  "/booking",
+  "/dashboard"
+ ],
+ "forms": [
+  "get [q]"
+ ],
+ "buttons": [
+  "☰"
+ ],
+ "images": 2
+}

@@ -1,0 +1,34 @@
+{
+ "path": "/contact",
+ "lang": "bn",
+ "dir": "ltr",
+ "title": "যোগাযোগ | Blessing Hajj Agency",
+ "headings": [
+  "H1:যোগাযোগ",
+  "H3:বার্তা পাঠান"
+ ],
+ "nav": [
+  "/",
+  "/hajj",
+  "/umrah",
+  "/flights",
+  "/hotels",
+  "/visa",
+  "/tours",
+  "/guide",
+  "/about",
+  "/contact",
+  "/login",
+  "/booking",
+  "/dashboard"
+ ],
+ "forms": [
+  "post /contact [_token,interest,message,name,package,phone]"
+ ],
+ "buttons": [
+  "লগইন",
+  "বুক করুন",
+  "বার্তা পাঠান"
+ ],
+ "images": 2
+}

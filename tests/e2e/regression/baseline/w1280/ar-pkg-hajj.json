@@ -1,0 +1,38 @@
+{
+ "path": "/packages/vip-hajj-clock-tower",
+ "lang": "ar",
+ "dir": "rtl",
+ "title": "حج VIP – برج الساعة | Blessing Hajj Agency",
+ "headings": [
+  "H1:حج VIP – برج الساعة",
+  "H3:البرنامج اليومي",
+  "H3:الفنادق",
+  "H3:خطة التقسيط (يتحدث حسب الغرفة والمسافرين)",
+  "H3:التقييمات ★ 5"
+ ],
+ "nav": [
+  "/",
+  "/hajj",
+  "/umrah",
+  "/flights",
+  "/hotels",
+  "/visa",
+  "/tours",
+  "/guide",
+  "/about",
+  "/contact",
+  "/login",
+  "/booking",
+  "/dashboard"
+ ],
+ "forms": [
+  "get /booking [package,pax,room]"
+ ],
+ "buttons": [
+  "دخول",
+  "احجز الآن",
+  "احجز الباقة",
+  "أرسل استفساراً"
+ ],
+ "images": 2
+}

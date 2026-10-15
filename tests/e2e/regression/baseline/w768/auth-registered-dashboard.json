@@ -1,0 +1,28 @@
+{
+ "path": "/dashboard",
+ "lang": "en",
+ "dir": "ltr",
+ "title": "My Dashboard | Blessing Hajj Agency",
+ "headings": [
+  "H2:Assalamu Alaikum, Regression User 2"
+ ],
+ "nav": [
+  "/",
+  "/dashboard#ov",
+  "/dashboard#bk",
+  "/dashboard#in",
+  "/dashboard#dc",
+  "/dashboard#vs",
+  "/dashboard#py",
+  "/dashboard#pf"
+ ],
+ "forms": [
+  "post /logout [_token]",
+  "post /dashboard/profile [_method,_token,address,district,email,name]"
+ ],
+ "buttons": [
+  "⎋ Logout",
+  "Book a package"
+ ],
+ "images": 1
+}

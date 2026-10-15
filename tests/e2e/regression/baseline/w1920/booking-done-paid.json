@@ -1,0 +1,30 @@
+{
+ "path": "/booking/BHA-<REF>/done",
+ "lang": "en",
+ "dir": "ltr",
+ "title": "BHA-<REF> | Blessing Hajj Agency",
+ "headings": [
+  "H2:Booking confirmed!"
+ ],
+ "nav": [
+  "/",
+  "/hajj",
+  "/umrah",
+  "/flights",
+  "/hotels",
+  "/visa",
+  "/tours",
+  "/guide",
+  "/about",
+  "/contact",
+  "/dashboard",
+  "/booking"
+ ],
+ "forms": [],
+ "buttons": [
+  "My account",
+  "Book Now",
+  "Go to my dashboard"
+ ],
+ "images": 2
+}

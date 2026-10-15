@@ -1,0 +1,45 @@
+{
+ "path": "/tours",
+ "lang": "en",
+ "dir": "ltr",
+ "title": "Tours & Ziyarah | Blessing Hajj Agency",
+ "headings": [
+  "H1:Tours & Ziyarah",
+  "H3:Makkah Ziyarah (half day)",
+  "H3:Madinah Ziyarah (full day)",
+  "H3:Taif Day Trip",
+  "H3:Umrah + Dubai stopover",
+  "H3:Istanbul & Bursa – 7 days",
+  "H3:Jerusalem & Al-Aqsa via Jordan"
+ ],
+ "nav": [
+  "/",
+  "/hajj",
+  "/umrah",
+  "/flights",
+  "/hotels",
+  "/visa",
+  "/tours",
+  "/guide",
+  "/about",
+  "/contact",
+  "/login",
+  "/booking",
+  "/dashboard"
+ ],
+ "forms": [],
+ "buttons": [
+  "Login",
+  "Book Now",
+  "All",
+  "Ziyarah",
+  "Islamic Tours",
+  "Book",
+  "Book",
+  "Book",
+  "Book",
+  "Book",
+  "Book"
+ ],
+ "images": 2
+}

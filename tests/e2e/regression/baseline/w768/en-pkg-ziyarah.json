@@ -1,0 +1,36 @@
+{
+ "path": "/packages/taif-day-trip",
+ "lang": "en",
+ "dir": "ltr",
+ "title": "Taif Day Trip | Blessing Hajj Agency",
+ "headings": [
+  "H1:Taif Day Trip",
+  "H3:Day-by-day itinerary",
+  "H3:Installment plan (updates with your room & travellers)",
+  "H3:Reviews ★ 4.7"
+ ],
+ "nav": [
+  "/",
+  "/hajj",
+  "/umrah",
+  "/flights",
+  "/hotels",
+  "/visa",
+  "/tours",
+  "/guide",
+  "/about",
+  "/contact",
+  "/login",
+  "/booking",
+  "/dashboard"
+ ],
+ "forms": [
+  "get /booking [package,pax,room]"
+ ],
+ "buttons": [
+  "☰",
+  "Book this package",
+  "Send enquiry"
+ ],
+ "images": 2
+}

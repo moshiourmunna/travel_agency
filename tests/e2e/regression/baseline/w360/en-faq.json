@@ -1,0 +1,38 @@
+{
+ "path": "/faq",
+ "lang": "en",
+ "dir": "ltr",
+ "title": "Frequently Asked Questions | Blessing Hajj Agency",
+ "headings": [
+  "H1:Frequently Asked Questions",
+  "H2:Ready to answer the call?"
+ ],
+ "nav": [
+  "/",
+  "/hajj",
+  "/umrah",
+  "/flights",
+  "/hotels",
+  "/visa",
+  "/tours",
+  "/guide",
+  "/about",
+  "/contact",
+  "/login",
+  "/booking",
+  "/dashboard"
+ ],
+ "forms": [],
+ "buttons": [
+  "☰",
+  "All",
+  "Hajj",
+  "Umrah",
+  "Payment",
+  "Visa",
+  "Women",
+  "Get free consultation",
+  "💬 WhatsApp"
+ ],
+ "images": 2
+}

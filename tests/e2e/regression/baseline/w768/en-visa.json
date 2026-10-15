@@ -1,0 +1,42 @@
+{
+ "path": "/visa",
+ "lang": "en",
+ "dir": "ltr",
+ "title": "Visa Services | Blessing Hajj Agency",
+ "headings": [
+  "H1:Visa Services",
+  "H3:Apply for a visa",
+  "H3:Track visa status"
+ ],
+ "nav": [
+  "/",
+  "/hajj",
+  "/umrah",
+  "/flights",
+  "/hotels",
+  "/visa",
+  "/tours",
+  "/guide",
+  "/about",
+  "/contact",
+  "/login",
+  "/booking",
+  "/dashboard"
+ ],
+ "forms": [
+  "post /visa/apply [_token,applicants,name,passport,phone,visa_type_id]",
+  "get /visa/track [ref]"
+ ],
+ "buttons": [
+  "☰",
+  "Apply",
+  "Apply",
+  "Apply",
+  "Apply",
+  "Apply",
+  "Apply",
+  "Submit application",
+  "Track"
+ ],
+ "images": 2
+}

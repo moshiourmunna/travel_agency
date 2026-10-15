@@ -1,0 +1,18 @@
+{
+ "path": "/login",
+ "lang": "en",
+ "dir": "ltr",
+ "title": "Login | Blessing Hajj Agency",
+ "headings": [
+  "H2:Welcome back"
+ ],
+ "nav": [],
+ "forms": [
+  "post /login [_token,login,password,remember]",
+  "post /register [_token,email,name,password,password_confirmation,phone]"
+ ],
+ "buttons": [
+  "Login"
+ ],
+ "images": 1
+}

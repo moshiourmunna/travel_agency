@@ -1,0 +1,42 @@
+{
+ "path": "/visa",
+ "lang": "ar",
+ "dir": "rtl",
+ "title": "خدمات التأشيرة | Blessing Hajj Agency",
+ "headings": [
+  "H1:خدمات التأشيرة",
+  "H3:تقديم طلب تأشيرة",
+  "H3:تتبع التأشيرة"
+ ],
+ "nav": [
+  "/",
+  "/hajj",
+  "/umrah",
+  "/flights",
+  "/hotels",
+  "/visa",
+  "/tours",
+  "/guide",
+  "/about",
+  "/contact",
+  "/login",
+  "/booking",
+  "/dashboard"
+ ],
+ "forms": [
+  "post /visa/apply [_token,applicants,name,passport,phone,visa_type_id]",
+  "get /visa/track [ref]"
+ ],
+ "buttons": [
+  "☰",
+  "تقديم",
+  "تقديم",
+  "تقديم",
+  "تقديم",
+  "تقديم",
+  "تقديم",
+  "إرسال الطلب",
+  "تتبع"
+ ],
+ "images": 2
+}

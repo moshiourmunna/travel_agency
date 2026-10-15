@@ -1,0 +1,34 @@
+{
+ "path": "/pre-registration",
+ "lang": "bn",
+ "dir": "ltr",
+ "title": "হজ্জ ২০২৭ প্রাক-নিবন্ধন | Blessing Hajj Agency",
+ "headings": [
+  "H1:হজ্জ ২০২৭ প্রাক-নিবন্ধন",
+  "H3:প্রাক-নিবন্ধন ফরম"
+ ],
+ "nav": [
+  "/",
+  "/hajj",
+  "/umrah",
+  "/flights",
+  "/hotels",
+  "/visa",
+  "/tours",
+  "/guide",
+  "/about",
+  "/contact",
+  "/login",
+  "/booking",
+  "/dashboard"
+ ],
+ "forms": [
+  "post /pre-registration [_token,agree,district,dob,name,nid,package_class,passport,phone,pilgrims]"
+ ],
+ "buttons": [
+  "লগইন",
+  "বুক করুন",
+  "প্রাক-নিবন্ধন জমা দিন"
+ ],
+ "images": 2
+}

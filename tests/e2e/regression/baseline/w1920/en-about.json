@@ -1,0 +1,37 @@
+{
+ "path": "/about",
+ "lang": "en",
+ "dir": "ltr",
+ "title": "About Blessing Hajj Agency | Blessing Hajj Agency",
+ "headings": [
+  "H1:About Blessing Hajj Agency",
+  "H2:Your Sacred Journey, Our Trusted Care",
+  "H2:Our Licences",
+  "H2:Our journey",
+  "H2:Leadership team",
+  "H2:Ready to answer the call?"
+ ],
+ "nav": [
+  "/",
+  "/hajj",
+  "/umrah",
+  "/flights",
+  "/hotels",
+  "/visa",
+  "/tours",
+  "/guide",
+  "/about",
+  "/contact",
+  "/login",
+  "/booking",
+  "/dashboard"
+ ],
+ "forms": [],
+ "buttons": [
+  "Login",
+  "Book Now",
+  "Get free consultation",
+  "💬 WhatsApp"
+ ],
+ "images": 2
+}

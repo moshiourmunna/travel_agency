@@ -1,0 +1,15 @@
+@extends('layouts.app')
+@php($title = t3('About Blessing Hajj Agency','ব্লেসিং হজ্জ এজেন্সি সম্পর্কে','عن وكالة بركة'))
+@section('title', $title)
+@section('content')
+<x-page-header :title="$title" :img="2"/>
+<section><div class="wrap grid g2" style="align-items:center"><div style="height:420px;border-radius:20px;background:url({{ asset('assets/img/img6.jpg') }}) center/cover"></div><div><span class="eyebrow">Since 2010</span><h2 style="font-size:36px">{{ site('tagline') }}</h2>
+<p style="color:var(--mut);margin:14px 0">{{ t3('Blessing Hajj Agency was founded with one aim: that every pilgrim from Bangladesh – from Dhaka to Teknaf – can perform Hajj and Umrah with ease, dignity and correct guidance. Today we serve thousands of pilgrims every year with our own teams in Dhaka, Chattogram, Sylhet and Makkah.','ব্লেসিং হজ্জ এজেন্সি একটি লক্ষ্য নিয়ে প্রতিষ্ঠিত: বাংলাদেশের প্রতিটি হাজী যেন স্বাচ্ছন্দ্যে, মর্যাদার সাথে ও সঠিক দিকনির্দেশনায় হজ্জ ও উমরাহ পালন করতে পারেন।','تأسست الوكالة بهدف أن يؤدي كل حاج من بنغلاديش مناسكه بيسر وكرامة وتوجيه صحيح.') }}</p>
+<div class="grid g2"><div class="panel"><b>🎯 {{ t3('Mission','লক্ষ্য','الرسالة') }}</b><p style="font-size:14px;color:var(--mut)">{{ t3('Sincere service, transparent pricing, Sunnah-guided worship.','আন্তরিক সেবা, স্বচ্ছ মূল্য, সুন্নাহভিত্তিক ইবাদত।','خدمة مخلصة وأسعار شفافة وعبادة على السنة.') }}</p></div><div class="panel"><b>🌙 {{ t3('Vision','ভিশন','الرؤية') }}</b><p style="font-size:14px;color:var(--mut)">{{ t3("Bangladesh's most trusted pilgrimage partner.",'বাংলাদেশের সবচেয়ে বিশ্বস্ত হজ্জ সহযোগী।','الشريك الأكثر ثقة للحج في بنغلاديش.') }}</p></div></div></div></div></section>
+@if(count(\App\Support\SiteConfig::load()['licences']))
+<section class="sec-alt"><div class="wrap"><x-section-head :title="t3('Our Licences','আমাদের লাইসেন্স','تراخيصنا')" :sub="t3('Every number can be verified with the issuing authority.','প্রতিটি নম্বর সংশ্লিষ্ট কর্তৃপক্ষের কাছে যাচাইযোগ্য।','يمكن التحقق من كل رقم.')"/><x-licence-badges variant="card"/></div></section>
+@endif
+<section><div class="wrap grid g2"><div><h2 style="margin-bottom:20px">{{ t3('Our journey','আমাদের পথচলা','مسيرتنا') }}</h2><div class="itin">@foreach([['2010','Founded in Naya Paltan, Dhaka with first Umrah group of 40'],['2013','Received Ministry of Religious Affairs Hajj licence'],['2018','IATA accreditation; launched air ticketing'],['2023','Opened Chattogram & Sylhet branches'],['2026','Launched online booking, installments & customer dashboard']] as [$y,$x])<div class="d"><b>{{ $y }}</b><p>{{ $x }}</p></div>@endforeach</div></div>
+<div><h2 style="margin-bottom:20px">{{ t3('Leadership team','নেতৃত্ব','فريق القيادة') }}</h2><div class="grid g2">@foreach($team as $m)<div class="card" style="padding:20px;text-align:center"><div class="av" style="width:70px;height:70px;margin:0 auto 10px;font-size:24px">{{ mb_substr(collect(explode(' ', $m->getTranslations('name')['en']))->slice(-2, 1)->first() ?? 'B', 0, 1) }}</div><b>{{ $m->name }}</b><br><small style="color:var(--mut)">{{ $m->role }}</small></div>@endforeach</div></div></div></section>
+@include('partials.cta')
+@endsection

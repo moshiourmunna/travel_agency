@@ -1,0 +1,34 @@
+{
+ "path": "/pre-registration",
+ "lang": "ar",
+ "dir": "rtl",
+ "title": "التسجيل المسبق لحج 2027 | Blessing Hajj Agency",
+ "headings": [
+  "H1:التسجيل المسبق لحج 2027",
+  "H3:نموذج التسجيل المسبق"
+ ],
+ "nav": [
+  "/",
+  "/hajj",
+  "/umrah",
+  "/flights",
+  "/hotels",
+  "/visa",
+  "/tours",
+  "/guide",
+  "/about",
+  "/contact",
+  "/login",
+  "/booking",
+  "/dashboard"
+ ],
+ "forms": [
+  "post /pre-registration [_token,agree,district,dob,name,nid,package_class,passport,phone,pilgrims]"
+ ],
+ "buttons": [
+  "دخول",
+  "احجز الآن",
+  "إرسال التسجيل"
+ ],
+ "images": 2
+}

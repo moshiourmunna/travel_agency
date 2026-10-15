@@ -1,0 +1,36 @@
+{
+ "path": "/guide",
+ "lang": "en",
+ "dir": "ltr",
+ "title": "Hajj & Umrah Guide | Blessing Hajj Agency",
+ "headings": [
+  "H1:Hajj & Umrah Guide",
+  "H2:Hajj step by step",
+  "H2:Essential duas"
+ ],
+ "nav": [
+  "/",
+  "/hajj",
+  "/umrah",
+  "/flights",
+  "/hotels",
+  "/visa",
+  "/tours",
+  "/guide",
+  "/about",
+  "/contact",
+  "/login",
+  "/booking",
+  "/dashboard"
+ ],
+ "forms": [],
+ "buttons": [
+  "Login",
+  "Book Now",
+  "Hajj step by step",
+  "Umrah step by step",
+  "For women",
+  "⬇ Print / save as PDF"
+ ],
+ "images": 2
+}

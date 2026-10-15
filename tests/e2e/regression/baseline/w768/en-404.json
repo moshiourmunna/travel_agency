@@ -1,0 +1,30 @@
+{
+ "path": "/no-such-page-xyz",
+ "lang": "en",
+ "dir": "ltr",
+ "title": "Page not found | Blessing Hajj Agency",
+ "headings": [
+  "H<TIME>4"
+ ],
+ "nav": [
+  "/",
+  "/hajj",
+  "/umrah",
+  "/flights",
+  "/hotels",
+  "/visa",
+  "/tours",
+  "/guide",
+  "/about",
+  "/contact",
+  "/login",
+  "/booking",
+  "/dashboard"
+ ],
+ "forms": [],
+ "buttons": [
+  "☰",
+  "Back to Home"
+ ],
+ "images": 3
+}

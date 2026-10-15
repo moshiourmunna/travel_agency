@@ -1,0 +1,62 @@
+{
+ "path": "/hotels",
+ "lang": "en",
+ "dir": "ltr",
+ "title": "Hotels in Makkah & Madinah | Blessing Hajj Agency",
+ "headings": [
+  "H1:Hotels in Makkah & Madinah",
+  "H3:Jeddah Hilton",
+  "H3:Swissôtel Makkah",
+  "H3:Pullman ZamZam Makkah",
+  "H3:Anwar Al Madinah Mövenpick",
+  "H3:Hilton Suites Makkah",
+  "H3:Pullman Zamzam Madinah",
+  "H3:Elaf Taiba",
+  "H3:Elaf Ajyad",
+  "H3:Dar Al Taqwa",
+  "H3:Makarem Ajyad",
+  "H3:Al Kiswah Towers",
+  "H3:Al Eiman Royal",
+  "H3:Al Massa Aziziyah"
+ ],
+ "nav": [
+  "/",
+  "/hajj",
+  "/umrah",
+  "/flights",
+  "/hotels",
+  "/visa",
+  "/tours",
+  "/guide",
+  "/about",
+  "/contact",
+  "/login",
+  "/booking",
+  "/dashboard"
+ ],
+ "forms": [
+  "get [city,distance,in]"
+ ],
+ "buttons": [
+  "☰",
+  "Search",
+  "All",
+  "Makkah",
+  "Madinah",
+  "Aziziyah",
+  "Book",
+  "Book",
+  "Book",
+  "Book",
+  "Book",
+  "Book",
+  "Book",
+  "Book",
+  "Book",
+  "Book",
+  "Book",
+  "Book",
+  "Book"
+ ],
+ "images": 2
+}

@@ -1,0 +1,34 @@
+{
+ "path": "/booking",
+ "lang": "en",
+ "dir": "ltr",
+ "title": "Book Your Journey | Blessing Hajj Agency",
+ "headings": [
+  "H1:Book Your Journey",
+  "H3:2. Traveller & passport details"
+ ],
+ "nav": [
+  "/",
+  "/hajj",
+  "/umrah",
+  "/flights",
+  "/hotels",
+  "/visa",
+  "/tours",
+  "/guide",
+  "/about",
+  "/contact",
+  "/dashboard",
+  "/booking"
+ ],
+ "forms": [
+  "post /booking [_token,addons[],adults,children,notes,package,payment_method,payment_mode,room_type,slip,travellers[0][dob],travellers[0][full_name],travellers[0][gender],travellers[0][passport_expiry],travellers[0][passport_no],travellers[0][phone],wheelchair]"
+ ],
+ "buttons": [
+  "My account",
+  "Book Now",
+  "← Back",
+  "Continue →"
+ ],
+ "images": 2
+}

@@ -1,0 +1,40 @@
+{
+ "path": "/umrah",
+ "lang": "en",
+ "dir": "ltr",
+ "title": "Umrah Packages | Blessing Hajj Agency",
+ "headings": [
+  "H1:Umrah Packages",
+  "H3:7 Days Express Umrah",
+  "H<TIME> Days Group Umrah",
+  "H<TIME> Days Family Umrah",
+  "H3:Ramadan Last 10 Nights",
+  "H3:VIP Umrah – 5★ Haram View"
+ ],
+ "nav": [
+  "/",
+  "/hajj",
+  "/umrah",
+  "/flights",
+  "/hotels",
+  "/visa",
+  "/tours",
+  "/guide",
+  "/about",
+  "/contact",
+  "/login",
+  "/booking",
+  "/dashboard"
+ ],
+ "forms": [],
+ "buttons": [
+  "☰",
+  "Reset filters",
+  "View Details",
+  "View Details",
+  "View Details",
+  "View Details",
+  "View Details"
+ ],
+ "images": 2
+}

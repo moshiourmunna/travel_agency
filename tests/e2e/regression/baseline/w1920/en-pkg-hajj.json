@@ -1,0 +1,38 @@
+{
+ "path": "/packages/vip-hajj-clock-tower",
+ "lang": "en",
+ "dir": "ltr",
+ "title": "VIP Hajj – Clock Tower | Blessing Hajj Agency",
+ "headings": [
+  "H1:VIP Hajj – Clock Tower",
+  "H3:Day-by-day itinerary",
+  "H3:Hotels",
+  "H3:Installment plan (updates with your room & travellers)",
+  "H3:Reviews ★ 5"
+ ],
+ "nav": [
+  "/",
+  "/hajj",
+  "/umrah",
+  "/flights",
+  "/hotels",
+  "/visa",
+  "/tours",
+  "/guide",
+  "/about",
+  "/contact",
+  "/login",
+  "/booking",
+  "/dashboard"
+ ],
+ "forms": [
+  "get /booking [package,pax,room]"
+ ],
+ "buttons": [
+  "Login",
+  "Book Now",
+  "Book this package",
+  "Send enquiry"
+ ],
+ "images": 2
+}

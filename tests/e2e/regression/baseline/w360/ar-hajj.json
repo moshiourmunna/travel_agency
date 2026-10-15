@@ -1,0 +1,38 @@
+{
+ "path": "/hajj",
+ "lang": "ar",
+ "dir": "rtl",
+ "title": "باقات الحج 2027 | Blessing Hajj Agency",
+ "headings": [
+  "H1:باقات الحج 2027",
+  "H3:حج اقتصادي 2027",
+  "H3:حج قياسي 2027",
+  "H3:حج مميز بدون تنقل",
+  "H3:حج VIP – برج الساعة"
+ ],
+ "nav": [
+  "/",
+  "/hajj",
+  "/umrah",
+  "/flights",
+  "/hotels",
+  "/visa",
+  "/tours",
+  "/guide",
+  "/about",
+  "/contact",
+  "/login",
+  "/booking",
+  "/dashboard"
+ ],
+ "forms": [],
+ "buttons": [
+  "☰",
+  "إعادة تعيين",
+  "التفاصيل",
+  "التفاصيل",
+  "التفاصيل",
+  "التفاصيل"
+ ],
+ "images": 2
+}

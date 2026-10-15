@@ -1,0 +1,38 @@
+{
+ "path": "/dashboard",
+ "lang": "en",
+ "dir": "ltr",
+ "title": "My Dashboard | Blessing Hajj Agency",
+ "headings": [
+  "H2:Assalamu Alaikum, Md. Rahim"
+ ],
+ "nav": [
+  "/",
+  "/dashboard#ov",
+  "/dashboard#bk",
+  "/dashboard#in",
+  "/dashboard#dc",
+  "/dashboard#vs",
+  "/dashboard#py",
+  "/dashboard#pf"
+ ],
+ "forms": [
+  "post /logout [_token]",
+  "get [b]",
+  "post /dashboard/bookings/BHA-<REF>/pay [_token,installment_id,method]",
+  "post /dashboard/bookings/BHA-<REF>/pay [_token,installment_id,method]",
+  "post /dashboard/bookings/BHA-<REF>/pay [_token,installment_id,method]",
+  "post /dashboard/bookings/BHA-<REF>/pay [_token,installment_id,method]",
+  "post /dashboard/bookings/BHA-<REF>/pay [_token,installment_id,method]",
+  "post /dashboard/bookings/BHA-<REF>/pay [_token,installment_id,method]",
+  "post /dashboard/documents/11 [_token,file]",
+  "post /dashboard/documents/15 [_token,file]",
+  "post /dashboard/documents/16 [_token,file]",
+  "post /dashboard/profile [_method,_token,address,district,email,name]"
+ ],
+ "buttons": [
+  "⎋ Logout",
+  "+ New booking"
+ ],
+ "images": 1
+}

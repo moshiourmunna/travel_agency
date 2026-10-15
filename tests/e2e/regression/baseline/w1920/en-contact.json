@@ -1,0 +1,34 @@
+{
+ "path": "/contact",
+ "lang": "en",
+ "dir": "ltr",
+ "title": "Contact Us | Blessing Hajj Agency",
+ "headings": [
+  "H1:Contact Us",
+  "H3:Send us a message"
+ ],
+ "nav": [
+  "/",
+  "/hajj",
+  "/umrah",
+  "/flights",
+  "/hotels",
+  "/visa",
+  "/tours",
+  "/guide",
+  "/about",
+  "/contact",
+  "/login",
+  "/booking",
+  "/dashboard"
+ ],
+ "forms": [
+  "post /contact [_token,interest,message,name,package,phone]"
+ ],
+ "buttons": [
+  "Login",
+  "Book Now",
+  "Send message"
+ ],
+ "images": 2
+}

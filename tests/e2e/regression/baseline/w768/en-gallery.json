@@ -1,0 +1,34 @@
+{
+ "path": "/gallery",
+ "lang": "en",
+ "dir": "ltr",
+ "title": "Gallery | Blessing Hajj Agency",
+ "headings": [
+  "H1:Gallery"
+ ],
+ "nav": [
+  "/",
+  "/hajj",
+  "/umrah",
+  "/flights",
+  "/hotels",
+  "/visa",
+  "/tours",
+  "/guide",
+  "/about",
+  "/contact",
+  "/login",
+  "/booking",
+  "/dashboard"
+ ],
+ "forms": [],
+ "buttons": [
+  "☰",
+  "All",
+  "Hajj 2025",
+  "Umrah",
+  "Ziyarah",
+  "Videos"
+ ],
+ "images": 2
+}

@@ -1,0 +1,37 @@
+{
+ "path": "/packages/vip-umrah-5-haram-view",
+ "lang": "en",
+ "dir": "ltr",
+ "title": "VIP Umrah – 5★ Haram View | Blessing Hajj Agency",
+ "headings": [
+  "H1:VIP Umrah – 5★ Haram View",
+  "H3:Day-by-day itinerary",
+  "H3:Hotels",
+  "H3:Installment plan (updates with your room & travellers)",
+  "H3:Reviews ★ 5"
+ ],
+ "nav": [
+  "/",
+  "/hajj",
+  "/umrah",
+  "/flights",
+  "/hotels",
+  "/visa",
+  "/tours",
+  "/guide",
+  "/about",
+  "/contact",
+  "/login",
+  "/booking",
+  "/dashboard"
+ ],
+ "forms": [
+  "get /booking [package,pax,room]"
+ ],
+ "buttons": [
+  "☰",
+  "Book this package",
+  "Send enquiry"
+ ],
+ "images": 2
+}

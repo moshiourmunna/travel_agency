@@ -1,0 +1,27 @@
+{
+ "path": "/agent",
+ "lang": "en",
+ "dir": "ltr",
+ "title": "Agent Portal | Blessing Hajj Agency",
+ "headings": [
+  "H2:Agent Portal – Al Noor Travels (Sylhet)"
+ ],
+ "nav": [
+  "/",
+  "/agent#",
+  "/agent#book",
+  "/agent#prices",
+  "/agent#bookings",
+  "/agent#subs"
+ ],
+ "forms": [
+  "post /logout [_token]",
+  "post /agent/bookings [_token,adults,gender,name,package,passport_no,phone,room_type]"
+ ],
+ "buttons": [
+  "⎋ Logout",
+  "+ New booking",
+  "Create booking"
+ ],
+ "images": 1
+}

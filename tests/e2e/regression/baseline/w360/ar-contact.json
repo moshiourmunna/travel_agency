@@ -1,0 +1,33 @@
+{
+ "path": "/contact",
+ "lang": "ar",
+ "dir": "rtl",
+ "title": "اتصل بنا | Blessing Hajj Agency",
+ "headings": [
+  "H1:اتصل بنا",
+  "H3:أرسل رسالة"
+ ],
+ "nav": [
+  "/",
+  "/hajj",
+  "/umrah",
+  "/flights",
+  "/hotels",
+  "/visa",
+  "/tours",
+  "/guide",
+  "/about",
+  "/contact",
+  "/login",
+  "/booking",
+  "/dashboard"
+ ],
+ "forms": [
+  "post /contact [_token,interest,message,name,package,phone]"
+ ],
+ "buttons": [
+  "☰",
+  "إرسال"
+ ],
+ "images": 2
+}
