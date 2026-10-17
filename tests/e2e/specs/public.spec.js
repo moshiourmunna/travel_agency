@@ -33,7 +33,7 @@ test.describe('Public site & portals', () => {
     await page.fill('#pr-dob', '1965-04-04');
     await page.fill('#pr-phone', `0199000000${u}`);
     await page.selectOption('select[name="district"]', { index: 1 });
-    await page.check('input[name="agree"]', { force: true });
+    await page.check('input[name="agree"]');
     await audit(page, 'prereg-form', info);
     await Promise.all([page.waitForNavigation(), page.locator('form button.btn-gold').click()]);
     await expect(page.locator('body')).toContainText('PR-');
@@ -52,10 +52,11 @@ test.describe('Public site & portals', () => {
     await audit(page, 'booking-step2', info);
     await page.click('[data-next]');
     await page.click('[data-next]');
-    await page.check('input[name="payment_mode"][value="pay_later"]', { force: true });
+    // No force: a real tap must reach the control (on phones the fixed bottom bar can cover it until it is scrolled clear).
+    await page.check('input[name="payment_mode"][value="pay_later"]');
     await audit(page, 'booking-step4', info);
     await page.click('[data-next]');
-    await page.check('#agree', { force: true });
+    await page.check('#agree');
     await Promise.all([page.waitForNavigation(), page.click('#bk-submit')]);
     await expect(page).toHaveURL(/\/booking\/.+\/done/);
     await audit(page, 'booking-done', info);

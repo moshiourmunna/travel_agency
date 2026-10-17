@@ -4,6 +4,8 @@ const { execFileSync } = require('child_process');
 const path = require('path');
 const fs = require('fs');
 const root = path.resolve(__dirname, '../../..');
+const { pinEnv, assertE2eDb } = require('../e2e-env');
+pinEnv();
 
 /** Dynamic bits that legitimately change between runs (countdown, random refs) are masked in screenshots. */
 const MASK = ['#countdown', '.count', 'video', 'iframe', '[data-random]'];
@@ -51,7 +53,11 @@ async function rcheck(page, name, info) {
   const dir = path.join(__dirname, '..', 'screenshots-regression', info.project.name);
   fs.mkdirSync(dir, { recursive: true });
   await page.screenshot({ path: path.join(dir, `${name}.png`), fullPage: true, animations: 'disabled', mask: MASK.map((m) => page.locator(m)) });
-  await expect.soft(page, `visual change: ${name}`).toHaveScreenshot(`${name}.png`, { fullPage: true, mask: MASK.map((m) => page.locator(m)) });
+  // Pixel baselines are rendered by Linux Chrome; on another OS font rasterisation differs, so REGRESSION_VISUAL=0 skips
+  // ONLY the pixel diff (behaviour fingerprint, links, console and overflow checks above still run). Default: strict.
+  if (process.env.REGRESSION_VISUAL !== '0') {
+    await expect.soft(page, `visual change: ${name}`).toHaveScreenshot(`${name}.png`, { fullPage: true, mask: MASK.map((m) => page.locator(m)) });
+  }
 }
 
 /** Run PHP against the e2e DB (module/language toggles without going through the admin UI). */
@@ -62,6 +68,7 @@ const setModule = (key, on) => php(`App\\Models\\Module::where('key','${key}')->
 const setLanguage = (code, on) => php(`App\\Models\\Language::where('code','${code}')->update(['enabled'=>${on ? 'true' : 'false'}]);`);
 
 function reseed() {
+  assertE2eDb();
   execFileSync('php', ['artisan', 'migrate:fresh', '--seed', '--force', '--env=e2e'], { cwd: root, stdio: 'ignore' });
   execFileSync('php', ['artisan', 'optimize:clear', '--env=e2e'], { cwd: root, stdio: 'ignore' });
 }

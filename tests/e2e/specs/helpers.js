@@ -66,10 +66,26 @@ async function logout(page) {
   await page.context().clearCookies();
 }
 
+/**
+ * React admin: the element that holds the nav links - the opened mobile drawer when the sidebar is hidden (< lg),
+ * otherwise the sidebar. Waits for the admin shell to render first: isVisible() is an instant check, and right after
+ * a full page load React may not have mounted yet, which would wrongly pick the (hidden) sidebar on small screens.
+ */
+async function adminNavScope(page) {
+  await page.locator('[data-testid="menu-toggle"]:visible, aside:visible').first().waitFor({ state: 'visible' });
+  const tog = page.getByTestId('menu-toggle');
+  if (await tog.isVisible()) {
+    await tog.click();
+    const dialog = page.getByRole('dialog');
+    await dialog.waitFor({ state: 'visible' });
+    return dialog;
+  }
+  return page.locator('aside');
+}
+
 /** React admin: open the mobile drawer if the sidebar is hidden, then click the nav link (Inertia visit). */
 async function adminNav(page, href) {
-  const tog = page.getByTestId('menu-toggle');
-  const scope = (await tog.isVisible()) ? (await tog.click(), page.getByRole('dialog')) : page.locator('aside');
+  const scope = await adminNavScope(page);
   await scope.locator(`a[href$="${href}"]`).first().click();
   await page.waitForURL((u) => u.pathname.endsWith(href));
   await page.waitForLoadState('networkidle').catch(() => {});
@@ -82,4 +98,4 @@ async function toast(page, text) {
 
 const uniq = (info) => ({ w360: '1', w768: '2', w1280: '3', w1920: '4' }[info.project.name] || '9');
 
-module.exports = { test, expect: base.expect, audit, checkLinks, login, logout, adminNav, toast, uniq };
+module.exports = { test, expect: base.expect, audit, checkLinks, login, logout, adminNav, adminNavScope, toast, uniq };

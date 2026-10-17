@@ -13,7 +13,9 @@ const PAGES = [
 ];
 
 
-test.beforeAll(() => { reseed(); });
+// Every test starts from a freshly seeded e2e DB so results (and baselines) never depend on which tests ran before
+// it, e.g. R05's paid booking must not appear in R06's "My bookings" screenshot.
+test.beforeEach(() => { reseed(); });
 
 test.describe('Public regression', () => {
   test('R01 every public page (EN) matches baseline', async ({ page }, info) => {
@@ -102,7 +104,7 @@ test.describe('Public regression', () => {
     await page.fill('#pr-dob', '1966-05-05');
     await page.fill('#pr-phone', `0198000000${u}`);
     await page.selectOption('select[name="district"]', { index: 1 });
-    await page.check('input[name="agree"]', { force: true });
+    await page.check('input[name="agree"]');
     await Promise.all([page.waitForNavigation(), page.locator('form button.btn-gold').click()]);
     await expect(page.locator('body')).toContainText('PR-');
     await rcheck(page, 'prereg-done', info);
@@ -127,11 +129,11 @@ test.describe('Public regression', () => {
     await page.click('[data-next]');
     await rcheck(page, 'booking-step3', info);
     await page.click('[data-next]');
-    await page.check('input[name="payment_mode"][value="full"]', { force: true });
-    await page.check('input[name="payment_method"][value="bkash"]', { force: true });
+    await page.check('input[name="payment_mode"][value="full"]');
+    await page.check('input[name="payment_method"][value="bkash"]');
     await rcheck(page, 'booking-step4', info);
     await page.click('[data-next]');
-    await page.check('#agree', { force: true });
+    await page.check('#agree');
     await Promise.all([page.waitForNavigation(), page.click('#bk-submit')]);
     await expect(page).toHaveURL(/simulate|done/);
     if (/simulate/.test(page.url())) {
@@ -148,9 +150,9 @@ test.describe('Public regression', () => {
     await page.click('[data-next]');
     await page.locator('#trav-list [data-f="full_name"]').first().fill('REGRESSION LATER');
     await page.click('[data-next]'); await page.click('[data-next]');
-    await page.check('input[name="payment_mode"][value="pay_later"]', { force: true });
+    await page.check('input[name="payment_mode"][value="pay_later"]');
     await page.click('[data-next]');
-    await page.check('#agree', { force: true });
+    await page.check('#agree');
     await Promise.all([page.waitForNavigation(), page.click('#bk-submit')]);
     await expect(page).toHaveURL(/\/booking\/.+\/done/);
     await page.goto('/dashboard');

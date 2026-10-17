@@ -85,3 +85,35 @@ php artisan optimize:clear
 - Roles use a `role` column (admin/agent/staff/customer) rather than spatie/permission.
 - Translations are stored as JSON columns `{en,bn,ar}` instead of the separate translation tables in docs/database.md.
 - Images, prices, licence numbers and people are placeholder data.
+
+## Admin panel (React + Inertia)
+
+The `/admin` area is a React 19 + Inertia 3 + TypeScript + Vite + Tailwind SPA. Public site, customer dashboard and agent portal remain Blade.
+
+```bash
+composer install
+npm install
+npm run build          # writes public/build (committed; app runs without Node)
+# or for local HMR:
+npm run dev
+```
+
+### Tests
+
+```bash
+unset APP_ENV           # important: shell APP_ENV=local breaks CSRF in phpunit
+php artisan test        # Feature + Unit (Inertia assertions for admin)
+npm test                # Vitest + React Testing Library
+cd tests/e2e && npm install && npx playwright test                  # admin + public at 360/768/1280/1920
+cd tests/e2e && npx playwright test -c playwright.regression.config.js  # public regression vs baseline
+```
+
+Notes:
+- PHP tests run on a frozen clock (`Tests\TestCase::FROZEN_NOW`), so date-based snapshots never drift.
+- Browser suites only ever touch `database/e2e.sqlite` via `.env.e2e`. `tests/e2e/e2e-env.js` forces `APP_ENV=e2e`,
+  refuses to start when `DB_*` variables are set in the OS environment, and verifies the resolved DB before any `migrate:fresh`.
+- Each regression test starts from a freshly seeded e2e DB.
+- Pixel baselines are Linux-Chrome renders. On Windows/macOS run with `REGRESSION_VISUAL=0`: this skips only the pixel diff,
+  while behaviour fingerprints, links, console and overflow checks still run.
+- Tailwind scans only `resources/js` and `resources/views/admin` (`source(none)`), so `npm run build` is reproducible and
+  never picks up class names from the committed `public/build`.

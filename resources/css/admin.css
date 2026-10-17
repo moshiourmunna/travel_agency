@@ -1,5 +1,7 @@
-@import "tailwindcss";
+/* Explicit sources only: never let Tailwind scan public/build (committed output) or it feeds on itself. */
+@import "tailwindcss" source(none);
 @source "../js";
+@source "../views/admin";
 
 @custom-variant dark (&:where(.dark, .dark *));
 

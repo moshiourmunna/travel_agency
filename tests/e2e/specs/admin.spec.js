@@ -1,5 +1,5 @@
 // React (Inertia) admin – every flow at 360/768/1280/1920 with console-error, overflow and broken-link checks.
-const { test, expect, audit, checkLinks, login, adminNav, toast, uniq } = require('./helpers');
+const { test, expect, audit, checkLinks, login, adminNav, adminNavScope, toast, uniq } = require('./helpers');
 
 const h1 = (page) => page.locator('main h1');
 const row = (page, text) => page.locator('main table tbody tr', { hasText: text });
@@ -279,8 +279,7 @@ test.describe('React admin', () => {
     for (const m of ['hotels', 'preregistration']) await page.getByTestId(`module-${m}`).click();
     await page.getByRole('button', { name: 'Save settings' }).click();
     await toast(page, 'Settings saved');
-    const navScope = async () => { const tog = page.getByTestId('menu-toggle'); if (await tog.isVisible()) { await tog.click(); return page.getByRole('dialog'); } return page.locator('aside'); };
-    await expect((await navScope()).locator('a[href$="/admin/pre-registrations"]')).toHaveCount(0);
+    await expect((await adminNavScope(page)).locator('a[href$="/admin/pre-registrations"]')).toHaveCount(0);
     await page.keyboard.press('Escape');
     expect((await page.request.get('/admin/pre-registrations')).status()).toBe(404);
     await page.goto('/');
@@ -293,7 +292,7 @@ test.describe('React admin', () => {
     await toast(page, 'Settings saved');
     expect((await page.request.get('/hotels')).status()).toBe(200);
     await page.goto('/admin');
-    await expect((await navScope()).locator('a[href$="/admin/pre-registrations"]')).toHaveCount(1);
+    await expect((await adminNavScope(page)).locator('a[href$="/admin/pre-registrations"]')).toHaveCount(1);
   });
 
   test('staff role: owner-only items hidden and forbidden', async ({ page }, info) => {
