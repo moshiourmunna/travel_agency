@@ -30,9 +30,13 @@ composer install
 php artisan key:generate      (first time only)
 php artisan migrate --seed    (or: migrate:fresh --seed to rebuild all demo data, ~20–40 s)
 php artisan storage:link
+npm ci                        (admin panel assets; first time and after updates)
+npm run build                 (builds backend/public/build — without it /admin pages return 500 "Vite manifest not found")
 php artisan serve --host=127.0.0.1 --port=8000
 ```
 Check it works: http://127.0.0.1:8000/api/v1/health should return `{"status":"ok"...}`.
+
+Keep this window open: the website build and the running website both need the API.
 
 > **Windows note:** `php artisan serve` handles one request at a time on Windows, because `PHP_CLI_SERVER_WORKERS` is ignored there.
 > It is fine for trying the site. For snappier pages, and for `npm run build`, which fetches every page, a Laragon virtual host is better:
@@ -44,7 +48,7 @@ Check it works: http://127.0.0.1:8000/api/v1/health should return `{"status":"ok
 ```
 cd frontend
 copy .env.example .env.local  (first time only)
-npm install
+npm ci                        (or npm install)
 npm run build                 (the API must be running — pages are pre-rendered from it)
 npm run start                 (http://localhost:3000)
 ```
@@ -68,7 +72,7 @@ The admin panel arrives in M6. The traveller portal and real sign-in arrive in M
      ```
      curl -X POST -H "content-type: application/json" -H "x-revalidate-secret: <secret>" -d "{\"tags\":[\"all\"]}" http://localhost:3000/api/revalidate
      ```
-- **Run the backend tests:** `cd backend && php artisan test`. This uses the `musafir_test` database; the demo seed runs once per run.
+- **Run the backend tests:** `cd backend && php artisan test` (needs the `musafir_test` database from step 2; Laragon's client is `C:\laragon\bin\mysql\mysql-8.4.3-winx64\bin\mysql.exe` if `mysql` is not on PATH). This uses the `musafir_test` database; the demo seed runs once per run.
 - **Read e-mails, SMS and OTP codes:** they are written to `backend/storage/logs/laravel.log` (`MAIL_MAILER=log`, `SMS_DRIVER=log`).
 - **Uploaded CVs:** these are private, stored in `backend/storage/app/private/cvs/` and never publicly reachable.
 
@@ -79,4 +83,7 @@ The admin panel arrives in M6. The traveller portal and real sign-in arrive in M
 | Images missing on the site | Run `php artisan storage:link`, and check that `APP_URL` matches the address you use for the API. |
 | Website shows old content after a reseed | Run `php artisan cache:clear`, then restart `npm run start` or call `/api/revalidate` as shown above. |
 | `npm run build` fails with fetch errors | The API is not reachable at `API_URL`. Start `php artisan serve` first. |
+| `/admin` shows a 500 "Vite manifest not found" | Run `npm ci` and `npm run build` inside `backend`. |
+| Edited content is not on the page yet | Pages refresh in the background: the first visit after a change can still show the old version, and the next visit (a few seconds later) shows the new one. |
+| `php artisan test` says `tests/Unit not found` | Create an empty `backend\tests\Unit` folder (fixed in later deliveries). |
 | Port 3000 or 8000 is busy | Use `php artisan serve --port=8001` and `npm run start -- -p 3001`, then update `API_URL`, `APP_URL`, `FRONTEND_URL` and `NEXT_PUBLIC_SITE_URL`. |
