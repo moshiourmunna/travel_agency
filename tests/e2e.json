@@ -1,0 +1,195 @@
+{
+ "results": [
+  {
+   "name": "root redirects to /en by default",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "language toggle → Bangla",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "language persists via localStorage (root → bn)",
+   "pass": true,
+   "info": "file:///workspace/musafir/site/bn/index.html"
+  },
+  {
+   "name": "theme toggle switches + persists across pages",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "currency switch to USD converts prices",
+   "pass": true,
+   "info": "US$ 561"
+  },
+  {
+   "name": "currency persists on next page",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "currency back to BDT",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "cruise region filter (Bangladesh) → 1 result",
+   "pass": true,
+   "info": "1"
+  },
+  {
+   "name": "cruise sort price asc",
+   "pass": true,
+   "info": "21500,38900,68500,112000,145000,189000"
+  },
+  {
+   "name": "activity category chip filters to water",
+   "pass": true,
+   "info": "water,water,water,water"
+  },
+  {
+   "name": "activity stepper updates total",
+   "pass": true,
+   "info": "৳ 20,700"
+  },
+  {
+   "name": "activity → booking.html?activity= hydrates summary",
+   "pass": true,
+   "info": "Dubai evening desert safari with BBQ dinner"
+  },
+  {
+   "name": "cruise cabin select recalculates",
+   "pass": true,
+   "info": "৳ 4,83,840"
+  },
+  {
+   "name": "cruise → booking hydrates",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "booking validation blocks empty traveller form",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "coupon CRUISE10 reduces total",
+   "pass": true,
+   "info": "৳ 3,78,000 → ৳ 3,40,200"
+  },
+  {
+   "name": "mock payment → booking-confirmed",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "planner: 2 destinations → 8 days default",
+   "pass": true,
+   "info": "8"
+  },
+  {
+   "name": "planner: day stepper +1 → 9",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "planner: Bali experiences revealed",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "planner: luxury tier raises budget",
+   "pass": true,
+   "info": "৳ 3,92,000 → ৳ 5,85,200"
+  },
+  {
+   "name": "planner: max 4 destinations enforced",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "planner: saved plan restores after reload",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "planner: quote dialog submits",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "wishlist empty state",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "wishlist shows saved tour",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "compare shows 2 selected columns",
+   "pass": true,
+   "info": "2"
+  },
+  {
+   "name": "login: OTP send blocked without phone",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "login: OTP step shown",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "login: OTP verify → account",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "login tabs switch",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "FAQ search filters",
+   "pass": true,
+   "info": "1"
+  },
+  {
+   "name": "gift card amount preview (bn digits)",
+   "pass": true,
+   "info": "৳ ২৫,০০০"
+  },
+  {
+   "name": "offers countdown ticking",
+   "pass": true,
+   "info": "16"
+  },
+  {
+   "name": "contact form validation flags invalid",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "mobile drawer opens with currency select",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "mobile drawer closes on Escape",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "no console errors across E2E",
+   "pass": true,
+   "info": ""
+  }
+ ],
+ "errs": []
+}

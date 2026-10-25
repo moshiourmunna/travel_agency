@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% import 'ui.html' as ui %}
+{% block content %}
+{% set x = D.TOUR['turkey-classic'] %}
+<script type="application/json" id="booking-catalog">{{ catalog|safe }}</script>
+<section class="border-b border-ink-100 bg-white dark:border-ink-800 dark:bg-ink-900"><div class="wrap py-5">
+  {{ ui.crumbs([(t('Home','হোম'),u('index.html')),(t('Checkout','চেকআউট'),'')]) }}
+  <h1 class="mt-2 text-2xl font-extrabold sm:text-3xl">{{ t('Secure checkout','নিরাপদ চেকআউট') }}</h1>
+</div></section>
+<div class="wrap grid gap-8 py-8 lg:grid-cols-[1fr_380px]" data-steps data-price-calc>
+  <div class="min-w-0">
+    <div class="mb-6"><div class="flex items-center justify-between text-sm font-semibold"><span data-step-label>{{ t('Step','ধাপ') }} {{ digits(1) }}/{{ digits(4) }}</span><span class="muted">{{ icon('lock','inline h-4 w-4') }} {{ t('256-bit SSL','২৫৬-বিট এসএসএল') }}</span></div>
+      <div class="mt-2 h-1.5 overflow-hidden rounded-full bg-ink-100 dark:bg-ink-800"><div class="h-full rounded-full bg-brand-600 transition-all duration-500" style="width:25%" data-step-bar></div></div>
+      <ol class="mt-4 hidden grid-cols-4 gap-2 sm:grid" aria-label="{{ t('Checkout steps','চেকআউটের ধাপ') }}">{% for s in [('Trip','ট্রিপ'),('Travellers','যাত্রী'),('Extras','অতিরিক্ত'),('Payment','পেমেন্ট')] %}<li data-step-ind data-state="{{ 'current' if loop.first else 'todo' }}" class="flex items-center gap-2"><span class="step-dot grid h-8 w-8 shrink-0 place-items-center rounded-full text-sm font-bold">{{ digits(loop.index) }}</span><span class="text-sm font-semibold">{{ t(*s) }}</span></li>{% endfor %}</ol></div>
+
+    <section class="card p-5 sm:p-7" data-step-panel>
+      <h2 class="text-xl font-bold">{{ t('Review your trip','আপনার ট্রিপ যাচাই করুন') }}</h2>
+      <div class="mt-5 flex gap-4 rounded-2xl border border-ink-100 p-4 dark:border-ink-800"><img src="{{ img(x.img, True) }}" alt="" class="h-20 w-28 shrink-0 rounded-xl object-cover" data-bk-img width="640" height="400"><div class="min-w-0"><p class="font-bold" data-bk-title>{{ x.title|tr }}</p><p class="mt-1 text-sm muted" data-bk-sub>{{ digits(x.days) }} {{ t('days','দিন') }} · {{ x.dest|tr }}</p><a href="{{ u('tours.html') }}" class="link mt-1 inline-block text-sm">{{ t('Change','পরিবর্তন') }}</a></div></div>
+      <div class="mt-5 grid gap-4 sm:grid-cols-2">
+        <div><label class="label" for="bk-date">{{ t('Travel date','ভ্রমণের তারিখ') }}</label><input id="bk-date" type="date" class="input" value="2026-11-09" required></div>
+        <div><label class="label" for="bk-room">{{ t('Room','রুম') }}</label><select id="bk-room" class="input" data-tier-select><option data-mult="1">{{ t('Twin sharing','দুজনের রুম') }}</option><option data-mult="0.94">{{ t('Triple sharing (−6%)','তিনজনের রুম (−৬%)') }}</option><option data-mult="1.35">{{ t('Single (+35%)','একক (+৩৫%)') }}</option></select></div>
+      </div>
+      <div class="mt-4 grid gap-3 sm:grid-cols-3">
+        {% for key,l,sub,unit,val,mn in [('adults',('Adults','প্রাপ্তবয়স্ক'),('12+','১২+'),x.price,2,1),('children',('Children','শিশু'),('2–11','২–১১'),(x.price*0.7)|round|int,0,0),('infants',('Infants','নবজাতক'),('0–2','০–২'),(x.price*0.1)|round|int,0,0)] %}
+        <div class="flex items-center justify-between rounded-2xl border border-ink-100 p-3 dark:border-ink-800" data-stepper data-unit="{{ unit }}" data-unit-key="{{ key }}"><div><p class="text-sm font-semibold" id="bk-{{ key }}-l">{{ t(*l) }}</p><p class="text-xs muted">{{ t(*sub) }}</p></div><div class="flex items-center gap-1.5"><button type="button" class="icon-btn h-8 w-8 border border-ink-200 dark:border-ink-700" data-step="-1" aria-label="{{ t('Decrease','কমান') }} {{ t(*l) }}">{{ icon('minus','h-4 w-4') }}</button><input type="number" name="{{ key }}" value="{{ val }}" min="{{ mn }}" max="9" readonly class="w-7 border-0 bg-transparent p-0 text-center text-sm font-bold focus:ring-0 [appearance:textfield]" aria-labelledby="bk-{{ key }}-l"><button type="button" class="icon-btn h-8 w-8 border border-ink-200 dark:border-ink-700" data-step="1" aria-label="{{ t('Increase','বাড়ান') }} {{ t(*l) }}">{{ icon('plus','h-4 w-4') }}</button></div></div>
+        {% endfor %}
+      </div>
+      <div class="mt-7 flex justify-end"><button type="button" class="btn btn-primary" data-next>{{ t('Continue','পরবর্তী') }} {{ icon('arrow-right','h-4 w-4') }}</button></div>
+    </section>
+
+    <section class="card p-5 sm:p-7" data-step-panel hidden>
+      <h2 class="text-xl font-bold">{{ t('Traveller details','যাত্রীর তথ্য') }}</h2>
+      <p class="mt-1 text-sm muted">{{ t('Names must match passport/NID. Already have an account?','নাম পাসপোর্ট/এনআইডির সাথে মিলতে হবে। অ্যাকাউন্ট আছে?') }} <a class="link" href="{{ u('login.html') }}">{{ t('Sign in to autofill','সাইন ইন করে অটোফিল করুন') }}</a></p>
+      <h3 class="mt-6 text-sm font-bold uppercase tracking-wide text-brand-700 dark:text-brand-300">{{ t('Lead traveller','প্রধান যাত্রী') }}</h3>
+      <div class="mt-3 grid gap-4 sm:grid-cols-2">
+        <div class="field"><label class="label" for="bk-fn">{{ t('First name','নামের প্রথম অংশ') }} *</label><input id="bk-fn" class="input" required autocomplete="given-name"><p class="field-error">{{ t('Required','আবশ্যক') }}</p></div>
+        <div class="field"><label class="label" for="bk-ln">{{ t('Last name','নামের শেষ অংশ') }} *</label><input id="bk-ln" class="input" required autocomplete="family-name"><p class="field-error">{{ t('Required','আবশ্যক') }}</p></div>
+        <div class="field"><label class="label" for="bk-em">{{ t('Email','ইমেইল') }} *</label><input id="bk-em" type="email" class="input" required autocomplete="email"><p class="field-error">{{ t('Enter a valid email.','সঠিক ইমেইল দিন।') }}</p></div>
+        <div class="field"><label class="label" for="bk-ph">{{ t('Mobile','মোবাইল') }} *</label><input id="bk-ph" type="tel" class="input" required placeholder="01XXXXXXXXX" autocomplete="tel"><p class="field-error">{{ t('Enter a valid BD mobile number.','সঠিক মোবাইল নম্বর দিন।') }}</p></div>
+        <div class="field"><label class="label" for="bk-pp">{{ t('Passport no. (international trips)','পাসপোর্ট নম্বর (বিদেশ ভ্রমণে)') }}</label><input id="bk-pp" class="input uppercase" placeholder="A01234567"></div>
+        <div class="field"><label class="label" for="bk-dob">{{ t('Date of birth','জন্মতারিখ') }}</label><input id="bk-dob" type="date" class="input"></div>
+      </div>
+      <h3 class="mt-6 text-sm font-bold uppercase tracking-wide text-brand-700 dark:text-brand-300">{{ t('Traveller 2','যাত্রী ২') }}</h3>
+      <div class="mt-3 grid gap-4 sm:grid-cols-2"><div class="field"><label class="label" for="bk-t2">{{ t('Full name','পূর্ণ নাম') }}</label><input id="bk-t2" class="input"></div><div class="field"><label class="label" for="bk-t2r">{{ t('Relation','সম্পর্ক') }}</label><select id="bk-t2r" class="input"><option>{{ t('Spouse','স্বামী/স্ত্রী') }}</option><option>{{ t('Parent','বাবা/মা') }}</option><option>{{ t('Child','সন্তান') }}</option><option>{{ t('Friend','বন্ধু') }}</option></select></div></div>
+      <div class="field mt-4"><label class="label" for="bk-req">{{ t('Special requests','বিশেষ অনুরোধ') }}</label><textarea id="bk-req" rows="3" class="input" placeholder="{{ t('Dietary needs, wheelchair, honeymoon setup…','খাবারের চাহিদা, হুইলচেয়ার, হানিমুন সাজসজ্জা…') }}"></textarea></div>
+      <div class="mt-7 flex justify-between"><button type="button" class="btn btn-ghost" data-prev>{{ icon('arrow-left','h-4 w-4') }} {{ t('Back','পেছনে') }}</button><button type="button" class="btn btn-primary" data-next>{{ t('Continue','পরবর্তী') }} {{ icon('arrow-right','h-4 w-4') }}</button></div>
+    </section>
+
+    <section class="card p-5 sm:p-7" data-step-panel hidden>
+      <h2 class="text-xl font-bold">{{ t('Make it better','আরও সুন্দর করুন') }}</h2>
+      <div class="mt-5 grid gap-3 sm:grid-cols-2">
+        {% for ic,l,d,p in [('shield-plus',('Travel insurance','ভ্রমণ বিমা'),('Medical up to US$50,000, trip cancellation, baggage','৫০,০০০ ডলার পর্যন্ত চিকিৎসা, ট্রিপ বাতিল, ব্যাগেজ'),1200),('car',('Airport pickup in Dhaka','ঢাকায় এয়ারপোর্ট পিকআপ'),('Private car, meet & greet','প্রাইভেট গাড়ি, অভ্যর্থনা'),1800),('smartphone',('Travel eSIM 10 GB','ট্রাভেল ই-সিম ১০ জিবি'),('Works in 120+ countries','১২০+ দেশে চলে'),1500),('camera',('Photographer (half day)','ফটোগ্রাফার (অর্ধদিবস)'),('Edited photos in 48 h','৪৮ ঘণ্টায় এডিট করা ছবি'),6500)] %}
+        <label class="flex cursor-pointer gap-3 rounded-2xl border border-ink-200 p-4 has-[:checked]:border-brand-600 has-[:checked]:bg-brand-50/60 dark:border-ink-700 dark:has-[:checked]:bg-brand-900/20"><input type="checkbox" class="check mt-1" data-addon="{{ p }}"><span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand-700 dark:bg-brand-900/40 dark:text-brand-300">{{ icon(ic,'h-5 w-5') }}</span><span class="flex-1"><b class="block text-sm">{{ t(*l) }}</b><span class="text-xs muted">{{ t(*d) }}</span></span><b class="text-sm">+{{ bdt(p) }}</b></label>
+        {% endfor %}
+      </div>
+      <div class="mt-6"><label class="label" for="bk-coupon">{{ t('Promo code','প্রোমো কোড') }}</label><div class="flex max-w-sm gap-2"><input id="bk-coupon" class="input uppercase" placeholder="MUSAFIR10" data-coupon-input><button type="button" class="btn btn-outline" data-coupon-apply>{{ t('Apply','প্রয়োগ') }}</button></div><p class="mt-1 text-xs muted">{{ t('Try','চেষ্টা করুন') }} <code class="rounded bg-ink-100 px-1 dark:bg-ink-800">MUSAFIR10</code></p></div>
+      <div class="mt-7 flex justify-between"><button type="button" class="btn btn-ghost" data-prev>{{ icon('arrow-left','h-4 w-4') }} {{ t('Back','পেছনে') }}</button><button type="button" class="btn btn-primary" data-next>{{ t('Continue to payment','পেমেন্টে যান') }} {{ icon('arrow-right','h-4 w-4') }}</button></div>
+    </section>
+
+    <section class="card p-5 sm:p-7" data-step-panel hidden>
+      <h2 class="text-xl font-bold">{{ t('Payment','পেমেন্ট') }}</h2>
+      <fieldset class="mt-5"><legend class="label">{{ t('How much would you like to pay now?','এখন কত টাকা দিতে চান?') }}</legend>
+        <div class="grid gap-3 sm:grid-cols-3">{% for v,l,d in [('deposit',('30% deposit','৩০% অগ্রিম'),('Rest 21 days before travel','বাকি টাকা যাত্রার ২১ দিন আগে')),('full',('Pay in full','পুরো টাকা'),('Get 2% instant discount','২% তাৎক্ষণিক ছাড়')),('emi',('Installments','কিস্তি'),('3 monthly payments','৩ মাসিক কিস্তি'))] %}<label class="cursor-pointer rounded-2xl border border-ink-200 p-4 has-[:checked]:border-brand-600 has-[:checked]:bg-brand-50/60 dark:border-ink-700 dark:has-[:checked]:bg-brand-900/20"><input type="radio" name="plan" value="{{ v }}" class="check rounded-full" {{ 'checked' if loop.first }}> <b class="ms-1 text-sm">{{ t(*l) }}</b><span class="mt-1 block text-xs muted">{{ t(*d) }}</span></label>{% endfor %}</div></fieldset>
+      {% with pid='bk' %}{% include 'partials/paymethods.html' %}{% endwith %}
+      <label class="mt-5 flex gap-3 text-sm"><input type="checkbox" class="check mt-0.5" required> <span>{{ t('I agree to the','আমি সম্মত') }} <a class="link" href="{{ u('terms.html') }}" target="_blank">{{ t('terms','শর্তাবলি') }}</a> {{ t('and','ও') }} <a class="link" href="{{ u('refund-policy.html') }}" target="_blank">{{ t('cancellation policy','বাতিল নীতিতে') }}</a>.</span></label>
+      <div class="mt-7 flex flex-col-reverse justify-between gap-3 sm:flex-row"><button type="button" class="btn btn-ghost" data-prev>{{ icon('arrow-left','h-4 w-4') }} {{ t('Back','পেছনে') }}</button><button type="button" class="btn btn-accent btn-lg" data-next data-pay data-redirect="{{ u('booking-confirmed.html') }}">{{ icon('lock','h-4 w-4') }} {{ t('Pay securely','নিরাপদে পরিশোধ') }} <span data-deposit-mirror></span></button></div>
+    </section>
+  </div>
+
+  <aside class="lg:sticky lg:top-24 lg:self-start">
+    <div class="card overflow-hidden">
+      <img src="{{ img(x.img, True) }}" alt="" class="aspect-[16/8] w-full object-cover" data-bk-img width="640" height="400">
+      <div class="p-5"><p class="font-bold" data-bk-title>{{ x.title|tr }}</p><p class="text-sm muted" data-bk-sub>{{ digits(x.days) }} {{ t('days','দিন') }} · {{ x.dest|tr }}</p>
+        <dl class="mt-4 space-y-2 border-t border-ink-100 pt-4 text-sm dark:border-ink-800">
+          <div class="flex justify-between"><dt class="muted">{{ t('Price per adult','প্রাপ্তবয়স্ক প্রতি মূল্য') }}</dt><dd data-bk-price>{{ bdt(x.price) }}</dd></div>
+          <div class="flex justify-between text-emerald-700 dark:text-emerald-400" data-coupon-row hidden><dt>{{ t('Promo MUSAFIR10','প্রোমো MUSAFIR10') }}</dt><dd>−10%</dd></div>
+          <div class="flex justify-between"><dt class="muted">{{ t('Taxes & VAT','কর ও ভ্যাট') }}</dt><dd>{{ t('Included','অন্তর্ভুক্ত') }}</dd></div>
+          <div class="flex justify-between border-t border-ink-100 pt-3 text-base dark:border-ink-800"><dt class="font-bold">{{ t('Total','মোট') }}</dt><dd class="text-xl font-extrabold" data-total>{{ bdt(x.price*2) }}</dd></div>
+          <div class="flex justify-between"><dt class="muted">{{ t('Due now (30%)','এখন দেয় (৩০%)') }}</dt><dd class="font-bold text-brand-700 dark:text-brand-300" data-deposit>{{ bdt((x.price*0.6)|round|int) }}</dd></div>
+        </dl></div>
+      <ul class="space-y-2 border-t border-ink-100 bg-ink-50/60 p-5 text-xs dark:border-ink-800 dark:bg-ink-850">{% for ic,l in [('badge-check',('Govt. licensed · IATA accredited','সরকার লাইসেন্সপ্রাপ্ত · আইএটিএ স্বীকৃত')),('rotate-ccw',('Free cancellation up to 30 days','৩০ দিন আগে পর্যন্ত ফ্রি বাতিল')),('headset',('24/7 support: ','২৪/৭ সাপোর্ট: ')+(C.hotline,C.hotline))] %}<li class="flex items-center gap-2">{{ icon(ic,'h-4 w-4 text-brand-600') }} {{ t(*l[:2]) if l|length==2 else (t(l[0],l[1])+digits(C.hotline)) }}</li>{% endfor %}</ul>
+    </div>
+  </aside>
+</div>
+{% endblock %}

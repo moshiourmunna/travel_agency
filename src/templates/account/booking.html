@@ -1,0 +1,68 @@
+{% extends 'app/shell.html' %}
+{% from 'app/ui.html' import page_head, status, kind_chip, progress, avatar_i %}
+{% block content %}
+{% set b = A.FEATURED %}{% set x = D.TOUR[b.slug] %}
+<div class="card overflow-hidden">
+  <div class="relative h-40 sm:h-56"><img src="{{ img(b.img) }}" alt="" class="h-full w-full object-cover" width="1600" height="1000"><div class="absolute inset-0 bg-gradient-to-t from-ink-950/85 to-transparent"></div>
+    <div class="absolute inset-x-0 bottom-0 p-4 text-white sm:p-6"><div class="flex flex-wrap items-center gap-2">{{ status(b.status) }}<span class="rounded-full bg-white/15 px-2.5 py-0.5 text-xs font-semibold">{{ b.ref }}</span></div><h1 class="mt-2 text-2xl font-extrabold sm:text-3xl">{{ b.title|tr }}</h1></div></div>
+  <div class="flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:justify-between sm:p-6">
+    <ul class="flex flex-wrap gap-x-6 gap-y-2 text-sm"><li>{{ icon('calendar','mr-1 inline h-4 w-4 text-brand-700 dark:text-brand-300') }}{{ date(b.start) }} – {{ date(b.end) }}</li><li>{{ icon('moon','mr-1 inline h-4 w-4 text-brand-700 dark:text-brand-300') }}{{ digits(4) }} {{ t('nights','রাত') }}</li><li>{{ icon('users','mr-1 inline h-4 w-4 text-brand-700 dark:text-brand-300') }}{{ digits(2) }} {{ t('adults','প্রাপ্তবয়স্ক') }}</li><li>{{ icon('building-2','mr-1 inline h-4 w-4 text-brand-700 dark:text-brand-300') }}{{ t('Water villa, half board','ওয়াটার ভিলা, হাফ বোর্ড') }}</li></ul>
+    <div class="flex flex-wrap gap-2"><button type="button" class="btn btn-outline btn-sm" data-print>{{ icon('printer','h-4 w-4') }} {{ t('Print voucher','ভাউচার প্রিন্ট') }}</button><button type="button" class="btn btn-outline btn-sm" data-demo="{{ t('Change request sent to Nadia (demo)','নাদিয়ার কাছে পরিবর্তনের অনুরোধ পাঠানো হয়েছে (ডেমো)') }}">{{ icon('pencil','h-4 w-4') }} {{ t('Request change','পরিবর্তনের অনুরোধ') }}</button><button type="button" class="btn btn-outline btn-sm text-rose-700 dark:text-rose-300" onclick="document.getElementById('cancel-dialog').showModal()">{{ icon('circle-x','h-4 w-4') }} {{ t('Cancel booking','বুকিং বাতিল') }}</button></div>
+  </div>
+</div>
+
+<div class="mt-6 grid gap-6 xl:grid-cols-[1fr_22rem]">
+  <div class="min-w-0" data-tabs>
+    <div class="flex max-w-full gap-1 overflow-x-auto rounded-xl bg-ink-100 p-1 dark:bg-ink-850 sm:inline-flex" role="tablist" aria-label="{{ t('Booking sections','বুকিংয়ের অংশ') }}">
+      {% for id,l in [('tb-itin',('Itinerary','ভ্রমণসূচি')),('tb-trav',('Travellers','ভ্রমণকারী')),('tb-pay',('Payments','পেমেন্ট')),('tb-docs',('Documents','ডকুমেন্ট'))] %}<button type="button" role="tab" class="tab-pill shrink-0" id="{{ id }}-t" data-tab="{{ id }}" aria-controls="{{ id }}" aria-selected="{{ 'true' if loop.first else 'false' }}" {% if not loop.first %}tabindex="-1"{% endif %}>{{ t(*l) }}</button>{% endfor %}
+    </div>
+    <section id="tb-itin" role="tabpanel" aria-labelledby="tb-itin-t" class="card mt-4 p-4 sm:p-6">
+      <ol class="relative space-y-6 border-l-2 border-dashed border-brand-200 pl-6 dark:border-brand-800">
+        {% for d in x.itin %}<li class="relative"><span class="absolute -left-[35px] grid h-7 w-7 place-items-center rounded-full bg-brand-700 text-xs font-bold text-white">{{ digits(loop.index) }}</span>
+          <p class="text-xs font-semibold uppercase tracking-wide text-brand-700 dark:text-brand-300">{{ date(['2026-12-12','2026-12-13','2026-12-14','2026-12-15','2026-12-16'][loop.index0], 'short') }}</p><h2 class="font-bold">{{ d.t|tr }}</h2>{% if d.d %}<p class="mt-1 text-sm muted">{{ d.d|tr }}</p>{% endif %}
+          {% if loop.first %}<div class="mt-3 grid gap-2 rounded-2xl bg-ink-50 p-3 text-sm dark:bg-ink-850 sm:grid-cols-2"><p>{{ icon('plane-takeoff','mr-1 inline h-4 w-4') }} BS 341 · 09:15 DAC → 12:35 MLE</p><p>{{ icon('ship','mr-1 inline h-4 w-4') }} {{ t('Speedboat transfer, 45 min','স্পিডবোট ট্রান্সফার, ৪৫ মিনিট') }}</p></div>{% endif %}
+        </li>{% endfor %}
+      </ol>
+    </section>
+    <section id="tb-trav" role="tabpanel" aria-labelledby="tb-trav-t" class="card mt-4 p-4 sm:p-6" hidden>
+      <ul class="divide-y divide-ink-100 dark:divide-ink-800">{% for p in A.TRAVELLERS[:2] %}<li class="flex flex-wrap items-center gap-3 py-3">{{ avatar_i(p.ini) }}<div class="min-w-0 flex-1"><p class="font-semibold">{{ p.name|tr }}</p><p class="text-xs muted">{{ t('Passport','পাসপোর্ট') }} {{ p.passport }} · {{ t('expires','মেয়াদ') }} {{ date(p.exp) }}</p></div><span class="badge badge-brand">{{ icon('check','h-3.5 w-3.5') }} {{ t('Details complete','তথ্য সম্পূর্ণ') }}</span></li>{% endfor %}</ul>
+      <a href="{{ u('account/travellers.html') }}" class="btn btn-outline btn-sm mt-3">{{ t('Edit travellers','ভ্রমণকারী এডিট') }}</a>
+    </section>
+    <section id="tb-pay" role="tabpanel" aria-labelledby="tb-pay-t" class="card mt-4 p-4 sm:p-6" hidden>
+      <div class="flex items-center justify-between text-sm"><p>{{ t('Paid','পরিশোধিত') }} <b>{{ bdt(b.paid) }}</b> {{ t('of','এর মধ্যে') }} {{ bdt(b.total) }}</p><p class="font-semibold">{{ digits(30) }}%</p></div>{{ progress(30, 'mt-2') }}
+      <ol class="mt-5 space-y-3">{% for d,amt,st,m in A.INSTALMENTS %}<li class="flex flex-wrap items-center gap-3 rounded-2xl border border-ink-100 p-3 dark:border-ink-800"><span class="grid h-9 w-9 place-items-center rounded-xl {{ 'bg-emerald-50 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300' if st=='paid' else ('bg-accent-100 text-accent-800 dark:bg-accent-400/15 dark:text-accent-200' if st=='due' else 'bg-ink-100 text-ink-600 dark:bg-ink-800 dark:text-ink-300') }}">{{ digits(loop.index) }}</span><div class="flex-1"><p class="font-semibold">{{ bdt(amt) }}</p><p class="text-xs muted">{{ t('Due','নির্ধারিত') }} {{ date(d) }}{% if m %} · {{ t('paid via','পরিশোধ') }} {{ m }}{% endif %}</p></div>{% if st=='paid' %}{{ status('success') }}{% elif st=='due' %}<a href="{{ u('account/payments.html') }}" class="btn btn-accent btn-sm">{{ t('Pay now','এখন পরিশোধ') }}</a>{% else %}<span class="text-xs muted">{{ t('Upcoming','আসন্ন') }}</span>{% endif %}</li>{% endfor %}</ol>
+    </section>
+    <section id="tb-docs" role="tabpanel" aria-labelledby="tb-docs-t" class="card mt-4 p-4 sm:p-6" hidden>
+      <ul class="grid gap-3 sm:grid-cols-2">{% for ic,n,s in [('file-text',('Tour voucher','ট্যুর ভাউচার'),'PDF · 240 KB'),('receipt',('Invoice INV-26-48213','ইনভয়েস INV-26-48213'),'PDF · 96 KB'),('plane',('Flight e-ticket BS 341','ফ্লাইট ই-টিকিট BS 341'),'PDF · 180 KB'),('shield-check',('Travel insurance policy','ভ্রমণ বিমা পলিসি'),'PDF · 310 KB'),('hotel',('Resort confirmation','রিসোর্ট কনফার্মেশন'),'PDF · 120 KB'),('map',('Maldives travel guide','মালদ্বীপ ট্রাভেল গাইড'),'PDF · 2.1 MB')] %}
+        <li class="flex items-center gap-3 rounded-2xl border border-ink-100 p-3 dark:border-ink-800"><span class="grid h-10 w-10 place-items-center rounded-xl bg-brand-50 text-brand-700 dark:bg-brand-900/40 dark:text-brand-300">{{ icon(ic,'h-5 w-5') }}</span><div class="min-w-0 flex-1"><p class="truncate text-sm font-semibold">{{ t(*n) }}</p><p class="text-xs muted">{{ s }}</p></div><button type="button" class="icon-btn" data-demo="{{ t('Download started (demo)','ডাউনলোড শুরু (ডেমো)') }}" aria-label="{{ t('Download','ডাউনলোড') }} {{ t(*n) }}">{{ icon('download','h-4 w-4') }}</button></li>{% endfor %}</ul>
+    </section>
+  </div>
+  <aside class="space-y-6">
+    <section class="card p-4 sm:p-5" aria-labelledby="sum-h"><h2 id="sum-h" class="font-bold">{{ t('Price summary','মূল্যের সারাংশ') }}</h2>
+      <dl class="mt-3 space-y-2 text-sm">
+        {% for l,v in [(('Package × 2 adults','প্যাকেজ × ২ প্রাপ্তবয়স্ক'),290000),(('Water-villa upgrade','ওয়াটার-ভিলা আপগ্রেড'),18000),(('Travel insurance × 2','ভ্রমণ বিমা × ২'),2400)] %}<div class="flex justify-between gap-3"><dt class="muted">{{ t(*l) }}</dt><dd>{{ bdt(v) }}</dd></div>{% endfor %}
+        <div class="flex justify-between gap-3 text-emerald-700 dark:text-emerald-400"><dt>{{ t('Promo WINTER26 + Gold member','প্রোমো WINTER26 + গোল্ড সদস্য') }}</dt><dd>−{{ bdt(21400) }}</dd></div>
+        <div class="flex justify-between gap-3 border-t border-ink-100 pt-2 text-base font-bold dark:border-ink-800"><dt>{{ t('Total','মোট') }}</dt><dd>{{ bdt(b.total) }}</dd></div>
+        <div class="flex justify-between gap-3"><dt class="muted">{{ t('Paid','পরিশোধিত') }}</dt><dd>{{ bdt(b.paid) }}</dd></div>
+        <div class="flex justify-between gap-3 font-semibold text-rose-700 dark:text-rose-300"><dt>{{ t('Balance','বাকি') }}</dt><dd>{{ bdt(b.total-b.paid) }}</dd></div>
+      </dl>
+      <a href="{{ u('account/payments.html') }}" class="btn btn-accent mt-4 w-full">{{ t('Pay next instalment','পরবর্তী কিস্তি দিন') }}</a>
+      <p class="mt-2 text-center text-xs muted">{{ t('Earns','পাবেন') }} {{ num(2890) }} {{ t('Miles','মাইলস') }}</p></section>
+    <section class="card p-4 sm:p-5" aria-labelledby="agent-h"><h2 id="agent-h" class="font-bold">{{ t('Your travel expert','আপনার ট্রাভেল এক্সপার্ট') }}</h2>
+      <div class="mt-3 flex items-center gap-3">{{ avatar_i('NI','h-12 w-12 text-sm','from-accent-400 to-accent-700') }}<div><p class="font-semibold">{{ t('Nadia Islam','নাদিয়া ইসলাম') }}</p><p class="text-xs muted">{{ t('Replies in ~5 min, 9 AM – 10 PM','সাধারণত ~৫ মিনিটে উত্তর, সকাল ৯টা – রাত ১০টা') }}</p></div></div>
+      <div class="mt-4 grid grid-cols-2 gap-2"><a href="https://wa.me/{{ C.wa }}" target="_blank" rel="noopener" class="btn btn-outline btn-sm">{{ icon('whatsapp','h-4 w-4 text-[#1FAF38]') }} WhatsApp</a><a href="{{ u('account/support.html') }}" class="btn btn-outline btn-sm">{{ icon('message-circle','h-4 w-4') }} {{ t('Chat','চ্যাট') }}</a></div></section>
+    <section class="card p-4 sm:p-5" aria-labelledby="pol-h"><h2 id="pol-h" class="font-bold">{{ t('Cancellation policy','বাতিলের নীতি') }}</h2>
+      <ul class="mt-3 space-y-2 text-sm">{% for w,r,c in [(('Until 12 Nov','১২ নভেম্বর পর্যন্ত'),('Full refund minus ৳ 2,000 fee','৳ ২,০০০ ফি বাদে পূর্ণ রিফান্ড'),'emerald'),(('13 Nov – 2 Dec','১৩ নভেম্বর – ২ ডিসেম্বর'),('50% refund','৫০% রিফান্ড'),'amber'),(('After 2 Dec','২ ডিসেম্বরের পর'),('Non-refundable','অফেরতযোগ্য'),'rose')] %}<li class="flex gap-2"><span class="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-{{ c }}-500"></span><span><b>{{ t(*w) }}</b> — {{ t(*r) }}</span></li>{% endfor %}</ul></section>
+  </aside>
+</div>
+
+<dialog id="cancel-dialog" class="w-[min(92vw,30rem)] rounded-3xl p-0 backdrop:bg-ink-950/60 dark:bg-ink-900 dark:text-white" aria-labelledby="cx-h">
+  <form method="dialog" class="p-6"><h2 id="cx-h" class="text-lg font-bold">{{ t('Cancel this booking?','এই বুকিং বাতিল করবেন?') }}</h2>
+    <p class="mt-2 text-sm muted">{{ t('You are inside the free window. Estimated refund:','আপনি ফ্রি সময়ের মধ্যে আছেন। আনুমানিক রিফান্ড:') }}</p>
+    <p class="mt-1 text-3xl font-extrabold text-emerald-700 dark:text-emerald-400">{{ bdt(b.paid-2000) }}</p>
+    <label class="label mt-4" for="cx-r">{{ t('Reason (optional)','কারণ (ঐচ্ছিক)') }}</label><select id="cx-r" class="input"><option>{{ t('Change of plans','পরিকল্পনা পরিবর্তন') }}</option><option>{{ t('Visa issue','ভিসা সমস্যা') }}</option><option>{{ t('Health reasons','স্বাস্থ্যগত কারণ') }}</option><option>{{ t('Found a better price','কম দামে পেয়েছি') }}</option></select>
+    <fieldset class="mt-4"><legend class="label">{{ t('Refund to','রিফান্ড যাবে') }}</legend><div class="grid grid-cols-2 gap-2 text-sm"><label class="flex items-center gap-2 rounded-xl border border-ink-200 p-3 dark:border-ink-700"><input type="radio" name="rf" class="check" checked> {{ t('Musafir wallet (instant)','মুসাফির ওয়ালেট (তাৎক্ষণিক)') }}</label><label class="flex items-center gap-2 rounded-xl border border-ink-200 p-3 dark:border-ink-700"><input type="radio" name="rf" class="check"> bKash (3–5 {{ t('days','দিন') }})</label></div></fieldset>
+    <div class="mt-6 flex justify-end gap-2"><button class="btn btn-outline" value="keep">{{ t('Keep booking','বুকিং রাখুন') }}</button><button class="btn bg-rose-700 text-white hover:bg-rose-800" value="cancel" data-modal-close data-demo="{{ t('Cancellation requested (demo) — nothing was changed.','বাতিলের অনুরোধ (ডেমো) — কিছু পরিবর্তন হয়নি।') }}">{{ t('Confirm cancellation','বাতিল নিশ্চিত করুন') }}</button></div>
+  </form>
+</dialog>
+{% endblock %}

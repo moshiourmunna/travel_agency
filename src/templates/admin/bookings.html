@@ -1,0 +1,19 @@
+{% extends 'app/shell.html' %}
+{% from 'app/ui.html' import page_head, status, kind_chip, rtable, dt_tools, person, row_menu, kpi %}
+{% block content %}
+{% call page_head(title, t('36 bookings in the last 30 days · ৳ 1.12 crore gross','শেষ ৩০ দিনে ৩৬টি বুকিং · মোট ৳ ১.১২ কোটি')) %}<button type="button" class="btn btn-outline btn-sm" data-demo="{{ t('Import wizard (demo)','ইমপোর্ট উইজার্ড (ডেমো)') }}">{{ icon('upload','h-4 w-4') }} {{ t('Import','ইমপোর্ট') }}</button><a id="new" href="#new" class="btn btn-primary btn-sm" data-demo="{{ t('New booking form (demo)','নতুন বুকিং ফর্ম (ডেমো)') }}">{{ icon('plus','h-4 w-4') }} {{ t('New booking','নতুন বুকিং') }}</a>{% endcall %}
+{% set rows = A.ADMIN_BOOKINGS %}
+<div class="mb-5 grid grid-cols-2 gap-3 lg:grid-cols-4">{{ kpi(t('Confirmed','নিশ্চিত'), digits(rows|selectattr('status','equalto','confirmed')|list|length), None, 'circle-check') }}{{ kpi(t('Awaiting payment','পেমেন্টের অপেক্ষায়'), digits(rows|selectattr('status','in',['pending','partial'])|list|length), None, 'hourglass', tone='accent') }}{{ kpi(t('Travelling in 30 days','৩০ দিনে যাত্রা'), digits(14), None, 'plane-takeoff', tone='sky') }}{{ kpi(t('Cancelled / refunded','বাতিল / রিফান্ড'), digits(rows|selectattr('status','in',['cancelled','refunded'])|list|length), None, 'circle-x', tone='rose') }}</div>
+{% set cnt = {} %}
+{{ dt_tools('bk', [('all',B('All','সব'),rows|length),('confirmed',A.ST.confirmed[0],None),('partial',A.ST.partial[0],None),('pending',A.ST.pending[0],None),('completed',A.ST.completed[0],None),('cancelled',A.ST.cancelled[0],None),('refunded',A.ST.refunded[0],None)], t('Search ref, customer, phone, trip…','রেফারেন্স, গ্রাহক, ফোন, ট্রিপ খুঁজুন…')) }}
+{% call(r, k) rtable('bk', [('ref',t('Booking','বুকিং'),'min-w-[16rem]'),('cust',t('Customer','গ্রাহক'),''),('$travel',t('Travel','যাত্রা'),'whitespace-nowrap'),('pax',t('Pax','যাত্রী'),'hidden text-center xl:table-cell'),('$total',t('Amount','পরিমাণ'),'text-right'),('status',t('Status','স্ট্যাটাস'),''),('channel',t('Channel','চ্যানেল'),'hidden 2xl:table-cell'),('act','','text-right')], rows, 'ref', t('Bookings','বুকিং'), True, ('status','total','travel')) %}
+  {% if k=='ref' %}<a href="{{ u('admin/booking.html') }}" class="flex min-w-0 items-center gap-3"><img src="{{ img(r.img, True) }}" alt="" class="h-10 w-14 shrink-0 rounded-lg object-cover" width="56" height="40" loading="lazy"><span class="min-w-0"><span class="block font-semibold text-brand-700 dark:text-brand-300">{{ r.ref }}</span><span class="block truncate text-xs muted">{{ r.title|tr }}</span></span></a>
+  {% elif k=='cust' %}{{ person(r.cust, r.ini, r.city|tr) }}
+  {% elif k=='travel' %}{{ date(r.travel) }}<span class="block text-xs muted">{{ t('booked','বুকিং') }} {{ date(r.created) }}</span>
+  {% elif k=='pax' %}{{ digits(r.pax) }}
+  {% elif k=='total' %}<b>{{ bdt(r.total) }}</b>{% if r.paid < r.total and r.status not in ('cancelled','refunded') %}<span class="block text-xs text-rose-700 dark:text-rose-300">{{ t('due','বাকি') }} {{ bdt(r.total-r.paid) }}</span>{% endif %}
+  {% elif k=='status' %}{{ status(r.status) }}
+  {% elif k=='channel' %}<span class="text-xs">{{ r.channel[1]|tr }}</span><span class="block text-xs muted">{{ r.method }}</span>
+  {% elif k=='act' %}{{ row_menu('admin/booking.html', True) }}{% endif %}
+{% endcall %}
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'app/shell.html' %}
+{% from 'app/ui.html' import page_head, status, rtable, dt_tools, person, kpi %}
+{% block content %}
+{% call page_head(title, t('Document checks, embassy submissions and decisions.','কাগজপত্র যাচাই, দূতাবাসে জমা ও সিদ্ধান্ত।')) %}<a href="{{ u('visa.html') }}" class="btn btn-outline btn-sm">{{ icon('external-link','h-4 w-4') }} {{ t('Visa pages','ভিসা পেজ') }}</a>{% endcall %}
+<div class="mb-5 grid grid-cols-2 gap-3 lg:grid-cols-4">{{ kpi(t('In progress','চলমান'), digits(48), None, 'stamp') }}{{ kpi(t('Missing documents','কাগজ বাকি'), digits(3), None, 'file-warning', tone='accent') }}{{ kpi(t('Approval rate (90 d)','অনুমোদনের হার (৯০ দিন)'), digits('96.4%'), '+1.1 pt', 'badge-check', tone='sky') }}{{ kpi(t('Avg. processing','গড় সময়'), t('8.2 days','৮.২ দিন'), None, 'clock', tone='brand') }}</div>
+{% set rows = [] %}{% for v in A.VISA_QUEUE %}{% set _ = rows.append(dict(ref=v[0], who=v[1], flag=v[2], country=v[3], status=v[4], eta=v[5], officer=v[6])) %}{% endfor %}
+{{ dt_tools('vq', [('all',B('All','সব'),rows|length),('docs',A.ST.docs[0],None),('submitted',A.ST.submitted[0],None),('embassy',A.ST.embassy[0],None),('approved',A.ST.approved[0],None),('failed',B('Refused','প্রত্যাখ্যাত'),None)], t('Search applicant or ref…','আবেদনকারী বা রেফারেন্স খুঁজুন…')) }}
+{% call(r, k) rtable('vq', [('ref',t('Application','আবেদন'),''),('who',t('Applicant','আবেদনকারী'),''),('country',t('Country','দেশ'),''),('status',t('Stage','ধাপ'),''),('eta',t('Expected','সম্ভাব্য'),'whitespace-nowrap'),('officer',t('Officer','অফিসার'),'hidden xl:table-cell'),('act','','text-right')], rows, 'ref', title, False, ('status',)) %}
+  {% if k=='ref' %}<span class="font-semibold">{{ r.ref }}</span>
+  {% elif k=='who' %}{{ r.who|tr }}
+  {% elif k=='country' %}<span aria-hidden="true">{{ r.flag }}</span> {{ r.country|tr }}
+  {% elif k=='status' %}{{ status(r.status) }}
+  {% elif k=='eta' %}{{ date(r.eta) }}
+  {% elif k=='officer' %}{{ r.officer }}
+  {% elif k=='act' %}<label class="sr-only" for="vs-{{ r.ref }}">{{ t('Move to stage','ধাপ পরিবর্তন') }} {{ r.ref }}</label><select id="vs-{{ r.ref }}" class="input h-8 w-auto py-0 text-xs" data-status-select>{% for s in ['docs','submitted','embassy','approved','failed'] %}<option {{ 'selected' if s==r.status }}>{{ A.ST[s][0]|tr }}</option>{% endfor %}</select>{% endif %}
+{% endcall %}
+{% endblock %}

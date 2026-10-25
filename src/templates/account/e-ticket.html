@@ -1,0 +1,31 @@
+{% extends 'app/shell.html' %}
+{% from 'app/ui.html' import page_head, status %}
+{% block content %}
+{% call page_head(title, t('Show this on your phone or print it. Check-in opens 3 hours before departure.','ফোনে দেখান বা প্রিন্ট করুন। চেক-ইন যাত্রার ৩ ঘণ্টা আগে শুরু।')) %}<button type="button" class="btn btn-outline btn-sm" data-print>{{ icon('printer','h-4 w-4') }} {{ t('Print','প্রিন্ট') }}</button><button type="button" class="btn btn-primary btn-sm" data-demo="{{ t('Added to Google Wallet (demo)','গুগল ওয়ালেটে যোগ হয়েছে (ডেমো)') }}">{{ icon('wallet','h-4 w-4') }} {{ t('Add to wallet','ওয়ালেটে যোগ') }}</button>{% endcall %}
+<div class="grid gap-6 xl:grid-cols-[1fr_20rem]">
+<div class="space-y-5">
+{% for who,seat,etk in [(A.TRAVELLERS[0],'14A','179-2468013579'),(A.TRAVELLERS[1],'14B','179-2468013580')] %}
+<article class="card overflow-hidden" aria-label="{{ t('Boarding pass','বোর্ডিং পাস') }} {{ who.name|tr }}">
+  <div class="flex items-center justify-between gap-3 bg-[#1D4E9E] px-4 py-3 text-white sm:px-6"><p class="font-bold">US-Bangla Airlines</p><p class="text-sm">{{ t('Economy','ইকোনমি') }} · PNR <b>K7Q2ZM</b></p></div>
+  <div class="grid gap-5 p-4 sm:p-6 md:grid-cols-[1fr_auto]">
+    <div>
+      <div class="flex items-center justify-between gap-3"><div><p class="text-3xl font-extrabold sm:text-4xl">DAC</p><p class="text-sm muted">{{ t('Dhaka','ঢাকা') }} · T2</p></div>
+        <div class="flex flex-1 flex-col items-center px-2 text-xs muted"><span>BS 341 · {{ t('5h 20m','৫ঘ ২০মি') }}</span><span class="relative my-2 block h-px w-full bg-ink-200 dark:bg-ink-700"><span class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-1 text-brand-700 dark:bg-ink-900 dark:text-brand-300">{{ icon('plane','h-4 w-4') }}</span></span><span>{{ t('Non-stop','সরাসরি') }}</span></div>
+        <div class="text-right"><p class="text-3xl font-extrabold sm:text-4xl">MLE</p><p class="text-sm muted">{{ t('Malé','মালে') }}</p></div></div>
+      <dl class="mt-5 grid grid-cols-2 gap-4 border-t border-dashed border-ink-200 pt-4 text-sm dark:border-ink-700 sm:grid-cols-4">
+        {% for l,v in [(('Passenger','যাত্রী'),who.name|tr),(('Date','তারিখ'),date('2026-12-12')),(('Departs','ছাড়বে'),'09:15'),(('Boarding','বোর্ডিং'),'08:35'),(('Seat','সিট'),seat),(('Gate','গেট'),'—'),(('Baggage','ব্যাগেজ'),'30 kg + 7 kg'),(('E-ticket','ই-টিকিট'),etk)] %}<div class="min-w-0"><dt class="text-xs muted">{{ t(*l) }}</dt><dd class="break-words font-semibold">{{ v }}</dd></div>{% endfor %}
+      </dl>
+    </div>
+    <div class="flex flex-col items-center justify-center gap-2 border-t border-dashed border-ink-200 pt-4 dark:border-ink-700 md:border-l md:border-t-0 md:pl-6 md:pt-0">
+      <svg viewBox="0 0 29 29" class="h-32 w-32 rounded-lg bg-white p-1.5" role="img" aria-label="{{ t('QR code (sample)','কিউআর কোড (নমুনা)') }}">{% for yy in range(29) %}{% for xx in range(29) %}{% if ((xx*7+yy*13+xx*yy+loop.index) % 5 < 2) or (xx<7 and yy<7 and (xx in (0,6) or yy in (0,6) or (1<xx<5 and 1<yy<5))) or (xx>21 and yy<7 and (xx in (22,28) or yy in (0,6) or (23<xx<27 and 1<yy<5))) or (xx<7 and yy>21 and (xx in (0,6) or yy in (22,28) or (1<xx<5 and 23<yy<27))) %}<rect x="{{ xx }}" y="{{ yy }}" width="1" height="1" fill="#0B1B2B"/>{% endif %}{% endfor %}{% endfor %}</svg>
+      <p class="text-xs muted">{{ t('Scan at the gate','গেটে স্ক্যান করুন') }}</p></div>
+  </div>
+</article>{% endfor %}
+</div>
+<aside class="space-y-5">
+  <section class="card p-4 sm:p-5"><h2 class="font-bold">{{ t('Flight status','ফ্লাইট স্ট্যাটাস') }}</h2><p class="mt-2 flex items-center gap-2 text-sm">{{ status('scheduled') }} {{ t('On time','সময়মতো') }}</p><p class="mt-2 text-xs muted">{{ t('We will SMS and WhatsApp you if anything changes.','কিছু পরিবর্তন হলে এসএমএস ও হোয়াটসঅ্যাপে জানাব।') }}</p></section>
+  <section class="card p-4 sm:p-5"><h2 class="font-bold">{{ t('Before you fly','যাত্রার আগে') }}</h2><ul class="mt-3 space-y-2 text-sm">{% for l in [('Passport valid 6+ months','পাসপোর্টের মেয়াদ ৬+ মাস'),('Return ticket & hotel voucher printed','ফিরতি টিকিট ও হোটেল ভাউচার প্রিন্ট'),('Maldives IMUGA form within 96 h','৯৬ ঘণ্টার মধ্যে মালদ্বীপ IMUGA ফর্ম'),('USD cash for incidentals','অতিরিক্ত খরচের জন্য ডলার নগদ')] %}<li class="flex gap-2">{{ icon('circle-check','mt-0.5 h-4 w-4 shrink-0 text-brand-700 dark:text-brand-300') }} {{ t(*l) }}</li>{% endfor %}</ul></section>
+  <section class="card p-4 sm:p-5"><h2 class="font-bold">{{ t('Add-ons','অ্যাড-অন') }}</h2><div class="mt-3 grid gap-2"><button type="button" class="btn btn-outline btn-sm justify-between" data-demo="{{ t('Seat map opened (demo)','সিট ম্যাপ খোলা হয়েছে (ডেমো)') }}">{{ icon('armchair','h-4 w-4') }} {{ t('Change seats','সিট পরিবর্তন') }}<span class="ml-auto">{{ bdt(1200) }}</span></button><button type="button" class="btn btn-outline btn-sm justify-between" data-demo="{{ t('Extra baggage added (demo)','অতিরিক্ত ব্যাগেজ যোগ (ডেমো)') }}">{{ icon('luggage','h-4 w-4') }} {{ t('+10 kg baggage','+১০ কেজি ব্যাগেজ') }}<span class="ml-auto">{{ bdt(3500) }}</span></button><button type="button" class="btn btn-outline btn-sm justify-between" data-demo="{{ t('Meal request saved (demo)','খাবারের অনুরোধ সংরক্ষিত (ডেমো)') }}">{{ icon('utensils','h-4 w-4') }} {{ t('Special meal','বিশেষ খাবার') }}<span class="ml-auto">{{ t('Free','ফ্রি') }}</span></button></div></section>
+</aside>
+</div>
+{% endblock %}

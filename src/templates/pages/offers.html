@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% import 'ui.html' as ui %}
+{% block content %}
+{{ ui.page_hero(t('Deals & offers','ডিল ও অফার'), t('Flash sales, early-bird fares, bank & bKash cashback and coupon codes — every deal shows exactly when it ends.','ফ্ল্যাশ সেল, আর্লি-বার্ড ভাড়া, ব্যাংক ও বিকাশ ক্যাশব্যাক এবং কুপন কোড — প্রতিটি অফার কখন শেষ হবে তা স্পষ্ট দেখানো।'), [(t('Home','হোম'),u('index.html')),(t('Offers','অফার'),'')], 'maldives') }}
+<section class="relative -mt-10 pb-4"><div class="wrap"><div class="grid items-center gap-5 rounded-3xl bg-gradient-to-r from-accent-400 to-accent-300 p-6 text-ink-900 shadow-lift md:grid-cols-[1fr_auto] md:p-8">
+  <div><p class="eyebrow text-ink-800">{{ icon('zap','h-4 w-4') }} {{ t('Flash sale','ফ্ল্যাশ সেল') }}</p><h2 class="text-2xl font-extrabold sm:text-3xl">{{ t('11.11 Mega Travel Sale — up to 30% off','১১.১১ মেগা ট্রাভেল সেল — সর্বোচ্চ ৩০% ছাড়') }}</h2><p class="mt-1 text-sm text-ink-800">{{ t('Holidays, cruises and activities. Use code at checkout.','হলিডে, ক্রুজ ও অ্যাক্টিভিটি। চেকআউটে কোড ব্যবহার করুন।') }} <button type="button" class="ml-1 rounded-lg border border-dashed border-ink-900/40 px-2 py-0.5 font-mono font-bold" data-copy="MUSAFIR10" aria-label="{{ t('Copy code','কোড কপি করুন') }} MUSAFIR10">MUSAFIR10 {{ icon('copy','inline h-3.5 w-3.5') }}</button></p></div>
+  <div data-countdown="2026-11-11T23:59:59+06:00" data-cd-grid class="grid grid-cols-4 gap-2 text-center" role="timer" aria-label="{{ t('Sale ends in','সেল শেষ হবে') }}">{% for k,l in [('d',('Days','দিন')),('h',('Hours','ঘণ্টা')),('m',('Mins','মিনিট')),('s',('Secs','সেকেন্ড'))] %}<div class="min-w-[4rem] rounded-2xl bg-ink-900 px-2 py-3 text-white"><b class="block text-2xl tabular-nums" data-cd="{{ k }}">--</b><span class="text-[11px] uppercase tracking-wider text-ink-300">{{ t(*l) }}</span></div>{% endfor %}</div>
+</div></div></section>
+<section class="section !pt-10" data-filter-group>
+  <div class="wrap">
+    <div class="mb-6 flex flex-wrap gap-2" role="group" aria-label="{{ t('Offer type','অফারের ধরন') }}">{% for v,l in [('all',('All deals','সব ডিল')),('holiday',('Holidays','হলিডে')),('cruise',('Cruises','ক্রুজ')),('flight',('Flights','ফ্লাইট')),('bank',('Bank & wallet','ব্যাংক ও ওয়ালেট'))] %}<button type="button" class="chip {{ 'is-active' if loop.first }}" aria-pressed="{{ 'true' if loop.first else 'false' }}" data-quick-filter="{{ v }}">{{ t(*l) }}</button>{% endfor %}</div>
+    <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+      {% for o in deals %}
+      <article class="card card-hover flex flex-col overflow-hidden" data-item data-kind="{{ o.kind }}">
+        <div class="relative aspect-[16/9] overflow-hidden"><img src="{{ img(o.img, True) }}" alt="" class="img-cover" loading="lazy" width="640" height="400"><span class="absolute left-3 top-3 badge bg-rose-600 text-white">{{ o.off|tr }}</span><span class="absolute bottom-3 left-3 badge bg-white/90 text-ink-800">{{ o.tag|tr }}</span></div>
+        <div class="flex flex-1 flex-col p-5"><h2 class="text-lg font-bold leading-snug">{{ o.title|tr }}</h2><p class="mt-1 text-sm muted">{{ o.desc|tr }}</p>
+          <div class="mt-4 flex items-center justify-between gap-3 rounded-2xl bg-ink-50 px-3 py-2 text-sm dark:bg-ink-850" data-countdown="{{ o.ends }}T23:59:59+06:00"><span class="inline-flex items-center gap-1.5 muted">{{ icon('timer','h-4 w-4 text-rose-500') }} {{ t('Ends in','শেষ হবে') }}</span><b class="tabular-nums" data-cd-out>--</b></div>
+          <div class="mt-auto flex items-center justify-between gap-3 pt-4">{% if o.code %}<button type="button" class="rounded-lg border border-dashed border-brand-400 px-2.5 py-1.5 font-mono text-sm font-bold text-brand-800 dark:text-brand-300" data-copy="{{ o.code }}" aria-label="{{ t('Copy code','কোড কপি করুন') }} {{ o.code }}">{{ o.code }} {{ icon('copy','inline h-3.5 w-3.5') }}</button>{% else %}<span class="text-xs muted">{{ t('Auto-applied','স্বয়ংক্রিয়ভাবে প্রযোজ্য') }}</span>{% endif %}<a href="{{ u(o.link) }}" class="btn btn-primary btn-sm">{{ t('View deal','ডিল দেখুন') }}</a></div>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<section class="pb-16"><div class="wrap">
+  {{ ui.sec_head(t('Price drops','মূল্য হ্রাস'), t('Tours with reduced prices right now','এখন যেসব ট্যুরে দাম কমেছে')) }}
+  <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{% for x in D.TOURS if x.old %}{% if loop.index <= 4 %}{{ ui.tour_card(x) }}{% endif %}{% endfor %}</div>
+  <p class="mt-8 rounded-2xl border border-ink-100 p-4 text-xs muted dark:border-ink-800">{{ t('Terms: one coupon per booking; not valid with other promotions; bank offers subject to the issuing bank’s terms; prices in BDT including VAT. Musafir may end any offer early if inventory sells out.','শর্তাবলি: প্রতি বুকিংয়ে একটি কুপন; অন্য অফারের সাথে প্রযোজ্য নয়; ব্যাংক অফার সংশ্লিষ্ট ব্যাংকের শর্তসাপেক্ষ; মূল্য ভ্যাটসহ টাকায়। ইনভেন্টরি শেষ হলে মুসাফির যেকোনো অফার আগেই বন্ধ করতে পারে।') }}</p>
+</div></section>
+{% endblock %}

@@ -1,0 +1,106 @@
+[
+ [
+  "admin login redirects to dashboard",
+  "PASS"
+ ],
+ [
+  "admin dashboard renders 3 Chart.js charts",
+  "PASS"
+ ],
+ [
+  "charts re-render on theme toggle",
+  "PASS"
+ ],
+ [
+  "bookings status filter",
+  "PASS"
+ ],
+ [
+  "bookings search",
+  "PASS"
+ ],
+ [
+  "header search ?q= prefilters bookings",
+  "PASS"
+ ],
+ [
+  "bookings sort by amount sets aria-sort",
+  "PASS"
+ ],
+ [
+  "select-all shows bulk bar with count",
+  "PASS"
+ ],
+ [
+  "delete with confirm dialog removes row",
+  "PASS"
+ ],
+ [
+  "mobile: sidebar is a drawer (open, Esc closes)",
+  "PASS"
+ ],
+ [
+  "mobile: table becomes cards",
+  "PASS"
+ ],
+ [
+  "leads: move card to next stage",
+  "PASS"
+ ],
+ [
+  "switch toggles aria-checked",
+  "PASS"
+ ],
+ [
+  "admin language switch keeps page",
+  "PASS"
+ ],
+ [
+  "portal: booking tabs switch panels",
+  "PASS"
+ ],
+ [
+  "portal: cancel dialog shows refund estimate",
+  "PASS"
+ ],
+ [
+  "portal: countdown ticks",
+  "PASS"
+ ],
+ [
+  "portal: bookings filter \"completed\"",
+  "PASS"
+ ],
+ [
+  "portal: support chat appends message",
+  "PASS"
+ ],
+ [
+  "portal: notifications filter by visa",
+  "PASS"
+ ],
+ [
+  "portal: profile form validates required",
+  "PASS"
+ ],
+ [
+  "portal: wallet top-up dialog opens",
+  "PASS"
+ ],
+ [
+  "portal: copy referral code toast",
+  "PASS"
+ ],
+ [
+  "theme persists across portal → admin",
+  "PASS"
+ ],
+ [
+  "keyboard \"/\" focuses admin search",
+  "PASS"
+ ],
+ [
+  "no console errors across app E2E",
+  "PASS"
+ ]
+]

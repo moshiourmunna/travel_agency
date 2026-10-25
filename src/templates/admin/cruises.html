@@ -1,0 +1,16 @@
+{% extends 'app/shell.html' %}
+{% from 'app/ui.html' import page_head, status, rtable, dt_tools, row_menu %}
+{% block content %}
+{% call page_head(title, t('6 sailings from Singapore, Dubai, Athens and Khulna','সিঙ্গাপুর, দুবাই, এথেন্স ও খুলনা থেকে ৬টি সেলিং')) %}<button type="button" class="btn btn-primary btn-sm" data-demo="{{ t('Editor opened (demo)','এডিটর খোলা হয়েছে (ডেমো)') }}">{{ icon('plus','h-4 w-4') }} {{ t('New sailing','নতুন সেলিং') }}</button>{% endcall %}
+{% set rows = [] %}{% for x in D.CRUISES %}{% set _ = rows.append(dict(x, status=('draft' if loop.index==99 else 'published'), sold=(loop.index*29)%90+6)) %}{% endfor %}
+{{ dt_tools('cr', [('all',B('All','সব'),rows|length)]+[('asia',D.CRUISE_REGIONS.asia,None),('gulf',D.CRUISE_REGIONS.gulf,None),('europe',D.CRUISE_REGIONS.europe,None),('bd',D.CRUISE_REGIONS.bd,None)], t('Search…','খুঁজুন…'), 'region') }}
+{% call(r, k) rtable('cr', [('title',t('Sailing','সেলিং'),'min-w-[18rem]'),('ship',t('Ship','জাহাজ'),'hidden xl:table-cell'),('depart',t('Departs','ছাড়বে'),'whitespace-nowrap'),('$price',t('From','শুরু'),'text-right'),('$sold',t('Cabins sold','বিক্রিত কেবিন'),'text-center'),('status',t('Status','স্ট্যাটাস'),''),('act','','text-right')], rows, 'title', title, False, ('region','price','sold')) %}
+  {% if k=='title' %}<div class="flex min-w-0 items-center gap-3"><img src="{{ img(r.img, True) }}" alt="" class="h-10 w-14 shrink-0 rounded-lg object-cover" width="56" height="40" loading="lazy"><span class="min-w-0"><span class="block truncate font-semibold">{{ r.title|tr }}</span><span class="block truncate text-xs muted">{{ digits(r.nights) }} {{ t('nights','রাত') }} · {{ D.CRUISE_REGIONS[r.region]|tr }}</span></span></div>
+  {% elif k=='ship' %}{{ r.ship }}<span class="block text-xs muted">{{ r.line }}</span>
+  {% elif k=='depart' %}{{ date(r.depart) }}<span class="block text-xs muted">{{ r.port|tr }}</span>
+  {% elif k=='price' %}<b>{{ bdt(r.price) }}</b>
+  {% elif k=='sold' %}{{ digits(r.sold) }}
+  {% elif k=='status' %}{{ status(r.status) }}
+  {% elif k=='act' %}<div class="flex justify-end gap-1"><a href="{{ u('cruises/'+r.slug+'.html') }}" class="icon-btn h-8 w-8" aria-label="{{ t('View on site','সাইটে দেখুন') }} — {{ r.title|tr }}">{{ icon('external-link','h-4 w-4') }}</a>{{ row_menu(None, True) }}</div>{% endif %}
+{% endcall %}
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% import 'ui.html' as ui %}
+{% block content %}
+{{ ui.page_hero(t('Travel insurance','ট্রাভেল ইন্স্যুরেন্স'), t('Medical, trip cancellation, lost baggage and flight delay cover — accepted for Schengen and all embassy visas.','চিকিৎসা, ট্রিপ বাতিল, হারানো লাগেজ ও ফ্লাইট বিলম্ব কভার — শেনজেনসহ সব দূতাবাসে গ্রহণযোগ্য।'), [(t('Home','হোম'),u('index.html')),(t('Insurance','ইন্স্যুরেন্স'),'')], 'plane') }}
+<section class="section"><div class="wrap">
+  <div class="grid gap-5 md:grid-cols-3">{% for n,p,med,feat,pop in [(('Asia Basic','এশিয়া বেসিক'),650,'US$ 30,000',[('Medical & hospital','চিকিৎসা ও হাসপাতাল'),('Emergency evacuation','জরুরি স্থানান্তর')],False),(('Worldwide Plus','ওয়ার্ল্ডওয়াইড প্লাস'),1450,'US$ 50,000',[('Schengen-approved','শেনজেন অনুমোদিত'),('Trip cancellation ৳1,00,000','ট্রিপ বাতিল ৳১,০০,০০০'),('Lost baggage','হারানো লাগেজ')],True),(('Family Premium','ফ্যামিলি প্রিমিয়াম'),3200,'US$ 1,00,000',[('Up to 2 adults + 3 kids','সর্বোচ্চ ২ প্রাপ্তবয়স্ক + ৩ শিশু'),('Flight delay ৳5,000 / 6 h','ফ্লাইট বিলম্ব ৳৫,০০০ / ৬ ঘণ্টা'),('Adventure sports','অ্যাডভেঞ্চার স্পোর্টস')],False)] %}
+    <article class="card relative flex flex-col p-6 {{ 'ring-2 ring-brand-600' if pop }}">{% if pop %}<span class="badge absolute -top-3 left-6 bg-brand-700 text-white">{{ t('Most popular','সবচেয়ে জনপ্রিয়') }}</span>{% endif %}<h2 class="text-xl font-bold">{{ t(*n) }}</h2><p class="mt-2"><span class="text-3xl font-extrabold">{{ bdt(p) }}</span> <span class="text-sm muted">/ {{ t('7 days','৭ দিন') }}</span></p><p class="mt-1 text-sm muted">{{ t('Medical cover','চিকিৎসা কভার') }}: <b class="text-ink-900 dark:text-white">{{ digits(med) }}</b></p><ul class="mt-4 flex-1 space-y-2 text-sm">{% for f in feat %}<li class="flex gap-2">{{ icon('check','h-4 w-4 shrink-0 text-brand-600') }} {{ t(*f) }}</li>{% endfor %}</ul><a href="#ins-quote" class="btn {{ 'btn-primary' if pop else 'btn-outline' }} mt-6">{{ t('Get this plan','এই প্ল্যান নিন') }}</a></article>{% endfor %}</div>
+  <form id="ins-quote" class="card mt-12 grid gap-4 p-6 sm:grid-cols-2 lg:grid-cols-5 lg:items-end" data-validate data-success="{{ t('Quote sent to your phone by SMS.','কোটেশন এসএমএসে পাঠানো হয়েছে।') }}">
+    <div class="field lg:col-span-2"><label class="label" for="in-d">{{ t('Destination','গন্তব্য') }} *</label><input id="in-d" class="input" required></div>
+    <div class="field"><label class="label" for="in-s">{{ t('Start','শুরু') }}</label><input id="in-s" type="date" class="input" value="2026-12-18"></div>
+    <div class="field"><label class="label" for="in-p">{{ t('Mobile','মোবাইল') }} *</label><input id="in-p" type="tel" class="input" required pattern="01[3-9][0-9]{8}" placeholder="01XXXXXXXXX"></div>
+    <button class="btn btn-accent">{{ t('Get quote','কোটেশন নিন') }}</button>
+  </form>
+  <p class="mt-4 text-xs muted">{{ t('Underwritten by licensed Bangladeshi insurers; Musafir acts as an authorised agent. Policy wording prevails.','লাইসেন্সপ্রাপ্ত বাংলাদেশি বিমা কোম্পানি দ্বারা প্রদত্ত; মুসাফির অনুমোদিত এজেন্ট। পলিসির শর্তাবলি প্রযোজ্য।') }}</p>
+</div></section>
+{% endblock %}

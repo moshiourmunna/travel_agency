@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% import 'ui.html' as ui %}
+{% block content %}
+<section class="relative isolate overflow-hidden bg-ink-950">
+  <img src="{{ img('resort') }}" alt="" class="img-cover absolute inset-0 -z-10 opacity-45" width="1600" height="1000" fetchpriority="high">
+  <div class="absolute inset-0 -z-10 bg-gradient-to-b from-ink-950/30 to-ink-950"></div>
+  <div class="wrap py-10 md:py-14">
+    {{ ui.crumbs([(t('Home','হোম'),u('index.html')),(t('Hotels','হোটেল'),'')], True) }}
+    <h1 class="mt-4 text-3xl font-extrabold text-white sm:text-4xl">{{ t('Hotels & resorts','হোটেল ও রিসোর্ট') }}</h1>
+    <p class="mt-2 text-ink-200">{{ t('From Cox’s Bazar beach resorts to Bali pool villas — best rates, pay now or later.','কক্সবাজারের সৈকত রিসোর্ট থেকে বালির পুল ভিলা — সেরা রেট, এখন বা পরে পরিশোধ।') }}</p>
+    <form class="mt-6 grid gap-3 rounded-3xl bg-white p-4 shadow-xl dark:bg-ink-900 sm:p-5 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr_auto] lg:items-end" action="#hlist">
+      <div><label class="label" for="ht-where">{{ t('City, hotel or area','শহর, হোটেল বা এলাকা') }}</label><input id="ht-where" class="input" value="{{ t("Cox's Bazar",'কক্সবাজার') }}"></div>
+      <div><label class="label" for="ht-in">{{ t('Check-in','চেক-ইন') }}</label><input id="ht-in" type="date" class="input" value="2026-12-18"></div>
+      <div><label class="label" for="ht-out">{{ t('Check-out','চেক-আউট') }}</label><input id="ht-out" type="date" class="input" value="2026-12-21"></div>
+      <div><label class="label" for="ht-g">{{ t('Guests & rooms','অতিথি ও রুম') }}</label><select id="ht-g" class="input"><option>{{ t('2 adults · 1 room','২ জন · ১ রুম') }}</option><option>{{ t('2 adults, 1 child · 1 room','২ জন, ১ শিশু · ১ রুম') }}</option><option>{{ t('4 adults · 2 rooms','৪ জন · ২ রুম') }}</option></select></div>
+      <button class="btn btn-accent h-[46px]">{{ icon('search','h-4 w-4') }} {{ t('Search','খুঁজুন') }}</button>
+    </form>
+  </div>
+</section>
+<section class="py-10" id="hlist" data-listing>
+  <div class="wrap grid gap-8 lg:grid-cols-[260px_1fr]">
+    <aside class="hidden lg:block" aria-label="{{ t('Filters','ফিল্টার') }}"><div class="card sticky top-24 p-5">{% with pfx='hfd' %}{% include 'partials/hotel_filters.html' %}{% endwith %}</div></aside>
+    <div>
+      <div class="mb-5 flex flex-wrap items-center justify-between gap-3"><p class="text-sm muted" aria-live="polite"><b class="text-ink-900 dark:text-white" data-count-out>{{ digits(D.HOTELS|length) }}</b> {{ t('properties','টি প্রপার্টি') }}</p>
+        <div class="flex gap-2"><button type="button" class="btn btn-outline btn-sm lg:hidden" data-drawer-open="hfilters" aria-controls="hfilters" aria-expanded="false">{{ icon('sliders-horizontal','h-4 w-4') }} {{ t('Filters','ফিল্টার') }}</button><label class="sr-only" for="hsort">{{ t('Sort by','সাজান') }}</label><select id="hsort" class="input w-auto py-2 text-sm" data-sort><option value="pop">{{ t('Recommended','প্রস্তাবিত') }}</option><option value="price-asc">{{ t('Price: low to high','মূল্য: কম থেকে বেশি') }}</option><option value="price-desc">{{ t('Price: high to low','মূল্য: বেশি থেকে কম') }}</option><option value="rating">{{ t('Guest rating','অতিথি রেটিং') }}</option></select></div></div>
+      <h2 class="sr-only">{{ t('All hotels','সব হোটেল') }}</h2>
+      <div class="space-y-5" data-items>{% for h in D.HOTELS %}{{ ui.hotel_card(h) }}{% endfor %}</div>
+      <div data-empty hidden class="card p-10 text-center"><p class="font-bold">{{ t('No hotels match your filters','আপনার ফিল্টারে কোনো হোটেল মেলেনি') }}</p></div>
+    </div>
+  </div>
+  <div id="hfilters" class="fixed inset-0 z-[60] hidden lg:hidden" data-drawer role="dialog" aria-modal="true" aria-label="{{ t('Filters','ফিল্টার') }}"><div class="absolute inset-0 bg-ink-950/50" data-drawer-close></div><div class="absolute inset-x-0 bottom-0 max-h-[88vh] overflow-y-auto rounded-t-3xl bg-white p-5 dark:bg-ink-900" data-drawer-panel><div class="mb-4 flex items-center justify-between"><h2 class="text-lg font-bold">{{ t('Filters','ফিল্টার') }}</h2><button type="button" class="icon-btn" data-drawer-close aria-label="{{ t('Close filters','ফিল্টার বন্ধ') }}">{{ icon('x') }}</button></div>{% with pfx='hfm' %}{% include 'partials/hotel_filters.html' %}{% endwith %}</div></div>
+</section>
+{% endblock %}

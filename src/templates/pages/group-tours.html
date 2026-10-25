@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% import 'ui.html' as ui %}
+{% block content %}
+{{ ui.page_hero(t('Group & corporate travel','গ্রুপ ও কর্পোরেট ভ্রমণ'), t('Company retreats, incentive trips, study tours, weddings and conferences — one dedicated manager, one invoice.','কোম্পানি রিট্রিট, ইনসেনটিভ ট্রিপ, শিক্ষা সফর, বিয়ে ও কনফারেন্স — একজন নির্দিষ্ট ম্যানেজার, একটি ইনভয়েস।'), [(t('Home','হোম'),u('index.html')),(t('Group tours','গ্রুপ ট্যুর'),'')], 'sajek') }}
+<section class="section"><div class="wrap">
+  <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{% for ic,a,b in [('building-2',('Corporate retreats','কর্পোরেট রিট্রিট'),('Cox’s Bazar, Sylhet and Bangkok resorts with meeting rooms.','মিটিং রুমসহ কক্সবাজার, সিলেট ও ব্যাংকক রিসোর্ট।')),('award',('Incentive trips','ইনসেনটিভ ট্রিপ'),('Reward top performers with Dubai, Bali or a cruise.','সেরা কর্মীদের দুবাই, বালি বা ক্রুজ উপহার দিন।')),('graduation-cap',('Student & study tours','শিক্ষা সফর'),('Safe, chaperoned trips with insurance included.','বিমাসহ নিরাপদ, তত্ত্বাবধানে ট্রিপ।')),('presentation',('MICE & events','মাইস ও ইভেন্ট'),('Venues, visas, flights and AV for up to 500 guests.','৫০০ অতিথি পর্যন্ত ভেন্যু, ভিসা, ফ্লাইট ও এভি।'))] %}<div class="card p-6"><span class="grid h-12 w-12 place-items-center rounded-2xl bg-brand-700 text-white">{{ icon(ic,'h-6 w-6') }}</span><h2 class="mt-4 text-lg font-bold">{{ t(*a) }}</h2><p class="mt-1 text-sm muted">{{ t(*b) }}</p></div>{% endfor %}</div>
+  <div class="mt-12 grid gap-10 lg:grid-cols-2">
+    <div><h2 class="text-2xl font-bold">{{ t('Trusted by teams at','যাদের টিম আমাদের উপর আস্থা রাখে') }}</h2><div class="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3">{% for n in ['Nimbus Tel','Delta Pharma','BracketSoft','Padma Bank','Sundar Foods','Meghna RMG'] %}<div class="grid h-16 place-items-center rounded-2xl border border-ink-100 text-sm font-extrabold tracking-tight text-ink-500 dark:border-ink-800 dark:text-ink-300">{{ n }}</div>{% endfor %}</div><p class="mt-3 text-xs muted">{{ t('Client names are illustrative for this mockup.','এই মকআপে ক্লায়েন্টের নাম উদাহরণস্বরূপ।') }}</p></div>
+    <form class="card space-y-4 p-6" data-validate data-success="{{ t('Thanks — our corporate desk will call you today.','ধন্যবাদ — আমাদের কর্পোরেট ডেস্ক আজই কল করবে।') }}">
+      <h2 class="text-xl font-bold">{{ t('Request a group proposal','গ্রুপ প্রস্তাবের অনুরোধ') }}</h2>
+      <div class="grid gap-4 sm:grid-cols-2"><div class="field"><label class="label" for="g-org">{{ t('Organisation','প্রতিষ্ঠান') }} *</label><input id="g-org" class="input" required autocomplete="organization"></div><div class="field"><label class="label" for="g-size">{{ t('Group size','দলের আকার') }}</label><input id="g-size" type="number" min="10" value="25" class="input"></div></div>
+      <div class="grid gap-4 sm:grid-cols-2"><div class="field"><label class="label" for="g-n">{{ t('Contact person','যোগাযোগকারী') }} *</label><input id="g-n" class="input" required autocomplete="name"></div><div class="field"><label class="label" for="g-e">{{ t('Work email','অফিস ইমেইল') }} *</label><input id="g-e" type="email" class="input" required autocomplete="email"></div></div>
+      <div class="field"><label class="label" for="g-m">{{ t('Brief','সংক্ষিপ্ত বিবরণ') }}</label><textarea id="g-m" rows="3" class="input"></textarea></div>
+      <button class="btn btn-primary">{{ t('Send request','অনুরোধ পাঠান') }}</button>
+    </form>
+  </div>
+</div></section>
+{% endblock %}

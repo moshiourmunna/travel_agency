@@ -1,0 +1,1 @@
+{ "name": "@musafir/ui-tokens", "version": "1.0.0", "private": true, "description": "Shared Tailwind 3.4 preset + component CSS from the Musafir mockup", "files": ["tailwind.preset.cjs", "musafir.css"] }

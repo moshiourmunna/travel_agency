@@ -1,0 +1,17 @@
+{% extends 'app/shell.html' %}
+{% from 'app/ui.html' import page_head, status, rtable, dt_tools, person, row_menu, kpi %}
+{% block content %}
+{% call page_head(title, t('24,812 registered travellers · 38% repeat','২৪,৮১২ নিবন্ধিত ভ্রমণকারী · ৩৮% পুনরায়')) %}<button type="button" class="btn btn-outline btn-sm" data-demo="{{ t('Segment saved (demo)','সেগমেন্ট সংরক্ষিত (ডেমো)') }}">{{ icon('filter','h-4 w-4') }} {{ t('Save segment','সেগমেন্ট সংরক্ষণ') }}</button>{% endcall %}
+{% set rows = A.CUSTOMERS %}
+{{ dt_tools('cu', [('all',B('All','সব'),rows|length),('active',A.ST.active[0],None),('suspended',A.ST.suspended[0],None)], t('Search name, email, phone…','নাম, ইমেইল, ফোন খুঁজুন…')) }}
+{% call(r, k) rtable('cu', [('name',t('Customer','গ্রাহক'),'min-w-[14rem]'),('phone',t('Phone','ফোন'),'whitespace-nowrap'),('city',t('City','শহর'),'hidden xl:table-cell'),('$trips',t('Trips','ট্রিপ'),'text-center'),('$spend',t('Lifetime value','লাইফটাইম ভ্যালু'),'text-right'),('tier',t('Tier','স্তর'),''),('status',t('Status','স্ট্যাটাস'),''),('act','','text-right')], rows, 'name', t('Customers','গ্রাহক'), True, ('status','trips','spend')) %}
+  {% if k=='name' %}<a href="{{ u('admin/customer.html') }}" class="block">{{ person(r.name, r.ini, r.email) }}</a>
+  {% elif k=='phone' %}{{ r.phone }}
+  {% elif k=='city' %}{{ r.city|tr }}
+  {% elif k=='trips' %}{{ digits(r.trips) }}
+  {% elif k=='spend' %}<b>{{ bdt(r.spend) }}</b>
+  {% elif k=='tier' %}<span class="badge {{ 'badge-accent' if r.tier.en in ('Gold','Platinum') else 'badge-brand' }}">{{ r.tier|tr }}</span>
+  {% elif k=='status' %}{{ status(r.status) }}
+  {% elif k=='act' %}{{ row_menu('admin/customer.html') }}{% endif %}
+{% endcall %}
+{% endblock %}

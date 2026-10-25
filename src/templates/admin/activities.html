@@ -1,0 +1,16 @@
+{% extends 'app/shell.html' %}
+{% from 'app/ui.html' import page_head, status, rtable, dt_tools, row_menu %}
+{% block content %}
+{% call page_head(title, t('12 bookable experiences · 9 with instant confirmation','১২টি বুকযোগ্য অভিজ্ঞতা · ৯টিতে তাৎক্ষণিক কনফার্মেশন')) %}<button type="button" class="btn btn-primary btn-sm" data-demo="{{ t('Editor opened (demo)','এডিটর খোলা হয়েছে (ডেমো)') }}">{{ icon('plus','h-4 w-4') }} {{ t('New activity','নতুন অ্যাক্টিভিটি') }}</button>{% endcall %}
+{% set rows = [] %}{% for x in D.ACTIVITIES %}{% set _ = rows.append(dict(x, status=('draft' if loop.index==11 else 'published'), sold=(loop.index*29)%90+6)) %}{% endfor %}
+{{ dt_tools('ac', [('all',B('All','সব'),rows|length),('bd',B('Bangladesh','বাংলাদেশ'),None),('intl',B('International','আন্তর্জাতিক'),None)], t('Search…','খুঁজুন…'), 'region') }}
+{% call(r, k) rtable('ac', [('title',t('Activity','অ্যাক্টিভিটি'),'min-w-[18rem]'),('cat',t('Category','ক্যাটাগরি'),'hidden xl:table-cell'),('$price',t('Price','মূল্য'),'text-right'),('cancel',t('Cancellation','বাতিল'),''),('$sold',t('Sold (30 d)','বিক্রি (৩০ দিন)'),'text-center'),('status',t('Status','স্ট্যাটাস'),''),('act','','text-right')], rows, 'title', title, False, ('region','price','sold')) %}
+  {% if k=='title' %}<div class="flex min-w-0 items-center gap-3"><img src="{{ img(r.img, True) }}" alt="" class="h-10 w-14 shrink-0 rounded-lg object-cover" width="56" height="40" loading="lazy"><span class="min-w-0"><span class="block truncate font-semibold">{{ r.title|tr }}</span><span class="block truncate text-xs muted">{{ r.city|tr }} · {{ r.dur|tr }}</span></span></div>
+  {% elif k=='cat' %}{{ D.ACT_CATS[r.cat][1]|tr }}
+  {% elif k=='price' %}<b>{{ bdt(r.price) }}</b>
+  {% elif k=='cancel' %}<span class="text-xs">{{ D.CANCEL[r.cancel][1]|tr }}</span>
+  {% elif k=='sold' %}{{ digits(r.sold) }}
+  {% elif k=='status' %}{{ status(r.status) }}
+  {% elif k=='act' %}<div class="flex justify-end gap-1"><a href="{{ u('activities/'+r.slug+'.html') }}" class="icon-btn h-8 w-8" aria-label="{{ t('View on site','সাইটে দেখুন') }} — {{ r.title|tr }}">{{ icon('external-link','h-4 w-4') }}</a>{{ row_menu(None, True) }}</div>{% endif %}
+{% endcall %}
+{% endblock %}

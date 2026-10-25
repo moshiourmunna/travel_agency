@@ -1,0 +1,28 @@
+{% extends 'app/shell.html' %}
+{% from 'app/ui.html' import page_head, avatar_i, progress %}
+{% block content %}
+{% call page_head(title, None) %}{% endcall %}
+<div class="grid gap-6 xl:grid-cols-[20rem_1fr]">
+  <aside class="card h-fit p-5 text-center"><div class="relative mx-auto w-fit">{{ avatar_i(A.USER.ini,'h-24 w-24 text-2xl') }}<button type="button" class="absolute bottom-0 right-0 grid h-8 w-8 place-items-center rounded-full bg-brand-700 text-white ring-4 ring-white dark:ring-ink-900" data-demo="{{ t('Photo picker (demo)','ছবি নির্বাচন (ডেমো)') }}" aria-label="{{ t('Change photo','ছবি পরিবর্তন') }}">{{ icon('camera','h-4 w-4') }}</button></div>
+    <p class="mt-3 text-lg font-bold">{{ A.USER.name|tr }}</p><p class="text-sm muted">{{ A.USER.tier|tr }} {{ t('member since','সদস্য,') }} {{ date(A.USER.since) }}</p>
+    <div class="mt-5 text-left"><p class="text-sm font-semibold">{{ t('Profile 80% complete','প্রোফাইল ৮০% সম্পূর্ণ') }}</p>{{ progress(80,'mt-2') }}<p class="mt-2 text-xs muted">{{ t('Add an emergency contact to finish.','শেষ করতে একজন জরুরি যোগাযোগ যোগ করুন।') }}</p></div></aside>
+  <form class="card p-4 sm:p-6" data-validate data-success="{{ t('Profile saved.','প্রোফাইল সংরক্ষিত।') }}">
+    <h2 class="text-lg font-bold">{{ t('Personal details','ব্যক্তিগত তথ্য') }}</h2>
+    <div class="mt-4 grid gap-4 sm:grid-cols-2">
+      <div><label class="label" for="pf-n">{{ t('Full name','পূর্ণ নাম') }}</label><input id="pf-n" class="input" value="{{ A.USER.name|tr }}" required autocomplete="name"></div>
+      <div><label class="label" for="pf-d">{{ t('Date of birth','জন্ম তারিখ') }}</label><input id="pf-d" type="date" class="input" value="{{ A.USER.dob }}"></div>
+      <div><label class="label" for="pf-e">{{ t('Email','ইমেইল') }} <span class="badge badge-brand ml-1">{{ t('Verified','যাচাইকৃত') }}</span></label><input id="pf-e" type="email" class="input" value="{{ A.USER.email }}" required autocomplete="email"></div>
+      <div><label class="label" for="pf-p">{{ t('Mobile','মোবাইল') }} <span class="badge badge-brand ml-1">{{ t('Verified','যাচাইকৃত') }}</span></label><input id="pf-p" type="tel" class="input" value="{{ A.USER.phone }}" required autocomplete="tel"></div>
+      <div><label class="label" for="pf-g">{{ t('Gender','লিঙ্গ') }}</label><select id="pf-g" class="input"><option selected>{{ t('Female','নারী') }}</option><option>{{ t('Male','পুরুষ') }}</option><option>{{ t('Prefer not to say','বলতে চাই না') }}</option></select></div>
+      <div><label class="label" for="pf-nid">{{ t('NID (for domestic flights)','এনআইডি (দেশীয় ফ্লাইটের জন্য)') }}</label><input id="pf-nid" class="input" value="{{ A.USER.nid }}" autocomplete="off"></div>
+      <div class="sm:col-span-2"><label class="label" for="pf-a">{{ t('Address','ঠিকানা') }}</label><input id="pf-a" class="input" value="{{ t('House 12, Road 7, Dhanmondi, Dhaka 1205','বাড়ি ১২, রোড ৭, ধানমন্ডি, ঢাকা ১২০৫') }}" autocomplete="street-address"></div>
+    </div>
+    <h2 class="mt-8 text-lg font-bold">{{ t('Emergency contact','জরুরি যোগাযোগ') }}</h2>
+    <div class="mt-4 grid gap-4 sm:grid-cols-2"><div><label class="label" for="ec-n">{{ t('Name','নাম') }}</label><input id="ec-n" class="input" autocomplete="off"></div><div><label class="label" for="ec-p">{{ t('Phone','ফোন') }}</label><input id="ec-p" type="tel" class="input" autocomplete="off"></div></div>
+    <h2 class="mt-8 text-lg font-bold">{{ t('Travel preferences','ভ্রমণ পছন্দ') }}</h2>
+    <fieldset class="mt-3"><legend class="sr-only">{{ t('Interests','আগ্রহ') }}</legend><div class="flex flex-wrap gap-2">{% for l,on in [(('Beaches','সৈকত'),True),(('Mountains','পাহাড়'),True),(('Cruises','ক্রুজ'),True),(('Food','খাবার'),False),(('Adventure','অ্যাডভেঞ্চার'),False),(('Luxury','বিলাসবহুল'),True),(('Budget','বাজেট'),False),(('Family','পরিবার'),True)] %}<label class="chip relative cursor-pointer has-[:checked]:border-brand-600 has-[:checked]:bg-brand-700 has-[:checked]:text-white"><input type="checkbox" class="sr-only" {{ 'checked' if on }}>{{ t(*l) }}</label>{% endfor %}</div></fieldset>
+    <div class="mt-4 grid gap-4 sm:grid-cols-3"><div><label class="label" for="tp-s">{{ t('Seat','সিট') }}</label><select id="tp-s" class="input"><option>{{ t('Window','জানালার পাশে') }}</option><option>{{ t('Aisle','আইলের পাশে') }}</option></select></div><div><label class="label" for="tp-m">{{ t('Meal','খাবার') }}</label><select id="tp-m" class="input"><option>{{ t('No preference','কোনো পছন্দ নেই') }}</option><option>{{ t('Vegetarian','নিরামিষ') }}</option><option>{{ t('Halal','হালাল') }}</option><option>{{ t('Diabetic','ডায়াবেটিক') }}</option></select></div><div><label class="label" for="tp-r">{{ t('Room','রুম') }}</label><select id="tp-r" class="input"><option>{{ t('King bed','কিং বেড') }}</option><option>{{ t('Twin beds','টুইন বেড') }}</option></select></div></div>
+    <div class="mt-6 flex justify-end gap-2"><button type="reset" class="btn btn-outline">{{ t('Reset','রিসেট') }}</button><button class="btn btn-primary">{{ t('Save changes','পরিবর্তন সংরক্ষণ') }}</button></div>
+  </form>
+</div>
+{% endblock %}

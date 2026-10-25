@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% import 'ui.html' as ui %}
+{% block content %}
+<section class="border-b border-ink-100 bg-ink-50 py-12 dark:border-ink-800 dark:bg-ink-900"><div class="wrap max-w-5xl">{{ ui.crumbs([(t('Home','হোম'),u('index.html')),(heading|tr,'')]) }}<h1 class="mt-4 text-3xl font-extrabold sm:text-4xl">{{ heading|tr }}</h1><p class="mt-2 muted">{{ t('Last updated','সর্বশেষ হালনাগাদ') }}: {{ date('2026-10-01') }}</p></div></section>
+<div class="wrap grid max-w-5xl gap-10 py-12 lg:grid-cols-[220px_1fr]">
+  <nav class="hidden lg:block" aria-label="{{ t('Contents','সূচিপত্র') }}"><ol class="sticky top-24 space-y-2 text-sm">{% for s in sections %}<li><a class="link-muted" href="#l{{ loop.index }}">{{ digits(loop.index) }}. {{ s[0]|tr }}</a></li>{% endfor %}</ol></nav>
+  <div class="prose-m">{% for h,p in sections %}<h2 id="l{{ loop.index }}">{{ digits(loop.index) }}. {{ h|tr }}</h2><p>{{ p|tr }}</p>{% endfor %}<p>{{ t('Questions? Email','প্রশ্ন? ইমেইল করুন') }} <a class="link" href="mailto:{{ C.email }}">{{ C.email }}</a>.</p></div>
+</div>
+{% endblock %}

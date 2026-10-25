@@ -1,0 +1,55 @@
+<footer class="relative overflow-hidden bg-ink-950 text-ink-300" aria-labelledby="footer-h">
+  <h2 id="footer-h" class="sr-only">{{ t('Footer','ফুটার') }}</h2>
+  <div class="pattern-dots pointer-events-none absolute inset-0 opacity-40"></div>
+  <div class="wrap relative">
+    <div class="grid gap-6 border-b border-white/10 py-10 md:grid-cols-[1.2fr_1fr] md:items-center">
+      <div><p class="text-2xl font-extrabold text-white">{{ t('Get travel deals before anyone else','সবার আগে ট্রাভেল অফার পান') }}</p><p class="mt-1 text-sm text-ink-400">{{ t('One email a fortnight. Flash fares, cruise deals and new tours. Unsubscribe anytime.','দুই সপ্তাহে একটি ইমেইল — ফ্ল্যাশ ভাড়া, ক্রুজ অফার ও নতুন ট্যুর। যেকোনো সময় আনসাবস্ক্রাইব করা যায়।') }}</p></div>
+      <form class="flex flex-col gap-2 sm:flex-row" data-validate data-success="{{ t('Subscribed! Please check your inbox to confirm.','সাবস্ক্রাইব সম্পন্ন! নিশ্চিত করতে ইনবক্স দেখুন।') }}" novalidate>
+        <div class="flex-1"><label for="nl-email" class="sr-only">{{ t('Email address','ইমেইল ঠিকানা') }}</label><input id="nl-email" type="email" required class="input border-white/10 bg-white/5 text-white placeholder:text-ink-400 dark:bg-white/5" placeholder="{{ t('you@example.com','আপনার@ইমেইল.com') }}"><p class="field-error">{{ t('Please enter a valid email.','সঠিক ইমেইল দিন।') }}</p></div>
+        <button class="btn btn-accent" type="submit">{{ t('Subscribe','সাবস্ক্রাইব') }}</button>
+      </form>
+    </div>
+    <div class="grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr_1.3fr]">
+      <div>
+        <img src="{{ asset('brand/logo-dark.svg') }}" alt="{{ t('Musafir — মুসাফির','মুসাফির — Musafir') }}" class="h-12 w-auto" width="260" height="54" loading="lazy">
+        <p class="mt-4 max-w-xs text-sm leading-6 text-ink-400">{{ t('Bangladesh-born, world-ready. Holidays, cruises, flights, hotels and visas — trusted by 1,20,000+ travellers since 2012.','বাংলাদেশে জন্ম, বিশ্বমানের সেবা। ২০১২ সাল থেকে হলিডে, ক্রুজ, ফ্লাইট, হোটেল ও ভিসা — ১,২০,০০০+ ভ্রমণকারীর আস্থা।') }}</p>
+        <div class="mt-5 flex gap-2">
+          {% for ic,label,href in [('facebook','Facebook','https://facebook.com/musafirbd'),('instagram','Instagram','https://instagram.com/musafirbd'),('youtube','YouTube','https://youtube.com/@musafirbd'),('linkedin','LinkedIn','https://linkedin.com/company/musafirbd'),('whatsapp','WhatsApp','https://wa.me/'+C.wa),('x-logo','X','https://x.com/musafirbd')] %}
+          <a href="{{ href }}" target="_blank" rel="noopener" class="grid h-10 w-10 place-items-center rounded-xl bg-white/5 text-ink-300 transition hover:bg-brand-600 hover:text-white" aria-label="{{ label }}">{{ icon(ic,'h-[18px] w-[18px]') }}</a>
+          {% endfor %}
+        </div>
+      </div>
+      <div><h3 class="text-sm font-bold text-white">{{ t('Travel','ভ্রমণ') }}</h3><ul class="mt-4 space-y-2.5 text-sm">
+        {% for href,label in [('tours.html',('Tour packages','ট্যুর প্যাকেজ')),('destinations.html',('Destinations','গন্তব্য')),('flights.html',('Flights','ফ্লাইট')),('hotels.html',('Hotels','হোটেল')),('visa.html',('Visa services','ভিসা সেবা')),('insurance.html',('Travel insurance','ভ্রমণ বিমা')),('offers.html',('Offers','অফার'))] %}<li><a class="hover:text-white" href="{{ u(href) }}">{{ t(*label) }}</a></li>{% endfor %}</ul></div>
+      <div><h3 class="text-sm font-bold text-white">{{ t('Holidays','হলিডে') }}</h3><ul class="mt-4 space-y-2.5 text-sm">
+        {% for href,label in [('holidays/honeymoon.html',('Honeymoon','হানিমুন')),('holidays/family.html',('Family holidays','পারিবারিক ভ্রমণ')),('holidays/adventure.html',('Adventure','অ্যাডভেঞ্চার')),('cruises.html',('Cruises','ক্রুজ')),('group-tours.html',('Group & corporate','গ্রুপ ও কর্পোরেট')),('gift-cards.html',('Gift cards','গিফট কার্ড'))] %}<li><a class="hover:text-white" href="{{ u(href) }}">{{ t(*label) }}</a></li>{% endfor %}</ul></div>
+      <div><h3 class="text-sm font-bold text-white">{{ t('Company','প্রতিষ্ঠান') }}</h3><ul class="mt-4 space-y-2.5 text-sm">
+        {% for href,label in [('about.html',('About us','আমাদের সম্পর্কে')),('team.html',('Our team','আমাদের টিম')),('careers.html',('Careers','ক্যারিয়ার')),('blog.html',('Blog','ব্লগ')),('gallery.html',('Gallery','গ্যালারি')),('reviews.html',('Reviews','রিভিউ')),('faq.html',('FAQ','প্রশ্নোত্তর')),('contact.html',('Contact','যোগাযোগ'))] %}<li><a class="hover:text-white" href="{{ u(href) }}">{{ t(*label) }}</a></li>{% endfor %}</ul></div>
+      <div><h3 class="text-sm font-bold text-white">{{ t('Head office','প্রধান কার্যালয়') }}</h3>
+        <address class="mt-4 space-y-3 text-sm not-italic">
+          <p class="flex gap-2">{{ icon('map-pin','mt-0.5 h-4 w-4 shrink-0 text-brand-400') }}<span>{{ C.address|tr }}</span></p>
+          <p class="flex gap-2">{{ icon('phone','mt-0.5 h-4 w-4 shrink-0 text-brand-400') }}<a class="hover:text-white" href="tel:{{ C.hotline_tel }}">{{ digits(C.hotline) }}</a></p>
+          <p class="flex gap-2">{{ icon('mail','mt-0.5 h-4 w-4 shrink-0 text-brand-400') }}<a class="hover:text-white" href="mailto:{{ C.email }}">{{ C.email }}</a></p>
+          <p class="flex gap-2">{{ icon('clock-3','mt-0.5 h-4 w-4 shrink-0 text-brand-400') }}<span>{{ C.hours|tr }}</span></p>
+        </address>
+        <div class="mt-5 flex gap-2">
+          <a href="#" class="flex items-center gap-2 rounded-xl border border-white/10 px-3 py-2 text-xs hover:border-white/30">{{ icon('play','h-4 w-4') }}<span><span class="block text-[10px] text-ink-400">{{ t('Get it on','ডাউনলোড') }}</span><b class="text-white">Google Play</b></span></a>
+          <a href="#" class="flex items-center gap-2 rounded-xl border border-white/10 px-3 py-2 text-xs hover:border-white/30">{{ icon('apple','h-4 w-4') }}<span><span class="block text-[10px] text-ink-400">{{ t('Download on','ডাউনলোড') }}</span><b class="text-white">App Store</b></span></a>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-col gap-5 border-t border-white/10 py-6 lg:flex-row lg:items-center lg:justify-between">
+      <div class="flex flex-wrap items-center gap-2" aria-label="{{ t('Accreditations','স্বীকৃতি') }}">
+        {% for k,v in C.licences %}<span class="rounded-lg border border-white/10 px-2.5 py-1 text-[11px] font-semibold text-ink-300">{{ k|tr }} <span class="text-ink-500">#{{ digits(v) }}</span></span>{% endfor %}
+      </div>
+      <div class="flex flex-wrap items-center gap-1.5" aria-label="{{ t('Payment methods','পেমেন্ট মাধ্যম') }}">
+        {% for p,c in [('bKash','#E2136E'),('Nagad','#C4161C'),('Rocket','#8C3494'),('VISA','#1A1F71'),('Mastercard','#EB001B'),('AMEX','#2E77BC'),('SSLCOMMERZ','#0F6CB6')] %}<span class="rounded-md bg-white px-2 py-1 text-[11px] font-extrabold tracking-tight" style="color:{{ c }}">{{ p }}</span>{% endfor %}
+      </div>
+    </div>
+    <div class="flex flex-col gap-3 border-t border-white/10 py-6 pb-24 text-xs text-ink-400 sm:flex-row sm:items-center sm:justify-between lg:pb-6">
+      <p>© {{ digits(2026) }} {{ C.name|tr }}. {{ t('All rights reserved.','সর্বস্বত্ব সংরক্ষিত।') }}</p>
+      <nav class="flex flex-wrap gap-x-4 gap-y-1" aria-label="{{ t('Legal','আইনি') }}"><a class="hover:text-white" href="{{ u('terms.html') }}">{{ t('Terms','শর্তাবলি') }}</a><a class="hover:text-white" href="{{ u('privacy.html') }}">{{ t('Privacy','গোপনীয়তা') }}</a><a class="hover:text-white" href="{{ u('refund-policy.html') }}">{{ t('Refund policy','রিফান্ড নীতিমালা') }}</a><a class="hover:text-white" href="{{ u('sitemap.html') }}">{{ t('Sitemap','সাইটম্যাপ') }}</a><button type="button" class="hover:text-white" data-cookie-settings>{{ t('Cookie settings','কুকি সেটিংস') }}</button></nav>
+    </div>
+  </div>
+</footer>
+{% include 'partials/widgets.html' %}

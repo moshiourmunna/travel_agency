@@ -1,0 +1,64 @@
+{% extends 'app/shell.html' %}
+{% from 'app/ui.html' import status, kpi, kind_chip, progress, avatar_i %}
+{% block content %}
+{% set fb = A.FEATURED %}
+<section class="relative overflow-hidden rounded-3xl bg-ink-900 text-white">
+  <img src="{{ img(fb.img) }}" alt="" class="absolute inset-0 h-full w-full object-cover opacity-50" width="1600" height="1000">
+  <div class="absolute inset-0 bg-gradient-to-r from-ink-950/90 via-ink-950/60 to-transparent"></div>
+  <div class="relative grid gap-6 p-5 sm:p-8 lg:grid-cols-[1fr_auto] lg:items-end">
+    <div><p class="text-sm font-semibold text-accent-300">{{ t('Your next trip','আপনার পরবর্তী ট্রিপ') }}</p>
+      <h1 class="mt-1 text-2xl font-extrabold leading-tight sm:text-4xl">{{ fb.title|tr }}</h1>
+      <p class="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm text-ink-100">{{ icon('calendar','inline h-4 w-4') }} {{ date(fb.start) }} – {{ date(fb.end) }} <span>{{ icon('users','inline h-4 w-4') }} {{ fb.sub|tr }}</span></p>
+      <div class="mt-5 flex flex-wrap gap-2"><a href="{{ u('account/booking.html') }}" class="btn btn-accent">{{ t('View booking','বুকিং দেখুন') }}</a><a href="{{ u('account/payments.html') }}" class="btn border border-white/30 bg-white/10 text-white hover:bg-white/20">{{ t('Pay instalment','কিস্তি পরিশোধ') }}</a></div></div>
+    <div class="rounded-2xl bg-white/10 p-4 backdrop-blur" data-countdown="{{ fb.start }}T09:15:00+06:00" data-cd-grid>
+      <p class="mb-2 text-xs font-semibold uppercase tracking-wider text-ink-100">{{ t('Departs in','যাত্রা শুরু') }}</p>
+      <div class="grid grid-cols-4 gap-2 text-center" role="timer" aria-label="{{ t('Time until departure','যাত্রা পর্যন্ত বাকি সময়') }}">{% for k,l in [('d',('Days','দিন')),('h',('Hours','ঘণ্টা')),('m',('Mins','মিনিট')),('s',('Secs','সেকেন্ড'))] %}<div class="min-w-[3.25rem] rounded-xl bg-ink-950/50 px-2 py-2"><b class="block text-xl tabular-nums" data-cd="{{ k }}">–</b><span class="text-[11px] text-ink-100">{{ t(*l) }}</span></div>{% endfor %}</div>
+    </div>
+  </div>
+</section>
+
+<div class="mt-6 grid grid-cols-2 gap-3 sm:gap-4 xl:grid-cols-4">
+  {{ kpi(t('Upcoming trips','আসন্ন ট্রিপ'), digits(5), None, 'plane', note=t('2 need action','২টিতে পদক্ষেপ দরকার')) }}
+  {{ kpi(t('Wallet balance','ওয়ালেট ব্যালান্স'), bdt(A.USER.wallet), None, 'wallet', note=t('Usable on any booking','যেকোনো বুকিংয়ে ব্যবহারযোগ্য'), tone='accent') }}
+  {{ kpi(t('Musafir Miles','মুসাফির মাইলস'), num(A.USER.miles), '+'+num(2055), 'award', True, t('this month','এই মাসে'), tone='sky') }}
+  {{ kpi(t('Next payment','পরবর্তী পেমেন্ট'), bdt(101150), None, 'calendar-clock', note=t('Due 28 Oct','২৮ অক্টোবর পর্যন্ত'), tone='rose') }}
+</div>
+
+<div class="mt-6 grid gap-6 xl:grid-cols-3">
+  <section class="card p-4 sm:p-6 xl:col-span-2" aria-labelledby="up-h">
+    <div class="flex items-center justify-between gap-3"><h2 id="up-h" class="text-lg font-bold">{{ t('Upcoming bookings','আসন্ন বুকিং') }}</h2><a href="{{ u('account/bookings.html') }}" class="link-muted text-sm font-semibold">{{ t('See all','সব দেখুন') }}</a></div>
+    <ul class="mt-4 divide-y divide-ink-100 dark:divide-ink-800">
+      {% for b in A.MY_BOOKINGS if b.upcoming %}
+      <li class="flex flex-col gap-3 py-4 sm:flex-row sm:items-center">
+        <img src="{{ img(b.img, True) }}" alt="" class="h-16 w-full rounded-xl object-cover sm:w-24" width="96" height="64" loading="lazy">
+        <div class="min-w-0 flex-1"><div class="flex flex-wrap items-center gap-2">{{ kind_chip(b.kind) }} {{ status(b.status) }}</div>
+          <p class="mt-1 truncate font-semibold text-ink-900 dark:text-white">{{ b.title|tr }}</p><p class="text-xs muted">{{ b.ref }} · {{ date(b.start) }}</p></div>
+        <div class="flex items-center justify-between gap-3 sm:block sm:text-right"><p class="font-bold">{{ bdt(b.total) }}</p>{% if b.paid < b.total %}<p class="text-xs text-rose-700 dark:text-rose-300">{{ t('Due','বাকি') }} {{ bdt(b.total-b.paid) }}</p>{% else %}<p class="text-xs text-emerald-700 dark:text-emerald-400">{{ t('Fully paid','সম্পূর্ণ পরিশোধিত') }}</p>{% endif %}</div>
+        <a href="{{ u('account/booking.html') if b.kind=='tour' else (u('account/e-ticket.html') if b.kind=='flight' else (u('account/visa.html') if b.kind=='visa' else u('account/bookings.html'))) }}" class="btn btn-outline btn-sm">{{ t('Manage','ম্যানেজ') }}<span class="sr-only"> {{ b.ref }}</span></a>
+      </li>{% endfor %}
+    </ul>
+  </section>
+  <div class="space-y-6">
+    <section class="card p-4 sm:p-6" aria-labelledby="todo-h"><h2 id="todo-h" class="text-lg font-bold">{{ t('To-do before you fly','যাত্রার আগে করণীয়') }}</h2>
+      <ul class="mt-4 space-y-3 text-sm">
+        {% for ic,txt,href,done in [('wallet',('Pay instalment 2 — ৳ 1,01,150','কিস্তি ২ পরিশোধ — ৳ ১,০১,১৫০'),'account/payments.html',False),('file-up',('Upload Shafiqul’s bank statement','শফিকুলের ব্যাংক স্টেটমেন্ট আপলোড'),'account/visa.html',False),('passport',('Renew Ayaan’s passport','আয়ানের পাসপোর্ট নবায়ন'),'account/travellers.html',False),('armchair',('Choose seats on BS 341','BS 341-এ সিট বাছাই'),'account/e-ticket.html',True),('shield-check',('Add travel insurance','ভ্রমণ বিমা যোগ'),'insurance.html',True)] %}
+        <li><a href="{{ u(href) }}" class="flex items-center gap-3 rounded-xl p-2 hover:bg-ink-50 dark:hover:bg-ink-850"><span class="grid h-8 w-8 shrink-0 place-items-center rounded-lg {{ 'bg-emerald-50 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300' if done else 'bg-accent-100 text-accent-800 dark:bg-accent-400/15 dark:text-accent-200' }}">{{ icon('check' if done else ic,'h-4 w-4') }}</span><span class="flex-1 {{ 'text-ink-500 line-through dark:text-ink-300' if done else 'font-medium' }}">{{ t(*txt) }}</span>{{ icon('chevron-right','h-4 w-4 text-ink-400') }}</a></li>{% endfor %}
+      </ul>
+      <div class="mt-4">{{ progress(40) }}<p class="mt-1.5 text-xs muted">{{ t('2 of 5 done','৫টির মধ্যে ২টি সম্পন্ন') }}</p></div></section>
+    <section class="card p-4 sm:p-6" aria-labelledby="visa-h"><div class="flex items-center justify-between"><h2 id="visa-h" class="text-lg font-bold">{{ t('Visa tracker','ভিসা ট্র্যাকার') }}</h2><a href="{{ u('account/visa.html') }}" class="link-muted text-sm font-semibold">{{ t('Details','বিস্তারিত') }}</a></div>
+      {% for v in A.VISA_APPS[:2] %}<div class="mt-4"><div class="flex items-center justify-between gap-2 text-sm"><p class="font-semibold"><span aria-hidden="true">{{ v.flag }}</span> {{ v.who|tr }}</p>{{ status(v.status) }}</div>{{ progress(v.stage*20, 'mt-2') }}<p class="mt-1 text-xs muted">{{ t('Stage','ধাপ') }} {{ digits(v.stage) }}/{{ digits(5) }} · {{ t('Expected','সম্ভাব্য') }} {{ date(v.eta) }}</p></div>{% endfor %}
+    </section>
+  </div>
+</div>
+
+<div class="mt-6 grid gap-6 lg:grid-cols-2">
+  <section class="card p-4 sm:p-6" aria-labelledby="act-h"><h2 id="act-h" class="text-lg font-bold">{{ t('Recent activity','সাম্প্রতিক কার্যক্রম') }}</h2>
+    <ol class="relative mt-4 space-y-4 border-l border-ink-100 pl-5 dark:border-ink-800">
+      {% for n in A.NOTIFS[:4] %}<li class="relative"><span class="absolute -left-[29px] grid h-6 w-6 place-items-center rounded-full bg-white ring-1 ring-ink-200 dark:bg-ink-900 dark:ring-ink-700">{{ icon(n[0],'h-3.5 w-3.5 text-brand-700 dark:text-brand-300') }}</span><p class="text-sm font-semibold">{{ n[1]|tr }}</p><p class="text-xs muted">{{ n[2]|tr }} · {{ digits(n[3]) }}</p></li>{% endfor %}
+    </ol></section>
+  <section class="card overflow-hidden" aria-labelledby="rec-h"><div class="p-4 sm:p-6"><h2 id="rec-h" class="text-lg font-bold">{{ t('Picked for you','আপনার জন্য বাছাই') }}</h2><p class="text-sm muted">{{ t('Based on your Bali and Sajek trips','আপনার বালি ও সাজেক ট্রিপের ভিত্তিতে') }}</p></div>
+    <ul class="grid gap-3 px-4 pb-4 sm:grid-cols-2 sm:px-6 sm:pb-6">{% for s in ['bhutan-happiness','nepal-pokhara','kashmir-paradise','srilanka-culture'] if s in D.TOUR %}{% set x = D.TOUR[s] %}
+      <li><a href="{{ u('tours/'+x.slug+'.html') }}" class="group flex gap-3 rounded-2xl border border-ink-100 p-2 hover:border-brand-400 dark:border-ink-800"><img src="{{ img(x.img, True) }}" alt="" class="h-16 w-20 rounded-xl object-cover" width="80" height="64" loading="lazy"><span class="min-w-0"><span class="line-clamp-2 text-sm font-semibold group-hover:text-brand-700 dark:group-hover:text-brand-300">{{ x.title|tr }}</span><span class="text-xs muted">{{ t('from','শুরু') }} {{ bdt(x.price) }}</span></span></a></li>{% endfor %}
+    </ul></section>
+</div>
+{% endblock %}

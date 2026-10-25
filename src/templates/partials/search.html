@@ -1,0 +1,50 @@
+{# Multi-tab search widget. compact=True for listing pages #}
+<div class="rounded-3xl bg-white/95 p-2 shadow-2xl ring-1 ring-black/5 backdrop-blur-xl dark:bg-ink-900/95 dark:ring-white/10" data-tabs>
+  <div role="tablist" aria-label="{{ t('Search type','অনুসন্ধানের ধরন') }}" class="no-scrollbar flex gap-1 overflow-x-auto rounded-2xl bg-ink-100/80 p-1 dark:bg-ink-950/60">
+    {% for id,ic,label in [('s-tours','palmtree',('Tours','ট্যুর')),('s-cruise','ship',('Cruises','ক্রুজ')),('s-flights','plane',('Flights','ফ্লাইট')),('s-hotels','bed-double',('Hotels','হোটেল')),('s-visa','stamp',('Visa','ভিসা'))] %}
+    <button type="button" role="tab" class="tab flex-1 justify-center" id="{{ id }}-tab" aria-controls="{{ id }}" aria-selected="{{ 'true' if loop.first else 'false' }}" tabindex="{{ '0' if loop.first else '-1' }}" data-tab="{{ id }}">{{ icon(ic,'h-4 w-4') }}<span>{{ t(*label) }}</span></button>
+    {% endfor %}
+  </div>
+  <div class="p-3 sm:p-4">
+    <form id="s-tours" role="tabpanel" aria-labelledby="s-tours-tab" data-panel action="{{ u('tours.html') }}" class="grid gap-3 md:grid-cols-[1.4fr_1fr_1fr_auto]">
+      <div><label class="label" for="st-dest">{{ t('Where to?','কোথায় যাবেন?') }}</label><div class="relative">{{ icon('map-pin','pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-400') }}<input id="st-dest" name="q" list="dest-list" class="input pl-9" placeholder="{{ t("Cox's Bazar, Maldives, Turkey…",'কক্সবাজার, মালদ্বীপ, তুরস্ক…') }}"></div>
+        <datalist id="dest-list">{% for d in D.DESTINATIONS %}<option value="{{ d.name|tr }}">{% endfor %}</datalist></div>
+      <div><label class="label" for="st-month">{{ t('When','কবে') }}</label><select id="st-month" name="month" class="input"><option value="">{{ t('Any month','যেকোনো মাস') }}</option>{% for m in [('Nov 2026','নভেম্বর ২০২৬'),('Dec 2026','ডিসেম্বর ২০২৬'),('Jan 2027','জানুয়ারি ২০২৭'),('Feb 2027','ফেব্রুয়ারি ২০২৭'),('Mar 2027','মার্চ ২০২৭')] %}<option>{{ t(*m) }}</option>{% endfor %}</select></div>
+      <div><label class="label" for="st-pax">{{ t('Travellers','ভ্রমণকারী') }}</label><select id="st-pax" name="pax" class="input">{% for i in range(1,9) %}<option {{ 'selected' if i==2 else '' }} value="{{ i }}">{{ digits(i) }} {{ t('traveller' if i==1 else 'travellers','জন') }}</option>{% endfor %}</select></div>
+      <button class="btn btn-accent btn-lg self-end">{{ icon('search','h-5 w-5') }}<span>{{ t('Search tours','ট্যুর খুঁজুন') }}</span></button>
+    </form>
+    <form id="s-cruise" role="tabpanel" aria-labelledby="s-cruise-tab" data-panel hidden action="{{ u('cruises.html') }}" class="grid gap-3 md:grid-cols-[1.2fr_1fr_1fr_auto]">
+      <div><label class="label" for="sc-region">{{ t('Cruise region','ক্রুজ অঞ্চল') }}</label><select id="sc-region" name="region" class="input"><option value="">{{ t('Anywhere','যেকোনো অঞ্চল') }}</option>{% for k,v in D.CRUISE_REGIONS.items() %}<option value="{{ k }}">{{ v|tr }}</option>{% endfor %}</select></div>
+      <div><label class="label" for="sc-len">{{ t('Length','সময়কাল') }}</label><select id="sc-len" name="dur" class="input"><option value="">{{ t('Any length','যেকোনো') }}</option><option value="1-3">{{ t('1–3 nights','১–৩ রাত') }}</option><option value="4-5">{{ t('4–5 nights','৪–৫ রাত') }}</option><option value="6-14">{{ t('6+ nights','৬+ রাত') }}</option></select></div>
+      <div><label class="label" for="sc-month">{{ t('Departure','যাত্রার সময়') }}</label><select id="sc-month" name="month" class="input"><option>{{ t('Any time','যেকোনো সময়') }}</option><option>{{ t('November 2026','নভেম্বর ২০২৬') }}</option><option>{{ t('December 2026','ডিসেম্বর ২০২৬') }}</option><option>{{ t('January 2027','জানুয়ারি ২০২৭') }}</option><option>{{ t('Summer 2027','গ্রীষ্ম ২০২৭') }}</option></select></div>
+      <button class="btn btn-accent btn-lg self-end">{{ icon('search','h-5 w-5') }}<span>{{ t('Find cruises','ক্রুজ খুঁজুন') }}</span></button>
+    </form>
+    <form id="s-flights" role="tabpanel" aria-labelledby="s-flights-tab" data-panel hidden action="{{ u('flights.html') }}">
+      <div class="mb-3 flex flex-wrap gap-2" role="radiogroup" aria-label="{{ t('Trip type','যাত্রার ধরন') }}">
+        {% for v,l in [('ow',('One way','একমুখী')),('rt',('Round trip','রাউন্ড ট্রিপ')),('mc',('Multi-city','মাল্টি-সিটি'))] %}<label class="cursor-pointer"><input type="radio" name="trip" value="{{ v }}" class="peer sr-only" {{ 'checked' if v=='rt' else '' }}><span class="chip peer-checked:border-brand-600 peer-checked:bg-brand-700 peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-brand-500">{{ t(*l) }}</span></label>{% endfor %}
+      </div>
+      <div class="grid gap-3 md:grid-cols-[1fr_auto_1fr_1fr_1fr_auto] md:items-end">
+        <div><label class="label" for="sf-from">{{ t('From','কোথা থেকে') }}</label><input id="sf-from" name="from" class="input" value="{{ t('Dhaka (DAC)','ঢাকা (DAC)') }}"></div>
+        <button type="button" class="icon-btn mx-auto -my-1 h-10 w-10 rotate-90 border border-ink-200 md:my-0 md:rotate-0 dark:border-ink-700" data-swap="#sf-from,#sf-to" aria-label="{{ t('Swap origin and destination','যাত্রাস্থান ও গন্তব্য বদলান') }}">{{ icon('arrow-left-right','h-4 w-4') }}</button>
+        <div><label class="label" for="sf-to">{{ t('To','কোথায়') }}</label><input id="sf-to" name="to" class="input" value="{{ t('Dubai (DXB)','দুবাই (DXB)') }}"></div>
+        <div><label class="label" for="sf-dep">{{ t('Depart','যাত্রা') }}</label><input id="sf-dep" type="date" name="dep" class="input" value="2026-11-12"></div>
+        <div><label class="label" for="sf-ret">{{ t('Return','ফেরা') }}</label><input id="sf-ret" type="date" name="ret" class="input" value="2026-11-19"></div>
+        <button class="btn btn-accent btn-lg">{{ icon('search','h-5 w-5') }}<span class="md:sr-only xl:not-sr-only">{{ t('Search','খুঁজুন') }}</span></button>
+      </div>
+      <div class="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm"><label class="flex items-center gap-2"><span class="muted">{{ t('Travellers','যাত্রী') }}</span><select class="input w-auto py-1.5" name="pax" aria-label="{{ t('Travellers','যাত্রী') }}"><option>{{ t('1 Adult','১ জন প্রাপ্তবয়স্ক') }}</option><option>{{ t('2 Adults','২ জন প্রাপ্তবয়স্ক') }}</option><option>{{ t('2 Adults, 1 Child','২ জন প্রাপ্তবয়স্ক, ১ শিশু') }}</option></select></label><label class="flex items-center gap-2"><span class="muted">{{ t('Class','শ্রেণি') }}</span><select class="input w-auto py-1.5" name="cabin" aria-label="{{ t('Cabin class','কেবিন শ্রেণি') }}"><option>{{ t('Economy','ইকোনমি') }}</option><option>{{ t('Premium economy','প্রিমিয়াম ইকোনমি') }}</option><option>{{ t('Business','বিজনেস') }}</option></select></label><label class="flex items-center gap-2"><input type="checkbox" class="check"> {{ t('Direct flights only','শুধু সরাসরি ফ্লাইট') }}</label></div>
+    </form>
+    <form id="s-hotels" role="tabpanel" aria-labelledby="s-hotels-tab" data-panel hidden action="{{ u('hotels.html') }}" class="grid gap-3 md:grid-cols-[1.4fr_1fr_1fr_1fr_auto] md:items-end">
+      <div><label class="label" for="sho-city">{{ t('City, area or hotel','শহর, এলাকা বা হোটেল') }}</label><input id="sho-city" name="q" class="input" placeholder="{{ t("Cox's Bazar",'কক্সবাজার') }}"></div>
+      <div><label class="label" for="sho-in">{{ t('Check-in','চেক-ইন') }}</label><input id="sho-in" type="date" class="input" value="2026-12-18"></div>
+      <div><label class="label" for="sho-out">{{ t('Check-out','চেক-আউট') }}</label><input id="sho-out" type="date" class="input" value="2026-12-21"></div>
+      <div><label class="label" for="sho-g">{{ t('Rooms & guests','রুম ও অতিথি') }}</label><select id="sho-g" class="input"><option>{{ t('1 room, 2 guests','১ রুম, ২ জন') }}</option><option>{{ t('2 rooms, 4 guests','২ রুম, ৪ জন') }}</option><option>{{ t('3 rooms, 6 guests','৩ রুম, ৬ জন') }}</option></select></div>
+      <button class="btn btn-accent btn-lg">{{ icon('search','h-5 w-5') }}<span class="md:sr-only xl:not-sr-only">{{ t('Search','খুঁজুন') }}</span></button>
+    </form>
+    <form id="s-visa" role="tabpanel" aria-labelledby="s-visa-tab" data-panel hidden action="{{ u('visa.html') }}" class="grid gap-3 md:grid-cols-[1.4fr_1fr_1fr_auto] md:items-end">
+      <div><label class="label" for="sv-c">{{ t('Destination country','গন্তব্য দেশ') }}</label><select id="sv-c" class="input">{% for v in D.VISAS %}<option>{{ v.flag }} {{ v.country|tr }}</option>{% endfor %}</select></div>
+      <div><label class="label" for="sv-t">{{ t('Visa type','ভিসার ধরন') }}</label><select id="sv-t" class="input"><option>{{ t('Tourist','ট্যুরিস্ট') }}</option><option>{{ t('Business','বিজনেস') }}</option><option>{{ t('Medical','মেডিকেল') }}</option><option>{{ t('Student','স্টুডেন্ট') }}</option></select></div>
+      <div><label class="label" for="sv-n">{{ t('Nationality','জাতীয়তা') }}</label><select id="sv-n" class="input"><option>{{ t('Bangladeshi','বাংলাদেশি') }}</option><option>{{ t('Other','অন্যান্য') }}</option></select></div>
+      <button class="btn btn-accent btn-lg">{{ icon('search','h-5 w-5') }}<span>{{ t('Check requirements','শর্তাবলি দেখুন') }}</span></button>
+    </form>
+  </div>
+</div>

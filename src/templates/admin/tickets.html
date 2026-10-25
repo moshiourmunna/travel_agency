@@ -1,0 +1,16 @@
+{% extends 'app/shell.html' %}
+{% from 'app/ui.html' import page_head, status, rtable, dt_tools, kpi %}
+{% block content %}
+{% call page_head(title, t('SLA: first reply 15 min (urgent), 2 h (normal).','এসএলএ: প্রথম উত্তর ১৫ মিনিট (জরুরি), ২ ঘণ্টা (সাধারণ)।')) %}{% endcall %}
+<div class="mb-5 grid grid-cols-2 gap-3 lg:grid-cols-4">{{ kpi(t('Open','খোলা'), digits(23), None, 'inbox') }}{{ kpi(t('Breaching SLA','এসএলএ লঙ্ঘন'), digits(1), None, 'alarm-clock', tone='rose') }}{{ kpi(t('First reply','প্রথম উত্তর'), t('11 min','১১ মিনিট'), '−3 min', 'timer', True, tone='sky') }}{{ kpi(t('CSAT','সিস্যাট'), digits('4.8/5'), None, 'smile', tone='accent') }}</div>
+{% set rows = [] %}{% for x in A.ADMIN_TICKETS %}{% set _ = rows.append(dict(ref=x[0], cust=x[1], subj=x[2], pri=x[3], status=x[4], agent=x[5], age=x[6])) %}{% endfor %}
+{{ dt_tools('tk', [('all',B('All','সব'),rows|length),('open',A.ST.open[0],None),('awaiting',A.ST.awaiting[0],None),('resolved',A.ST.resolved[0],None)], t('Search tickets…','টিকিট খুঁজুন…')) }}
+{% call(r, k) rtable('tk', [('subj',t('Ticket','টিকিট'),'min-w-[16rem]'),('cust',t('Customer','গ্রাহক'),''),('pri',t('Priority','অগ্রাধিকার'),''),('status',t('Status','স্ট্যাটাস'),''),('agent',t('Assignee','দায়িত্বপ্রাপ্ত'),''),('age',t('Waiting','অপেক্ষা'),'')], rows, 'ref', title, False, ('status',)) %}
+  {% if k=='subj' %}<p class="font-semibold">{{ r.subj|tr }}</p><p class="text-xs muted">{{ r.ref }}</p>
+  {% elif k=='cust' %}{{ r.cust|tr }}
+  {% elif k=='pri' %}<span class="badge {{ {'urgent':'bg-rose-50 text-rose-800 dark:bg-rose-900/30 dark:text-rose-300','high':'bg-amber-50 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300','normal':'bg-sky-50 text-sky-800 dark:bg-sky-900/30 dark:text-sky-300','low':'bg-ink-100 text-ink-700 dark:bg-ink-800 dark:text-ink-200'}[r.pri] }}">{{ {'urgent':t('Urgent','জরুরি'),'high':t('High','উচ্চ'),'normal':t('Normal','সাধারণ'),'low':t('Low','নিম্ন')}[r.pri] }}</span>
+  {% elif k=='status' %}{{ status(r.status) }}
+  {% elif k=='agent' %}{{ r.agent }}
+  {% elif k=='age' %}{{ digits(r.age) }}{% endif %}
+{% endcall %}
+{% endblock %}

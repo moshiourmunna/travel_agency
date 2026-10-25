@@ -1,0 +1,74 @@
+{% include 'partials/head.html' %}
+{% from 'app/ui.html' import avatar_i %}
+<body class="min-h-screen bg-ink-50 dark:bg-ink-950 {{ body_class or '' }}" data-app="{{ area }}">
+<a href="#main" class="skip-link">{{ t('Skip to content','মূল বিষয়বস্তুতে যান') }}</a>
+{% macro sidenav(mobile=False) %}
+  <div class="flex h-16 shrink-0 items-center justify-between gap-2 border-b border-ink-100 px-4 dark:border-ink-800">
+    <a href="{{ u('index.html') if area=='account' else u('admin/index.html') }}" class="flex items-center gap-2" aria-label="{{ t('Musafir home','মুসাফির হোম') }}">
+      <img src="{{ asset('brand/logo-compact.svg') }}" alt="" class="h-9 w-auto dark:hidden" width="140" height="40"><img src="{{ asset('brand/logo-compact-dark.svg') }}" alt="" class="hidden h-9 w-auto dark:block" width="140" height="40">
+      {% if area=='admin' %}<span class="badge bg-accent-100 text-accent-900 dark:bg-accent-400/20 dark:text-accent-200">{{ t('Admin','অ্যাডমিন') }}</span>{% endif %}
+    </a>
+    {% if mobile %}<button type="button" class="icon-btn" data-drawer-close aria-label="{{ t('Close menu','মেনু বন্ধ করুন') }}">{{ icon('x','h-6 w-6') }}</button>{% endif %}
+  </div>
+  <nav class="flex-1 space-y-5 overflow-y-auto p-3" aria-label="{{ t('Account navigation','অ্যাকাউন্ট নেভিগেশন') if area=='account' else t('Admin navigation','অ্যাডমিন নেভিগেশন') }}">
+    {% for grp, items in nav %}
+    <div>{% if grp %}<p class="mb-1 px-3 text-[11px] font-bold uppercase tracking-wider text-ink-500 dark:text-ink-300">{{ grp|tr }}</p>{% endif %}
+      <ul class="space-y-0.5">{% for key, href, ic, label, cnt in items %}
+        <li><a href="{{ u(href) }}" class="side-link" {% if nav_active==key %}aria-current="page"{% endif %}>{{ icon(ic,'h-[18px] w-[18px] shrink-0') }}<span class="flex-1 truncate">{{ label|tr }}</span>{% if cnt %}<span class="rounded-full bg-accent-100 px-2 py-0.5 text-[11px] font-bold text-accent-900 dark:bg-accent-400/20 dark:text-accent-200">{{ digits(cnt) }}</span>{% endif %}</a></li>
+      {% endfor %}</ul></div>
+    {% endfor %}
+  </nav>
+  <div class="border-t border-ink-100 p-3 dark:border-ink-800">
+    {% if area=='account' %}
+    <div class="rounded-2xl bg-gradient-to-br from-brand-800 to-brand-600 p-4 text-white"><p class="text-xs text-brand-100">{{ t('Musafir Miles','মুসাফির মাইলস') }} · {{ A.USER.tier|tr }}</p><p class="text-xl font-extrabold">{{ num(A.USER.miles) }}</p>
+      <div class="mt-2 h-1.5 overflow-hidden rounded-full bg-white/20"><div class="h-full rounded-full bg-accent-400" style="width: {{ (A.USER.miles*100/A.USER.next_tier)|round|int }}%"></div></div>
+      <p class="mt-1.5 text-[11px] text-brand-100">{{ num(A.USER.next_tier-A.USER.miles) }} {{ t('Miles to Platinum','মাইলস বাকি প্লাটিনামে') }}</p></div>
+    {% else %}
+    <a href="{{ u('index.html') }}" class="side-link">{{ icon('external-link','h-[18px] w-[18px]') }}<span>{{ t('View website','ওয়েবসাইট দেখুন') }}</span></a>
+    {% endif %}
+    <a href="{{ u('login.html') if area=='account' else u('admin/login.html') }}" class="side-link">{{ icon('log-out','h-[18px] w-[18px]') }}<span>{{ t('Sign out','সাইন আউট') }}</span></a>
+  </div>
+{% endmacro %}
+<aside class="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col border-r border-ink-100 bg-white dark:border-ink-800 dark:bg-ink-900 lg:flex">{{ sidenav() }}</aside>
+<div id="sidenav" class="fixed inset-0 z-[60] hidden lg:hidden" data-drawer role="dialog" aria-modal="true" aria-label="{{ t('Menu','মেনু') }}">
+  <div class="absolute inset-0 bg-ink-950/50 backdrop-blur-sm" data-drawer-close></div>
+  <div class="absolute left-0 top-0 flex h-full w-[86%] max-w-xs flex-col bg-white shadow-2xl dark:bg-ink-900" data-drawer-panel>{{ sidenav(True) }}</div>
+</div>
+<div class="lg:pl-64">
+  <header class="sticky top-0 z-20 border-b border-ink-100 bg-white/90 backdrop-blur-xl dark:border-ink-800 dark:bg-ink-900/90">
+    <div class="flex h-16 items-center gap-2 px-3 sm:px-6">
+      <button type="button" class="icon-btn lg:hidden" data-drawer-open="sidenav" aria-controls="sidenav" aria-expanded="false" aria-label="{{ t('Open menu','মেনু খুলুন') }}">{{ icon('menu','h-6 w-6') }}</button>
+      <a href="{{ u('index.html') if area=='account' else u('admin/index.html') }}" class="lg:hidden" aria-label="{{ t('Musafir home','মুসাফির হোম') }}"><img src="{{ asset('brand/icon.svg') }}" alt="" class="h-8 w-8" width="32" height="32"></a>
+      {% if area=='admin' %}
+      <form class="relative ml-1 hidden max-w-md flex-1 md:block" role="search" action="{{ u('admin/bookings.html') }}"><label for="adm-q" class="sr-only">{{ t('Search','খুঁজুন') }}</label>{{ icon('search','pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-500 dark:text-ink-300') }}<input id="adm-q" name="q" type="search" class="input h-10 pl-9" placeholder="{{ t('Search bookings, customers, refs…','বুকিং, গ্রাহক, রেফারেন্স খুঁজুন…') }}"><kbd class="pointer-events-none absolute right-3 top-1/2 hidden -translate-y-1/2 rounded border border-ink-200 px-1.5 text-[10px] font-semibold text-ink-500 dark:border-ink-700 dark:text-ink-300 lg:block">/</kbd></form>
+      {% else %}
+      <p class="ml-1 hidden truncate text-sm font-semibold text-ink-700 dark:text-ink-200 md:block">{{ t('Welcome back,','আবার স্বাগতম,') }} {{ A.USER.first|tr }} 👋</p>
+      {% endif %}
+      <div class="ml-auto flex items-center gap-1">
+        {% if area=='account' %}<a href="{{ u('tours.html') }}" class="btn btn-primary btn-sm mr-1 hidden sm:inline-flex">{{ icon('plus','h-4 w-4') }} {{ t('New trip','নতুন ট্রিপ') }}</a>{% else %}<a href="{{ u('admin/bookings.html') }}#new" class="btn btn-primary btn-sm mr-1 hidden sm:inline-flex">{{ icon('plus','h-4 w-4') }} {{ t('New booking','নতুন বুকিং') }}</a>{% endif %}
+        <a href="{{ other_lang_url }}" data-lang-link="{{ other_lang }}" class="icon-btn w-auto px-2.5 text-sm font-bold" hreflang="{{ other_lang }}" lang="{{ other_lang }}" aria-label="{{ t('বাংলায় দেখুন','View in English') }}">{{ 'বাং' if L=='en' else 'EN' }}</a>
+        <button type="button" class="icon-btn" data-theme-toggle aria-label="{{ t('Toggle dark mode','ডার্ক মোড চালু/বন্ধ') }}">{{ icon('moon','h-5 w-5 dark:hidden') }}{{ icon('sun','hidden h-5 w-5 dark:block') }}</button>
+        <a href="{{ u('account/notifications.html') if area=='account' else u('admin/notifications.html') }}" class="icon-btn relative" aria-label="{{ t('Notifications','নোটিফিকেশন') }} ({{ digits(3) }} {{ t('unread','অপঠিত') }})">{{ icon('bell','h-5 w-5') }}<span class="absolute right-1.5 top-1.5 h-2.5 w-2.5 rounded-full bg-rose-500 ring-2 ring-white dark:ring-ink-900"></span></a>
+        <a href="{{ u('account/profile.html') if area=='account' else u('admin/staff.html') }}" class="ml-1 flex items-center gap-2 rounded-full p-0.5 pr-2 hover:bg-ink-100 dark:hover:bg-ink-800" aria-label="{{ t('Your profile','আপনার প্রোফাইল') }}">{{ avatar_i(A.USER.ini if area=='account' else 'AZ', 'h-9 w-9 text-xs') }}<span class="hidden text-sm font-semibold xl:block">{{ A.USER.first|tr if area=='account' else 'Ahmed Z.' }}</span></a>
+      </div>
+    </div>
+  </header>
+  <main id="main" tabindex="-1" class="outline-none">
+    <div class="mx-auto max-w-[1400px] px-3 py-5 sm:px-6 sm:py-8">
+      {% if crumbs_ui %}<nav aria-label="{{ t('Breadcrumb','ব্রেডক্রাম্ব') }}" class="mb-2 text-xs text-ink-500 dark:text-ink-300"><ol class="flex flex-wrap items-center gap-1">{% for n,h in crumbs_ui %}<li class="flex items-center gap-1">{% if not loop.last %}<a href="{{ u(h) }}" class="hover:text-brand-700 hover:underline dark:hover:text-brand-300">{{ n|tr }}</a>{{ icon('chevron-right','h-3 w-3') }}{% else %}<span aria-current="page">{{ n|tr }}</span>{% endif %}</li>{% endfor %}</ol></nav>{% endif %}
+      {% block content %}{% endblock %}
+    </div>
+    <footer class="mx-auto max-w-[1400px] px-3 pb-24 pt-2 text-xs text-ink-500 dark:text-ink-300 sm:px-6 lg:pb-8">© {{ digits(2026) }} {{ C.name|tr }} · {{ t('Design mock — dummy data','ডিজাইন মক — নমুনা তথ্য') }}</footer>
+  </main>
+</div>
+<dialog id="confirm-dialog" class="w-[min(92vw,26rem)] rounded-3xl p-0 backdrop:bg-ink-950/60 dark:bg-ink-900 dark:text-white" aria-labelledby="cd-title">
+  <div class="p-6"><span class="grid h-12 w-12 place-items-center rounded-2xl bg-rose-50 text-rose-700 dark:bg-rose-900/30 dark:text-rose-300">{{ icon('triangle-alert','h-6 w-6') }}</span>
+    <h2 id="cd-title" class="mt-4 text-lg font-bold">{{ t('Are you sure?','আপনি কি নিশ্চিত?') }}</h2><p class="mt-1 text-sm muted">{{ t('This is a demo — nothing is really deleted.','এটি ডেমো — আসলে কিছু মোছা হবে না।') }}</p>
+    <div class="mt-6 flex justify-end gap-2"><button type="button" class="btn btn-outline" data-modal-close>{{ t('Cancel','বাতিল') }}</button><button type="button" class="btn bg-rose-700 text-white hover:bg-rose-800" data-confirm-ok>{{ t('Delete','মুছুন') }}</button></div></div>
+</dialog>
+<div id="toasts" class="pointer-events-none fixed inset-x-0 top-20 z-[70] flex flex-col items-center gap-2 px-4" aria-live="polite" aria-atomic="true"></div>
+<script>window.MUSAFIR={lang:'{{ L }}',i18n:{{ js_i18n|safe }}};</script>
+<script src="{{ asset('js/app.js') }}" defer></script>
+{% if charts %}<script src="{{ asset('vendor/chart.umd.min.js') }}" defer></script>{% endif %}
+</body>
+</html>

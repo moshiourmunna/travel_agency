@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% import 'ui.html' as ui %}
+{% block content %}
+{{ ui.page_hero(t('Careers at Musafir','মুসাফিরে ক্যারিয়ার'), t('Help 1 lakh+ Bangladeshis see the world. Hybrid work, travel perks and real growth.','১ লাখের বেশি বাংলাদেশিকে বিশ্ব দেখাতে সাহায্য করুন। হাইব্রিড কাজ, ভ্রমণ সুবিধা ও সত্যিকারের উন্নতি।'), [(t('Home','হোম'),u('index.html')),(t('Careers','ক্যারিয়ার'),'')], 'swiss') }}
+<section class="section"><div class="wrap">
+  <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{% for ic,a in [('plane',('Annual fam trip abroad','বার্ষিক বিদেশ ফ্যাম ট্রিপ')),('heart-pulse',('Family health cover','পারিবারিক স্বাস্থ্য বিমা')),('graduation-cap',('IATA & destination training','আইএটিএ ও গন্তব্য প্রশিক্ষণ')),('laptop',('Hybrid: 2 days from home','হাইব্রিড: সপ্তাহে ২ দিন বাসা থেকে'))] %}<div class="card flex items-center gap-3 p-5">{{ icon(ic,'h-6 w-6 shrink-0 text-brand-600') }}<p class="font-semibold">{{ t(*a) }}</p></div>{% endfor %}</div>
+  <h2 class="mt-12 text-2xl font-bold">{{ t('Open positions','খোলা পদ') }} <span class="badge badge-brand align-middle">{{ digits(D.CAREERS|length) }}</span></h2>
+  <ul class="mt-5 space-y-3">{% for j in D.CAREERS %}<li class="card flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:justify-between"><div><h3 class="font-bold">{{ j.title|tr }}</h3><p class="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-sm muted"><span class="inline-flex items-center gap-1">{{ icon('briefcase','h-4 w-4') }} {{ j.dept|tr }}</span><span class="inline-flex items-center gap-1">{{ icon('map-pin','h-4 w-4') }} {{ j.loc|tr }}</span><span class="inline-flex items-center gap-1">{{ icon('clock','h-4 w-4') }} {{ j.type|tr }}</span><span>{{ t('Experience','অভিজ্ঞতা') }}: {{ j.exp|tr }}</span></p></div><button type="button" class="btn btn-outline btn-sm shrink-0" data-modal-open="apply-dialog">{{ t('Apply','আবেদন করুন') }}</button></li>{% endfor %}</ul>
+</div></section>
+<dialog id="apply-dialog" class="w-[min(100%-2rem,32rem)] rounded-3xl bg-white p-0 text-ink-900 shadow-2xl backdrop:bg-ink-950/60 dark:bg-ink-900 dark:text-ink-100" aria-labelledby="ap-t">
+  <form class="space-y-4 p-6" data-validate data-success="{{ t('Application received — we reply within 7 days.','আবেদন পেয়েছি — ৭ দিনের মধ্যে উত্তর দেব।') }}">
+    <div class="flex items-center justify-between"><h2 id="ap-t" class="text-xl font-bold">{{ t('Apply now','এখনই আবেদন করুন') }}</h2><button type="button" class="icon-btn" data-modal-close aria-label="{{ t('Close','বন্ধ') }}">{{ icon('x') }}</button></div>
+    <div class="field"><label class="label" for="ap-n">{{ t('Full name','পূর্ণ নাম') }} *</label><input id="ap-n" class="input" required autocomplete="name"></div>
+    <div class="field"><label class="label" for="ap-e">{{ t('Email','ইমেইল') }} *</label><input id="ap-e" type="email" class="input" required autocomplete="email"></div>
+    <div class="field"><label class="label" for="ap-cv">{{ t('CV (PDF)','সিভি (পিডিএফ)') }}</label><input id="ap-cv" type="file" accept=".pdf" class="input"></div>
+    <button class="btn btn-primary w-full">{{ t('Submit application','আবেদন জমা দিন') }}</button>
+  </form>
+</dialog>
+{% endblock %}

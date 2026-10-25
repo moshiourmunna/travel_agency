@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% import 'ui.html' as ui %}
+{% block content %}
+<article>
+<header class="wrap max-w-4xl pt-8">
+  {{ ui.crumbs([(t('Home','হোম'),u('index.html')),(t('Blog','ব্লগ'),u('blog.html')),(p.title|tr,'')]) }}
+  <p class="mt-6 text-sm font-semibold text-brand-700 dark:text-brand-300">{{ p.cat|tr }}</p>
+  <h1 class="mt-2 text-3xl font-extrabold leading-tight text-balance sm:text-5xl">{{ p.title|tr }}</h1>
+  <p class="mt-4 text-lg muted">{{ p.ex|tr }}</p>
+  <div class="mt-6 flex flex-wrap items-center justify-between gap-4 border-y border-ink-100 py-4 dark:border-ink-800"><div class="flex items-center gap-3">{{ ui.avatar(p.author.en.split(' ')|map('first')|join) }}<div><p class="font-semibold">{{ p.author|tr }}</p><p class="text-sm muted"><time datetime="{{ p.date }}">{{ date(p.date) }}</time> · {{ digits(p.mins) }} {{ t('min read','মিনিট পড়া') }}</p></div></div>
+    <div class="flex gap-2"><a class="icon-btn border border-ink-200 dark:border-ink-700" href="https://www.facebook.com/sharer/sharer.php?u={{ abs_url()|urlencode }}" target="_blank" rel="noopener" aria-label="{{ t('Share on Facebook','ফেসবুকে শেয়ার') }}">{{ icon('facebook','h-4 w-4') }}</a><a class="icon-btn border border-ink-200 dark:border-ink-700" href="https://wa.me/?text={{ abs_url()|urlencode }}" target="_blank" rel="noopener" aria-label="{{ t('Share on WhatsApp','হোয়াটসঅ্যাপে শেয়ার') }}">{{ icon('whatsapp','h-4 w-4') }}</a><button type="button" class="icon-btn border border-ink-200 dark:border-ink-700" data-copy="{{ abs_url() }}" aria-label="{{ t('Copy link','লিংক কপি') }}">{{ icon('link','h-4 w-4') }}</button></div></div>
+</header>
+<figure class="wrap mt-8 max-w-5xl"><img src="{{ img(p.img) }}" alt="{{ p.title|tr }}" class="aspect-[16/9] w-full rounded-3xl object-cover" width="1600" height="900" fetchpriority="high"></figure>
+<div class="wrap grid max-w-5xl gap-10 py-10 lg:grid-cols-[220px_1fr]">
+  <nav class="hidden lg:block" aria-label="{{ t('On this page','এই পাতায়') }}"><div class="sticky top-24"><p class="mb-3 text-xs font-bold uppercase tracking-wider text-ink-400">{{ t('On this page','এই পাতায়') }}</p><ol class="space-y-2 text-sm">{% for s in body %}<li><a href="#s{{ loop.index }}" class="link-muted">{{ s.h }}</a></li>{% endfor %}</ol></div></nav>
+  <div class="prose-m max-w-none">
+    {% for s in body %}<h2 id="s{{ loop.index }}">{{ s.h }}</h2>{% for para in s.p %}<p>{{ para }}</p>{% endfor %}{% if s.get('list') %}<ul>{% for li in s.list %}<li>{{ li }}</li>{% endfor %}</ul>{% endif %}{% if loop.index == 2 %}<aside class="not-prose my-8 flex flex-col gap-4 rounded-3xl bg-brand-50 p-6 dark:bg-brand-900/30 sm:flex-row sm:items-center"><div class="flex-1"><p class="font-bold">{{ t('Want us to plan it for you?','আমরা কি আপনার জন্য প্ল্যান করে দেব?') }}</p><p class="text-sm muted">{{ t('Free itinerary and quote within 4 working hours.','৪ কর্মঘণ্টার মধ্যে ফ্রি ভ্রমণসূচি ও কোটেশন।') }}</p></div><a href="{{ u('trip-planner.html') }}" class="btn btn-primary">{{ t('Plan my trip','ট্রিপ প্ল্যান করুন') }}</a></aside>{% endif %}{% endfor %}
+    <div class="not-prose mt-10 flex flex-wrap gap-2">{% for tg in tags %}<span class="chip">#{{ tg }}</span>{% endfor %}</div>
+  </div>
+</div>
+</article>
+<section class="section bg-ink-50 dark:bg-ink-900/50"><div class="wrap">{{ ui.sec_head(t('Keep reading','আরও পড়ুন'), t('Related stories','সম্পর্কিত লেখা')) }}<div class="grid gap-6 md:grid-cols-3">{% for r in related %}<a href="{{ u('blog/'+r.slug+'.html') }}" class="card card-hover overflow-hidden"><img src="{{ img(r.img, True) }}" alt="" class="aspect-[16/10] w-full object-cover" loading="lazy" width="640" height="400"><div class="p-5"><p class="text-xs font-semibold text-brand-700 dark:text-brand-300">{{ r.cat|tr }}</p><h3 class="mt-1 font-bold leading-snug">{{ r.title|tr }}</h3></div></a>{% endfor %}</div></div></section>
+{% endblock %}

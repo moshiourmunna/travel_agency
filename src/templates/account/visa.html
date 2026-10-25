@@ -1,0 +1,28 @@
+{% extends 'app/shell.html' %}
+{% from 'app/ui.html' import page_head, status, progress %}
+{% block content %}
+{% call page_head(title, t('Live status for every application. We message you at each step.','প্রতিটি আবেদনের লাইভ স্ট্যাটাস। প্রতিটি ধাপে আমরা আপনাকে জানাই।')) %}<a href="{{ u('visa.html') }}" class="btn btn-primary btn-sm">{{ icon('plus','h-4 w-4') }} {{ t('New application','নতুন আবেদন') }}</a>{% endcall %}
+<section class="card p-4 sm:p-6" aria-labelledby="v1-h">
+  <div class="flex flex-wrap items-start justify-between gap-3"><div><p class="text-xs muted">VSA-26-1182 · {{ t('linked to','যুক্ত') }} MSF-26-49388</p><h2 id="v1-h" class="mt-1 text-xl font-bold"><span aria-hidden="true">🇹🇭</span> {{ t('Thailand tourist e-Visa — Farhana Rahman','থাইল্যান্ড ট্যুরিস্ট ই-ভিসা — ফারহানা রহমান') }}</h2></div>{{ status('embassy') }}</div>
+  <ol class="mt-6 grid gap-4 md:grid-cols-5">
+    {% for l,d,st in A.VISA_STAGES %}<li class="relative flex gap-3 md:flex-col md:items-center md:text-center">
+      {% if not loop.last %}<span class="absolute left-4 top-9 h-[calc(100%-1rem)] w-0.5 md:left-1/2 md:top-4 md:h-0.5 md:w-full {{ 'bg-brand-600' if st=='done' else 'bg-ink-200 dark:bg-ink-700' }}" aria-hidden="true"></span>{% endif %}
+      <span class="relative z-10 grid h-8 w-8 shrink-0 place-items-center rounded-full text-xs font-bold {{ 'bg-brand-700 text-white' if st=='done' else ('bg-accent-400 text-ink-900 ring-4 ring-accent-100 dark:ring-accent-400/20' if st=='current' else 'bg-ink-100 text-ink-600 dark:bg-ink-800 dark:text-ink-300') }}">{{ icon('check','h-4 w-4') if st=='done' else digits(loop.index) }}</span>
+      <div><p class="text-sm font-semibold">{{ l|tr }}</p><p class="text-xs muted">{{ date(d) if d else (t('Expected 4 Nov','সম্ভাব্য ৪ নভেম্বর') if loop.index==4 else t('Pending','অপেক্ষমাণ')) }}</p>{% if st=='current' %}<span class="sr-only">({{ t('current step','বর্তমান ধাপ') }})</span>{% endif %}</div></li>{% endfor %}
+  </ol>
+  <div class="mt-6 rounded-2xl bg-sky-50 p-4 text-sm text-sky-900 dark:bg-sky-900/30 dark:text-sky-100">{{ icon('info','mr-1 inline h-4 w-4') }} {{ t('Embassy processing usually takes 7–10 working days. No action needed from you right now.','দূতাবাসের প্রক্রিয়া সাধারণত ৭–১০ কর্মদিবস লাগে। এখন আপনার কিছু করতে হবে না।') }}</div>
+</section>
+<div class="mt-6 grid gap-6 lg:grid-cols-2">
+  <section class="card border-accent-300 p-4 ring-1 ring-accent-300 dark:ring-accent-400/40 sm:p-6" aria-labelledby="v2-h">
+    <div class="flex flex-wrap items-start justify-between gap-3"><div><p class="text-xs muted">VSA-26-1183</p><h2 id="v2-h" class="mt-1 text-lg font-bold"><span aria-hidden="true">🇹🇭</span> {{ t('Thailand — Shafiqul Islam','থাইল্যান্ড — শফিকুল ইসলাম') }}</h2></div>{{ status('docs') }}</div>
+    {{ progress(40,'mt-4') }}
+    <p class="mt-4 text-sm font-semibold">{{ t('We still need:','আমাদের এখনও প্রয়োজন:') }}</p>
+    <ul class="mt-2 space-y-2 text-sm">{% for l,ok in [(('Passport bio page','পাসপোর্টের তথ্য পাতা'),True),(('Photo 35×45 mm, white background','ছবি ৩৫×৪৫ মিমি, সাদা ব্যাকগ্রাউন্ড'),True),(('6-month bank statement with seal','সিলসহ ৬ মাসের ব্যাংক স্টেটমেন্ট'),False),(('NOC from employer','নিয়োগকর্তার এনওসি'),True)] %}<li class="flex items-center gap-2">{{ icon('circle-check' if ok else 'circle-alert','h-4 w-4 shrink-0 '+('text-emerald-700 dark:text-emerald-400' if ok else 'text-amber-700 dark:text-amber-300')) }} {{ t(*l) }}</li>{% endfor %}</ul>
+    <form class="mt-4" data-validate data-success="{{ t('Uploaded — our visa officer will verify within 4 working hours.','আপলোড হয়েছে — ৪ কর্মঘণ্টার মধ্যে ভিসা অফিসার যাচাই করবেন।') }}"><label for="up-bs" class="flex cursor-pointer flex-col items-center gap-2 rounded-2xl border-2 border-dashed border-ink-200 p-5 text-center text-sm hover:border-brand-500 dark:border-ink-700">{{ icon('upload','h-6 w-6 text-brand-700 dark:text-brand-300') }}<span class="font-semibold">{{ t('Upload bank statement','ব্যাংক স্টেটমেন্ট আপলোড') }}</span><span class="text-xs muted">PDF, JPG · {{ t('max 10 MB','সর্বোচ্চ ১০ এমবি') }}</span></label><input id="up-bs" type="file" class="sr-only" accept=".pdf,.jpg,.jpeg,.png"><button class="btn btn-primary btn-sm mt-3 w-full">{{ t('Submit document','ডকুমেন্ট জমা দিন') }}</button></form>
+  </section>
+  <section class="card p-4 sm:p-6" aria-labelledby="vh-h"><h2 id="vh-h" class="text-lg font-bold">{{ t('Past applications','আগের আবেদন') }}</h2>
+    <ul class="mt-4 divide-y divide-ink-100 dark:divide-ink-800">{% for v in A.VISA_APPS %}<li class="flex items-center gap-3 py-3"><span class="text-2xl" aria-hidden="true">{{ v.flag }}</span><div class="min-w-0 flex-1"><p class="truncate font-semibold">{{ v.country|tr }} · {{ v.vtype|tr }}</p><p class="text-xs muted">{{ v.ref }} · {{ v.who|tr }}</p></div>{{ status(v.status) }}</li>{% endfor %}</ul>
+    <div class="mt-4 rounded-2xl bg-ink-50 p-4 text-sm dark:bg-ink-850"><p class="font-semibold">{{ t('Need another visa?','আরেকটি ভিসা দরকার?') }}</p><p class="mt-1 muted">{{ t('We handle 40+ countries, with document checks and embassy appointments.','৪০+ দেশের ভিসা — ডকুমেন্ট চেক ও দূতাবাস অ্যাপয়েন্টমেন্টসহ।') }}</p><a href="{{ u('visa.html') }}" class="link-muted mt-2 inline-block font-semibold">{{ t('Browse visa services','ভিসা সেবা দেখুন') }} →</a></div>
+  </section>
+</div>
+{% endblock %}

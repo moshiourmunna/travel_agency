@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% import 'ui.html' as ui %}
+{% block content %}
+{{ ui.page_hero(t('Help centre','হেল্প সেন্টার'), t('Answers about bookings, payments, cancellations, visas and travelling with Musafir.','বুকিং, পেমেন্ট, বাতিল, ভিসা ও মুসাফিরের সাথে ভ্রমণ নিয়ে উত্তর।'), [(t('Home','হোম'),u('index.html')),(t('FAQ','প্রশ্নোত্তর'),'')], 'plane') }}
+<section class="section" data-filter-group><div class="wrap max-w-4xl">
+  <div class="relative"><label class="sr-only" for="faq-q">{{ t('Search questions','প্রশ্ন খুঁজুন') }}</label><span class="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-ink-400">{{ icon('search','h-5 w-5') }}</span><input id="faq-q" type="search" class="input py-3.5 pl-12 text-base" placeholder="{{ t('Try “refund”, “EMI” or “visa”…','লিখুন “রিফান্ড”, “ইএমআই” বা “ভিসা”…') }}" data-faq-search></div>
+  <div class="mt-5 flex flex-wrap gap-2" role="group" aria-label="{{ t('Topics','বিষয়') }}">{% for v,l in [('all',('All','সব')),('booking',('Booking','বুকিং')),('payment',('Payments','পেমেন্ট')),('visa',('Visa','ভিসা'))] %}<button type="button" class="chip {{ 'is-active' if loop.first }}" aria-pressed="{{ 'true' if loop.first else 'false' }}" data-quick-filter="{{ v }}">{{ t(*l) }}</button>{% endfor %}</div>
+  <div class="mt-8 divide-y divide-ink-100 overflow-hidden rounded-2xl border border-ink-100 bg-white dark:divide-ink-800 dark:border-ink-800 dark:bg-ink-900">
+    {% for q,a,cat in D.FAQS %}<details class="group" data-item data-kind="{{ cat }}" {{ 'open' if loop.first }}><summary class="flex cursor-pointer list-none items-center justify-between gap-4 p-5 font-semibold">{{ q|tr }}<span class="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-ink-50 transition group-open:rotate-45 dark:bg-ink-800">{{ icon('plus','h-4 w-4') }}</span></summary><div class="px-5 pb-5 text-ink-600 dark:text-ink-300">{{ a|tr }}</div></details>{% endfor %}
+  </div>
+  <p data-faq-empty hidden class="mt-6 text-center muted">{{ t('No matching questions — ask us directly.','মিল পাওয়া যায়নি — সরাসরি জিজ্ঞেস করুন।') }}</p>
+  <div class="mt-10 grid gap-4 sm:grid-cols-3">{% for ic,a,h in [('message-circle',('Live chat','লাইভ চ্যাট'),'#'),('phone',('Call hotline','হটলাইনে কল'),'tel:'+C.hotline_tel),('mail',('Email support','ইমেইল সাপোর্ট'),'mailto:'+C.email)] %}<a href="{{ h }}" class="card card-hover flex items-center gap-3 p-4 font-semibold" {% if loop.first %}data-open-chat{% endif %}>{{ icon(ic,'h-5 w-5 text-brand-600') }} {{ t(*a) }}</a>{% endfor %}</div>
+</div></section>
+{% endblock %}

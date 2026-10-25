@@ -1,0 +1,112 @@
+<a href="#main" class="skip-link">{{ t('Skip to content','মূল বিষয়বস্তুতে যান') }}</a>
+<div class="hidden border-b border-white/5 bg-ink-950 text-[13px] text-ink-300 lg:block">
+  <div class="wrap flex h-10 items-center justify-between gap-6">
+    <div class="flex items-center gap-5">
+      <a href="tel:{{ C.hotline_tel }}" class="inline-flex items-center gap-1.5 hover:text-white">{{ icon('phone','h-3.5 w-3.5') }} {{ t('Hotline','হটলাইন') }} {{ digits(C.hotline) }}</a>
+      <a href="https://wa.me/{{ C.wa }}" class="inline-flex items-center gap-1.5 hover:text-white" rel="noopener" target="_blank">{{ icon('message-circle','h-3.5 w-3.5') }} WhatsApp</a>
+      <a href="mailto:{{ C.email }}" class="hidden items-center gap-1.5 hover:text-white xl:inline-flex">{{ icon('mail','h-3.5 w-3.5') }} {{ C.email }}</a>
+    </div>
+    <div class="flex items-center gap-5">
+      <span class="hidden items-center gap-1.5 text-gold-300 xl:inline-flex">{{ icon('shield-check','h-3.5 w-3.5') }} {{ t('IATA accredited · ATAB & TOAB member','আইএটিএ স্বীকৃত · আটাব ও টোয়াব সদস্য') }}</span>
+      <a href="{{ u('account/bookings.html') }}" class="hover:text-white">{{ t('Manage booking','বুকিং ম্যানেজ') }}</a>
+      <a href="{{ u('login.html') }}?role=agent" class="hover:text-white">{{ t('Agent / B2B','এজেন্ট / বিটুবি') }}</a>
+      <label class="sr-only" for="cur-top">{{ t('Currency','মুদ্রা') }}</label>
+      <select id="cur-top" data-currency class="cursor-pointer rounded-md border-0 bg-transparent py-0 pl-1 pr-6 text-[13px] text-ink-300 focus:ring-0"><option class="text-ink-900" value="BDT">৳ BDT</option><option class="text-ink-900" value="USD">$ USD</option><option class="text-ink-900" value="EUR">€ EUR</option></select>
+    </div>
+  </div>
+</div>
+<header id="site-header" class="sticky top-0 z-40 border-b border-ink-100/80 bg-white/90 backdrop-blur-xl transition-shadow dark:border-ink-800/80 dark:bg-ink-950/85">
+  <div class="wrap flex h-16 items-center gap-3 lg:h-[72px]">
+    <a href="{{ u('index.html') }}" class="mr-2 flex shrink-0 items-center" aria-label="{{ t('Musafir home','মুসাফির হোম') }}">
+      <img src="{{ asset('brand/logo-compact.svg') }}" alt="{{ t('Musafir — মুসাফির','মুসাফির — Musafir') }}" width="172" height="48" class="h-10 w-auto dark:hidden lg:h-11">
+      <img src="{{ asset('brand/logo-compact-dark.svg') }}" alt="" aria-hidden="true" width="172" height="48" class="hidden h-10 w-auto dark:block lg:h-11">
+    </a>
+    <nav class="hidden flex-1 items-center gap-0.5 lg:flex" aria-label="{{ t('Main','প্রধান') }}">
+      <div class="relative" data-dd>
+        <button type="button" class="nav-link" aria-expanded="false" aria-haspopup="true" {% if active=='tours' %}aria-current="page"{% endif %}>{{ t('Tours','ট্যুর') }} {{ icon('chevron-down','h-4 w-4 opacity-60') }}</button>
+        <div data-dd-panel hidden class="absolute left-0 top-full z-50 mt-2 w-[720px] rounded-2xl border border-ink-100 bg-white p-6 shadow-lift dark:border-ink-800 dark:bg-ink-900">
+          <div class="grid grid-cols-3 gap-6">
+            {% for title, links in NAV_TOURS %}
+            <div><p class="mb-3 text-xs font-bold uppercase tracking-wider text-ink-400">{{ title|tr }}</p>
+              <ul class="space-y-1">{% for href, label in links %}<li><a class="block rounded-lg px-2 py-1.5 text-sm font-medium text-ink-700 hover:bg-brand-50 hover:text-brand-800 dark:text-ink-200 dark:hover:bg-ink-800 dark:hover:text-white" href="{{ u(href) }}">{{ label|tr }}</a></li>{% endfor %}</ul></div>
+            {% endfor %}
+          </div>
+          <div class="mt-5 flex items-center justify-between rounded-xl bg-gradient-to-r from-brand-700 to-brand-600 p-4 text-white">
+            <div><p class="font-bold">{{ t('Not sure where to go?','কোথায় যাবেন ঠিক করতে পারছেন না?') }}</p><p class="text-sm text-brand-100">{{ t('Tell us your budget — we design the trip in 24 hours.','বাজেট জানান — ২৪ ঘণ্টায় আমরা ট্যুর সাজিয়ে দেব।') }}</p></div>
+            <a href="{{ u('trip-planner.html') }}" class="btn btn-accent btn-sm">{{ t('Plan my trip','ট্যুর প্ল্যান করুন') }}</a>
+          </div>
+        </div>
+      </div>
+      <div class="relative" data-dd>
+        <button type="button" class="nav-link" aria-expanded="false" aria-haspopup="true" {% if active=='holidays' %}aria-current="page"{% endif %}>{{ t('Holidays','হলিডে') }} {{ icon('chevron-down','h-4 w-4 opacity-60') }}</button>
+        <div data-dd-panel hidden class="absolute left-0 top-full z-50 mt-2 w-[600px] overflow-hidden rounded-2xl border border-ink-100 bg-white shadow-lift dark:border-ink-800 dark:bg-ink-900">
+          <div class="grid grid-cols-[1.2fr_1fr]">
+            <div class="grid grid-cols-1 gap-1 p-5">
+              {% for th in D.THEMES %}
+              <a href="{{ u('holidays/'+th.slug+'.html') }}" class="flex gap-3 rounded-xl p-2 hover:bg-brand-50 dark:hover:bg-ink-800"><span class="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-brand-50 text-brand-700 dark:bg-brand-900/40 dark:text-brand-300">{{ icon(th.icon,'h-[18px] w-[18px]') }}</span><span class="min-w-0"><span class="block text-sm font-semibold text-ink-800 dark:text-white">{{ th.name|tr }}</span><span class="block truncate text-xs text-ink-500 dark:text-ink-300">{{ th.tag|tr }}</span></span></a>
+              {% endfor %}
+              <a href="{{ u('holidays.html') }}" class="mt-1 px-2 text-sm font-semibold text-brand-700 dark:text-brand-300">{{ t('All holiday themes →','সব হলিডে থিম →') }}</a>
+            </div>
+            <a href="{{ u('cruises.html') }}" class="relative block min-h-[260px] overflow-hidden">
+              <img src="{{ img('cruise', True) }}" alt="" class="img-cover absolute inset-0" loading="lazy" width="640" height="400">
+              <span class="absolute inset-0 bg-gradient-to-t from-ink-950/90 via-ink-950/30"></span>
+              <span class="absolute bottom-0 p-5 text-white"><span class="badge mb-2 bg-accent-400 text-ink-900">{{ t('New: cruises','নতুন: ক্রুজ') }}</span><span class="block text-lg font-bold">{{ t('Cruises from ৳21,500','ক্রুজ ৳২১,৫০০ থেকে') }}</span><span class="block text-sm text-ink-200">{{ t('Singapore, Gulf, Greek Isles & Sundarbans','সিঙ্গাপুর, উপসাগর, গ্রিক দ্বীপ ও সুন্দরবন') }}</span></span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <a href="{{ u('cruises.html') }}" class="nav-link" {% if active=='cruises' %}aria-current="page"{% endif %}>{{ t('Cruises','ক্রুজ') }}</a>
+      <a href="{{ u('activities.html') }}" class="nav-link hidden xl:inline-flex" {% if active=='activities' %}aria-current="page"{% endif %}>{{ t('Activities','অ্যাক্টিভিটি') }}</a>
+      <a href="{{ u('flights.html') }}" class="nav-link" {% if active=='flights' %}aria-current="page"{% endif %}>{{ t('Flights','ফ্লাইট') }}</a>
+      <a href="{{ u('hotels.html') }}" class="nav-link" {% if active=='hotels' %}aria-current="page"{% endif %}>{{ t('Hotels','হোটেল') }}</a>
+      <a href="{{ u('visa.html') }}" class="nav-link" {% if active=='visa' %}aria-current="page"{% endif %}>{{ t('Visa','ভিসা') }}</a>
+      <a href="{{ u('destinations.html') }}" class="nav-link hidden 2xl:inline-flex" {% if active=='dest' %}aria-current="page"{% endif %}>{{ t('Destinations','গন্তব্য') }}</a>
+      <a href="{{ u('offers.html') }}" class="nav-link" {% if active=='offers' %}aria-current="page"{% endif %}>{{ t('Offers','অফার') }} <span class="h-1.5 w-1.5 rounded-full bg-accent-500"></span></a>
+      <div class="relative" data-dd>
+        <button type="button" class="nav-link" aria-expanded="false" aria-haspopup="true">{{ t('More','আরও') }} {{ icon('chevron-down','h-4 w-4 opacity-60') }}</button>
+        <div data-dd-panel hidden class="absolute right-0 top-full z-50 mt-2 w-64 rounded-2xl border border-ink-100 bg-white p-2 shadow-lift dark:border-ink-800 dark:bg-ink-900">
+          {% for href,label in [('destinations.html',('Destinations','গন্তব্য')),('group-tours.html',('Group & corporate','গ্রুপ ও কর্পোরেট')),('custom-tour.html',('Custom tour / quote','কাস্টম ট্যুর / কোটেশন')),('insurance.html',('Travel insurance','ভ্রমণ বিমা')),('gift-cards.html',('Gift cards','গিফট কার্ড')),('compare.html',('Compare packages','প্যাকেজ তুলনা')),('blog.html',('Travel blog','ট্রাভেল ব্লগ')),('gallery.html',('Gallery','গ্যালারি')),('reviews.html',('Reviews','রিভিউ')),('about.html',('About us','আমাদের সম্পর্কে')),('contact.html',('Contact','যোগাযোগ'))] %}
+          <a href="{{ u(href) }}" class="block rounded-lg px-3 py-2 text-sm font-medium text-ink-700 hover:bg-ink-50 hover:text-brand-700 dark:text-ink-200 dark:hover:bg-ink-800 dark:hover:text-white">{{ t(*label) }}</a>
+          {% endfor %}
+        </div>
+      </div>
+    </nav>
+    <div class="ml-auto flex items-center gap-1">
+      <a href="{{ other_lang_url }}" data-lang-link="{{ other_lang }}" class="icon-btn w-auto px-2.5 text-sm font-bold" hreflang="{{ other_lang }}" lang="{{ other_lang }}" aria-label="{{ t('বাংলায় দেখুন','View in English') }}">{{ 'বাং' if L=='en' else 'EN' }}</a>
+      <button type="button" class="icon-btn" data-theme-toggle aria-label="{{ t('Toggle dark mode','ডার্ক মোড চালু/বন্ধ') }}">{{ icon('moon','h-5 w-5 dark:hidden') }}{{ icon('sun','hidden h-5 w-5 dark:block') }}</button>
+      <a href="{{ u('wishlist.html') }}" class="icon-btn relative hidden sm:inline-flex" aria-label="{{ t('Wishlist','উইশলিস্ট') }}">{{ icon('heart') }}<span data-wish-count class="absolute right-1 top-1 hidden min-w-[18px] rounded-full bg-accent-500 px-1 text-center text-[10px] font-bold leading-[18px] text-white">0</span></a>
+      <a href="{{ u('login.html') }}" class="btn btn-ghost btn-sm hidden xl:inline-flex">{{ icon('circle-user-round','h-[18px] w-[18px]') }} {{ t('Sign in','সাইন ইন') }}</a>
+      <a href="{{ u('custom-tour.html') }}" class="btn btn-primary btn-sm hidden xl:inline-flex">{{ t('Get a quote','কোটেশন নিন') }}</a>
+      <button type="button" class="icon-btn lg:hidden" data-drawer-open="mnav" aria-controls="mnav" aria-expanded="false" aria-label="{{ t('Open menu','মেনু খুলুন') }}">{{ icon('menu','h-6 w-6') }}</button>
+    </div>
+  </div>
+</header>
+<!-- Mobile drawer -->
+<div id="mnav" class="fixed inset-0 z-[60] hidden lg:hidden" data-drawer role="dialog" aria-modal="true" aria-label="{{ t('Menu','মেনু') }}">
+  <div class="absolute inset-0 bg-ink-950/50 backdrop-blur-sm" data-drawer-close></div>
+  <div class="absolute right-0 top-0 flex h-full w-[86%] max-w-sm flex-col bg-white shadow-2xl dark:bg-ink-900" data-drawer-panel>
+    <div class="flex items-center justify-between border-b border-ink-100 px-4 py-3 dark:border-ink-800">
+      <img src="{{ asset('brand/logo-compact.svg') }}" alt="" class="h-9 w-auto dark:hidden" width="140" height="40"><img src="{{ asset('brand/logo-compact-dark.svg') }}" alt="" class="hidden h-9 w-auto dark:block" width="140" height="40">
+      <button type="button" class="icon-btn" data-drawer-close aria-label="{{ t('Close menu','মেনু বন্ধ করুন') }}">{{ icon('x','h-6 w-6') }}</button>
+    </div>
+    <nav class="flex-1 overflow-y-auto p-3" aria-label="{{ t('Mobile','মোবাইল') }}">
+      <details class="group rounded-xl" {% if active=='tours' %}open{% endif %}><summary class="flex cursor-pointer list-none items-center justify-between rounded-xl px-3 py-3 font-semibold text-ink-800 dark:text-white">{{ t('Tours','ট্যুর') }} {{ icon('chevron-down','h-4 w-4 transition group-open:rotate-180') }}</summary>
+        <div class="pb-2 pl-3">{% for title, links in NAV_TOURS %}<p class="px-3 pt-2 text-xs font-bold uppercase tracking-wider text-ink-400">{{ title|tr }}</p>{% for href,label in links %}<a href="{{ u(href) }}" class="block rounded-lg px-3 py-2 text-sm text-ink-600 dark:text-ink-300">{{ label|tr }}</a>{% endfor %}{% endfor %}<a href="{{ u('tours.html') }}" class="block rounded-lg px-3 py-2 text-sm font-semibold text-brand-700 dark:text-brand-300">{{ t('All tours →','সব ট্যুর →') }}</a></div></details>
+      <details class="group rounded-xl" {% if active=='holidays' %}open{% endif %}><summary class="flex cursor-pointer list-none items-center justify-between rounded-xl px-3 py-3 font-semibold text-ink-800 dark:text-white">{{ t('Holidays','হলিডে') }} {{ icon('chevron-down','h-4 w-4 transition group-open:rotate-180') }}</summary>
+        <div class="pb-2 pl-3">{% for th in D.THEMES %}<a href="{{ u('holidays/'+th.slug+'.html') }}" class="block rounded-lg px-3 py-2 text-sm text-ink-600 dark:text-ink-300">{{ th.name|tr }}</a>{% endfor %}<a href="{{ u('holidays.html') }}" class="block rounded-lg px-3 py-2 text-sm font-semibold text-brand-700 dark:text-brand-300">{{ t('All themes →','সব থিম →') }}</a></div></details>
+      <a href="{{ u('cruises.html') }}" class="block rounded-xl px-3 py-3 font-semibold text-ink-800 hover:bg-ink-50 dark:text-white dark:hover:bg-ink-800">{{ t('Cruises','ক্রুজ') }}</a>
+      {% for href,label in [('activities.html',('Things to do','অ্যাক্টিভিটি')),('trip-planner.html',('Trip planner','ট্রিপ প্ল্যানার')),('flights.html',('Flights','ফ্লাইট')),('hotels.html',('Hotels','হোটেল')),('visa.html',('Visa services','ভিসা সেবা')),('destinations.html',('Destinations','গন্তব্য')),('offers.html',('Offers & deals','অফার ও ডিল')),('group-tours.html',('Group & corporate','গ্রুপ ও কর্পোরেট')),('custom-tour.html',('Custom tour / quote','কাস্টম ট্যুর / কোটেশন')),('insurance.html',('Travel insurance','ভ্রমণ বিমা')),('gift-cards.html',('Gift cards','গিফট কার্ড')),('blog.html',('Blog','ব্লগ')),('about.html',('About','আমাদের সম্পর্কে')),('contact.html',('Contact','যোগাযোগ'))] %}
+      <a href="{{ u(href) }}" class="block rounded-xl px-3 py-3 font-semibold text-ink-800 hover:bg-ink-50 dark:text-white dark:hover:bg-ink-800">{{ t(*label) }}</a>
+      {% endfor %}
+    </nav>
+    <div class="space-y-3 border-t border-ink-100 p-4 dark:border-ink-800">
+      <div class="grid grid-cols-2 gap-2">
+        <a href="{{ other_lang_url }}" data-lang-link="{{ other_lang }}" class="btn btn-outline btn-sm">{{ icon('languages','h-4 w-4') }} {{ 'বাংলা' if L=='en' else 'English' }}</a>
+        <button type="button" data-theme-toggle class="btn btn-outline btn-sm">{{ icon('moon','h-4 w-4 dark:hidden') }}{{ icon('sun','hidden h-4 w-4 dark:block') }} {{ t('Theme','থিম') }}</button>
+      </div>
+      <div class="flex items-center justify-between gap-3 rounded-xl border border-ink-200 px-3 py-2 dark:border-ink-700"><label for="cur-m" class="flex items-center gap-2 text-sm font-semibold">{{ icon('coins','h-4 w-4') }} {{ t('Currency','মুদ্রা') }}</label><select id="cur-m" data-currency class="input w-auto py-1.5 text-sm"><option value="BDT">৳ BDT</option><option value="USD">$ USD</option><option value="EUR">€ EUR</option></select></div>
+      <a href="{{ u('login.html') }}" class="btn btn-primary w-full">{{ t('Sign in / Register','সাইন ইন / রেজিস্টার') }}</a>
+      <a href="tel:{{ C.hotline_tel }}" class="flex items-center justify-center gap-2 text-sm font-semibold text-ink-600 dark:text-ink-300">{{ icon('phone','h-4 w-4') }} {{ digits(C.hotline) }}</a>
+    </div>
+  </div>
+</div>

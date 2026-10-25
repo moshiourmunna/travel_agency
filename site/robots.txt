@@ -1,0 +1,13 @@
+# Musafir — robots.txt
+User-agent: *
+Allow: /
+Disallow: /en/account/
+Disallow: /bn/account/
+Disallow: /en/admin/
+Disallow: /bn/admin/
+Disallow: /en/booking
+Disallow: /bn/booking
+Disallow: /*?*sort=
+Disallow: /*?*page=
+
+Sitemap: https://musafir.com.bd/sitemap.xml

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% import 'ui.html' as ui %}
+{% block content %}
+{{ ui.page_hero(t('Destinations','গন্তব্য'), t('From Bangladesh’s hills and beaches to the holy cities and the Himalayas — explore where to go next.','বাংলাদেশের পাহাড়-সমুদ্র থেকে পবিত্র নগরী আর হিমালয় — এবার কোথায় যাবেন খুঁজে নিন।'), [(t('Home','হোম'),u('index.html')),(t('Destinations','গন্তব্য'),'')], 'nepal') }}
+<section class="section" data-filter-group>
+  <div class="wrap">
+    <div class="no-scrollbar -mx-4 mb-8 flex gap-2 overflow-x-auto px-4 md:mx-0 md:px-0" role="group" aria-label="{{ t('Filter destinations','গন্তব্য ফিল্টার') }}">
+      {% for v,l in [('all',('All destinations','সব গন্তব্য')),('bd',('Bangladesh','বাংলাদেশ')),('intl',('International','আন্তর্জাতিক'))] %}<button type="button" class="chip shrink-0 {{ 'is-active' if loop.first else '' }}" aria-pressed="{{ 'true' if loop.first else 'false' }}" data-quick-filter="{{ v }}">{{ t(*l) }}</button>{% endfor %}
+    </div>
+    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {% for d in D.DESTINATIONS %}<div data-item data-region="{{ d.region }}">{{ ui.dest_card(d) }}<p class="mt-3 line-clamp-2 px-1 text-sm muted">{{ d.desc|tr }}</p></div>{% endfor %}
+    </div>
+  </div>
+</section>
+<section class="pb-16"><div class="wrap"><div class="flex flex-col items-start justify-between gap-5 rounded-3xl bg-brand-50 p-8 dark:bg-brand-900/30 md:flex-row md:items-center"><div><h2 class="text-2xl font-bold">{{ t("Can't decide? Let us plan it.",'সিদ্ধান্ত নিতে পারছেন না? আমরা পরিকল্পনা করে দিই।') }}</h2><p class="mt-1 muted">{{ t('Share your budget and dates — get 3 tailor-made options within 24 hours.','বাজেট ও তারিখ জানান — ২৪ ঘণ্টায় ৩টি কাস্টম অপশন পান।') }}</p></div><a href="{{ u('custom-tour.html') }}" class="btn btn-primary btn-lg">{{ t('Plan my trip','ট্যুর প্ল্যান করুন') }}</a></div></div></section>
+{% endblock %}

@@ -1,0 +1,23 @@
+# Musafir monorepo
+node_modules/
+vendor/
+.env
+.env.*
+!.env.example
+!.env.e2e.example
+.next/
+out/
+*.log
+.DS_Store
+Thumbs.db
+__pycache__/
+backend/storage/*.key
+backend/storage/app/public/*
+!backend/storage/app/public/.gitignore
+backend/public/storage
+backend/public/hot
+backend/database/*.sqlite
+e2e/test-results/
+e2e/playwright-report/
+tests/lh-tmp/
+/musafir_pkg/

@@ -1,0 +1,28 @@
+{% extends 'app/shell.html' %}
+{% from 'app/ui.html' import page_head %}
+{% block content %}
+{% call page_head(title, None) %}{% endcall %}
+{% macro sw(id, label, sub, on=False) %}<div class="flex items-center justify-between gap-4 py-3"><div><p id="{{ id }}-l" class="text-sm font-semibold">{{ label }}</p>{% if sub %}<p class="text-xs muted">{{ sub }}</p>{% endif %}</div><button type="button" role="switch" aria-checked="{{ 'true' if on else 'false' }}" aria-labelledby="{{ id }}-l" data-toggle-switch class="switch"><span></span></button></div>{% endmacro %}
+<div class="grid gap-6 lg:grid-cols-2">
+  <section class="card p-4 sm:p-6" aria-labelledby="sec-h"><h2 id="sec-h" class="text-lg font-bold">{{ t('Sign-in & security','সাইন-ইন ও নিরাপত্তা') }}</h2>
+    <div class="divide-y divide-ink-100 dark:divide-ink-800">
+      <div class="flex items-center justify-between gap-4 py-3"><div><p class="text-sm font-semibold">{{ t('Password','পাসওয়ার্ড') }}</p><p class="text-xs muted">{{ t('Last changed 3 months ago','শেষ পরিবর্তন ৩ মাস আগে') }}</p></div><button type="button" class="btn btn-outline btn-sm" data-demo="{{ t('Password reset link sent (demo)','পাসওয়ার্ড রিসেট লিংক পাঠানো হয়েছে (ডেমো)') }}">{{ t('Change','পরিবর্তন') }}</button></div>
+      {{ sw('s2fa', t('Two-step sign-in (OTP)','টু-স্টেপ সাইন-ইন (ওটিপি)'), t('A code by SMS each time you sign in on a new device','নতুন ডিভাইসে সাইন-ইনে এসএমএসে কোড'), True) }}
+      {{ sw('sbio', t('Passkey / fingerprint','পাসকি / ফিঙ্গারপ্রিন্ট'), t('Faster sign-in on this phone','এই ফোনে দ্রুত সাইন-ইন'), False) }}
+      <div class="py-3"><p class="text-sm font-semibold">{{ t('Active sessions','সক্রিয় সেশন') }}</p><ul class="mt-2 space-y-2 text-sm">{% for d,w,cur in [('Chrome · Windows','Dhaka · now',True),('Musafir app · Android','Dhaka · 2 h ago',False),('Safari · iPhone','Chattogram · 6 d ago',False)] %}<li class="flex items-center gap-3 rounded-xl bg-ink-50 p-3 dark:bg-ink-850" data-row>{{ icon('monitor-smartphone','h-5 w-5 text-ink-500 dark:text-ink-300') }}<div class="flex-1"><p class="font-medium">{{ d }}</p><p class="text-xs muted">{{ w }}</p></div>{% if cur %}<span class="badge badge-brand">{{ t('This device','এই ডিভাইস') }}</span>{% else %}<button type="button" class="btn btn-outline btn-sm" data-confirm-delete>{{ t('Sign out','সাইন আউট') }}<span class="sr-only"> {{ d }}</span></button>{% endif %}</li>{% endfor %}</ul></div>
+    </div></section>
+  <section class="card p-4 sm:p-6" aria-labelledby="pref-h"><h2 id="pref-h" class="text-lg font-bold">{{ t('Preferences','পছন্দ') }}</h2>
+    <div class="mt-3 grid gap-4 sm:grid-cols-2"><div><label class="label" for="st-l">{{ t('Language','ভাষা') }}</label><select id="st-l" class="input" onchange="var a=document.querySelector('[data-lang-link]');if(this.value!=='{{ L }}'&&a)a.click()"><option value="en" {{ 'selected' if L=='en' }}>English</option><option value="bn" {{ 'selected' if L=='bn' }}>বাংলা</option></select></div>
+      <div><label class="label" for="st-c">{{ t('Display currency','প্রদর্শিত মুদ্রা') }}</label><select id="st-c" class="input" data-currency><option value="BDT">BDT ৳</option><option value="USD">USD $</option><option value="EUR">EUR €</option></select></div></div>
+    <div id="notif" class="mt-4 divide-y divide-ink-100 dark:divide-ink-800">
+      <p class="pb-1 text-sm font-bold">{{ t('Notifications','নোটিফিকেশন') }}</p>
+      {{ sw('n1', t('Trip & payment alerts (SMS + WhatsApp)','ট্রিপ ও পেমেন্ট অ্যালার্ট (এসএমএস + হোয়াটসঅ্যাপ)'), t('Required for active bookings','সক্রিয় বুকিংয়ের জন্য প্রয়োজনীয়'), True) }}
+      {{ sw('n2', t('Email receipts & itineraries','ইমেইলে রসিদ ও ভ্রমণসূচি'), None, True) }}
+      {{ sw('n3', t('Deals and price-drop alerts','অফার ও দাম কমার অ্যালার্ট'), t('Max 2 per week','সপ্তাহে সর্বোচ্চ ২টি'), True) }}
+      {{ sw('n4', t('Newsletter','নিউজলেটার'), None, False) }}
+    </div></section>
+  <section class="card p-4 sm:p-6 lg:col-span-2" aria-labelledby="priv-h"><h2 id="priv-h" class="text-lg font-bold">{{ t('Privacy & data','গোপনীয়তা ও তথ্য') }}</h2>
+    <div class="mt-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"><p class="text-sm muted">{{ t('Download a copy of your bookings, profile and reviews (JSON + PDF).','আপনার বুকিং, প্রোফাইল ও রিভিউর একটি কপি ডাউনলোড করুন (JSON + PDF)।') }}</p><button type="button" class="btn btn-outline btn-sm" data-demo="{{ t('We will email your data within 24 hours (demo).','২৪ ঘণ্টার মধ্যে আপনার তথ্য ইমেইল করব (ডেমো)।') }}">{{ icon('download','h-4 w-4') }} {{ t('Request my data','আমার তথ্য চাই') }}</button></div>
+    <div class="mt-4 flex flex-col gap-3 rounded-2xl border border-rose-200 bg-rose-50/60 p-4 dark:border-rose-900 dark:bg-rose-900/20 sm:flex-row sm:items-center sm:justify-between"><div><p class="text-sm font-semibold text-rose-800 dark:text-rose-200">{{ t('Delete account','অ্যাকাউন্ট মুছুন') }}</p><p class="text-xs text-rose-800/80 dark:text-rose-200/80">{{ t('Only possible when you have no active bookings. Wallet balance is refunded first.','কোনো সক্রিয় বুকিং না থাকলেই সম্ভব। আগে ওয়ালেট ব্যালান্স ফেরত দেওয়া হবে।') }}</p></div><button type="button" class="btn btn-sm bg-rose-700 text-white hover:bg-rose-800" data-confirm-delete>{{ t('Delete account','অ্যাকাউন্ট মুছুন') }}</button></div></section>
+</div>
+{% endblock %}

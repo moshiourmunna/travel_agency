@@ -1,0 +1,190 @@
+{% macro stars(r, cls='h-4 w-4') -%}
+<span class="stars" role="img" aria-label="{{ t('Rated','রেটিং') }} {{ digits(r) }}/{{ digits(5) }}">{% for i in range(5) %}{% if r >= i+0.75 %}{{ icon('star', cls+' fill-current') }}{% elif r >= i+0.25 %}{{ icon('star-half', cls+' fill-current') }}{% else %}{{ icon('star', cls+' text-ink-200 dark:text-ink-700') }}{% endif %}{% endfor %}</span>
+{%- endmacro %}
+
+{% macro sec_head(eyebrow, title, sub=None, link=None, link_label=None, center=False, light=False) -%}
+<div class="mb-8 flex flex-col gap-4 md:mb-10 {{ 'items-center text-center' if center else 'md:flex-row md:items-end md:justify-between' }}">
+  <div class="{{ 'max-w-2xl' if center else 'max-w-2xl' }}">
+    {% if eyebrow %}<p class="eyebrow {{ 'text-brand-300' if light else '' }}">{{ eyebrow }}</p>{% endif %}
+    <h2 class="h-section text-balance {{ 'text-white' if light else '' }}">{{ title }}</h2>
+    {% if sub %}<p class="mt-3 {{ 'text-ink-300' if light else 'lead' }}">{{ sub }}</p>{% endif %}
+  </div>
+  {% if link %}<a href="{{ link }}" class="group inline-flex shrink-0 items-center gap-1.5 text-sm font-bold {{ 'text-white' if light else 'text-brand-700 dark:text-brand-300' }}">{{ link_label }} {{ icon('arrow-right','h-4 w-4 transition group-hover:translate-x-1') }}</a>{% endif %}
+</div>
+{%- endmacro %}
+
+{% macro crumbs(items, light=False) -%}
+<nav aria-label="{{ t('Breadcrumb','ব্রেডক্রাম্ব') }}" class="text-sm">
+  <ol class="flex flex-wrap items-center gap-1.5 {{ 'text-white/80' if light else 'text-ink-500 dark:text-ink-300' }}">
+    {% for label, href in items %}
+      {% if not loop.last %}<li><a href="{{ href }}" class="hover:underline">{{ label }}</a></li><li aria-hidden="true">{{ icon('chevron-right','h-3.5 w-3.5 opacity-60') }}</li>
+      {% else %}<li aria-current="page" class="font-semibold {{ 'text-white' if light else 'text-ink-800 dark:text-ink-100' }}">{{ label }}</li>{% endif %}
+    {% endfor %}
+  </ol>
+</nav>
+{%- endmacro %}
+
+{% macro page_hero(title, sub, items, image='coxsbazar', extra='') -%}
+<section class="relative isolate overflow-hidden bg-ink-950">
+  <img src="{{ img(image) }}" alt="" class="img-cover absolute inset-0 -z-10 opacity-60" width="1600" height="1000" fetchpriority="high">
+  <div class="absolute inset-0 -z-10 bg-gradient-to-r from-ink-950/90 via-ink-950/60 to-ink-950/20"></div>
+  <div class="wrap py-12 md:py-20">
+    {{ crumbs(items, True) }}
+    <h1 class="mt-4 max-w-3xl text-3xl font-extrabold text-white text-balance sm:text-5xl">{{ title }}</h1>
+    {% if sub %}<p class="mt-4 max-w-2xl text-base text-ink-200 sm:text-lg">{{ sub }}</p>{% endif %}
+    {{ extra }}
+  </div>
+</section>
+{%- endmacro %}
+
+{% macro wish_btn(id, kind='tour', cls='') -%}
+<button type="button" class="grid h-9 w-9 place-items-center rounded-full bg-white/90 text-ink-700 shadow-sm backdrop-blur transition hover:scale-110 hover:text-rose-600 aria-pressed:text-rose-600 dark:bg-ink-900/90 dark:text-ink-200 {{ cls }}" data-wish="{{ kind }}:{{ id }}" aria-pressed="false" aria-label="{{ t('Save to wishlist','উইশলিস্টে রাখুন') }}">{{ icon('heart','h-[18px] w-[18px] [[aria-pressed=true]_&]:fill-current') }}</button>
+{%- endmacro %}
+
+{% macro tour_card(x, list=False) -%}
+<article class="card card-hover group relative flex overflow-hidden {{ 'flex-col sm:flex-row' if list else 'flex-col' }}" data-item data-price="{{ x.price }}" data-rating="{{ x.rating }}" data-days="{{ x.days }}" data-region="{{ x.region }}" data-cats="{{ x.cats|join(' ') }}" data-title="{{ x.title.en }}">
+  <div class="relative shrink-0 overflow-hidden {{ 'aspect-[16/10] sm:aspect-auto sm:w-72' if list else 'aspect-[16/11]' }}">
+    <img src="{{ img(x.img, True) }}" alt="{{ x.title|tr }}" class="img-cover transition duration-700 group-hover:scale-105" loading="lazy" width="640" height="400">
+    <div class="absolute left-3 top-3 flex flex-wrap gap-1.5">
+      {% if x.badge %}<span class="badge bg-accent-400 text-ink-900">{{ x.badge|tr }}</span>{% endif %}
+      {% if x.old %}<span class="badge bg-rose-600 text-white">-{{ digits(((x.old-x.price)/x.old*100)|round|int) }}%</span>{% endif %}
+    </div>
+    <div class="absolute right-3 top-3 z-10">{{ wish_btn(x.slug) }}</div>
+    <span class="absolute bottom-3 left-3 inline-flex items-center gap-1 rounded-full bg-ink-950/70 px-2.5 py-1 text-xs font-semibold text-white backdrop-blur">{{ icon('map-pin','h-3.5 w-3.5') }} {{ x.dest|tr }}{% if tr(x.dest)!=tr(x.country) %}, {{ x.country|tr }}{% endif %}</span>
+  </div>
+  <div class="flex flex-1 flex-col p-4 sm:p-5">
+    <div class="flex items-center gap-2 text-xs font-semibold text-ink-500 dark:text-ink-300">
+      <span class="inline-flex items-center gap-1">{{ icon('calendar-days','h-3.5 w-3.5') }} {{ digits(x.days) }}{{ t('D','দিন') }} / {{ digits(x.nights) }}{{ t('N','রাত') }}</span><span aria-hidden="true">·</span>
+      <span class="inline-flex items-center gap-1">{{ icon('users','h-3.5 w-3.5') }} {{ digits(x.group) }}</span>
+      {% if x.flight %}<span aria-hidden="true">·</span><span class="inline-flex items-center gap-1 text-brand-700 dark:text-brand-300">{{ icon('plane','h-3.5 w-3.5') }} {{ t('Flight','ফ্লাইট') }}</span>{% endif %}
+    </div>
+    <h3 class="mt-2 text-[17px] font-bold leading-snug"><a href="{{ u('tours/'+x.slug+'.html') }}" class="after:absolute after:inset-0 hover:text-brand-700 dark:hover:text-brand-300">{{ x.title|tr }}</a></h3>
+    {% if list %}<ul class="mt-3 hidden space-y-1 text-sm text-ink-600 dark:text-ink-300 sm:block">{% for h in x.hl %}<li class="flex gap-2">{{ icon('check','mt-0.5 h-4 w-4 shrink-0 text-brand-600') }}{{ h|tr }}</li>{% endfor %}</ul>{% endif %}
+    <div class="mt-2 flex items-center gap-2 text-sm">{{ stars(x.rating,'h-3.5 w-3.5') }}<b class="text-ink-800 dark:text-white">{{ digits(x.rating) }}</b><span class="muted">({{ num(x.reviews) }})</span></div>
+    <div class="mt-1.5">{{ cancel_badge(x.cancel) }}</div>
+    <div class="mt-auto flex items-end justify-between gap-3 pt-4">
+      <div><p class="text-xs muted">{{ t('From, per person','শুরু, জনপ্রতি') }}</p>
+        <p class="flex items-baseline gap-2"><span class="text-xl font-extrabold text-ink-900 dark:text-white">{{ bdt(x.price) }}</span>{% if x.old %}<s class="text-sm text-ink-400">{{ bdt(x.old) }}</s>{% endif %}</p></div>
+      <label class="relative z-10 inline-flex cursor-pointer items-center gap-1.5 text-xs font-semibold text-ink-500 dark:text-ink-300"><input type="checkbox" class="check" data-compare="{{ x.slug }}"> {{ t('Compare','তুলনা') }}</label>
+    </div>
+  </div>
+</article>
+{%- endmacro %}
+
+{% macro cancel_badge(key, cls='') -%}
+{% set c = D.CANCEL[key] %}<span class="inline-flex items-center gap-1 text-xs font-semibold {{ 'text-emerald-700 dark:text-emerald-400' if c[0]=='free' else ('text-amber-700 dark:text-amber-300' if c[0]=='partial' else 'text-ink-500 dark:text-ink-300') }} {{ cls }}">{{ icon('circle-check' if c[0]=='free' else ('circle-alert' if c[0]=='partial' else 'circle-x'),'h-3.5 w-3.5') }} {{ c[1]|tr }}</span>
+{%- endmacro %}
+
+{% macro cruise_card(c) -%}
+<article class="card card-hover group relative flex flex-col overflow-hidden" data-item data-price="{{ c.price }}" data-rating="{{ c.rating }}" data-days="{{ c.nights }}" data-region="{{ c.region }}" data-dep="{{ c.depart }}" data-title="{{ c.title.en }}">
+  <div class="relative aspect-[16/10] overflow-hidden">
+    <img src="{{ img(c.img, True) }}" alt="{{ c.title|tr }}" class="img-cover transition duration-700 group-hover:scale-105" loading="lazy" width="640" height="400">
+    <div class="absolute inset-0 bg-gradient-to-t from-ink-950/80 via-transparent"></div>
+    <div class="absolute left-3 top-3 flex gap-1.5"><span class="badge bg-white text-ink-800">{{ D.CRUISE_REGIONS[c.region]|tr }}</span>{% if c.badge %}<span class="badge bg-accent-400 text-ink-900">{{ c.badge|tr }}</span>{% endif %}</div>
+    <div class="absolute right-3 top-3 z-10">{{ wish_btn(c.slug,'cruise') }}</div>
+    <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs font-semibold text-white"><span class="inline-flex items-center gap-1">{{ icon('moon','h-3.5 w-3.5') }} {{ digits(c.nights) }} {{ t('nights','রাত') }}</span><span class="inline-flex items-center gap-1">{{ icon('calendar-days','h-3.5 w-3.5') }} {{ date(c.depart) }}</span></div>
+  </div>
+  <div class="flex flex-1 flex-col p-5">
+    <p class="text-xs font-semibold uppercase tracking-wide text-brand-700 dark:text-brand-300">{{ c.ship }} · {{ c.line }}</p>
+    <h3 class="mt-1 text-[17px] font-bold leading-snug"><a class="after:absolute after:inset-0 hover:text-brand-700 dark:hover:text-brand-300" href="{{ u('cruises/'+c.slug+'.html') }}">{{ c.title|tr }}</a></h3>
+    <p class="mt-2 line-clamp-1 text-sm muted">{{ icon('anchor','inline h-3.5 w-3.5') }} {{ c.ports|map('tr')|join(' → ') }}</p>
+    <div class="mt-2 flex items-center gap-2 text-sm">{{ stars(c.rating,'h-3.5 w-3.5') }}<b>{{ digits(c.rating) }}</b><span class="muted">({{ num(c.reviews) }})</span></div>
+    <div class="mt-auto flex items-end justify-between gap-3 border-t border-ink-100 pt-4 dark:border-ink-800">
+      <div><p class="text-xs muted">{{ c.cabin|tr }}, {{ t('per person','জনপ্রতি') }}</p><p class="flex items-baseline gap-2"><span class="text-xl font-extrabold text-ink-900 dark:text-white">{{ bdt(c.price) }}</span>{% if c.old %}<s class="text-sm text-ink-400">{{ bdt(c.old) }}</s>{% endif %}</p></div>
+      {{ cancel_badge(c.cancel) }}
+    </div>
+  </div>
+</article>
+{%- endmacro %}
+
+{% macro activity_card(a) -%}
+<article class="card card-hover group relative flex h-full flex-col overflow-hidden" data-item data-price="{{ a.price }}" data-rating="{{ a.rating }}" data-cats="{{ a.cat }}" data-tier="{{ D.CANCEL[a.cancel][0] }}" data-region="{{ a.region }}" data-title="{{ a.title.en }} {{ a.city.en }}">
+  <div class="relative aspect-[4/3] overflow-hidden">
+    <img src="{{ img(a.img, True) }}" alt="{{ a.title|tr }}" class="img-cover transition duration-700 group-hover:scale-105" loading="lazy" width="640" height="400">
+    {% if a.badge %}<span class="badge absolute left-3 top-3 bg-accent-400 text-ink-900">{{ a.badge|tr }}</span>{% endif %}
+    <div class="absolute right-3 top-3 z-10">{{ wish_btn(a.slug,'activity') }}</div>
+  </div>
+  <div class="flex flex-1 flex-col p-4">
+    <p class="text-xs font-semibold text-ink-500 dark:text-ink-300">{{ D.ACT_CATS[a.cat][1]|tr }} · {{ a.city|tr }}</p>
+    <h3 class="mt-1 line-clamp-2 font-bold leading-snug"><a class="after:absolute after:inset-0 hover:text-brand-700 dark:hover:text-brand-300" href="{{ u('activities/'+a.slug+'.html') }}">{{ a.title|tr }}</a></h3>
+    <p class="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs muted"><span class="inline-flex items-center gap-1">{{ icon('clock','h-3.5 w-3.5') }} {{ a.dur|tr }}</span>{% if a.pickup %}<span class="inline-flex items-center gap-1">{{ icon('car','h-3.5 w-3.5') }} {{ t('Pickup','পিকআপ') }}</span>{% endif %}</p>
+    <div class="mt-2">{{ cancel_badge(a.cancel) }}</div>
+    <div class="mt-auto flex items-end justify-between pt-3"><span class="inline-flex items-center gap-1 text-sm">{{ icon('star','h-3.5 w-3.5 fill-current text-accent-400') }}<b>{{ digits(a.rating) }}</b><span class="muted">({{ num(a.reviews) }})</span></span><span class="text-right"><span class="block text-[11px] muted">{{ t('from','শুরু') }}</span><b class="text-lg">{{ bdt(a.price) }}</b></span></div>
+  </div>
+</article>
+{%- endmacro %}
+
+{% macro dest_card(d, tall=False) -%}
+<a href="{{ u('destinations/'+d.slug+'.html') }}" class="group relative block overflow-hidden rounded-3xl {{ 'aspect-[4/5]' if tall else 'aspect-[4/3]' }}">
+  <img src="{{ img(d.img, True) }}" alt="{{ d.name|tr }}" class="img-cover transition duration-700 group-hover:scale-110" loading="lazy" width="640" height="400">
+  <span class="absolute inset-0 bg-gradient-to-t from-ink-950/85 via-ink-950/10 to-transparent"></span>
+  <span class="absolute inset-x-0 bottom-0 flex items-end justify-between gap-2 p-5 text-white">
+    <span><span class="block text-xl font-bold">{{ d.name|tr }}</span><span class="text-sm text-white/80">{{ d.country|tr }} · {{ digits(d.tours) }} {{ t('tours','ট্যুর') }}</span></span>
+    <span class="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-white/15 backdrop-blur transition group-hover:bg-accent-400 group-hover:text-ink-900">{{ icon('arrow-up-right','h-5 w-5') }}</span>
+  </span>
+</a>
+{%- endmacro %}
+
+{% macro hotel_card(h, list=True) -%}
+<article class="card card-hover group relative flex flex-col overflow-hidden sm:flex-row" data-item data-price="{{ h.price }}" data-rating="{{ h.rating }}" data-stars="{{ h.stars }}">
+  <div class="relative aspect-[16/10] shrink-0 overflow-hidden sm:aspect-auto sm:w-64 lg:w-72">
+    <img src="{{ img(h.img, True) }}" alt="{{ h.name|tr }}" class="img-cover transition duration-700 group-hover:scale-105" loading="lazy" width="640" height="400">
+    <div class="absolute right-3 top-3 z-10">{{ wish_btn(h.slug,'hotel') }}</div>
+  </div>
+  <div class="flex flex-1 flex-col gap-3 p-4 sm:p-5 md:flex-row">
+    <div class="flex-1">
+      <div class="flex items-center gap-1 text-accent-400" aria-label="{{ digits(h.stars) }} {{ t('star hotel','তারকা হোটেল') }}">{% for i in range(h.stars) %}{{ icon('star','h-3.5 w-3.5 fill-current') }}{% endfor %}</div>
+      <h3 class="mt-1 text-lg font-bold"><a class="after:absolute after:inset-0 hover:text-brand-700 dark:hover:text-brand-300" href="{{ u('hotels/'+h.slug+'.html') }}">{{ h.name|tr }}</a></h3>
+      <p class="mt-1 flex items-center gap-1 text-sm muted">{{ icon('map-pin','h-4 w-4') }} {{ h.city|tr }} · {{ h.dist|tr }}</p>
+      <div class="mt-3 flex flex-wrap gap-1.5">{% for a in h.amen[:4] %}<span class="badge badge-gray">{{ icon(AMENITY[a][0],'h-3.5 w-3.5') }} {{ AMENITY[a][1]|tr }}</span>{% endfor %}</div>
+      <div class="mt-3 flex flex-wrap gap-3 text-xs font-semibold">{% if h.refundable %}<span class="text-emerald-700 dark:text-emerald-400">✓ {{ t('Free cancellation','ফ্রি বাতিল') }}</span>{% endif %}{% if h.breakfast %}<span class="text-emerald-700 dark:text-emerald-400">✓ {{ t('Breakfast included','নাশতা অন্তর্ভুক্ত') }}</span>{% endif %}</div>
+    </div>
+    <div class="flex shrink-0 flex-row items-end justify-between gap-2 border-t border-ink-100 pt-3 dark:border-ink-800 md:w-44 md:flex-col md:border-l md:border-t-0 md:pl-5 md:pt-0">
+      <div class="flex items-center gap-2 md:flex-row-reverse"><span class="rounded-lg bg-brand-700 px-2 py-1 text-sm font-bold text-white">{{ digits(h.rating) }}</span><span class="text-xs leading-tight muted">{{ t('Excellent','চমৎকার') if h.rating>=9 else t('Very good','খুব ভালো') }}<br>{{ num(h.reviews) }} {{ t('reviews','রিভিউ') }}</span></div>
+      <div class="text-right">{% if h.old %}<s class="text-sm text-ink-400">{{ bdt(h.old) }}</s>{% endif %}<p class="text-xl font-extrabold text-ink-900 dark:text-white">{{ bdt(h.price) }}</p><p class="text-xs muted">{{ t('per night, incl. VAT','প্রতি রাত, ভ্যাটসহ') }}</p></div>
+    </div>
+  </div>
+</article>
+{%- endmacro %}
+
+{% macro avatar(ini, cls='h-11 w-11 text-sm', grad='from-brand-500 to-brand-800') -%}
+<span class="grid shrink-0 place-items-center rounded-full bg-gradient-to-br {{ grad }} font-bold text-white {{ cls }}" aria-hidden="true">{{ ini }}</span>
+{%- endmacro %}
+
+{% macro review_card(r) -%}
+<figure class="card flex h-full flex-col p-6">
+  <div class="flex items-center justify-between">{{ stars(r.rating) }}{{ icon('quote','h-8 w-8 text-brand-100 dark:text-brand-900') }}</div>
+  <blockquote class="mt-4 flex-1 text-[15px] leading-7 text-ink-700 dark:text-ink-200">“{{ r.text|tr }}”</blockquote>
+  <figcaption class="mt-5 flex items-center gap-3 border-t border-ink-100 pt-4 dark:border-ink-800">{{ avatar(r.ini) }}<div><p class="font-bold text-ink-900 dark:text-white">{{ r.name|tr }}</p><p class="text-xs muted">{{ r.trip|tr }} · {{ r.city|tr }}</p></div></figcaption>
+</figure>
+{%- endmacro %}
+
+{% macro faq_list(items, open_first=True) -%}
+<div class="divide-y divide-ink-100 overflow-hidden rounded-2xl border border-ink-100 bg-white dark:divide-ink-800 dark:border-ink-800 dark:bg-ink-900">
+  {% for q,a,cat in items %}
+  <details class="group" {% if open_first and loop.first %}open{% endif %}>
+    <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 text-left font-semibold text-ink-800 hover:bg-ink-50 dark:text-white dark:hover:bg-ink-850"><span>{{ q|tr }}</span><span class="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-ink-100 transition group-open:rotate-45 group-open:bg-brand-700 group-open:text-white dark:bg-ink-800">{{ icon('plus','h-4 w-4') }}</span></summary>
+    <p class="px-5 pb-5 text-[15px] leading-7 text-ink-600 dark:text-ink-300">{{ a|tr }}</p>
+  </details>
+  {% endfor %}
+</div>
+{%- endmacro %}
+
+{% macro pagination(cur=1, total=4) -%}
+<nav class="mt-10 flex items-center justify-center gap-1.5" aria-label="{{ t('Pagination','পৃষ্ঠা') }}" data-pagination>
+  <button type="button" class="icon-btn border border-ink-200 dark:border-ink-700" aria-label="{{ t('Previous page','আগের পাতা') }}" data-page="prev" disabled>{{ icon('chevron-left','h-4 w-4') }}</button>
+  {% for i in range(1,total+1) %}<button type="button" data-page="{{ i }}" class="h-10 min-w-10 rounded-xl px-3 text-sm font-semibold {{ 'bg-brand-700 text-white' if i==cur else 'border border-ink-200 hover:border-brand-500 dark:border-ink-700' }}" {% if i==cur %}aria-current="page"{% endif %}>{{ digits(i) }}</button>{% endfor %}
+  <button type="button" class="icon-btn border border-ink-200 dark:border-ink-700" aria-label="{{ t('Next page','পরের পাতা') }}" data-page="next">{{ icon('chevron-right','h-4 w-4') }}</button>
+</nav>
+{%- endmacro %}
+
+{% macro reviews_summary(rating, count, cats=None) -%}
+{% set dist = [0.78, 0.15, 0.04, 0.02, 0.01] if rating >= 4.7 else [0.62, 0.24, 0.09, 0.03, 0.02] %}
+<div class="grid gap-6 rounded-3xl border border-ink-100 p-5 dark:border-ink-800 sm:grid-cols-[auto_1fr] sm:p-6" data-reviews-summary>
+  <div class="text-center sm:pr-6 sm:text-left"><p class="text-5xl font-extrabold text-ink-900 dark:text-white">{{ digits(rating) }}</p><div class="mt-1 flex justify-center sm:justify-start">{{ stars(rating) }}</div><p class="mt-1 text-sm muted">{{ num(count) }} {{ t('verified reviews','যাচাইকৃত রিভিউ') }}</p><p class="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-emerald-700 dark:text-emerald-400">{{ icon('badge-check','h-4 w-4') }} {{ digits(97 if rating >= 4.7 else 92) }}% {{ t('recommend','সুপারিশ করেন') }}</p></div>
+  <div class="space-y-4">
+    <ul class="space-y-1.5" aria-label="{{ t('Rating breakdown','রেটিং বিভাজন') }}">{% for d in dist %}<li class="flex items-center gap-3 text-sm"><span class="w-10 shrink-0">{{ digits(5-loop.index0) }} ★</span><span class="h-2 flex-1 rounded-full bg-ink-100 dark:bg-ink-800"><span class="block h-2 rounded-full bg-accent-400" style="width: {{ (d*100)|round|int }}%"></span></span><span class="w-12 shrink-0 text-right text-xs muted">{{ num((count*d)|round|int) }}</span></li>{% endfor %}</ul>
+    <dl class="grid grid-cols-2 gap-x-6 gap-y-2 text-sm sm:grid-cols-4">{% for k,v in (cats or [(('Guide','গাইড'),4.9),(('Value','মূল্যমান'),4.6),(('Hotels','হোটেল'),4.7),(('Organisation','ব্যবস্থাপনা'),4.8)]) %}<div><dt class="muted">{{ t(*k) }}</dt><dd class="font-bold">{{ digits(v) }}/{{ digits(5) }}</dd></div>{% endfor %}</dl>
+  </div>
+</div>
+{%- endmacro %}

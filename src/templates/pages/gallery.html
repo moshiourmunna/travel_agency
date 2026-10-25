@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% import 'ui.html' as ui %}
+{% block content %}
+{{ ui.page_hero(t('Photo gallery','ছবির গ্যালারি'), t('Moments from Musafir trips — shared by our travellers and guides.','মুসাফির ট্রিপের মুহূর্ত — আমাদের ভ্রমণকারী ও গাইডদের তোলা।'), [(t('Home','হোম'),u('index.html')),(t('Gallery','গ্যালারি'),'')], 'phuket') }}
+<section class="section" data-filter-group><div class="wrap">
+  <div class="mb-6 flex flex-wrap gap-2" role="group" aria-label="{{ t('Filter photos','ছবি ফিল্টার') }}">{% for v,l in [('all',('All','সব')),('bd',('Bangladesh','বাংলাদেশ')),('intl',('International','আন্তর্জাতিক'))] %}<button type="button" class="chip {{ 'is-active' if loop.first }}" aria-pressed="{{ 'true' if loop.first else 'false' }}" data-quick-filter="{{ v }}">{{ t(*l) }}</button>{% endfor %}</div>
+  <div class="columns-2 gap-4 md:columns-3 xl:columns-4 [&>*]:mb-4">
+    {% for k,cap,reg in photos %}<a href="{{ img(k) }}" data-lightbox data-caption="{{ cap }}" data-item data-region="{{ reg }}" class="group relative block break-inside-avoid overflow-hidden rounded-2xl"><img src="{{ img(k, True) }}" alt="{{ cap }}" class="w-full transition duration-500 group-hover:scale-105 {{ ['aspect-[4/5]','aspect-[4/3]','aspect-square'][loop.index0 % 3] }} object-cover" loading="lazy" width="640" height="400"><span class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink-950/80 to-transparent p-3 text-sm font-semibold text-white opacity-0 transition group-hover:opacity-100 group-focus-visible:opacity-100">{{ cap }}</span></a>{% endfor %}
+  </div>
+  <p class="mt-8 text-xs muted">{{ t('Photos: Wikimedia Commons contributors under Creative Commons licences — see','ছবি: উইকিমিডিয়া কমন্স অবদানকারী, ক্রিয়েটিভ কমন্স লাইসেন্স — দেখুন') }} <a class="link" href="{{ u('credits.html') }}">{{ t('image credits','ছবির ক্রেডিট') }}</a>.</p>
+</div></section>
+{% include 'partials/lightbox.html' %}
+{% endblock %}

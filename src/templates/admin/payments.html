@@ -1,0 +1,17 @@
+{% extends 'app/shell.html' %}
+{% from 'app/ui.html' import page_head, status, rtable, dt_tools, kpi, row_menu %}
+{% block content %}
+{% call page_head(title, t('SSLCommerz, bKash, Nagad and bank transfers · settlement T+1','SSLCommerz, বিকাশ, নগদ ও ব্যাংক ট্রান্সফার · সেটেলমেন্ট T+1')) %}<button type="button" class="btn btn-outline btn-sm" data-demo="{{ t('Reconciliation file downloaded (demo)','রিকনসিলিয়েশন ফাইল ডাউনলোড (ডেমো)') }}">{{ icon('file-spreadsheet','h-4 w-4') }} {{ t('Reconcile','রিকনসাইল') }}</button>{% endcall %}
+<div class="mb-5 grid grid-cols-2 gap-3 lg:grid-cols-4">{{ kpi(t('Collected (Oct)','সংগৃহীত (অক্টোবর)'), bdt(21450000), '+9.3%', 'circle-dollar-sign') }}{{ kpi(t('Outstanding','বকেয়া'), bdt(4380000), None, 'hourglass', note=t('62 bookings','৬২টি বুকিং'), tone='accent') }}{{ kpi(t('Refunds (Oct)','রিফান্ড (অক্টোবর)'), bdt(312000), '−18%', 'rotate-ccw', True, tone='rose') }}{{ kpi(t('Gateway fees','গেটওয়ে ফি'), bdt(268000), None, 'percent', note=digits('1.25%')+' '+t('blended','গড়'), tone='sky') }}</div>
+{% set rows = A.PAYMENTS %}
+{{ dt_tools('py', [('all',B('All','সব'),rows|length),('success',A.ST.success[0],None),('pending',A.ST.pending[0],None),('failed',A.ST.failed[0],None),('refunded',A.ST.refunded[0],None)], t('Search transaction, booking, customer…','লেনদেন, বুকিং, গ্রাহক খুঁজুন…')) }}
+{% call(r, k) rtable('py', [('txn',t('Transaction','লেনদেন'),''),('ref',t('Booking','বুকিং'),''),('cust',t('Customer','গ্রাহক'),''),('method',t('Method','মাধ্যম'),''),('$amount',t('Amount','পরিমাণ'),'text-right'),('status',t('Status','স্ট্যাটাস'),''),('act','','text-right')], rows, 'txn', t('Payments','পেমেন্ট'), False, ('status','amount')) %}
+  {% if k=='txn' %}<p class="font-mono text-sm font-semibold">{{ r.txn }}</p><p class="text-xs muted">{{ date(r.date) }}</p>
+  {% elif k=='ref' %}<a href="{{ u('admin/booking.html') }}" class="font-semibold text-brand-700 hover:underline dark:text-brand-300">{{ r.ref }}</a>
+  {% elif k=='cust' %}{{ r.cust|tr }}
+  {% elif k=='method' %}{{ r.method }}
+  {% elif k=='amount' %}<b>{{ bdt(r.amount) }}</b><span class="block text-xs muted">{{ t('fee','ফি') }} {{ bdt(r.fee) }}</span>
+  {% elif k=='status' %}{{ status(r.status) }}
+  {% elif k=='act' %}<div class="flex justify-end gap-1">{% if r.status=='success' %}<button type="button" class="btn btn-outline btn-sm" data-demo="{{ t('Refund flow opened — needs Finance approval (demo)','রিফান্ড প্রক্রিয়া খোলা — ফাইন্যান্স অনুমোদন প্রয়োজন (ডেমো)') }}">{{ t('Refund','রিফান্ড') }}<span class="sr-only"> {{ r.txn }}</span></button>{% elif r.status=='failed' %}<button type="button" class="btn btn-outline btn-sm" data-demo="{{ t('Payment link re-sent (demo)','পেমেন্ট লিংক আবার পাঠানো (ডেমো)') }}">{{ t('Resend link','লিংক পাঠান') }}<span class="sr-only"> {{ r.txn }}</span></button>{% endif %}</div>{% endif %}
+{% endcall %}
+{% endblock %}

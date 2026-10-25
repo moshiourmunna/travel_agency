@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% import 'ui.html' as ui %}
+{% block content %}
+{% set h = hotel %}
+<div class="wrap pt-6">{{ ui.crumbs([(t('Home','হোম'),u('index.html')),(t('Hotels','হোটেল'),u('hotels.html')),(h.name|tr,'')]) }}</div>
+<section class="wrap mt-4">
+  <div class="flex flex-wrap items-start justify-between gap-4">
+    <div><div class="flex items-center gap-1 text-accent-400" role="img" aria-label="{{ digits(h.stars) }} {{ t('star hotel','তারকা হোটেল') }}">{% for i in range(h.stars) %}{{ icon('star','h-4 w-4 fill-current') }}{% endfor %}</div>
+      <h1 class="mt-1 text-3xl font-extrabold sm:text-4xl">{{ h.name|tr }}</h1>
+      <p class="mt-2 flex items-center gap-1.5 muted">{{ icon('map-pin','h-4 w-4') }} {{ h.city|tr }} · {{ h.dist|tr }}</p></div>
+    <div class="flex items-center gap-3"><div class="text-right"><p class="font-bold">{{ t('Excellent','চমৎকার') if h.rating>=9 else t('Very good','খুব ভালো') }}</p><p class="text-xs muted">{{ num(h.reviews) }} {{ t('verified reviews','যাচাইকৃত রিভিউ') }}</p></div><span class="rounded-xl bg-brand-700 px-3 py-2 text-xl font-extrabold text-white">{{ digits(h.rating) }}</span>{{ ui.wish_btn(h.slug,'hotel','border border-ink-200 dark:border-ink-700') }}</div>
+  </div>
+  <div class="mt-5 grid h-[260px] grid-cols-4 grid-rows-2 gap-2 overflow-hidden rounded-3xl sm:h-[420px]">
+    {% for k in gallery %}<a href="{{ img(k) }}" data-lightbox data-caption="{{ h.name|tr }}" class="relative {{ 'col-span-4 row-span-2 sm:col-span-2' if loop.first else 'hidden sm:block' }}"><img src="{{ img(k, not loop.first) }}" alt="{{ h.name|tr }} — {{ digits(loop.index) }}" class="img-cover transition hover:opacity-90" {{ 'fetchpriority=high' if loop.first else 'loading=lazy' }} width="{{ 1600 if loop.first else 640 }}" height="{{ 1000 if loop.first else 400 }}">{% if loop.last %}<span class="absolute bottom-3 right-3 rounded-xl bg-white/90 px-3 py-1.5 text-sm font-semibold text-ink-900">{{ icon('images','inline h-4 w-4') }} {{ t('All photos','সব ছবি') }}</span>{% endif %}</a>{% endfor %}
+  </div>
+</section>
+<div class="wrap grid gap-10 py-10 lg:grid-cols-[1fr_360px]">
+  <div class="min-w-0 space-y-10">
+    <section><h2 class="text-2xl font-bold">{{ t('About this property','প্রপার্টি সম্পর্কে') }}</h2><p class="mt-3 leading-7 text-ink-600 dark:text-ink-300">{{ about|tr }}</p>
+      <h3 class="mt-6 font-bold">{{ t('Popular amenities','জনপ্রিয় সুবিধা') }}</h3>
+      <ul class="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3">{% for a in h.amen %}<li class="flex items-center gap-2 text-sm">{{ icon(AMENITY[a][0],'h-5 w-5 text-brand-600') }} {{ AMENITY[a][1]|tr }}</li>{% endfor %}</ul></section>
+    <section id="rooms"><h2 class="text-2xl font-bold">{{ t('Choose your room','রুম বেছে নিন') }}</h2>
+      <div class="mt-5 space-y-4">
+        {% for r in rooms %}
+        <article class="card grid gap-4 p-4 sm:grid-cols-[160px_1fr_auto] sm:items-center">
+          <img src="{{ img(r.img, True) }}" alt="{{ r.name|tr }}" class="aspect-[16/10] w-full rounded-xl object-cover sm:aspect-square" loading="lazy" width="640" height="400">
+          <div><h3 class="font-bold">{{ r.name|tr }}</h3><p class="mt-1 flex flex-wrap gap-x-3 gap-y-1 text-sm muted"><span>{{ icon('bed-double','inline h-4 w-4') }} {{ r.bed|tr }}</span><span>{{ icon('users','inline h-4 w-4') }} {{ digits(r.occ) }} {{ t('guests','জন') }}</span><span>{{ icon('ruler','inline h-4 w-4') }} {{ digits(r.size) }} {{ t('m²','বর্গমি.') }}</span></p>
+            <ul class="mt-2 space-y-1 text-xs font-semibold">{% if r.bf %}<li class="text-emerald-700 dark:text-emerald-400">✓ {{ t('Breakfast included','নাশতা অন্তর্ভুক্ত') }}</li>{% endif %}<li class="{{ 'text-emerald-700 dark:text-emerald-400' if r.ref else 'text-ink-500' }}">{{ '✓ '+t('Free cancellation until 48 h before','৪৮ ঘণ্টা আগে পর্যন্ত ফ্রি বাতিল') if r.ref else t('Non-refundable — lowest price','অফেরতযোগ্য — সর্বনিম্ন মূল্য') }}</li></ul></div>
+          <div class="flex items-end justify-between gap-3 sm:flex-col sm:items-end"><div class="sm:text-right"><p class="text-xl font-extrabold">{{ bdt(r.price) }}</p><p class="text-xs muted">{{ t('per night','প্রতি রাত') }}</p>{% if r.left %}<p class="text-xs font-semibold text-rose-600">{{ t('Only','মাত্র') }} {{ digits(r.left) }} {{ t('left','টি বাকি') }}</p>{% endif %}</div><a href="{{ u('booking.html') }}?hotel={{ h.slug }}&room={{ loop.index }}" class="btn btn-primary btn-sm">{{ t('Reserve','রিজার্ভ') }}</a></div>
+        </article>
+        {% endfor %}
+      </div></section>
+    <section><h2 class="text-2xl font-bold">{{ t('House rules','হোটেলের নিয়ম') }}</h2>
+      <ul class="mt-4 grid gap-4 sm:grid-cols-2">{% for ic,k,v in [('log-in',('Check-in','চেক-ইন'),('From 2:00 PM','দুপুর ২:০০ থেকে')),('log-out',('Check-out','চেক-আউট'),('Until 12:00 PM','দুপুর ১২:০০ পর্যন্ত')),('baby',('Children','শিশু'),('Under 6 stay free with parents','৬ বছরের কম বয়সীরা বিনামূল্যে')),('cigarette-off',('Smoking','ধূমপান'),('Non-smoking property','ধূমপানমুক্ত প্রপার্টি')),('id-card',('ID required','পরিচয়পত্র'),('NID or passport for all adults','সব প্রাপ্তবয়স্কের এনআইডি বা পাসপোর্ট')),('heart-handshake',('Couples','দম্পতি'),('Marriage certificate may be requested (BD law)','বিবাহ সনদ চাওয়া হতে পারে'))] %}<li class="flex gap-3"><span class="text-brand-600">{{ icon(ic,'h-5 w-5') }}</span><div><p class="text-sm font-bold">{{ t(*k) }}</p><p class="text-sm muted">{{ t(*v) }}</p></div></li>{% endfor %}</ul></section>
+    <section><h2 class="text-2xl font-bold">{{ t('Guest reviews','অতিথিদের রিভিউ') }}</h2>
+      <div class="mt-4 grid gap-3 sm:grid-cols-2">{% for k,v in [(('Cleanliness','পরিচ্ছন্নতা'),9.3),(('Location','অবস্থান'),9.5),(('Staff','কর্মী'),9.1),(('Value for money','মূল্যমান'),8.7)] %}<div><div class="flex justify-between text-sm"><span>{{ t(*k) }}</span><b>{{ digits(v) }}</b></div><div class="mt-1 h-2 rounded-full bg-ink-100 dark:bg-ink-800"><div class="h-2 rounded-full bg-brand-600" style="width: {{ v*10 }}%"></div></div></div>{% endfor %}</div>
+      <div class="mt-6 grid gap-5 md:grid-cols-2">{% for r in D.REVIEWS[2:4] %}{{ ui.review_card(r) }}{% endfor %}</div></section>
+    <section><h2 class="text-2xl font-bold">{{ t('Location','অবস্থান') }}</h2>{% with stops=[h.name|tr, h.city|tr], map_q=tr(h.name) %}<div class="mt-4">{% include 'partials/route_map.html' %}</div>{% endwith %}</section>
+  </div>
+  <aside class="lg:sticky lg:top-24 lg:self-start">
+    <form class="card p-5" action="{{ u('booking.html') }}" method="get" data-price-calc data-nights="3">
+      <input type="hidden" name="hotel" value="{{ h.slug }}">
+      <p class="flex items-baseline gap-2"><span class="text-3xl font-extrabold">{{ bdt(h.price) }}</span><span class="text-sm muted">/ {{ t('night','রাত') }}</span>{% if h.old %}<s class="text-sm text-ink-400">{{ bdt(h.old) }}</s>{% endif %}</p>
+      <div class="mt-4 grid grid-cols-2 gap-3"><div><label class="label" for="hb-in">{{ t('Check-in','চেক-ইন') }}</label><input id="hb-in" name="in" type="date" class="input" value="2026-12-18"></div><div><label class="label" for="hb-out">{{ t('Check-out','চেক-আউট') }}</label><input id="hb-out" name="out" type="date" class="input" value="2026-12-21"></div></div>
+      <div class="mt-3 flex items-center justify-between rounded-2xl border border-ink-100 p-3 dark:border-ink-800" data-stepper data-unit="{{ h.price*3 }}"><div><p class="text-sm font-semibold" id="hb-rooms">{{ t('Rooms','রুম') }}</p><p class="text-xs muted">{{ t('3 nights','৩ রাত') }}</p></div><div class="flex items-center gap-2"><button type="button" class="icon-btn h-8 w-8 border border-ink-200 dark:border-ink-700" data-step="-1" aria-label="{{ t('Fewer rooms','রুম কমান') }}">{{ icon('minus','h-4 w-4') }}</button><input type="number" name="rooms" value="1" min="1" max="5" readonly class="w-8 border-0 bg-transparent p-0 text-center text-sm font-bold focus:ring-0 [appearance:textfield]" aria-labelledby="hb-rooms"><button type="button" class="icon-btn h-8 w-8 border border-ink-200 dark:border-ink-700" data-step="1" aria-label="{{ t('More rooms','রুম বাড়ান') }}">{{ icon('plus','h-4 w-4') }}</button></div></div>
+      <label class="mt-3 flex items-center justify-between gap-2 text-sm"><span class="flex items-center gap-2"><input type="checkbox" class="check" data-addon="2400" name="transfer"> {{ t('Airport transfer','এয়ারপোর্ট ট্রান্সফার') }}</span><span class="muted">+{{ bdt(2400) }}</span></label>
+      <div class="mt-4 flex items-center justify-between border-t border-ink-100 pt-4 dark:border-ink-800"><span class="font-semibold">{{ t('Total (incl. VAT)','মোট (ভ্যাটসহ)') }}</span><b class="text-2xl" data-total>{{ bdt(h.price*3) }}</b></div>
+      <p class="hidden" data-deposit></p>
+      <button class="btn btn-accent btn-lg mt-4 w-full">{{ t('Reserve now','এখনই রিজার্ভ করুন') }}</button>
+      <p class="mt-2 text-center text-xs muted">{{ t('You won’t be charged yet','এখনই কোনো টাকা কাটা হবে না') }}</p>
+    </form>
+  </aside>
+</div>
+{% include 'partials/lightbox.html' %}
+{% endblock %}

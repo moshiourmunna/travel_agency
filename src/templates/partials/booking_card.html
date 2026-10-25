@@ -1,0 +1,29 @@
+{% set pf = 'm' if m is defined and m else 'd' %}
+<form class="card overflow-hidden" action="{{ u('booking.html') }}" method="get">
+  <input type="hidden" name="tour" value="{{ x.slug }}">
+  <div class="bg-gradient-to-r from-brand-800 to-brand-600 p-5 text-white">
+    <p class="text-sm text-brand-100">{{ t('From, per person','শুরু, জনপ্রতি') }}</p>
+    <p class="flex items-baseline gap-2"><span class="text-3xl font-extrabold">{{ bdt(x.price) }}</span>{% if x.old %}<s class="text-brand-200">{{ bdt(x.old) }}</s><span class="badge bg-accent-400 text-ink-900">{{ t('Save','সাশ্রয়') }} {{ bdt(x.old-x.price) }}</span>{% endif %}</p>
+  </div>
+  <div class="space-y-4 p-5">
+    <div><label class="label" for="{{ pf }}-date">{{ t('Departure date','যাত্রার তারিখ') }}</label><select id="{{ pf }}-date" name="date" class="input">{% for dd in deps %}<option value="{{ dd.d }}">{{ date(dd.d) }} — {{ bdt(dd.p) }}</option>{% endfor %}</select></div>
+    <div><label class="label" for="{{ pf }}-room">{{ t('Room type','রুমের ধরন') }}</label><select id="{{ pf }}-room" name="room" class="input" data-tier-select><option value="twin" data-mult="1">{{ t('Twin sharing','দুজনের রুম') }}</option><option value="triple" data-mult="0.94">{{ t('Triple sharing (−6%)','তিনজনের রুম (−৬%)') }}</option><option value="single" data-mult="1.35">{{ t('Single room (+35%)','একক রুম (+৩৫%)') }}</option></select></div>
+    <div class="space-y-3 rounded-2xl border border-ink-100 p-3 dark:border-ink-800">
+      {% for key,l,sub,unit,val,mn in [('adults',('Adults','প্রাপ্তবয়স্ক'),('12+ years','১২+ বছর'),x.price,2,1),('children',('Children','শিশু'),('2–11 years, 70%','২–১১ বছর, ৭০%'),(x.price*0.7)|round|int,0,0),('infants',('Infants','নবজাতক'),('Under 2, 10%','২ বছরের কম, ১০%'),(x.price*0.1)|round|int,0,0)] %}
+      <div class="flex items-center justify-between" data-stepper data-unit="{{ unit }}"><div><p class="text-sm font-semibold text-ink-800 dark:text-white" id="{{ pf }}-{{ key }}-l">{{ t(*l) }}</p><p class="text-xs muted">{{ t(*sub) }}</p></div>
+        <div class="flex items-center gap-2"><button type="button" class="icon-btn h-8 w-8 border border-ink-200 dark:border-ink-700" data-step="-1" aria-label="{{ t('Decrease','কমান') }} {{ t(*l) }}">{{ icon('minus','h-4 w-4') }}</button><input type="number" name="{{ key }}" value="{{ val }}" min="{{ mn }}" max="9" class="w-8 border-0 bg-transparent p-0 text-center text-sm font-bold [appearance:textfield] focus:ring-0 [&::-webkit-inner-spin-button]:appearance-none" aria-labelledby="{{ pf }}-{{ key }}-l" readonly><button type="button" class="icon-btn h-8 w-8 border border-ink-200 dark:border-ink-700" data-step="1" aria-label="{{ t('Increase','বাড়ান') }} {{ t(*l) }}">{{ icon('plus','h-4 w-4') }}</button></div></div>
+      {% endfor %}
+    </div>
+    <fieldset class="space-y-2 text-sm"><legend class="label">{{ t('Add-ons','অতিরিক্ত সেবা') }}</legend>
+      <label class="flex items-center justify-between gap-2"><span class="flex items-center gap-2"><input type="checkbox" class="check" data-addon="1200" name="insurance"> {{ t('Travel insurance','ভ্রমণ বিমা') }}</span><span class="muted">+{{ bdt(1200) }}</span></label>
+      <label class="flex items-center justify-between gap-2"><span class="flex items-center gap-2"><input type="checkbox" class="check" data-addon="1800" name="pickup"> {{ t('Airport pickup in Dhaka','ঢাকায় এয়ারপোর্ট পিকআপ') }}</span><span class="muted">+{{ bdt(1800) }}</span></label>
+    </fieldset>
+    <div class="space-y-1 border-t border-ink-100 pt-4 dark:border-ink-800">
+      <div class="flex items-center justify-between"><span class="font-semibold">{{ t('Total','মোট') }}</span><b class="text-2xl text-ink-900 dark:text-white" data-total>{{ bdt(x.price*2) }}</b></div>
+      <div class="flex items-center justify-between text-sm muted"><span>{{ t('Pay now (30% deposit)','এখন দিন (৩০% অগ্রিম)') }}</span><span data-deposit>{{ bdt((x.price*0.6)|round|int) }}</span></div>
+    </div>
+    <button class="btn btn-accent btn-lg w-full">{{ t('Book now','এখনই বুক করুন') }}</button>
+    <a href="https://wa.me/{{ C.wa }}?text={{ (tr(x.title))|urlencode }}" target="_blank" rel="noopener" class="btn btn-outline w-full">{{ icon('whatsapp','h-4 w-4 text-[#1FAF38]') }} {{ t('Ask on WhatsApp','হোয়াটসঅ্যাপে জিজ্ঞেস করুন') }}</a>
+    <ul class="space-y-1.5 text-xs muted"><li class="flex gap-2">{{ icon('shield-check','h-4 w-4 text-brand-600') }} {{ t('Free cancellation up to 30 days before','৩০ দিন আগে পর্যন্ত ফ্রি বাতিল') }}</li><li class="flex gap-2">{{ icon('wallet','h-4 w-4 text-brand-600') }} {{ t('Pay the rest in 3 installments','বাকি টাকা ৩ কিস্তিতে') }}</li></ul>
+  </div>
+</form>

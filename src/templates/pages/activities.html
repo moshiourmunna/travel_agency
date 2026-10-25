@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% import 'ui.html' as ui %}
+{% block content %}
+{{ ui.page_hero(t('Things to do','যা যা করবেন'), t('Day tours, boat rides, attraction tickets, food walks and transfers — instant confirmation and mobile vouchers.','ডে-ট্যুর, নৌভ্রমণ, আকর্ষণের টিকিট, ফুড ওয়াক ও ট্রান্সফার — তাৎক্ষণিক নিশ্চিতকরণ ও মোবাইল ভাউচার।'), [(t('Home','হোম'),u('index.html')),(t('Activities','অ্যাক্টিভিটি'),'')], 'cappadocia') }}
+<section class="py-10" id="alist" data-listing>
+  <div class="wrap">
+    <form data-filters data-for="alist" class="space-y-4" aria-label="{{ t('Filter activities','অ্যাক্টিভিটি ফিল্টার') }}">
+      <div class="relative -mx-4 flex gap-2 overflow-x-auto px-4 pb-1 no-scrollbar" role="group" aria-label="{{ t('Categories','ক্যাটাগরি') }}">{% for k,(ic,l) in D.ACT_CATS.items() %}<label class="chip relative cursor-pointer has-[:checked]:border-brand-700 has-[:checked]:bg-brand-700 has-[:checked]:text-white"><input type="checkbox" name="cat" value="{{ k }}" class="sr-only">{{ icon(ic,'h-4 w-4') }} {{ l|tr }}</label>{% endfor %}</div>
+      <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="relative"><label class="sr-only" for="aq">{{ t('Search activities','অ্যাক্টিভিটি খুঁজুন') }}</label><span class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-ink-400">{{ icon('search','h-4 w-4') }}</span><input id="aq" name="q" type="search" class="input pl-9" placeholder="{{ t('City or activity…','শহর বা অ্যাক্টিভিটি…') }}"></div>
+        <div><label class="sr-only" for="arating">{{ t('Rating','রেটিং') }}</label><select id="arating" name="rating" class="input"><option value="">{{ t('Any rating','যেকোনো রেটিং') }}</option><option value="4.5">4.5+</option><option value="4.8">4.8+</option></select></div>
+        <label class="flex items-center gap-2.5 rounded-xl border border-ink-200 px-3 py-2.5 text-sm dark:border-ink-700"><input type="checkbox" class="check" name="tier" value="free"> {{ icon('circle-check','h-4 w-4 text-emerald-700 dark:text-emerald-400') }} {{ t('Free cancellation only','শুধু ফ্রি বাতিল') }}</label>
+        <div><label class="label !mb-1 text-xs" for="aprice">{{ t('Max price','সর্বোচ্চ মূল্য') }}: <span data-maxprice-out>{{ bdt(30000) }}</span></label><input id="aprice" type="range" name="maxprice" min="1000" max="30000" step="500" value="30000" class="w-full"></div>
+      </div>
+    </form>
+    <div class="mb-5 mt-8 flex flex-wrap items-center justify-between gap-3"><p class="text-sm muted" aria-live="polite"><b class="text-ink-900 dark:text-white" data-count-out>{{ digits(D.ACTIVITIES|length) }}</b> {{ t('experiences','টি অভিজ্ঞতা') }}</p><div><label class="sr-only" for="asort">{{ t('Sort by','সাজান') }}</label><select id="asort" class="input w-auto py-2 text-sm" data-sort><option value="">{{ t('Recommended','প্রস্তাবিত') }}</option><option value="price-asc">{{ t('Price: low to high','মূল্য: কম থেকে বেশি') }}</option><option value="rating">{{ t('Top rated','সেরা রেটিং') }}</option></select></div></div>
+    <h2 class="sr-only">{{ t('All activities','সব অ্যাক্টিভিটি') }}</h2>
+    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" data-items>{% for a in D.ACTIVITIES %}{{ ui.activity_card(a) }}{% endfor %}</div>
+    <div data-empty hidden class="card p-10 text-center"><p class="font-bold">{{ t('No activities match','কোনো অ্যাক্টিভিটি মেলেনি') }}</p></div>
+  </div>
+</section>
+<section class="pb-16"><div class="wrap grid gap-4 rounded-3xl bg-ink-50 p-6 dark:bg-ink-900 sm:grid-cols-3 sm:p-8">{% for ic,ti,de in [('zap',('Instant confirmation','তাৎক্ষণিক নিশ্চিতকরণ'),('Voucher on your phone in seconds.','সেকেন্ডেই ফোনে ভাউচার।')),('circle-check',('Free cancellation','ফ্রি বাতিল'),('Most experiences: full refund up to 24 h before.','বেশিরভাগ অভিজ্ঞতায় ২৪ ঘণ্টা আগে পর্যন্ত পূর্ণ রিফান্ড।')),('shield-check',('Vetted local partners','যাচাইকৃত স্থানীয় পার্টনার'),('Licensed operators, insured and reviewed by real guests.','লাইসেন্সপ্রাপ্ত, বিমাকৃত ও আসল অতিথিদের রিভিউকৃত অপারেটর।'))] %}<div class="flex gap-3"><span class="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-white text-brand-700 shadow-sm dark:bg-ink-800 dark:text-brand-300">{{ icon(ic,'h-5 w-5') }}</span><div><h2 class="font-bold">{{ t(*ti) }}</h2><p class="text-sm muted">{{ t(*de) }}</p></div></div>{% endfor %}</div></section>
+{% endblock %}

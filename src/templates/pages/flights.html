@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% import 'ui.html' as ui %}
+{% block content %}
+<section class="relative isolate overflow-hidden bg-ink-950">
+  <img src="{{ img('plane') }}" alt="" class="img-cover absolute inset-0 -z-10 opacity-40" width="1600" height="1000" fetchpriority="high">
+  <div class="absolute inset-0 -z-10 bg-gradient-to-b from-ink-950/40 to-ink-950"></div>
+  <div class="wrap py-10 md:py-14">
+    {{ ui.crumbs([(t('Home','হোম'),u('index.html')),(t('Flights','ফ্লাইট'),'')], True) }}
+    <h1 class="mt-4 text-3xl font-extrabold text-white sm:text-4xl">{{ t('Cheap flights from Bangladesh','বাংলাদেশ থেকে সাশ্রয়ী ফ্লাইট') }}</h1>
+    <p class="mt-2 text-ink-200">{{ t('Compare 450+ airlines, pay with bKash or card EMI and get your e-ticket in minutes.','৪৫০+ এয়ারলাইন তুলনা করুন, বিকাশ বা কার্ড ইএমআইতে পরিশোধ করুন এবং মিনিটেই ই-টিকেট পান।') }}</p>
+    <form class="mt-6 rounded-3xl bg-white p-4 shadow-xl dark:bg-ink-900 sm:p-5" action="#results" data-flight-search>
+      <div class="mb-4 flex flex-wrap gap-4 text-sm font-semibold" role="radiogroup" aria-label="{{ t('Trip type','যাত্রার ধরন') }}">{% for v,l in [('rt',('Round trip','রাউন্ড ট্রিপ')),('ow',('One way','ওয়ান ওয়ে')),('mc',('Multi-city','মাল্টি-সিটি'))] %}<label class="flex items-center gap-2"><input type="radio" name="trip" value="{{ v }}" class="check rounded-full" {{ 'checked' if loop.first }}> {{ t(*l) }}</label>{% endfor %}</div>
+      <div class="grid gap-3 md:grid-cols-2 lg:grid-cols-[1fr_auto_1fr_1fr_1fr_1fr_auto] lg:items-end">
+        <div><label class="label" for="fl-from">{{ t('From','কোথা থেকে') }}</label><input id="fl-from" class="input" value="{{ t('Dhaka (DAC)','ঢাকা (DAC)') }}" list="airports"></div>
+        <button type="button" class="icon-btn mx-auto h-10 w-10 rotate-90 border border-ink-200 dark:border-ink-700 lg:mb-0.5 lg:rotate-0" data-swap="#fl-from,#fl-to" aria-label="{{ t('Swap origin and destination','যাত্রা ও গন্তব্য অদলবদল') }}">{{ icon('arrow-left-right','h-4 w-4') }}</button>
+        <div><label class="label" for="fl-to">{{ t('To','কোথায়') }}</label><input id="fl-to" class="input" value="{{ t('Dubai (DXB)','দুবাই (DXB)') }}" list="airports"></div>
+        <div><label class="label" for="fl-dep">{{ t('Departure','যাত্রা') }}</label><input id="fl-dep" type="date" class="input" value="2026-12-12"></div>
+        <div><label class="label" for="fl-ret">{{ t('Return','ফেরা') }}</label><input id="fl-ret" type="date" class="input" value="2026-12-20"></div>
+        <div><label class="label" for="fl-pax">{{ t('Travellers, class','যাত্রী, ক্লাস') }}</label><select id="fl-pax" class="input"><option>{{ t('1 adult, Economy','১ জন, ইকোনমি') }}</option><option>{{ t('2 adults, Economy','২ জন, ইকোনমি') }}</option><option>{{ t('1 adult, Business','১ জন, বিজনেস') }}</option></select></div>
+        <button class="btn btn-accent h-[46px]">{{ icon('search','h-4 w-4') }} {{ t('Search','খুঁজুন') }}</button>
+      </div>
+      <datalist id="airports">{% for a in ['Dhaka (DAC)','Chattogram (CGP)',"Cox's Bazar (CXB)",'Sylhet (ZYL)','Dubai (DXB)','Kathmandu (KTM)','Malé (MLE)','Kuala Lumpur (KUL)','Singapore (SIN)','Bangkok (BKK)','Istanbul (IST)','London (LHR)','Kolkata (CCU)'] %}<option value="{{ a }}">{% endfor %}</datalist>
+    </form>
+  </div>
+</section>
+
+<section class="py-8" id="results">
+  <div class="wrap">
+    <div class="no-scrollbar -mx-4 mb-6 flex gap-2 overflow-x-auto px-4 md:mx-0 md:px-0" role="group" aria-label="{{ t('Flexible dates','নমনীয় তারিখ') }}">
+      {% for d,p in [('2026-12-09',36900),('2026-12-10',35400),('2026-12-11',37800),('2026-12-12',33780),('2026-12-13',39200),('2026-12-14',41100),('2026-12-15',34600)] %}
+      <button type="button" class="shrink-0 rounded-2xl border px-4 py-2.5 text-center {{ 'border-brand-600 bg-brand-50 dark:bg-brand-900/30' if d=='2026-12-12' else 'border-ink-200 hover:border-brand-500 dark:border-ink-700' }}" aria-pressed="{{ 'true' if d=='2026-12-12' else 'false' }}" data-demo="{{ t('Showing fares for','ভাড়া দেখানো হচ্ছে:') }} {{ date(d) }}"><span class="block text-xs muted">{{ date(d, 'short') }}</span><b class="text-sm {{ 'text-emerald-700 dark:text-emerald-400' if p < 34000 else '' }}">{{ bdt(p) }}</b></button>{% endfor %}
+    </div>
+    <div class="grid gap-8 lg:grid-cols-[260px_1fr]" id="flist" data-listing>
+      <aside class="hidden lg:block" aria-label="{{ t('Filters','ফিল্টার') }}"><div class="card sticky top-24 p-5">{% with pfx='ffd' %}{% include 'partials/flight_filters.html' %}{% endwith %}</div></aside>
+      <div>
+        <div class="mb-4 grid grid-cols-3 overflow-hidden rounded-2xl border border-ink-100 dark:border-ink-800" role="group" aria-label="{{ t('Sort','সাজান') }}">
+          {% for v,l,s in [('price-asc',('Cheapest','সবচেয়ে সস্তা'),bdt(33780)),('duration',('Fastest','সবচেয়ে দ্রুত'),t('5h 00m','৫ ঘ ০০ মি')),('pop',('Best value','সেরা মূল্য'),bdt(38450))] %}<button type="button" class="border-ink-100 px-3 py-3 text-left dark:border-ink-800 {{ 'bg-brand-700 text-white' if loop.first else 'bg-white hover:bg-ink-50 dark:bg-ink-900 dark:hover:bg-ink-850' }} {{ 'border-l' if not loop.first }}" data-sort-btn="{{ v }}" aria-pressed="{{ 'true' if loop.first else 'false' }}"><span class="block text-xs font-semibold opacity-80">{{ t(*l) }}</span><b class="text-sm sm:text-base">{{ s }}</b></button>{% endfor %}
+        </div>
+        <div class="mb-4 flex items-center justify-between"><p class="text-sm muted" aria-live="polite"><b class="text-ink-900 dark:text-white" data-count-out>{{ digits(D.FLIGHTS|length) }}</b> {{ t('flights · Dhaka → Dubai · 12 Dec','টি ফ্লাইট · ঢাকা → দুবাই · ১২ ডিসেম্বর') }}</p><button type="button" class="btn btn-outline btn-sm lg:hidden" data-drawer-open="ffilters" aria-controls="ffilters" aria-expanded="false">{{ icon('sliders-horizontal','h-4 w-4') }} {{ t('Filters','ফিল্টার') }}</button><select class="sr-only" data-sort aria-hidden="true" tabindex="-1"><option value="price-asc"></option><option value="duration"></option><option value="pop"></option></select></div>
+        <div class="space-y-4" data-items>
+          {% for f in D.FLIGHTS|sort(attribute='price') %}{% set al = AIRLINE[f.code] %}
+          <article class="card overflow-hidden" data-item data-price="{{ f.price }}" data-stops="{{ f.stops }}" data-airline="{{ f.code }}" data-days="{{ f.dur.en|replace('h','')|replace('m','')|replace(' ','') }}" data-order="{{ loop.index }}">
+            <div class="grid gap-4 p-4 sm:p-5 md:grid-cols-[180px_1fr_170px] md:items-center">
+              <div class="flex items-center gap-3"><span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl text-sm font-extrabold text-white" style="background: {{ al[2] }}">{{ f.code }}</span><div><p class="text-sm font-bold">{{ al[1] }}</p><p class="text-xs muted">{{ f.no }} · {{ t('Economy','ইকোনমি') }}</p></div></div>
+              <div class="flex items-center gap-3">
+                <div class="text-center"><p class="text-xl font-extrabold tabular-nums">{{ digits(f.dep) }}</p><p class="text-xs font-semibold muted">DAC</p></div>
+                <div class="flex-1 text-center"><p class="text-xs muted">{{ f.dur|tr }}</p><div class="relative my-1 h-px bg-ink-200 dark:bg-ink-700"><span class="absolute -top-1 left-0 h-2 w-2 rounded-full bg-ink-300"></span>{% if f.stops %}<span class="absolute -top-1 left-1/2 h-2 w-2 -translate-x-1/2 rounded-full bg-accent-500 ring-2 ring-white dark:ring-ink-900"></span>{% endif %}<span class="absolute -top-1.5 right-0 text-brand-600">{{ icon('plane','h-3 w-3') }}</span></div><p class="text-xs font-semibold {{ 'text-emerald-700 dark:text-emerald-400' if not f.stops else 'text-accent-700 dark:text-accent-300' }}">{{ t('Non-stop','সরাসরি') if not f.stops else (digits(f.stops)+' '+t('stop','স্টপ')+' · '+f.via) }}</p></div>
+                <div class="text-center"><p class="text-xl font-extrabold tabular-nums">{{ digits(f.arr) }}</p><p class="text-xs font-semibold muted">DXB</p></div>
+              </div>
+              <div class="flex items-center justify-between gap-3 border-t border-ink-100 pt-3 dark:border-ink-800 md:flex-col md:items-end md:border-0 md:pt-0"><div class="md:text-right"><p class="text-2xl font-extrabold">{{ bdt(f.price) }}</p><p class="text-xs {{ 'text-rose-600' if f.seats < 5 else 'muted' }}">{{ digits(f.seats) }} {{ t('seats left','আসন বাকি') }}</p></div><a href="{{ u('booking.html') }}?flight={{ f.no|replace(' ','') }}" class="btn btn-primary">{{ t('Select','নির্বাচন') }}</a></div>
+            </div>
+            <details class="group border-t border-ink-100 dark:border-ink-800"><summary class="flex cursor-pointer list-none items-center justify-between bg-ink-50/60 px-5 py-2.5 text-sm font-semibold text-brand-700 dark:bg-ink-850 dark:text-brand-300"><span class="flex flex-wrap gap-x-4 gap-y-1"><span class="inline-flex items-center gap-1">{{ icon('luggage','h-4 w-4') }} {{ f.bag }}</span><span class="inline-flex items-center gap-1 {{ 'text-emerald-700 dark:text-emerald-400' if f.refundable else 'text-ink-500' }}">{{ icon('rotate-ccw','h-4 w-4') }} {{ t('Refundable','ফেরতযোগ্য') if f.refundable else t('Non-refundable','অফেরতযোগ্য') }}</span></span><span class="inline-flex items-center gap-1">{{ t('Flight details','ফ্লাইটের বিস্তারিত') }} {{ icon('chevron-down','h-4 w-4 transition group-open:rotate-180') }}</span></summary>
+              <div class="grid gap-4 p-5 text-sm sm:grid-cols-3"><div><p class="font-bold">{{ t('Baggage','ব্যাগেজ') }}</p><p class="muted">{{ t('Check-in','চেক-ইন') }} {{ f.bag }} · {{ t('Cabin 7 kg','কেবিন ৭ কেজি') }}</p></div><div><p class="font-bold">{{ t('Fare rules','ভাড়ার নিয়ম') }}</p><p class="muted">{{ t('Date change from ৳3,500 + fare difference','তারিখ পরিবর্তন ৳৩,৫০০ + ভাড়ার পার্থক্য') }}</p></div><div><p class="font-bold">{{ t('Fare breakdown','ভাড়ার বিবরণ') }}</p><p class="muted">{{ t('Base','মূল ভাড়া') }} {{ bdt((f.price*0.78)|round|int) }} · {{ t('Taxes','কর') }} {{ bdt(f.price - (f.price*0.78)|round|int) }}</p></div></div>
+            </details>
+          </article>
+          {% endfor %}
+        </div>
+        <div data-empty hidden class="card p-10 text-center"><p class="font-bold">{{ t('No flights match your filters','আপনার ফিল্টারে কোনো ফ্লাইট মেলেনি') }}</p></div>
+      </div>
+      <div id="ffilters" class="fixed inset-0 z-[60] hidden lg:hidden" data-drawer role="dialog" aria-modal="true" aria-label="{{ t('Filters','ফিল্টার') }}"><div class="absolute inset-0 bg-ink-950/50" data-drawer-close></div><div class="absolute inset-x-0 bottom-0 max-h-[88vh] overflow-y-auto rounded-t-3xl bg-white p-5 dark:bg-ink-900" data-drawer-panel><div class="mb-4 flex items-center justify-between"><h2 class="text-lg font-bold">{{ t('Filters','ফিল্টার') }}</h2><button type="button" class="icon-btn" data-drawer-close aria-label="{{ t('Close filters','ফিল্টার বন্ধ') }}">{{ icon('x') }}</button></div>{% with pfx='ffm' %}{% include 'partials/flight_filters.html' %}{% endwith %}</div></div>
+    </div>
+  </div>
+</section>
+<section class="section bg-ink-50 dark:bg-ink-900/50"><div class="wrap">
+  {{ ui.sec_head(t('Popular routes','জনপ্রিয় রুট'), t('Fares people are booking now','এখন যে ভাড়ায় বুক হচ্ছে')) }}
+  <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    {% for fr,to,p,im in [(('Dhaka','ঢাকা'),('Dubai','দুবাই'),33780,'dubai'),(('Dhaka','ঢাকা'),('Malé','মালে'),31900,'maldives'),(('Dhaka','ঢাকা'),('Kuala Lumpur','কুয়ালালামপুর'),24500,'malaysia'),(('Dhaka','ঢাকা'),('Bangkok','ব্যাংকক'),21800,'phuket'),(('Dhaka','ঢাকা'),("Cox's Bazar",'কক্সবাজার'),5499,'coxsbazar'),(('Dhaka','ঢাকা'),('Istanbul','ইস্তাম্বুল'),71500,'istanbul'),(('Dhaka','ঢাকা'),('Singapore','সিঙ্গাপুর'),29900,'singapore'),(('Chattogram','চট্টগ্রাম'),('Dubai','দুবাই'),36200,'dubai')] %}
+    <a href="#results" class="card card-hover flex items-center gap-3 p-3"><img src="{{ img(im, True) }}" alt="" class="h-16 w-16 rounded-xl object-cover" loading="lazy" width="640" height="400"><div class="min-w-0"><p class="truncate text-sm font-bold">{{ t(*fr) }} → {{ t(*to) }}</p><p class="text-xs muted">{{ t('from','শুরু') }} <b class="text-brand-700 dark:text-brand-300">{{ bdt(p) }}</b></p></div></a>{% endfor %}
+  </div>
+  <div class="mt-10">{{ ui.sec_head(t('Partners','পার্টনার'), t('Airlines we ticket','যে এয়ারলাইনের টিকেট দিই')) }}<div class="flex flex-wrap gap-3">{% for c,n,col in D.AIRLINES %}<span class="chip"><span class="grid h-6 w-6 place-items-center rounded-md text-[10px] font-extrabold text-white" style="background: {{ col }}">{{ c }}</span>{{ n }}</span>{% endfor %}</div></div>
+</div></section>
+{% endblock %}

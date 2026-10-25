@@ -1,0 +1,37 @@
+{% extends 'app/shell.html' %}
+{% from 'app/ui.html' import page_head, status, kind_chip, dt_tools %}
+{% block content %}
+{% call page_head(title, t('Manage trips, download vouchers and invoices, or request changes.','ট্রিপ ম্যানেজ করুন, ভাউচার ও ইনভয়েস ডাউনলোড করুন বা পরিবর্তনের অনুরোধ করুন।')) %}<a href="{{ u('tours.html') }}" class="btn btn-primary btn-sm">{{ icon('plus','h-4 w-4') }} {{ t('Book a new trip','নতুন ট্রিপ বুক করুন') }}</a>{% endcall %}
+<div data-dt id="mybk">
+{{ dt_tools('mybk', [('all',B('All','সব'),A.MY_BOOKINGS|length),('upcoming',B('Upcoming','আসন্ন'),5),('completed',B('Completed','সম্পন্ন'),3),('cancelled',B('Cancelled & refunded','বাতিল ও রিফান্ড'),2)], t('Search by ref, trip or place…','রেফারেন্স, ট্রিপ বা জায়গা খুঁজুন…'), 'group') }}
+<ul class="space-y-4" data-dt-body>
+{% for b in A.MY_BOOKINGS %}{% set grp = 'upcoming' if b.upcoming else ('completed' if b.status=='completed' else 'cancelled') %}
+<li class="card overflow-hidden" data-dt-row data-group="{{ grp }}" data-kind="{{ b.kind }}">
+  <article class="flex flex-col sm:flex-row" aria-labelledby="bk-{{ loop.index }}">
+    <img src="{{ img(b.img, True) }}" alt="" class="h-36 w-full object-cover sm:h-auto sm:w-56 {{ 'grayscale' if grp=='cancelled' else '' }}" width="224" height="160" loading="lazy">
+    <div class="flex min-w-0 flex-1 flex-col gap-3 p-4 sm:p-5 lg:flex-row lg:items-center">
+      <div class="min-w-0 flex-1"><div class="flex flex-wrap items-center gap-2">{{ kind_chip(b.kind) }} {{ status(b.status) }}<span class="text-xs muted">{{ b.ref }}</span></div>
+        <h2 id="bk-{{ loop.index }}" class="mt-1.5 text-lg font-bold leading-snug text-ink-900 dark:text-white">{{ b.title|tr }}</h2>
+        <p class="mt-1 text-sm muted">{{ icon('calendar','mr-1 inline h-4 w-4') }}{{ date(b.start) }}{% if b.end != b.start %} – {{ date(b.end) }}{% endif %} · {{ b.sub|tr }}</p>
+        <p class="mt-1 text-xs muted">{{ t('Booked on','বুকিংয়ের তারিখ') }} {{ date(b.booked) }}</p></div>
+      <div class="flex flex-wrap items-center justify-between gap-3 border-t border-ink-100 pt-3 dark:border-ink-800 lg:block lg:min-w-[12rem] lg:border-0 lg:pt-0 lg:text-right">
+        <div><p class="text-xl font-extrabold">{{ bdt(b.total) }}</p>{% if b.status in ('partial','pending') %}<p class="text-xs font-semibold text-rose-700 dark:text-rose-300">{{ t('Balance due','বাকি') }} {{ bdt(b.total-b.paid) }}</p>{% elif b.status=='refunded' %}<p class="text-xs text-violet-700 dark:text-violet-300">{{ t('Refunded','রিফান্ড হয়েছে') }} {{ bdt(b.total) }}</p>{% else %}<p class="text-xs muted">{{ t('Paid in full','সম্পূর্ণ পরিশোধিত') }}</p>{% endif %}</div>
+        <div class="flex flex-wrap gap-2 lg:mt-3 lg:justify-end">
+          {% if b.kind=='tour' and b.upcoming %}<a href="{{ u('account/booking.html') }}" class="btn btn-primary btn-sm">{{ t('Manage','ম্যানেজ') }}<span class="sr-only"> {{ b.ref }}</span></a>
+          {% elif b.kind=='flight' and b.upcoming %}<a href="{{ u('account/e-ticket.html') }}" class="btn btn-primary btn-sm">{{ t('E-ticket','ই-টিকিট') }}<span class="sr-only"> {{ b.ref }}</span></a>
+          {% elif b.kind=='visa' %}<a href="{{ u('account/visa.html') }}" class="btn btn-primary btn-sm">{{ t('Track visa','ভিসা ট্র্যাক') }}<span class="sr-only"> {{ b.ref }}</span></a>
+          {% elif b.status=='pending' %}<a href="{{ u('account/payments.html') }}" class="btn btn-accent btn-sm">{{ t('Pay now','এখন পরিশোধ') }}<span class="sr-only"> {{ b.ref }}</span></a>
+          {% elif b.upcoming %}<a href="{{ u('account/booking.html') }}" class="btn btn-primary btn-sm">{{ t('Manage','ম্যানেজ') }}<span class="sr-only"> {{ b.ref }}</span></a>
+          {% elif b.status=='completed' %}<a href="{{ u('account/reviews.html') }}" class="btn btn-outline btn-sm">{{ icon('star','h-4 w-4') }} {{ t('Review','রিভিউ') }}<span class="sr-only"> {{ b.ref }}</span></a>
+          {% if b.slug and b.kind=='tour' %}<a href="{{ u('tours/'+b.slug+'.html') }}" class="btn btn-outline btn-sm">{{ t('Book again','আবার বুক করুন') }}<span class="sr-only"> {{ b.ref }}</span></a>{% endif %}
+          {% endif %}
+          <button type="button" class="btn btn-outline btn-sm" data-demo="{{ t('Invoice PDF downloaded (demo)','ইনভয়েস পিডিএফ ডাউনলোড (ডেমো)') }}">{{ icon('download','h-4 w-4') }}<span class="sr-only sm:not-sr-only">{{ t('Invoice','ইনভয়েস') }}</span><span class="sr-only"> {{ b.ref }}</span></button>
+        </div></div>
+    </div>
+  </article>
+</li>{% endfor %}
+</ul>
+<p class="card mt-3 hidden p-8 text-center text-sm muted" data-dt-empty>{{ t('No bookings match.','কোনো বুকিং মেলেনি।') }}</p>
+<p class="sr-only"><span data-dt-count>{{ digits(A.MY_BOOKINGS|length) }}</span></p>
+</div>
+{% endblock %}

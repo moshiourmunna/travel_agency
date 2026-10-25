@@ -1,0 +1,14 @@
+{% extends 'app/shell.html' %}
+{% from 'app/ui.html' import page_head, rtable, dt_tools, avatar_i %}
+{% block content %}
+{% call page_head(title, t('Retained for 7 years. Read-only — entries cannot be edited or deleted.','৭ বছর সংরক্ষিত। শুধু পড়া যায় — এন্ট্রি এডিট বা মোছা যায় না।')) %}{% endcall %}
+{% set rows = [] %}{% for l in A.LOGS %}{% set _ = rows.append(dict(time=l[0], who=l[1], what=l[2], cat=l[3], ip=l[4])) %}{% endfor %}
+{{ dt_tools('lg', [('all',B('All','সব'),rows|length),('booking',B('Bookings','বুকিং'),None),('payment',B('Payments','পেমেন্ট'),None),('security',B('Security','নিরাপত্তা'),None),('auth',B('Sign-ins','সাইন-ইন'),None),('system',B('System','সিস্টেম'),None)], t('Search log…','লগ খুঁজুন…'), 'cat') }}
+{% call(r, k) rtable('lg', [('what',t('Event','ঘটনা'),'min-w-[20rem]'),('who',t('Actor','কর্তা'),''),('cat',t('Type','ধরন'),''),('time',t('When','কখন'),'whitespace-nowrap'),('ip',t('IP','আইপি'),'hidden xl:table-cell')], rows, 'time', title, False, ('cat',)) %}
+  {% if k=='what' %}<p class="text-sm">{{ r.what|tr }}</p>
+  {% elif k=='who' %}{{ r.who }}
+  {% elif k=='cat' %}<span class="rounded-md bg-ink-100 px-1.5 py-0.5 font-mono text-xs dark:bg-ink-800">{{ r.cat }}</span>
+  {% elif k=='time' %}{{ digits(r.time) if r.time!='Yesterday' else t('Yesterday','গতকাল') }}
+  {% elif k=='ip' %}<span class="font-mono text-xs">{{ r.ip }}</span>{% endif %}
+{% endcall %}
+{% endblock %}

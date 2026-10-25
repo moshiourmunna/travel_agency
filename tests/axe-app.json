@@ -1,0 +1,802 @@
+[
+ {
+  "p": "en/account/booking.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/account/bookings.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/account/e-ticket.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/account/index.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/account/notifications.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/account/payments.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/account/profile.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/account/referrals.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/account/reviews.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/account/settings.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/account/support.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/account/travellers.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/account/trips.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/account/visa.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/account/wallet.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/admin/activities.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/admin/agents.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/admin/booking.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/admin/bookings.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/admin/cms.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/admin/coupons.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/admin/cruises.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/admin/customer.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/admin/customers.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/admin/index.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/admin/leads.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/admin/login.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/admin/logs.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/admin/media.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/admin/notifications.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/admin/payments.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/admin/reports.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/admin/reviews.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/admin/settings.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/admin/staff.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/admin/themes.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/admin/tickets.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/admin/tour-edit.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/admin/tours.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/admin/visa.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/account/booking.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/account/bookings.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/account/e-ticket.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/account/index.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/account/notifications.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/account/payments.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/account/profile.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/account/referrals.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/account/reviews.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/account/settings.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/account/support.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/account/travellers.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/account/trips.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/account/visa.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/account/wallet.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/admin/activities.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/admin/agents.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/admin/booking.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/admin/bookings.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/admin/cms.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/admin/coupons.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/admin/cruises.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/admin/customer.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/admin/customers.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/admin/index.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/admin/leads.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/admin/login.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/admin/logs.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/admin/media.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/admin/notifications.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/admin/payments.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/admin/reports.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/admin/reviews.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/admin/settings.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/admin/staff.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/admin/themes.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/admin/tickets.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/admin/tour-edit.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/admin/tours.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/admin/visa.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/account/booking.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/account/bookings.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/account/e-ticket.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/account/index.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/account/notifications.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/account/payments.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/account/profile.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/account/referrals.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/account/reviews.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/account/settings.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/account/support.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/account/travellers.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/account/trips.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/account/visa.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/account/wallet.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/admin/activities.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/admin/agents.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/admin/booking.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/admin/bookings.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/admin/cms.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/admin/coupons.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/admin/cruises.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/admin/customer.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/admin/customers.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/admin/index.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/admin/leads.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/admin/login.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/admin/logs.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/admin/media.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/admin/notifications.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/admin/payments.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/admin/reports.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/admin/reviews.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/admin/settings.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/admin/staff.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/admin/themes.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/admin/tickets.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/admin/tour-edit.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/admin/tours.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/admin/visa.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/account/booking.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/account/bookings.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/account/e-ticket.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/account/index.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/account/notifications.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/account/payments.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/account/profile.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/account/referrals.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/account/reviews.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/account/settings.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/account/support.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/account/travellers.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/account/trips.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/account/visa.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/account/wallet.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/admin/activities.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/admin/agents.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/admin/booking.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/admin/bookings.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/admin/cms.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/admin/coupons.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/admin/cruises.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/admin/customer.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/admin/customers.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/admin/index.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/admin/leads.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/admin/login.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/admin/logs.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/admin/media.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/admin/notifications.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/admin/payments.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/admin/reports.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/admin/reviews.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/admin/settings.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/admin/staff.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/admin/themes.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/admin/tickets.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/admin/tour-edit.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/admin/tours.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/admin/visa.html",
+  "th": "dark",
+  "violations": []
+ }
+]

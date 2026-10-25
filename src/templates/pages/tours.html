@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% import 'ui.html' as ui %}
+{% block content %}
+{{ ui.page_hero(t('Tour packages','ট্যুর প্যাকেজ'), t('16 handpicked holidays in Bangladesh and abroad — transparent prices, flexible dates and easy installments.','দেশ-বিদেশের ১৬টি বাছাই করা হলিডে — স্বচ্ছ মূল্য, সুবিধাজনক তারিখ ও সহজ কিস্তি।'), [(t('Home','হোম'),u('index.html')),(t('Tours','ট্যুর'),'')], 'bali') }}
+<section class="py-10 md:py-14" id="listing" data-listing>
+  <div class="wrap grid gap-8 lg:grid-cols-[280px_1fr]">
+    <aside class="hidden lg:block" aria-label="{{ t('Filters','ফিল্টার') }}"><div class="card sticky top-24 p-5">{% with pfx='fd' %}{% include 'partials/tour_filters.html' %}{% endwith %}</div></aside>
+    <div>
+      <div class="mb-5 flex flex-wrap items-center justify-between gap-3">
+        <p class="text-sm muted" aria-live="polite"><b class="text-ink-900 dark:text-white" data-count-out>{{ digits(16) }}</b> {{ t('tours found','টি ট্যুর পাওয়া গেছে') }}</p>
+        <div class="flex items-center gap-2">
+          <button type="button" class="btn btn-outline btn-sm lg:hidden" data-drawer-open="filters" aria-controls="filters" aria-expanded="false">{{ icon('sliders-horizontal','h-4 w-4') }} {{ t('Filters','ফিল্টার') }} <span data-active-filters hidden class="rounded-full bg-brand-700 px-1.5 text-[11px] text-white"></span></button>
+          <label class="sr-only" for="sort">{{ t('Sort by','সাজান') }}</label>
+          <select id="sort" class="input w-auto py-2 text-sm" data-sort><option value="pop">{{ t('Most popular','সবচেয়ে জনপ্রিয়') }}</option><option value="price-asc">{{ t('Price: low to high','মূল্য: কম থেকে বেশি') }}</option><option value="price-desc">{{ t('Price: high to low','মূল্য: বেশি থেকে কম') }}</option><option value="rating">{{ t('Top rated','সেরা রেটিং') }}</option><option value="duration">{{ t('Shortest first','কম দিনের আগে') }}</option></select>
+          <div class="hidden rounded-xl border border-ink-200 p-1 dark:border-ink-700 sm:flex" role="group" aria-label="{{ t('View','ভিউ') }}">
+            <button type="button" class="icon-btn h-8 w-8 aria-pressed:bg-ink-100 aria-pressed:text-brand-700 dark:aria-pressed:bg-ink-800" data-view="grid" aria-pressed="true" aria-label="{{ t('Grid view','গ্রিড ভিউ') }}">{{ icon('layout-grid','h-4 w-4') }}</button>
+            <button type="button" class="icon-btn h-8 w-8 aria-pressed:bg-ink-100 aria-pressed:text-brand-700 dark:aria-pressed:bg-ink-800" data-view="list" aria-pressed="false" aria-label="{{ t('List view','লিস্ট ভিউ') }}">{{ icon('list','h-4 w-4') }}</button>
+          </div>
+        </div>
+      </div>
+      <h2 class="sr-only">{{ t('All tour packages','সব ট্যুর প্যাকেজ') }}</h2>
+      <div class="grid gap-5 sm:grid-cols-2 xl:grid-cols-3" data-items>
+        {% for x in D.TOURS %}{{ ui.tour_card(x) }}{% endfor %}
+      </div>
+      <div data-empty hidden class="card mt-4 p-10 text-center"><span class="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-ink-100 dark:bg-ink-800">{{ icon('search-x','h-6 w-6') }}</span><p class="mt-3 font-bold">{{ t('No tours match your filters','আপনার ফিল্টারে কোনো ট্যুর মেলেনি') }}</p><p class="text-sm muted">{{ t('Try widening the budget or clearing a filter.','বাজেট বাড়িয়ে বা একটি ফিল্টার সরিয়ে দেখুন।') }}</p><a href="{{ u('custom-tour.html') }}" class="btn btn-primary mt-4">{{ t('Request a custom tour','কাস্টম ট্যুরের অনুরোধ') }}</a></div>
+      {{ ui.pagination(1, 3) }}
+    </div>
+  </div>
+  <div id="filters" class="fixed inset-0 z-[60] hidden lg:hidden" data-drawer role="dialog" aria-modal="true" aria-label="{{ t('Filters','ফিল্টার') }}">
+    <div class="absolute inset-0 bg-ink-950/50" data-drawer-close></div>
+    <div class="absolute inset-x-0 bottom-0 max-h-[88vh] overflow-y-auto rounded-t-3xl bg-white p-5 dark:bg-ink-900" data-drawer-panel>
+      <div class="mx-auto mb-4 h-1.5 w-12 rounded-full bg-ink-200 dark:bg-ink-700"></div>
+      <div class="mb-4 flex items-center justify-between"><h2 class="text-lg font-bold">{{ t('Filters','ফিল্টার') }}</h2><button type="button" class="icon-btn" data-drawer-close aria-label="{{ t('Close filters','ফিল্টার বন্ধ') }}">{{ icon('x') }}</button></div>
+      {% with pfx='fm' %}{% include 'partials/tour_filters.html' %}{% endwith %}
+    </div>
+  </div>
+</section>
+{% include 'partials/compare_bar.html' %}
+{% endblock %}

@@ -1,0 +1,22 @@
+import { chromium } from 'playwright';
+const b = await chromium.launch({ executablePath: '/usr/bin/google-chrome', args: ['--no-sandbox'] });
+const p = await b.newPage({ viewport: { width: 1280, height: 900 } });
+const errs = []; p.on('console', m => { if (m.type() === 'error') errs.push(m.text()); }); p.on('pageerror', e => errs.push(e.message));
+await p.goto('file:///workspace/musafir/site/en/booking.html?pkg=umrah-10-day-standard&adults=3');
+console.log(await p.textContent('aside [data-bk-title]'), await p.textContent('aside [data-total]'));
+await p.click('[data-step-panel]:not([hidden]) [data-next]');
+await p.click('[data-step-panel]:not([hidden]) [data-next]'); // should fail validation
+console.log('still step2:', await p.isVisible('#bk-fn'));
+await p.fill('#bk-fn', 'Rafiq'); await p.fill('#bk-ln', 'Islam'); await p.fill('#bk-em', 'r@x.com'); await p.fill('#bk-ph', '01711234567');
+await p.click('[data-step-panel]:not([hidden]) [data-next]');
+await p.fill('#bk-coupon', 'musafir10'); await p.click('[data-coupon-apply]');
+console.log('after coupon', await p.textContent('aside [data-total]'));
+await p.click('[data-step-panel]:not([hidden]) [data-next]');
+await p.screenshot({ path: '/tmp/bk.jpg', fullPage: true, quality: 60, type: 'jpeg' });
+await p.fill('#bk-bk', '01711234567'); await p.check('[data-step-panel]:not([hidden]) input[type=checkbox][required]');
+await p.click('[data-step-panel]:not([hidden]) [data-pay]');
+await p.waitForURL(/booking-confirmed/, { timeout: 5000 });
+console.log('url', p.url());
+await p.screenshot({ path: '/tmp/bc.jpg', fullPage: true, quality: 60, type: 'jpeg' });
+console.log('errors', errs);
+await b.close();

@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% import 'ui.html' as ui %}
+{% block content %}
+{{ ui.page_hero(t('Trip planner','ট্রিপ প্ল্যানার'), t('Build your own itinerary: pick places, set days, add experiences and see a live budget. A travel expert turns it into a firm quote within 4 working hours.','নিজের ভ্রমণসূচি বানান: জায়গা বাছুন, দিন ঠিক করুন, অভিজ্ঞতা যোগ করুন আর সাথে সাথে বাজেট দেখুন। ৪ কর্মঘণ্টার মধ্যে একজন বিশেষজ্ঞ নিশ্চিত কোটেশন পাঠাবেন।'), [(t('Home','হোম'),u('index.html')),(t('Trip planner','ট্রিপ প্ল্যানার'),'')], 'bali') }}
+<div class="wrap grid gap-8 py-10 lg:grid-cols-[1fr_400px]" data-planner
+     data-l-day="{{ t('Day','দিন') }}" data-l-days="{{ t('days','দিন') }}" data-l-arrive="{{ t('Arrive & check in','পৌঁছানো ও চেক-ইন') }}" data-l-explore="{{ t('Explore','ঘুরে দেখা') }}" data-l-fly="{{ t('Fly home','দেশে ফেরা') }}" data-l-none="{{ t('Pick at least one destination to start.','শুরু করতে অন্তত একটি গন্তব্য বাছুন।') }}" data-l-max="{{ t('Up to 4 destinations per plan','প্রতি প্ল্যানে সর্বোচ্চ ৪টি গন্তব্য') }}" data-l-saved="{{ t('Plan saved on this device','প্ল্যান এই ডিভাইসে সেভ হয়েছে') }}" data-l-sent="{{ t('Request sent! Reference','অনুরোধ পাঠানো হয়েছে! রেফারেন্স') }}" data-l-less="{{ t('Fewer days','দিন কমান') }}" data-l-more="{{ t('More days','দিন বাড়ান') }}">
+  <script type="application/json" id="planner-data">{{ planner_json|safe }}</script>
+  <div class="min-w-0 space-y-10">
+    <section aria-labelledby="p1"><h2 id="p1" class="flex items-center gap-3 text-xl font-bold"><span class="grid h-8 w-8 place-items-center rounded-full bg-brand-700 text-sm text-white">{{ digits(1) }}</span>{{ t('Where do you want to go?','কোথায় যেতে চান?') }}</h2>
+      <p class="mt-1 text-sm muted">{{ t('Choose up to 4 — combine Bangladesh and abroad if you like.','সর্বোচ্চ ৪টি বাছুন — চাইলে দেশ-বিদেশ মিলিয়ে।') }}</p>
+      <div class="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-4">{% for d in D.DESTINATIONS %}{% set pc = PLAN_COST[d.slug] %}
+        <label class="group relative cursor-pointer overflow-hidden rounded-2xl ring-2 ring-transparent has-[:checked]:ring-brand-600"><input type="checkbox" class="peer sr-only" name="pdest" value="{{ d.slug }}" data-plan-dest>
+          <img src="{{ img(d.img, True) }}" alt="" class="aspect-[4/3] w-full object-cover" loading="lazy" width="320" height="240"><span class="absolute inset-0 bg-gradient-to-t from-ink-950/85 to-transparent"></span>
+          <span class="absolute right-2 top-2 grid h-7 w-7 place-items-center rounded-full bg-white/90 text-transparent peer-checked:bg-brand-600 peer-checked:text-white">{{ icon('check','h-4 w-4') }}</span>
+          <span class="absolute inset-x-0 bottom-0 p-3 text-white"><span class="block text-sm font-bold leading-tight">{{ d.name|tr }}</span><span class="text-xs text-white/80">{{ t('from','শুরু') }} {{ bdt(pc[0]) }}/{{ t('day','দিন') }}</span></span>
+          <span class="absolute inset-0 rounded-2xl peer-focus-visible:ring-4 peer-focus-visible:ring-accent-400"></span>
+        </label>{% endfor %}</div>
+    </section>
+    <section aria-labelledby="p2"><h2 id="p2" class="flex items-center gap-3 text-xl font-bold"><span class="grid h-8 w-8 place-items-center rounded-full bg-brand-700 text-sm text-white">{{ digits(2) }}</span>{{ t('How many days in each place?','প্রতিটি জায়গায় কত দিন?') }}</h2>
+      <div class="mt-4 space-y-3" data-plan-days><p class="rounded-2xl border border-dashed border-ink-200 p-5 text-center text-sm muted dark:border-ink-700">{{ t('Pick at least one destination to start.','শুরু করতে অন্তত একটি গন্তব্য বাছুন।') }}</p></div>
+    </section>
+    <section aria-labelledby="p3"><h2 id="p3" class="flex items-center gap-3 text-xl font-bold"><span class="grid h-8 w-8 place-items-center rounded-full bg-brand-700 text-sm text-white">{{ digits(3) }}</span>{{ t('Who, when and what style?','কে, কবে ও কোন ধরনের?') }}</h2>
+      <div class="mt-4 grid gap-4 sm:grid-cols-3">
+        <div><label class="label" for="pstart">{{ t('Start date','শুরুর তারিখ') }}</label><input id="pstart" type="date" class="input" value="2026-12-18" min="2026-10-26" data-plan-start></div>
+        <div><label class="label" for="padults">{{ t('Adults','প্রাপ্তবয়স্ক') }}</label><select id="padults" class="input" data-plan-adults>{% for i in range(1,11) %}<option value="{{ i }}" {{ 'selected' if i==2 }}>{{ digits(i) }}</option>{% endfor %}</select></div>
+        <div><label class="label" for="pkids">{{ t('Children','শিশু') }}</label><select id="pkids" class="input" data-plan-kids>{% for i in range(0,7) %}<option value="{{ i }}">{{ digits(i) }}</option>{% endfor %}</select></div>
+      </div>
+      <fieldset class="mt-5"><legend class="label">{{ t('Hotel & comfort level','হোটেল ও আরামের স্তর') }}</legend><div class="grid gap-3 sm:grid-cols-3">{% for v,l,d,m in [('budget',('Budget','বাজেট'),('3★ hotels, shared transfers','৩★ হোটেল, শেয়ার্ড ট্রান্সফার'),0.75),('comfort',('Comfort','কমফোর্ট'),('4★ hotels, private transfers','৪★ হোটেল, প্রাইভেট ট্রান্সফার'),1),('luxury',('Luxury','লাক্সারি'),('5★ & villas, private guide','৫★ ও ভিলা, প্রাইভেট গাইড'),1.7)] %}<label class="cursor-pointer"><input type="radio" name="ptier" value="{{ v }}" data-mult="{{ m }}" class="peer sr-only" data-plan-tier {{ 'checked' if loop.index==2 }}><span class="block h-full rounded-2xl border border-ink-200 p-4 peer-checked:border-brand-600 peer-checked:bg-brand-50 peer-focus-visible:ring-2 peer-focus-visible:ring-brand-400 dark:border-ink-700 dark:peer-checked:bg-brand-900/30"><b class="block">{{ t(*l) }}</b><span class="text-xs muted">{{ t(*d) }}</span></span></label>{% endfor %}</div></fieldset>
+      <fieldset class="mt-5"><legend class="label">{{ t('Interests (optional)','আগ্রহ (ঐচ্ছিক)') }}</legend><div class="flex flex-wrap gap-2">{% for th in D.THEMES %}<label class="chip relative cursor-pointer has-[:checked]:border-brand-700 has-[:checked]:bg-brand-700 has-[:checked]:text-white"><input type="checkbox" class="sr-only" name="pint" value="{{ th.slug }}">{{ icon(th.icon,'h-4 w-4') }} {{ th.name|tr }}</label>{% endfor %}</div></fieldset>
+    </section>
+    <section aria-labelledby="p4"><h2 id="p4" class="flex items-center gap-3 text-xl font-bold"><span class="grid h-8 w-8 place-items-center rounded-full bg-brand-700 text-sm text-white">{{ digits(4) }}</span>{{ t('Add experiences','অভিজ্ঞতা যোগ করুন') }}</h2>
+      <p class="mt-1 text-sm muted">{{ t('Suggestions update for the places you picked.','আপনার বাছাই করা জায়গা অনুযায়ী পরামর্শ বদলায়।') }}</p>
+      <div class="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">{% for a in D.ACTIVITIES %}<label class="flex min-w-0 cursor-pointer items-center gap-3 rounded-2xl border border-ink-100 p-3 has-[:checked]:border-brand-600 has-[:checked]:bg-brand-50 dark:border-ink-800 dark:has-[:checked]:bg-brand-900/30" data-plan-act-row data-dest="{{ a.dest or '' }}" {{ 'hidden' if a.dest }}><input type="checkbox" class="check" value="{{ a.slug }}" data-plan-act data-price="{{ a.price }}"><img src="{{ img(a.img, True) }}" alt="" class="h-14 w-14 shrink-0 rounded-xl object-cover" loading="lazy" width="56" height="56"><span class="min-w-0 flex-1"><span class="block truncate text-sm font-semibold">{{ a.title|tr }}</span><span class="text-xs muted">{{ a.city|tr }} · {{ bdt(a.price) }}/{{ t('person','জন') }}</span></span></label>{% endfor %}</div>
+    </section>
+  </div>
+  <aside class="lg:sticky lg:top-24 lg:self-start">
+    <div class="card overflow-hidden">
+      <div class="bg-gradient-to-br from-brand-800 to-brand-600 p-5 text-white"><p class="text-sm text-brand-100">{{ t('Your trip','আপনার ট্রিপ') }}</p><p class="text-2xl font-extrabold"><span data-plan-totaldays>{{ digits(0) }}</span> {{ t('days','দিন') }} · <span data-plan-places>{{ digits(0) }}</span> {{ t('places','জায়গা') }}</p></div>
+      <ol class="max-h-72 space-y-2 overflow-y-auto p-5 text-sm" data-plan-timeline aria-live="polite"><li class="muted">{{ t('Pick at least one destination to start.','শুরু করতে অন্তত একটি গন্তব্য বাছুন।') }}</li></ol>
+      <dl class="space-y-2 border-t border-ink-100 p-5 text-sm dark:border-ink-800">
+        <div class="flex justify-between"><dt class="muted">{{ t('Flights (est.)','ফ্লাইট (আনুমানিক)') }}</dt><dd data-plan-air>{{ bdt(0) }}</dd></div>
+        <div class="flex justify-between"><dt class="muted">{{ t('Hotels, transfers & guide','হোটেল, ট্রান্সফার ও গাইড') }}</dt><dd data-plan-land>{{ bdt(0) }}</dd></div>
+        <div class="flex justify-between"><dt class="muted">{{ t('Experiences','অভিজ্ঞতা') }}</dt><dd data-plan-acts>{{ bdt(0) }}</dd></div>
+        <div class="flex items-center justify-between border-t border-ink-100 pt-3 dark:border-ink-800"><dt class="font-bold">{{ t('Estimated total','আনুমানিক মোট') }}</dt><dd class="text-2xl font-extrabold" data-plan-total>{{ bdt(0) }}</dd></div>
+        <div class="flex justify-between text-xs muted"><dt>{{ t('Per person','জনপ্রতি') }}</dt><dd data-plan-pp>{{ bdt(0) }}</dd></div>
+      </dl>
+      <div class="space-y-2 p-5 pt-0"><button type="button" class="btn btn-accent btn-lg w-full" data-modal-open="quote-dialog" data-plan-quote disabled>{{ icon('send','h-5 w-5') }} {{ t('Get a free quote','ফ্রি কোটেশন নিন') }}</button><button type="button" class="btn btn-outline w-full" data-plan-save>{{ icon('bookmark','h-4 w-4') }} {{ t('Save plan','প্ল্যান সেভ করুন') }}</button><p class="text-center text-xs muted">{{ t('Estimates only — final price depends on dates & availability.','শুধু আনুমানিক — চূড়ান্ত মূল্য তারিখ ও প্রাপ্যতার উপর নির্ভর করে।') }}</p></div>
+    </div>
+  </aside>
+  <dialog id="quote-dialog" class="w-[min(100%-2rem,32rem)] rounded-3xl bg-white p-0 text-ink-900 shadow-2xl backdrop:bg-ink-950/60 dark:bg-ink-900 dark:text-ink-100" aria-labelledby="qd-t">
+    <form class="space-y-4 p-6" data-plan-form>
+      <div class="flex items-center justify-between"><h2 id="qd-t" class="text-xl font-bold">{{ t('Request your custom quote','কাস্টম কোটেশনের অনুরোধ') }}</h2><button type="button" class="icon-btn" data-modal-close aria-label="{{ t('Close','বন্ধ') }}">{{ icon('x') }}</button></div>
+      <div><label class="label" for="qn">{{ t('Full name','পূর্ণ নাম') }}</label><input id="qn" class="input" required autocomplete="name" value=""></div>
+      <div class="grid gap-4 sm:grid-cols-2"><div><label class="label" for="qp">{{ t('Mobile','মোবাইল') }}</label><input id="qp" type="tel" class="input" required autocomplete="tel" placeholder="01XXXXXXXXX" pattern="01[3-9][0-9]{8}"></div><div><label class="label" for="qe">{{ t('Email','ইমেইল') }}</label><input id="qe" type="email" class="input" autocomplete="email"></div></div>
+      <div><label class="label" for="qnote">{{ t('Anything else?','আর কিছু?') }}</label><textarea id="qnote" class="input" rows="3" placeholder="{{ t('Dietary needs, celebrations, visa help…','খাবারের চাহিদা, বিশেষ উদযাপন, ভিসা সহায়তা…') }}"></textarea></div>
+      <button class="btn btn-primary btn-lg w-full">{{ t('Send request','অনুরোধ পাঠান') }}</button>
+    </form>
+  </dialog>
+</div>
+{% endblock %}

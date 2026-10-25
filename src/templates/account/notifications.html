@@ -1,0 +1,12 @@
+{% extends 'app/shell.html' %}
+{% from 'app/ui.html' import page_head, dt_tools %}
+{% block content %}
+{% call page_head(title, None) %}<button type="button" class="btn btn-outline btn-sm" data-demo="{{ t('All marked as read','সব পঠিত হিসেবে চিহ্নিত') }}">{{ icon('check-check','h-4 w-4') }} {{ t('Mark all read','সব পঠিত') }}</button><a href="{{ u('account/settings.html') }}#notif" class="btn btn-outline btn-sm">{{ icon('settings','h-4 w-4') }} {{ t('Preferences','পছন্দ') }}</a>{% endcall %}
+<div data-dt id="ntf">
+{{ dt_tools('ntf', [('all',B('All','সব'),A.NOTIFS|length),('booking',B('Bookings','বুকিং'),None),('visa',B('Visa','ভিসা'),None),('offer',B('Offers','অফার'),None)], t('Search notifications…','নোটিফিকেশন খুঁজুন…'), 'cat') }}
+<ul class="card divide-y divide-ink-100 dark:divide-ink-800">{% for ic,ti,tx,ago,unread,cat in A.NOTIFS %}
+  <li class="flex gap-3 p-4 sm:p-5 {{ 'bg-brand-50/50 dark:bg-brand-900/10' if unread else '' }}" data-dt-row data-cat="{{ cat }}"><span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white text-brand-700 ring-1 ring-ink-100 dark:bg-ink-900 dark:text-brand-300 dark:ring-ink-800">{{ icon(ic,'h-5 w-5') }}</span><div class="min-w-0 flex-1"><p class="font-semibold">{% if unread %}<span class="mr-1.5 inline-block h-2 w-2 rounded-full bg-accent-500" aria-hidden="true"></span><span class="sr-only">{{ t('Unread:','অপঠিত:') }} </span>{% endif %}{{ ti|tr }}</p><p class="mt-0.5 text-sm muted">{{ tx|tr }}</p></div><span class="shrink-0 text-xs muted">{{ digits(ago) }}</span></li>{% endfor %}
+</ul>
+<p class="card mt-3 hidden p-8 text-center text-sm muted" data-dt-empty>{{ t('Nothing here.','এখানে কিছু নেই।') }}</p><p class="sr-only"><span data-dt-count></span></p>
+</div>
+{% endblock %}

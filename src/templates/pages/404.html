@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="grid min-h-[70vh] place-items-center px-4 py-16 text-center"><div class="max-w-lg">
+  <svg viewBox="0 0 200 120" class="mx-auto h-32 w-auto" aria-hidden="true"><circle cx="100" cy="40" r="18" fill="#F6A33B"/><path d="M20 110 C50 70 60 40 75 40 C88 40 90 80 100 80 C110 80 112 40 125 40 C140 40 150 70 180 110" fill="none" stroke="#0D6B65" stroke-width="12" stroke-linecap="round"/></svg>
+  <p class="mt-6 text-sm font-bold uppercase tracking-widest text-brand-700 dark:text-brand-300">{{ t('Error 404','ত্রুটি ৪০৪') }}</p>
+  <h1 class="mt-2 text-3xl font-extrabold sm:text-4xl">{{ t('Looks like this road leads nowhere','মনে হচ্ছে এই পথ কোথাও যায়নি') }}</h1>
+  <p class="mt-3 muted">{{ t('The page may have moved. Try searching or head back to the start.','পাতাটি সরানো হতে পারে। খুঁজে দেখুন বা শুরুতে ফিরে যান।') }}</p>
+  <form action="{{ u('tours.html') }}" class="mx-auto mt-6 flex max-w-sm gap-2" role="search"><label for="nf-q" class="sr-only">{{ t('Search tours','ট্যুর খুঁজুন') }}</label><input id="nf-q" name="q" class="input" placeholder="{{ t('Where to?','কোথায়?') }}"><button class="btn btn-primary">{{ icon('search','h-4 w-4') }}<span class="sr-only">{{ t('Search','খুঁজুন') }}</span></button></form>
+  <div class="mt-6 flex flex-wrap justify-center gap-2"><a href="{{ u('index.html') }}" class="btn btn-outline btn-sm">{{ t('Home','হোম') }}</a><a href="{{ u('offers.html') }}" class="btn btn-ghost btn-sm">{{ t('Deals','ডিল') }}</a><a href="{{ u('contact.html') }}" class="btn btn-ghost btn-sm">{{ t('Contact','যোগাযোগ') }}</a></div>
+</div></section>
+{% endblock %}

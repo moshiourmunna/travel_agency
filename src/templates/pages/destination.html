@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% import 'ui.html' as ui %}
+{% block content %}
+{% set d = dest %}
+<section class="relative isolate overflow-hidden bg-ink-950">
+  <img src="{{ img(d.img) }}" alt="{{ d.name|tr }}" class="img-cover absolute inset-0 -z-10 opacity-75" width="1600" height="1000" fetchpriority="high">
+  <div class="absolute inset-0 -z-10 bg-gradient-to-t from-ink-950 via-ink-950/40 to-ink-950/20"></div>
+  <div class="wrap flex min-h-[420px] flex-col justify-end py-10 md:min-h-[520px]">
+    {{ ui.crumbs([(t('Home','হোম'),u('index.html')),(t('Destinations','গন্তব্য'),u('destinations.html')),(d.name|tr,'')], True) }}
+    <h1 class="mt-4 text-4xl font-extrabold text-white sm:text-6xl">{{ d.name|tr }}</h1>
+    <p class="mt-3 max-w-2xl text-lg text-white/85">{{ d.desc|tr }}</p>
+  </div>
+</section>
+<section class="border-b border-ink-100 bg-white dark:border-ink-800 dark:bg-ink-900">
+  <ul class="wrap grid grid-cols-2 gap-4 py-6 md:grid-cols-5">
+    {% for ic,k,v in [('sun',('Best time','সেরা সময়'),d.best|tr),('stamp',('Visa','ভিসা'),d.visa|tr),('banknote',('Currency','মুদ্রা'),d.cur),('plane',('From Dhaka','ঢাকা থেকে'),d.fly|tr),('map',('Packages','প্যাকেজ'),digits(d.tours)+' '+t('tours','ট্যুর'))] %}
+    <li class="flex items-center gap-3"><span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand-700 dark:bg-brand-900/40 dark:text-brand-300">{{ icon(ic,'h-5 w-5') }}</span><div><p class="text-xs muted">{{ t(*k) }}</p><p class="text-sm font-bold text-ink-900 dark:text-white">{{ v }}</p></div></li>
+    {% endfor %}
+  </ul>
+</section>
+<div class="wrap grid gap-10 py-14 lg:grid-cols-[1fr_340px]">
+  <div class="min-w-0">
+    <h2 class="text-2xl font-bold">{{ t('Top things to do','যা যা করবেন') }}</h2>
+    <div class="mt-5 grid gap-4 sm:grid-cols-2">{% for th in d.things %}<div class="card flex items-center gap-4 p-4"><span class="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-accent-100 text-lg font-extrabold text-accent-700 dark:bg-accent-900/40 dark:text-accent-200">{{ digits(loop.index) }}</span><div><p class="font-bold text-ink-900 dark:text-white">{{ th|tr }}</p><p class="text-xs muted">{{ t('Included in selected packages','নির্দিষ্ট প্যাকেজে অন্তর্ভুক্ত') }}</p></div></div>{% endfor %}</div>
+    <h2 class="mt-12 text-2xl font-bold">{{ t('Packages to','প্যাকেজ:') }} {{ d.name|tr }}</h2>
+    <div class="mt-5 grid gap-5 sm:grid-cols-2">{% for x in tours %}{{ ui.tour_card(x) }}{% endfor %}</div>
+    {% if acts %}<h2 class="mt-12 text-2xl font-bold">{{ t('Things to do in','যা করবেন:') }} {{ d.name|tr }}</h2><div class="mt-5 grid gap-5 sm:grid-cols-2">{% for a in acts %}{{ ui.activity_card(a) }}{% endfor %}</div>{% endif %}
+    <h2 class="mt-12 text-2xl font-bold">{{ t('Travel tips','ভ্রমণ টিপস') }}</h2>
+    <div class="prose-m"><ul>
+      <li>{{ t('Carry a photocopy of your passport/NID and keep digital copies in the Musafir app.','পাসপোর্ট/এনআইডির ফটোকপি সাথে রাখুন এবং ডিজিটাল কপি মুসাফির অ্যাপে সংরক্ষণ করুন।') }}</li>
+      <li>{{ t('Book at least 3–4 weeks ahead for peak season and public holidays.','ভরা মৌসুম ও সরকারি ছুটিতে অন্তত ৩–৪ সপ্তাহ আগে বুক করুন।') }}</li>
+      <li>{{ t('Dress modestly at religious sites and respect local customs.','ধর্মীয় স্থানে শালীন পোশাক পরুন ও স্থানীয় রীতি মেনে চলুন।') }}</li>
+      <li>{{ t('Keep some cash in local currency; cards are widely accepted in cities.','কিছু স্থানীয় মুদ্রা নগদ রাখুন; শহরে কার্ড সহজে চলে।') }}</li>
+    </ul></div>
+  </div>
+  <aside class="space-y-5">
+    <div class="card p-5"><h2 class="font-bold">{{ t('Get a free quote','ফ্রি কোটেশন নিন') }}</h2><p class="mt-1 text-sm muted">{{ t('Our','আমাদের') }} {{ d.name|tr }} {{ t('specialist replies within 2 hours.','বিশেষজ্ঞ ২ ঘণ্টার মধ্যে উত্তর দেবেন।') }}</p>
+      <form class="mt-4 space-y-3" data-validate novalidate>
+        <div class="field"><label class="label" for="dq-name">{{ t('Full name','পূর্ণ নাম') }}</label><input id="dq-name" class="input" required autocomplete="name"><p class="field-error">{{ t('Please enter your name.','আপনার নাম লিখুন।') }}</p></div>
+        <div class="field"><label class="label" for="dq-phone">{{ t('Mobile number','মোবাইল নম্বর') }}</label><input id="dq-phone" type="tel" class="input" required placeholder="01XXXXXXXXX" autocomplete="tel"><p class="field-error">{{ t('Enter a valid BD mobile number.','সঠিক মোবাইল নম্বর দিন।') }}</p></div>
+        <div class="field"><label class="label" for="dq-when">{{ t('Travel month','ভ্রমণের মাস') }}</label><select id="dq-when" class="input"><option>{{ t('December 2026','ডিসেম্বর ২০২৬') }}</option><option>{{ t('January 2027','জানুয়ারি ২০২৭') }}</option><option>{{ t('Not sure yet','এখনো ঠিক হয়নি') }}</option></select></div>
+        <button class="btn btn-primary w-full">{{ t('Request quote','কোটেশন চান') }}</button>
+      </form></div>
+    {% with stops=[d.name|tr]+(d.things|map('tr')|list)[:3], map_q=tr(d.name) %}{% include 'partials/route_map.html' %}{% endwith %}
+  </aside>
+</div>
+{% endblock %}

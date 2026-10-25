@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% import 'ui.html' as ui %}
+{% block content %}
+{{ ui.page_hero(t('Cruise holidays','ক্রুজ হলিডে'), t('Ocean, river and island cruises with meals, entertainment and port excursions — visas and flights to the port arranged by us.','খাবার, বিনোদন ও বন্দর ভ্রমণসহ সমুদ্র, নদী ও দ্বীপ ক্রুজ — ভিসা ও বন্দর পর্যন্ত ফ্লাইট আমরা ব্যবস্থা করি।'), [(t('Home','হোম'),u('index.html')),(t('Cruises','ক্রুজ'),'')], 'cruise') }}
+<section class="py-10" id="clist" data-listing>
+  <div class="wrap grid gap-8 lg:grid-cols-[260px_1fr]">
+    <aside class="hidden lg:block" aria-label="{{ t('Filters','ফিল্টার') }}"><div class="card sticky top-24 p-5">{% with pfx='cfd' %}{% include 'partials/cruise_filters.html' %}{% endwith %}</div></aside>
+    <div>
+      <div class="mb-5 flex flex-wrap items-center justify-between gap-3"><p class="text-sm muted" aria-live="polite"><b class="text-ink-900 dark:text-white" data-count-out>{{ digits(D.CRUISES|length) }}</b> {{ t('cruises','টি ক্রুজ') }}</p>
+        <div class="flex gap-2"><button type="button" class="btn btn-outline btn-sm lg:hidden" data-drawer-open="cfilters" aria-controls="cfilters" aria-expanded="false">{{ icon('sliders-horizontal','h-4 w-4') }} {{ t('Filters','ফিল্টার') }}</button><label class="sr-only" for="csort">{{ t('Sort by','সাজান') }}</label><select id="csort" class="input w-auto py-2 text-sm" data-sort><option value="dep">{{ t('Departure date','যাত্রার তারিখ') }}</option><option value="price-asc">{{ t('Price: low to high','মূল্য: কম থেকে বেশি') }}</option><option value="price-desc">{{ t('Price: high to low','মূল্য: বেশি থেকে কম') }}</option><option value="rating">{{ t('Top rated','সেরা রেটিং') }}</option><option value="duration">{{ t('Shortest first','কম সময় আগে') }}</option></select></div></div>
+      <h2 class="sr-only">{{ t('All cruises','সব ক্রুজ') }}</h2>
+      <div class="grid gap-5 sm:grid-cols-2 xl:grid-cols-3" data-items>{% for c in D.CRUISES %}{{ ui.cruise_card(c) }}{% endfor %}</div>
+      <div data-empty hidden class="card p-10 text-center"><p class="font-bold">{{ t('No cruises match your filters','আপনার ফিল্টারে কোনো ক্রুজ মেলেনি') }}</p></div>
+    </div>
+  </div>
+  <div id="cfilters" class="fixed inset-0 z-[60] hidden lg:hidden" data-drawer role="dialog" aria-modal="true" aria-label="{{ t('Filters','ফিল্টার') }}"><div class="absolute inset-0 bg-ink-950/50" data-drawer-close></div><div class="absolute inset-x-0 bottom-0 max-h-[88vh] overflow-y-auto rounded-t-3xl bg-white p-5 dark:bg-ink-900" data-drawer-panel><div class="mb-4 flex items-center justify-between"><h2 class="text-lg font-bold">{{ t('Filters','ফিল্টার') }}</h2><button type="button" class="icon-btn" data-drawer-close aria-label="{{ t('Close filters','ফিল্টার বন্ধ') }}">{{ icon('x') }}</button></div>{% with pfx='cfm' %}{% include 'partials/cruise_filters.html' %}{% endwith %}</div></div>
+</section>
+<section class="section bg-ink-50 dark:bg-ink-900/50"><div class="wrap">
+  {{ ui.sec_head(t('First cruise?','প্রথম ক্রুজ?'), t('How cruising with Musafir works','মুসাফিরের সাথে ক্রুজ যেভাবে হয়'), center=True) }}
+  <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{% for ic,ti,de in [('ship',('Choose ship & cabin','জাহাজ ও কেবিন বাছুন'),('Inside, ocean-view or balcony — compare in one table.','ইনসাইড, ওশান-ভিউ বা ব্যালকনি — এক টেবিলে তুলনা।')),('stamp',('Visa & flights','ভিসা ও ফ্লাইট'),('We file visas and book flights to the embarkation port.','ভিসা আবেদন ও বন্দর পর্যন্ত ফ্লাইট আমরাই করি।')),('file-check-2',('Boarding pack','বোর্ডিং প্যাক'),('E-tickets, luggage tags and port guide 7 days before.','৭ দিন আগে ই-টিকিট, লাগেজ ট্যাগ ও বন্দর গাইড।')),('headset',('24/7 at sea','সমুদ্রেও ২৪/৭'),('WhatsApp support onboard and at every port.','জাহাজে ও প্রতিটি বন্দরে হোয়াটসঅ্যাপ সাপোর্ট।'))] %}<div class="card p-6"><span class="grid h-12 w-12 place-items-center rounded-2xl bg-brand-700 text-white">{{ icon(ic,'h-6 w-6') }}</span><h3 class="mt-4 font-bold">{{ t(*ti) }}</h3><p class="mt-1 text-sm muted">{{ t(*de) }}</p></div>{% endfor %}</div>
+</div></section>
+{% endblock %}

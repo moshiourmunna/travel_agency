@@ -1,0 +1,303 @@
+{% extends 'base.html' %}
+{% import 'ui.html' as ui %}
+{% block content %}
+<!-- HERO -->
+<section class="relative isolate overflow-hidden bg-ink-950">
+  <picture>
+    <source media="(max-width: 767px)" srcset="{{ img('coxsbazar', True) }}">
+    <img src="{{ img('coxsbazar') }}" alt="{{ t("Sunset over Cox's Bazar sea beach, Bangladesh",'কক্সবাজার সমুদ্রসৈকতে সূর্যাস্ত, বাংলাদেশ') }}" class="img-cover absolute inset-0 -z-20" width="1600" height="1000" fetchpriority="high">
+  </picture>
+  <div class="hero-shade absolute inset-0 -z-10"></div>
+  <div class="wrap flex min-h-[640px] flex-col justify-end pb-10 pt-16 sm:pt-24 lg:min-h-[760px] lg:pb-16">
+    <div class="max-w-3xl">
+      <p class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-semibold text-white backdrop-blur sm:text-sm">{{ ui.stars(4.9,'h-3.5 w-3.5') }} {{ t('4.9/5 from 8,400+ travellers','৮,৪০০+ ভ্রমণকারীর রেটিং ৪.৯/৫') }}</p>
+      <h1 class="mt-5 text-[2.35rem] font-extrabold leading-[1.08] text-white text-shadow text-balance sm:text-6xl lg:text-7xl">
+        {% if L=='bn' %}পৃথিবী দেখুন, <span class="text-accent-300">মুসাফিরের চোখে</span>{% else %}See the world, <span class="font-display font-medium italic text-accent-300">the Musafir way</span>{% endif %}
+      </h1>
+      <p class="mt-4 max-w-2xl text-base text-white/85 sm:text-xl">{{ t('Handpicked holidays, cruises, activities, flights and visas — planned in Dhaka with care, delivered to world standards.','বাছাই করা হলিডে, ক্রুজ, অ্যাক্টিভিটি, ফ্লাইট ও ভিসা — ঢাকায় যত্নে পরিকল্পিত, বিশ্বমানে পরিচালিত।') }}</p>
+    </div>
+    <div class="mt-8 lg:mt-10">{% include 'partials/search.html' %}</div>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<section class="border-b border-ink-100 bg-white dark:border-ink-800 dark:bg-ink-900" aria-label="{{ t('Why travellers trust us','কেন ভ্রমণকারীরা আমাদের বিশ্বাস করেন') }}">
+  <div class="wrap no-scrollbar flex gap-8 overflow-x-auto py-5 lg:justify-between">
+    {% for ic,a,b in [('shield-check',('Tourism Board registered','ট্যুরিজম বোর্ডে নিবন্ধিত'),('BTB-2214 · since 2012','BTB-২২১৪ · ২০১২ থেকে')),('badge-check',('IATA accredited','আয়াটা স্বীকৃত'),('ATAB · TOAB member','আটাব · টোয়াব সদস্য')),('wallet',('Easy installments','সহজ কিস্তি'),('bKash, Nagad, 0% EMI','বিকাশ, নগদ, ০% ইএমআই')),('headset',('24/7 support','২৪/৭ সাপোর্ট'),('Before, during & after','যাত্রার আগে, পথে ও পরে')),('receipt',('No hidden fees','কোনো লুকানো খরচ নেই'),('All-in prices with VAT','ভ্যাটসহ পূর্ণ মূল্য'))] %}
+    <div class="flex shrink-0 items-center gap-3"><span class="grid h-11 w-11 place-items-center rounded-xl bg-brand-50 text-brand-700 dark:bg-brand-900/40 dark:text-brand-300">{{ icon(ic) }}</span><div><p class="text-sm font-bold text-ink-900 dark:text-white">{{ t(*a) }}</p><p class="text-xs muted">{{ t(*b) }}</p></div></div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="section pb-0">
+  <div class="wrap">
+    {{ ui.sec_head(t('Travel your way','আপনার মতো ভ্রমণ'), t('What kind of trip are you dreaming of?','কেমন ভ্রমণের স্বপ্ন দেখছেন?'), center=True) }}
+    <div class="no-scrollbar -mx-4 flex gap-3 overflow-x-auto px-4 pb-2 md:mx-0 md:grid md:grid-cols-9 md:px-0">
+      {% for key,ic,label in D.CATEGORIES %}
+      <a href="{{ u('cruises.html') if key=='cruise' else u('tours.html')+'?type='+key }}" class="group flex w-24 shrink-0 flex-col items-center gap-2 rounded-2xl border border-ink-100 bg-white p-4 text-center transition hover:-translate-y-1 hover:border-brand-300 hover:shadow-soft dark:border-ink-800 dark:bg-ink-900 md:w-auto">
+        <span class="grid h-12 w-12 place-items-center rounded-2xl bg-brand-50 text-brand-700 dark:bg-brand-900/40 dark:text-brand-300 transition group-hover:scale-110">{{ icon(ic,'h-6 w-6') }}</span>
+        <span class="text-sm font-semibold text-ink-700 dark:text-ink-200">{{ label|tr }}</span>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- DESTINATIONS BENTO -->
+<section class="section">
+  <div class="wrap">
+    {{ ui.sec_head(t('Featured destinations','বাছাইকৃত গন্তব্য'), t('Trending this season','এই মৌসুমে জনপ্রিয়'), t('From the longest sea beach on earth to Himalayan monasteries — places our travellers love right now.','পৃথিবীর দীর্ঘতম সমুদ্রসৈকত থেকে হিমালয়ের মঠ — যেসব জায়গা এখন আমাদের ভ্রমণকারীদের সবচেয়ে প্রিয়।'), u('destinations.html'), t('All destinations','সব গন্তব্য')) }}
+    {% set ds = D.DESTINATIONS %}
+    <div class="no-scrollbar -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-4 px-4 md:scroll-px-0 md:mx-0 md:grid md:grid-cols-4 md:grid-rows-2 md:px-0 lg:h-[560px]">
+      <div class="w-[78%] shrink-0 snap-start md:col-span-2 md:row-span-2 md:w-auto [&>a]:h-full [&>a]:aspect-auto md:[&>a]:min-h-[420px]">{{ ui.dest_card(ds[0], True) }}</div>
+      {% for d in [ds[4], ds[5], ds[1], ds[6]] %}<div class="w-[66%] shrink-0 snap-start md:w-auto [&>a]:h-full md:[&>a]:aspect-auto">{{ ui.dest_card(d) }}</div>{% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- DEALS -->
+<section class="section bg-gradient-to-b from-accent-50 to-white dark:from-ink-900 dark:to-ink-950">
+  <div class="wrap">
+    <div class="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+      <div><p class="eyebrow text-accent-700 dark:text-accent-300">{{ icon('zap','h-4 w-4') }} {{ t('Flash deals','ফ্ল্যাশ ডিল') }}</p><h2 class="h-section">{{ t('Limited-time offers','সীমিত সময়ের অফার') }}</h2></div>
+      <div class="flex items-center gap-3">
+        <div class="flex items-center gap-2 rounded-2xl bg-ink-900 px-4 py-2 text-white dark:bg-white/10" data-countdown="2026-11-30T23:59:59+06:00" aria-label="{{ t('Offer ends in','অফার শেষ হবে') }}"><span class="text-xs text-ink-300">{{ t('Ends in','শেষ হবে') }}</span><b class="text-base font-bold tabular-nums" data-cd-out>--</b></div>
+        <div class="hidden gap-2 md:flex"><button type="button" class="icon-btn border border-ink-200 dark:border-ink-700" data-scroll="#deals" data-dir="-1" aria-label="{{ t('Previous','আগের') }}">{{ icon('chevron-left') }}</button><button type="button" class="icon-btn border border-ink-200 dark:border-ink-700" data-scroll="#deals" data-dir="1" aria-label="{{ t('Next','পরের') }}">{{ icon('chevron-right') }}</button></div>
+      </div>
+    </div>
+    <div id="deals" class="no-scrollbar -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth scroll-px-4 px-4 md:scroll-px-0 pb-2 md:mx-0 md:px-0">
+      {% for o in D.OFFERS %}
+      <a href="{{ u(o.link) }}" class="group relative flex w-[82%] shrink-0 snap-start overflow-hidden rounded-3xl bg-ink-900 text-white sm:w-[420px]">
+        <img src="{{ img(o.img, True) }}" alt="" class="img-cover absolute inset-0 opacity-70 transition duration-700 group-hover:scale-105" loading="lazy" width="640" height="400">
+        <span class="absolute inset-0 bg-gradient-to-r from-ink-950/95 via-ink-950/60 to-transparent"></span>
+        <span class="relative flex min-h-[220px] flex-col p-6">
+          <span class="badge w-fit bg-white/15 text-white backdrop-blur">{{ o.tag|tr }}</span>
+          <span class="mt-3 max-w-[16rem] text-xl font-bold leading-snug">{{ o.title|tr }}</span>
+          <span class="mt-1 text-2xl font-extrabold text-accent-300">{{ o.off|tr }}</span>
+          <span class="mt-auto flex items-center gap-3 pt-4 text-xs"><span class="rounded-lg border border-dashed border-white/40 px-2 py-1 font-mono font-bold tracking-wider">{{ o.code }}</span><span class="text-white/70">{{ t('Valid till','মেয়াদ') }} {{ date(o.ends) }}</span></span>
+        </span>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- POPULAR PACKAGES -->
+<section class="section" data-filter-group>
+  <div class="wrap">
+    <div class="mb-8 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+      <div><p class="eyebrow">{{ t('Popular packages','জনপ্রিয় প্যাকেজ') }}</p><h2 class="h-section">{{ t('Most-loved tours this month','এ মাসের সবচেয়ে প্রিয় ট্যুর') }}</h2></div>
+      <div class="no-scrollbar -mx-4 flex gap-2 overflow-x-auto px-4 md:mx-0 md:px-0" role="group" aria-label="{{ t('Filter packages','প্যাকেজ ফিল্টার') }}">
+        {% for v,l in [('all',('All','সব')),('bd',('Bangladesh','বাংলাদেশ')),('intl',('International','আন্তর্জাতিক')),('honeymoon',('Honeymoon','হানিমুন')),('family',('Family','পরিবার'))] %}<button type="button" class="chip shrink-0 {{ 'is-active' if loop.first else '' }}" aria-pressed="{{ 'true' if loop.first else 'false' }}" data-quick-filter="{{ v }}">{{ t(*l) }}</button>{% endfor %}
+      </div>
+    </div>
+    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" data-items>
+      {% for x in D.TOURS[:8] %}{{ ui.tour_card(x) }}{% endfor %}
+    </div>
+    <div class="mt-10 text-center"><a href="{{ u('tours.html') }}" class="btn btn-outline btn-lg">{{ t('Browse all 16 tours','সব ১৬টি ট্যুর দেখুন') }} {{ icon('arrow-right','h-4 w-4') }}</a></div>
+  </div>
+</section>
+
+<!-- HOLIDAY THEMES -->
+<section class="section bg-ink-50 dark:bg-ink-900/40" aria-labelledby="themes-h">
+  <div class="wrap">
+    <div class="mb-8 flex flex-wrap items-end justify-between gap-4"><div><p class="eyebrow">{{ t('Holidays by theme','থিম অনুযায়ী হলিডে') }}</p><h2 id="themes-h" class="h-section">{{ t('What kind of trip are you dreaming of?','কেমন ভ্রমণের স্বপ্ন দেখছেন?') }}</h2></div><a href="{{ u('holidays.html') }}" class="link inline-flex items-center gap-1">{{ t('All themes','সব থিম') }} {{ icon('arrow-right','h-4 w-4') }}</a></div>
+    <div class="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
+      {% for th in D.THEMES %}
+      <a href="{{ u('holidays/'+th.slug+'.html') }}" class="group relative aspect-[3/4] overflow-hidden rounded-3xl">
+        <img src="{{ img(th.img, True) }}" alt="" class="img-cover transition duration-700 group-hover:scale-110" loading="lazy" width="640" height="400">
+        <span class="absolute inset-0 bg-gradient-to-t from-ink-950/85 via-ink-950/20 to-transparent"></span>
+        <span class="absolute inset-x-0 bottom-0 p-4 text-white"><span class="mb-2 grid h-9 w-9 place-items-center rounded-xl bg-white/15 backdrop-blur">{{ icon(th.icon,'h-5 w-5') }}</span><span class="block font-bold leading-tight">{{ th.name|tr }}</span><span class="text-xs text-white/75">{{ digits(D.TOURS|selectattr('cats','contains',th.cat)|list|length) }} {{ t('trips','টি ট্রিপ') }}</span></span>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- CRUISES -->
+<section class="relative overflow-hidden bg-ink-950 py-16 text-white md:py-24" aria-labelledby="cruise-h">
+  <img src="{{ img('cruise') }}" alt="" class="absolute inset-0 h-full w-full object-cover opacity-25" loading="lazy" width="1600" height="1000">
+  <div class="absolute inset-0 bg-gradient-to-r from-ink-950 via-ink-950/80 to-ink-950/40"></div>
+  <div class="wrap relative grid gap-10 lg:grid-cols-[1fr_1.3fr] lg:items-center">
+    <div>
+      <p class="eyebrow text-accent-300">{{ icon('ship','h-4 w-4') }} {{ t('Cruises','ক্রুজ') }}</p>
+      <h2 id="cruise-h" class="h-section text-white">{{ t('Set sail — meals, shows and ports included','পাল তুলুন — খাবার, শো ও বন্দর ভ্রমণসহ') }}</h2>
+      <p class="mt-4 text-ink-300">{{ t('From a 2-night Ha Long Bay junk to 7 nights in the Greek Isles — we handle visas, flights to the port and onboard packages, with 0% EMI for 12 months.','২ রাতের হা লং বে জাঙ্ক থেকে গ্রিক দ্বীপে ৭ রাত — ভিসা, বন্দর পর্যন্ত ফ্লাইট ও জাহাজের প্যাকেজ আমরাই সামলাই, সাথে ১২ মাসের ০% ইএমআই।') }}</p>
+      <ul class="mt-6 grid grid-cols-2 gap-3 text-sm">{% for ic,l in [('utensils',('All main meals','সব প্রধান খাবার')),('ticket',('Shows & entertainment','শো ও বিনোদন')),('baby',('Kids clubs','কিডস ক্লাব')),('stamp',('Visa handled','ভিসা আমাদের দায়িত্বে'))] %}<li class="flex items-center gap-2">{{ icon(ic,'h-4 w-4 text-accent-300') }} {{ t(*l) }}</li>{% endfor %}</ul>
+      <div class="mt-7 flex flex-wrap gap-3"><a href="{{ u('cruises.html') }}" class="btn btn-accent btn-lg">{{ t('Explore cruises','ক্রুজ দেখুন') }}</a><a href="{{ u('trip-planner.html') }}" class="btn btn-lg bg-white/10 text-white ring-1 ring-white/25 hover:bg-white/20">{{ t('Plan a custom trip','নিজের মতো ট্রিপ সাজান') }}</a></div>
+    </div>
+    <div class="grid gap-4 sm:grid-cols-2">
+      {% for c in D.CRUISES[:4] %}
+      <a href="{{ u('cruises/'+c.slug+'.html') }}" class="group overflow-hidden rounded-3xl bg-white/5 ring-1 ring-white/10 transition hover:bg-white/10">
+        <div class="relative aspect-[16/9] overflow-hidden"><img src="{{ img(c.img, True) }}" alt="" class="img-cover transition duration-700 group-hover:scale-105" loading="lazy" width="640" height="400"><span class="badge absolute left-3 top-3 bg-white text-ink-800">{{ digits(c.nights) }} {{ t('nights','রাত') }}</span></div>
+        <div class="p-4"><p class="font-bold leading-snug">{{ c.title|tr }}</p><p class="mt-1 text-xs text-ink-400">{{ c.ship }} · {{ c.port|tr }}</p><p class="mt-2 text-sm text-ink-300">{{ t('from','শুরু') }} <b class="text-lg text-white">{{ bdt(c.price) }}</b></p></div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ACTIVITIES -->
+<section class="section" aria-labelledby="act-h">
+  <div class="wrap">
+    {{ ui.sec_head(t('Things to do','যা যা করবেন'), t('Activities & experiences','অ্যাক্টিভিটি ও অভিজ্ঞতা'), t('Day tours, tickets and once-in-a-lifetime moments — instant confirmation, free cancellation on most.','ডে-ট্যুর, টিকিট আর জীবনে একবারের অভিজ্ঞতা — তাৎক্ষণিক নিশ্চিতকরণ, বেশিরভাগেই ফ্রি বাতিল।'), u('activities.html'), t('All activities','সব অ্যাক্টিভিটি')) }}
+    <div class="no-scrollbar -mx-4 flex snap-x gap-4 overflow-x-auto scroll-px-4 px-4 md:scroll-px-0 pb-2 md:mx-0 md:grid md:grid-cols-2 md:px-0 lg:grid-cols-4">
+      {% for a in D.ACTIVITIES[:8] %}<div class="w-[78%] shrink-0 snap-start sm:w-[45%] md:w-auto">{{ ui.activity_card(a) }}</div>{% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- TRUST & SAFETY -->
+<section class="section bg-brand-50/60 dark:bg-brand-950/40" aria-labelledby="trust-h">
+  <div class="wrap grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:items-center">
+    <div>
+      <p class="eyebrow">{{ t('Trust & safety','আস্থা ও নিরাপত্তা') }}</p>
+      <h2 id="trust-h" class="h-section">{{ t('Book with total peace of mind','নিশ্চিন্তে বুক করুন') }}</h2>
+      <p class="mt-4 muted">{{ t('Your money is protected, your plans are flexible and a real person answers 24/7 — before, during and after your trip.','আপনার টাকা সুরক্ষিত, পরিকল্পনা নমনীয়, আর যাত্রার আগে, পথে ও পরে ২৪/৭ একজন মানুষ উত্তর দেন।') }}</p>
+      <div class="mt-6 flex flex-wrap gap-2">{% for l in ['IATA','ATAB','TOAB','BTB-2214','PCI-DSS'] %}<span class="chip bg-white font-bold dark:bg-ink-900">{{ l }}</span>{% endfor %}</div>
+    </div>
+    <div class="grid gap-4 sm:grid-cols-2">
+      {% for ic,ti,de in [('lock',('Secure payments','নিরাপদ পেমেন্ট'),('SSLCommerz, bKash & Nagad with 3-D Secure. We never store card numbers.','৩-ডি সিকিউরসহ এসএসএলকমার্জ, বিকাশ ও নগদ। আমরা কার্ড নম্বর সংরক্ষণ করি না।')),('rotate-ccw',('Free cancellation','ফ্রি বাতিল'),('Clear badges on every trip: free, partial or non-refundable — no surprises.','প্রতিটি ট্রিপে স্পষ্ট ব্যাজ: ফ্রি, আংশিক বা অফেরতযোগ্য — কোনো চমক নেই।')),('badge-check',('Verified partners','যাচাইকৃত পার্টনার'),('Every hotel, guide and operator is vetted and re-rated after each trip.','প্রতিটি হোটেল, গাইড ও অপারেটর যাচাই করা এবং প্রতি ট্রিপের পর পুনর্মূল্যায়িত।')),('siren',('24/7 emergency line','২৪/৭ জরুরি লাইন'),('Medical, lost passport or missed flight — one call and we take over.','অসুস্থতা, পাসপোর্ট হারানো বা ফ্লাইট মিস — এক কলেই আমরা দায়িত্ব নিই।'))] %}
+      <div class="card p-5"><span class="grid h-11 w-11 place-items-center rounded-xl bg-brand-700 text-white">{{ icon(ic,'h-5 w-5') }}</span><h3 class="mt-3 font-bold">{{ t(*ti) }}</h3><p class="mt-1 text-sm muted">{{ t(*de) }}</p></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section">
+  <div class="wrap">
+    {{ ui.sec_head(t('One agency, every need','এক এজেন্সিতে সব সেবা'), t('Everything for your journey','আপনার যাত্রার সবকিছু'), center=True) }}
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {% for href,ic,col,title,sub in [('flights.html','plane','bg-sky-50 text-sky-700 dark:bg-sky-900/30 dark:text-sky-300',('Air tickets','এয়ার টিকেট'),('500+ airlines, instant e-ticket, date change support.','৫০০+ এয়ারলাইন, তাৎক্ষণিক ই-টিকেট, তারিখ পরিবর্তনে সহায়তা।')),('hotels.html','bed-double','bg-violet-50 text-violet-700 dark:bg-violet-900/30 dark:text-violet-300',('Hotels & resorts','হোটেল ও রিসোর্ট'),('From Sajek cottages to Maldives water villas — best-price guarantee.','সাজেকের কটেজ থেকে মালদ্বীপের ওয়াটার ভিলা — সেরা দামের নিশ্চয়তা।')),('visa.html','stamp','bg-amber-50 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300',('Visa processing','ভিসা প্রসেসিং'),('Checklists, appointments and status tracking for 40+ countries.','৪০+ দেশের চেকলিস্ট, অ্যাপয়েন্টমেন্ট ও স্ট্যাটাস ট্র্যাকিং।')),('insurance.html','shield-plus','bg-emerald-50 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300',('Travel insurance','ভ্রমণ বিমা'),('Medical, baggage and trip-cancellation cover from ৳450.','মেডিকেল, ব্যাগেজ ও ট্রিপ-বাতিল কভার ৳৪৫০ থেকে।')),('group-tours.html','building-2','bg-rose-50 text-rose-700 dark:bg-rose-900/30 dark:text-rose-300',('Group & corporate','গ্রুপ ও কর্পোরেট'),('Retreats, MICE, study tours and family reunions.','রিট্রিট, মাইস, শিক্ষা সফর ও পারিবারিক পুনর্মিলনী।')),('custom-tour.html','wand-sparkles','bg-brand-50 text-brand-700 dark:bg-brand-900/30 dark:text-brand-300',('Tailor-made trips','নিজের মতো ট্যুর'),('Tell us your dates and budget — get a plan in 24 hours.','তারিখ ও বাজেট জানান — ২৪ ঘণ্টায় পরিকল্পনা পান।'))] %}
+      <a href="{{ u(href) }}" class="card card-hover group flex gap-4 p-6">
+        <span class="grid h-12 w-12 shrink-0 place-items-center rounded-2xl {{ col }}">{{ icon(ic,'h-6 w-6') }}</span>
+        <span><span class="flex items-center gap-1 font-bold text-ink-900 dark:text-white">{{ t(*title) }} {{ icon('arrow-right','h-4 w-4 opacity-0 transition group-hover:translate-x-1 group-hover:opacity-100') }}</span><span class="mt-1 block text-sm muted">{{ t(*sub) }}</span></span>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- WHY US + STATS -->
+<section class="section bg-ink-50 dark:bg-ink-900/40">
+  <div class="wrap grid items-center gap-12 lg:grid-cols-2">
+    <div class="relative grid grid-cols-2 gap-4">
+      <img src="{{ img('cappadocia', True) }}" alt="{{ t('Hot-air balloons over Cappadocia','কাপাদোকিয়ায় হট-এয়ার বেলুন') }}" class="aspect-[3/4] w-full rounded-3xl object-cover" loading="lazy" width="640" height="400">
+      <div class="grid gap-4"><img src="{{ img('srilanka', True) }}" alt="{{ t('Sigiriya rock, Sri Lanka','সিগিরিয়া রক, শ্রীলঙ্কা') }}" class="aspect-square w-full rounded-3xl object-cover" loading="lazy" width="640" height="400"><img src="{{ img('sundarbans', True) }}" alt="{{ t('Boat in the Sundarbans','সুন্দরবনে নৌকা') }}" class="aspect-[4/3] w-full rounded-3xl object-cover" loading="lazy" width="640" height="400"></div>
+      <div class="absolute -bottom-6 left-1/2 w-[85%] -translate-x-1/2 rounded-2xl bg-white p-4 shadow-lift dark:bg-ink-800 sm:w-auto">
+        <div class="flex items-center gap-3"><span class="grid h-12 w-12 place-items-center rounded-xl bg-accent-100 text-accent-700">{{ icon('award','h-6 w-6') }}</span><div><p class="font-bold text-ink-900 dark:text-white">{{ t('Best Tour Operator 2025','সেরা ট্যুর অপারেটর ২০২৫') }}</p><p class="text-xs muted">{{ t('Bangladesh Travel & Tourism Awards','বাংলাদেশ ট্রাভেল অ্যান্ড ট্যুরিজম অ্যাওয়ার্ডস') }}</p></div></div>
+      </div>
+    </div>
+    <div>
+      <p class="eyebrow">{{ t('Why Musafir','কেন মুসাফির') }}</p>
+      <h2 class="h-section">{{ t('Local heart. Global standards.','দেশীয় আন্তরিকতা, বিশ্বমানের সেবা।') }}</h2>
+      <p class="mt-4 lead">{{ t('We are a licensed Bangladeshi agency with our own teams in Dhaka, Bangkok and Istanbul — so you are never handed off to a stranger.','আমরা ঢাকা, ব্যাংকক ও ইস্তাম্বুলে নিজস্ব টিমসহ লাইসেন্সপ্রাপ্ত বাংলাদেশি এজেন্সি — তাই আপনাকে কখনো অচেনা কারো হাতে ছেড়ে দেওয়া হয় না।') }}</p>
+      <ul class="mt-6 grid gap-4 sm:grid-cols-2">
+        {% for ic,a,b in [('badge-percent',('Best-price promise','সেরা দামের প্রতিশ্রুতি'),('Found it cheaper? We match it.','অন্য কোথাও কম পেলে আমরা মিলিয়ে দেব।')),('hand-heart',('Travel your way','আপনার মতো ভ্রমণ'),('Any diet, accessible rooms, flexible pacing.','যেকোনো খাদ্যাভ্যাস, সহজগম্য রুম, নিজের গতিতে ভ্রমণ।')),('smartphone',('Everything in one app','সব এক অ্যাপে'),('Tickets, vouchers, live updates.','টিকিট, ভাউচার, লাইভ আপডেট।')),('life-buoy',('On-trip assistance','ভ্রমণকালীন সহায়তা'),('Local reps and a 24/7 hotline.','স্থানীয় প্রতিনিধি ও ২৪/৭ হটলাইন।'))] %}
+        <li class="flex gap-3"><span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white text-brand-700 shadow-soft dark:bg-ink-800 dark:text-brand-300">{{ icon(ic,'h-5 w-5') }}</span><span><b class="block text-ink-900 dark:text-white">{{ t(*a) }}</b><span class="text-sm muted">{{ t(*b) }}</span></span></li>
+        {% endfor %}
+      </ul>
+      <dl class="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
+        {% for n,suf,l in D.STATS %}<div class="rounded-2xl bg-white p-4 text-center shadow-soft dark:bg-ink-800"><dt class="sr-only">{{ l|tr }}</dt><dd><b class="block text-2xl font-extrabold text-brand-700 dark:text-brand-300" data-count="{{ n }}" data-suffix="{{ suf }}">{{ num(n) }}{{ suf }}</b><span class="text-xs muted">{{ l|tr }}</span></dd></div>{% endfor %}
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section">
+  <div class="wrap">
+    {{ ui.sec_head(t('Simple & transparent','সহজ ও স্বচ্ছ'), t('Book in four easy steps','চারটি সহজ ধাপে বুকিং'), center=True) }}
+    <ol class="grid gap-6 md:grid-cols-4">
+      {% for ic,a,b in [('search',('Choose','বাছাই করুন'),('Browse packages or request a custom plan.','প্যাকেজ দেখুন বা কাস্টম প্ল্যান চান।')),('calendar-check',('Pick dates','তারিখ ঠিক করুন'),('See live prices for your dates and group.','আপনার তারিখ ও দলের জন্য লাইভ মূল্য দেখুন।')),('credit-card',('Pay securely','নিরাপদে পরিশোধ'),('Deposit by bKash, Nagad, card or EMI.','বিকাশ, নগদ, কার্ড বা ইএমআইতে অগ্রিম দিন।')),('plane-takeoff',('Fly happy','নিশ্চিন্তে উড়ুন'),('Vouchers, visa and 24/7 support — sorted.','ভাউচার, ভিসা ও ২৪/৭ সাপোর্ট — সব প্রস্তুত।'))] %}
+      <li class="relative text-center"><span class="mx-auto grid h-16 w-16 place-items-center rounded-2xl bg-gradient-to-br from-brand-500 to-brand-800 text-white shadow-lift">{{ icon(ic,'h-7 w-7') }}</span><span class="absolute left-1/2 top-0 ml-6 grid h-7 w-7 place-items-center rounded-full bg-accent-400 text-xs font-bold text-ink-900">{{ digits(loop.index) }}</span><h3 class="mt-4 text-lg font-bold">{{ t(*a) }}</h3><p class="mt-1 text-sm muted">{{ t(*b) }}</p></li>
+      {% endfor %}
+    </ol>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section bg-brand-950 text-white">
+  <div class="wrap">
+    <div class="mb-10 grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
+      <div><p class="eyebrow text-brand-300">{{ t('Testimonials','প্রশংসাপত্র') }}</p><h2 class="h-section text-white">{{ t('Stories from our travellers','আমাদের ভ্রমণকারীদের গল্প') }}</h2></div>
+      <div class="flex flex-wrap gap-3">
+        {% for s,r,c in [('Google','4.9','3,214'),('Facebook','4.8','4,102'),('Trustpilot','4.7','1,105')] %}<div class="rounded-2xl border border-white/10 bg-white/5 px-4 py-2.5"><p class="text-xs text-brand-200">{{ s }}</p><p class="flex items-center gap-1.5"><b class="text-lg">{{ digits(r) }}</b>{{ ui.stars(r|float,'h-3.5 w-3.5') }}<span class="text-xs text-brand-200">({{ digits(c) }})</span></p></div>{% endfor %}
+      </div>
+    </div>
+    <div class="no-scrollbar -mx-4 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-px-4 px-4 md:scroll-px-0 pb-2 md:mx-0 md:grid md:grid-cols-3 md:px-0 [&_.card]:border-white/10 [&_.card]:bg-white/5 [&_blockquote]:text-ink-100 [&_figcaption]:border-white/10 [&_p.font-bold]:text-white [&_.muted]:text-brand-200">
+      {% for r in D.REVIEWS[:3] %}<div class="w-[85%] shrink-0 snap-start md:w-auto">{{ ui.review_card(r) }}</div>{% endfor %}
+    </div>
+    <div class="mt-8 text-center"><a class="btn btn-white" href="{{ u('reviews.html') }}">{{ t('Read all reviews','সব রিভিউ পড়ুন') }}</a></div>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<section class="border-b border-ink-100 py-10 dark:border-ink-800" aria-label="{{ t('Airline partners','এয়ারলাইন পার্টনার') }}">
+  <p class="mb-6 text-center text-sm font-semibold text-ink-500 dark:text-ink-300">{{ t('Ticketing partner of 500+ airlines, including','৫০০+ এয়ারলাইনের টিকেটিং পার্টনার, যার মধ্যে রয়েছে') }}</p>
+  <div class="relative overflow-hidden mask-fade-r"><div class="flex w-max animate-marquee gap-4 hover:[animation-play-state:paused]">
+    {% for _ in range(2) %}{% for code,name,col in D.AIRLINES %}<span class="flex shrink-0 items-center gap-2 rounded-2xl border border-ink-100 bg-white px-5 py-3 dark:border-ink-800 dark:bg-ink-900" {% if _ %}aria-hidden="true"{% endif %}><span class="grid h-8 w-8 place-items-center rounded-lg text-xs font-extrabold text-white" style="background:{{ col }}">{{ code }}</span><span class="text-sm font-bold text-ink-700 dark:text-ink-200">{{ name }}</span></span>{% endfor %}{% endfor %}
+  </div></div>
+</section>
+
+<!-- BLOG -->
+<section class="section">
+  <div class="wrap">
+    {{ ui.sec_head(t('Travel journal','ট্রাভেল জার্নাল'), t('Guides & inspiration','গাইড ও অনুপ্রেরণা'), None, u('blog.html'), t('Visit the blog','ব্লগে যান')) }}
+    <div class="grid gap-6 md:grid-cols-3">
+      {% for p in D.BLOG[:3] %}
+      <article class="group relative">
+        <div class="aspect-[16/10] overflow-hidden rounded-3xl"><img src="{{ img(p.img, True) }}" alt="" class="img-cover transition duration-700 group-hover:scale-105" loading="lazy" width="640" height="400"></div>
+        <div class="mt-4 flex items-center gap-2 text-xs font-semibold"><span class="badge badge-brand">{{ p.cat|tr }}</span><span class="muted">{{ date(p.date) }} · {{ digits(p.mins) }} {{ t('min read','মিনিট পড়া') }}</span></div>
+        <h3 class="mt-2 text-lg font-bold leading-snug"><a href="{{ u('blog/'+p.slug+'.html') }}" class="after:absolute after:inset-0 group-hover:text-brand-700 dark:group-hover:text-brand-300">{{ p.title|tr }}</a></h3>
+        <p class="mt-2 line-clamp-2 text-sm muted">{{ p.ex|tr }}</p>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- APP PROMO -->
+<section class="pb-16 md:pb-20">
+  <div class="wrap">
+    <div class="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-brand-700 via-brand-800 to-ink-950 px-6 py-12 text-white sm:px-12 lg:py-0">
+      <div class="pattern-dots absolute inset-0 opacity-50"></div>
+      <div class="relative grid items-center gap-10 lg:grid-cols-2">
+        <div class="lg:py-16">
+          <p class="eyebrow text-accent-300">{{ t('Musafir app','মুসাফির অ্যাপ') }}</p>
+          <h2 class="h-section text-white">{{ t('Your whole trip, in your pocket','পুরো ভ্রমণ আপনার হাতের মুঠোয়') }}</h2>
+          <p class="mt-4 max-w-lg text-brand-100">{{ t('E-tickets offline, live flight alerts, day-by-day itineraries, local tips and an SOS button that reaches our 24/7 desk.','অফলাইনে ই-টিকিট, লাইভ ফ্লাইট অ্যালার্ট, দিনভিত্তিক ভ্রমণসূচি, স্থানীয় টিপস এবং ২৪/৭ ডেস্কে পৌঁছানোর এসওএস বাটন।') }}</p>
+          <ul class="mt-6 grid gap-2 text-sm sm:grid-cols-2">{% for f in [('App-only fares up to 8% off','অ্যাপে বিশেষ ভাড়া, ৮% পর্যন্ত ছাড়'),('Musafir Miles on every booking','প্রতি বুকিংয়ে মুসাফির মাইলস'),('Document wallet','ডকুমেন্ট ওয়ালেট'),('Group chat with your guide','গাইডের সাথে গ্রুপ চ্যাট')] %}<li class="flex items-center gap-2">{{ icon('circle-check','h-4 w-4 text-accent-300') }} {{ t(*f) }}</li>{% endfor %}</ul>
+          <div class="mt-8 flex flex-wrap gap-3"><a href="#" class="btn btn-white">{{ icon('play','h-4 w-4') }} Google Play</a><a href="#" class="btn border border-white/30 text-white hover:bg-white/10">{{ icon('apple','h-4 w-4') }} App Store</a></div>
+        </div>
+        <div class="relative mx-auto w-60 lg:mt-12 lg:self-end" aria-hidden="true">
+          <div class="rounded-t-[2.5rem] border-[10px] border-b-0 border-ink-900 bg-white pb-6 shadow-2xl dark:bg-ink-900">
+            <div class="mx-auto mt-2 h-5 w-24 rounded-full bg-ink-900"></div>
+            <div class="p-3">
+              <div class="flex items-center justify-between"><img src="{{ asset('brand/icon.svg') }}" class="h-7 w-7 rounded-lg" alt="" width="28" height="28"><span class="text-[10px] font-semibold text-ink-500">{{ t('Hi, Rahim 👋','হ্যালো, রহিম 👋') }}</span></div>
+              <div class="mt-3 overflow-hidden rounded-2xl"><img src="{{ img('maldives', True) }}" class="h-28 w-full object-cover" alt="" loading="lazy" width="640" height="400"></div>
+              <p class="mt-2 text-xs font-bold text-ink-900 dark:text-white">{{ t('Maldives · in 12 days','মালদ্বীপ · ১২ দিন পর') }}</p>
+              <div class="mt-2 rounded-xl bg-brand-50 p-2 text-[10px] text-brand-800 dark:bg-brand-900/40 dark:text-brand-200">✈ BS 325 · DAC → MLE · 10:40</div>
+              <div class="mt-2 grid grid-cols-3 gap-1.5">{% for i in ['ticket','hotel','shield-check'] %}<div class="grid h-12 place-items-center rounded-xl bg-ink-50 text-brand-700 dark:bg-ink-800">{{ icon(i,'h-4 w-4') }}</div>{% endfor %}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section bg-ink-50 pt-16 dark:bg-ink-900/40">
+  <div class="wrap grid gap-10 lg:grid-cols-[1fr_1.4fr]">
+    <div>
+      <p class="eyebrow">{{ t('FAQ','প্রশ্নোত্তর') }}</p><h2 class="h-section">{{ t('Questions, answered','আপনার প্রশ্নের উত্তর') }}</h2>
+      <p class="mt-4 lead">{{ t("Can't find what you need? Our travel experts are a call or message away.",'যা খুঁজছেন পাচ্ছেন না? আমাদের ট্রাভেল এক্সপার্টরা একটি কল বা মেসেজ দূরে।') }}</p>
+      <div class="mt-6 flex flex-wrap gap-3"><a href="tel:{{ C.hotline_tel }}" class="btn btn-primary">{{ icon('phone','h-4 w-4') }} {{ digits(C.hotline) }}</a><a href="{{ u('faq.html') }}" class="btn btn-outline">{{ t('All FAQs','সব প্রশ্নোত্তর') }}</a></div>
+    </div>
+    {{ ui.faq_list(D.FAQS[:6]) }}
+  </div>
+</section>
+{% endblock %}

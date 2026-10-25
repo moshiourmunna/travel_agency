@@ -1,0 +1,58 @@
+<!-- Mobile bottom navigation -->
+<nav id="mbar" class="safe-b fixed inset-x-0 bottom-0 z-40 border-t border-ink-100 bg-white/95 backdrop-blur-xl dark:border-ink-800 dark:bg-ink-950/95 lg:hidden" aria-label="{{ t('Quick navigation','দ্রুত নেভিগেশন') }}">
+  <div class="mx-auto grid h-16 max-w-md grid-cols-5 text-[11px] font-semibold">
+    {% for key,href,ic,label in [('home','index.html','house',('Home','হোম')),('tours','tours.html','compass',('Explore','ঘুরে দেখুন')),('offers','offers.html','badge-percent',('Deals','অফার')),('wish','wishlist.html','heart',('Saved','সেভড')),('account','account/index.html','circle-user-round',('Account','অ্যাকাউন্ট'))] %}
+    {% if key=='offers' %}
+    <a href="{{ u(href) }}" class="relative -mt-5 flex flex-col items-center justify-end gap-1 pb-2 text-ink-600 dark:text-ink-300" {% if active==key %}aria-current="page"{% endif %}><span class="grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-accent-400 to-accent-600 text-ink-950 shadow-lift ring-4 ring-white dark:ring-ink-950">{{ icon(ic,'h-6 w-6') }}</span>{{ t(*label) }}</a>
+    {% else %}
+    <a href="{{ u(href) }}" class="flex flex-col items-center justify-center gap-1 {{ 'text-brand-700 dark:text-brand-300' if active==key else 'text-ink-500 dark:text-ink-300' }}" {% if active==key %}aria-current="page"{% endif %}>{{ icon(ic,'h-[22px] w-[22px]') }}{{ t(*label) }}</a>
+    {% endif %}
+    {% endfor %}
+  </div>
+</nav>
+<!-- Chat / WhatsApp widget -->
+<div id="chat" class="fixed bottom-20 right-4 z-50 flex flex-col items-end gap-3 lg:bottom-6 lg:right-6">
+  <div id="chat-panel" hidden class="w-[calc(100vw-2rem)] max-w-sm overflow-hidden rounded-3xl border border-ink-100 bg-white shadow-2xl dark:border-ink-800 dark:bg-ink-900" role="dialog" aria-label="{{ t('Chat with Musafir','মুসাফিরের সাথে চ্যাট') }}">
+    <div class="flex items-center gap-3 bg-gradient-to-r from-brand-800 to-brand-600 p-4 text-white">
+      <img src="{{ asset('brand/icon.svg') }}" alt="" class="h-10 w-10 rounded-xl ring-2 ring-white/30" width="40" height="40">
+      <div class="flex-1"><p class="font-bold leading-tight">{{ t('Musafir Support','মুসাফির সাপোর্ট') }}</p><p class="flex items-center gap-1.5 text-xs text-brand-100"><span class="h-2 w-2 animate-pulseDot rounded-full bg-emerald-300"></span>{{ t('Typically replies in 2 min','সাধারণত ২ মিনিটে উত্তর দেন') }}</p></div>
+      <button type="button" class="icon-btn h-8 w-8 text-white hover:bg-white/10 hover:text-white dark:text-white" data-chat-close aria-label="{{ t('Close chat','চ্যাট বন্ধ করুন') }}">{{ icon('x','h-5 w-5') }}</button>
+    </div>
+    <div id="chat-log" class="max-h-72 space-y-3 overflow-y-auto bg-ink-50 p-4 text-sm dark:bg-ink-950" aria-live="polite">
+      <div class="max-w-[85%] rounded-2xl rounded-tl-sm bg-white p-3 shadow-sm dark:bg-ink-800 dark:text-ink-100">{{ t('Hi there! 👋 How can we help you plan your journey today?','হ্যালো! 👋 আজ আপনার ভ্রমণ পরিকল্পনায় কীভাবে সাহায্য করতে পারি?') }}</div>
+      <div class="flex flex-wrap gap-2" id="chat-quick">
+        {% for q in [('Holiday deals','হলিডে অফার'),('Cruise dates & prices','ক্রুজের তারিখ ও মূল্য'),('Visa help','ভিসা সহায়তা'),('Talk to an agent','এজেন্টের সাথে কথা বলুন')] %}<button type="button" class="chip text-xs" data-chat-quick>{{ t(*q) }}</button>{% endfor %}
+      </div>
+    </div>
+    <form id="chat-form" class="flex items-center gap-2 border-t border-ink-100 p-3 dark:border-ink-800">
+      <label for="chat-input" class="sr-only">{{ t('Message','বার্তা') }}</label>
+      <input id="chat-input" class="input py-2" placeholder="{{ t('Type a message…','বার্তা লিখুন…') }}" autocomplete="off">
+      <button class="btn btn-primary h-10 w-10 shrink-0 p-0" aria-label="{{ t('Send','পাঠান') }}">{{ icon('send-horizontal','h-4 w-4') }}</button>
+    </form>
+    <div class="grid grid-cols-2 gap-2 border-t border-ink-100 p-3 text-xs dark:border-ink-800">
+      <a href="https://wa.me/{{ C.wa }}" target="_blank" rel="noopener" class="btn btn-sm bg-[#1FAF38] text-white hover:bg-[#1a9a31]">{{ icon('message-circle','h-4 w-4') }} WhatsApp</a>
+      <a href="tel:{{ C.hotline_tel }}" class="btn btn-outline btn-sm">{{ icon('phone','h-4 w-4') }} {{ t('Call us','কল করুন') }}</a>
+    </div>
+  </div>
+  <button id="chat-fab" type="button" class="group relative grid h-14 w-14 place-items-center rounded-2xl bg-brand-700 text-white shadow-lift transition hover:scale-105 hover:bg-brand-800" aria-expanded="false" aria-controls="chat-panel" aria-label="{{ t('Open chat','চ্যাট খুলুন') }}">
+    <span class="absolute -right-1 -top-1 h-3.5 w-3.5 rounded-full border-2 border-white bg-accent-500 dark:border-ink-950"></span>{{ icon('messages-square','h-6 w-6') }}
+  </button>
+</div>
+<!-- Cookie banner -->
+<div id="cookie" hidden class="fixed inset-x-3 bottom-20 z-[55] mx-auto max-w-3xl rounded-2xl border border-ink-100 bg-white p-4 shadow-2xl dark:border-ink-800 dark:bg-ink-900 sm:p-5 lg:bottom-6" role="region" aria-label="{{ t('Cookie consent','কুকি সম্মতি') }}">
+  <div class="flex flex-col gap-4 md:flex-row md:items-center">
+    <div class="flex gap-3"><span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-accent-100 text-accent-700 dark:bg-accent-900/40 dark:text-accent-200">{{ icon('cookie') }}</span>
+      <p class="text-sm text-ink-600 dark:text-ink-300">{{ t('We use cookies to keep you signed in, remember your preferences and measure site performance.','আপনাকে সাইন-ইন রাখতে, পছন্দ মনে রাখতে ও সাইটের পারফরম্যান্স মাপতে আমরা কুকি ব্যবহার করি।') }} <a href="{{ u('privacy.html') }}" class="link">{{ t('Privacy policy','গোপনীয়তা নীতি') }}</a></p></div>
+    <div class="flex shrink-0 flex-wrap gap-2"><button type="button" class="btn btn-ghost btn-sm" data-cookie="custom">{{ t('Customise','কাস্টমাইজ') }}</button><button type="button" class="btn btn-outline btn-sm" data-cookie="reject">{{ t('Reject optional','ঐচ্ছিক বাতিল') }}</button><button type="button" class="btn btn-primary btn-sm" data-cookie="accept">{{ t('Accept all','সব গ্রহণ') }}</button></div>
+  </div>
+  <div id="cookie-custom" hidden class="mt-4 grid gap-2 border-t border-ink-100 pt-4 text-sm dark:border-ink-800 sm:grid-cols-3">
+    <label class="flex items-center gap-2"><input type="checkbox" class="check" checked disabled> {{ t('Essential','প্রয়োজনীয়') }}</label>
+    <label class="flex items-center gap-2"><input type="checkbox" class="check" data-cookie-opt="analytics" checked> {{ t('Analytics','অ্যানালিটিক্স') }}</label>
+    <label class="flex items-center gap-2"><input type="checkbox" class="check" data-cookie-opt="marketing"> {{ t('Marketing','মার্কেটিং') }}</label>
+    <button type="button" class="btn btn-primary btn-sm sm:col-span-3 sm:justify-self-end" data-cookie="save">{{ t('Save preferences','পছন্দ সংরক্ষণ') }}</button>
+  </div>
+</div>
+<div id="toasts" class="pointer-events-none fixed inset-x-0 top-20 z-[70] flex flex-col items-center gap-2 px-4" aria-live="polite" aria-atomic="true"></div>
+<script>window.MUSAFIR={lang:'{{ L }}',i18n:{{ js_i18n|safe }}};</script>
+<script src="{{ asset('js/app.js') }}" defer></script>
+{% if charts %}<script src="{{ asset('vendor/chart.umd.min.js') }}" defer></script>{% endif %}

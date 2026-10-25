@@ -1,0 +1,7 @@
+{% include 'partials/head.html' %}
+<body class="min-h-screen {{ body_class or '' }}">
+{% include 'partials/header.html' %}
+<main id="main" tabindex="-1" class="outline-none">{% block content %}{% endblock %}</main>
+{% include 'partials/footer.html' %}
+</body>
+</html>

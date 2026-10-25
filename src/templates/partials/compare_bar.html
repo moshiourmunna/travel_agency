@@ -1,0 +1,4 @@
+<div id="compare-bar" hidden class="fixed inset-x-3 bottom-20 z-40 mx-auto flex max-w-xl items-center justify-between gap-3 rounded-2xl bg-ink-900 p-3 pl-5 text-white shadow-2xl lg:bottom-6">
+  <p class="text-sm font-semibold"><span data-compare-n>0</span>/{{ digits(3) }} {{ t('selected to compare','টি তুলনার জন্য নির্বাচিত') }}</p>
+  <div class="flex gap-2"><button type="button" class="btn btn-sm text-ink-300 hover:text-white" data-compare-clear>{{ t('Clear','মুছুন') }}</button><a href="{{ u('compare.html') }}" data-base="{{ u('compare.html') }}" data-compare-go class="btn btn-accent btn-sm">{{ t('Compare now','এখনই তুলনা করুন') }}</a></div>
+</div>

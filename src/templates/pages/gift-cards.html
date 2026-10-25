@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% import 'ui.html' as ui %}
+{% block content %}
+{{ ui.page_hero(t('Gift cards','গিফট কার্ড'), t('Give the gift of travel — valid 2 years on any Musafir holiday, cruise, flight or activity.','ভ্রমণ উপহার দিন — যেকোনো মুসাফির হলিডে, ক্রুজ, ফ্লাইট বা অ্যাক্টিভিটিতে ২ বছর মেয়াদি।'), [(t('Home','হোম'),u('index.html')),(t('Gift cards','গিফট কার্ড'),'')], 'maldives') }}
+<section class="section"><div class="wrap grid gap-10 lg:grid-cols-2" data-gift>
+  <div><div class="relative aspect-[1.6] overflow-hidden rounded-3xl bg-gradient-to-br from-brand-800 via-brand-600 to-accent-400 p-6 text-white shadow-lift sm:p-8"><img src="{{ asset('brand/icon-white.svg') }}" alt="" class="absolute -right-6 -top-6 h-40 w-40 opacity-20" width="160" height="160"><p class="text-sm font-semibold uppercase tracking-widest text-white/80">{{ t('Musafir gift card','মুসাফির গিফট কার্ড') }}</p><p class="mt-4 text-4xl font-extrabold sm:text-5xl" data-gift-amt>{{ bdt(10000) }}</p><p class="mt-4 text-sm text-white/90" data-gift-to>{{ t('For someone special','বিশেষ কারো জন্য') }}</p><p class="absolute bottom-5 right-6 font-mono text-xs tracking-widest sm:text-sm">MSF-GIFT-••••-2026</p></div>
+    <p class="mt-4 text-sm muted">{{ t('Delivered instantly by email & SMS with a printable PDF.','ইমেইল ও এসএমএসে তাৎক্ষণিক, প্রিন্টযোগ্য পিডিএফসহ।') }}</p></div>
+  <form class="card space-y-5 p-6" data-validate data-success="{{ t('Gift card added — continue to payment (demo).','গিফট কার্ড যোগ হয়েছে — পেমেন্টে যান (ডেমো)।') }}">
+    <fieldset><legend class="label">{{ t('Amount','পরিমাণ') }}</legend><div class="grid grid-cols-2 gap-2 sm:grid-cols-3">{% for a in [5000,10000,25000,50000,100000] %}<label class="cursor-pointer"><input type="radio" name="gamt" value="{{ a }}" class="peer sr-only" {{ 'checked' if a==10000 }} data-gift-opt><span class="block rounded-xl border border-ink-200 py-2.5 text-center text-sm font-bold peer-checked:border-brand-700 peer-checked:bg-brand-700 peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-brand-400 dark:border-ink-700">{{ bdt(a) }}</span></label>{% endfor %}</div></fieldset>
+    <div class="field"><label class="label" for="gf-to">{{ t('Recipient name','প্রাপকের নাম') }} *</label><input id="gf-to" class="input" required data-gift-name></div>
+    <div class="field"><label class="label" for="gf-em">{{ t('Recipient email','প্রাপকের ইমেইল') }} *</label><input id="gf-em" type="email" class="input" required></div>
+    <div class="field"><label class="label" for="gf-msg">{{ t('Message','বার্তা') }}</label><textarea id="gf-msg" rows="2" class="input" maxlength="140"></textarea></div>
+    <div class="field"><label class="label" for="gf-dt">{{ t('Send on','পাঠানোর তারিখ') }}</label><input id="gf-dt" type="date" class="input" value="2026-10-26"></div>
+    <button class="btn btn-accent btn-lg w-full">{{ icon('gift','h-5 w-5') }} {{ t('Buy gift card','গিফট কার্ড কিনুন') }}</button>
+  </form>
+</div></section>
+{% endblock %}

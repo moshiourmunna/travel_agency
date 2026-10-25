@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% import 'ui.html' as ui %}
+{% block content %}
+{{ ui.page_hero(t('Holidays by theme','থিম অনুযায়ী হলিডে'), t('Pick the feeling first — romance, family fun, adrenaline, beaches, culture or wildlife — and we match the trip.','আগে অনুভূতি বেছে নিন — রোমান্স, পারিবারিক আনন্দ, অ্যাডভেঞ্চার, সৈকত, সংস্কৃতি বা বন্যপ্রাণী — ট্রিপ আমরা মিলিয়ে দেব।'), [(t('Home','হোম'),u('index.html')),(t('Holidays','হলিডে'),'')], 'santorini') }}
+<section class="section"><div class="wrap grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+  {% for th in D.THEMES %}{% set n = D.TOURS|selectattr('cats','contains',th.cat)|list %}
+  <a href="{{ u('holidays/'+th.slug+'.html') }}" class="card card-hover group overflow-hidden">
+    <div class="relative aspect-[16/10] overflow-hidden"><img src="{{ img(th.img, True) }}" alt="" class="img-cover transition duration-700 group-hover:scale-105" loading="lazy" width="640" height="400"><span class="absolute left-4 top-4 grid h-11 w-11 place-items-center rounded-2xl bg-white/90 text-brand-700 shadow">{{ icon(th.icon,'h-5 w-5') }}</span></div>
+    <div class="p-5"><h2 class="text-xl font-bold">{{ th.name|tr }}</h2><p class="mt-1 text-sm muted">{{ th.tag|tr }}</p>
+      <p class="mt-4 flex items-center justify-between text-sm"><span><b>{{ digits(n|length) }}</b> {{ t('trips','টি ট্রিপ') }} · {{ t('from','শুরু') }} <b>{{ bdt((n|map(attribute='price')|min) if n else 0) }}</b></span><span class="link inline-flex items-center gap-1">{{ t('Explore','দেখুন') }} {{ icon('arrow-right','h-4 w-4') }}</span></p></div>
+  </a>
+  {% endfor %}
+</div></section>
+<section class="pb-16"><div class="wrap"><div class="flex flex-col items-start justify-between gap-5 rounded-3xl bg-gradient-to-r from-brand-800 to-brand-600 p-8 text-white md:flex-row md:items-center"><div><h2 class="text-2xl font-bold">{{ t('Mix themes in one trip','এক ট্রিপে একাধিক থিম') }}</h2><p class="mt-1 text-brand-100">{{ t('Beach + adventure? Family + culture? Build it day by day in our trip planner.','সৈকত + অ্যাডভেঞ্চার? পরিবার + সংস্কৃতি? আমাদের ট্রিপ প্ল্যানারে দিন ধরে সাজান।') }}</p></div><a href="{{ u('trip-planner.html') }}" class="btn btn-accent btn-lg">{{ icon('route','h-5 w-5') }} {{ t('Open trip planner','ট্রিপ প্ল্যানার খুলুন') }}</a></div></div></section>
+{% endblock %}

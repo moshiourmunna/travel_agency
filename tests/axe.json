@@ -1,0 +1,662 @@
+[
+ {
+  "p": "en/index.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/tours.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/tours/maldives-honeymoon.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/holidays.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/cruises.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/cruises/greek-isles-turkey.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/activities.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/activities/pokhara-paragliding.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/trip-planner.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/destinations/bali.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/flights.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/hotels/ocean-pearl-resort.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/visa/schengen.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/booking.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/offers.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/blog/sajek-travel-guide.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/gallery.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/about.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/contact.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/faq.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/reviews.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/careers.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/terms.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/custom-tour.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/insurance.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/gift-cards.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/compare.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/wishlist.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/login.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/register.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/sitemap.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/brand.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/404.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/index.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/tours.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/tours/maldives-honeymoon.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/holidays.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/cruises.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/cruises/greek-isles-turkey.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/activities.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/activities/pokhara-paragliding.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/trip-planner.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/destinations/bali.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/flights.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/hotels/ocean-pearl-resort.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/visa/schengen.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/booking.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/offers.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/blog/sajek-travel-guide.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/gallery.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/about.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/contact.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/faq.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/reviews.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/careers.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/terms.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/custom-tour.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/insurance.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/gift-cards.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/compare.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/wishlist.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/login.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/register.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/sitemap.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/brand.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "bn/404.html",
+  "th": "light",
+  "violations": []
+ },
+ {
+  "p": "en/index.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/tours.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/tours/maldives-honeymoon.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/holidays.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/cruises.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/cruises/greek-isles-turkey.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/activities.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/activities/pokhara-paragliding.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/trip-planner.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/destinations/bali.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/flights.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/hotels/ocean-pearl-resort.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/visa/schengen.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/booking.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/offers.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/blog/sajek-travel-guide.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/gallery.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/about.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/contact.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/faq.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/reviews.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/careers.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/terms.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/custom-tour.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/insurance.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/gift-cards.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/compare.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/wishlist.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/login.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/register.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/sitemap.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/brand.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "en/404.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/index.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/tours.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/tours/maldives-honeymoon.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/holidays.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/cruises.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/cruises/greek-isles-turkey.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/activities.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/activities/pokhara-paragliding.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/trip-planner.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/destinations/bali.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/flights.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/hotels/ocean-pearl-resort.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/visa/schengen.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/booking.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/offers.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/blog/sajek-travel-guide.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/gallery.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/about.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/contact.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/faq.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/reviews.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/careers.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/terms.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/custom-tour.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/insurance.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/gift-cards.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/compare.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/wishlist.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/login.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/register.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/sitemap.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/brand.html",
+  "th": "dark",
+  "violations": []
+ },
+ {
+  "p": "bn/404.html",
+  "th": "dark",
+  "violations": []
+ }
+]

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% import 'ui.html' as ui %}
+{% block content %}
+{{ ui.page_hero(t('Traveller reviews','ভ্রমণকারীদের রিভিউ'), t('Only travellers who completed a Musafir trip can review. We publish every rating — good or bad.','শুধু মুসাফিরের সাথে ট্রিপ সম্পন্ন করা ভ্রমণকারীরাই রিভিউ দিতে পারেন। ভালো-মন্দ সব রেটিং প্রকাশ করি।'), [(t('Home','হোম'),u('index.html')),(t('Reviews','রিভিউ'),'')], 'bali') }}
+<section class="section"><div class="wrap">
+  <div class="grid gap-6 lg:grid-cols-[1.4fr_1fr]">{{ ui.reviews_summary(4.8, 8412, [(('Trip planning','পরিকল্পনা'),4.9),(('Support','সাপোর্ট'),4.8),(('Hotels','হোটেল'),4.7),(('Value','মূল্যমান'),4.7)]) }}
+    <div class="card flex flex-col justify-between gap-4 p-6"><div><p class="text-sm muted">{{ t('Also rated on','অন্যান্য প্ল্যাটফর্মে রেটিং') }}</p><ul class="mt-3 space-y-2 text-sm">{% for n,r,c in [('Google',4.8,3120),('Facebook',4.9,5640),('Trustpilot',4.6,412)] %}<li class="flex items-center justify-between"><b>{{ n }}</b><span class="inline-flex items-center gap-1">{{ icon('star','h-4 w-4 fill-current text-accent-400') }} {{ digits(r) }} <span class="muted">({{ num(c) }})</span></span></li>{% endfor %}</ul></div><button type="button" class="btn btn-primary" data-modal-open="review-dialog">{{ icon('pen-line','h-4 w-4') }} {{ t('Write a review','রিভিউ লিখুন') }}</button></div>
+  </div>
+  <div class="mt-10" data-filter-group>
+    <div class="mb-6 flex flex-wrap gap-2" role="group" aria-label="{{ t('Filter reviews','রিভিউ ফিল্টার') }}">{% for v,l in [('all',('All','সব')),('5',('5 stars','৫ তারকা')),('4',('4 stars','৪ তারকা')),('bd',('Domestic trips','দেশীয় ট্রিপ')),('intl',('International','আন্তর্জাতিক'))] %}<button type="button" class="chip {{ 'is-active' if loop.first }}" aria-pressed="{{ 'true' if loop.first else 'false' }}" data-quick-filter="{{ v }}">{{ t(*l) }}</button>{% endfor %}</div>
+    <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">{% for r in revs %}<div data-item data-tier="{{ r.rating }}" data-region="{{ r.reg }}">{{ ui.review_card(r) }}</div>{% endfor %}</div>
+  </div>
+</div></section>
+{% include 'partials/review_dialog.html' %}
+{% endblock %}

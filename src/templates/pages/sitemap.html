@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% import 'ui.html' as ui %}
+{% block content %}
+<section class="border-b border-ink-100 bg-ink-50 py-10 dark:border-ink-800 dark:bg-ink-900"><div class="wrap">{{ ui.crumbs([(t('Home','হোম'),u('index.html')),(t('Sitemap','সাইটম্যাপ'),'')]) }}<h1 class="mt-3 text-3xl font-extrabold">{{ t('Sitemap','সাইটম্যাপ') }}</h1></div></section>
+<section class="section !pt-8"><div class="wrap columns-1 gap-8 sm:columns-2 lg:columns-4">
+  {% for title, links in groups %}<div class="mb-8 break-inside-avoid"><h2 class="mb-3 font-bold">{{ title|tr }}</h2><ul class="space-y-1.5 text-sm">{% for h,l in links %}<li><a class="link-muted" href="{{ u(h) }}">{{ l|tr }}</a></li>{% endfor %}</ul></div>{% endfor %}
+</div></section>
+{% endblock %}

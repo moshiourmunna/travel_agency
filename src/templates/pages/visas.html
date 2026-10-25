@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% import 'ui.html' as ui %}
+{% block content %}
+{{ ui.page_hero(t('Visa processing services','ভিসা প্রসেসিং সেবা'), t('Tourist, business and student visas for 40+ countries — document check, appointment booking and tracking by experts.','৪০+ দেশের ট্যুরিস্ট, বিজনেস ও স্টুডেন্ট ভিসা — বিশেষজ্ঞদের মাধ্যমে কাগজপত্র যাচাই, অ্যাপয়েন্টমেন্ট ও ট্র্যাকিং।'), [(t('Home','হোম'),u('index.html')),(t('Visa','ভিসা'),'')], 'istanbul') }}
+<section class="section" id="vlist" data-listing>
+  <div class="wrap">
+    <div class="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+      <form data-filters data-for="vlist" class="w-full max-w-md" role="search"><label class="label" for="v-q">{{ t('Which country are you visiting?','কোন দেশে যাচ্ছেন?') }}</label><div class="relative">{{ icon('search','pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-400') }}<input id="v-q" name="q" class="input pl-9" placeholder="{{ t('Search a country','দেশের নাম লিখুন') }}"></div></form>
+      <p class="text-sm muted" aria-live="polite"><b class="text-ink-900 dark:text-white" data-count-out>{{ digits(D.VISAS|length) }}</b> {{ t('countries','টি দেশ') }}</p>
+    </div>
+    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" data-items>
+      {% for v in D.VISAS %}
+      <article class="card card-hover group relative overflow-hidden" data-item data-price="{{ v.fee }}" data-title="{{ v.country.en }} {{ v.country.bn }}">
+        <div class="relative aspect-[16/9] overflow-hidden"><img src="{{ img(v.img, True) }}" alt="" class="img-cover transition duration-700 group-hover:scale-105" loading="lazy" width="640" height="400"><div class="absolute inset-0 bg-gradient-to-t from-ink-950/70"></div><span class="absolute left-3 top-3 rounded-lg bg-white px-2 py-1 text-xs font-extrabold tracking-wider text-ink-900">{{ ISO[v.slug] }}</span><h2 class="absolute bottom-3 left-4 text-xl font-bold text-white">{{ v.country|tr }}</h2></div>
+        <div class="p-4"><p class="text-sm font-semibold text-brand-700 dark:text-brand-300">{{ v.vtype|tr }}</p>
+          <dl class="mt-3 grid grid-cols-2 gap-2 text-xs"><div><dt class="muted">{{ t('Processing','প্রসেসিং') }}</dt><dd class="font-semibold">{{ v.days|tr }}</dd></div><div><dt class="muted">{{ t('Stay','অবস্থান') }}</dt><dd class="font-semibold">{{ v.stay|tr }}</dd></div></dl>
+          <div class="mt-4 flex items-center justify-between border-t border-ink-100 pt-3 dark:border-ink-800"><p><span class="text-xs muted">{{ t('From','শুরু') }}</span> <b class="text-lg">{{ bdt(v.fee) }}</b></p><a href="{{ u('visa/'+v.slug+'.html') }}" class="link text-sm after:absolute after:inset-0">{{ t('Details','বিস্তারিত') }} →</a></div></div>
+      </article>
+      {% endfor %}
+    </div>
+    <div data-empty hidden class="card p-10 text-center"><p class="font-bold">{{ t('Country not listed?','দেশটি তালিকায় নেই?') }}</p><p class="text-sm muted">{{ t('We process visas for 40+ countries — call us.','আমরা ৪০+ দেশের ভিসা প্রসেস করি — কল করুন।') }}</p></div>
+  </div>
+</section>
+<section class="section bg-ink-50 dark:bg-ink-900/50"><div class="wrap">
+  {{ ui.sec_head(t('Process','প্রক্রিয়া'), t('Visa in 4 simple steps','৪টি সহজ ধাপে ভিসা'), center=True) }}
+  <ol class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{% for ic,ti,de in [('file-search',('Free assessment','ফ্রি মূল্যায়ন'),('Tell us your profile; we confirm eligibility and the document list.','আপনার প্রোফাইল জানান; আমরা যোগ্যতা ও কাগজের তালিকা নিশ্চিত করি।')),('folder-check',('Document check','কাগজপত্র যাচাই'),('Upload or drop off documents; our team reviews every page.','কাগজ আপলোড বা জমা দিন; আমাদের টিম প্রতিটি পাতা যাচাই করে।')),('calendar-check',('Submission','জমা'),('We file online or book your VFS/embassy appointment.','অনলাইনে আবেদন বা ভিএফএস/দূতাবাসের অ্যাপয়েন্টমেন্ট বুক করি।')),('badge-check',('Track & collect','ট্র্যাক ও সংগ্রহ'),('Live status in your account; passport delivered to your door.','অ্যাকাউন্টে লাইভ স্ট্যাটাস; পাসপোর্ট আপনার দরজায় পৌঁছে দিই।'))] %}<li class="card p-6"><span class="grid h-12 w-12 place-items-center rounded-2xl bg-brand-700 text-white">{{ icon(ic,'h-6 w-6') }}</span><p class="mt-4 text-xs font-bold text-brand-700 dark:text-brand-300">{{ t('Step','ধাপ') }} {{ digits(loop.index) }}</p><h3 class="font-bold">{{ t(*ti) }}</h3><p class="mt-1 text-sm muted">{{ t(*de) }}</p></li>{% endfor %}</ol>
+</div></section>
+{% endblock %}

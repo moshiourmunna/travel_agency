@@ -1,0 +1,32 @@
+{% set pid = pid if pid is defined else 'pm' %}
+<fieldset class="mt-5"><legend class="label">{{ t('Choose payment method','পেমেন্ট পদ্ধতি বেছে নিন') }}</legend>
+  <div class="grid grid-cols-2 gap-3 sm:grid-cols-4">
+    {% for v,l,sub,mark in [('bkash','bKash',('Mobile wallet','মোবাইল ওয়ালেট'),'<span class="rounded-md bg-[#E2136E] px-2 py-1 text-xs font-extrabold text-white">bKash</span>'),('nagad','Nagad',('Mobile wallet','মোবাইল ওয়ালেট'),'<span class="rounded-md bg-[#C4161C] px-2 py-1 text-xs font-extrabold text-white">Nagad</span>'),('card',t('Card','কার্ড'),('Visa · Master · Amex','ভিসা · মাস্টার · অ্যামেক্স'),'<span class="flex gap-1"><span class="rounded bg-[#1A1F71] px-1.5 py-1 text-[10px] font-extrabold italic text-white">VISA</span><span class="flex"><span class="h-5 w-5 rounded-full bg-[#EB001B]"></span><span class="-ml-2 h-5 w-5 rounded-full bg-[#F79E1B]/90"></span></span></span>'),('bank',t('Bank','ব্যাংক'),('Transfer / deposit','ট্রান্সফার / জমা'),'')] %}
+    <label class="relative flex cursor-pointer flex-col gap-2 rounded-2xl border border-ink-200 p-4 transition has-[:checked]:border-brand-600 has-[:checked]:bg-brand-50/60 has-[:checked]:ring-2 has-[:checked]:ring-brand-600/20 dark:border-ink-700 dark:has-[:checked]:bg-brand-900/20">
+      <input type="radio" name="{{ pid }}-method" value="{{ v }}" class="sr-only" data-paymethod {{ 'checked' if loop.first }}>
+      <span class="flex h-6 items-center">{% if mark %}{{ mark|safe }}{% else %}<span class="grid h-6 w-6 place-items-center rounded bg-brand-700 text-white">{{ icon('landmark','h-4 w-4') }}</span>{% endif %}</span><span class="text-sm font-bold">{{ l }}</span><span class="text-xs muted">{{ t(*sub) }}</span>
+    </label>
+    {% endfor %}
+  </div>
+</fieldset>
+<div class="mt-5 rounded-2xl bg-ink-50 p-5 dark:bg-ink-850" data-pay-panel="bkash">
+  <p class="text-sm">{{ t('You will be taken to the secure bKash checkout. Enter your bKash account number to receive an OTP.','আপনাকে নিরাপদ বিকাশ চেকআউটে নিয়ে যাওয়া হবে। ওটিপি পেতে আপনার বিকাশ নম্বর দিন।') }}</p>
+  <div class="field mt-3 max-w-xs"><label class="label" for="{{ pid }}-bk">{{ t('bKash account number','বিকাশ নম্বর') }}</label><input id="{{ pid }}-bk" type="tel" class="input" required placeholder="01XXXXXXXXX"><p class="field-error">{{ t('Enter a valid BD mobile number.','সঠিক মোবাইল নম্বর দিন।') }}</p></div>
+</div>
+<div class="mt-5 rounded-2xl bg-ink-50 p-5 dark:bg-ink-850" data-pay-panel="nagad" hidden>
+  <p class="text-sm">{{ t('Pay with Nagad — 1% cashback on travel bookings this month.','নগদে পরিশোধ করুন — এ মাসে ট্রাভেল বুকিংয়ে ১% ক্যাশব্যাক।') }}</p>
+  <div class="field mt-3 max-w-xs"><label class="label" for="{{ pid }}-ng">{{ t('Nagad account number','নগদ নম্বর') }}</label><input id="{{ pid }}-ng" type="tel" class="input" required placeholder="01XXXXXXXXX"><p class="field-error">{{ t('Enter a valid BD mobile number.','সঠিক মোবাইল নম্বর দিন।') }}</p></div>
+</div>
+<div class="mt-5 rounded-2xl bg-ink-50 p-5 dark:bg-ink-850" data-pay-panel="card" hidden>
+  <div class="grid gap-3 sm:grid-cols-2">
+    <div class="field sm:col-span-2"><label class="label" for="{{ pid }}-cn">{{ t('Card number','কার্ড নম্বর') }}</label><input id="{{ pid }}-cn" class="input" inputmode="numeric" autocomplete="cc-number" required pattern="[0-9 ]{15,19}" placeholder="4242 4242 4242 4242"><p class="field-error">{{ t('Enter a valid card number.','সঠিক কার্ড নম্বর দিন।') }}</p></div>
+    <div class="field"><label class="label" for="{{ pid }}-ce">{{ t('Expiry (MM/YY)','মেয়াদ (মাস/বছর)') }}</label><input id="{{ pid }}-ce" class="input" autocomplete="cc-exp" required pattern="(0[1-9]|1[0-2])/[0-9]{2}" placeholder="08/29"><p class="field-error">MM/YY</p></div>
+    <div class="field"><label class="label" for="{{ pid }}-cv">CVV</label><input id="{{ pid }}-cv" class="input" inputmode="numeric" autocomplete="cc-csc" required pattern="[0-9]{3,4}" placeholder="123"><p class="field-error">{{ t('3 or 4 digits','৩ বা ৪ সংখ্যা') }}</p></div>
+    <div class="sm:col-span-2"><label class="label" for="{{ pid }}-emi">{{ t('EMI option','ইএমআই অপশন') }}</label><select id="{{ pid }}-emi" class="input"><option>{{ t('Pay in full','একবারে পরিশোধ') }}</option><option>{{ t('3 months 0% EMI','৩ মাস ০% ইএমআই') }}</option><option>{{ t('6 months 0% EMI','৬ মাস ০% ইএমআই') }}</option><option>{{ t('12 months EMI','১২ মাস ইএমআই') }}</option></select></div>
+  </div>
+  <p class="mt-3 flex items-center gap-2 text-xs muted">{{ icon('lock','h-3.5 w-3.5') }} {{ t('Secured by SSLCommerz · PCI-DSS · 3-D Secure','SSLCommerz দ্বারা সুরক্ষিত · PCI-DSS · 3-D Secure') }}</p>
+</div>
+<div class="mt-5 rounded-2xl bg-ink-50 p-5 text-sm dark:bg-ink-850" data-pay-panel="bank" hidden>
+  <dl class="grid gap-2 sm:grid-cols-2">{% for k,v in [(('Account name','হিসাবের নাম'),'Musafir Tours & Travels Ltd.'),(('Bank','ব্যাংক'),'The City Bank PLC, Gulshan'),(('Account no.','হিসাব নম্বর'),'2050 1234 5678 9012'),(('Routing no.','রাউটিং নম্বর'),'125260345')] %}<div><dt class="muted">{{ t(*k) }}</dt><dd class="font-semibold">{{ v }}</dd></div>{% endfor %}</dl>
+  <div class="field mt-3 max-w-xs"><label class="label" for="{{ pid }}-ref">{{ t('Transaction / slip reference','লেনদেন / স্লিপ রেফারেন্স') }}</label><input id="{{ pid }}-ref" class="input" required><p class="field-error">{{ t('Required','আবশ্যক') }}</p></div>
+</div>

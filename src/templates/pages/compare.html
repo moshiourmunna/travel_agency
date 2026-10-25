@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% import 'ui.html' as ui %}
+{% block content %}
+<section class="border-b border-ink-100 bg-ink-50 py-10 dark:border-ink-800 dark:bg-ink-900"><div class="wrap">{{ ui.crumbs([(t('Home','হোম'),u('index.html')),(t('Tours','ট্যুর'),u('tours.html')),(t('Compare','তুলনা'),'')]) }}<h1 class="mt-3 text-3xl font-extrabold">{{ t('Compare tours','ট্যুর তুলনা') }}</h1><p class="mt-1 muted">{{ t('Tick “Compare” on up to 3 tour cards. Showing your selection (or our suggestions).','সর্বোচ্চ ৩টি ট্যুর কার্ডে “তুলনা” টিক দিন। আপনার নির্বাচন (বা আমাদের পরামর্শ) দেখানো হচ্ছে।') }}</p></div></section>
+<section class="section !pt-8"><div class="wrap overflow-x-auto" data-compare-page data-default="{{ default }}">
+  <table class="w-full min-w-[640px] border-separate border-spacing-0 text-sm">
+    <caption class="sr-only">{{ t('Tour comparison','ট্যুর তুলনা') }}</caption>
+    <thead><tr><th scope="col" class="w-40 p-3 text-left align-bottom text-xs uppercase tracking-wider muted">{{ t('Tour','ট্যুর') }}</th>{% for x in D.TOURS %}<th scope="col" class="p-3 text-left align-top" data-col="{{ x.slug }}"><img src="{{ img(x.img, True) }}" alt="" class="aspect-[16/10] w-full rounded-2xl object-cover" loading="lazy" width="320" height="200"><a class="mt-2 block font-bold hover:text-brand-700" href="{{ u('tours/'+x.slug+'.html') }}">{{ x.title|tr }}</a></th>{% endfor %}</tr></thead>
+    <tbody>
+      {% for lbl,fn in rows %}<tr class="odd:bg-ink-50 dark:odd:bg-ink-900"><th scope="row" class="p-3 text-left font-semibold">{{ lbl|tr }}</th>{% for x in D.TOURS %}<td class="p-3" data-col="{{ x.slug }}">{{ fn[x.slug] }}</td>{% endfor %}</tr>{% endfor %}
+      <tr><td class="p-3"></td>{% for x in D.TOURS %}<td class="p-3" data-col="{{ x.slug }}"><a href="{{ u('booking.html') }}?tour={{ x.slug }}" class="btn btn-accent btn-sm w-full">{{ t('Book','বুক করুন') }}</a></td>{% endfor %}</tr>
+    </tbody>
+  </table>
+</div></section>
+{% endblock %}

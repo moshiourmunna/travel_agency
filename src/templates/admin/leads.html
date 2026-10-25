@@ -1,0 +1,17 @@
+{% extends 'app/shell.html' %}
+{% from 'app/ui.html' import page_head, avatar_i, kpi %}
+{% block content %}
+{% call page_head(title, t('Enquiries from the website, trip planner, WhatsApp, ads and branches.','ওয়েবসাইট, ট্রিপ প্ল্যানার, হোয়াটসঅ্যাপ, বিজ্ঞাপন ও শাখা থেকে অনুসন্ধান।')) %}<button type="button" class="btn btn-primary btn-sm" data-demo="{{ t('New lead form (demo)','নতুন লিড ফর্ম (ডেমো)') }}">{{ icon('plus','h-4 w-4') }} {{ t('Add lead','লিড যোগ') }}</button>{% endcall %}
+<div class="mb-5 grid grid-cols-2 gap-3 lg:grid-cols-4">{{ kpi(t('Open pipeline','চলমান পাইপলাইন'), bdt(3120000), None, 'kanban') }}{{ kpi(t('Win rate (90 d)','সফলতার হার (৯০ দিন)'), digits('34%'), '+4 pt', 'trophy', tone='accent') }}{{ kpi(t('First response','প্রথম সাড়া'), t('6 min','৬ মিনিট'), None, 'timer', note=t('Target: under 10 min','লক্ষ্য: ১০ মিনিটের কম'), tone='sky') }}{{ kpi(t('Planner leads','প্ল্যানার লিড'), digits(41), '+12', 'route', tone='brand') }}</div>
+<div class="relative -mx-3 flex snap-x gap-4 overflow-x-auto scroll-px-3 px-3 sm:scroll-px-0 pb-4 sm:mx-0 sm:px-0">
+{% for st,lab in [('new',A.ST.new[0]),('contacted',A.ST.contacted[0]),('quoted',A.ST.quoted[0]),('won',A.ST.won[0]),('lost',A.ST.lost[0])] %}{% set items = A.LEADS|selectattr('stage','equalto',st)|list %}
+<section class="w-[85vw] max-w-[19rem] shrink-0 snap-start rounded-3xl bg-ink-100/70 p-3 dark:bg-ink-900/60 sm:w-72" data-kcol aria-labelledby="k-{{ st }}">
+  <div class="flex items-center justify-between px-1 pb-3"><h2 id="k-{{ st }}" class="text-sm font-bold">{{ lab|tr }} <span class="ml-1 rounded-full bg-white px-2 py-0.5 text-xs dark:bg-ink-800" data-kn>{{ digits(items|length) }}</span></h2><span class="text-xs muted">{{ bdt(items|sum(attribute='value')) }}</span></div>
+  <ul class="space-y-2" data-klist>{% for l in items %}
+    <li class="card p-3" data-kcard><div class="flex items-start gap-2">{{ avatar_i(l.ini,'h-8 w-8 text-[11px]') }}<div class="min-w-0 flex-1"><p class="truncate text-sm font-semibold">{{ l.name|tr }}</p><p class="text-xs muted">{{ l.id }} · {{ digits(l.age) }}</p></div></div>
+      <p class="mt-2 text-sm">{{ l.need|tr }}</p><div class="mt-2 flex flex-wrap items-center gap-1.5 text-xs"><span class="rounded-md bg-ink-100 px-1.5 py-0.5 dark:bg-ink-800">{{ l.src|tr }}</span><span class="rounded-md bg-brand-50 px-1.5 py-0.5 text-brand-800 dark:bg-brand-900/40 dark:text-brand-200">{{ l.owner }}</span><b class="ml-auto">{{ bdt(l.value) }}</b></div>
+      {% if st not in ('won','lost') %}<div class="mt-3 flex gap-1.5 border-t border-ink-100 pt-2 dark:border-ink-800"><a href="https://wa.me/{{ C.wa }}" target="_blank" rel="noopener" class="icon-btn h-8 w-8" aria-label="WhatsApp {{ l.name|tr }}">{{ icon('whatsapp','h-4 w-4 text-[#1FAF38]') }}</a><button type="button" class="icon-btn h-8 w-8" data-demo="{{ t('Quote builder opened (demo)','কোটেশন বিল্ডার খোলা হয়েছে (ডেমো)') }}" aria-label="{{ t('Create quote','কোটেশন তৈরি') }} — {{ l.name|tr }}">{{ icon('file-text','h-4 w-4') }}</button><button type="button" class="btn btn-outline btn-sm ml-auto h-8" data-move-next>{{ t('Next stage','পরের ধাপ') }} →<span class="sr-only"> {{ l.name|tr }}</span></button></div>{% endif %}
+    </li>{% endfor %}</ul>
+</section>{% endfor %}
+</div>
+{% endblock %}

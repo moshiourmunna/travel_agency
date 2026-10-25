@@ -1,0 +1,17 @@
+{% extends 'app/shell.html' %}
+{% from 'app/ui.html' import page_head, status %}
+{% from 'ui.html' import stars %}
+{% block content %}
+{% call page_head(title, t('Each published review earns 250 Miles.','প্রতিটি প্রকাশিত রিভিউতে ২৫০ মাইলস।')) %}{% endcall %}
+<section class="card p-4 sm:p-6" aria-labelledby="wr-h"><h2 id="wr-h" class="text-lg font-bold">{{ t('Waiting for your review','আপনার রিভিউয়ের অপেক্ষায়') }}</h2>
+  <form class="mt-4 grid gap-4 lg:grid-cols-[16rem_1fr]" data-validate data-success="{{ t('Thanks! Your review is in moderation; 250 Miles will be added once it is published.','ধন্যবাদ! রিভিউটি মডারেশনে আছে; প্রকাশ হলে ২৫০ মাইলস যোগ হবে।') }}">
+    <div class="flex gap-3 lg:block"><img src="{{ img(D.TOUR['bali-highlights'].img, True) }}" alt="" class="h-20 w-28 rounded-xl object-cover lg:h-36 lg:w-full" width="256" height="144"><div class="lg:mt-2"><p class="font-semibold">{{ D.TOUR['bali-highlights'].title|tr }}</p><p class="text-xs muted">MSF-25-31207 · {{ date('2025-12-25') }}</p></div></div>
+    <div><fieldset><legend class="label">{{ t('Overall rating','সার্বিক রেটিং') }}</legend><div class="flex flex-row-reverse justify-end gap-1">{% for i in range(5,0,-1) %}<input type="radio" name="rate" id="rt{{ i }}" value="{{ i }}" class="peer sr-only" {{ 'checked' if i==5 }} required><label for="rt{{ i }}" class="cursor-pointer text-ink-300 peer-checked:text-accent-400 hover:text-accent-400 dark:text-ink-600" title="{{ digits(i) }}">{{ icon('star','h-8 w-8 fill-current') }}<span class="sr-only">{{ digits(i) }} {{ t('stars','তারকা') }}</span></label>{% endfor %}</div></fieldset>
+      <div class="mt-3 grid gap-3 sm:grid-cols-3">{% for l in [('Guide','গাইড'),('Hotels','হোটেল'),('Value','মূল্যমান')] %}<div><label class="label" for="sr{{ loop.index }}">{{ t(*l) }}</label><select id="sr{{ loop.index }}" class="input">{% for i in range(5,0,-1) %}<option>{{ digits(i) }} ★</option>{% endfor %}</select></div>{% endfor %}</div>
+      <label class="label mt-3" for="rv-t">{{ t('Your review','আপনার রিভিউ') }}</label><textarea id="rv-t" rows="4" class="input" required minlength="20" placeholder="{{ t('What did you love? Anything we could do better?','কী ভালো লেগেছে? কী আরও ভালো করা যেত?') }}"></textarea>
+      <label class="mt-3 flex cursor-pointer items-center gap-2 text-sm"><input type="checkbox" class="check"> {{ t('Add photos (up to 6)','ছবি যোগ করুন (সর্বোচ্চ ৬টি)') }}</label>
+      <button class="btn btn-primary mt-4">{{ t('Publish review','রিভিউ প্রকাশ') }}</button></div>
+  </form></section>
+<section class="mt-6" aria-labelledby="pr-h"><h2 id="pr-h" class="text-lg font-bold">{{ t('Published','প্রকাশিত') }}</h2>
+  <ul class="mt-3 grid gap-4 md:grid-cols-2">{% for r in A.MY_REVIEWS %}<li class="card p-4 sm:p-5"><div class="flex items-center justify-between gap-2">{{ stars(r.rating) }}{{ status('published') }}</div><p class="mt-2 font-semibold">{{ r.title|tr }}</p><p class="mt-1 text-sm muted">“{{ r.text|tr }}”</p><p class="mt-3 text-xs muted">{{ r.ref }} · {{ date(r.date) }} · +{{ digits(250) }} {{ t('Miles','মাইলস') }}</p></li>{% endfor %}</ul></section>
+{% endblock %}

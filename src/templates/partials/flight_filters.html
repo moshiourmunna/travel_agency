@@ -1,0 +1,6 @@
+<form data-filters data-for="flist" class="space-y-6" aria-label="{{ t('Filter flights','ফ্লাইট ফিল্টার') }}">
+  <fieldset><legend class="label">{{ t('Stops','স্টপ') }}</legend><div class="space-y-2">{% for v,l in [('0',('Non-stop','সরাসরি')),('1',('1 stop','১ স্টপ'))] %}<label class="flex items-center gap-2.5 text-sm"><input type="checkbox" class="check" name="stops" value="{{ v }}"> {{ t(*l) }}</label>{% endfor %}</div></fieldset>
+  <fieldset><legend class="label">{{ t('Airlines','এয়ারলাইন') }}</legend><div class="space-y-2">{% for f in D.FLIGHTS %}<label class="flex items-center gap-2.5 text-sm"><input type="checkbox" class="check" name="airline" value="{{ f.code }}"> {{ AIRLINE[f.code][1] }}</label>{% endfor %}</div></fieldset>
+  <div><label class="label" for="{{ pfx }}-price">{{ t('Max price','সর্বোচ্চ ভাড়া') }}: <span class="text-brand-700 dark:text-brand-300" data-maxprice-out>{{ bdt(60000) }}</span></label><input id="{{ pfx }}-price" type="range" name="maxprice" min="30000" max="60000" step="1000" value="60000" class="w-full"></div>
+  <div class="flex gap-2"><button type="reset" class="btn btn-ghost flex-1">{{ t('Reset','রিসেট') }}</button><button class="btn btn-primary flex-1 lg:hidden">{{ t('Show results','ফলাফল দেখুন') }}</button></div>
+</form>

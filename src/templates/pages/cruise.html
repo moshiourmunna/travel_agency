@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% import 'ui.html' as ui %}
+{% block content %}
+{% set c = cruise %}
+<section class="relative isolate overflow-hidden bg-ink-950">
+  <img src="{{ img(c.img) }}" alt="{{ c.title|tr }}" class="img-cover absolute inset-0 -z-10 opacity-60" width="1600" height="1000" fetchpriority="high">
+  <div class="absolute inset-0 -z-10 bg-gradient-to-t from-ink-950 via-ink-950/50 to-ink-950/20"></div>
+  <div class="wrap py-10 md:py-16">
+    {{ ui.crumbs([(t('Home','হোম'),u('index.html')),(t('Cruises','ক্রুজ'),u('cruises.html')),(c.title|tr,'')], True) }}
+    <div class="mt-5 flex flex-wrap gap-2"><span class="badge bg-white text-ink-800">{{ D.CRUISE_REGIONS[c.region]|tr }}</span>{% if c.badge %}<span class="badge bg-accent-400 text-ink-900">{{ c.badge|tr }}</span>{% endif %}</div>
+    <h1 class="mt-3 max-w-4xl text-3xl font-extrabold text-white text-balance sm:text-5xl">{{ c.title|tr }}</h1>
+    <div class="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-ink-200"><span class="inline-flex items-center gap-1.5">{{ ui.stars(c.rating) }} <b class="text-white">{{ digits(c.rating) }}</b> ({{ num(c.reviews) }})</span><span class="inline-flex items-center gap-1.5">{{ icon('ship','h-4 w-4') }} {{ c.ship }} · {{ c.line }}</span><span class="inline-flex items-center gap-1.5">{{ icon('moon','h-4 w-4') }} {{ digits(c.nights) }} {{ t('nights','রাত') }}</span><span class="inline-flex items-center gap-1.5">{{ icon('anchor','h-4 w-4') }} {{ t('From','যাত্রা:') }} {{ c.port|tr }}</span></div>
+  </div>
+</section>
+<div class="wrap grid gap-10 py-10 lg:grid-cols-[1fr_380px]">
+  <div class="min-w-0 space-y-12">
+    <section><h2 class="text-2xl font-bold">{{ t('Route','রুট') }}</h2>
+      <div class="mt-5">{% with stops=c.ports|map('tr')|list, map_q=tr(c.title) %}{% include 'partials/route_map.html' %}{% endwith %}</div>
+      <ol class="mt-6 space-y-3">{% for p in c.ports %}<li class="flex gap-4 rounded-2xl border border-ink-100 p-4 dark:border-ink-800"><span class="grid h-12 w-16 shrink-0 place-items-center rounded-xl bg-brand-50 text-center text-xs font-bold text-brand-800 dark:bg-brand-900/30 dark:text-brand-300">{{ t('Day','দিন') }}<br>{{ digits(port_days[loop.index0]) }}</span><div><h3 class="font-bold">{{ p|tr }}</h3><p class="mt-0.5 text-sm muted">{% if loop.first %}{{ t('Embark from 1:00 PM · welcome dinner & safety drill','দুপুর ১টা থেকে বোর্ডিং · স্বাগত ডিনার ও নিরাপত্তা মহড়া') }}{% elif loop.last %}{{ t('Disembark after breakfast · airport transfer','নাশতার পর জাহাজ ত্যাগ · এয়ারপোর্ট ট্রান্সফার') }}{% else %}{{ t('Arrive 8:00 AM, depart 6:00 PM · optional shore excursion','সকাল ৮টায় পৌঁছানো, সন্ধ্যা ৬টায় ছাড়া · ঐচ্ছিক তীর ভ্রমণ') }}{% endif %}</p></div></li>{% endfor %}</ol>
+    </section>
+    <section><h2 class="text-2xl font-bold">{{ t('Cabins & prices','কেবিন ও মূল্য') }}</h2>
+      <div class="mt-5 grid gap-4 sm:grid-cols-3">{% for k,l,m,ic in [('inside',('Inside','ইনসাইড'),0.82,'bed-double'),('ocean',('Ocean view','ওশান ভিউ'),1.0,'sunrise'),('balcony',('Balcony','ব্যালকনি'),1.28,'sun')] %}<div class="card p-5 {{ 'ring-2 ring-brand-600' if loop.index==2 }}"><span class="grid h-10 w-10 place-items-center rounded-xl bg-brand-50 text-brand-700 dark:bg-brand-900/40 dark:text-brand-300">{{ icon(ic,'h-5 w-5') }}</span><h3 class="mt-3 font-bold">{{ t(*l) }}</h3><p class="text-xs muted">{{ t('Twin sharing, per person','দুজনের কেবিন, জনপ্রতি') }}</p><p class="mt-2 text-2xl font-extrabold">{{ bdt((c.price*m)|round|int) }}</p>{% if loop.index==2 %}<span class="badge badge-brand mt-2">{{ t('Most popular','সবচেয়ে জনপ্রিয়') }}</span>{% endif %}</div>{% endfor %}</div>
+    </section>
+    <section><h2 class="text-2xl font-bold">{{ t('Included','যা অন্তর্ভুক্ত') }}</h2>
+      <ul class="mt-4 grid gap-2 sm:grid-cols-2">{% for h in c.hl %}<li class="flex gap-2 text-sm">{{ icon('check','h-4 w-4 shrink-0 text-brand-600') }} {{ h|tr }}</li>{% endfor %}{% for l in [('Port taxes & gratuities','বন্দর কর ও টিপস'),('Return transfers to port','বন্দরে যাওয়া-আসার ট্রান্সফার'),('Musafir travel kit','মুসাফির ট্রাভেল কিট')] %}<li class="flex gap-2 text-sm">{{ icon('check','h-4 w-4 shrink-0 text-brand-600') }} {{ t(*l) }}</li>{% endfor %}</ul>
+      <div class="mt-5 rounded-2xl bg-ink-50 p-4 text-sm dark:bg-ink-850"><p class="font-bold">{{ t('Cancellation policy','বাতিল নীতি') }}</p><div class="mt-1">{{ ui.cancel_badge(c.cancel) }}</div><p class="mt-1 muted">{{ t('Full refund 60+ days before sailing, 50% at 30–59 days, non-refundable within 30 days.','যাত্রার ৬০+ দিন আগে পূর্ণ রিফান্ড, ৩০–৫৯ দিনে ৫০%, ৩০ দিনের মধ্যে অফেরতযোগ্য।') }}</p></div>
+    </section>
+    <section><h2 class="text-2xl font-bold">{{ t('Guest reviews','অতিথিদের রিভিউ') }}</h2><div class="mt-5">{{ ui.reviews_summary(c.rating, c.reviews, [(('Cabin','কেবিন'),4.7),(('Food','খাবার'),4.8),(('Entertainment','বিনোদন'),4.9),(('Value','মূল্যমান'),4.6)]) }}</div><div class="mt-5 grid gap-5 md:grid-cols-2">{% for r in D.REVIEWS[1:3] %}{{ ui.review_card(r) }}{% endfor %}</div></section>
+  </div>
+  <aside class="lg:sticky lg:top-24 lg:self-start">
+    <form class="card overflow-hidden" action="{{ u('booking.html') }}" method="get" data-price-calc>
+      <input type="hidden" name="cruise" value="{{ c.slug }}">
+      <div class="bg-gradient-to-br from-ink-900 to-brand-900 p-5 text-white"><p class="text-sm text-brand-200">{{ t('From, per person','শুরু, জনপ্রতি') }}</p><p class="flex flex-wrap items-baseline gap-2"><span class="text-3xl font-extrabold">{{ bdt(c.price) }}</span>{% if c.old %}<s class="text-ink-300">{{ bdt(c.old) }}</s>{% endif %}</p><p class="mt-1 text-sm text-ink-300">{{ t('Next sailing','পরবর্তী যাত্রা') }}: {{ date(c.depart) }}</p></div>
+      <div class="space-y-4 p-5">
+        <div><label class="label" for="cr-cabin">{{ t('Cabin','কেবিন') }}</label><select id="cr-cabin" name="cabin" class="input" data-tier-select><option data-mult="0.82">{{ t('Inside (−18%)','ইনসাইড (−১৮%)') }}</option><option data-mult="1" selected>{{ t('Ocean view','ওশান ভিউ') }}</option><option data-mult="1.28">{{ t('Balcony (+28%)','ব্যালকনি (+২৮%)') }}</option></select></div>
+        <div class="flex items-center justify-between rounded-2xl border border-ink-100 p-3 dark:border-ink-800" data-stepper data-unit="{{ c.price }}"><div><p class="text-sm font-semibold" id="cr-g">{{ t('Guests','অতিথি') }}</p><p class="text-xs muted">{{ t('Max 4 per cabin','প্রতি কেবিনে সর্বোচ্চ ৪') }}</p></div><div class="flex items-center gap-2"><button type="button" class="icon-btn h-8 w-8 border border-ink-200 dark:border-ink-700" data-step="-1" aria-label="{{ t('Fewer guests','অতিথি কমান') }}">{{ icon('minus','h-4 w-4') }}</button><input type="number" name="adults" value="2" min="1" max="8" readonly class="w-8 border-0 bg-transparent p-0 text-center text-sm font-bold focus:ring-0 [appearance:textfield]" aria-labelledby="cr-g"><button type="button" class="icon-btn h-8 w-8 border border-ink-200 dark:border-ink-700" data-step="1" aria-label="{{ t('More guests','অতিথি বাড়ান') }}">{{ icon('plus','h-4 w-4') }}</button></div></div>
+        <label class="flex items-center justify-between gap-2 text-sm"><span class="flex items-center gap-2"><input type="checkbox" class="check" data-addon="9500" name="drinks"> {{ t('Beverage & Wi-Fi package','পানীয় ও ওয়াই-ফাই প্যাকেজ') }}</span><span class="muted">+{{ bdt(9500) }}</span></label>
+        <div class="space-y-1 border-t border-ink-100 pt-4 dark:border-ink-800"><div class="flex items-center justify-between"><span class="font-semibold">{{ t('Total','মোট') }}</span><b class="text-2xl" data-total>{{ bdt(c.price*2) }}</b></div><div class="flex justify-between text-sm muted"><span>{{ t('Deposit today (30%)','আজ অগ্রিম (৩০%)') }}</span><span data-deposit>{{ bdt((c.price*0.6)|round|int) }}</span></div></div>
+        <button class="btn btn-accent btn-lg w-full">{{ t('Book this cruise','এই ক্রুজ বুক করুন') }}</button>
+        <div class="text-center">{{ ui.cancel_badge(c.cancel) }}</div>
+      </div>
+    </form>
+  </aside>
+</div>
+<div class="fixed inset-x-0 bottom-16 z-30 border-t border-ink-100 bg-white/95 p-3 backdrop-blur dark:border-ink-800 dark:bg-ink-900/95 lg:hidden"><div class="wrap flex items-center justify-between gap-3 !px-1"><div><p class="text-xs muted">{{ digits(c.nights) }} {{ t('nights','রাত') }} · {{ c.ship }}</p><p class="text-lg font-extrabold">{{ bdt(c.price) }}</p></div><a href="{{ u('booking.html') }}?cruise={{ c.slug }}" class="btn btn-accent">{{ t('Book now','বুক করুন') }}</a></div></div>
+{% endblock %}

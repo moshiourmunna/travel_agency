@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% import 'ui.html' as ui %}
+{% block content %}
+<section class="relative overflow-hidden bg-gradient-to-br from-brand-800 to-brand-600 text-white print:hidden">
+  <div class="pattern-dots absolute inset-0 opacity-20"></div>
+  <div class="wrap relative py-12 text-center md:py-16">
+    <span class="mx-auto grid h-20 w-20 place-items-center rounded-full bg-white text-brand-700 shadow-xl ring-8 ring-white/20">{{ icon('check','h-10 w-10') }}</span>
+    <h1 class="mt-6 text-3xl font-extrabold sm:text-4xl">{{ t('Booking confirmed!','বুকিং নিশ্চিত হয়েছে!') }}</h1>
+    <p class="mx-auto mt-2 max-w-xl text-brand-100">{{ t('Thank you, Rafiq. Your e-voucher and invoice have been sent to your email and phone. Booking reference:','ধন্যবাদ, রফিক। আপনার ই-ভাউচার ও ইনভয়েস ইমেইল ও ফোনে পাঠানো হয়েছে। বুকিং রেফারেন্স:') }}</p>
+    <p class="mt-4 inline-flex items-center gap-2 rounded-2xl bg-white/15 px-5 py-3 font-mono text-xl font-bold ring-1 ring-white/25">MSF-26-10458 <button type="button" class="icon-btn h-8 w-8 text-white hover:bg-white/15" data-copy="MSF-26-10458" aria-label="{{ t('Copy reference','রেফারেন্স কপি করুন') }}">{{ icon('copy','h-4 w-4') }}</button></p>
+    <div class="mt-6 flex flex-wrap justify-center gap-3"><a href="{{ u('account/booking.html') }}" class="btn bg-white text-brand-800 hover:bg-brand-50">{{ t('Manage booking','বুকিং ম্যানেজ করুন') }}</a><button type="button" class="btn bg-white/10 text-white ring-1 ring-white/30 hover:bg-white/20" data-print>{{ icon('download','h-4 w-4') }} {{ t('Download invoice (PDF)','ইনভয়েস ডাউনলোড (পিডিএফ)') }}</button><a href="https://wa.me/?text=MSF-26-10458" target="_blank" rel="noopener" class="btn bg-white/10 text-white ring-1 ring-white/30 hover:bg-white/20">{{ icon('share-2','h-4 w-4') }} {{ t('Share','শেয়ার') }}</a></div>
+  </div>
+</section>
+<div class="wrap grid gap-8 py-10 lg:grid-cols-[1fr_320px]">
+  <div class="min-w-0">{% include 'partials/invoice.html' %}</div>
+  <aside class="space-y-5 print:hidden">
+    <div class="card p-5"><h2 class="font-bold">{{ t('What happens next','এরপর যা হবে') }}</h2>
+      <ol class="mt-4 space-y-4">{% for ic,ti,de in [('mail-check',('Confirmation sent','নিশ্চিতকরণ পাঠানো হয়েছে'),('Check your inbox and SMS','ইনবক্স ও এসএমএস দেখুন')),('user-round-check',('Coordinator assigned','সমন্বয়ক নির্ধারিত'),('Nusrat will call within 2 hours','নুসরাত ২ ঘণ্টার মধ্যে কল করবেন')),('file-up',('Upload documents','কাগজপত্র আপলোড'),('Passport & photo in My Account','মাই অ্যাকাউন্টে পাসপোর্ট ও ছবি')),('wallet',('Pay balance','বকেয়া পরিশোধ'),('Due 21 days before travel','যাত্রার ২১ দিন আগে'))] %}<li class="flex gap-3"><span class="grid h-9 w-9 shrink-0 place-items-center rounded-full {{ 'bg-emerald-100 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-300' if loop.first else 'bg-ink-100 text-ink-600 dark:bg-ink-800 dark:text-ink-300' }}">{{ icon(ic,'h-4 w-4') }}</span><div><p class="text-sm font-bold">{{ t(*ti) }}</p><p class="text-xs muted">{{ t(*de) }}</p></div></li>{% endfor %}</ol></div>
+    <div class="card p-5"><h2 class="font-bold">{{ t('Add to your trip','ট্রিপে যোগ করুন') }}</h2><div class="mt-3 space-y-2">{% for ic,l,h in [('plane',('Flights','ফ্লাইট'),'flights.html'),('shield-plus',('Travel insurance','ভ্রমণ বিমা'),'insurance.html'),('stamp',('Visa assistance','ভিসা সহায়তা'),'visa.html')] %}<a href="{{ u(h) }}" class="flex items-center justify-between rounded-xl border border-ink-100 p-3 text-sm font-semibold hover:border-brand-500 dark:border-ink-800"><span class="flex items-center gap-2">{{ icon(ic,'h-4 w-4 text-brand-600') }} {{ t(*l) }}</span>{{ icon('chevron-right','h-4 w-4') }}</a>{% endfor %}</div></div>
+  </aside>
+</div>
+{% endblock %}

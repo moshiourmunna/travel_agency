@@ -1,0 +1,27 @@
+{# expects inv: dict(no, date, due, cust, phone, email, items[(desc, qty, unit)], paid) #}
+{% set sub = namespace(v=0) %}{% for d,q,p in inv['items'] %}{% set sub.v = sub.v + q*p %}{% endfor %}
+{% set disc = (sub.v*inv.disc)|round|int %}{% set total = sub.v - disc %}
+<article class="card overflow-hidden print:border-0 print:shadow-none" id="invoice" aria-labelledby="inv-h">
+  <header class="flex flex-wrap items-start justify-between gap-6 border-b border-ink-100 p-6 dark:border-ink-800 sm:p-8">
+    <div><img src="{{ asset('brand/logo.svg') }}" alt="Musafir" class="h-11 w-auto dark:hidden print:block" width="190" height="48"><img src="{{ asset('brand/logo-dark.svg') }}" alt="Musafir" class="hidden h-11 w-auto dark:block print:hidden" width="190" height="48">
+      <p class="mt-3 max-w-xs text-xs muted">{{ C.name|tr }}<br>{{ C.address|tr }}<br>BIN 004567891-0101 · IATA 42-3 1234 5</p></div>
+    <div class="text-right"><h2 id="inv-h" class="text-2xl font-extrabold tracking-tight">{{ t('INVOICE','ইনভয়েস') }}</h2><p class="mt-1 text-sm font-semibold">#{{ inv.no }}</p>
+      <span class="badge mt-2 {{ 'bg-emerald-100 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-300' if inv.paid >= total else 'bg-amber-100 text-amber-800 dark:bg-amber-500/15 dark:text-amber-300' }}">{{ t('PAID','পরিশোধিত') if inv.paid >= total else t('PARTIALLY PAID','আংশিক পরিশোধিত') }}</span></div>
+  </header>
+  <div class="grid gap-6 p-6 text-sm sm:grid-cols-3 sm:p-8">
+    <div><p class="text-xs font-bold uppercase tracking-wide muted">{{ t('Billed to','বিল প্রাপক') }}</p><p class="mt-1 font-bold">{{ inv.cust|tr }}</p><p class="muted">{{ digits(inv.phone) }}<br>{{ inv.email }}</p></div>
+    <div><p class="text-xs font-bold uppercase tracking-wide muted">{{ t('Issued','ইস্যুর তারিখ') }}</p><p class="mt-1 font-semibold">{{ date(inv.date) }}</p><p class="mt-3 text-xs font-bold uppercase tracking-wide muted">{{ t('Balance due by','বকেয়া পরিশোধের শেষ তারিখ') }}</p><p class="mt-1 font-semibold">{{ date(inv.due) }}</p></div>
+    <div><p class="text-xs font-bold uppercase tracking-wide muted">{{ t('Booking ref.','বুকিং রেফারেন্স') }}</p><p class="mt-1 font-mono font-bold">{{ inv.ref }}</p><svg viewBox="0 0 21 21" class="mt-2 h-16 w-16" aria-label="{{ t('QR code (mock)','কিউআর কোড (ডেমো)') }}" role="img" shape-rendering="crispEdges">{% for y in range(21) %}{% for x in range(21) %}{% if (x<7 and y<7 and not (x in [1,5] and 0<y<6 or y in [1,5] and 0<x<6)) or (x>13 and y<7 and not ((x-14) in [1,5] and 0<y<6 or y in [1,5] and 0<(x-14)<6)) or (x<7 and y>13 and not (x in [1,5] and 0<(y-14)<6 or (y-14) in [1,5] and 0<x<6)) or (x>7 and y>7 and (x*7+y*13+x*y) % 3 == 0) or (x>7 and x<13 and y<7 and (x+y)%2==0) %}<rect x="{{ x }}" y="{{ y }}" width="1" height="1" fill="currentColor"/>{% endif %}{% endfor %}{% endfor %}</svg></div>
+  </div>
+  <div class="overflow-x-auto px-6 sm:px-8"><table class="table min-w-[520px]"><thead><tr><th scope="col">{{ t('Description','বিবরণ') }}</th><th scope="col" class="text-right">{{ t('Qty','পরিমাণ') }}</th><th scope="col" class="text-right">{{ t('Unit price','একক মূল্য') }}</th><th scope="col" class="text-right">{{ t('Amount','টাকা') }}</th></tr></thead>
+    <tbody>{% for d,q,p in inv['items'] %}<tr><td>{{ d|tr }}</td><td class="text-right">{{ digits(q) }}</td><td class="text-right">{{ bdt(p) }}</td><td class="text-right font-semibold">{{ bdt(q*p) }}</td></tr>{% endfor %}</tbody></table></div>
+  <div class="flex justify-end p-6 sm:p-8"><dl class="w-full max-w-xs space-y-2 text-sm">
+    <div class="flex justify-between"><dt class="muted">{{ t('Subtotal','উপমোট') }}</dt><dd>{{ bdt(sub.v) }}</dd></div>
+    {% if disc %}<div class="flex justify-between text-emerald-700 dark:text-emerald-400"><dt>{{ t('Discount','ছাড়') }}</dt><dd>−{{ bdt(disc) }}</dd></div>{% endif %}
+    <div class="flex justify-between"><dt class="muted">{{ t('VAT (incl., 15% on service charge)','ভ্যাট (অন্তর্ভুক্ত, সার্ভিস চার্জে ১৫%)') }}</dt><dd>{{ bdt((total*0.012)|round|int) }}</dd></div>
+    <div class="flex justify-between border-t border-ink-100 pt-2 text-base font-bold dark:border-ink-800"><dt>{{ t('Total','মোট') }}</dt><dd>{{ bdt(total) }}</dd></div>
+    <div class="flex justify-between text-emerald-700 dark:text-emerald-400"><dt>{{ t('Paid','পরিশোধিত') }} ({{ inv.method }})</dt><dd>−{{ bdt(inv.paid) }}</dd></div>
+    <div class="flex justify-between rounded-xl bg-ink-50 p-3 text-base font-extrabold dark:bg-ink-850"><dt>{{ t('Balance due','বকেয়া') }}</dt><dd>{{ bdt([total - inv.paid, 0]|max) }}</dd></div>
+  </dl></div>
+  <footer class="border-t border-ink-100 p-6 text-xs muted dark:border-ink-800 sm:px-8">{{ t('This is a computer-generated invoice and does not require a signature. Payments are subject to our refund policy.','এটি কম্পিউটারে তৈরি ইনভয়েস, স্বাক্ষরের প্রয়োজন নেই। পেমেন্ট আমাদের রিফান্ড নীতির অধীন।') }} {{ C.email }} · {{ digits(C.hotline) }}</footer>
+</article>

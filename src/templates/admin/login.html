@@ -1,0 +1,25 @@
+{% include 'partials/head.html' %}
+<body class="min-h-screen bg-ink-50 dark:bg-ink-950">
+<a href="#main" class="skip-link">{{ t('Skip to content','মূল বিষয়বস্তুতে যান') }}</a>
+<main id="main" tabindex="-1" class="grid min-h-screen outline-none lg:grid-cols-2">
+  <div class="relative hidden overflow-hidden lg:block"><img src="{{ img('maldives') }}" alt="" class="absolute inset-0 h-full w-full object-cover" width="1600" height="1000"><div class="absolute inset-0 bg-gradient-to-t from-ink-950/90 via-ink-950/40 to-transparent"></div>
+    <div class="absolute inset-x-0 bottom-0 p-10 text-white"><img src="{{ asset('brand/logo-compact-dark.svg') }}" alt="" class="h-10 w-auto" width="140" height="40"><p class="mt-6 max-w-md text-2xl font-bold leading-snug">{{ t('Musafir operations console — bookings, visas, payments and content in one place.','মুসাফির অপারেশন কনসোল — বুকিং, ভিসা, পেমেন্ট ও কনটেন্ট এক জায়গায়।') }}</p></div></div>
+  <div class="flex flex-col px-4 py-6 sm:px-8">
+    <div class="flex items-center justify-between"><a href="{{ u('index.html') }}" class="lg:invisible" aria-label="{{ t('Musafir home','মুসাফির হোম') }}"><img src="{{ asset('brand/icon.svg') }}" alt="" class="h-10 w-10" width="40" height="40"></a>
+      <div class="flex gap-1"><a href="{{ other_lang_url }}" data-lang-link="{{ other_lang }}" class="icon-btn w-auto px-2.5 text-sm font-bold" hreflang="{{ other_lang }}" lang="{{ other_lang }}" aria-label="{{ t('বাংলায় দেখুন','View in English') }}">{{ 'বাং' if L=='en' else 'EN' }}</a><button type="button" class="icon-btn" data-theme-toggle aria-label="{{ t('Toggle dark mode','ডার্ক মোড চালু/বন্ধ') }}">{{ icon('moon','h-5 w-5 dark:hidden') }}{{ icon('sun','hidden h-5 w-5 dark:block') }}</button></div></div>
+    <div class="m-auto w-full max-w-sm py-10">
+      <h1 class="text-3xl font-extrabold">{{ t('Staff sign-in','স্টাফ সাইন-ইন') }}</h1><p class="mt-2 text-sm muted">{{ t('Use your work email. Two-step verification is required.','অফিসের ইমেইল ব্যবহার করুন। টু-স্টেপ যাচাই আবশ্যক।') }}</p>
+      <form class="mt-8 space-y-4" data-validate data-redirect="{{ u('admin/index.html') }}">
+        <div><label class="label" for="ad-e">{{ t('Work email','অফিসের ইমেইল') }}</label><input id="ad-e" type="email" class="input" value="ahmed.zubair@musafir.com.bd" required autocomplete="username"></div>
+        <div><label class="label" for="ad-p">{{ t('Password','পাসওয়ার্ড') }}</label><input id="ad-p" type="password" class="input" value="demo-password" required autocomplete="current-password"></div>
+        <div><label class="label" for="ad-o">{{ t('Authenticator code','অথেন্টিকেটর কোড') }}</label><input id="ad-o" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" class="input tracking-[.5em]" value="482913" required autocomplete="one-time-code"></div>
+        <button class="btn btn-primary btn-lg w-full">{{ t('Sign in','সাইন ইন') }}</button>
+      </form>
+      <p class="mt-6 rounded-2xl bg-ink-100 p-3 text-xs muted dark:bg-ink-900">{{ icon('shield-check','mr-1 inline h-4 w-4') }}{{ t('Demo: fields are prefilled — just press Sign in. Access is IP-restricted and every action is audit-logged.','ডেমো: ঘরগুলো আগে থেকে পূরণ — শুধু সাইন ইন চাপুন। অ্যাক্সেস আইপি-সীমিত এবং প্রতিটি কাজ অডিট-লগ হয়।') }}</p>
+    </div>
+  </div>
+</main>
+<div id="toasts" class="pointer-events-none fixed inset-x-0 top-20 z-[70] flex flex-col items-center gap-2 px-4" aria-live="polite" aria-atomic="true"></div>
+<script>window.MUSAFIR={lang:'{{ L }}',i18n:{{ js_i18n|safe }}};</script>
+<script src="{{ asset('js/app.js') }}" defer></script>
+</body></html>

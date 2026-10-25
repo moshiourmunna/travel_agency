@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% import 'ui.html' as ui %}
+{% block content %}
+{{ ui.page_hero(th.name|tr, th.tag|tr, [(t('Home','হোম'),u('index.html')),(t('Holidays','হলিডে'),u('holidays.html')),(th.name|tr,'')], th.img) }}
+<section class="border-b border-ink-100 dark:border-ink-800"><div class="wrap grid gap-4 py-6 sm:grid-cols-3">{% for p in th.perks %}<div class="flex items-center gap-3"><span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand-700 dark:bg-brand-900/40 dark:text-brand-300">{{ icon('sparkles','h-5 w-5') }}</span><p class="text-sm font-semibold">{{ p|tr }}</p></div>{% endfor %}</div></section>
+<section class="section" data-filter-group>
+  <div class="wrap">
+    <div class="mb-6 flex flex-wrap items-center justify-between gap-3"><h2 class="text-2xl font-bold">{{ digits(tours|length) }} {{ th.name|tr }} {{ t('trips','ট্রিপ') }}</h2>
+      <div class="flex gap-2" role="group" aria-label="{{ t('Region','অঞ্চল') }}">{% for v,l in [('all',('All','সব')),('bd',('Bangladesh','বাংলাদেশ')),('intl',('International','আন্তর্জাতিক'))] %}<button type="button" class="chip {{ 'is-active' if loop.first }}" aria-pressed="{{ 'true' if loop.first else 'false' }}" data-quick-filter="{{ v }}">{{ t(*l) }}</button>{% endfor %}</div></div>
+    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{% for x in tours %}{{ ui.tour_card(x) }}{% endfor %}</div>
+    {% if acts %}<h2 class="mt-14 text-2xl font-bold">{{ t('Add an experience','একটি অভিজ্ঞতা যোগ করুন') }}</h2><div class="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{% for a in acts %}{{ ui.activity_card(a) }}{% endfor %}</div>{% endif %}
+  </div>
+</section>
+<section class="pb-16"><div class="wrap grid gap-6 lg:grid-cols-[1fr_1.4fr]"><div>{{ ui.sec_head(t('Good to know','জেনে রাখুন'), t('Questions about','প্রশ্নোত্তর:')+' '+tr(th.name)) }}</div>{{ ui.faq_list(D.FAQS[:4]) }}</div></section>
+{% endblock %}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="{{ L }}" dir="ltr" class="scroll-smooth">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{ meta_title }}</title>
+<meta name="description" content="{{ meta_desc }}">
+{% if noindex %}<meta name="robots" content="noindex, nofollow">{% else %}<meta name="robots" content="index, follow, max-image-preview:large">{% endif %}
+<link rel="canonical" href="{{ canonical }}">
+<link rel="alternate" hreflang="en" href="{{ alt_en }}">
+<link rel="alternate" hreflang="bn" href="{{ alt_bn }}">
+<link rel="alternate" hreflang="x-default" href="{{ alt_en }}">
+<meta name="theme-color" content="#0D6B65" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#07131F" media="(prefers-color-scheme: dark)">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="{{ og_type or 'website' }}">
+<meta property="og:site_name" content="{{ t('Musafir','মুসাফির') }}">
+<meta property="og:title" content="{{ meta_title }}">
+<meta property="og:description" content="{{ meta_desc }}">
+<meta property="og:url" content="{{ canonical }}">
+<meta property="og:image" content="{{ og_image }}">
+<meta property="og:image:width" content="1600"><meta property="og:image:height" content="1000">
+<meta property="og:image:alt" content="{{ og_alt or meta_title }}">
+<meta property="og:locale" content="{{ 'bn_BD' if L=='bn' else 'en_US' }}">
+<meta property="og:locale:alternate" content="{{ 'en_US' if L=='bn' else 'bn_BD' }}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@musafirbd">
+<meta name="twitter:title" content="{{ meta_title }}">
+<meta name="twitter:description" content="{{ meta_desc }}">
+<meta name="twitter:image" content="{{ og_image }}">
+<link rel="icon" href="{{ asset('brand/favicon.ico') }}" sizes="any">
+<link rel="icon" href="{{ asset('brand/icon.svg') }}" type="image/svg+xml">
+<link rel="apple-touch-icon" href="{{ asset('brand/icon-180.png') }}">
+<link rel="manifest" href="{{ rel('manifest.webmanifest') }}">
+{% if preload_img %}<link rel="preload" as="image" href="{{ preload_img }}" fetchpriority="high">{% endif %}
+<script>/* font preloads only over http(s): a crossorigin preload is blocked under file:// */(function(){if(!/^https?:$/.test(location.protocol))return;[{% if L == 'bn' %}'{{ asset('fonts/hind-siliguri-bengali-400-normal.woff2') }}','{{ asset('fonts/hind-siliguri-bengali-700-normal.woff2') }}'{% else %}'{{ asset('fonts/plus-jakarta-sans-latin-wght-normal.woff2') }}'{% endif %}].forEach(function(h){var l=document.createElement('link');l.rel='preload';l.as='font';l.type='font/woff2';l.crossOrigin='anonymous';l.href=h;document.head.appendChild(l);});})();</script>
+<link rel="stylesheet" href="{{ asset('css/app.css') }}">
+<script>(function(){try{var d=document.documentElement,t=localStorage.getItem('musafir-theme');if(t==='dark'||(!t&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches))d.classList.add('dark');localStorage.setItem('musafir-lang','{{ L }}')}catch(e){}})();</script>
+{% for j in jsonlds %}{{ jsonld(j) }}
+{% endfor %}
+</head>

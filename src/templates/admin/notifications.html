@@ -1,0 +1,18 @@
+{% extends 'app/shell.html' %}
+{% from 'app/ui.html' import page_head, status %}
+{% block content %}
+{% call page_head(title, t('Transactional messages go out automatically; campaigns respect opt-outs and quiet hours (10 PM – 8 AM).','লেনদেন-সংক্রান্ত বার্তা স্বয়ংক্রিয়; ক্যাম্পেইন অপ্ট-আউট ও নীরব সময় (রাত ১০টা – সকাল ৮টা) মানে।')) %}{% endcall %}
+<div class="grid grid-cols-1 gap-6 xl:grid-cols-[1fr_26rem]">
+<section class="card overflow-hidden" aria-labelledby="tp-h"><h2 id="tp-h" class="p-4 text-lg font-bold sm:p-6 sm:pb-3">{{ t('Message templates','বার্তার টেমপ্লেট') }}</h2>
+  <ul class="divide-y divide-ink-100 dark:divide-ink-800">{% for n,ch,on in [(('Booking confirmed','বুকিং নিশ্চিত'),'Email · SMS · WhatsApp',True),(('Payment received','পেমেন্ট গৃহীত'),'Email · SMS',True),(('Instalment reminder (−3 d, −1 d)','কিস্তির রিমাইন্ডার (−৩ দিন, −১ দিন)'),'SMS · WhatsApp · Push',True),(('Visa stage changed','ভিসার ধাপ পরিবর্তন'),'SMS · WhatsApp',True),(('Pre-departure checklist (−7 d)','যাত্রার আগের চেকলিস্ট (−৭ দিন)'),'Email · WhatsApp',True),(('Review request (+2 d)','রিভিউর অনুরোধ (+২ দিন)'),'Email · Push',True),(('Abandoned checkout (+1 h)','অসম্পূর্ণ চেকআউট (+১ ঘণ্টা)'),'Email · WhatsApp',False)] %}<li class="flex items-center gap-3 px-4 py-3 sm:px-6"><div class="min-w-0 flex-1"><p class="text-sm font-semibold">{{ t(*n) }}</p><p class="text-xs muted">{{ ch }} · EN/BN</p></div><button type="button" class="btn btn-outline btn-sm" data-demo="{{ t('Template editor (demo)','টেমপ্লেট এডিটর (ডেমো)') }}">{{ t('Edit','এডিট') }}<span class="sr-only"> {{ t(*n) }}</span></button><button type="button" role="switch" aria-checked="{{ 'true' if on else 'false' }}" data-toggle-switch class="switch" aria-label="{{ t(*n) }}"><span></span></button></li>{% endfor %}</ul></section>
+<section class="card p-4 sm:p-6" aria-labelledby="cm-h"><h2 id="cm-h" class="text-lg font-bold">{{ t('New campaign','নতুন ক্যাম্পেইন') }}</h2>
+  <form class="mt-4 space-y-3" data-validate data-success="{{ t('Campaign scheduled for 26 Oct, 7:00 PM (demo).','ক্যাম্পেইন ২৬ অক্টোবর সন্ধ্যা ৭টায় নির্ধারিত (ডেমো)।') }}">
+    <div><label class="label" for="cm-a">{{ t('Audience','অডিয়েন্স') }}</label><select id="cm-a" class="input"><option>{{ t('Gold & Platinum members (3,412)','গোল্ড ও প্লাটিনাম সদস্য (৩,৪১২)') }}</option><option>{{ t('Beach lovers, Dhaka (8,950)','সৈকতপ্রেমী, ঢাকা (৮,৯৫০)') }}</option><option>{{ t('Abandoned Maldives checkout (126)','অসম্পূর্ণ মালদ্বীপ চেকআউট (১২৬)') }}</option></select></div>
+    <fieldset><legend class="label">{{ t('Channels','চ্যানেল') }}</legend><div class="flex flex-wrap gap-3 text-sm">{% for c,on in [('Email',True),('SMS',False),('WhatsApp',True),('Push',True)] %}<label class="flex items-center gap-2"><input type="checkbox" class="check" {{ 'checked' if on }}> {{ c }}</label>{% endfor %}</div></fieldset>
+    <div><label class="label" for="cm-s">{{ t('Subject / title','বিষয় / শিরোনাম') }}</label><input id="cm-s" class="input" required value="{{ t('Winter beach sale — up to 20% off','শীতের সৈকত সেল — সর্বোচ্চ ২০% ছাড়') }}"></div>
+    <div><label class="label" for="cm-m">{{ t('Message','বার্তা') }}</label><textarea id="cm-m" rows="3" class="input" required>{{ t('Hi {first_name}, Cox’s Bazar & Saint Martin from ৳ 18,500. Code WINTER26 until 30 Nov.','হাই {first_name}, কক্সবাজার ও সেন্ট মার্টিন ৳ ১৮,৫০০ থেকে। কোড WINTER26, ৩০ নভেম্বর পর্যন্ত।') }}</textarea></div>
+    <div><label class="label" for="cm-w">{{ t('Send at','পাঠানোর সময়') }}</label><input id="cm-w" type="datetime-local" class="input" value="2026-10-26T19:00"></div>
+    <button class="btn btn-primary w-full">{{ icon('send','h-4 w-4') }} {{ t('Schedule campaign','ক্যাম্পেইন নির্ধারণ') }}</button>
+  </form></section>
+</div>
+{% endblock %}

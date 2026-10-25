@@ -1,0 +1,17 @@
+{% extends 'app/shell.html' %}
+{% from 'app/ui.html' import page_head, status, rtable, dt_tools, row_menu %}
+{% from 'ui.html' import stars %}
+{% block content %}
+{% call page_head(title, t('16 packages · 12 departures this month','১৬টি প্যাকেজ · এই মাসে ১২টি যাত্রা')) %}<a href="{{ u('admin/tour-edit.html') }}" class="btn btn-primary btn-sm">{{ icon('plus','h-4 w-4') }} {{ t('New package','নতুন প্যাকেজ') }}</a>{% endcall %}
+{% set rows = [] %}{% for x in D.TOURS %}{% set _ = rows.append(dict(x, status=('draft' if loop.index==14 else 'published'), seats=(loop.index*7)%30+4, sold=(loop.index*37)%140+12)) %}{% endfor %}
+{{ dt_tools('tr', [('all',B('All','সব'),rows|length),('bd',B('Domestic','দেশীয়'),None),('intl',B('International','আন্তর্জাতিক'),None)], t('Search packages…','প্যাকেজ খুঁজুন…'), 'region') }}
+{% call(r, k) rtable('tr', [('title',t('Package','প্যাকেজ'),'min-w-[18rem]'),('$days',t('Days','দিন'),'text-center'),('$price',t('From','শুরু'),'text-right'),('$rating',t('Rating','রেটিং'),'hidden xl:table-cell'),('$sold',t('Sold (90 d)','বিক্রি (৯০ দিন)'),'text-center'),('status',t('Status','স্ট্যাটাস'),''),('act','','text-right')], rows, 'title', t('Holiday packages','হলিডে প্যাকেজ'), True, ('region','days','price','rating','sold')) %}
+  {% if k=='title' %}<a href="{{ u('admin/tour-edit.html') }}" class="flex min-w-0 items-center gap-3"><img src="{{ img(r.img, True) }}" alt="" class="h-10 w-14 shrink-0 rounded-lg object-cover" width="56" height="40" loading="lazy"><span class="min-w-0"><span class="block truncate font-semibold">{{ r.title|tr }}</span><span class="block truncate text-xs muted">{{ r.dest|tr }} · {{ t('Domestic','দেশীয়') if r.region=='bd' else t('International','আন্তর্জাতিক') }}</span></span></a>
+  {% elif k=='days' %}{{ digits(r.days) }}
+  {% elif k=='price' %}<b>{{ bdt(r.price) }}</b>
+  {% elif k=='rating' %}<span class="inline-flex items-center gap-1">{{ stars(r.rating,'h-3.5 w-3.5') }} {{ digits(r.rating) }}</span>
+  {% elif k=='sold' %}{{ digits(r.sold) }}
+  {% elif k=='status' %}{{ status(r.status) }}
+  {% elif k=='act' %}<div class="flex items-center justify-end gap-1"><a href="{{ u('tours/'+r.slug+'.html') }}" class="icon-btn h-8 w-8" aria-label="{{ t('View on site','সাইটে দেখুন') }} — {{ r.title|tr }}">{{ icon('external-link','h-4 w-4') }}</a><a href="{{ u('admin/tour-edit.html') }}" class="icon-btn h-8 w-8" aria-label="{{ t('Edit','এডিট') }} — {{ r.title|tr }}">{{ icon('pencil','h-4 w-4') }}</a><button type="button" class="icon-btn h-8 w-8" data-confirm-delete aria-label="{{ t('Delete','মুছুন') }} — {{ r.title|tr }}">{{ icon('trash-2','h-4 w-4') }}</button></div>{% endif %}
+{% endcall %}
+{% endblock %}

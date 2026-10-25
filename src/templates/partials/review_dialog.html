@@ -1,0 +1,9 @@
+<dialog id="review-dialog" class="w-[calc(100%-2rem)] max-w-lg rounded-3xl bg-white p-0 text-ink-800 shadow-2xl dark:bg-ink-900 dark:text-ink-100" aria-labelledby="rv-h">
+  <form class="space-y-4 p-6" data-validate data-success="{{ t('Thank you! Your review will appear after moderation.','ধন্যবাদ! যাচাইয়ের পর আপনার রিভিউ প্রকাশিত হবে।') }}" novalidate>
+    <div class="flex items-center justify-between"><h2 id="rv-h" class="text-xl font-bold">{{ t('Write a review','রিভিউ লিখুন') }}</h2><button type="button" class="icon-btn" data-modal-close aria-label="{{ t('Close','বন্ধ') }}">{{ icon('x') }}</button></div>
+    <div class="field"><p class="label">{{ t('Your rating','আপনার রেটিং') }}</p><div class="flex gap-1" data-rate>{% for i in range(5) %}<button type="button" class="text-ink-300" aria-label="{{ digits(i+1) }} {{ t('stars','তারকা') }}" aria-pressed="false">{{ icon('star','h-7 w-7 fill-current') }}</button>{% endfor %}<input type="number" name="rating" min="1" max="5" required class="sr-only" tabindex="-1" aria-hidden="true"></div><p class="field-error">{{ t('Please choose a rating.','রেটিং দিন।') }}</p></div>
+    <div class="field"><label class="label" for="rv-title">{{ t('Title','শিরোনাম') }}</label><input id="rv-title" class="input" required minlength="4"><p class="field-error">{{ t('Add a short title.','ছোট একটি শিরোনাম দিন।') }}</p></div>
+    <div class="field"><label class="label" for="rv-body">{{ t('Your experience','আপনার অভিজ্ঞতা') }}</label><textarea id="rv-body" rows="4" class="input" required minlength="20"></textarea><p class="field-error">{{ t('Please write at least 20 characters.','কমপক্ষে ২০ অক্ষর লিখুন।') }}</p></div>
+    <div class="flex justify-end gap-2"><button type="button" class="btn btn-ghost" data-modal-close>{{ t('Cancel','বাতিল') }}</button><button class="btn btn-primary">{{ t('Submit review','রিভিউ জমা দিন') }}</button></div>
+  </form>
+</dialog>

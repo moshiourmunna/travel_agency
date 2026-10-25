@@ -1,0 +1,18 @@
+{% extends 'app/shell.html' %}
+{% from 'app/ui.html' import page_head, status, rtable, dt_tools, row_menu, progress %}
+{% block content %}
+{% call page_head(title, t('Codes apply at checkout; deals appear on the Offers page with countdowns.','কোড চেকআউটে প্রযোজ্য; ডিলগুলো কাউন্টডাউনসহ অফার পেজে দেখায়।')) %}<button type="button" class="btn btn-primary btn-sm" onclick="document.getElementById('cp-dlg').showModal()">{{ icon('plus','h-4 w-4') }} {{ t('New coupon','নতুন কুপন') }}</button>{% endcall %}
+{% set rows = [] %}{% for c in A.COUPONS %}{% set _ = rows.append(dict(code=c[0], name=c[1], off=c[2], used=c[3], cap=c[4], ends=c[5], status=c[6])) %}{% endfor %}
+{{ dt_tools('cp', [('all',B('All','সব'),rows|length),('active',A.ST.active[0],None),('scheduled',A.ST.scheduled[0],None),('expired',A.ST.expired[0],None)], t('Search code or campaign…','কোড বা ক্যাম্পেইন খুঁজুন…')) }}
+{% call(r, k) rtable('cp', [('code',t('Code','কোড'),''),('off',t('Discount','ছাড়'),''),('used',t('Redemptions','ব্যবহার'),'min-w-[10rem]'),('ends',t('Ends','শেষ'),'whitespace-nowrap'),('status',t('Status','স্ট্যাটাস'),''),('act','','text-right')], rows, 'code', t('Coupons','কুপন'), False, ('status',)) %}
+  {% if k=='code' %}<p><code class="rounded-lg bg-ink-100 px-2 py-0.5 font-bold dark:bg-ink-800">{{ r.code }}</code></p><p class="mt-1 text-xs muted">{{ r.name|tr }}</p>
+  {% elif k=='off' %}<b>{{ digits(r.off) }}</b>
+  {% elif k=='used' %}{{ num(r.used) }}{% if r.cap %} / {{ num(r.cap) }}{{ progress((r.used*100/r.cap) if r.used < r.cap else 100, 'mt-1.5') }}{% else %} <span class="text-xs muted">· {{ t('no cap','সীমা নেই') }}</span>{% endif %}
+  {% elif k=='ends' %}{{ date(r.ends) }}
+  {% elif k=='status' %}{{ status(r.status) }}
+  {% elif k=='act' %}{{ row_menu(None, True) }}{% endif %}
+{% endcall %}
+<dialog id="cp-dlg" class="w-[min(92vw,32rem)] rounded-3xl p-0 backdrop:bg-ink-950/60 dark:bg-ink-900 dark:text-white" aria-labelledby="cp-h"><form class="p-6" data-validate data-success="{{ t('Coupon created (demo).','কুপন তৈরি (ডেমো)।') }}"><h2 id="cp-h" class="text-lg font-bold">{{ t('New coupon','নতুন কুপন') }}</h2>
+  <div class="mt-4 grid gap-3 sm:grid-cols-2"><div><label class="label" for="cp-c">{{ t('Code','কোড') }}</label><input id="cp-c" class="input uppercase" required pattern="[A-Za-z0-9]{4,16}" value="WINTER26B"></div><div><label class="label" for="cp-t">{{ t('Type','ধরন') }}</label><select id="cp-t" class="input"><option>{{ t('Percentage','শতাংশ') }}</option><option>{{ t('Fixed amount (৳)','নির্দিষ্ট পরিমাণ (৳)') }}</option></select></div><div><label class="label" for="cp-v">{{ t('Value','মান') }}</label><input id="cp-v" type="number" class="input" value="10" required></div><div><label class="label" for="cp-min">{{ t('Minimum spend (৳)','ন্যূনতম খরচ (৳)') }}</label><input id="cp-min" type="number" class="input" value="15000"></div><div><label class="label" for="cp-s">{{ t('Starts','শুরু') }}</label><input id="cp-s" type="date" class="input" value="2026-11-01"></div><div><label class="label" for="cp-e">{{ t('Ends','শেষ') }}</label><input id="cp-e" type="date" class="input" value="2026-11-30"></div><div class="sm:col-span-2"><label class="label" for="cp-ap">{{ t('Applies to','প্রযোজ্য') }}</label><select id="cp-ap" class="input"><option>{{ t('All holidays','সব হলিডে') }}</option><option>{{ t('Cruises only','শুধু ক্রুজ') }}</option><option>{{ t('Activities only','শুধু অ্যাক্টিভিটি') }}</option><option>{{ t('Selected packages…','নির্বাচিত প্যাকেজ…') }}</option></select></div></div>
+  <div class="mt-6 flex justify-end gap-2"><button type="button" class="btn btn-outline" data-modal-close>{{ t('Cancel','বাতিল') }}</button><button class="btn btn-primary">{{ t('Create','তৈরি') }}</button></div></form></dialog>
+{% endblock %}
