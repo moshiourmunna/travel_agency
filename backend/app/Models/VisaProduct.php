@@ -25,6 +25,7 @@ class VisaProduct extends Model
     protected function casts(): array
     {
         return [
+            'fee_breakdown' => 'array',
             'extra_documents' => 'array',
             'fee' => 'decimal:2',
             'published_at' => 'datetime',

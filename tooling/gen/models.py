@@ -81,7 +81,7 @@ M = {
  'FlightOffer': dict(casts={'via': 'array', 'fare': 'decimal:2', 'refundable': 'boolean', 'is_active': 'boolean'}, rel=[('airline', 'belongsTo', 'Airline')]),
  'VisaDocumentSet': dict(tr=['name'], casts={'items': 'array'}),
  'VisaProduct': dict(tr=['country_name', 'type', 'processing', 'validity', 'stay', 'entry', 'description'], pub=True, soft=True, ulid=True,
-     casts={'extra_documents': 'array', 'fee': 'decimal:2', 'published_at': 'datetime', 'is_featured': 'boolean'},
+     casts={'fee_breakdown': 'array', 'extra_documents': 'array', 'fee': 'decimal:2', 'published_at': 'datetime', 'is_featured': 'boolean'},
      rel=[('country', 'belongsTo', 'Country'), ('requirements', 'hasMany', 'VisaRequirement', None, "->orderBy('sort')"), ('applications', 'hasMany', 'VisaApplication')], search=['country_name', 'type']),
  'VisaRequirement': dict(tr=['item'], casts={'required': 'boolean'}, rel=[('product', 'belongsTo', 'VisaProduct', "'visa_product_id'")]),
  'InsurancePlan': dict(tr=['name', 'price_note'], casts={'coverage': 'array', 'price': 'decimal:2', 'is_popular': 'boolean', 'is_active': 'boolean'}),

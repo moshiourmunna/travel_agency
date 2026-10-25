@@ -11,8 +11,8 @@ const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
  * Generic lead form → POST /api/inquiries (BFF → Laravel FormController). Client validation mirrors the server
  * (BD mobile, email); server 422 errors are mapped back onto fields. Honeypot `website` is hidden from humans.
  */
-export function InquiryForm({ type, fields, submit, success, consent, extra, className = 'space-y-3', grid, idPrefix }: {
-  type: string; fields: QField[]; submit: string; success: string; consent?: string; extra?: Record<string, unknown>; className?: string; grid?: string; idPrefix: string;
+export function InquiryForm({ type, fields, submit, success, consent, extra, className = 'space-y-3', grid, idPrefix, submitClass = 'btn btn-primary w-full', header, footer }: {
+  type: string; fields: QField[]; submit: string; success: string; consent?: string; extra?: Record<string, unknown>; className?: string; grid?: string; idPrefix: string; submitClass?: string; header?: React.ReactNode; footer?: React.ReactNode;
 }) {
   const { lang, msg } = useSite();
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -33,9 +33,12 @@ export function InquiryForm({ type, fields, submit, success, consent, extra, cla
     if (consent && !fd.get('consent')) er.consent = msg.required;
     setErrors(er);
     if (Object.keys(er).length) { form.querySelector<HTMLElement>(`[name="${Object.keys(er)[0]}"]`)?.focus(); return; }
+    // `details.<key>` fields travel as a nested free-form details object (profession, product, …)
+    const details: Record<string, string> = {};
+    for (const k of Object.keys(data)) if (k.startsWith('details.')) { details[k.slice(8)] = String(data[k]); delete data[k]; }
     setState('busy');
     try {
-      const r = await fetch(`/api/inquiries?lang=${lang}`, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify({ type, ...extra, ...data, consent: true, page: location.pathname }) });
+      const r = await fetch(`/api/inquiries?lang=${lang}`, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify({ type, ...extra, ...data, ...(Object.keys(details).length ? { details } : {}), consent: true, page: location.pathname }) });
       const j = await r.json().catch(() => ({}));
       if (r.ok) { setRef(j.data?.reference ?? j.reference ?? ''); setState('done'); form.reset(); return; }
       if (r.status === 422 && j.errors) setErrors(Object.fromEntries(Object.entries(j.errors).map(([k, v]) => [k, (v as string[])[0]])));
@@ -64,12 +67,14 @@ export function InquiryForm({ type, fields, submit, success, consent, extra, cla
   return (
     <form className={className} noValidate onSubmit={onSubmit}>
       <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
+      {header}
       {grid ? <div className={grid}>{fields.map(cell)}</div> : fields.map(cell)}
       {consent ? (
         <div className={`field ${errors.consent ? 'is-invalid' : ''}`}><label className="flex items-start gap-2.5 text-sm"><input type="checkbox" name="consent" value="1" className="check mt-0.5" /> <span>{consent}</span></label><p className="field-error">{msg.required}</p></div>
       ) : null}
       {state === 'fail' ? <p className="text-sm font-semibold text-rose-700 dark:text-rose-400" role="alert">{msg.failed}</p> : null}
-      <button className="btn btn-primary w-full" disabled={state === 'busy'} aria-busy={state === 'busy'}>{submit}</button>
+      <button className={submitClass} disabled={state === 'busy'} aria-busy={state === 'busy'}>{submit}</button>
+      {footer}
       {consent ? null : <p className="text-center text-[11px] muted">{msg.privacy}</p>}
     </form>
   );

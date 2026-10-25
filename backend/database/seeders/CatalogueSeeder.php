@@ -239,13 +239,13 @@ class CatalogueSeeder extends Seeder
 
         // Visa
         foreach (S::public('VISA_DOCS') as $k => $items) {
-            $names = ['general' => ['General documents', 'সাধারণ কাগজপত্র'], 'job' => ['For job holders', 'চাকরিজীবীদের জন্য'], 'business' => ['For business owners', 'ব্যবসায়ীদের জন্য'], 'student' => ['For students', 'শিক্ষার্থীদের জন্য']][$k] ?? [$k, $k];
+            $names = ['general' => ['All applicants', 'সব আবেদনকারী'], 'job' => ['Job holders', 'চাকরিজীবী'], 'business' => ['Business owners', 'ব্যবসায়ী'], 'student' => ['Students', 'শিক্ষার্থী']][$k] ?? [$k, $k];
             VisaDocumentSet::updateOrCreate(['code' => $k], ['name' => ['en' => $names[0], 'bn' => $names[1]], 'items' => S::bl($items), 'sort' => array_search($k, array_keys(S::public('VISA_DOCS')), true)]);
         }
         foreach (S::public('VISAS') as $i => $v) {
             VisaProduct::updateOrCreate(['slug' => $v['slug']], [
                 'country_id' => $countries[self::VISA_ISO[$v['slug']] ?? ''] ?? null, 'country_name' => S::b($v['country']), 'flag' => $v['flag'], 'type' => S::b($v['vtype']),
-                'processing' => S::b($v['days']), 'fee' => $v['fee'], 'validity' => S::b($v['validity']), 'stay' => S::b($v['stay']), 'entry' => S::b($v['entry']),
+                'processing' => S::b($v['days']), 'fee' => $v['fee'], 'fee_breakdown' => self::visaFees((int) $v['fee']), 'validity' => S::b($v['validity']), 'stay' => S::b($v['stay']), 'entry' => S::b($v['entry']),
                 'extra_documents' => S::bl($v['docs_extra']), 'image_id' => S::asset($v['img']), 'status' => 'published', 'is_featured' => $i < 6, 'sort' => $i + 1,
             ]);
         }
@@ -292,5 +292,18 @@ class CatalogueSeeder extends Seeder
             str_starts_with($code, 'WINTER') => ['kinds' => ['tour', 'hotel']],
             default => null,
         };
+    }
+
+    /** Mockup split of the all-in visa fee: embassy 62 %, service 30 %, VFS/courier + VAT the rest (admin-editable per visa). */
+    public static function visaFees(int $fee): array
+    {
+        $embassy = (int) round($fee * 0.62);
+        $service = (int) round($fee * 0.30);
+
+        return [
+            ['label' => ['en' => 'Embassy / e-visa fee', 'bn' => 'দূতাবাস / ই-ভিসা ফি'], 'amount' => $embassy],
+            ['label' => ['en' => 'Musafir service charge', 'bn' => 'মুসাফির সার্ভিস চার্জ'], 'amount' => $service],
+            ['label' => ['en' => 'VFS / courier & VAT', 'bn' => 'ভিএফএস / কুরিয়ার ও ভ্যাট'], 'amount' => $fee - $embassy - $service],
+        ];
     }
 }

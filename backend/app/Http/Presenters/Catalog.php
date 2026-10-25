@@ -212,6 +212,7 @@ final class Catalog
     {
         return self::visaCard($v) + [
             'description' => $v->tr('description'), 'extra_documents' => tr_list($v->extra_documents),
+            'fee_breakdown' => collect($v->fee_breakdown ?? [])->map(fn ($r) => ['label' => tr_pick($r['label'] ?? ''), 'amount' => self::money($r['amount'] ?? 0)])->all(),
             'document_sets' => VisaDocumentSet::orderBy('sort')->get()->map(fn ($s) => ['code' => $s->code, 'name' => $s->tr('name'), 'items' => tr_list($s->items)])->all(),
             'seo' => self::seo($v->seo),
         ];

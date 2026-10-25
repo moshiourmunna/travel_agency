@@ -48,7 +48,7 @@ class CmsSeeder extends Seeder
     {
         foreach (json_decode(file_get_contents(database_path('seeders/data/static_pages.json')), true) as $slug => $p) {
             Page::updateOrCreate(['slug' => $slug], ['template' => $p['template'], 'title' => $p['title'], 'subtitle' => $p['subtitle'],
-                'image_id' => S::asset($p['image']), 'status' => 'published', 'published_at' => '2026-10-01']);
+                'image_id' => S::asset($p['image']), 'body' => $p['body'] ?? null, 'data' => $p['data'] ?? null, 'status' => 'published', 'published_at' => '2026-10-01']);
         }
     }
 

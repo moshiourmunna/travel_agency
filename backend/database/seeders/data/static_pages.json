@@ -282,7 +282,63 @@
    "bn": "৪০+ দেশের ট্যুরিস্ট, বিজনেস ও স্টুডেন্ট ভিসা — বিশেষজ্ঞদের মাধ্যমে কাগজপত্র যাচাই, অ্যাপয়েন্টমেন্ট ও ট্র্যাকিং।"
   },
   "image": "istanbul",
-  "template": "hero"
+  "template": "hero",
+  "data": {
+   "steps_eyebrow": {
+    "en": "Process",
+    "bn": "প্রক্রিয়া"
+   },
+   "steps_title": {
+    "en": "Visa in 4 simple steps",
+    "bn": "৪টি সহজ ধাপে ভিসা"
+   },
+   "steps": [
+    {
+     "icon": "clipboard-check",
+     "title": {
+      "en": "Free assessment",
+      "bn": "ফ্রি মূল্যায়ন"
+     },
+     "text": {
+      "en": "Tell us your profile; we confirm eligibility and the document list.",
+      "bn": "আপনার প্রোফাইল জানান; আমরা যোগ্যতা ও কাগজের তালিকা নিশ্চিত করি।"
+     }
+    },
+    {
+     "icon": "file-search",
+     "title": {
+      "en": "Document check",
+      "bn": "কাগজপত্র যাচাই"
+     },
+     "text": {
+      "en": "Upload or drop off documents; our team reviews every page.",
+      "bn": "কাগজ আপলোড বা জমা দিন; আমাদের টিম প্রতিটি পাতা যাচাই করে।"
+     }
+    },
+    {
+     "icon": "send",
+     "title": {
+      "en": "Submission",
+      "bn": "জমা"
+     },
+     "text": {
+      "en": "We file online or book your VFS/embassy appointment.",
+      "bn": "অনলাইনে আবেদন বা ভিএফএস/দূতাবাসের অ্যাপয়েন্টমেন্ট বুক করি।"
+     }
+    },
+    {
+     "icon": "package-check",
+     "title": {
+      "en": "Track & collect",
+      "bn": "ট্র্যাক ও সংগ্রহ"
+     },
+     "text": {
+      "en": "Live status in your account; passport delivered to your door.",
+      "bn": "অ্যাকাউন্টে লাইভ স্ট্যাটাস; পাসপোর্ট আপনার দরজায় পৌঁছে দিই।"
+     }
+    }
+   ]
+  }
  },
  "wishlist": {
   "title": {
