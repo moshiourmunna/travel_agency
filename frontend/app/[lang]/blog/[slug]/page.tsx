@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { h2Sections } from '@/lib/html';
 import Link from 'next/link';
 import { cache } from 'react';
 import { Icon } from '@/components/icons/Icon';
@@ -24,23 +25,6 @@ export async function generateMetadata({ params }: PageProps<'/[lang]/blog/[slug
   return buildMetadata(lang, `/blog/${slug}`, { title: p.title, description: p.excerpt, image: p.image, seo: p.seo, ogType: 'article' });
 }
 
-const ENT: Record<string, string> = { amp: '&', lt: '<', gt: '>', quot: '"', '#39': "'", nbsp: '\u00a0' };
-const decode = (s: string) => s.replace(/&(amp|lt|gt|quot|#39|nbsp);/g, (_, k: string) => ENT[k]);
-
-/** Adds stable ids to <h2>s (table of contents) and splits the body so a CTA can sit after the 2nd section. */
-function sections(html: string) {
-  const parts = html.split(/(?=<h2[\s>])/i).filter((s) => s.trim());
-  const toc: { id: string; text: string }[] = [];
-  const out = parts.map((s) => {
-    const m = s.match(/^<h2([^>]*)>([\s\S]*?)<\/h2>/i);
-    if (!m) return s;
-    const id = `s${toc.length + 1}`;
-    toc.push({ id, text: decode(m[2].replace(/<[^>]+>/g, '').trim()) });
-    return s.replace(/^<h2([^>]*)>/i, (_, attrs: string) => `<h2${attrs.replace(/\sid="[^"]*"/i, '')} id="${id}">`);
-  });
-  return { toc, parts: out };
-}
-
 export default async function PostPage({ params }: PageProps<'/[lang]/blog/[slug]'>) {
   const { lang, slug } = (await params) as { lang: Lang; slug: string };
   const [i, p, site] = await Promise.all([getI18n(lang), load(slug, lang), getSite(lang)]);
@@ -48,7 +32,7 @@ export default async function PostPage({ params }: PageProps<'/[lang]/blog/[slug
   const base = siteUrl(site);
   const url = `${base}/${lang}/blog/${slug}`;
   const crumbs: Crumb[] = [[t('Home', 'হোম'), i.u('/')], [t('Blog', 'ব্লগ'), i.u('/blog')], [p.title, i.u(`/blog/${slug}`)]];
-  const { toc, parts } = sections(p.body ?? '');
+  const { toc, parts } = h2Sections(p.body ?? '');
   const initials = String(p.author ?? '').split(/\s+/).map((w: string) => w[0]).join('').slice(0, 2);
   const ld = { '@context': 'https://schema.org', '@type': 'BlogPosting', headline: p.title, description: p.excerpt, image: p.image?.src, datePublished: p.published_at, dateModified: p.updated_at, mainEntityOfPage: url,
     author: { '@type': 'Person', name: p.author }, publisher: { '@type': 'Organization', name: site.settings.company?.name, logo: { '@type': 'ImageObject', url: `${base}/brand/icon-192.png` } }, keywords: (p.tags ?? []).map((x: any) => x.name).join(', '), inLanguage: lang === 'bn' ? 'bn-BD' : 'en' };

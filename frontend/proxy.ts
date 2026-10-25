@@ -13,7 +13,12 @@ export function proxy(req: NextRequest) {
     return NextResponse.redirect(new URL(clean + search, req.url), 301);
   }
   const first = pathname.split('/')[1];
-  if (LOCALES.includes(first)) return NextResponse.next();
+  if (LOCALES.includes(first)) {
+    // Pass the locale to segments that receive no params (not-found / error boundaries).
+    const headers = new Headers(req.headers);
+    headers.set('x-musafir-lang', first);
+    return NextResponse.next({ request: { headers } });
+  }
   const cookie = req.cookies.get('musafir-lang')?.value;
   const accept = req.headers.get('accept-language') ?? '';
   const lang = cookie && LOCALES.includes(cookie) ? cookie : /^\s*bn\b/i.test(accept) ? 'bn' : 'en';

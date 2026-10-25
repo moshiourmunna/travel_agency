@@ -117,12 +117,12 @@ export function SearchHero({ i, title, sub, crumbs, image, opacity = 'opacity-45
 }
 
 /** Light page header without image (compare, wishlist, sitemap, legal). */
-export function PlainHero({ i, title, sub, crumbs, children }: { i: I18n; title: string; sub?: string | null; crumbs: Crumb[]; children?: React.ReactNode }) {
+export function PlainHero({ i, title, sub, crumbs, children, wrap = 'wrap', big = false }: { i: I18n; title: string; sub?: string | null; crumbs: Crumb[]; children?: React.ReactNode; wrap?: string; big?: boolean }) {
   return (
-    <section className="border-b border-ink-100 bg-ink-50 py-10 dark:border-ink-800 dark:bg-ink-900">
-      <div className="wrap">
+    <section className={`border-b border-ink-100 bg-ink-50 dark:border-ink-800 dark:bg-ink-900 ${big ? 'py-12' : 'py-10'}`}>
+      <div className={wrap}>
         <Crumbs i={i} items={crumbs} />
-        <h1 className="mt-3 text-3xl font-extrabold">{title}</h1>
+        <h1 className={big ? 'mt-4 text-3xl font-extrabold sm:text-4xl' : 'mt-3 text-3xl font-extrabold'}>{title}</h1>
         {sub ? <p className="mt-1 muted">{sub}</p> : null}
         {children}
       </div>

@@ -18,3 +18,9 @@ export async function pageMetadata(lang: Lang, slug: string, path = `/${slug}`, 
   const p = await getPage(slug, lang);
   return buildMetadata(lang, path, { title: p.title, description: p.subtitle?.includes(':') ? null : p.subtitle, image: p.image, seo: p.seo, noindex: extra.noindex });
 }
+
+/** Metadata for routes without a Page record (credits, brand, auth, booking): SEO row keyed by path. */
+export async function pathMetadata(lang: Lang, path: string, fallbackTitle: string, extra: { noindex?: boolean } = {}): Promise<Metadata> {
+  const seo = await apiData<SeoPayload>('seo', { lang, tags: ['seo'], query: { path } }).catch(() => null);
+  return buildMetadata(lang, path, { title: seo?.title || fallbackTitle, description: seo?.description, image: seo?.og_image, seo, noindex: extra.noindex });
+}

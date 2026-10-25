@@ -26,6 +26,7 @@ Route::prefix('v1')->name('api.v1.')->middleware(['api.locale'])->group(function
         Route::get('reviews', [Content::class, 'reviews'])->name('reviews');
         Route::get('team', [Content::class, 'team'])->name('team');
         Route::get('gallery', [Content::class, 'gallery'])->name('gallery');
+        Route::get('credits', [Content::class, 'credits'])->name('credits');
         Route::get('careers', [Content::class, 'careers'])->name('careers');
         Route::get('careers/{slug}', [Content::class, 'career'])->name('careers.show');
         Route::get('posts', [Content::class, 'posts'])->name('posts');

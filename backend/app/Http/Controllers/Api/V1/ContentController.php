@@ -162,6 +162,23 @@ class ContentController extends Controller
         return response()->json(['data' => P::post($p) + ['related' => $related->map(fn ($r) => P::postCard($r))->all()]]);
     }
 
+    /** Attribution for every licensed image (CC BY / BY-SA require it). */
+    public function credits(): JsonResponse
+    {
+        return response()->json(['data' => MediaAsset::with('media')->whereNotNull('license')->orderBy('name')->get()->map(fn ($a) => [
+            'key' => $a->key, 'title' => self::fileTitle($a->credit_url) ?? $a->name, 'credit' => $a->credit, 'credit_url' => $a->credit_url, 'license' => $a->license, 'image' => Img::of($a),
+        ])->values()]);
+    }
+
+    private static function fileTitle(?string $url): ?string
+    {
+        if (! $url || ! str_contains($url, 'File:')) {
+            return null;
+        }
+
+        return str_replace('_', ' ', rawurldecode(substr($url, strpos($url, 'File:') + 5)));
+    }
+
     public function gallery(): JsonResponse
     {
         return response()->json(['data' => GalleryAlbum::with('items.asset.media')->where('is_active', true)->orderBy('sort')->get()->map(fn ($a) => [
