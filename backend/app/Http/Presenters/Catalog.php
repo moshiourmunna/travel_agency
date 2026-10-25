@@ -10,6 +10,7 @@ use App\Models\Cruise;
 use App\Models\Destination;
 use App\Models\Hotel;
 use App\Models\Offer;
+use App\Models\Region;
 use App\Models\Review;
 use App\Models\SeoMeta;
 use App\Models\Theme;
@@ -17,6 +18,7 @@ use App\Models\Tour;
 use App\Models\VisaDocumentSet;
 use App\Models\VisaProduct;
 use App\Support\Img;
+use App\Support\Settings;
 
 /**
  * Array presenters for the public API (localised to the current app locale).
@@ -78,7 +80,7 @@ final class Catalog
     {
         return [
             'type' => 'destination', 'slug' => $d->slug, 'name' => $d->tr('name'), 'country' => $d->tr('country_name'), 'region' => $d->region,
-            'tours_count' => $d->tours_count_display ?? ($d->tours_count ?? 0), 'best_time' => $d->tr('best_time'), 'image' => Img::of($d->image),
+            'tours_count' => $d->tours_count_display ?? ($d->tours_count ?? 0), 'best_time' => $d->tr('best_time'), 'excerpt' => $d->tr('description'), 'image' => Img::of($d->image),
         ];
     }
 
@@ -141,7 +143,7 @@ final class Catalog
         ];
     }
 
-    /** @var array<string, \App\Models\Amenity>|null */
+    /** @var array<string, Amenity>|null */
     private static ?array $amenities = null;
 
     private static ?array $regions = null;
@@ -162,14 +164,14 @@ final class Catalog
 
     private static function regionLabel(?string $code): ?string
     {
-        self::$regions ??= \App\Models\Region::all()->keyBy('code')->all();
+        self::$regions ??= Region::all()->keyBy('code')->all();
 
         return isset(self::$regions[$code]) ? self::$regions[$code]->tr('name') : $code;
     }
 
     private static function activityCategory(?string $key): ?array
     {
-        self::$actCats ??= collect(\App\Support\Settings::get('catalog.activity_categories', []))->keyBy('key')->all();
+        self::$actCats ??= collect(Settings::get('catalog.activity_categories', []))->keyBy('key')->all();
         $c = self::$actCats[$key] ?? null;
 
         return $c ? ['key' => $key, 'icon' => $c['icon'], 'label' => tr_pick($c['label'])] : null;

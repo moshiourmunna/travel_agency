@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Presenters\Catalog;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,7 +12,7 @@ class SetApiLocale
 {
     public function handle(Request $request, Closure $next): Response
     {
-        \App\Http\Presenters\Catalog::flush(); // per-request lookup caches (safe under long-running workers)
+        Catalog::flush(); // per-request lookup caches (safe under long-running workers)
         $supported = config('musafir.locales', ['en', 'bn']);
         $lang = $request->query('lang');
         if (! in_array($lang, $supported, true)) {

@@ -42,7 +42,6 @@ Route::prefix('v1')->name('api.v1.')->middleware(['api.locale'])->group(function
         Route::get('cruises/{slug}', [Cat::class, 'cruise'])->name('cruises.show');
         Route::get('activities', [Cat::class, 'activities'])->name('activities');
         Route::get('activities/{slug}', [Cat::class, 'activity'])->name('activities.show');
-        Route::get('activities/{slug}/slots', [Cat::class, 'activitySlots'])->name('activities.slots');
         Route::get('hotels', [Cat::class, 'hotels'])->name('hotels');
         Route::get('hotels/{slug}', [Cat::class, 'hotel'])->name('hotels.show');
         Route::get('visas', [Cat::class, 'visas'])->name('visas');
@@ -59,6 +58,8 @@ Route::prefix('v1')->name('api.v1.')->middleware(['api.locale'])->group(function
     Route::middleware('throttle:search')->group(function () {
         Route::get('search', [Search::class, 'search'])->name('search');
         Route::get('flights/search', [Search::class, 'flights'])->name('flights.search');
+        // live availability — never cached
+        Route::get('activities/{slug}/slots', [Cat::class, 'activitySlots'])->name('activities.slots');
         Route::post('planner/estimate', [Planner::class, 'estimate'])->name('planner.estimate');
     });
 

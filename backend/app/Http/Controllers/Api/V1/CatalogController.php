@@ -157,9 +157,14 @@ class CatalogController extends Controller
         $d = Destination::published()->with(['image.media', 'seo.ogImage.media'])->where('slug', $slug)->firstOrFail();
         $tours = Tour::published()->with(self::CARD_WITH)->where('destination_id', $d->id)->ordered()->get();
         $acts = Activity::published()->with(['image.media', 'cancellationPolicy', 'destination'])->where('destination_id', $d->id)->ordered()->limit(4)->get();
+        // Pad thin destinations with other packages in the same country (shown under a separate heading)
+        $nearby = $tours->count() >= 3 || ! $d->country_id ? collect() : Tour::published()->with(self::CARD_WITH)
+            ->where('destination_id', '!=', $d->id)->whereHas('destination', fn ($q) => $q->where('country_id', $d->country_id))
+            ->ordered()->limit(3 - $tours->count())->get();
 
         return response()->json(['data' => P::destination($d) + [
             'tours' => $tours->map(fn ($t) => P::tourCard($t))->all(),
+            'nearby_tours' => $nearby->map(fn ($t) => P::tourCard($t))->all(),
             'activities' => $acts->map(fn ($a) => P::activityCard($a))->all(),
             'planner' => $d->plannerCost ? ['per_day' => P::money($d->plannerCost->cost_per_day_standard), 'flight' => P::money($d->plannerCost->flight_estimate)] : null,
         ]]);
@@ -168,9 +173,10 @@ class CatalogController extends Controller
     public function themes(): JsonResponse
     {
         $themes = Theme::published()->with('image.media')->ordered()->get();
-        $counts = Tour::published()->with('categories:id,slug')->get(['id'])->flatMap(fn ($t) => $t->categories->pluck('slug'))->countBy();
+        $tours = Tour::published()->with('categories:id,slug')->get(['id', 'price_from']);
+        $by = fn (string $cat) => $tours->filter(fn ($t) => $t->categories->contains('slug', $cat));
 
-        return response()->json(['data' => $themes->map(fn ($t) => P::themeCard($t) + ['tours_count' => $counts[$t->category_slug] ?? 0])->all()]);
+        return response()->json(['data' => $themes->map(fn ($t) => P::themeCard($t) + ['tours_count' => $by($t->category_slug)->count(), 'price_from' => P::money($by($t->category_slug)->min('price_from'))])->all()]);
     }
 
     public function theme(string $slug): JsonResponse
@@ -186,9 +192,16 @@ class CatalogController extends Controller
     public function cruises(Request $request): JsonResponse
     {
         $q = Cruise::published()->with(['image.media', 'ship.line', 'cancellationPolicy'])->search($request->query('q'))
-            ->when($request->query('region'), fn ($q, $v) => $q->where('region', $v))
-            ->when($request->query('nights_max'), fn ($q, $v) => $q->where('nights', '<=', (int) $v));
-        $this->sort($q, $request->query('sort'), 'price_from', 'nights');
+            ->when($request->query('region'), fn ($q, $v) => $q->whereIn('region', explode(',', $v)))
+            ->when($request->query('nights_min'), fn ($q, $v) => $q->where('nights', '>=', (int) $v))
+            ->when($request->query('nights_max'), fn ($q, $v) => $q->where('nights', '<=', (int) $v))
+            ->when($request->query('price_max'), fn ($q, $v) => $q->where('price_from', '<=', (float) $v))
+            ->when($request->query('rating'), fn ($q, $v) => $q->where('rating', '>=', (float) $v));
+        if ($request->query('sort') === 'dep') {
+            $q->orderByRaw('(select min(s.date) from cruise_sailings s where s.cruise_id = cruises.id and s.date >= ?) is null, (select min(s.date) from cruise_sailings s where s.cruise_id = cruises.id and s.date >= ?)', [today()->toDateString(), today()->toDateString()]);
+        } else {
+            $this->sort($q, $request->query('sort'), 'price_from', 'nights');
+        }
         $codes = Cruise::published()->distinct()->pluck('region');
         $regions = Region::whereIn('code', $codes)->orderBy('sort')->get()->mapWithKeys(fn ($r) => [$r->code => $r->tr('name')]);
 
@@ -208,8 +221,11 @@ class CatalogController extends Controller
     public function activities(Request $request): JsonResponse
     {
         $q = Activity::published()->with(['image.media', 'cancellationPolicy', 'destination'])->search($request->query('q'))
-            ->when($request->query('category'), fn ($q, $v) => $q->where('category', $v))
-            ->when($request->query('region'), fn ($q, $v) => $q->where('region', $v))
+            ->when($request->query('category'), fn ($q, $v) => $q->whereIn('category', explode(',', $v)))
+            ->when($request->query('region'), fn ($q, $v) => $q->whereIn('region', explode(',', $v)))
+            ->when($request->query('price_max'), fn ($q, $v) => $q->where('price', '<=', (float) $v))
+            ->when($request->query('rating'), fn ($q, $v) => $q->where('rating', '>=', (float) $v))
+            ->when($request->boolean('free_cancel'), fn ($q) => $q->whereHas('cancellationPolicy', fn ($p) => $p->where('kind', 'free')))
             ->when($request->query('destination'), fn ($q, $v) => $q->whereHas('destination', fn ($d) => $d->where('slug', $v)));
         $this->sort($q, $request->query('sort'), 'price');
         $cats = collect(Settings::get('catalog.activity_categories', []))->map(fn ($c) => ['key' => $c['key'], 'icon' => $c['icon'], 'label' => tr_pick($c['label'])])->values();

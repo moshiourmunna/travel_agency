@@ -186,7 +186,11 @@ class ContentController extends Controller
     public function seo(Request $request): JsonResponse
     {
         $path = '/'.trim((string) $request->query('path', '/'), '/');
-        $s = SeoMeta::with('ogImage.media')->where('path', $path === '/' ? '/' : $path)->first();
+        $s = SeoMeta::with('ogImage.media')->where('path', $path)->first();
+        if (! $s && substr_count($path, '/') === 1) {
+            // Static pages keep their SEO on the Page record ("/" → home)
+            $s = Page::published()->with('seo.ogImage.media')->where('slug', $path === '/' ? 'home' : ltrim($path, '/'))->first()?->seo;
+        }
 
         return response()->json(['data' => P::seo($s)]);
     }

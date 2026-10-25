@@ -36,6 +36,8 @@ class FormController extends Controller
             'adults' => ['nullable', 'integer', 'min:1', 'max:500'], 'children' => ['nullable', 'integer', 'min:0', 'max:200'],
             'budget' => ['nullable', 'numeric', 'min:0', 'max:100000000'], 'interests' => ['nullable', 'array', 'max:20'], 'interests.*' => ['string', 'max:60'],
             'organisation' => ['nullable', 'string', 'max:190'], 'product' => ['nullable', 'string', 'max:190'], 'preferred_time' => ['nullable', 'string', 'max:60'],
+            'travel_month' => ['nullable', 'string', 'max:60'], 'page' => ['nullable', 'string', 'max:255'],
+            'details' => ['nullable', 'array', 'max:30'], 'details.*' => ['nullable', 'string', 'max:500'],
             'consent' => ['accepted'],
         ]);
         [$label, $key] = self::SOURCES[$v['type']] ?? [['en' => 'Website enquiry', 'bn' => 'ওয়েবসাইট অনুসন্ধান'], 'website-enquiry'];

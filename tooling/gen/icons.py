@@ -16,6 +16,10 @@ for f in glob.glob(os.path.join(ROOT, 'backend', 'database', 'seeders', 'data', 
 for f in glob.glob(os.path.join(ROOT, 'frontend', '{app,components,lib}', '**', '*.tsx'), recursive=True) + glob.glob(os.path.join(ROOT, 'frontend', 'app', '**', '*.tsx'), recursive=True) + glob.glob(os.path.join(ROOT, 'frontend', 'components', '**', '*.tsx'), recursive=True):
     s = open(f, encoding='utf-8').read()
     names |= set(re.findall(r'(?:name|icon)="([a-z0-9-]+)"', s))
+    # icon names held in variables / ternaries: any lucide name quoted on a line that mentions "icon"
+    for line in s.splitlines():
+        if 'icon' in line.lower():
+            names |= {n for n in re.findall(r'[\'"]([a-z][a-z0-9]*(?:-[a-z0-9]+)*)[\'"]', line) if os.path.exists(os.path.join(LUCIDE, n + '.svg'))}
 for f in glob.glob(os.path.join(ROOT, 'backend', 'database', 'seeders', '*.php')) + glob.glob(os.path.join(ROOT, 'backend', 'app', '**', '*.php'), recursive=True):
     s = open(f, encoding='utf-8').read()
     names |= set(re.findall(r"'(?:icon|key)'\s*=>\s*'([a-z0-9-]+)'", s))

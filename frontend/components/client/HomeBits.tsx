@@ -35,7 +35,7 @@ export function ScrollButtons({ target, prev, next, children }: { target: string
 }
 
 /** Quick filter chips over server-rendered cards (data-region / data-cats on each [data-item]). */
-export function QuickFilter({ label, options, header, children }: { label: string; options: { value: string; label: string }[]; header: React.ReactNode; children: React.ReactNode }) {
+export function QuickFilter({ label, options, header, children, rowClass = 'mb-8 flex flex-col gap-5 md:flex-row md:items-end md:justify-between', chipsClass = 'no-scrollbar -mx-4 flex gap-2 overflow-x-auto px-4 md:mx-0 md:px-0' }: { label: string; options: { value: string; label: string }[]; header?: React.ReactNode; children: React.ReactNode; rowClass?: string; chipsClass?: string }) {
   const [v, setV] = useState('all');
   const box = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -46,9 +46,9 @@ export function QuickFilter({ label, options, header, children }: { label: strin
   }, [v]);
   return (
     <>
-      <div className="mb-8 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+      <div className={rowClass}>
         {header}
-        <div className="no-scrollbar -mx-4 flex gap-2 overflow-x-auto px-4 md:mx-0 md:px-0" role="group" aria-label={label}>
+        <div className={chipsClass} role="group" aria-label={label}>
           {options.map((o) => <button key={o.value} type="button" className={`chip shrink-0 ${v === o.value ? 'is-active' : ''}`} aria-pressed={v === o.value} onClick={() => setV(o.value)}>{o.label}</button>)}
         </div>
       </div>

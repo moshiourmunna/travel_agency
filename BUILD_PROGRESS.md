@@ -70,3 +70,16 @@ Run on the box AND in real browsers: backend unit/feature (API, admin CRUD, auth
 portal and admin flows against the real API+DB (admin edit → public page updates, search/filters, booking → payment → voucher, login/OTP); responsive matrix 320–1920 ×
 light/dark × bn/en; axe a11y; Lighthouse; SEO checks (metadata, hreflang, JSON-LD validity, sitemap/robots, SSR HTML content); visual diff vs mockup; broken links;
 console errors; security checks. Then repeat key browser E2E on the user's PC (c81f2d4f) with local Chrome/Edge. Fix → re-run until clean; document in TEST_REPORT.md.
+
+## M3 — IN PROGRESS (Next.js public site)
+- Done (commits 683bf96, 9229d38 + next): layout/header/footer, home (18 CMS sections), tours listing (URL filters/sort/view/pagination/compare) + tour detail,
+  static page heroes from `pages` table (data/static_pages.json), case-sensitive translation keys (utf8mb4_bin).
+- 2026-10-26 03:40 BDT: destinations list/detail (pads thin destinations with "More tours in <country>"), holidays list/theme, cruises list/detail (cabins, sailings,
+  add-ons from setting `commerce.cruise_addons`, CruiseBook), activities list/detail (filters, slot picker via /api/slots → /api/v1/activities/{slug}/slots, now
+  outside `public.cache` = never cached), InquiryForm (validation, 422 mapping, honeypot, reference). Reviews block `variant="card"` matches mockup for cruise/activity.
+  Icon generator also picks lucide names quoted on lines mentioning "icon" (ternaries/maps) → 198 icons. /api/v1/seo?path falls back to the Page record's SEO.
+- Visual check 1440: destinations/holidays/holidays-theme/cruises/activities = mockup height exactly; details differ only by extra data-driven sections.
+- Gotcha: Next data cache survives rebuilds → after reseeding run cache:clear + POST /api/revalidate {"tags":["all"]} (Content-Type JSON) and hit the page twice.
+- Tests: Pest 55 passed / 375 assertions.
+- Next: hotels, flights, visa, offers, insurance, gift cards, group/custom tour, planner, compare, wishlist, blog, about/team/careers/gallery/reviews/faq/contact,
+  legal, sitemap page, credits, brand, 404/error, booking stub, auth placeholders; /api/reviews BFF (401 until M5).

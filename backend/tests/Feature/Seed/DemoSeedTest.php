@@ -6,6 +6,7 @@ use App\Models\Cruise;
 use App\Models\Destination;
 use App\Models\Hotel;
 use App\Models\MediaAsset;
+use App\Models\Page;
 use App\Models\Payment;
 use App\Models\SeoMeta;
 use App\Models\Tour;
@@ -63,6 +64,6 @@ it('seeds consistent bookings and payments', function () {
 
 it('seeds SEO meta for every public mockup page', function () {
     expect(SeoMeta::count())->toBeGreaterThan(100);
-    expect(SeoMeta::where('path', '/')->first()->getTranslation('meta_title', 'bn'))->not->toBeEmpty();
+    expect(Page::where('slug', 'home')->first()->seo->getTranslation('meta_title', 'bn'))->not->toBeEmpty();
     expect(Tour::where('slug', 'turkey-classic')->first()->seo->getTranslation('meta_title', 'en'))->toContain('Turkey');
 });

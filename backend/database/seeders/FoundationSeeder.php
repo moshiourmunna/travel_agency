@@ -136,6 +136,7 @@ class FoundationSeeder extends Seeder
         $set('commerce', 'hold_minutes', 30, 'number');
         $set('commerce', 'miles_per_100', 1, 'number');
         $set('commerce', 'room_factors', ['twin' => 1, 'triple' => 0.94, 'single' => 1.35], 'json');
+        $set('commerce', 'cruise_addons', [['code' => 'drinks', 'label' => ['en' => 'Beverage & Wi-Fi package', 'bn' => 'পানীয় ও ওয়াই-ফাই প্যাকেজ'], 'price' => 9500, 'per' => 'booking']], 'json');
         $set('commerce', 'pax_factors', ['adults' => 1, 'children' => 0.7, 'infants' => 0.1], 'json');
         $set('payments', 'gateways', ['mock' => true, 'sslcommerz' => true, 'bkash' => true, 'nagad' => true, 'bank_transfer' => true, 'wallet' => true], 'json');
         $set('payments', 'mode', 'sandbox', 'text', false);
