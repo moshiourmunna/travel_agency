@@ -17,8 +17,8 @@ export function Wish({ i, id, kind = 'tour' }: { i: I18n; id: string; kind?: str
 export function TourCard({ i, x, list = false }: { i: I18n; x: Tr; list?: boolean }) {
   const off = pctOff(x.price, x.price_was);
   return (
-    <article className={`card card-hover group relative flex overflow-hidden ${list ? 'flex-col sm:flex-row' : 'flex-col'}`} data-item data-price={x.price} data-rating={x.rating} data-days={x.days} data-region={x.region} data-cats={x.categories.join(' ')}>
-      <div className={`relative shrink-0 overflow-hidden ${list ? 'aspect-[16/10] sm:aspect-auto sm:w-72' : 'aspect-[16/11]'}`}>
+    <article className={`card card-hover group relative flex overflow-hidden ${list ? 'flex-col sm:flex-row' : 'flex-col sm:group-data-[view=list]/view:flex-row'}`} data-item data-price={x.price} data-rating={x.rating} data-days={x.days} data-region={x.region} data-cats={x.categories.join(' ')}>
+      <div className={`relative shrink-0 overflow-hidden ${list ? 'aspect-[16/10] sm:aspect-auto sm:w-72' : 'aspect-[16/11] sm:group-data-[view=list]/view:aspect-auto sm:group-data-[view=list]/view:w-72'}`}>
         <Picture img={x.image} alt={x.title} className="img-cover transition duration-700 group-hover:scale-105" />
         <div className="absolute left-3 top-3 flex flex-wrap gap-1.5">
           {x.badge ? <span className="badge bg-accent-400 text-ink-900">{x.badge}</span> : null}
@@ -36,7 +36,7 @@ export function TourCard({ i, x, list = false }: { i: I18n; x: Tr; list?: boolea
           {x.includes_flight ? (<><span aria-hidden="true">·</span><span className="inline-flex items-center gap-1 text-brand-700 dark:text-brand-300"><Icon name="plane" className="h-3.5 w-3.5" /> {i.t('Flight', 'ফ্লাইট')}</span></>) : null}
         </div>
         <h3 className="mt-2 text-[17px] font-bold leading-snug"><Link href={i.u(`/tours/${x.slug}`)} className="after:absolute after:inset-0 hover:text-brand-700 dark:hover:text-brand-300">{x.title}</Link></h3>
-        {list ? <ul className="mt-3 hidden space-y-1 text-sm text-ink-600 dark:text-ink-300 sm:block">{x.highlights.map((h, k) => <li key={k} className="flex gap-2"><Icon name="check" className="mt-0.5 h-4 w-4 shrink-0 text-brand-600" />{h}</li>)}</ul> : null}
+        <ul className={`mt-3 hidden space-y-1 text-sm text-ink-600 dark:text-ink-300 ${list ? 'sm:block' : 'sm:group-data-[view=list]/view:block'}`}>{x.highlights.slice(0, 3).map((h, k) => <li key={k} className="flex gap-2"><Icon name="check" className="mt-0.5 h-4 w-4 shrink-0 text-brand-600" />{h}</li>)}</ul>
         <div className="mt-2 flex items-center gap-2 text-sm"><Stars i={i} rating={x.rating} className="h-3.5 w-3.5" /><b className="text-ink-800 dark:text-white">{i.d(x.rating)}</b><span className="muted">({i.num(x.reviews_count)})</span></div>
         <div className="mt-1.5"><CancelBadge policy={x.cancellation} /></div>
         <div className="mt-auto flex items-end justify-between gap-3 pt-4">

@@ -1,0 +1,299 @@
+{
+ "about": {
+  "title": {
+   "en": "About Musafir",
+   "bn": "মুসাফির সম্পর্কে"
+  },
+  "subtitle": {
+   "en": "A Dhaka-born travel company with world-class standards — since 2012.",
+   "bn": "ঢাকায় জন্ম নেওয়া, বিশ্বমানের একটি ট্রাভেল কোম্পানি — ২০১২ সাল থেকে।"
+  },
+  "image": "sajek",
+  "template": "hero"
+ },
+ "activities": {
+  "title": {
+   "en": "Things to do",
+   "bn": "যা যা করবেন"
+  },
+  "subtitle": {
+   "en": "Day tours, boat rides, attraction tickets, food walks and transfers — instant confirmation and mobile vouchers.",
+   "bn": "ডে-ট্যুর, নৌভ্রমণ, আকর্ষণের টিকিট, ফুড ওয়াক ও ট্রান্সফার — তাৎক্ষণিক নিশ্চিতকরণ ও মোবাইল ভাউচার।"
+  },
+  "image": "cappadocia",
+  "template": "hero"
+ },
+ "blog": {
+  "title": {
+   "en": "Travel journal",
+   "bn": "ভ্রমণ জার্নাল"
+  },
+  "subtitle": {
+   "en": "Guides, budgets, visa checklists and real stories from Bangladeshi travellers.",
+   "bn": "বাংলাদেশি ভ্রমণকারীদের জন্য গাইড, বাজেট, ভিসা চেকলিস্ট ও সত্যিকারের গল্প।"
+  },
+  "image": "santorini",
+  "template": "hero"
+ },
+ "careers": {
+  "title": {
+   "en": "Careers at Musafir",
+   "bn": "মুসাফিরে ক্যারিয়ার"
+  },
+  "subtitle": {
+   "en": "Help 1 lakh+ Bangladeshis see the world. Hybrid work, travel perks and real growth.",
+   "bn": "১ লাখের বেশি বাংলাদেশিকে বিশ্ব দেখাতে সাহায্য করুন। হাইব্রিড কাজ, ভ্রমণ সুবিধা ও সত্যিকারের উন্নতি।"
+  },
+  "image": "swiss",
+  "template": "hero"
+ },
+ "compare": {
+  "title": {
+   "en": "Compare tours",
+   "bn": "ট্যুর তুলনা"
+  },
+  "subtitle": {
+   "en": "Tick “Compare” on up to 3 tour cards. Showing your selection (or our suggestions).",
+   "bn": "সর্বোচ্চ ৩টি ট্যুর কার্ডে “তুলনা” টিক দিন। আপনার নির্বাচন (বা আমাদের পরামর্শ) দেখানো হচ্ছে।"
+  },
+  "image": null,
+  "template": "plain"
+ },
+ "contact": {
+  "title": {
+   "en": "Contact us",
+   "bn": "যোগাযোগ"
+  },
+  "subtitle": {
+   "en": "Call, WhatsApp, email or visit — a real travel expert replies within 15 minutes during office hours.",
+   "bn": "কল, হোয়াটসঅ্যাপ, ইমেইল বা সরাসরি আসুন — অফিস সময়ে ১৫ মিনিটের মধ্যে একজন বিশেষজ্ঞ উত্তর দেন।"
+  },
+  "image": "dhaka",
+  "template": "hero"
+ },
+ "cruises": {
+  "title": {
+   "en": "Cruise holidays",
+   "bn": "ক্রুজ হলিডে"
+  },
+  "subtitle": {
+   "en": "Ocean, river and island cruises with meals, entertainment and port excursions — visas and flights to the port arranged by us.",
+   "bn": "খাবার, বিনোদন ও বন্দর ভ্রমণসহ সমুদ্র, নদী ও দ্বীপ ক্রুজ — ভিসা ও বন্দর পর্যন্ত ফ্লাইট আমরা ব্যবস্থা করি।"
+  },
+  "image": "cruise",
+  "template": "hero"
+ },
+ "custom-tour": {
+  "title": {
+   "en": "Tailor-made trip",
+   "bn": "কাস্টম ট্রিপ"
+  },
+  "subtitle": {
+   "en": "Tell us the basics — a travel expert designs your itinerary and sends a quote within 24 hours. No obligation.",
+   "bn": "মূল তথ্য জানান — একজন বিশেষজ্ঞ ভ্রমণসূচি সাজিয়ে ২৪ ঘণ্টার মধ্যে কোটেশন পাঠাবেন। কোনো বাধ্যবাধকতা নেই।"
+  },
+  "image": "swiss",
+  "template": "hero"
+ },
+ "destinations": {
+  "title": {
+   "en": "Destinations",
+   "bn": "গন্তব্য"
+  },
+  "subtitle": {
+   "en": "From Bangladesh’s hills and beaches to island resorts and the Himalayas — explore where to go next.",
+   "bn": "বাংলাদেশের পাহাড়-সমুদ্র থেকে দ্বীপের রিসোর্ট আর হিমালয় — এবার কোথায় যাবেন খুঁজে নিন।"
+  },
+  "image": "nepal",
+  "template": "hero"
+ },
+ "faq": {
+  "title": {
+   "en": "Help centre",
+   "bn": "হেল্প সেন্টার"
+  },
+  "subtitle": {
+   "en": "Answers about bookings, payments, cancellations, visas and travelling with Musafir.",
+   "bn": "বুকিং, পেমেন্ট, বাতিল, ভিসা ও মুসাফিরের সাথে ভ্রমণ নিয়ে উত্তর।"
+  },
+  "image": "plane",
+  "template": "hero"
+ },
+ "flights": {
+  "title": {
+   "en": "Cheap flights from Bangladesh",
+   "bn": "বাংলাদেশ থেকে সাশ্রয়ী ফ্লাইট"
+  },
+  "subtitle": {
+   "en": "Compare 450+ airlines, pay with bKash or card EMI and get your e-ticket in minutes.",
+   "bn": "৪৫০+ এয়ারলাইন তুলনা করুন, বিকাশ বা কার্ড ইএমআইতে পরিশোধ করুন এবং মিনিটেই ই-টিকেট পান।"
+  },
+  "image": "plane",
+  "template": "search"
+ },
+ "gallery": {
+  "title": {
+   "en": "Photo gallery",
+   "bn": "ছবির গ্যালারি"
+  },
+  "subtitle": {
+   "en": "Moments from Musafir trips — shared by our travellers and guides.",
+   "bn": "মুসাফির ট্রিপের মুহূর্ত — আমাদের ভ্রমণকারী ও গাইডদের তোলা।"
+  },
+  "image": "phuket",
+  "template": "hero"
+ },
+ "gift-cards": {
+  "title": {
+   "en": "Gift cards",
+   "bn": "গিফট কার্ড"
+  },
+  "subtitle": {
+   "en": "Give the gift of travel — valid 2 years on any Musafir holiday, cruise, flight or activity.",
+   "bn": "ভ্রমণ উপহার দিন — যেকোনো মুসাফির হলিডে, ক্রুজ, ফ্লাইট বা অ্যাক্টিভিটিতে ২ বছর মেয়াদি।"
+  },
+  "image": "maldives",
+  "template": "hero"
+ },
+ "group-tours": {
+  "title": {
+   "en": "Group & corporate travel",
+   "bn": "গ্রুপ ও কর্পোরেট ভ্রমণ"
+  },
+  "subtitle": {
+   "en": "Company retreats, incentive trips, study tours, weddings and conferences — one dedicated manager, one invoice.",
+   "bn": "কোম্পানি রিট্রিট, ইনসেনটিভ ট্রিপ, শিক্ষা সফর, বিয়ে ও কনফারেন্স — একজন নির্দিষ্ট ম্যানেজার, একটি ইনভয়েস।"
+  },
+  "image": "sajek",
+  "template": "hero"
+ },
+ "holidays": {
+  "title": {
+   "en": "Holidays by theme",
+   "bn": "থিম অনুযায়ী হলিডে"
+  },
+  "subtitle": {
+   "en": "Pick the feeling first — romance, family fun, adrenaline, beaches, culture or wildlife — and we match the trip.",
+   "bn": "আগে অনুভূতি বেছে নিন — রোমান্স, পারিবারিক আনন্দ, অ্যাডভেঞ্চার, সৈকত, সংস্কৃতি বা বন্যপ্রাণী — ট্রিপ আমরা মিলিয়ে দেব।"
+  },
+  "image": "santorini",
+  "template": "hero"
+ },
+ "hotels": {
+  "title": {
+   "en": "Hotels & resorts",
+   "bn": "হোটেল ও রিসোর্ট"
+  },
+  "subtitle": {
+   "en": "From Cox’s Bazar beach resorts to Bali pool villas — best rates, pay now or later.",
+   "bn": "কক্সবাজারের সৈকত রিসোর্ট থেকে বালির পুল ভিলা — সেরা রেট, এখন বা পরে পরিশোধ।"
+  },
+  "image": "resort",
+  "template": "search"
+ },
+ "insurance": {
+  "title": {
+   "en": "Travel insurance",
+   "bn": "ট্রাভেল ইন্স্যুরেন্স"
+  },
+  "subtitle": {
+   "en": "Medical, trip cancellation, lost baggage and flight delay cover — accepted for Schengen and all embassy visas.",
+   "bn": "চিকিৎসা, ট্রিপ বাতিল, হারানো লাগেজ ও ফ্লাইট বিলম্ব কভার — শেনজেনসহ সব দূতাবাসে গ্রহণযোগ্য।"
+  },
+  "image": "plane",
+  "template": "hero"
+ },
+ "offers": {
+  "title": {
+   "en": "Deals & offers",
+   "bn": "ডিল ও অফার"
+  },
+  "subtitle": {
+   "en": "Flash sales, early-bird fares, bank & bKash cashback and coupon codes — every deal shows exactly when it ends.",
+   "bn": "ফ্ল্যাশ সেল, আর্লি-বার্ড ভাড়া, ব্যাংক ও বিকাশ ক্যাশব্যাক এবং কুপন কোড — প্রতিটি অফার কখন শেষ হবে তা স্পষ্ট দেখানো।"
+  },
+  "image": "maldives",
+  "template": "hero"
+ },
+ "reviews": {
+  "title": {
+   "en": "Traveller reviews",
+   "bn": "ভ্রমণকারীদের রিভিউ"
+  },
+  "subtitle": {
+   "en": "Only travellers who completed a Musafir trip can review. We publish every rating — good or bad.",
+   "bn": "শুধু মুসাফিরের সাথে ট্রিপ সম্পন্ন করা ভ্রমণকারীরাই রিভিউ দিতে পারেন। ভালো-মন্দ সব রেটিং প্রকাশ করি।"
+  },
+  "image": "bali",
+  "template": "hero"
+ },
+ "sitemap": {
+  "title": {
+   "en": "Sitemap",
+   "bn": "সাইটম্যাপ"
+  },
+  "subtitle": null,
+  "image": null,
+  "template": "plain"
+ },
+ "team": {
+  "title": {
+   "en": "Our team",
+   "bn": "আমাদের টিম"
+  },
+  "subtitle": {
+   "en": "Travel experts who have been there — and will pick up the phone at 2 a.m. if you need them.",
+   "bn": "যাঁরা নিজেরা ঘুরে এসেছেন — আর প্রয়োজনে রাত ২টায়ও ফোন ধরবেন।"
+  },
+  "image": "nepal",
+  "template": "hero"
+ },
+ "tours": {
+  "title": {
+   "en": "Tour packages",
+   "bn": "ট্যুর প্যাকেজ"
+  },
+  "subtitle": {
+   "en": ":count handpicked holidays in Bangladesh and abroad — transparent prices, flexible dates and easy installments.",
+   "bn": "দেশ-বিদেশের :countটি বাছাই করা হলিডে — স্বচ্ছ মূল্য, সুবিধাজনক তারিখ ও সহজ কিস্তি।"
+  },
+  "image": "bali",
+  "template": "hero"
+ },
+ "trip-planner": {
+  "title": {
+   "en": "Trip planner",
+   "bn": "ট্রিপ প্ল্যানার"
+  },
+  "subtitle": {
+   "en": "Build your own itinerary: pick places, set days, add experiences and see a live budget. A travel expert turns it into a firm quote within 4 working hours.",
+   "bn": "নিজের ভ্রমণসূচি বানান: জায়গা বাছুন, দিন ঠিক করুন, অভিজ্ঞতা যোগ করুন আর সাথে সাথে বাজেট দেখুন। ৪ কর্মঘণ্টার মধ্যে একজন বিশেষজ্ঞ নিশ্চিত কোটেশন পাঠাবেন।"
+  },
+  "image": "bali",
+  "template": "hero"
+ },
+ "visa": {
+  "title": {
+   "en": "Visa processing services",
+   "bn": "ভিসা প্রসেসিং সেবা"
+  },
+  "subtitle": {
+   "en": "Tourist, business and student visas for 40+ countries — document check, appointment booking and tracking by experts.",
+   "bn": "৪০+ দেশের ট্যুরিস্ট, বিজনেস ও স্টুডেন্ট ভিসা — বিশেষজ্ঞদের মাধ্যমে কাগজপত্র যাচাই, অ্যাপয়েন্টমেন্ট ও ট্র্যাকিং।"
+  },
+  "image": "istanbul",
+  "template": "hero"
+ },
+ "wishlist": {
+  "title": {
+   "en": "Your wishlist",
+   "bn": "আপনার উইশলিস্ট"
+  },
+  "subtitle": {
+   "en": "Saved on this device. Sign in to sync across phone and laptop.",
+   "bn": "এই ডিভাইসে সংরক্ষিত। ফোন ও ল্যাপটপে সিঙ্ক করতে সাইন ইন করুন।"
+  },
+  "image": null,
+  "template": "plain"
+ }
+}

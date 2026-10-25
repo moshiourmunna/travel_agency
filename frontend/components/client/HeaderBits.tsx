@@ -5,11 +5,12 @@ import { useSite } from './SiteContext';
 import { KEYS, toast, useCurrency, write } from './store';
 
 /** Desktop dropdown (hover on hover-capable devices, click/keyboard everywhere, Esc + outside click close). */
-export function Dropdown({ label, current, panelClass, children }: { label: React.ReactNode; current?: boolean; panelClass: string; children: React.ReactNode }) {
+export function Dropdown({ label, under = [], panelClass, children }: { label: React.ReactNode; under?: string[]; panelClass: string; children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const pathname = usePathname();
+  const current = under.some((x) => pathname === x || pathname.startsWith(x + '/'));
   useEffect(() => setOpen(false), [pathname]);
   useEffect(() => {
     if (!open) return;

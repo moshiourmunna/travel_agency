@@ -40,6 +40,16 @@ class CmsSeeder extends Seeder
         $this->translations();
         $this->menus();
         $this->home();
+        $this->staticPages();
+    }
+
+    /** Listing & static pages: admin-editable H1, subtitle, hero image (+ per-page `data` blocks added by PageContentSeeder). */
+    private function staticPages(): void
+    {
+        foreach (json_decode(file_get_contents(database_path('seeders/data/static_pages.json')), true) as $slug => $p) {
+            Page::updateOrCreate(['slug' => $slug], ['template' => $p['template'], 'title' => $p['title'], 'subtitle' => $p['subtitle'],
+                'image_id' => S::asset($p['image']), 'status' => 'published', 'published_at' => '2026-10-01']);
+        }
     }
 
     private function translations(): void
@@ -80,7 +90,7 @@ class CmsSeeder extends Seeder
         $this->menu('mega-tours', $b('Tours mega menu', 'ট্যুর মেগা মেনু'), $mega);
 
         $this->menu('header', $b('Header', 'হেডার'), [
-            ['label' => $b('Tours', 'ট্যুর'), 'url' => 'tours.html', 'meta' => ['mega' => 'tours']],
+            ['label' => $b('Tours', 'ট্যুর'), 'url' => 'tours.html', 'meta' => ['mega' => 'tours', 'also' => ['/compare']]],
             ['label' => $b('Holidays', 'হলিডে'), 'url' => 'holidays.html', 'meta' => ['mega' => 'holidays']],
             ['label' => $b('Cruises', 'ক্রুজ'), 'url' => 'cruises.html'],
             ['label' => $b('Activities', 'অ্যাক্টিভিটি'), 'url' => 'activities.html', 'meta' => ['show_from' => 'xl']],

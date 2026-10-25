@@ -8,6 +8,7 @@ use App\Http\Presenters\Sections;
 use App\Models\Activity;
 use App\Models\BlogCategory;
 use App\Models\BlogPost;
+use App\Models\Category;
 use App\Models\Cruise;
 use App\Models\Currency;
 use App\Models\Destination;
@@ -17,6 +18,7 @@ use App\Models\GalleryAlbum;
 use App\Models\Hotel;
 use App\Models\JobPost;
 use App\Models\Language;
+use App\Models\MediaAsset;
 use App\Models\Menu;
 use App\Models\Page;
 use App\Models\Partner;
@@ -53,6 +55,7 @@ class ContentController extends Controller
             'settings' => Settings::public(),
             'menus' => $menus,
             'menu_names' => $all->mapWithKeys(fn ($m) => [$m->location => $m->tr('name')]),
+            'categories' => Category::orderBy('sort')->get()->map(fn ($c) => ['slug' => $c->slug, 'icon' => $c->icon, 'name' => $c->tr('name')]),
             'stats' => Stat::where('is_active', true)->orderBy('sort')->get()->map(fn ($s) => ['value' => $s->value, 'suffix' => $s->suffix, 'label' => $s->tr('label'), 'icon' => $s->icon]),
             'partners' => Partner::with('logo.media')->where('is_active', true)->orderBy('kind')->orderBy('sort')->get()->groupBy('kind')
                 ->map(fn ($g) => $g->map(fn ($p) => ['name' => $p->name, 'code' => $p->code, 'color' => $p->color, 'logo' => Img::of($p->logo)])->values()),
@@ -191,7 +194,7 @@ class ContentController extends Controller
     /** A media-library image by its key (used for decorative/layout images). */
     public function media(string $key): JsonResponse
     {
-        $a = \App\Models\MediaAsset::with('media')->where('key', $key)->firstOrFail();
+        $a = MediaAsset::with('media')->where('key', $key)->firstOrFail();
 
         return response()->json(['data' => Img::of($a)]);
     }
@@ -216,8 +219,12 @@ class ContentController extends Controller
         }
         $static = SeoMeta::whereNotNull('path')->where('in_sitemap', true)->get()->map(fn ($s) => ['path' => $s->path, 'lastmod' => $s->updated_at?->toDateString(),
             'priority' => $s->sitemap_priority ?? 0.8, 'changefreq' => $s->sitemap_changefreq ?? 'weekly'])->all();
-        foreach (Page::published()->with('seo')->whereNotIn('slug', ['home'])->get() as $p) {
-            $static[] = ['path' => '/'.$p->slug, 'lastmod' => $p->updated_at?->toDateString(), 'priority' => 0.5, 'changefreq' => 'monthly'];
+        foreach (Page::published()->with('seo')->get() as $p) {
+            if ($p->seo && (! $p->seo->in_sitemap || str_contains((string) $p->seo->robots, 'noindex'))) {
+                continue;
+            }
+            $static[] = ['path' => $p->slug === 'home' ? '/' : '/'.$p->slug, 'lastmod' => $p->updated_at?->toDateString(),
+                'priority' => (float) ($p->seo?->sitemap_priority ?? 0.5), 'changefreq' => $p->seo?->sitemap_changefreq ?? 'monthly'];
         }
 
         return response()->json(['data' => collect(array_merge($static, $entities))->unique('path')->values()]);

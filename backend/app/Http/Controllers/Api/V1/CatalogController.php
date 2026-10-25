@@ -38,13 +38,13 @@ class CatalogController extends Controller
         $q = Tour::published()->with(self::CARD_WITH)->search($request->query('q'));
         $this->filterTours($q, $request);
         $this->sort($q, $request->query('sort'), 'price_from', 'days');
-        $tours = $q->get();
+        [$tours, $page] = $this->paged($q, $request);
         $all = Tour::published()->with('categories')->get(['id', 'region', 'price_from', 'days', 'rating', 'cancellation_policy_id']);
 
         return response()->json([
             'data' => $tours->map(fn ($t) => P::tourCard($t))->all(),
             'meta' => [
-                'total' => $tours->count(),
+                ...$page,
                 'facets' => [
                     'region' => $all->countBy('region'),
                     'category' => $all->flatMap(fn ($t) => $t->categories->pluck('slug'))->countBy(),
@@ -54,6 +54,15 @@ class CatalogController extends Controller
                 'categories' => Category::orderBy('sort')->get()->map(fn ($c) => ['slug' => $c->slug, 'icon' => $c->icon, 'name' => $c->tr('name')]),
             ],
         ]);
+    }
+
+    /** Page a listing query: ?page=N&per_page=M (default 24, max 60). Returns [rows, pagination meta]. */
+    private function paged(Builder $q, Request $r): array
+    {
+        $per = max(1, min(60, (int) $r->query('per_page', 24)));
+        $p = $q->paginate($per, ['*'], 'page', max(1, (int) $r->query('page', 1)));
+
+        return [$p->getCollection(), ['total' => $p->total(), 'current_page' => $p->currentPage(), 'last_page' => $p->lastPage(), 'per_page' => $per]];
     }
 
     private function filterTours(Builder $q, Request $r): void
@@ -112,10 +121,25 @@ class CatalogController extends Controller
         $own = Review::where('status', 'published')->where('reviewable_type', $model::class)->where('reviewable_id', $model->id)->latest()->limit(4)->get();
         $list = $own->count() >= 2 ? $own : Review::where('status', 'published')->whereNull('user_id')->latest('travelled_on')->limit(4)->get();
 
+        $rating = (float) ($model->rating ?? $model->guest_score ?? 0);
+        $all = Review::where('status', 'published')->where('reviewable_type', $model::class)->where('reviewable_id', $model->id)->get(['rating', 'category_scores']);
+        // Real distribution once there are enough first-party reviews; before that, the imported aggregate's typical spread.
+        $histogram = $all->count() >= 10
+            ? collect([5, 4, 3, 2, 1])->mapWithKeys(fn ($s) => [(string) $s => (int) round(100 * $all->where('rating', $s)->count() / $all->count())])->all()
+            : ($rating >= 4.7 ? ['5' => 78, '4' => 15, '3' => 5, '2' => 1, '1' => 1] : ['5' => 62, '4' => 24, '3' => 9, '2' => 3, '1' => 2]);
+        $scores = $all->pluck('category_scores')->filter()->reduce(function ($c, $s) {
+            foreach ($s as $k => $v) {
+                $c[$k][] = (float) $v;
+            }
+
+            return $c;
+        }, []);
+
         return [
-            'rating' => (float) ($model->rating ?? $model->guest_score ?? 0),
+            'rating' => $rating,
             'count' => (int) ($model->reviews_count ?? 0),
-            'histogram' => ['5' => 78, '4' => 15, '3' => 5, '2' => 1, '1' => 1],
+            'histogram' => $histogram,
+            'scores' => $scores ? array_map(fn ($v) => round(array_sum($v) / count($v), 1), $scores) : null,
             'items' => $list->map(fn ($r) => P::review($r))->all(),
         ];
     }
@@ -168,7 +192,9 @@ class CatalogController extends Controller
         $codes = Cruise::published()->distinct()->pluck('region');
         $regions = Region::whereIn('code', $codes)->orderBy('sort')->get()->mapWithKeys(fn ($r) => [$r->code => $r->tr('name')]);
 
-        return response()->json(['data' => $q->get()->map(fn ($c) => P::cruiseCard($c))->all(), 'meta' => ['regions' => $regions]]);
+        [$rows, $page] = $this->paged($q, $request);
+
+        return response()->json(['data' => $rows->map(fn ($c) => P::cruiseCard($c))->all(), 'meta' => $page + ['regions' => $regions]]);
     }
 
     public function cruise(string $slug): JsonResponse
@@ -188,7 +214,9 @@ class CatalogController extends Controller
         $this->sort($q, $request->query('sort'), 'price');
         $cats = collect(Settings::get('catalog.activity_categories', []))->map(fn ($c) => ['key' => $c['key'], 'icon' => $c['icon'], 'label' => tr_pick($c['label'])])->values();
 
-        return response()->json(['data' => $q->get()->map(fn ($a) => P::activityCard($a))->all(), 'meta' => ['categories' => $cats]]);
+        [$rows, $page] = $this->paged($q, $request);
+
+        return response()->json(['data' => $rows->map(fn ($a) => P::activityCard($a))->all(), 'meta' => $page + ['categories' => $cats]]);
     }
 
     public function activity(string $slug): JsonResponse
@@ -220,8 +248,10 @@ class CatalogController extends Controller
             ->when($request->boolean('breakfast'), fn ($q) => $q->where('breakfast', true));
         $this->sort($q, $request->query('sort'), 'price_from');
 
-        return response()->json(['data' => $q->get()->map(fn ($h) => P::hotelCard($h))->all(),
-            'meta' => ['amenities' => Amenity::all()->map(fn ($a) => ['code' => $a->code, 'icon' => $a->icon, 'label' => $a->tr('name')])]]);
+        [$rows, $page] = $this->paged($q, $request);
+
+        return response()->json(['data' => $rows->map(fn ($h) => P::hotelCard($h))->all(),
+            'meta' => $page + ['amenities' => Amenity::all()->map(fn ($a) => ['code' => $a->code, 'icon' => $a->icon, 'label' => $a->tr('name')])]]);
     }
 
     public function hotel(string $slug): JsonResponse

@@ -59,7 +59,7 @@ return new class extends Migration
         Schema::create('translations', function (Blueprint $t) {
             $t->id();
             $t->string('group', 32)->default('ui')->index();
-            $t->string('key', 191);
+            $t->string('key', 191)->collation('utf8mb4_bin'); // case-sensitive: "Tours" and "tours" are different UI strings
             $t->json('value');
             $t->timestamps();
             $t->unique(['group', 'key']);

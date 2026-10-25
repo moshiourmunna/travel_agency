@@ -40,8 +40,8 @@ class SeoSeeder extends Seeder
             $seg = explode('/', trim($path, '/'));
             $model = count($seg) === 2 ? (self::ENTITY[$seg[0]] ?? null) : null;
             $entity = $model ? $model::where('slug', $seg[1])->first() : null;
-            if (! $entity && count($seg) === 1 && in_array($seg[0], ['terms', 'privacy', 'refund-policy'], true)) {
-                $entity = Page::where('slug', $seg[0])->first();
+            if (! $entity && count($seg) === 1) {
+                $entity = Page::where('slug', $seg[0] === '' ? 'home' : $seg[0])->first();
             }
             if ($entity) {
                 $entity->seo()->create($attrs);

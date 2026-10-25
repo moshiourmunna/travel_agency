@@ -10,6 +10,7 @@ export type Site = {
   settings: Record<string, Record<string, any>>;
   menus: Record<string, any[]>;
   menu_names: Record<string, string>;
+  categories: { slug: string; icon: string; name: string }[];
   stats: { value: number; suffix: string; label: string; icon?: string }[];
   partners: Record<string, { name: string; code: string; color: string }[]>;
 };

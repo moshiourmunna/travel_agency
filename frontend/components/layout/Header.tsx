@@ -49,7 +49,7 @@ export function Header({ i, company, menus, themes, cruiseImage }: { i: I18n; co
               const chevron = <Icon name="chevron-down" className="h-4 w-4 opacity-60" />;
               if (m.meta?.mega === 'tours')
                 return (
-                  <Dropdown key={k} label={<>{m.label} {chevron}</>} panelClass="absolute left-0 top-full z-50 mt-2 w-[720px] rounded-2xl border border-ink-100 bg-white p-6 shadow-lift dark:border-ink-800 dark:bg-ink-900">
+                  <Dropdown key={k} under={[m.url, ...(m.meta?.also ?? [])].filter((x): x is string => !!x).map((x) => u(x))} label={<>{m.label} {chevron}</>} panelClass="absolute left-0 top-full z-50 mt-2 w-[720px] rounded-2xl border border-ink-100 bg-white p-6 shadow-lift dark:border-ink-800 dark:bg-ink-900">
                     <div className="grid grid-cols-3 gap-6">
                       {mega.map((col, c) => (
                         <div key={c}><p className="mb-3 text-xs font-bold uppercase tracking-wider text-ink-400">{col.label}</p>
@@ -64,7 +64,7 @@ export function Header({ i, company, menus, themes, cruiseImage }: { i: I18n; co
                 );
               if (m.meta?.mega === 'holidays')
                 return (
-                  <Dropdown key={k} label={<>{m.label} {chevron}</>} panelClass="absolute left-0 top-full z-50 mt-2 w-[600px] overflow-hidden rounded-2xl border border-ink-100 bg-white shadow-lift dark:border-ink-800 dark:bg-ink-900">
+                  <Dropdown key={k} under={[m.url, ...(m.meta?.also ?? [])].filter((x): x is string => !!x).map((x) => u(x))} label={<>{m.label} {chevron}</>} panelClass="absolute left-0 top-full z-50 mt-2 w-[600px] overflow-hidden rounded-2xl border border-ink-100 bg-white shadow-lift dark:border-ink-800 dark:bg-ink-900">
                     <div className="grid grid-cols-[1.2fr_1fr]">
                       <div className="grid grid-cols-1 gap-1 p-5">
                         {themes.map((th) => (
