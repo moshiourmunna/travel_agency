@@ -99,3 +99,16 @@ console errors; security checks. Then repeat key browser E2E on the user's PC (c
 - frontend/.env.example now tracked (frontend/.gitignore ignored it). backend/.env.example rewritten for Musafir/MySQL. docs/LOCAL_SETUP.md written.
 - PC sync #1 (M3): 14×4 MB chunks (bigger CopyFromBox transfers fail; send sequentially), sha256 verified, robocopy /E merge (no deletes, .env skipped).
   PC: composer install (5.8 min), migrate --seed 105 s, storage:link, npm ci, next build 222 s with `artisan serve` single-threaded.
+
+## M3 — DONE + verified on PC (2026-10-26 05:35 BDT)
+- PC (c81f2d4f): servers already running from the previous worker were reused, then stopped (php serve ×2, npm/next start). Laragon mysqld and an unrelated
+  codex node daemon (PID 3328) were left alone.
+- HTTP smoke OK. Headless Chrome via playwright-core installed in %LOCALAPPDATA%\musafir-smoke (outside the project) running tooling/pc/pc_smoke.mjs:
+  27/27 (13 pages × 1440/390 + dark). Screenshots are at %LOCALAPPDATA%\musafir-smoke\shots on the PC.
+- Content edit → public: tinker title edit + cache:clear + POST /api/revalidate → visible after about 6 s (SWR 'max' profile; the first hit is stale). Reverted.
+  TODO M6: admin save hook should call revalidate with `{ expire: 0 }` (or poll-warm) for immediate preview.
+- Fixes: PC lacked backend/public/build (gitignored) → `npm ci && npm run build` in backend (admin/health 200). tests/Unit missing (empty dir) → .gitkeep.
+  PC `php artisan test` → 64 passed / 553 assertions. LOCAL_SETUP.md updated; M3_REPORT.md written; both copied to the PC (sha256 verified).
+- Gotcha: CopyFromBox only writes under C:\Users\m (the local-exec root). Copy there, then Move-Item into F:\projects\tour_travel.
+- Gotcha: in PowerShell scripts, don't name a function `rv` (it's the alias for Remove-Variable).
+- NEXT: M4 checkout + payments (4-step booking, coupons, deposit/instalments, mock + SSLCommerz/bKash/Nagad sandbox drivers, IPN, confirmation, mail/SMS log, PDFs).

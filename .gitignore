@@ -22,3 +22,4 @@ e2e/playwright-report/
 tests/lh-tmp/
 /musafir_pkg/
 tooling/shots/
+m3_pc_shots/
