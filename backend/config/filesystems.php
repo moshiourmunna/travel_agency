@@ -38,6 +38,15 @@ return [
             'report' => false,
         ],
 
+        // Used by the test-suite so seeded media never touches storage/app/public.
+        'testing_public' => [
+            'driver' => 'local',
+            'root' => storage_path('framework/testing/public'),
+            'url' => rtrim(env('APP_URL', 'http://localhost'), '/').'/storage-testing',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),

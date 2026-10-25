@@ -2,24 +2,26 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
+/**
+ * php artisan migrate:fresh --seed  — builds the full demo: every content type from the approved mockup,
+ * demo staff/traveller accounts (password "password"), bookings, payments, CRM data and SEO meta.
+ */
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
-
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        mt_srand(26);
+        $this->call([
+            FoundationSeeder::class,
+            UserSeeder::class,
+            CatalogueSeeder::class,
+            ContentSeeder::class,
+            CmsSeeder::class,
+            CommerceSeeder::class,
+            CrmSeeder::class,
+            SeoSeeder::class,
         ]);
     }
 }

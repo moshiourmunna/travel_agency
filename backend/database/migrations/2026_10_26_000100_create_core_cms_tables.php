@@ -103,6 +103,7 @@ return new class extends Migration
             $t->json('data')->nullable();
             $t->string('status', 16)->default('published')->index();
             $t->timestamp('published_at')->nullable();
+            $t->text('search_text')->nullable();
             $t->timestamps();
             $t->softDeletes();
         });
@@ -253,6 +254,7 @@ return new class extends Migration
             $t->boolean('is_featured')->default(false);
             $t->string('status', 16)->default('published')->index();
             $t->timestamp('published_at')->nullable()->index();
+            $t->text('search_text')->nullable();
             $t->timestamps();
             $t->softDeletes();
         });

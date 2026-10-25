@@ -39,3 +39,15 @@ The plan is `docs/IMPLEMENTATION_PLAN.md`. It was approved on 26 Oct 2026 with t
 - frontend: Tailwind 3.4.19 via postcss (tailwind.config.js uses ui-tokens preset), globals.css imports musafir.css, fonts in public/fonts,
   next.config.ts without cacheComponents (classic fetch cache + tags). `npm run build` OK; page fetches API health.
 - Run: `cd backend && php artisan serve --port=8000`; `cd frontend && npm run dev`.
+
+## M1 — DONE (schema, models, seeders)  2026-10-26 ~03:00 BDT
+- 121 tables (migrations 2026_10_26_0001..0004 + framework/spatie). Round-trip rollback/migrate OK. CHECK constraints + FULLTEXT ngram on MySQL only.
+- 99 Eloquent models generated from tooling/gen/models.py (spec; re-run regenerates all except User/MediaAsset). Traits: HasTr (spatie translatable, EN fallback),
+  Publishable (status scopes, image/gallery from media_assets, seo morphOne, search_text), HasPublicUlid.
+- Central media library: media_assets (+ spatie media, webp conversions thumb 480/card 800/hero 1600, nonQueued). Content references assets by id; gallery = json ids.
+- Seed data: tooling/export_seed.py -> database/seeders/data/{public,app}.json ; tooling/export_pages.py -> pages.json (meta + derived ctx of all 153 mockup pages).
+  Photos bundled in database/seeders/media (38 jpg + credits.json).
+- Seeders: Foundation, User, Catalogue, Content, Cms (EMPTY placeholder — home sections/menus/translations to do in M3), Commerce, Crm, Seo. `migrate:fresh --seed` ≈ 19 s.
+- Demo logins (password "password"): admin@ sales@ reservations@ visa@ support@ accounts@ content@ musafir.test; farhana@example.com; agent@example.com.
+- Tests: Pest on MySQL `musafir_test` (phpunit.xml), MEDIA_DISK=testing_public. `unset APP_ENV; ./vendor/bin/pest` → 6 passed.
+- APP timezone Asia/Dhaka (config/app.php env APP_TIMEZONE).

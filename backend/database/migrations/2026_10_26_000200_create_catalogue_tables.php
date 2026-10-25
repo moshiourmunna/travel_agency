@@ -77,7 +77,7 @@ return new class extends Migration
             $t->json('description')->nullable();
             $t->json('best_time')->nullable();
             $t->json('visa_info')->nullable();
-            $t->string('currency', 8)->nullable();
+            $t->string('currency', 24)->nullable();
             $t->json('flight_time')->nullable();
             $t->json('things_to_do')->nullable(); // [{en,bn}]
             $t->decimal('lat', 10, 7)->nullable();
@@ -489,6 +489,8 @@ return new class extends Migration
             $t->id();
             $t->string('code', 32)->unique();
             $t->json('title');
+            $t->json('description')->nullable();
+            $t->string('kind', 16)->default('holiday'); // holiday | cruise | flight | bank (offers page filter)
             $t->json('discount_text')->nullable();
             $t->json('tag')->nullable();
             $t->string('link', 512)->nullable();

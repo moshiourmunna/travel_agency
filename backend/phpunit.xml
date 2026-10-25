@@ -18,13 +18,18 @@
         </include>
     </source>
     <php>
-        <env name="APP_ENV" value="testing"/>
+        <env name="APP_ENV" value="testing" force="true"/>
         <env name="APP_MAINTENANCE_DRIVER" value="file"/>
         <env name="BCRYPT_ROUNDS" value="4"/>
         <env name="BROADCAST_CONNECTION" value="null"/>
         <env name="CACHE_STORE" value="array"/>
-        <env name="DB_CONNECTION" value="sqlite"/>
-        <env name="DB_DATABASE" value=":memory:"/>
+        <env name="DB_CONNECTION" value="mysql"/>
+        <env name="DB_DATABASE" value="musafir_test"/>
+        <env name="MEDIA_DISK" value="testing_public"/>
+        <env name="APP_URL" value="http://127.0.0.1:8000"/>
+        <env name="FRONTEND_URL" value="http://localhost:3000"/>
+        <env name="REVALIDATE_ENABLED" value="false"/>
+        <env name="SMS_DRIVER" value="log"/>
         <env name="DB_URL" value=""/>
         <env name="MAIL_MAILER" value="array"/>
         <env name="QUEUE_CONNECTION" value="sync"/>
