@@ -75,7 +75,7 @@ export function InquiryForm({ type, fields, submit, success, consent, extra, cla
       {state === 'fail' ? <p className="text-sm font-semibold text-rose-700 dark:text-rose-400" role="alert">{msg.failed}</p> : null}
       <button className={submitClass} disabled={state === 'busy'} aria-busy={state === 'busy'}>{submit}</button>
       {footer}
-      {consent ? null : <p className="text-center text-[11px] muted">{msg.privacy}</p>}
+      {consent ? null : <p className="col-span-full text-center text-[11px] muted">{msg.privacy}</p>}
     </form>
   );
 }

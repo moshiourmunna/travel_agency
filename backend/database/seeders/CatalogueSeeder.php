@@ -257,18 +257,18 @@ class CatalogueSeeder extends Seeder
             ['family-premium', 'Family Premium', 'ফ্যামিলি প্রিমিয়াম', 3200, 'US$ 1,00,000', [['Up to 2 adults + 3 kids', 'সর্বোচ্চ ২ প্রাপ্তবয়স্ক + ৩ শিশু'], ['Flight delay ৳5,000 / 6 h', 'ফ্লাইট বিলম্ব ৳৫,০০০ / ৬ ঘণ্টা'], ['Adventure sports', 'অ্যাডভেঞ্চার স্পোর্টস']], false],
         ];
         foreach ($plans as $k => [$code, $en, $bn, $price, $medical, $features, $popular]) {
-            InsurancePlan::updateOrCreate(['code' => $code], ['name' => ['en' => $en, 'bn' => $bn], 'price' => $price, 'price_note' => ['en' => 'per traveller, up to 15 days', 'bn' => 'জনপ্রতি, ১৫ দিন পর্যন্ত'],
-                'coverage' => array_merge([['en' => "Medical cover {$medical}", 'bn' => "চিকিৎসা কভার {$medical}"]], array_map(fn ($f) => ['en' => $f[0], 'bn' => $f[1]], $features)), 'is_popular' => $popular, 'sort' => $k]);
+            InsurancePlan::updateOrCreate(['code' => $code], ['name' => ['en' => $en, 'bn' => $bn], 'medical_cover' => $medical, 'price' => $price, 'price_note' => ['en' => '7 days', 'bn' => '৭ দিন'],
+                'coverage' => array_map(fn ($f) => ['en' => $f[0], 'bn' => $f[1]], $features), 'is_popular' => $popular, 'sort' => $k]);
         }
 
-        foreach ([['classic', 'Classic teal', 'ক্লাসিক টিল', 'from-brand-700 to-brand-500', 'maldives'], ['celebration', 'Celebration', 'উদযাপন', 'from-accent-500 to-rose-500', 'santorini'], ['adventure', 'Adventure', 'অ্যাডভেঞ্চার', 'from-ink-900 to-brand-800', 'nepal']] as $k => [$code, $en, $bn, $grad, $img]) {
+        foreach ([['classic', 'Classic teal', 'ক্লাসিক টিল', 'from-brand-800 via-brand-600 to-accent-400', 'maldives'], ['celebration', 'Celebration', 'উদযাপন', 'from-accent-500 to-rose-500', 'santorini'], ['adventure', 'Adventure', 'অ্যাডভেঞ্চার', 'from-ink-900 to-brand-800', 'nepal']] as $k => [$code, $en, $bn, $grad, $img]) {
             GiftCardDesign::updateOrCreate(['code' => $code], ['name' => ['en' => $en, 'bn' => $bn], 'gradient' => $grad, 'image_id' => S::asset($img), 'amounts' => [5000, 10000, 25000, 50000, 100000], 'sort' => $k]);
         }
 
         // Offers (mockup OFFERS + the offers page extras) and coupons
         $info = S::page('offers.html')['ctx']['en']['deals'] ?? [];
         foreach ($info as $k => $o) {
-            Offer::updateOrCreate(['code' => $o['code'] ?? 'FLASH-ACT'], [
+            Offer::updateOrCreate(['code' => $o['code'], 'sort' => $k], [
                 'title' => S::b($o['title']), 'description' => S::b($o['desc']), 'kind' => $o['kind'], 'discount_text' => S::b($o['off']), 'tag' => S::b($o['tag']), 'link' => CmsSeeder::path($o['link']),
                 'image_id' => S::asset($o['img']), 'starts_at' => '2026-10-01 00:00:00', 'ends_at' => $o['ends'].' 23:59:59', 'is_flash' => $o['code'] === null || $k < 2, 'sort' => $k,
                 'is_active' => true,

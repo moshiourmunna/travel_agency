@@ -72,6 +72,7 @@ class CatalogController extends Controller
             ->when($r->query('category') ?? $r->query('theme'), fn ($q, $v) => $q->whereHas('categories', fn ($c) => $c->whereIn('slug', explode(',', $v))))
             ->when($r->query('price_min'), fn ($q, $v) => $q->where('price_from', '>=', (float) $v))
             ->when($r->query('price_max'), fn ($q, $v) => $q->where('price_from', '<=', (float) $v))
+            ->when($r->boolean('on_sale'), fn ($q) => $q->whereNotNull('price_was')->whereColumn('price_was', '>', 'price_from'))
             ->when($r->query('days_min'), fn ($q, $v) => $q->where('days', '>=', (int) $v))
             ->when($r->query('days_max'), fn ($q, $v) => $q->where('days', '<=', (int) $v))
             ->when($r->query('rating'), fn ($q, $v) => $q->where('rating', '>=', (float) $v))
@@ -88,6 +89,7 @@ class CatalogController extends Controller
             'rating' => $q->orderByDesc($rating)->orderByDesc('reviews_count'),
             'duration' => $duration ? $q->orderBy($duration) : $q->ordered(),
             'newest' => $q->orderByDesc("{$t}.published_at"),
+            'discount' => $q->orderByRaw("({$t}.price_was - {$t}.price_from) / NULLIF({$t}.price_was, 0) DESC"),
             default => $q->orderByDesc("{$t}.is_featured")->orderBy("{$t}.sort")->orderBy("{$t}.id"),
         };
     }
@@ -307,7 +309,7 @@ class CatalogController extends Controller
     public function insurancePlans(): JsonResponse
     {
         return response()->json(['data' => InsurancePlan::where('is_active', true)->orderBy('sort')->get()->map(fn ($p) => [
-            'code' => $p->code, 'name' => $p->tr('name'), 'price' => P::money($p->price), 'price_note' => $p->tr('price_note'), 'coverage' => tr_list($p->coverage), 'is_popular' => $p->is_popular,
+            'code' => $p->code, 'name' => $p->tr('name'), 'medical_cover' => $p->medical_cover, 'price' => P::money($p->price), 'price_note' => $p->tr('price_note'), 'coverage' => tr_list($p->coverage), 'is_popular' => $p->is_popular,
         ])]);
     }
 

@@ -213,7 +213,37 @@
    "bn": "ফ্ল্যাশ সেল, আর্লি-বার্ড ভাড়া, ব্যাংক ও বিকাশ ক্যাশব্যাক এবং কুপন কোড — প্রতিটি অফার কখন শেষ হবে তা স্পষ্ট দেখানো।"
   },
   "image": "maldives",
-  "template": "hero"
+  "template": "hero",
+  "data": {
+   "banner": {
+    "eyebrow": {
+     "en": "Flash sale",
+     "bn": "ফ্ল্যাশ সেল"
+    },
+    "title": {
+     "en": "11.11 Mega Travel Sale — up to 30% off",
+     "bn": "১১.১১ মেগা ট্রাভেল সেল — সর্বোচ্চ ৩০% ছাড়"
+    },
+    "text": {
+     "en": "Holidays, cruises and activities. Use code at checkout.",
+     "bn": "হলিডে, ক্রুজ ও অ্যাক্টিভিটি। চেকআউটে কোড ব্যবহার করুন।"
+    },
+    "code": "MUSAFIR10",
+    "ends_at": "2026-11-11T23:59:59+06:00"
+   },
+   "drops_eyebrow": {
+    "en": "Price drops",
+    "bn": "মূল্য হ্রাস"
+   },
+   "drops_title": {
+    "en": "Tours with reduced prices right now",
+    "bn": "এখন যেসব ট্যুরে দাম কমেছে"
+   },
+   "terms": {
+    "en": "Terms: one coupon per booking; not valid with other promotions; bank offers subject to the issuing bank’s terms; prices in BDT including VAT. Musafir may end any offer early if inventory sells out.",
+    "bn": "শর্তাবলি: প্রতি বুকিংয়ে একটি কুপন; অন্য অফারের সাথে প্রযোজ্য নয়; ব্যাংক অফার সংশ্লিষ্ট ব্যাংকের শর্তসাপেক্ষ; মূল্য ভ্যাটসহ টাকায়। ইনভেন্টরি শেষ হলে মুসাফির যেকোনো অফার আগেই বন্ধ করতে পারে।"
+   }
+  }
  },
  "reviews": {
   "title": {
