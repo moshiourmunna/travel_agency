@@ -79,13 +79,13 @@ class CatalogController extends Controller
             ->when($r->boolean('featured'), fn ($q) => $q->where('is_featured', true));
     }
 
-    private function sort(Builder $q, ?string $sort, string $price = 'price_from', ?string $duration = null): void
+    private function sort(Builder $q, ?string $sort, string $price = 'price_from', ?string $duration = null, string $rating = 'rating'): void
     {
         $t = $q->getModel()->getTable();
         match ($sort) {
             'price-asc' => $q->orderBy($price),
             'price-desc' => $q->orderByDesc($price),
-            'rating' => $q->orderByDesc('rating')->orderByDesc('reviews_count'),
+            'rating' => $q->orderByDesc($rating)->orderByDesc('reviews_count'),
             'duration' => $duration ? $q->orderBy($duration) : $q->ordered(),
             'newest' => $q->orderByDesc("{$t}.published_at"),
             default => $q->orderByDesc("{$t}.is_featured")->orderBy("{$t}.sort")->orderBy("{$t}.id"),
@@ -261,8 +261,10 @@ class CatalogController extends Controller
             ->when($request->query('stars'), fn ($q, $v) => $q->whereIn('stars', explode(',', $v)))
             ->when($request->query('kind'), fn ($q, $v) => $q->where('kind', $v))
             ->when($request->boolean('refundable'), fn ($q) => $q->where('refundable', true))
-            ->when($request->boolean('breakfast'), fn ($q) => $q->where('breakfast', true));
-        $this->sort($q, $request->query('sort'), 'price_from');
+            ->when($request->boolean('breakfast'), fn ($q) => $q->where('breakfast', true))
+            ->when(is_numeric($request->query('rating')), fn ($q) => $q->where('guest_score', '>=', (float) $request->query('rating')))
+            ->when(is_numeric($request->query('price_max')), fn ($q) => $q->where('price_from', '<=', (float) $request->query('price_max')));
+        $this->sort($q, $request->query('sort'), 'price_from', null, 'guest_score');
 
         [$rows, $page] = $this->paged($q, $request);
 

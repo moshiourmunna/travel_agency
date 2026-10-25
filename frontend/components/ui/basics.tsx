@@ -99,3 +99,33 @@ export function FaqList({ items, openFirst = true }: { items: { q: string; a: st
     </div>
   );
 }
+
+/** Compact dark hero with a search form (hotels, flights). */
+export function SearchHero({ i, title, sub, crumbs, image, opacity = 'opacity-45', children }: { i: I18n; title: string; sub?: string | null; crumbs: Crumb[]; image: Image | undefined; opacity?: string; children?: React.ReactNode }) {
+  return (
+    <section className="relative isolate overflow-hidden bg-ink-950">
+      <Picture img={image} className={`img-cover absolute inset-0 -z-10 ${opacity}`} priority sizes="100vw" width={1600} height={1000} />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-ink-950/30 to-ink-950" />
+      <div className="wrap py-10 md:py-14">
+        <Crumbs i={i} items={crumbs} light />
+        <h1 className="mt-4 text-3xl font-extrabold text-white sm:text-4xl">{title}</h1>
+        {sub ? <p className="mt-2 text-ink-200">{sub}</p> : null}
+        {children}
+      </div>
+    </section>
+  );
+}
+
+/** Light page header without image (compare, wishlist, sitemap, legal). */
+export function PlainHero({ i, title, sub, crumbs, children }: { i: I18n; title: string; sub?: string | null; crumbs: Crumb[]; children?: React.ReactNode }) {
+  return (
+    <section className="border-b border-ink-100 bg-ink-50 py-10 dark:border-ink-800 dark:bg-ink-900">
+      <div className="wrap">
+        <Crumbs i={i} items={crumbs} />
+        <h1 className="mt-3 text-3xl font-extrabold">{title}</h1>
+        {sub ? <p className="mt-1 muted">{sub}</p> : null}
+        {children}
+      </div>
+    </section>
+  );
+}

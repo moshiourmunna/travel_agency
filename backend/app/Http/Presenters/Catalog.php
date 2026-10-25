@@ -194,6 +194,7 @@ final class Catalog
             'rooms' => $h->roomTypes->map(fn ($r) => ['id' => $r->id, 'name' => $r->tr('name'), 'bed' => $r->tr('bed'), 'size_sqm' => $r->size_sqm, 'occupancy' => $r->features['occupancy'] ?? $r->max_adults,
                 'price' => self::money($r->price), 'breakfast' => $r->breakfast, 'refundable' => $r->refundable, 'rooms_left' => $r->features['rooms_left'] ?? null,
                 'image' => Img::key($r->features['image'] ?? null)])->all(),
+            'house_rules' => $h->house_rules ? \App\Support\Settings::localise($h->house_rules) : null,
             'seo' => self::seo($h->seo),
         ];
     }

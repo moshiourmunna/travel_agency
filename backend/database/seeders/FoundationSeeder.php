@@ -137,6 +137,15 @@ class FoundationSeeder extends Seeder
         $set('commerce', 'miles_per_100', 1, 'number');
         $set('commerce', 'room_factors', ['twin' => 1, 'triple' => 0.94, 'single' => 1.35], 'json');
         $set('commerce', 'cruise_addons', [['code' => 'drinks', 'label' => ['en' => 'Beverage & Wi-Fi package', 'bn' => 'পানীয় ও ওয়াই-ফাই প্যাকেজ'], 'price' => 9500, 'per' => 'booking']], 'json');
+        $set('commerce', 'hotel_addons', [['code' => 'transfer', 'label' => ['en' => 'Airport transfer', 'bn' => 'এয়ারপোর্ট ট্রান্সফার'], 'price' => 2400, 'per' => 'booking']], 'json');
+        $set('catalog', 'hotel_house_rules', [
+            ['icon' => 'clock', 'title' => ['en' => 'Check-in', 'bn' => 'চেক-ইন'], 'text' => ['en' => 'From 2:00 PM', 'bn' => 'দুপুর ২:০০ থেকে']],
+            ['icon' => 'log-out', 'title' => ['en' => 'Check-out', 'bn' => 'চেক-আউট'], 'text' => ['en' => 'Until 12:00 PM', 'bn' => 'দুপুর ১২:০০ পর্যন্ত']],
+            ['icon' => 'baby', 'title' => ['en' => 'Children', 'bn' => 'শিশু'], 'text' => ['en' => 'Under 6 stay free with parents', 'bn' => '৬ বছরের কম বয়সীরা মা-বাবার সাথে ফ্রি']],
+            ['icon' => 'cigarette-off', 'title' => ['en' => 'Smoking', 'bn' => 'ধূমপান'], 'text' => ['en' => 'Non-smoking property', 'bn' => 'ধূমপানমুক্ত প্রপার্টি']],
+            ['icon' => 'id-card', 'title' => ['en' => 'ID required', 'bn' => 'পরিচয়পত্র আবশ্যক'], 'text' => ['en' => 'NID or passport for all adults', 'bn' => 'সব প্রাপ্তবয়স্কের এনআইডি বা পাসপোর্ট']],
+            ['icon' => 'users', 'title' => ['en' => 'Couples', 'bn' => 'দম্পতি'], 'text' => ['en' => 'Marriage certificate may be requested (BD law)', 'bn' => 'বিবাহের সনদ চাওয়া হতে পারে (বাংলাদেশের আইন)']],
+        ], 'json');
         $set('commerce', 'pax_factors', ['adults' => 1, 'children' => 0.7, 'infants' => 0.1], 'json');
         $set('payments', 'gateways', ['mock' => true, 'sslcommerz' => true, 'bkash' => true, 'nagad' => true, 'bank_transfer' => true, 'wallet' => true], 'json');
         $set('payments', 'mode', 'sandbox', 'text', false);

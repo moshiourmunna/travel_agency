@@ -96,3 +96,38 @@ export function ActivityBook({ slug, price, childPrice, times, minDate, booking,
     </form>
   );
 }
+
+/** Hotel booking card: stay dates → nights × rooms × room rate + add-ons. */
+export function HotelBook({ slug, price, priceWas, rooms, addons, minDate, checkin, checkout, booking, l, minus, plus }: {
+  slug: string; price: number; priceWas?: number | null; rooms: { id: number; name: string; price: number }[]; addons: Addon[]; minDate: string; checkin: string; checkout: string; booking: string;
+  l: Record<'night' | 'in' | 'out' | 'room' | 'rooms' | 'nights' | 'fewer' | 'more' | 'total' | 'reserve' | 'note' | 'bad', string>; minus: React.ReactNode; plus: React.ReactNode;
+}) {
+  const { lang } = useSite();
+  const [din, setIn] = useState(checkin);
+  const [dout, setOut] = useState(checkout);
+  const [room, setRoom] = useState(rooms[0]?.id ?? 0);
+  const [n, setN] = useState(1);
+  const [extra, setExtra] = useState<string[]>([]);
+  const nights = Math.max(0, Math.round((Date.parse(dout) - Date.parse(din)) / 86400000));
+  const rate = rooms.find((r) => r.id === room)?.price ?? price;
+  const total = rate * nights * n + addons.filter((a) => extra.includes(a.code)).reduce((s, a) => s + a.price * (a.per === 'person' ? n : 1), 0);
+  const d = (s: string | number) => (lang === 'bn' ? String(s).replace(/\d/g, (x) => '০১২৩৪৫৬৭৮৯'[+x]) : String(s));
+  const next = (iso: string) => { const x = new Date(iso + 'T00:00:00Z'); x.setUTCDate(x.getUTCDate() + 1); return x.toISOString().slice(0, 10); };
+  return (
+    <form className="card p-5" action={booking} method="get">
+      <input type="hidden" name="hotel" value={slug} /><input type="hidden" name="rooms" value={n} />
+      <p className="flex items-baseline gap-2"><span className="text-3xl font-extrabold"><Price value={price} /></span><span className="text-sm muted">/ {l.night}</span>{priceWas ? <s className="text-sm text-ink-400"><Price value={priceWas} /></s> : null}</p>
+      <div className="mt-4 grid grid-cols-2 gap-3">
+        <div><label className="label" htmlFor="hb-in">{l.in}</label><input id="hb-in" name="in" type="date" className="input" min={minDate} value={din} onChange={(e) => { const v = e.target.value; if (!v) return; setIn(v); if (dout <= v) setOut(next(v)); }} /></div>
+        <div><label className="label" htmlFor="hb-out">{l.out}</label><input id="hb-out" name="out" type="date" className="input" min={next(din)} value={dout} onChange={(e) => e.target.value && setOut(e.target.value)} /></div>
+      </div>
+      {rooms.length > 1 ? <div className="mt-3"><label className="label" htmlFor="hb-room">{l.room}</label><select id="hb-room" name="room" className="input" value={room} onChange={(e) => setRoom(+e.target.value)}>{rooms.map((r) => <option key={r.id} value={r.id}>{r.name}</option>)}</select></div> : <input type="hidden" name="room" value={room} />}
+      <div className="mt-3"><Stepper id="hb-rooms" label={l.rooms} sub={`${d(nights)} ${l.nights}`} value={n} min={1} max={5} set={setN} minus={minus} plus={plus} dec={l.fewer} inc={l.more} /></div>
+      {addons.map((a) => <label key={a.code} className="mt-3 flex items-center justify-between gap-2 text-sm"><span className="flex items-center gap-2"><input type="checkbox" className="check" name="addons[]" value={a.code} checked={extra.includes(a.code)} onChange={(e) => setExtra((x) => (e.target.checked ? [...x, a.code] : x.filter((c) => c !== a.code)))} /> {a.label}</span><span className="muted">+<Price value={a.price} /></span></label>)}
+      <div className="mt-4 flex items-center justify-between border-t border-ink-100 pt-4 dark:border-ink-800"><span className="font-semibold">{l.total}</span><b className="text-2xl" aria-live="polite"><Price value={total} /></b></div>
+      {nights < 1 ? <p className="mt-2 text-xs font-semibold text-rose-600" role="alert">{l.bad}</p> : null}
+      <button className="btn btn-accent btn-lg mt-4 w-full" disabled={nights < 1}>{l.reserve}</button>
+      <p className="mt-2 text-center text-xs muted">{l.note}</p>
+    </form>
+  );
+}

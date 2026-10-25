@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useSite } from '@/components/client/SiteContext';
 import { useQueryNav } from './ListingBits';
 
-export type Opt = { value: string; label: string; count?: number };
+export type Opt = { value: string; label: string; count?: number; icon?: React.ReactNode };
 export type Field =
   | { type: 'search'; name: string; label: string; placeholder: string }
   | { type: 'checks'; name: string; label: string; options: Opt[] }
@@ -61,7 +61,7 @@ export function Filters({ id, fields, live, labels, search }: { id: string; fiel
         );
         if (f.type === 'chips') return (
           <fieldset key={f.name}><legend className="label">{f.label}</legend><div className="flex flex-wrap gap-2">
-            {f.options.map((o) => <label key={o.value} className="cursor-pointer"><input type="checkbox" name={f.name} value={o.value} className="peer sr-only" checked={(state[f.name] || '').split(',').includes(o.value)} onChange={(e) => toggleMulti(f.name, o.value, e.target.checked)} /><span className="chip text-xs peer-checked:border-brand-600 peer-checked:bg-brand-700 peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-brand-500">{o.label}</span></label>)}
+            {f.options.map((o) => <label key={o.value} className="cursor-pointer"><input type="checkbox" name={f.name} value={o.value} className="peer sr-only" checked={(state[f.name] || '').split(',').includes(o.value)} onChange={(e) => toggleMulti(f.name, o.value, e.target.checked)} /><span className="chip text-xs peer-checked:border-brand-600 peer-checked:bg-brand-700 peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-brand-500">{o.label}{o.icon ? <> {o.icon}</> : null}</span></label>)}
           </div></fieldset>
         );
         if (f.type === 'radios') return (

@@ -28,6 +28,7 @@ class Hotel extends Model
         return [
             'amenities' => 'array',
             'gallery' => 'array',
+            'house_rules' => 'array',
             'refundable' => 'boolean',
             'breakfast' => 'boolean',
             'price_from' => 'decimal:2',

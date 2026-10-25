@@ -72,7 +72,7 @@ M = {
  'ActivitySlot': dict(casts={'starts_at': 'datetime', 'price': 'decimal:2'}, rel=[('activity', 'belongsTo', 'Activity')]),
  'Amenity': dict(table='amenities', tr=['name']),
  'Hotel': dict(tr=['name', 'city', 'address', 'description', 'distance_text'], pub=True, soft=True, ulid=True,
-     casts={'amenities': 'array', 'gallery': 'array', 'refundable': 'boolean', 'breakfast': 'boolean', 'price_from': 'decimal:2', 'price_was': 'decimal:2', 'guest_score': 'float', 'lat': 'float', 'lng': 'float', 'published_at': 'datetime', 'is_featured': 'boolean'},
+     casts={'amenities': 'array', 'gallery': 'array', 'house_rules': 'array', 'refundable': 'boolean', 'breakfast': 'boolean', 'price_from': 'decimal:2', 'price_was': 'decimal:2', 'guest_score': 'float', 'lat': 'float', 'lng': 'float', 'published_at': 'datetime', 'is_featured': 'boolean'},
      rel=[('destination', 'belongsTo', 'Destination'), ('roomTypes', 'hasMany', 'HotelRoomType', None, "->orderBy('sort')"), ('reviews', 'morphMany', 'Review', "'reviewable'")], search=['name', 'city', 'address']),
  'HotelRoomType': dict(tr=['name', 'description', 'bed'], casts={'features': 'array', 'price': 'decimal:2', 'refundable': 'boolean', 'breakfast': 'boolean'}, rel=[('hotel', 'belongsTo', 'Hotel'), ('rates', 'hasMany', 'HotelRate')]),
  'HotelRate': dict(casts={'starts_on': 'date', 'ends_on': 'date', 'price': 'decimal:2'}, rel=[('roomType', 'belongsTo', 'HotelRoomType', "'hotel_room_type_id'")]),
