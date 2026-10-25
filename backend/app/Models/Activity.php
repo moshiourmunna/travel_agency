@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Activity extends Model
 {
-    use HasTr, Publishable, SoftDeletes, HasPublicUlid;
+    use HasPublicUlid, HasTr, Publishable, SoftDeletes;
 
     protected $table = 'activities';
 

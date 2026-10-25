@@ -1,9 +1,13 @@
 <?php
 
+use App\Http\Middleware\HandleInertiaRequests;
+use App\Http\Middleware\PublicCache;
+use App\Http\Middleware\SetApiLocale;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -14,7 +18,7 @@ return Application::configure(basePath: dirname(__DIR__))
         then: function () {
             $domain = config('musafir.admin_domain');
             $path = config('musafir.admin_path');
-            $group = Illuminate\Support\Facades\Route::middleware(['web', App\Http\Middleware\HandleInertiaRequests::class])->name('admin.');
+            $group = Route::middleware(['web', HandleInertiaRequests::class])->name('admin.');
             if ($domain) {
                 $group->domain($domain);
             }
@@ -25,7 +29,11 @@ return Application::configure(basePath: dirname(__DIR__))
         },
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        $middleware->alias([
+            'api.locale' => SetApiLocale::class,
+            'public.cache' => PublicCache::class,
+        ]);
+        $middleware->trustProxies(at: env('TRUSTED_PROXIES', '127.0.0.1'));
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(

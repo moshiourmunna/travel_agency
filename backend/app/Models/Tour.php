@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Tour extends Model
 {
-    use HasTr, Publishable, SoftDeletes, HasPublicUlid;
+    use HasPublicUlid, HasTr, Publishable, SoftDeletes;
 
     protected $guarded = ['id'];
 

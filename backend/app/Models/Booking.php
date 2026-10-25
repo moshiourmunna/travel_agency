@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Booking extends Model
 {
-    use HasTr, SoftDeletes, HasPublicUlid;
+    use HasPublicUlid, HasTr, SoftDeletes;
 
     protected $guarded = ['id'];
 

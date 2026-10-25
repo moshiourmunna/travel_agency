@@ -142,5 +142,6 @@ class FoundationSeeder extends Seeder
         $set('home', 'countdown', ['ends_at' => '2026-11-30T23:59:00+06:00', 'label' => ['en' => 'Winter sale ends in', 'bn' => 'শীতের সেল শেষ হবে']], 'json');
         $set('cookie', 'banner', ['en' => 'We use essential cookies to run Musafir and optional analytics cookies to improve it.', 'bn' => 'মুসাফির চালাতে প্রয়োজনীয় কুকি এবং উন্নত করতে ঐচ্ছিক অ্যানালিটিক্স কুকি ব্যবহার করি।'], 'tr');
         $set('system', 'maintenance', false, 'bool', false);
+        $set('catalog', 'activity_categories', collect(S::public('ACT_CATS'))->map(fn ($c, $k) => ['key' => $k, 'icon' => $c[0], 'label' => S::b($c[1])])->values()->all(), 'json');
     }
 }

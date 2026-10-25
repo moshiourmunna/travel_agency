@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class TripPlan extends Model
 {
-    use HasTr, HasPublicUlid;
+    use HasPublicUlid, HasTr;
 
     protected $guarded = ['id'];
 

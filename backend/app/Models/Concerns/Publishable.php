@@ -34,7 +34,9 @@ trait Publishable
         foreach ($this->searchable ?? [] as $field) {
             $v = $this->getAttributes()[$field] ?? null;
             $v = is_string($v) ? (json_decode($v, true) ?? $v) : $v;
-            array_walk_recursive_safe($v, function ($s) use (&$parts) { $parts[] = $s; });
+            array_walk_recursive_safe($v, function ($s) use (&$parts) {
+                $parts[] = $s;
+            });
         }
 
         return mb_substr(trim(preg_replace('/\s+/u', ' ', strip_tags(implode(' ', $parts)))), 0, 60000);
@@ -42,7 +44,11 @@ trait Publishable
 
     public function scopePublished(Builder $q): Builder
     {
-        return $q->where($this->getTable().'.status', 'published');
+        $t = $this->getTable();
+
+        // Scheduled content goes live when published_at passes (Next revalidates listing pages every few minutes).
+        return $q->where("{$t}.status", 'published')
+            ->where(fn ($w) => $w->whereNull("{$t}.published_at")->orWhere("{$t}.published_at", '<=', now()));
     }
 
     public function scopeFeatured(Builder $q): Builder

@@ -51,3 +51,22 @@ The plan is `docs/IMPLEMENTATION_PLAN.md`. It was approved on 26 Oct 2026 with t
 - Demo logins (password "password"): admin@ sales@ reservations@ visa@ support@ accounts@ content@ musafir.test; farhana@example.com; agent@example.com.
 - Tests: Pest on MySQL `musafir_test` (phpunit.xml), MEDIA_DISK=testing_public. `unset APP_ENV; ./vendor/bin/pest` → 6 passed.
 - APP timezone Asia/Dhaka (config/app.php env APP_TIMEZONE).
+
+## M2 — DONE (public REST API v1)  2026-10-26 ~03:20 BDT
+- 44 routes under /api/v1 (routes/api.php). Middleware: `api.locale` (?lang / Accept-Language → Content-Language + Vary), `public.cache` (weak ETag, 304, Cache-Control public),
+  throttles `public` 240/min, `search` 60/min, `forms` 6/min + 60/day per IP; SSR calls from Next carry `X-Musafir-Ssr: <REVALIDATE_SECRET>` → unthrottled.
+- Controllers Api/V1: Content (site, translations, redirects, sitemap, seo?path, home, pages/{slug}, faqs, testimonials, reviews, team, gallery, careers, posts),
+  Catalog (tours + filters/sort/facets, tour detail + departures, destinations, themes, cruises, activities + slots?date, hotels, visas, offers, insurance-plans, gift-card-designs),
+  Search (search?q across 7 types, airports, flights/search with pax/cabin pricing), Planner (config, estimate = mockup calculator, quote → inquiry+lead), Form (inquiries w/ honeypot, newsletter).
+- Presenters: app/Http/Presenters/Catalog.php (cards/details), Sections.php (CMS page sections: localised data, image refs `*_image_id(s)`, dynamic `source` blocks).
+- Publishable::scopePublished now also hides scheduled items (published_at in future). Settings cache busts on Setting save; translations version busts on Translation save.
+- Model::preventLazyLoading in non-prod (caught 3 N+1s, fixed). trustProxies via TRUSTED_PROXIES env.
+- Activity categories moved into settings `catalog.activity_categories` (admin-editable).
+- Tests: tests/Feature/Api/* → total 55 passed / 375 assertions (incl. 304/ETag, locale, draft/scheduled/deleted hiding, filters/sorts, planner maths, validation, honeypot, XSS-as-data, SQLi-safe search, rate limiting).
+  Sweep: all 218 detail endpoints (every slug × en/bn) return 200.
+
+## M8 requirement (from owner, recorded 26 Oct 02:45) — testing campaign scope
+Run on the box AND in real browsers: backend unit/feature (API, admin CRUD, auth/RBAC, validation, payments mock, seeders); frontend unit; Playwright E2E of all public,
+portal and admin flows against the real API+DB (admin edit → public page updates, search/filters, booking → payment → voucher, login/OTP); responsive matrix 320–1920 ×
+light/dark × bn/en; axe a11y; Lighthouse; SEO checks (metadata, hreflang, JSON-LD validity, sitemap/robots, SSR HTML content); visual diff vs mockup; broken links;
+console errors; security checks. Then repeat key browser E2E on the user's PC (c81f2d4f) with local Chrome/Edge. Fix → re-run until clean; document in TEST_REPORT.md.
