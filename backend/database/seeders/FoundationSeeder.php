@@ -154,6 +154,7 @@ class FoundationSeeder extends Seeder
             ['from' => 'DAC', 'to' => 'SIN', 'image' => 'singapore'], ['from' => 'CGP', 'to' => 'DXB', 'image' => 'dubai'],
         ], 'json');
         $set('catalog', 'visa_approval_note', ['en' => '98.4% approval rate in 2025', 'bn' => '২০২৫ সালে ৯৮.৪% অনুমোদনের হার'], 'json');
+        $set('catalog', 'compare_default', ['maldives-honeymoon', 'bali-highlights', 'coxs-bazar-saint-martin'], 'json'); // tours shown on /compare before the visitor picks any
         $set('commerce', 'pax_factors', ['adults' => 1, 'children' => 0.7, 'infants' => 0.1], 'json');
         $set('payments', 'gateways', ['mock' => true, 'sslcommerz' => true, 'bkash' => true, 'nagad' => true, 'bank_transfer' => true, 'wallet' => true], 'json');
         $set('payments', 'mode', 'sandbox', 'text', false);

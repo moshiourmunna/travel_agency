@@ -39,9 +39,9 @@ export function GiftCardForm({ designs, booking, today, l, icon, logo }: {
         setErr(er);
         if (Object.keys(er).length) { e.preventDefault(); e.currentTarget.querySelector<HTMLElement>(`[name="${Object.keys(er)[0]}"]`)?.focus(); }
       }}>
-        <input type="hidden" name="gift" value={design} />
+        {designs.length > 1 ? null : <input type="hidden" name="gift" value={design} />}
         {designs.length > 1 ? <fieldset><legend className="label">{l.design}</legend><div className="flex flex-wrap gap-2">{designs.map((x) => (
-          <label key={x.code} className="cursor-pointer"><input type="radio" name="design" value={x.code} className="peer sr-only" checked={design === x.code} onChange={() => setDesign(x.code)} /><span className="flex items-center gap-2 rounded-xl border border-ink-200 px-3 py-2 text-sm font-semibold peer-checked:border-brand-700 peer-checked:ring-2 peer-checked:ring-brand-600 peer-focus-visible:ring-2 peer-focus-visible:ring-brand-400 dark:border-ink-700"><span className={`h-5 w-8 rounded-md bg-gradient-to-br ${x.gradient}`} aria-hidden="true" />{x.name}</span></label>
+          <label key={x.code} className="cursor-pointer"><input type="radio" name="gift" value={x.code} className="peer sr-only" checked={design === x.code} onChange={() => setDesign(x.code)} /><span className="flex items-center gap-2 rounded-xl border border-ink-200 px-3 py-2 text-sm font-semibold peer-checked:border-brand-700 peer-checked:ring-2 peer-checked:ring-brand-600 peer-focus-visible:ring-2 peer-focus-visible:ring-brand-400 dark:border-ink-700"><span className={`h-5 w-8 rounded-md bg-gradient-to-br ${x.gradient}`} aria-hidden="true" />{x.name}</span></label>
         ))}</div></fieldset> : null}
         <fieldset><legend className="label">{l.amount}</legend><div className="grid grid-cols-2 gap-2 sm:grid-cols-3">{amounts.map((a) => (
           <label key={a} className="cursor-pointer"><input type="radio" name="amount" value={a} className="peer sr-only" checked={amt === a} onChange={() => setAmt(a)} /><span className="block rounded-xl border border-ink-200 py-2.5 text-center text-sm font-bold peer-checked:border-brand-700 peer-checked:bg-brand-700 peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-brand-400 dark:border-ink-700">{money(a)}</span></label>

@@ -96,8 +96,12 @@ class PlannerController extends Controller
     /** Free quote request: stores an inquiry + CRM lead with the plan snapshot. */
     public function quote(Request $request): JsonResponse
     {
+        if ($request->filled('website')) { // honeypot: pretend success, store nothing
+            return response()->json(['data' => ['reference' => 'MSF-INQ-'.random_int(10000, 99999)]], 201);
+        }
         $plan = $this->validated($request);
-        $c = $request->validate(['name' => ['required', 'string', 'max:120'], 'phone' => ['required', 'string', 'regex:/^\+?[0-9 \-]{8,20}$/'], 'email' => ['nullable', 'email', 'max:190'], 'note' => ['nullable', 'string', 'max:2000']]);
+        $c = $request->validate(['name' => ['required', 'string', 'max:120'], 'phone' => ['required', 'string', 'regex:/^\+?[0-9 \-]{8,20}$/'], 'email' => ['nullable', 'email', 'max:190'], 'note' => ['nullable', 'string', 'max:2000'],
+            'interests' => ['nullable', 'array', 'max:20'], 'interests.*' => ['string', 'max:60']]);
         $est = self::compute($plan);
         $inq = FormController::store('planner', $c + ['plan' => $plan, 'estimate' => $est], $request, ['en' => 'Trip planner', 'bn' => 'ট্রিপ প্ল্যানার'], 'trip-planner', $est['total']);
 

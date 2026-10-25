@@ -67,7 +67,8 @@ class CatalogController extends Controller
 
     private function filterTours(Builder $q, Request $r): void
     {
-        $q->when($r->query('region'), fn ($q, $v) => $q->whereIn('region', (array) explode(',', $v)))
+        $q->when(self::slugs($r), fn ($q, $v) => $q->whereIn('slug', $v))
+            ->when($r->query('region'), fn ($q, $v) => $q->whereIn('region', (array) explode(',', $v)))
             ->when($r->query('destination'), fn ($q, $v) => $q->whereHas('destination', fn ($d) => $d->where('slug', $v)))
             ->when($r->query('category') ?? $r->query('theme'), fn ($q, $v) => $q->whereHas('categories', fn ($c) => $c->whereIn('slug', explode(',', $v))))
             ->when($r->query('price_min'), fn ($q, $v) => $q->where('price_from', '>=', (float) $v))
@@ -194,6 +195,7 @@ class CatalogController extends Controller
     public function cruises(Request $request): JsonResponse
     {
         $q = Cruise::published()->with(['image.media', 'ship.line', 'cancellationPolicy'])->search($request->query('q'))
+            ->when(self::slugs($request), fn ($q, $v) => $q->whereIn('slug', $v))
             ->when($request->query('region'), fn ($q, $v) => $q->whereIn('region', explode(',', $v)))
             ->when($request->query('nights_min'), fn ($q, $v) => $q->where('nights', '>=', (int) $v))
             ->when($request->query('nights_max'), fn ($q, $v) => $q->where('nights', '<=', (int) $v))
@@ -223,6 +225,7 @@ class CatalogController extends Controller
     public function activities(Request $request): JsonResponse
     {
         $q = Activity::published()->with(['image.media', 'cancellationPolicy', 'destination'])->search($request->query('q'))
+            ->when(self::slugs($request), fn ($q, $v) => $q->whereIn('slug', $v))
             ->when($request->query('category'), fn ($q, $v) => $q->whereIn('category', explode(',', $v)))
             ->when($request->query('region'), fn ($q, $v) => $q->whereIn('region', explode(',', $v)))
             ->when($request->query('price_max'), fn ($q, $v) => $q->where('price', '<=', (float) $v))
@@ -260,6 +263,7 @@ class CatalogController extends Controller
     public function hotels(Request $request): JsonResponse
     {
         $q = Hotel::published()->with('image.media')->search($request->query('q'))
+            ->when(self::slugs($request), fn ($q, $v) => $q->whereIn('slug', $v))
             ->when($request->query('stars'), fn ($q, $v) => $q->whereIn('stars', explode(',', $v)))
             ->when($request->query('kind'), fn ($q, $v) => $q->where('kind', $v))
             ->when($request->boolean('refundable'), fn ($q) => $q->where('refundable', true))
@@ -318,5 +322,13 @@ class CatalogController extends Controller
         return response()->json(['data' => GiftCardDesign::with('image.media')->where('is_active', true)->orderBy('sort')->get()->map(fn ($g) => [
             'code' => $g->code, 'name' => $g->tr('name'), 'gradient' => $g->gradient, 'amounts' => $g->amounts, 'image' => Img::of($g->image),
         ])]);
+    }
+
+    /** `?slugs=a,b,c` — fetch specific items (compare, wishlist); capped to keep queries small. */
+    private static function slugs(Request $r): ?array
+    {
+        $v = array_values(array_filter(array_map('trim', explode(',', (string) $r->query('slugs', ''))), fn ($s) => preg_match('/^[a-z0-9-]{1,120}$/', $s)));
+
+        return $v ? array_slice(array_unique($v), 0, 24) : null;
     }
 }

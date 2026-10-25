@@ -93,7 +93,61 @@
    "bn": "মূল তথ্য জানান — একজন বিশেষজ্ঞ ভ্রমণসূচি সাজিয়ে ২৪ ঘণ্টার মধ্যে কোটেশন পাঠাবেন। কোনো বাধ্যবাধকতা নেই।"
   },
   "image": "swiss",
-  "template": "hero"
+  "template": "hero",
+  "data": {
+   "form_title": {
+    "en": "Your trip request",
+    "bn": "আপনার ট্রিপ অনুরোধ"
+   },
+   "budgets": [
+    {
+     "en": "Under ৳50,000",
+     "bn": "৳৫০,০০০-এর কম"
+    },
+    {
+     "en": "৳50,000 – ৳1,00,000",
+     "bn": "৳৫০,০০০ – ৳১,০০,০০০"
+    },
+    {
+     "en": "৳1,00,000 – ৳2,50,000",
+     "bn": "৳১,০০,০০০ – ৳২,৫০,০০০"
+    },
+    {
+     "en": "Above ৳2,50,000",
+     "bn": "৳২,৫০,০০০-এর বেশি"
+    }
+   ],
+   "planner_title": {
+    "en": "Prefer to build it yourself?",
+    "bn": "নিজে সাজাতে চান?"
+   },
+   "planner_text": {
+    "en": "Use the trip planner for an instant budget.",
+    "bn": "তাৎক্ষণিক বাজেটের জন্য ট্রিপ প্ল্যানার ব্যবহার করুন।"
+   },
+   "perks": [
+    {
+     "en": "Free itinerary, no booking fee",
+     "bn": "ফ্রি ভ্রমণসূচি, বুকিং ফি নেই"
+    },
+    {
+     "en": "Unlimited revisions until it is perfect",
+     "bn": "নিখুঁত না হওয়া পর্যন্ত যতবার খুশি পরিবর্তন"
+    },
+    {
+     "en": "Visa, flights, hotels and guides in one plan",
+     "bn": "ভিসা, ফ্লাইট, হোটেল ও গাইড এক প্ল্যানে"
+    },
+    {
+     "en": "Pay 30% to confirm, rest in EMI",
+     "bn": "৩০% দিয়ে নিশ্চিত করুন, বাকিটা ইএমআইতে"
+    }
+   ],
+   "success": {
+    "en": "Your expert will call you within 24 hours.",
+    "bn": "২৪ ঘণ্টার মধ্যে বিশেষজ্ঞ কল করবেন।"
+   }
+  }
  },
  "destinations": {
   "title": {
@@ -165,7 +219,79 @@
    "bn": "কোম্পানি রিট্রিট, ইনসেনটিভ ট্রিপ, শিক্ষা সফর, বিয়ে ও কনফারেন্স — একজন নির্দিষ্ট ম্যানেজার, একটি ইনভয়েস।"
   },
   "image": "sajek",
-  "template": "hero"
+  "template": "hero",
+  "data": {
+   "services": [
+    {
+     "icon": "building-2",
+     "title": {
+      "en": "Corporate retreats",
+      "bn": "কর্পোরেট রিট্রিট"
+     },
+     "text": {
+      "en": "Cox’s Bazar, Sylhet and Bangkok resorts with meeting rooms.",
+      "bn": "মিটিং রুমসহ কক্সবাজার, সিলেট ও ব্যাংকক রিসোর্ট।"
+     }
+    },
+    {
+     "icon": "award",
+     "title": {
+      "en": "Incentive trips",
+      "bn": "ইনসেনটিভ ট্রিপ"
+     },
+     "text": {
+      "en": "Reward top performers with Dubai, Bali or a cruise.",
+      "bn": "সেরা কর্মীদের দুবাই, বালি বা ক্রুজ উপহার দিন।"
+     }
+    },
+    {
+     "icon": "graduation-cap",
+     "title": {
+      "en": "Student & study tours",
+      "bn": "শিক্ষা সফর"
+     },
+     "text": {
+      "en": "Safe, chaperoned trips with insurance included.",
+      "bn": "বিমাসহ নিরাপদ, তত্ত্বাবধানে ট্রিপ।"
+     }
+    },
+    {
+     "icon": "presentation",
+     "title": {
+      "en": "MICE & events",
+      "bn": "মাইস ও ইভেন্ট"
+     },
+     "text": {
+      "en": "Venues, visas, flights and AV for up to 500 guests.",
+      "bn": "৫০০ অতিথি পর্যন্ত ভেন্যু, ভিসা, ফ্লাইট ও এভি।"
+     }
+    }
+   ],
+   "clients_title": {
+    "en": "Trusted by teams at",
+    "bn": "যাদের টিম আমাদের উপর আস্থা রাখে"
+   },
+   "clients": [
+    "Nimbus Tel",
+    "Delta Pharma",
+    "BracketSoft",
+    "Padma Bank",
+    "Sundar Foods",
+    "Meghna RMG"
+   ],
+   "clients_note": {
+    "en": "Client names are illustrative for this mockup.",
+    "bn": "এই মকআপে ক্লায়েন্টের নাম উদাহরণস্বরূপ।"
+   },
+   "form_title": {
+    "en": "Request a group proposal",
+    "bn": "গ্রুপ প্রস্তাবের অনুরোধ"
+   },
+   "success": {
+    "en": "Thanks — our corporate desk will call you today.",
+    "bn": "ধন্যবাদ — আমাদের কর্পোরেট ডেস্ক আজই কল করবে।"
+   }
+  }
  },
  "holidays": {
   "title": {
@@ -380,6 +506,13 @@
    "bn": "এই ডিভাইসে সংরক্ষিত। ফোন ও ল্যাপটপে সিঙ্ক করতে সাইন ইন করুন।"
   },
   "image": null,
-  "template": "plain"
+  "template": "plain",
+  "data": {
+   "sample": [
+    "tour:maldives-honeymoon",
+    "cruise:singapore-penang-phuket",
+    "activity:cappadocia-balloon-sunrise"
+   ]
+  }
  }
 }
