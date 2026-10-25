@@ -269,7 +269,7 @@ class CatalogueSeeder extends Seeder
         $info = S::page('offers.html')['ctx']['en']['deals'] ?? [];
         foreach ($info as $k => $o) {
             Offer::updateOrCreate(['code' => $o['code'] ?? 'FLASH-ACT'], [
-                'title' => S::b($o['title']), 'description' => S::b($o['desc']), 'kind' => $o['kind'], 'discount_text' => S::b($o['off']), 'tag' => S::b($o['tag']), 'link' => '/'.preg_replace('/\.html$/', '', $o['link']),
+                'title' => S::b($o['title']), 'description' => S::b($o['desc']), 'kind' => $o['kind'], 'discount_text' => S::b($o['off']), 'tag' => S::b($o['tag']), 'link' => CmsSeeder::path($o['link']),
                 'image_id' => S::asset($o['img']), 'starts_at' => '2026-10-01 00:00:00', 'ends_at' => $o['ends'].' 23:59:59', 'is_flash' => $o['code'] === null || $k < 2, 'sort' => $k,
                 'is_active' => true,
             ]);

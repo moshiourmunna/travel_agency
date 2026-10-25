@@ -10,7 +10,6 @@ use App\Models\Hotel;
 use App\Models\Payment;
 use App\Models\Review;
 use App\Models\Tour;
-use App\Models\Traveller;
 use App\Models\TripPlan;
 use App\Models\User;
 use App\Models\VisaApplication;
@@ -128,13 +127,27 @@ class CommerceSeeder extends Seeder
 
         // Reviews: product reviews (testimonial set attached to products) + Farhana's own reviews + moderation queue states
         Review::query()->delete();
-        $statuses = array_map(fn ($r) => $r[5], S::app('ADMIN_REVIEWS'));
         $products = [Tour::where('slug', 'maldives-honeymoon')->first(), Cruise::first(), Tour::where('slug', 'sajek-rangamati')->first(), Tour::where('slug', 'turkey-classic')->first(), Tour::where('slug', 'nepal-pokhara')->first(), Tour::where('slug', 'bali-highlights')->first()];
         foreach (S::public('REVIEWS') as $i => $r) {
             $prod = $products[$i] ?? null;
             Review::create(['reviewable_type' => $prod ? $prod::class : null, 'reviewable_id' => $prod?->id, 'author_name' => S::b($r['name']), 'author_city' => S::b($r['city']), 'initials' => $r['ini'],
-                'trip_title' => S::b($r['trip']), 'rating' => $r['rating'], 'body' => S::b($r['text']), 'status' => $statuses[$i] ?? 'published', 'travelled_on' => $r['date'],
+                'trip_title' => S::b($r['trip']), 'rating' => $r['rating'], 'body' => S::b($r['text']), 'status' => 'published', 'travelled_on' => $r['date'],
                 'category_scores' => ['guide' => 4.9, 'hotels' => 4.7, 'value' => 4.8, 'transport' => 4.6], 'created_at' => $r['date'].' 18:00:00']);
+        }
+        // Moderation queue demo: fresh submissions awaiting review plus one hidden (spam) — never shown publicly.
+        $queue = [
+            [['en' => 'Nabila Hossain', 'bn' => 'নাবিলা হোসেন'], ['en' => 'Dhaka', 'bn' => 'ঢাকা'], 'NH', 'sajek-rangamati', 5, 'review',
+                ['en' => 'Sunrise over the clouds at Sajek was unreal. The jeep driver was careful on the hill roads and the cottage was spotless.', 'bn' => 'সাজেকে মেঘের ওপর সূর্যোদয় অবিশ্বাস্য ছিল। পাহাড়ি পথে জিপচালক সাবধানী ছিলেন, কটেজও ঝকঝকে পরিষ্কার।']],
+            [['en' => 'Arif Mahmud', 'bn' => 'আরিফ মাহমুদ'], ['en' => 'Cumilla', 'bn' => 'কুমিল্লা'], 'AM', 'bali-highlights', 4, 'review',
+                ['en' => 'Lovely villas and a great guide in Ubud. The airport pickup was 30 minutes late, but the team called ahead to let us know.', 'bn' => 'উবুদে চমৎকার ভিলা ও দারুণ গাইড। এয়ারপোর্ট পিকআপ ৩০ মিনিট দেরি করেছিল, তবে টিম আগেই ফোন করে জানিয়েছিল।']],
+            [['en' => 'Cheap Visa Agent', 'bn' => 'Cheap Visa Agent'], ['en' => '—', 'bn' => '—'], 'CV', null, 1, 'hidden',
+                ['en' => 'Get any visa in 2 days!!! WhatsApp me for cheap tickets, best price guaranteed.', 'bn' => 'Get any visa in 2 days!!! WhatsApp me for cheap tickets, best price guaranteed.']],
+        ];
+        foreach ($queue as $k => [$name, $city, $ini, $slug, $rating, $status, $body]) {
+            $prod = $slug ? Tour::where('slug', $slug)->first() : null;
+            Review::create(['reviewable_type' => $prod ? Tour::class : null, 'reviewable_id' => $prod?->id, 'author_name' => $name, 'author_city' => $city, 'initials' => $ini,
+                'trip_title' => $prod?->title, 'rating' => $rating, 'body' => $body, 'status' => $status,
+                'travelled_on' => now()->subDays(6 + $k)->toDateString(), 'created_at' => now()->subDays(2 + $k)]);
         }
         foreach (S::app('MY_REVIEWS') as $r) {
             $bk = $bookings[$r['ref']] ?? null;

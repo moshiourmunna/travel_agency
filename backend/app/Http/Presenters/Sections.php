@@ -31,6 +31,9 @@ final class Sections
         $data = self::images(Settings::localise($s->data ?? []));
         $source = $data['source'] ?? null;
         $items = $source ? self::source($source, (int) ($data['limit'] ?? 8), $data['ids'] ?? null) : null;
+        if ($source === 'tours') {
+            $data['total'] = Tour::published()->count();
+        }
 
         return ['id' => $s->id, 'type' => $s->type, 'data' => $data] + ($items !== null ? ['items' => $items] : []);
     }
@@ -80,7 +83,7 @@ final class Sections
             })(),
             'cruises' => self::pinned(Cruise::published()->with(['image.media', 'ship.line', 'cancellationPolicy'])->ordered(), $ids, $limit)->map(fn ($c) => P::cruiseCard($c))->all(),
             'activities' => self::pinned(Activity::published()->with(['image.media', 'cancellationPolicy', 'destination'])->ordered(), $ids, $limit)->map(fn ($a) => P::activityCard($a))->all(),
-            'reviews' => Review::where('status', 'published')->whereNull('user_id')->orderByDesc('rating')->latest('travelled_on')->limit($limit)->get()->map(fn ($r) => P::review($r))->all(),
+            'reviews' => self::pinned(Review::where('status', 'published')->orderByDesc('rating')->latest('travelled_on'), $ids, $limit)->map(fn ($r) => P::review($r))->all(),
             'airlines' => Airline::with('logo.media')->where('is_active', true)->orderBy('id')->limit($limit)->get()->map(fn ($a) => ['code' => $a->code, 'name' => $a->name, 'color' => $a->color, 'logo' => Img::of($a->logo)])->all(),
             'posts' => BlogPost::published()->with(['image.media', 'category'])->where('published_at', '<=', now())->orderByDesc('published_at')->limit($limit)->get()->map(fn ($p) => P::postCard($p))->all(),
             'faqs' => Faq::where('is_active', true)->whereJsonContains('show_on', 'home')->orderBy('sort')->limit($limit)->get()->map(fn ($f) => ['id' => $f->id, 'q' => $f->tr('question'), 'a' => $f->tr('answer')])->all(),

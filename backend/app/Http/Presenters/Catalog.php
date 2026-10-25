@@ -99,7 +99,7 @@ final class Catalog
     public static function cruiseCard(Cruise $c): array
     {
         return [
-            'type' => 'cruise', 'slug' => $c->slug, 'title' => $c->tr('title'), 'region' => $c->region, 'nights' => $c->nights, 'ship' => $c->ship?->name,
+            'type' => 'cruise', 'slug' => $c->slug, 'title' => $c->tr('title'), 'region' => $c->region, 'region_label' => self::regionLabel($c->region), 'nights' => $c->nights, 'ship' => $c->ship?->name,
             'line' => $c->ship?->line?->name, 'depart_port' => $c->tr('depart_port'), 'route' => tr_list($c->route), 'cabin_from' => $c->tr('cabin_from'),
             'highlights' => tr_list($c->highlights), 'price' => self::money($c->price_from), 'price_was' => self::money($c->price_was), 'badge' => $c->tr('badge'),
             'rating' => (float) $c->rating, 'reviews_count' => $c->reviews_count, 'next_departure' => $c->next_departure?->toDateString(),
@@ -122,7 +122,7 @@ final class Catalog
     public static function activityCard(Activity $a): array
     {
         return [
-            'type' => 'activity', 'slug' => $a->slug, 'title' => $a->tr('title'), 'city' => $a->tr('city'), 'category' => $a->category, 'region' => $a->region,
+            'type' => 'activity', 'slug' => $a->slug, 'title' => $a->tr('title'), 'city' => $a->tr('city'), 'category' => $a->category, 'category_label' => self::activityCategory($a->category)['label'] ?? null, 'region' => $a->region,
             'duration' => $a->tr('duration_text'), 'price' => self::money($a->price), 'price_was' => self::money($a->price_was), 'rating' => (float) $a->rating,
             'reviews_count' => $a->reviews_count, 'badge' => $a->tr('badge'), 'highlights' => tr_list($a->highlights), 'languages' => $a->languages ?? [],
             'instant_confirm' => $a->instant_confirm, 'pickup' => $a->pickup, 'cancellation' => self::policy($a->cancellationPolicy), 'image' => Img::of($a->image),
@@ -141,11 +141,45 @@ final class Catalog
         ];
     }
 
+    /** @var array<string, \App\Models\Amenity>|null */
+    private static ?array $amenities = null;
+
+    private static ?array $regions = null;
+
+    private static ?array $actCats = null;
+
+    public static function flush(): void
+    {
+        self::$amenities = self::$regions = self::$actCats = null;
+    }
+
+    private static function amenityList(?array $codes): array
+    {
+        self::$amenities ??= Amenity::all()->keyBy('code')->all();
+
+        return collect($codes ?? [])->map(fn ($c) => ['code' => $c, 'icon' => self::$amenities[$c]->icon ?? null, 'label' => isset(self::$amenities[$c]) ? self::$amenities[$c]->tr('name') : $c])->all();
+    }
+
+    private static function regionLabel(?string $code): ?string
+    {
+        self::$regions ??= \App\Models\Region::all()->keyBy('code')->all();
+
+        return isset(self::$regions[$code]) ? self::$regions[$code]->tr('name') : $code;
+    }
+
+    private static function activityCategory(?string $key): ?array
+    {
+        self::$actCats ??= collect(\App\Support\Settings::get('catalog.activity_categories', []))->keyBy('key')->all();
+        $c = self::$actCats[$key] ?? null;
+
+        return $c ? ['key' => $key, 'icon' => $c['icon'], 'label' => tr_pick($c['label'])] : null;
+    }
+
     public static function hotelCard(Hotel $h): array
     {
         return [
             'type' => 'hotel', 'slug' => $h->slug, 'name' => $h->tr('name'), 'city' => $h->tr('city'), 'kind' => $h->kind, 'stars' => $h->stars,
-            'distance' => $h->tr('distance_text'), 'amenities' => $h->amenities ?? [], 'refundable' => $h->refundable, 'breakfast' => $h->breakfast,
+            'distance' => $h->tr('distance_text'), 'amenities' => self::amenityList($h->amenities), 'refundable' => $h->refundable, 'breakfast' => $h->breakfast,
             'price' => self::money($h->price_from), 'price_was' => self::money($h->price_was), 'rating' => (float) $h->guest_score, 'reviews_count' => $h->reviews_count,
             'image' => Img::of($h->image),
         ];
@@ -153,11 +187,8 @@ final class Catalog
 
     public static function hotel(Hotel $h): array
     {
-        $amen = Amenity::whereIn('code', $h->amenities ?? [])->get()->keyBy('code');
-
         return self::hotelCard($h) + [
             'description' => $h->tr('description'), 'address' => $h->tr('address'), 'gallery' => Img::ids($h->gallery), 'lat' => $h->lat, 'lng' => $h->lng,
-            'amenity_list' => collect($h->amenities ?? [])->map(fn ($c) => ['code' => $c, 'icon' => $amen[$c]->icon ?? null, 'label' => $amen[$c]?->tr('name') ?? $c])->all(),
             'rooms' => $h->roomTypes->map(fn ($r) => ['id' => $r->id, 'name' => $r->tr('name'), 'bed' => $r->tr('bed'), 'size_sqm' => $r->size_sqm, 'occupancy' => $r->features['occupancy'] ?? $r->max_adults,
                 'price' => self::money($r->price), 'breakfast' => $r->breakfast, 'refundable' => $r->refundable, 'rooms_left' => $r->features['rooms_left'] ?? null,
                 'image' => Img::key($r->features['image'] ?? null)])->all(),

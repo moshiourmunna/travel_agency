@@ -101,6 +101,7 @@ class FoundationSeeder extends Seeder
         $set('company', 'name', S::b($c['name']), 'tr');
         $set('company', 'short_name', S::b(['en' => 'Musafir', 'bn' => 'মুসাফির']), 'tr');
         $set('company', 'tagline', S::b($c['tagline']), 'tr');
+        $set('company', 'about_short', ['en' => 'Bangladesh-born, world-ready. Holidays, cruises, flights, hotels and visas — trusted by 1,20,000+ travellers since 2012.', 'bn' => 'বাংলাদেশে জন্ম, বিশ্বমানের সেবা। ২০১২ সাল থেকে হলিডে, ক্রুজ, ফ্লাইট, হোটেল ও ভিসা — ১,২০,০০০+ ভ্রমণকারীর আস্থা।'], 'tr');
         $set('company', 'hotline', $c['hotline']);
         $set('company', 'hotline_tel', $c['hotline_tel']);
         $set('company', 'whatsapp', $c['whatsapp']);
@@ -115,8 +116,9 @@ class FoundationSeeder extends Seeder
         $set('company', 'rating', ['value' => 4.9, 'count' => 8421], 'json');
         $set('social', 'links', [
             ['key' => 'facebook', 'url' => 'https://facebook.com/musafirbd'], ['key' => 'instagram', 'url' => 'https://instagram.com/musafirbd'],
-            ['key' => 'youtube', 'url' => 'https://youtube.com/@musafirbd'], ['key' => 'linkedin', 'url' => 'https://linkedin.com/company/musafirbd'],
+            ['key' => 'youtube', 'url' => 'https://youtube.com/@musafirbd'], ['key' => 'linkedin', 'url' => 'https://linkedin.com/company/musafirbd'], ['key' => 'whatsapp', 'url' => 'https://wa.me/'.$c['wa']], ['key' => 'x-logo', 'url' => 'https://x.com/musafirbd'],
         ], 'json');
+        $set('app', 'links', ['play_url' => '', 'appstore_url' => ''], 'json'); // empty = shown as "coming soon" (never a dead link)
         $set('seo', 'site_url', rtrim((string) config('musafir.frontend_url'), '/'));
         $set('seo', 'production_url', 'https://musafir.com.bd');
         $set('seo', 'title_suffix', ['en' => 'Musafir', 'bn' => 'মুসাফির'], 'tr');

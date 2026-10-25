@@ -16,6 +16,7 @@ Route::prefix('v1')->name('api.v1.')->middleware(['api.locale'])->group(function
         Route::get('site', [Content::class, 'site'])->name('site');
         Route::get('translations/{lang}', [Content::class, 'translations'])->name('translations');
         Route::get('redirects', [Content::class, 'redirects'])->name('redirects');
+        Route::get('media/{key}', [Content::class, 'media'])->name('media')->where('key', '[a-z0-9\-_]+');
         Route::get('sitemap', [Content::class, 'sitemap'])->name('sitemap');
         Route::get('seo', [Content::class, 'seo'])->name('seo');
         Route::get('home', [Content::class, 'home'])->name('home');

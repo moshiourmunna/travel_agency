@@ -7,6 +7,7 @@ use App\Models\Menu;
 use App\Models\MenuItem;
 use App\Models\Page;
 use App\Models\PageSection;
+use App\Models\Review;
 use App\Models\Translation;
 use Database\Seeders\Support\SeedData as S;
 use Illuminate\Database\Seeder;
@@ -179,7 +180,7 @@ class CmsSeeder extends Seeder
                 $it('plane-takeoff', ['Fly happy', 'নিশ্চিন্তে উড়ুন'], ['Vouchers, visa and 24/7 support — sorted.', 'ভাউচার, ভিসা ও ২৪/৭ সাপোর্ট — সব প্রস্তুত।'])]]],
             ['testimonials', ['eyebrow' => $b('Testimonials', 'প্রশংসাপত্র'), 'title' => $b('Stories from our travellers', 'আমাদের ভ্রমণকারীদের গল্প'),
                 'platforms' => [['name' => 'Google', 'rating' => 4.9, 'count' => 3214], ['name' => 'Facebook', 'rating' => 4.8, 'count' => 4102], ['name' => 'Trustpilot', 'rating' => 4.7, 'count' => 1105]],
-                'link' => ['url' => '/reviews', 'label' => $b('Read all reviews', 'সব রিভিউ পড়ুন')], 'source' => 'reviews', 'limit' => 3]],
+                'link' => ['url' => '/reviews', 'label' => $b('Read all reviews', 'সব রিভিউ পড়ুন')], 'source' => 'reviews', 'limit' => 3, 'ids' => Review::orderBy('id')->limit(3)->pluck('id')->all()]],
             ['partners', ['title' => $b('Ticketing partner of 500+ airlines, including', '৫০০+ এয়ারলাইনের টিকেটিং পার্টনার, যার মধ্যে রয়েছে'), 'label' => $b('Airline partners', 'এয়ারলাইন পার্টনার'), 'source' => 'airlines', 'limit' => 20]],
             ['blog', ['eyebrow' => $b('Travel journal', 'ট্রাভেল জার্নাল'), 'title' => $b('Guides & inspiration', 'গাইড ও অনুপ্রেরণা'), 'link' => ['url' => '/blog', 'label' => $b('Visit the blog', 'ব্লগে যান')], 'source' => 'posts', 'limit' => 3]],
             ['app_promo', ['eyebrow' => $b('Musafir app', 'মুসাফির অ্যাপ'), 'title' => $b('Your whole trip, in your pocket', 'পুরো ভ্রমণ আপনার হাতের মুঠোয়'),

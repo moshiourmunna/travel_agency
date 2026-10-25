@@ -42,8 +42,9 @@ class ContentController extends Controller
     public function site(): JsonResponse
     {
         $locale = app()->getLocale();
-        $menus = Menu::with(['items' => fn ($q) => $q->where('is_active', true), 'items.children' => fn ($q) => $q->where('is_active', true)])->get()
-            ->mapWithKeys(fn ($m) => [$m->location => $m->items->map(fn ($i) => self::menuItem($i))->all()]);
+        $all = Menu::with(['items' => fn ($q) => $q->where('is_active', true), 'items.children' => fn ($q) => $q->where('is_active', true)])->get()
+            ->keyBy('location');
+        $menus = $all->map(fn ($m) => $m->items->map(fn ($i) => self::menuItem($i))->all());
 
         return response()->json(['data' => [
             'locale' => $locale,
@@ -51,6 +52,7 @@ class ContentController extends Controller
             'currencies' => Currency::where('is_active', true)->orderBy('sort')->get(['code', 'symbol', 'rate_to_bdt']),
             'settings' => Settings::public(),
             'menus' => $menus,
+            'menu_names' => $all->mapWithKeys(fn ($m) => [$m->location => $m->tr('name')]),
             'stats' => Stat::where('is_active', true)->orderBy('sort')->get()->map(fn ($s) => ['value' => $s->value, 'suffix' => $s->suffix, 'label' => $s->tr('label'), 'icon' => $s->icon]),
             'partners' => Partner::with('logo.media')->where('is_active', true)->orderBy('kind')->orderBy('sort')->get()->groupBy('kind')
                 ->map(fn ($g) => $g->map(fn ($p) => ['name' => $p->name, 'code' => $p->code, 'color' => $p->color, 'logo' => Img::of($p->logo)])->values()),
@@ -184,6 +186,14 @@ class ContentController extends Controller
         $s = SeoMeta::with('ogImage.media')->where('path', $path === '/' ? '/' : $path)->first();
 
         return response()->json(['data' => P::seo($s)]);
+    }
+
+    /** A media-library image by its key (used for decorative/layout images). */
+    public function media(string $key): JsonResponse
+    {
+        $a = \App\Models\MediaAsset::with('media')->where('key', $key)->firstOrFail();
+
+        return response()->json(['data' => Img::of($a)]);
     }
 
     public function redirects(): JsonResponse

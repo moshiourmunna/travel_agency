@@ -21,3 +21,4 @@ e2e/test-results/
 e2e/playwright-report/
 tests/lh-tmp/
 /musafir_pkg/
+tooling/shots/
