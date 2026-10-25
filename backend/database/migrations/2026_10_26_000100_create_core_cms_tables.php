@@ -139,6 +139,7 @@ return new class extends Migration
             $t->unsignedSmallInteger('sort')->default(0);
             $t->boolean('is_active')->default(true);
             $t->boolean('new_tab')->default(false);
+            $t->json('meta')->nullable(); // display hints: {"mega":"tours"}, {"show_from":"xl"}, {"dot":true}
             $t->timestamps();
         });
 

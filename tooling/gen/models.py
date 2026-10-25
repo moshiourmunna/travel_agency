@@ -16,7 +16,7 @@ M = {
  'Page': dict(tr=['title', 'subtitle', 'body'], pub=True, soft=True, casts={'data': 'array', 'published_at': 'datetime'}, rel=[('sections', 'hasMany', 'PageSection', None, "->orderBy('sort')")], search=['title', 'body']),
  'PageSection': dict(casts={'data': 'array', 'is_active': 'boolean'}, rel=[('page', 'belongsTo', 'Page')]),
  'Menu': dict(tr=['name'], rel=[('items', 'hasMany', 'MenuItem', None, "->whereNull('parent_id')->orderBy('sort')"), ('allItems', 'hasMany', 'MenuItem')]),
- 'MenuItem': dict(tr=['label', 'badge', 'description'], casts={'is_active': 'boolean', 'new_tab': 'boolean'}, rel=[('menu', 'belongsTo', 'Menu'), ('parent', 'belongsTo', 'MenuItem', "'parent_id'"), ('children', 'hasMany', 'MenuItem', "'parent_id'", "->orderBy('sort')"), ('linkable', 'morphTo', None)]),
+ 'MenuItem': dict(tr=['label', 'badge', 'description'], casts={'is_active': 'boolean', 'new_tab': 'boolean', 'meta': 'array'}, rel=[('menu', 'belongsTo', 'Menu'), ('parent', 'belongsTo', 'MenuItem', "'parent_id'"), ('children', 'hasMany', 'MenuItem', "'parent_id'", "->orderBy('sort')"), ('linkable', 'morphTo', None)]),
  'Banner': dict(tr=['title', 'subtitle', 'cta'], casts={'starts_at': 'datetime', 'ends_at': 'datetime', 'is_active': 'boolean'}, img=True),
  'FaqCategory': dict(tr=['name'], rel=[('faqs', 'hasMany', 'Faq', None, "->orderBy('sort')")]),
  'Faq': dict(tr=['question', 'answer'], casts={'show_on': 'array', 'is_active': 'boolean'}, rel=[('category', 'belongsTo', 'FaqCategory', "'faq_category_id'")]),

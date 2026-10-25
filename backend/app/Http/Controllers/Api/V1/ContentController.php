@@ -60,7 +60,7 @@ class ContentController extends Controller
 
     private static function menuItem($i): array
     {
-        return ['label' => $i->tr('label'), 'url' => $i->url, 'icon' => $i->icon, 'badge' => $i->tr('badge'), 'description' => $i->tr('description'), 'new_tab' => $i->new_tab,
+        return ['label' => $i->tr('label'), 'url' => $i->url, 'icon' => $i->icon, 'badge' => $i->tr('badge'), 'description' => $i->tr('description'), 'new_tab' => $i->new_tab, 'meta' => $i->meta ?? (object) [],
             'children' => $i->relationLoaded('children') ? $i->children->map(fn ($c) => self::menuItem($c))->all() : []];
     }
 
@@ -69,7 +69,7 @@ class ContentController extends Controller
         abort_unless(in_array($lang, config('musafir.locales'), true), 404);
         $rows = Translation::all();
 
-        return response()->json(['data' => $rows->mapWithKeys(fn ($t) => [($t->group && $t->group !== '*' ? $t->group.'.' : '').$t->key => $t->value[$lang] ?? $t->value['en'] ?? $t->key])]);
+        return response()->json(['data' => $rows->mapWithKeys(fn ($t) => [($t->group && ! in_array($t->group, ['*', 'ui'], true) ? $t->group.'.' : '').$t->key => $t->value[$lang] ?? $t->value['en'] ?? $t->key])]);
     }
 
     public function home(): JsonResponse

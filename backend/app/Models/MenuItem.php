@@ -22,6 +22,7 @@ class MenuItem extends Model
         return [
             'is_active' => 'boolean',
             'new_tab' => 'boolean',
+            'meta' => 'array',
         ];
     }
 
