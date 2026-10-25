@@ -93,3 +93,9 @@ console errors; security checks. Then repeat key browser E2E on the user's PC (c
   - Visual parity at 1440 vs mockup: same height on nearly all pages (about ±8 px, reviews taller = 8 DB reviews, credits = 36 library assets vs 38 mockup files).
   - Uncommitted: /account/* → /login?next= redirect (until M5), tooling/sweep.py (route + internal-link sweep), tests/Feature/Api/M3PagesApiTest.php.
   - Sweep: 222 pages (en+bn) all 200; only broken internal links were /account* → fixed by the redirect.
+- 04:55 BDT: FIX — `headers()` in [lang]/not-found.tsx had made EVERY page dynamic (no SSG). 404 now renders both languages' copy from the
+  dictionary and picks by pathname on the client (NotFoundView); proxy no longer injects x-musafir-lang. Build: 74 SSG paths ●, only
+  searchParams listings/booking/compare/wishlist are ƒ. Sweep 222/222 OK; overflow check 320/360/390/768 en+bn clean.
+- frontend/.env.example now tracked (frontend/.gitignore ignored it). backend/.env.example rewritten for Musafir/MySQL. docs/LOCAL_SETUP.md written.
+- PC sync #1 (M3): 14×4 MB chunks (bigger CopyFromBox transfers fail; send sequentially), sha256 verified, robocopy /E merge (no deletes, .env skipped).
+  PC: composer install (5.8 min), migrate --seed 105 s, storage:link, npm ci, next build 222 s with `artisan serve` single-threaded.
