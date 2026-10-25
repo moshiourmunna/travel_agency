@@ -83,3 +83,13 @@ console errors; security checks. Then repeat key browser E2E on the user's PC (c
 - Tests: Pest 55 passed / 375 assertions.
 - Next: hotels, flights, visa, offers, insurance, gift cards, group/custom tour, planner, compare, wishlist, blog, about/team/careers/gallery/reviews/faq/contact,
   legal, sitemap page, credits, brand, 404/error, booking stub, auth placeholders; /api/reviews BFF (401 until M5).
+- 2026-10-26 04:30 BDT (log catch-up — these were committed but not logged before an interruption):
+  - c2c21c1 hotels list/detail · ea8b424 flights search · 9b0d168 visa list/detail · d36b116 offers, insurance, gift cards
+  - ea3b7eb group tours, custom tour, trip planner, compare, wishlist (?slugs= API filter)
+  - 7cdd850 blog + post (TOC/CTA/share/JSON-LD), about, team, careers (+CV apply → private disk), gallery albums, reviews page, FAQ, contact
+  - 3b18802 legal pages (terms/privacy/refund, numbered TOC), human sitemap, credits (GET /api/v1/credits), brand sheet (noindex), localised 404 ([...missing] catch-all
+    + proxy header x-musafir-lang) and error boundary, auth UI (login OTP/password, register, reset — submit shows "accounts opening soon" until M5),
+    /booking interim = booking-request form (inquiry type quote, CRM lead) → replaced by the 4-step checkout in M4.
+  - Visual parity at 1440 vs mockup: same height on nearly all pages (about ±8 px, reviews taller = 8 DB reviews, credits = 36 library assets vs 38 mockup files).
+  - Uncommitted: /account/* → /login?next= redirect (until M5), tooling/sweep.py (route + internal-link sweep), tests/Feature/Api/M3PagesApiTest.php.
+  - Sweep: 222 pages (en+bn) all 200; only broken internal links were /account* → fixed by the redirect.
