@@ -135,6 +135,9 @@ class FoundationSeeder extends Seeder
         $set('commerce', 'vat_included', true, 'bool');
         $set('commerce', 'hold_minutes', 30, 'number');
         $set('commerce', 'miles_per_100', 1, 'number');
+        foreach (\App\Support\CheckoutDefaults::settings() as [$g, $k, $v, $type, $public]) {
+            $set($g, $k, $v, $type, $public);
+        }
         $set('commerce', 'room_factors', ['twin' => 1, 'triple' => 0.94, 'single' => 1.35], 'json');
         $set('commerce', 'cruise_addons', [['code' => 'drinks', 'label' => ['en' => 'Beverage & Wi-Fi package', 'bn' => 'পানীয় ও ওয়াই-ফাই প্যাকেজ'], 'price' => 9500, 'per' => 'booking']], 'json');
         $set('commerce', 'hotel_addons', [['code' => 'transfer', 'label' => ['en' => 'Airport transfer', 'bn' => 'এয়ারপোর্ট ট্রান্সফার'], 'price' => 2400, 'per' => 'booking']], 'json');

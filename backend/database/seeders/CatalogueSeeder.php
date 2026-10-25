@@ -116,6 +116,9 @@ class CatalogueSeeder extends Seeder
         }
         TourAddon::updateOrCreate(['tour_id' => null, 'code' => 'insurance'], ['label' => ['en' => 'Travel insurance', 'bn' => 'ভ্রমণ বিমা'], 'price' => 1200, 'per' => 'booking']);
         TourAddon::updateOrCreate(['tour_id' => null, 'code' => 'pickup'], ['label' => ['en' => 'Airport pickup in Dhaka', 'bn' => 'ঢাকায় এয়ারপোর্ট পিকআপ'], 'price' => 1800, 'per' => 'booking']);
+        foreach (\App\Support\CheckoutDefaults::addons() as $a) {
+            TourAddon::updateOrCreate(['tour_id' => null, 'code' => $a['code']], $a);
+        }
 
         // Cruises
         foreach (S::public('CRUISES') as $i => $c) {

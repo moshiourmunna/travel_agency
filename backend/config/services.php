@@ -35,4 +35,27 @@ return [
         ],
     ],
 
+    // Payment gateways. Leave blank locally: in PAYMENT_MODE=sandbox an unconfigured gateway runs through the built-in simulator.
+    'sslcommerz' => [
+        'store_id' => env('SSLCZ_STORE_ID'),
+        'store_password' => env('SSLCZ_STORE_PASSWORD'),
+        'sandbox' => (bool) env('SSLCZ_SANDBOX', true),
+    ],
+
+    'bkash' => [
+        'base_url' => env('BKASH_BASE_URL', 'https://tokenized.sandbox.bka.sh/v1.2.0-beta'),
+        'app_key' => env('BKASH_APP_KEY'),
+        'app_secret' => env('BKASH_APP_SECRET'),
+        'username' => env('BKASH_USERNAME'),
+        'password' => env('BKASH_PASSWORD'),
+    ],
+
+    'nagad' => [
+        'base_url' => env('NAGAD_BASE_URL', 'http://sandbox.mynagad.com:10080/remote-payment-gateway-1.0/api/dfs'),
+        'merchant_id' => env('NAGAD_MERCHANT_ID'),
+        'merchant_number' => env('NAGAD_MERCHANT_NUMBER'),
+        'public_key' => env('NAGAD_PUBLIC_KEY'),   // Nagad's public key (PEM or base64 body)
+        'private_key' => env('NAGAD_PRIVATE_KEY'), // your merchant private key
+    ],
+
 ];

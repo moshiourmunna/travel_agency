@@ -1,11 +1,13 @@
 <?php
 
 use App\Http\Controllers\Api\V1\CatalogController as Cat;
+use App\Http\Controllers\Api\V1\CheckoutController as Checkout;
 use App\Http\Controllers\Api\V1\ContentController as Content;
 use App\Http\Controllers\Api\V1\FormController as Form;
 use App\Http\Controllers\Api\V1\HealthController;
 use App\Http\Controllers\Api\V1\PlannerController as Planner;
 use App\Http\Controllers\Api\V1\SearchController as Search;
+use App\Http\Controllers\Pay\PaymentReturnController as PayReturn;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->name('api.v1.')->middleware(['api.locale'])->group(function () {
@@ -72,4 +74,16 @@ Route::prefix('v1')->name('api.v1.')->middleware(['api.locale'])->group(function
         Route::post('planner/quote', [Planner::class, 'quote'])->name('planner.quote');
         Route::post('careers/{slug}/apply', [Form::class, 'careerApply'])->name('careers.apply');
     });
+
+    // Checkout (never cached). Amounts are always recomputed on the server.
+    Route::middleware('throttle:checkout')->group(function () {
+        Route::post('checkout/quote', [Checkout::class, 'quote'])->name('checkout.quote');
+        Route::post('coupons/validate', [Checkout::class, 'coupon'])->name('coupons.validate');
+        Route::post('bookings', [Checkout::class, 'store'])->name('bookings.store');
+        Route::get('bookings/{ref}', [Checkout::class, 'show'])->name('bookings.show')->where('ref', '[A-Z]{3}-\d{2}-\d{5}');
+        Route::post('bookings/{ref}/pay', [Checkout::class, 'pay'])->name('bookings.pay')->where('ref', '[A-Z]{3}-\d{2}-\d{5}');
+        Route::get('bookings/{ref}/{doc}.pdf', [Checkout::class, 'pdf'])->name('bookings.pdf')->where(['ref' => '[A-Z]{3}-\d{2}-\d{5}', 'doc' => 'invoice|voucher']);
+    });
+    // Server-to-server payment notifications (verified with the gateway's own API before anything changes).
+    Route::post('payments/{gateway}/ipn', [PayReturn::class, 'ipn'])->name('payments.ipn')->where('gateway', '[a-z_]+');
 });

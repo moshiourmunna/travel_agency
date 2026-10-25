@@ -15,6 +15,7 @@ use App\Models\Hotel;
 use App\Models\MediaAsset;
 use App\Models\Tour;
 use App\Models\VisaProduct;
+use App\Services\Checkout\FlightFare;
 use App\Support\Img;
 use App\Support\Settings;
 use Illuminate\Http\JsonResponse;
@@ -69,9 +70,8 @@ class SearchController extends Controller
         $pax = ['adults' => (int) ($v['adults'] ?? 1), 'children' => (int) ($v['children'] ?? 0), 'infants' => (int) ($v['infants'] ?? 0)];
         $f = Settings::get('commerce.pax_factors', ['adults' => 1, 'children' => 0.7, 'infants' => 0.1]);
         $mult = $pax['adults'] * $f['adults'] + $pax['children'] * $f['children'] + $pax['infants'] * $f['infants'];
-        $cabinMult = ['economy' => 1, 'premium' => 1.6, 'business' => 3.2, 'first' => 5][$v['cabin'] ?? 'economy'];
+        $cabin = $v['cabin'] ?? 'economy';
         $cfg = Settings::get('flights.pricing', []);
-        $dayFactor = fn (Carbon $d) => (float) (($cfg['weekday_factors'] ?? [])[$d->dayOfWeekIso - 1] ?? 1);
         $taxShare = (float) ($cfg['tax_share'] ?? 0.22);
         $changeFee = (int) ($cfg['change_fee'] ?? 3500);
         $date = isset($v['date']) ? Carbon::parse($v['date'])->startOfDay() : today()->addDays(14);
@@ -80,7 +80,7 @@ class SearchController extends Controller
         }
 
         $all = FlightOffer::with('airline.logo.media')->where('is_active', true)->where('origin', $from)->where('destination', $to)->get();
-        $price = fn ($o, Carbon $d) => (int) (round($o->fare * $cabinMult * $dayFactor($d) / 10) * 10);
+        $price = fn ($o, Carbon $d) => FlightFare::perAdult($o, $cabin, $d);
         $stops = isset($v['stops']) ? array_map('intval', explode(',', $v['stops'])) : null;
         $airlines = isset($v['airline']) ? array_map('strtoupper', explode(',', $v['airline'])) : null;
 

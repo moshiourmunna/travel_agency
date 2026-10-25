@@ -33,6 +33,8 @@ return Application::configure(basePath: dirname(__DIR__))
             'api.locale' => SetApiLocale::class,
             'public.cache' => PublicCache::class,
         ]);
+        // Gateways POST back to /pay/* from their own domains (verified via their APIs / signed URLs instead).
+        $middleware->preventRequestForgery(except: ['pay/*']);
         $middleware->trustProxies(at: env('TRUSTED_PROXIES', '127.0.0.1'));
     })
     ->withExceptions(function (Exceptions $exceptions): void {
