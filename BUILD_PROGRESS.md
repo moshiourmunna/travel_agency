@@ -30,3 +30,12 @@ The plan is `docs/IMPLEMENTATION_PLAN.md`. It was approved on 26 Oct 2026 with t
 
 ## Log
 - 26 Oct 02:19 — M0 started. The box had no PHP or MySQL: installed php8.4-cli + extensions and composer, and MySQL 8.4.11 (generic tarball in /opt/box). Created the musafir and musafir_e2e databases.
+
+## M0 — DONE (2026-10-26 02:25 BDT box time)
+- Git repo at /workspace/musafir (branch main), root .gitignore.
+- backend: .env → MySQL `musafir` (127.0.0.1:3306 root/no pw); config/musafir.php (FRONTEND_URL, ADMIN_DOMAIN, ADMIN_PATH, REVALIDATE_SECRET, PAYMENT_MODE, SMS_DRIVER);
+  admin routes in routes/admin.php mounted from bootstrap/app.php under domain and/or prefix; GET /api/v1/health, /admin/health (Inertia).
+  Admin JS: resources/js/admin/app.tsx (vite 8, @vitejs/plugin-react, Inertia React 3.9, Tailwind 3.4.19 + ../packages/ui-tokens preset), `npm run build` OK.
+- frontend: Tailwind 3.4.19 via postcss (tailwind.config.js uses ui-tokens preset), globals.css imports musafir.css, fonts in public/fonts,
+  next.config.ts without cacheComponents (classic fetch cache + tags). `npm run build` OK; page fetches API health.
+- Run: `cd backend && php artisan serve --port=8000`; `cd frontend && npm run dev`.

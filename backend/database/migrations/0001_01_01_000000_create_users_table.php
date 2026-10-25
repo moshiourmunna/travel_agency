@@ -13,12 +13,38 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->ulid('ulid')->unique();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('phone', 32)->nullable()->unique();
             $table->timestamp('email_verified_at')->nullable();
+            $table->timestamp('phone_verified_at')->nullable();
             $table->string('password');
+            $table->string('type', 16)->default('customer')->index(); // customer | staff | agent
+            $table->string('locale', 5)->default('en');
+            $table->string('theme_pref', 8)->default('system');
+            $table->string('avatar_path')->nullable();
+            $table->string('initials', 4)->nullable();
+            $table->string('city')->nullable();
+            $table->string('title')->nullable(); // staff job title (json-free, staff are internal)
+            $table->string('branch')->nullable();
+            $table->unsignedBigInteger('tier_id')->nullable()->index();
+            $table->unsignedInteger('miles')->default(0);
+            $table->decimal('wallet_balance', 12, 2)->default(0);
+            $table->string('referral_code', 24)->nullable()->unique();
+            $table->unsignedBigInteger('referred_by')->nullable()->index();
+            $table->date('dob')->nullable();
+            $table->string('gender', 12)->nullable();
+            $table->text('nid_enc')->nullable();
+            $table->string('status', 16)->default('active')->index();
+            $table->json('preferences')->nullable(); // meal, seat, notifications, newsletter
+            $table->timestamp('last_login_at')->nullable();
+            $table->text('two_factor_secret')->nullable();
+            $table->text('two_factor_recovery_codes')->nullable();
+            $table->timestamp('two_factor_confirmed_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

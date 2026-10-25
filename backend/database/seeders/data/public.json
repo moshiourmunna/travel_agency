@@ -1,0 +1,5187 @@
+{
+ "COMPANY": {
+  "name": {
+   "en": "Musafir Tours & Travels Ltd.",
+   "bn": "মুসাফির ট্যুরস অ্যান্ড ট্রাভেলস লিমিটেড"
+  },
+  "short": "Musafir",
+  "tagline": {
+   "en": "Every journey, with care",
+   "bn": "প্রতিটি যাত্রায় আন্তরিক যত্ন"
+  },
+  "hotline": "09612-787878",
+  "hotline_tel": "+8809612787878",
+  "whatsapp": "+880 1711-787878",
+  "wa": "8801711787878",
+  "email": "hello@musafir.com.bd",
+  "address": {
+   "en": "Level 9, Musafir Tower, 42 Kemal Ataturk Avenue, Banani, Dhaka 1213",
+   "bn": "লেভেল ৯, মুসাফির টাওয়ার, ৪২ কামাল আতাতুর্ক অ্যাভিনিউ, বনানী, ঢাকা ১২১৩"
+  },
+  "branches": [
+   {
+    "en": "Chattogram: GEC Circle, Chattogram 4000",
+    "bn": "চট্টগ্রাম: জিইসি মোড়, চট্টগ্রাম ৪০০০"
+   },
+   {
+    "en": "Sylhet: Zindabazar, Sylhet 3100",
+    "bn": "সিলেট: জিন্দাবাজার, সিলেট ৩১০০"
+   }
+  ],
+  "hours": {
+   "en": "Sat–Thu, 9:30 AM – 8:00 PM · Hotline 24/7",
+   "bn": "শনি–বৃহস্পতি, সকাল ৯:৩০ – রাত ৮:০০ · হটলাইন ২৪/৭"
+  },
+  "licences": [
+   [
+    "IATA",
+    "42-3 1234 5"
+   ],
+   [
+    "ATAB",
+    "3456"
+   ],
+   [
+    "TOAB",
+    "0789"
+   ],
+   [
+    {
+     "en": "Tourism Board Reg.",
+     "bn": "ট্যুরিজম বোর্ড নিবন্ধন"
+    },
+    "BTB-2214"
+   ]
+  ],
+  "founded": 2012
+ },
+ "NAV_TOURS": [
+  [
+   {
+    "en": "Bangladesh Tours",
+    "bn": "দেশের ভেতরে ট্যুর"
+   },
+   [
+    [
+     "tours.html?region=bd",
+     {
+      "en": "Cox's Bazar & Saint Martin",
+      "bn": "কক্সবাজার ও সেন্ট মার্টিন"
+     }
+    ],
+    [
+     "tours/sajek-rangamati.html",
+     {
+      "en": "Sajek & Rangamati",
+      "bn": "সাজেক ও রাঙামাটি"
+     }
+    ],
+    [
+     "tours/sylhet-srimangal.html",
+     {
+      "en": "Sylhet & Srimangal",
+      "bn": "সিলেট ও শ্রীমঙ্গল"
+     }
+    ],
+    [
+     "tours/sundarbans-cruise.html",
+     {
+      "en": "Sundarbans Cruise",
+      "bn": "সুন্দরবন ক্রুজ"
+     }
+    ],
+    [
+     "tours/bandarban-nilgiri.html",
+     {
+      "en": "Bandarban Trek",
+      "bn": "বান্দরবান ট্রেক"
+     }
+    ]
+   ]
+  ],
+  [
+   {
+    "en": "International",
+    "bn": "আন্তর্জাতিক"
+   },
+   [
+    [
+     "tours/maldives-honeymoon.html",
+     {
+      "en": "Maldives",
+      "bn": "মালদ্বীপ"
+     }
+    ],
+    [
+     "tours/turkey-classic.html",
+     {
+      "en": "Turkey",
+      "bn": "তুরস্ক"
+     }
+    ],
+    [
+     "tours/bali-highlights.html",
+     {
+      "en": "Bali, Indonesia",
+      "bn": "বালি, ইন্দোনেশিয়া"
+     }
+    ],
+    [
+     "tours/dubai-family.html",
+     {
+      "en": "Dubai, UAE",
+      "bn": "দুবাই, সংযুক্ত আরব আমিরাত"
+     }
+    ],
+    [
+     "tours/nepal-pokhara.html",
+     {
+      "en": "Nepal",
+      "bn": "নেপাল"
+     }
+    ],
+    [
+     "tours/thailand-phuket.html",
+     {
+      "en": "Thailand",
+      "bn": "থাইল্যান্ড"
+     }
+    ]
+   ]
+  ],
+  [
+   {
+    "en": "Travel Styles",
+    "bn": "ভ্রমণের ধরন"
+   },
+   [
+    [
+     "holidays/honeymoon.html",
+     {
+      "en": "Honeymoon",
+      "bn": "হানিমুন"
+     }
+    ],
+    [
+     "holidays/family.html",
+     {
+      "en": "Family holidays",
+      "bn": "পারিবারিক ভ্রমণ"
+     }
+    ],
+    [
+     "holidays/adventure.html",
+     {
+      "en": "Adventure & trekking",
+      "bn": "অ্যাডভেঞ্চার ও ট্রেকিং"
+     }
+    ],
+    [
+     "group-tours.html",
+     {
+      "en": "Group & corporate",
+      "bn": "গ্রুপ ও কর্পোরেট"
+     }
+    ],
+    [
+     "custom-tour.html",
+     {
+      "en": "Tailor-made trip",
+      "bn": "নিজের মতো ট্যুর"
+     }
+    ]
+   ]
+  ]
+ ],
+ "CATEGORIES": [
+  [
+   "beach",
+   "umbrella",
+   {
+    "en": "Beach",
+    "bn": "সমুদ্র"
+   }
+  ],
+  [
+   "hills",
+   "mountain",
+   {
+    "en": "Hills",
+    "bn": "পাহাড়"
+   }
+  ],
+  [
+   "heritage",
+   "landmark",
+   {
+    "en": "Heritage",
+    "bn": "ঐতিহ্য"
+   }
+  ],
+  [
+   "honeymoon",
+   "heart",
+   {
+    "en": "Honeymoon",
+    "bn": "হানিমুন"
+   }
+  ],
+  [
+   "family",
+   "users",
+   {
+    "en": "Family",
+    "bn": "পরিবার"
+   }
+  ],
+  [
+   "adventure",
+   "tent",
+   {
+    "en": "Adventure",
+    "bn": "অ্যাডভেঞ্চার"
+   }
+  ],
+  [
+   "wildlife",
+   "trees",
+   {
+    "en": "Wildlife",
+    "bn": "বন্যপ্রাণী"
+   }
+  ],
+  [
+   "city",
+   "building-2",
+   {
+    "en": "City break",
+    "bn": "শহর ভ্রমণ"
+   }
+  ],
+  [
+   "cruise",
+   "ship",
+   {
+    "en": "Cruise",
+    "bn": "ক্রুজ"
+   }
+  ]
+ ],
+ "TOURS": [
+  {
+   "slug": "coxs-bazar-saint-martin",
+   "img": "coxsbazar",
+   "title": {
+    "en": "Cox's Bazar & Saint Martin Island Escape",
+    "bn": "কক্সবাজার ও সেন্ট মার্টিন দ্বীপ ভ্রমণ"
+   },
+   "dest": {
+    "en": "Cox's Bazar",
+    "bn": "কক্সবাজার"
+   },
+   "country": {
+    "en": "Bangladesh",
+    "bn": "বাংলাদেশ"
+   },
+   "region": "bd",
+   "cats": [
+    "beach",
+    "family"
+   ],
+   "days": 4,
+   "nights": 3,
+   "price": 18500,
+   "old": 22000,
+   "rating": 4.8,
+   "reviews": 412,
+   "hl": [
+    {
+     "en": "Sea-view hotel on Kolatoli beach",
+     "bn": "কলাতলী সৈকতে সি-ভিউ হোটেল"
+    },
+    {
+     "en": "Ship to Saint Martin & Chhera Dwip",
+     "bn": "জাহাজে সেন্ট মার্টিন ও ছেঁড়া দ্বীপ"
+    },
+    {
+     "en": "Marine Drive sunset ride",
+     "bn": "মেরিন ড্রাইভে সূর্যাস্ত ভ্রমণ"
+    }
+   ],
+   "group": "2–24",
+   "gallery": [
+    "coxsbazar",
+    "stmartin",
+    "kuakata",
+    "resort"
+   ],
+   "itin": [
+    {
+     "t": {
+      "en": "Dhaka → Cox's Bazar, Marine Drive",
+      "bn": "ঢাকা → কক্সবাজার, মেরিন ড্রাইভ"
+     },
+     "d": {
+      "en": "Morning flight from Dhaka (US-Bangla/Biman). Check in to a sea-view hotel at Kolatoli, then an evening jeep ride along the 80 km Marine Drive to Himchari and Inani for sunset.",
+      "bn": "সকালে ঢাকা থেকে ফ্লাইট (ইউএস-বাংলা/বিমান)। কলাতলীর সি-ভিউ হোটেলে চেক-ইন, এরপর বিকেলে ৮০ কিলোমিটার দীর্ঘ মেরিন ড্রাইভ ধরে হিমছড়ি ও ইনানীতে সূর্যাস্ত দেখতে জিপ ভ্রমণ।"
+     }
+    },
+    {
+     "t": {
+      "en": "Teknaf → Saint Martin Island",
+      "bn": "টেকনাফ → সেন্ট মার্টিন দ্বীপ"
+     },
+     "d": {
+      "en": "Early transfer to Teknaf jetty and a 2.5-hour cruise across the Naf river mouth to Saint Martin. Afternoon on the west beach and a seafood barbecue under the stars.",
+      "bn": "ভোরে টেকনাফ জেটিতে পৌঁছে নাফ নদীর মোহনা পেরিয়ে আড়াই ঘণ্টার জাহাজযাত্রায় সেন্ট মার্টিন। বিকেলে পশ্চিম সৈকতে সময় কাটানো এবং রাতে তারাভরা আকাশের নিচে সামুদ্রিক খাবারের বারবিকিউ।"
+     }
+    },
+    {
+     "t": {
+      "en": "Chhera Dwip & return to Cox's Bazar",
+      "bn": "ছেঁড়া দ্বীপ ও কক্সবাজারে ফেরা"
+     },
+     "d": {
+      "en": "Sunrise walk, then a speedboat to Chhera Dwip, the country's southernmost point, for coral pools. Afternoon ship back and an evening at Laboni beach market.",
+      "bn": "সূর্যোদয় দেখে স্পিডবোটে দেশের সর্বদক্ষিণ বিন্দু ছেঁড়া দ্বীপে প্রবালের মাঝে সময় কাটানো। দুপুরে জাহাজে ফেরা এবং সন্ধ্যায় লাবনী সৈকতের বাজারে কেনাকাটা।"
+     }
+    },
+    {
+     "t": {
+      "en": "Leisure morning & fly home",
+      "bn": "অবসর সকাল ও ঢাকায় ফেরা"
+     },
+     "d": {
+      "en": "Free morning for the beach or a visit to the Radar Station viewpoint. Afternoon transfer to the airport for your flight to Dhaka.",
+      "bn": "সকাল নিজের মতো সৈকতে কাটানো বা রাডার স্টেশন ভিউপয়েন্ট ঘুরে দেখা। বিকেলে বিমানবন্দরে পৌঁছে ঢাকার ফ্লাইট।"
+     }
+    }
+   ],
+   "badge": {
+    "en": "Bestseller",
+    "bn": "সর্বাধিক বিক্রিত"
+   },
+   "flight": false,
+   "visa": false,
+   "cancel": "free7"
+  },
+  {
+   "slug": "sajek-rangamati",
+   "img": "sajek",
+   "title": {
+    "en": "Sajek Valley & Rangamati Hill Retreat",
+    "bn": "সাজেক ভ্যালি ও রাঙামাটি পাহাড়ি অবকাশ"
+   },
+   "dest": {
+    "en": "Sajek Valley",
+    "bn": "সাজেক ভ্যালি"
+   },
+   "country": {
+    "en": "Bangladesh",
+    "bn": "বাংলাদেশ"
+   },
+   "region": "bd",
+   "cats": [
+    "hills",
+    "family"
+   ],
+   "days": 3,
+   "nights": 2,
+   "price": 9800,
+   "old": 11500,
+   "rating": 4.7,
+   "reviews": 286,
+   "hl": [
+    {
+     "en": "Sunrise over the clouds at Konglak",
+     "bn": "কংলাক পাহাড়ে মেঘের ওপর সূর্যোদয়"
+    },
+    {
+     "en": "Kaptai Lake boat trip",
+     "bn": "কাপ্তাই লেকে নৌভ্রমণ"
+    },
+    {
+     "en": "Hanging bridge & tribal bazaar",
+     "bn": "ঝুলন্ত সেতু ও পাহাড়ি বাজার"
+    }
+   ],
+   "group": "2–24",
+   "gallery": [
+    "sajek",
+    "rangamati",
+    "bandarban"
+   ],
+   "itin": [
+    {
+     "t": {
+      "en": "Dhaka → Khagrachari → Sajek",
+      "bn": "ঢাকা → খাগড়াছড়ি → সাজেক"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "Konglak sunrise → Rangamati",
+      "bn": "কংলাকে সূর্যোদয় → রাঙামাটি"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "Kaptai Lake → Dhaka",
+      "bn": "কাপ্তাই লেক → ঢাকা"
+     },
+     "d": null
+    }
+   ],
+   "badge": null,
+   "flight": false,
+   "visa": false,
+   "cancel": "free7"
+  },
+  {
+   "slug": "sylhet-srimangal",
+   "img": "jaflong",
+   "title": {
+    "en": "Sylhet Tea Trails: Jaflong, Ratargul & Srimangal",
+    "bn": "সিলেটের চা-পথে: জাফলং, রাতারগুল ও শ্রীমঙ্গল"
+   },
+   "dest": {
+    "en": "Sylhet",
+    "bn": "সিলেট"
+   },
+   "country": {
+    "en": "Bangladesh",
+    "bn": "বাংলাদেশ"
+   },
+   "region": "bd",
+   "cats": [
+    "hills",
+    "wildlife"
+   ],
+   "days": 3,
+   "nights": 2,
+   "price": 11500,
+   "old": 13000,
+   "rating": 4.8,
+   "reviews": 198,
+   "hl": [
+    {
+     "en": "Boat ride through Ratargul swamp forest",
+     "bn": "রাতারগুল জলাবনে নৌকাভ্রমণ"
+    },
+    {
+     "en": "Tea estate walk & seven-layer tea",
+     "bn": "চা-বাগানে হাঁটা ও সাত রঙের চা"
+    },
+    {
+     "en": "Lawachara rainforest trail",
+     "bn": "লাউয়াছড়া রেইনফরেস্ট ট্রেইল"
+    }
+   ],
+   "group": "2–24",
+   "gallery": [
+    "jaflong",
+    "ratargul",
+    "darjeeling",
+    "srimangal"
+   ],
+   "itin": [
+    {
+     "t": {
+      "en": "Dhaka → Sylhet, Shrine visits",
+      "bn": "ঢাকা → সিলেট, মাজার জিয়ারত"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "Ratargul & Jaflong",
+      "bn": "রাতারগুল ও জাফলং"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "Srimangal tea gardens → Dhaka",
+      "bn": "শ্রীমঙ্গলের চা-বাগান → ঢাকা"
+     },
+     "d": null
+    }
+   ],
+   "badge": null,
+   "flight": false,
+   "visa": false,
+   "cancel": "free7"
+  },
+  {
+   "slug": "sundarbans-cruise",
+   "img": "sundarbans",
+   "title": {
+    "en": "Sundarbans Mangrove Cruise (3 Days on Deck)",
+    "bn": "সুন্দরবন ম্যানগ্রোভ ক্রুজ (৩ দিন জলযানে)"
+   },
+   "dest": {
+    "en": "Sundarbans",
+    "bn": "সুন্দরবন"
+   },
+   "country": {
+    "en": "Bangladesh",
+    "bn": "বাংলাদেশ"
+   },
+   "region": "bd",
+   "cats": [
+    "wildlife",
+    "adventure"
+   ],
+   "days": 3,
+   "nights": 2,
+   "price": 14900,
+   "old": 16500,
+   "rating": 4.9,
+   "reviews": 154,
+   "hl": [
+    {
+     "en": "AC cruise vessel with all meals",
+     "bn": "সব খাবারসহ এসি ক্রুজ জলযান"
+    },
+    {
+     "en": "Kotka & Kochikhali wildlife trails",
+     "bn": "কটকা ও কচিখালীর বন্যপ্রাণী ট্রেইল"
+    },
+    {
+     "en": "Forest permits & armed guard",
+     "bn": "বন বিভাগের অনুমতি ও সশস্ত্র গার্ড"
+    }
+   ],
+   "group": "2–24",
+   "gallery": [
+    "sundarbans",
+    "ratargul"
+   ],
+   "itin": [
+    {
+     "t": {
+      "en": "Khulna → Harbaria eco-trail",
+      "bn": "খুলনা → হারবাড়িয়া ইকো-ট্রেইল"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "Kotka, Jamtola beach & Kochikhali",
+      "bn": "কটকা, জামতলা সৈকত ও কচিখালী"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "Karamjal → Khulna",
+      "bn": "করমজল → খুলনা"
+     },
+     "d": null
+    }
+   ],
+   "badge": {
+    "en": "Eco certified",
+    "bn": "পরিবেশবান্ধব"
+   },
+   "flight": false,
+   "visa": false,
+   "cancel": "free7"
+  },
+  {
+   "slug": "bandarban-nilgiri",
+   "img": "bandarban",
+   "title": {
+    "en": "Bandarban Nilgiri & Nafakhum Trek",
+    "bn": "বান্দরবান নীলগিরি ও নাফাখুম ট্রেক"
+   },
+   "dest": {
+    "en": "Bandarban",
+    "bn": "বান্দরবান"
+   },
+   "country": {
+    "en": "Bangladesh",
+    "bn": "বাংলাদেশ"
+   },
+   "region": "bd",
+   "cats": [
+    "hills",
+    "adventure"
+   ],
+   "days": 4,
+   "nights": 3,
+   "price": 12500,
+   "old": null,
+   "rating": 4.6,
+   "reviews": 121,
+   "hl": [
+    {
+     "en": "Nilgiri cloud-top resort night",
+     "bn": "নীলগিরির মেঘছোঁয়া রিসোর্টে রাত্রিযাপন"
+    },
+    {
+     "en": "Nafakhum waterfall trek with local guide",
+     "bn": "স্থানীয় গাইডসহ নাফাখুম জলপ্রপাত ট্রেক"
+    },
+    {
+     "en": "Golden Temple & Boga Lake",
+     "bn": "স্বর্ণমন্দির ও বগা লেক"
+    }
+   ],
+   "group": "2–24",
+   "gallery": [
+    "bandarban",
+    "sajek"
+   ],
+   "itin": [
+    {
+     "t": {
+      "en": "Dhaka → Bandarban, Golden Temple",
+      "bn": "ঢাকা → বান্দরবান, স্বর্ণমন্দির"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "Thanchi → Remakri",
+      "bn": "থানচি → রেমাক্রি"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "Nafakhum waterfall trek",
+      "bn": "নাফাখুম জলপ্রপাত ট্রেক"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "Nilgiri → Dhaka",
+      "bn": "নীলগিরি → ঢাকা"
+     },
+     "d": null
+    }
+   ],
+   "badge": null,
+   "flight": false,
+   "visa": false,
+   "cancel": "free7"
+  },
+  {
+   "slug": "maldives-honeymoon",
+   "img": "maldives",
+   "title": {
+    "en": "Maldives Water-Villa Honeymoon",
+    "bn": "মালদ্বীপ ওয়াটার-ভিলা হানিমুন"
+   },
+   "dest": {
+    "en": "Maldives",
+    "bn": "মালদ্বীপ"
+   },
+   "country": {
+    "en": "Maldives",
+    "bn": "মালদ্বীপ"
+   },
+   "region": "intl",
+   "cats": [
+    "beach",
+    "honeymoon"
+   ],
+   "days": 5,
+   "nights": 4,
+   "price": 145000,
+   "old": 168000,
+   "rating": 4.9,
+   "reviews": 233,
+   "hl": [
+    {
+     "en": "2 nights beach villa + 2 nights water villa",
+     "bn": "২ রাত বিচ ভিলা + ২ রাত ওয়াটার ভিলা"
+    },
+    {
+     "en": "Speedboat transfers & half board",
+     "bn": "স্পিডবোট ট্রান্সফার ও হাফ বোর্ড"
+    },
+    {
+     "en": "Sunset dolphin cruise for two",
+     "bn": "দুজনের জন্য সূর্যাস্ত ডলফিন ক্রুজ"
+    }
+   ],
+   "group": "2–24",
+   "gallery": [
+    "maldives",
+    "resort",
+    "hotelroom"
+   ],
+   "itin": [
+    {
+     "t": {
+      "en": "Dhaka → Malé, speedboat to resort",
+      "bn": "ঢাকা → মালে, স্পিডবোটে রিসোর্ট"
+     },
+     "d": {
+      "en": "Direct US-Bangla flight to Malé. Our representative meets you at Velana Airport for the 25-minute speedboat transfer. Welcome drinks and a beach-villa check-in.",
+      "bn": "ইউএস-বাংলার সরাসরি ফ্লাইটে মালে। ভেলানা বিমানবন্দরে আমাদের প্রতিনিধি স্বাগত জানাবেন, এরপর ২৫ মিনিটের স্পিডবোটে রিসোর্টে পৌঁছানো। ওয়েলকাম ড্রিংক ও বিচ ভিলায় চেক-ইন।"
+     }
+    },
+    {
+     "t": {
+      "en": "Snorkelling & house reef",
+      "bn": "স্নরকেলিং ও হাউস রিফ"
+     },
+     "d": {
+      "en": "Guided snorkelling on the house reef with turtles and reef sharks, then a spa hour for two. Dinner at the overwater restaurant.",
+      "bn": "কচ্ছপ ও রিফ শার্কের দেখা মেলে এমন হাউস রিফে গাইডসহ স্নরকেলিং, এরপর দুজনের জন্য স্পা। রাতে পানির ওপর রেস্তোরাঁয় ডিনার।"
+     }
+    },
+    {
+     "t": {
+      "en": "Move to water villa, dolphin cruise",
+      "bn": "ওয়াটার ভিলায় স্থানান্তর, ডলফিন ক্রুজ"
+     },
+     "d": {
+      "en": "Shift to your overwater villa with a private deck. Late-afternoon sunset cruise to spot spinner dolphins.",
+      "bn": "নিজস্ব ডেকসহ ওয়াটার ভিলায় স্থানান্তর। বিকেলে স্পিনার ডলফিন দেখার সূর্যাস্ত ক্রুজ।"
+     }
+    },
+    {
+     "t": {
+      "en": "Sandbank picnic",
+      "bn": "স্যান্ডব্যাংক পিকনিক"
+     },
+     "d": {
+      "en": "A private sandbank picnic with lunch, then a free afternoon. Optional diving or seaplane photo flight.",
+      "bn": "দুপুরের খাবারসহ ব্যক্তিগত স্যান্ডব্যাংক পিকনিক, বিকেল অবসর। চাইলে ডাইভিং বা সি-প্লেনে ফটো ফ্লাইট।"
+     }
+    },
+    {
+     "t": {
+      "en": "Malé → Dhaka",
+      "bn": "মালে → ঢাকা"
+     },
+     "d": {
+      "en": "Breakfast, check-out and speedboat to the airport for your flight home.",
+      "bn": "নাশতা ও চেক-আউটের পর স্পিডবোটে বিমানবন্দর, এরপর ঢাকার ফ্লাইট।"
+     }
+    }
+   ],
+   "badge": {
+    "en": "Honeymoon pick",
+    "bn": "হানিমুন বাছাই"
+   },
+   "flight": true,
+   "visa": false,
+   "cancel": "free30"
+  },
+  {
+   "slug": "bali-highlights",
+   "img": "bali",
+   "title": {
+    "en": "Bali Highlights: Ubud, Rice Terraces & Beaches",
+    "bn": "বালি হাইলাইটস: উবুদ, ধানখেত ও সৈকত"
+   },
+   "dest": {
+    "en": "Bali",
+    "bn": "বালি"
+   },
+   "country": {
+    "en": "Indonesia",
+    "bn": "ইন্দোনেশিয়া"
+   },
+   "region": "intl",
+   "cats": [
+    "beach",
+    "honeymoon",
+    "heritage"
+   ],
+   "days": 6,
+   "nights": 5,
+   "price": 89500,
+   "old": 99000,
+   "rating": 4.8,
+   "reviews": 176,
+   "hl": [
+    {
+     "en": "Tegallalang rice terraces & jungle swing",
+     "bn": "তেগালালাং ধানখেত ও জঙ্গল সুইং"
+    },
+    {
+     "en": "Uluwatu temple Kecak fire dance",
+     "bn": "উলুওয়াতু মন্দিরে কেচাক অগ্নিনৃত্য"
+    },
+    {
+     "en": "Nusa Penida day cruise",
+     "bn": "নুসা পেনিদা ডে ক্রুজ"
+    }
+   ],
+   "group": "2–24",
+   "gallery": [
+    "bali",
+    "resort",
+    "hotelroom"
+   ],
+   "itin": [
+    {
+     "t": {
+      "en": "Dhaka → Denpasar",
+      "bn": "ঢাকা → ডেনপাসার"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "Ubud art villages & Monkey Forest",
+      "bn": "উবুদের শিল্পগ্রাম ও মাঙ্কি ফরেস্ট"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "Tegallalang & Kintamani volcano",
+      "bn": "তেগালালাং ও কিন্তামানি আগ্নেয়গিরি"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "Nusa Penida island cruise",
+      "bn": "নুসা পেনিদা দ্বীপ ক্রুজ"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "Uluwatu & Jimbaran seafood",
+      "bn": "উলুওয়াতু ও জিম্বারান সি-ফুড"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "Denpasar → Dhaka",
+      "bn": "ডেনপাসার → ঢাকা"
+     },
+     "d": null
+    }
+   ],
+   "badge": null,
+   "flight": true,
+   "visa": true,
+   "cancel": "partial"
+  },
+  {
+   "slug": "dubai-family",
+   "img": "dubai",
+   "title": {
+    "en": "Dubai Family Fun with Desert Safari",
+    "bn": "ডেজার্ট সাফারিসহ দুবাই পারিবারিক ভ্রমণ"
+   },
+   "dest": {
+    "en": "Dubai",
+    "bn": "দুবাই"
+   },
+   "country": {
+    "en": "United Arab Emirates",
+    "bn": "সংযুক্ত আরব আমিরাত"
+   },
+   "region": "intl",
+   "cats": [
+    "family",
+    "city"
+   ],
+   "days": 5,
+   "nights": 4,
+   "price": 78000,
+   "old": 85000,
+   "rating": 4.7,
+   "reviews": 309,
+   "hl": [
+    {
+     "en": "Burj Khalifa \"At the Top\" tickets",
+     "bn": "বুর্জ খলিফা \"অ্যাট দ্য টপ\" টিকিট"
+    },
+    {
+     "en": "Desert safari with BBQ dinner",
+     "bn": "বিবিকিউ ডিনারসহ ডেজার্ট সাফারি"
+    },
+    {
+     "en": "Dhow cruise at Dubai Marina",
+     "bn": "দুবাই মেরিনায় ধাও ক্রুজ"
+    }
+   ],
+   "group": "2–24",
+   "gallery": [
+    "dubai",
+    "resort"
+   ],
+   "itin": [
+    {
+     "t": {
+      "en": "Dhaka → Dubai, Marina dhow cruise",
+      "bn": "ঢাকা → দুবাই, মেরিনায় ধাও ক্রুজ"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "City tour & Burj Khalifa",
+      "bn": "সিটি ট্যুর ও বুর্জ খলিফা"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "Desert safari",
+      "bn": "ডেজার্ট সাফারি"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "Abu Dhabi Grand Mosque day trip",
+      "bn": "আবুধাবি গ্র্যান্ড মসজিদ ডে-ট্রিপ"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "Shopping & fly home",
+      "bn": "কেনাকাটা ও দেশে ফেরা"
+     },
+     "d": null
+    }
+   ],
+   "badge": {
+    "en": "Family favourite",
+    "bn": "পরিবারের পছন্দ"
+   },
+   "flight": true,
+   "visa": true,
+   "cancel": "partial"
+  },
+  {
+   "slug": "turkey-classic",
+   "img": "istanbul",
+   "title": {
+    "en": "Turkey Classic: Istanbul, Cappadocia & Pamukkale",
+    "bn": "তুরস্ক ক্লাসিক: ইস্তাম্বুল, কাপাদোকিয়া ও পামুক্কালে"
+   },
+   "dest": {
+    "en": "Istanbul",
+    "bn": "ইস্তাম্বুল"
+   },
+   "country": {
+    "en": "Türkiye",
+    "bn": "তুরস্ক"
+   },
+   "region": "intl",
+   "cats": [
+    "heritage",
+    "honeymoon",
+    "city"
+   ],
+   "days": 8,
+   "nights": 7,
+   "price": 165000,
+   "old": 182000,
+   "rating": 4.9,
+   "reviews": 268,
+   "hl": [
+    {
+     "en": "Hot-air balloon flight over Cappadocia",
+     "bn": "কাপাদোকিয়ায় হট-এয়ার বেলুন রাইড"
+    },
+    {
+     "en": "Bosphorus cruise & Blue Mosque",
+     "bn": "বসফরাস ক্রুজ ও ব্লু মস্ক"
+    },
+    {
+     "en": "Pamukkale travertine terraces",
+     "bn": "পামুক্কালের সাদা চুনাপাথরের ধাপ"
+    }
+   ],
+   "group": "2–24",
+   "gallery": [
+    "istanbul",
+    "cappadocia",
+    "turkey2",
+    "hotelroom"
+   ],
+   "itin": [
+    {
+     "t": {
+      "en": "Dhaka → Istanbul",
+      "bn": "ঢাকা → ইস্তাম্বুল"
+     },
+     "d": {
+      "en": "Turkish Airlines flight to Istanbul. Private transfer to your Sultanahmet hotel and a welcome dinner with a view of the Golden Horn.",
+      "bn": "টার্কিশ এয়ারলাইন্সে ইস্তাম্বুল। সুলতানাহমেতের হোটেলে প্রাইভেট ট্রান্সফার এবং গোল্ডেন হর্নের দৃশ্যসহ ওয়েলকাম ডিনার।"
+     }
+    },
+    {
+     "t": {
+      "en": "Old City: Hagia Sophia & Blue Mosque",
+      "bn": "পুরোনো শহর: আয়া সোফিয়া ও ব্লু মস্ক"
+     },
+     "d": {
+      "en": "Guided walk through Hagia Sophia, the Blue Mosque, Topkapı Palace and the Grand Bazaar.",
+      "bn": "গাইডসহ আয়া সোফিয়া, ব্লু মস্ক, তোপকাপি প্রাসাদ ও গ্র্যান্ড বাজার ভ্রমণ।"
+     }
+    },
+    {
+     "t": {
+      "en": "Bosphorus cruise & Asian side",
+      "bn": "বসফরাস ক্রুজ ও এশীয় অংশ"
+     },
+     "d": {
+      "en": "Morning Bosphorus cruise between two continents, then Çamlıca hill and the Spice Bazaar.",
+      "bn": "সকালে দুই মহাদেশের মাঝ দিয়ে বসফরাস ক্রুজ, এরপর চামলিজা পাহাড় ও স্পাইস বাজার।"
+     }
+    },
+    {
+     "t": {
+      "en": "Fly to Cappadocia",
+      "bn": "কাপাদোকিয়ায় ফ্লাইট"
+     },
+     "d": {
+      "en": "Domestic flight to Kayseri. Afternoon in Göreme open-air museum and a cave-hotel check-in.",
+      "bn": "কায়সেরিতে অভ্যন্তরীণ ফ্লাইট। বিকেলে গোরেমে ওপেন-এয়ার মিউজিয়াম ও গুহা-হোটেলে চেক-ইন।"
+     }
+    },
+    {
+     "t": {
+      "en": "Balloon flight & underground city",
+      "bn": "বেলুন রাইড ও ভূগর্ভস্থ শহর"
+     },
+     "d": {
+      "en": "Sunrise hot-air balloon flight (weather permitting), then Derinkuyu underground city and Pigeon Valley.",
+      "bn": "সূর্যোদয়ে হট-এয়ার বেলুন রাইড (আবহাওয়া অনুকূলে থাকলে), এরপর দেরিনকুয়ু ভূগর্ভস্থ শহর ও পিজিয়ন ভ্যালি।"
+     }
+    },
+    {
+     "t": {
+      "en": "Road to Pamukkale",
+      "bn": "পামুক্কালের পথে"
+     },
+     "d": {
+      "en": "Scenic drive via Konya and the Mevlana Museum to Pamukkale; thermal-spa hotel.",
+      "bn": "কোনিয়া ও মাওলানা জাদুঘর হয়ে পামুক্কালে; থার্মাল-স্পা হোটেল।"
+     }
+    },
+    {
+     "t": {
+      "en": "Pamukkale & Hierapolis",
+      "bn": "পামুক্কালে ও হিয়েরাপোলিস"
+     },
+     "d": {
+      "en": "Walk barefoot on the white travertines and swim in Cleopatra's antique pool. Evening flight back to Istanbul.",
+      "bn": "সাদা চুনাপাথরের ধাপে খালি পায়ে হাঁটা ও ক্লিওপেট্রার প্রাচীন পুলে সাঁতার। সন্ধ্যায় ইস্তাম্বুলে ফেরা।"
+     }
+    },
+    {
+     "t": {
+      "en": "Istanbul → Dhaka",
+      "bn": "ইস্তাম্বুল → ঢাকা"
+     },
+     "d": {
+      "en": "Free morning for last-minute shopping and airport transfer.",
+      "bn": "সকালে শেষ মুহূর্তের কেনাকাটা, এরপর বিমানবন্দরে ট্রান্সফার।"
+     }
+    }
+   ],
+   "badge": {
+    "en": "Top rated",
+    "bn": "সেরা রেটিং"
+   },
+   "flight": true,
+   "visa": true,
+   "cancel": "partial"
+  },
+  {
+   "slug": "nepal-pokhara",
+   "img": "nepal",
+   "title": {
+    "en": "Nepal: Kathmandu & Pokhara Mountain Escape",
+    "bn": "নেপাল: কাঠমান্ডু ও পোখারা পাহাড়ি অবকাশ"
+   },
+   "dest": {
+    "en": "Pokhara",
+    "bn": "পোখারা"
+   },
+   "country": {
+    "en": "Nepal",
+    "bn": "নেপাল"
+   },
+   "region": "intl",
+   "cats": [
+    "hills",
+    "adventure"
+   ],
+   "days": 5,
+   "nights": 4,
+   "price": 42500,
+   "old": 47000,
+   "rating": 4.7,
+   "reviews": 214,
+   "hl": [
+    {
+     "en": "Sarangkot sunrise over the Annapurnas",
+     "bn": "সারাংকোট থেকে অন্নপূর্ণায় সূর্যোদয়"
+    },
+    {
+     "en": "Phewa Lake boating",
+     "bn": "ফেওয়া লেকে নৌকাভ্রমণ"
+    },
+    {
+     "en": "Paragliding add-on available",
+     "bn": "প্যারাগ্লাইডিং যোগ করার সুযোগ"
+    }
+   ],
+   "group": "2–24",
+   "gallery": [
+    "nepal",
+    "darjeeling"
+   ],
+   "itin": [
+    {
+     "t": {
+      "en": "Dhaka → Kathmandu, Thamel",
+      "bn": "ঢাকা → কাঠমান্ডু, থামেল"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "Kathmandu Durbar Square & Swayambhu",
+      "bn": "কাঠমান্ডু দরবার স্কয়ার ও স্বয়ম্ভূ"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "Drive to Pokhara",
+      "bn": "পোখারার পথে"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "Sarangkot sunrise & Phewa Lake",
+      "bn": "সারাংকোটে সূর্যোদয় ও ফেওয়া লেক"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "Kathmandu → Dhaka",
+      "bn": "কাঠমান্ডু → ঢাকা"
+     },
+     "d": null
+    }
+   ],
+   "badge": null,
+   "flight": true,
+   "visa": false,
+   "cancel": "free30"
+  },
+  {
+   "slug": "bhutan-happiness",
+   "img": "bhutan",
+   "title": {
+    "en": "Bhutan Happiness Trail: Thimphu, Punakha & Paro",
+    "bn": "ভুটান হ্যাপিনেস ট্রেইল: থিম্পু, পুনাখা ও পারো"
+   },
+   "dest": {
+    "en": "Paro",
+    "bn": "পারো"
+   },
+   "country": {
+    "en": "Bhutan",
+    "bn": "ভুটান"
+   },
+   "region": "intl",
+   "cats": [
+    "hills",
+    "heritage"
+   ],
+   "days": 6,
+   "nights": 5,
+   "price": 68000,
+   "old": null,
+   "rating": 4.8,
+   "reviews": 97,
+   "hl": [
+    {
+     "en": "Hike to Tiger's Nest monastery",
+     "bn": "টাইগার্স নেস্ট মঠে হাইকিং"
+    },
+    {
+     "en": "Punakha Dzong & suspension bridge",
+     "bn": "পুনাখা জং ও ঝুলন্ত সেতু"
+    },
+    {
+     "en": "Dochula Pass 108 chortens",
+     "bn": "দোচুলা পাস ও ১০৮টি চোর্তেন"
+    }
+   ],
+   "group": "2–24",
+   "gallery": [
+    "bhutan",
+    "nepal"
+   ],
+   "itin": [
+    {
+     "t": {
+      "en": "Dhaka → Paro → Thimphu",
+      "bn": "ঢাকা → পারো → থিম্পু"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "Thimphu sightseeing",
+      "bn": "থিম্পু দর্শন"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "Dochula → Punakha",
+      "bn": "দোচুলা → পুনাখা"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "Punakha → Paro",
+      "bn": "পুনাখা → পারো"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "Tiger's Nest hike",
+      "bn": "টাইগার্স নেস্ট হাইক"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "Paro → Dhaka",
+      "bn": "পারো → ঢাকা"
+     },
+     "d": null
+    }
+   ],
+   "badge": null,
+   "flight": true,
+   "visa": false,
+   "cancel": "free30"
+  },
+  {
+   "slug": "thailand-phuket",
+   "img": "phuket",
+   "title": {
+    "en": "Thailand: Bangkok, Phuket & Phi Phi",
+    "bn": "থাইল্যান্ড: ব্যাংকক, ফুকেট ও ফি ফি"
+   },
+   "dest": {
+    "en": "Phuket",
+    "bn": "ফুকেট"
+   },
+   "country": {
+    "en": "Thailand",
+    "bn": "থাইল্যান্ড"
+   },
+   "region": "intl",
+   "cats": [
+    "beach",
+    "family",
+    "city"
+   ],
+   "days": 6,
+   "nights": 5,
+   "price": 62000,
+   "old": 69500,
+   "rating": 4.6,
+   "reviews": 341,
+   "hl": [
+    {
+     "en": "Phi Phi & Maya Bay speedboat tour",
+     "bn": "ফি ফি ও মায়া বে স্পিডবোট ট্যুর"
+    },
+    {
+     "en": "Bangkok temples & river cruise",
+     "bn": "ব্যাংককের মন্দির ও রিভার ক্রুজ"
+    },
+    {
+     "en": "Dietary needs catered for",
+     "bn": "খাদ্যাভ্যাস অনুযায়ী খাবারের ব্যবস্থা"
+    }
+   ],
+   "group": "2–24",
+   "gallery": [
+    "phuket",
+    "resort"
+   ],
+   "itin": [
+    {
+     "t": {
+      "en": "Dhaka → Bangkok",
+      "bn": "ঢাকা → ব্যাংকক"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "Grand Palace & Chao Phraya cruise",
+      "bn": "গ্র্যান্ড প্যালেস ও চাও ফ্রায়া ক্রুজ"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "Fly to Phuket",
+      "bn": "ফুকেটে ফ্লাইট"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "Phi Phi islands",
+      "bn": "ফি ফি দ্বীপপুঞ্জ"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "Phuket city & Big Buddha",
+      "bn": "ফুকেট শহর ও বিগ বুদ্ধ"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "Phuket → Dhaka",
+      "bn": "ফুকেট → ঢাকা"
+     },
+     "d": null
+    }
+   ],
+   "badge": null,
+   "flight": true,
+   "visa": true,
+   "cancel": "partial"
+  },
+  {
+   "slug": "kashmir-paradise",
+   "img": "kashmir",
+   "title": {
+    "en": "Kashmir Paradise: Srinagar, Gulmarg & Pahalgam",
+    "bn": "ভূস্বর্গ কাশ্মীর: শ্রীনগর, গুলমার্গ ও পহেলগাম"
+   },
+   "dest": {
+    "en": "Srinagar",
+    "bn": "শ্রীনগর"
+   },
+   "country": {
+    "en": "India",
+    "bn": "ভারত"
+   },
+   "region": "intl",
+   "cats": [
+    "hills",
+    "honeymoon"
+   ],
+   "days": 6,
+   "nights": 5,
+   "price": 58500,
+   "old": 64000,
+   "rating": 4.7,
+   "reviews": 162,
+   "hl": [
+    {
+     "en": "Houseboat night on Dal Lake",
+     "bn": "ডাল লেকের হাউসবোটে রাত্রিযাপন"
+    },
+    {
+     "en": "Gulmarg gondola ride",
+     "bn": "গুলমার্গ গন্ডোলা রাইড"
+    },
+    {
+     "en": "Shikara ride at sunset",
+     "bn": "সূর্যাস্তে শিকারা ভ্রমণ"
+    }
+   ],
+   "group": "2–24",
+   "gallery": [
+    "kashmir",
+    "swiss"
+   ],
+   "itin": [
+    {
+     "t": {
+      "en": "Dhaka → Srinagar, houseboat",
+      "bn": "ঢাকা → শ্রীনগর, হাউসবোট"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "Mughal gardens & shikara",
+      "bn": "মুঘল উদ্যান ও শিকারা"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "Gulmarg gondola",
+      "bn": "গুলমার্গ গন্ডোলা"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "Pahalgam valleys",
+      "bn": "পহেলগাম উপত্যকা"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "Sonamarg glacier",
+      "bn": "সোনমার্গ হিমবাহ"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "Srinagar → Dhaka",
+      "bn": "শ্রীনগর → ঢাকা"
+     },
+     "d": null
+    }
+   ],
+   "badge": null,
+   "flight": true,
+   "visa": true,
+   "cancel": "partial"
+  },
+  {
+   "slug": "singapore-malaysia",
+   "img": "singapore",
+   "title": {
+    "en": "Singapore & Malaysia Twin-City Holiday",
+    "bn": "সিঙ্গাপুর ও মালয়েশিয়া টুইন-সিটি হলিডে"
+   },
+   "dest": {
+    "en": "Singapore",
+    "bn": "সিঙ্গাপুর"
+   },
+   "country": {
+    "en": "Singapore & Malaysia",
+    "bn": "সিঙ্গাপুর ও মালয়েশিয়া"
+   },
+   "region": "intl",
+   "cats": [
+    "city",
+    "family"
+   ],
+   "days": 7,
+   "nights": 6,
+   "price": 98000,
+   "old": 108000,
+   "rating": 4.7,
+   "reviews": 188,
+   "hl": [
+    {
+     "en": "Universal Studios & Gardens by the Bay",
+     "bn": "ইউনিভার্সাল স্টুডিওস ও গার্ডেনস বাই দ্য বে"
+    },
+    {
+     "en": "Genting Highlands cable car",
+     "bn": "গেন্টিং হাইল্যান্ডস ক্যাবল কার"
+    },
+    {
+     "en": "Coach transfer Singapore → KL",
+     "bn": "সিঙ্গাপুর → কুয়ালালামপুর কোচ ট্রান্সফার"
+    }
+   ],
+   "group": "2–24",
+   "gallery": [
+    "singapore",
+    "malaysia"
+   ],
+   "itin": [
+    {
+     "t": {
+      "en": "Dhaka → Singapore",
+      "bn": "ঢাকা → সিঙ্গাপুর"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "City tour & Gardens by the Bay",
+      "bn": "সিটি ট্যুর ও গার্ডেনস বাই দ্য বে"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "Sentosa & Universal Studios",
+      "bn": "সেন্তোসা ও ইউনিভার্সাল স্টুডিওস"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "Coach to Kuala Lumpur",
+      "bn": "কোচে কুয়ালালামপুর"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "Petronas Towers & Batu Caves",
+      "bn": "পেট্রোনাস টাওয়ার ও বাতু কেভস"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "Genting Highlands",
+      "bn": "গেন্টিং হাইল্যান্ডস"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "Kuala Lumpur → Dhaka",
+      "bn": "কুয়ালালামপুর → ঢাকা"
+     },
+     "d": null
+    }
+   ],
+   "badge": null,
+   "flight": true,
+   "visa": true,
+   "cancel": "partial"
+  },
+  {
+   "slug": "egypt-wonders",
+   "img": "egypt",
+   "title": {
+    "en": "Egypt Wonders: Cairo, Giza & Nile Cruise",
+    "bn": "মিশরের বিস্ময়: কায়রো, গিজা ও নীল নদ ক্রুজ"
+   },
+   "dest": {
+    "en": "Cairo",
+    "bn": "কায়রো"
+   },
+   "country": {
+    "en": "Egypt",
+    "bn": "মিশর"
+   },
+   "region": "intl",
+   "cats": [
+    "heritage"
+   ],
+   "days": 7,
+   "nights": 6,
+   "price": 138000,
+   "old": 149000,
+   "rating": 4.8,
+   "reviews": 74,
+   "hl": [
+    {
+     "en": "Pyramids of Giza & the Sphinx",
+     "bn": "গিজার পিরামিড ও স্ফিংক্স"
+    },
+    {
+     "en": "3-night Nile cruise Luxor–Aswan",
+     "bn": "লুক্সর–আসওয়ান ৩ রাতের নীল নদ ক্রুজ"
+    },
+    {
+     "en": "Al-Azhar & Islamic Cairo walk",
+     "bn": "আল-আজহার ও ইসলামিক কায়রো ভ্রমণ"
+    }
+   ],
+   "group": "2–24",
+   "gallery": [
+    "egypt"
+   ],
+   "itin": [
+    {
+     "t": {
+      "en": "Dhaka → Cairo",
+      "bn": "ঢাকা → কায়রো"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "Giza pyramids & Egyptian Museum",
+      "bn": "গিজার পিরামিড ও মিশরীয় জাদুঘর"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "Islamic Cairo & Khan el-Khalili",
+      "bn": "ইসলামিক কায়রো ও খান আল-খলিলি"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "Fly to Luxor, board cruise",
+      "bn": "লুক্সরে ফ্লাইট, ক্রুজে ওঠা"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "Edfu & Kom Ombo",
+      "bn": "এডফু ও কম ওম্বো"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "Aswan & Philae",
+      "bn": "আসওয়ান ও ফিলাই"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "Cairo → Dhaka",
+      "bn": "কায়রো → ঢাকা"
+     },
+     "d": null
+    }
+   ],
+   "badge": null,
+   "flight": true,
+   "visa": true,
+   "cancel": "partial"
+  },
+  {
+   "slug": "srilanka-culture",
+   "img": "srilanka",
+   "title": {
+    "en": "Sri Lanka Cultural Triangle & Kandy",
+    "bn": "শ্রীলঙ্কা কালচারাল ট্রায়াঙ্গল ও ক্যান্ডি"
+   },
+   "dest": {
+    "en": "Sigiriya",
+    "bn": "সিগিরিয়া"
+   },
+   "country": {
+    "en": "Sri Lanka",
+    "bn": "শ্রীলঙ্কা"
+   },
+   "region": "intl",
+   "cats": [
+    "heritage",
+    "wildlife"
+   ],
+   "days": 6,
+   "nights": 5,
+   "price": 72000,
+   "old": null,
+   "rating": 4.6,
+   "reviews": 88,
+   "hl": [
+    {
+     "en": "Climb Sigiriya Lion Rock",
+     "bn": "সিগিরিয়া লায়ন রক আরোহণ"
+    },
+    {
+     "en": "Minneriya elephant safari",
+     "bn": "মিনেরিয়ায় হাতি সাফারি"
+    },
+    {
+     "en": "Scenic train to Ella",
+     "bn": "এলা পর্যন্ত মনোরম ট্রেনযাত্রা"
+    }
+   ],
+   "group": "2–24",
+   "gallery": [
+    "srilanka"
+   ],
+   "itin": [
+    {
+     "t": {
+      "en": "Dhaka → Colombo → Sigiriya",
+      "bn": "ঢাকা → কলম্বো → সিগিরিয়া"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "Sigiriya rock & Minneriya safari",
+      "bn": "সিগিরিয়া রক ও মিনেরিয়া সাফারি"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "Dambulla → Kandy",
+      "bn": "ডাম্বুলা → ক্যান্ডি"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "Train to Ella",
+      "bn": "এলার পথে ট্রেন"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "Ella → Colombo",
+      "bn": "এলা → কলম্বো"
+     },
+     "d": null
+    },
+    {
+     "t": {
+      "en": "Colombo → Dhaka",
+      "bn": "কলম্বো → ঢাকা"
+     },
+     "d": null
+    }
+   ],
+   "badge": null,
+   "flight": true,
+   "visa": true,
+   "cancel": "partial"
+  }
+ ],
+ "DESTINATIONS": [
+  {
+   "slug": "coxs-bazar",
+   "img": "coxsbazar",
+   "name": {
+    "en": "Cox's Bazar",
+    "bn": "কক্সবাজার"
+   },
+   "country": {
+    "en": "Bangladesh",
+    "bn": "বাংলাদেশ"
+   },
+   "region": "bd",
+   "tours": 18,
+   "best": {
+    "en": "Nov – Mar",
+    "bn": "নভেম্বর – মার্চ"
+   },
+   "visa": {
+    "en": "Not required",
+    "bn": "প্রয়োজন নেই"
+   },
+   "cur": "BDT",
+   "fly": {
+    "en": "1 h flight",
+    "bn": "১ ঘণ্টার ফ্লাইট"
+   },
+   "desc": {
+    "en": "Home to the world's longest natural sea beach — 120 km of golden sand, the scenic Marine Drive, Himchari waterfalls and fresh seafood.",
+    "bn": "বিশ্বের দীর্ঘতম প্রাকৃতিক সমুদ্রসৈকত — ১২০ কিলোমিটার সোনালি বালুকাবেলা, মনোরম মেরিন ড্রাইভ, হিমছড়ির ঝরনা আর টাটকা সামুদ্রিক খাবার।"
+   },
+   "things": [
+    {
+     "en": "Inani rocky beach",
+     "bn": "ইনানী পাথুরে সৈকত"
+    },
+    {
+     "en": "Himchari National Park",
+     "bn": "হিমছড়ি জাতীয় উদ্যান"
+    },
+    {
+     "en": "Saint Martin day trip",
+     "bn": "সেন্ট মার্টিন ডে-ট্রিপ"
+    },
+    {
+     "en": "Ramu Buddhist temples",
+     "bn": "রামুর বৌদ্ধ বিহার"
+    }
+   ]
+  },
+  {
+   "slug": "sajek-valley",
+   "img": "sajek",
+   "name": {
+    "en": "Sajek Valley",
+    "bn": "সাজেক ভ্যালি"
+   },
+   "country": {
+    "en": "Bangladesh",
+    "bn": "বাংলাদেশ"
+   },
+   "region": "bd",
+   "tours": 9,
+   "best": {
+    "en": "Jun – Nov",
+    "bn": "জুন – নভেম্বর"
+   },
+   "visa": {
+    "en": "Not required",
+    "bn": "প্রয়োজন নেই"
+   },
+   "cur": "BDT",
+   "fly": {
+    "en": "8 h by road",
+    "bn": "সড়কপথে ৮ ঘণ্টা"
+   },
+   "desc": {
+    "en": "The \"queen of hills\" in Rangamati, famous for sunrise above a sea of clouds and colourful wooden cottages.",
+    "bn": "রাঙামাটির \"পাহাড়ের রানী\" — মেঘের সমুদ্রের ওপর সূর্যোদয় আর রঙিন কাঠের কটেজের জন্য বিখ্যাত।"
+   },
+   "things": [
+    {
+     "en": "Konglak Para",
+     "bn": "কংলাক পাড়া"
+    },
+    {
+     "en": "Helipad sunset",
+     "bn": "হেলিপ্যাডে সূর্যাস্ত"
+    },
+    {
+     "en": "Hazachora waterfall",
+     "bn": "হাজাছড়া ঝরনা"
+    }
+   ]
+  },
+  {
+   "slug": "sylhet",
+   "img": "jaflong",
+   "name": {
+    "en": "Sylhet",
+    "bn": "সিলেট"
+   },
+   "country": {
+    "en": "Bangladesh",
+    "bn": "বাংলাদেশ"
+   },
+   "region": "bd",
+   "tours": 12,
+   "best": {
+    "en": "Jun – Oct",
+    "bn": "জুন – অক্টোবর"
+   },
+   "visa": {
+    "en": "Not required",
+    "bn": "প্রয়োজন নেই"
+   },
+   "cur": "BDT",
+   "fly": {
+    "en": "45 min flight",
+    "bn": "৪৫ মিনিটের ফ্লাইট"
+   },
+   "desc": {
+    "en": "Rolling tea estates, the crystal-clear Jaflong river, Ratargul swamp forest and the turquoise water of Lalakhal.",
+    "bn": "ঢেউখেলানো চা-বাগান, জাফলংয়ের স্বচ্ছ নদী, রাতারগুল জলাবন আর লালাখালের নীলচে পানি।"
+   },
+   "things": [
+    {
+     "en": "Ratargul swamp forest",
+     "bn": "রাতারগুল জলাবন"
+    },
+    {
+     "en": "Bisnakandi",
+     "bn": "বিছনাকান্দি"
+    },
+    {
+     "en": "Lalakhal",
+     "bn": "লালাখাল"
+    }
+   ]
+  },
+  {
+   "slug": "sundarbans",
+   "img": "sundarbans",
+   "name": {
+    "en": "Sundarbans",
+    "bn": "সুন্দরবন"
+   },
+   "country": {
+    "en": "Bangladesh",
+    "bn": "বাংলাদেশ"
+   },
+   "region": "bd",
+   "tours": 6,
+   "best": {
+    "en": "Nov – Feb",
+    "bn": "নভেম্বর – ফেব্রুয়ারি"
+   },
+   "visa": {
+    "en": "Not required",
+    "bn": "প্রয়োজন নেই"
+   },
+   "cur": "BDT",
+   "fly": {
+    "en": "5 h by road to Khulna",
+    "bn": "খুলনা পর্যন্ত সড়কপথে ৫ ঘণ্টা"
+   },
+   "desc": {
+    "en": "The world's largest mangrove forest and UNESCO World Heritage site, home of the Royal Bengal tiger.",
+    "bn": "বিশ্বের বৃহত্তম ম্যানগ্রোভ বন ও ইউনেস্কো বিশ্ব ঐতিহ্য — রয়েল বেঙ্গল টাইগারের আবাস।"
+   },
+   "things": [
+    {
+     "en": "Kotka",
+     "bn": "কটকা"
+    },
+    {
+     "en": "Kochikhali",
+     "bn": "কচিখালী"
+    },
+    {
+     "en": "Karamjal",
+     "bn": "করমজল"
+    }
+   ]
+  },
+  {
+   "slug": "maldives",
+   "img": "maldives",
+   "name": {
+    "en": "Maldives",
+    "bn": "মালদ্বীপ"
+   },
+   "country": {
+    "en": "Maldives",
+    "bn": "মালদ্বীপ"
+   },
+   "region": "intl",
+   "tours": 11,
+   "best": {
+    "en": "Nov – Apr",
+    "bn": "নভেম্বর – এপ্রিল"
+   },
+   "visa": {
+    "en": "Free on arrival",
+    "bn": "অন-অ্যারাইভাল (ফ্রি)"
+   },
+   "cur": "MVR / USD",
+   "fly": {
+    "en": "3 h 50 m direct",
+    "bn": "সরাসরি ৩ ঘণ্টা ৫০ মিনিট"
+   },
+   "desc": {
+    "en": "Overwater villas, turquoise lagoons and house reefs — the classic honeymoon escape, just under four hours from Dhaka.",
+    "bn": "পানির ওপর ভিলা, ফিরোজা লেগুন আর প্রবালপ্রাচীর — ঢাকা থেকে চার ঘণ্টারও কম দূরত্বে ক্লাসিক হানিমুন গন্তব্য।"
+   },
+   "things": [
+    {
+     "en": "Malé city",
+     "bn": "মালে শহর"
+    },
+    {
+     "en": "Maafushi",
+     "bn": "মাফুশি"
+    },
+    {
+     "en": "Sandbank picnic",
+     "bn": "স্যান্ডব্যাংক পিকনিক"
+    }
+   ]
+  },
+  {
+   "slug": "turkey",
+   "img": "istanbul",
+   "name": {
+    "en": "Türkiye",
+    "bn": "তুরস্ক"
+   },
+   "country": {
+    "en": "Türkiye",
+    "bn": "তুরস্ক"
+   },
+   "region": "intl",
+   "tours": 8,
+   "best": {
+    "en": "Apr – Jun, Sep – Nov",
+    "bn": "এপ্রিল – জুন, সেপ্টেম্বর – নভেম্বর"
+   },
+   "visa": {
+    "en": "Sticker visa",
+    "bn": "স্টিকার ভিসা"
+   },
+   "cur": "TRY",
+   "fly": {
+    "en": "9 h 1-stop",
+    "bn": "এক স্টপে ৯ ঘণ্টা"
+   },
+   "desc": {
+    "en": "Where continents meet: Ottoman mosques, Cappadocia balloons and the white terraces of Pamukkale.",
+    "bn": "যেখানে দুই মহাদেশ মিলেছে: উসমানীয় মসজিদ, কাপাদোকিয়ার বেলুন আর পামুক্কালের সাদা ধাপ।"
+   },
+   "things": [
+    {
+     "en": "Istanbul",
+     "bn": "ইস্তাম্বুল"
+    },
+    {
+     "en": "Cappadocia",
+     "bn": "কাপাদোকিয়া"
+    },
+    {
+     "en": "Bursa",
+     "bn": "বুরসা"
+    },
+    {
+     "en": "Antalya",
+     "bn": "আন্তালিয়া"
+    }
+   ]
+  },
+  {
+   "slug": "bali",
+   "img": "bali",
+   "name": {
+    "en": "Bali",
+    "bn": "বালি"
+   },
+   "country": {
+    "en": "Indonesia",
+    "bn": "ইন্দোনেশিয়া"
+   },
+   "region": "intl",
+   "tours": 7,
+   "best": {
+    "en": "Apr – Oct",
+    "bn": "এপ্রিল – অক্টোবর"
+   },
+   "visa": {
+    "en": "e-VOA",
+    "bn": "ই-ভিসা অন অ্যারাইভাল"
+   },
+   "cur": "IDR",
+   "fly": {
+    "en": "7 h 1-stop",
+    "bn": "এক স্টপে ৭ ঘণ্টা"
+   },
+   "desc": {
+    "en": "Temples, terraced rice fields and surf beaches on the Island of the Gods.",
+    "bn": "দেবতাদের দ্বীপে মন্দির, ধাপে ধাপে ধানখেত আর সার্ফিং সৈকত।"
+   },
+   "things": [
+    {
+     "en": "Ubud",
+     "bn": "উবুদ"
+    },
+    {
+     "en": "Uluwatu",
+     "bn": "উলুওয়াতু"
+    },
+    {
+     "en": "Nusa Penida",
+     "bn": "নুসা পেনিদা"
+    }
+   ]
+  },
+  {
+   "slug": "dubai",
+   "img": "dubai",
+   "name": {
+    "en": "Dubai",
+    "bn": "দুবাই"
+   },
+   "country": {
+    "en": "United Arab Emirates",
+    "bn": "সংযুক্ত আরব আমিরাত"
+   },
+   "region": "intl",
+   "tours": 10,
+   "best": {
+    "en": "Nov – Mar",
+    "bn": "নভেম্বর – মার্চ"
+   },
+   "visa": {
+    "en": "e-Visa",
+    "bn": "ই-ভিসা"
+   },
+   "cur": "AED",
+   "fly": {
+    "en": "5 h direct",
+    "bn": "সরাসরি ৫ ঘণ্টা"
+   },
+   "desc": {
+    "en": "Skyscrapers, desert dunes and world-class malls — perfect for families and shoppers.",
+    "bn": "আকাশচুম্বী ভবন, মরুভূমির বালিয়াড়ি আর বিশ্বমানের শপিং মল — পরিবার ও কেনাকাটাপ্রেমীদের জন্য আদর্শ।"
+   },
+   "things": [
+    {
+     "en": "Burj Khalifa",
+     "bn": "বুর্জ খলিফা"
+    },
+    {
+     "en": "Desert safari",
+     "bn": "ডেজার্ট সাফারি"
+    },
+    {
+     "en": "Abu Dhabi",
+     "bn": "আবুধাবি"
+    }
+   ]
+  },
+  {
+   "slug": "nepal",
+   "img": "nepal",
+   "name": {
+    "en": "Nepal",
+    "bn": "নেপাল"
+   },
+   "country": {
+    "en": "Nepal",
+    "bn": "নেপাল"
+   },
+   "region": "intl",
+   "tours": 6,
+   "best": {
+    "en": "Oct – Dec, Mar – May",
+    "bn": "অক্টোবর – ডিসেম্বর, মার্চ – মে"
+   },
+   "visa": {
+    "en": "Free on arrival",
+    "bn": "অন-অ্যারাইভাল (ফ্রি)"
+   },
+   "cur": "NPR",
+   "fly": {
+    "en": "1 h 15 m direct",
+    "bn": "সরাসরি ১ ঘণ্টা ১৫ মিনিট"
+   },
+   "desc": {
+    "en": "Himalayan sunrises, lakeside Pokhara and the temples of the Kathmandu valley.",
+    "bn": "হিমালয়ের সূর্যোদয়, হ্রদের ধারে পোখারা আর কাঠমান্ডু উপত্যকার মন্দির।"
+   },
+   "things": [
+    {
+     "en": "Pokhara",
+     "bn": "পোখারা"
+    },
+    {
+     "en": "Nagarkot",
+     "bn": "নাগরকোট"
+    },
+    {
+     "en": "Chitwan",
+     "bn": "চিতওয়ান"
+    }
+   ]
+  },
+  {
+   "slug": "thailand",
+   "img": "phuket",
+   "name": {
+    "en": "Thailand",
+    "bn": "থাইল্যান্ড"
+   },
+   "country": {
+    "en": "Thailand",
+    "bn": "থাইল্যান্ড"
+   },
+   "region": "intl",
+   "tours": 9,
+   "best": {
+    "en": "Nov – Apr",
+    "bn": "নভেম্বর – এপ্রিল"
+   },
+   "visa": {
+    "en": "Sticker / e-Visa",
+    "bn": "স্টিকার / ই-ভিসা"
+   },
+   "cur": "THB",
+   "fly": {
+    "en": "2 h 30 m direct",
+    "bn": "সরাসরি ২ ঘণ্টা ৩০ মিনিট"
+   },
+   "desc": {
+    "en": "Island hopping, street food and golden temples — great value for every budget.",
+    "bn": "দ্বীপ ভ্রমণ, স্ট্রিট ফুড আর সোনালি মন্দির — সব বাজেটে সাশ্রয়ী।"
+   },
+   "things": [
+    {
+     "en": "Phuket",
+     "bn": "ফুকেট"
+    },
+    {
+     "en": "Krabi",
+     "bn": "ক্রাবি"
+    },
+    {
+     "en": "Bangkok",
+     "bn": "ব্যাংকক"
+    },
+    {
+     "en": "Pattaya",
+     "bn": "পাতায়া"
+    }
+   ]
+  },
+  {
+   "slug": "bhutan",
+   "img": "bhutan",
+   "name": {
+    "en": "Bhutan",
+    "bn": "ভুটান"
+   },
+   "country": {
+    "en": "Bhutan",
+    "bn": "ভুটান"
+   },
+   "region": "intl",
+   "tours": 4,
+   "best": {
+    "en": "Mar – May, Sep – Nov",
+    "bn": "মার্চ – মে, সেপ্টেম্বর – নভেম্বর"
+   },
+   "visa": {
+    "en": "Free on arrival (SDF applies)",
+    "bn": "অন-অ্যারাইভাল (এসডিএফ প্রযোজ্য)"
+   },
+   "cur": "BTN",
+   "fly": {
+    "en": "1 h 20 m direct",
+    "bn": "সরাসরি ১ ঘণ্টা ২০ মিনিট"
+   },
+   "desc": {
+    "en": "The land of the thunder dragon — cliffside monasteries, clean air and Gross National Happiness.",
+    "bn": "বজ্র ড্রাগনের দেশ — পাহাড়ের গায়ে মঠ, নির্মল বাতাস আর \"গ্রস ন্যাশনাল হ্যাপিনেস\"।"
+   },
+   "things": [
+    {
+     "en": "Paro",
+     "bn": "পারো"
+    },
+    {
+     "en": "Thimphu",
+     "bn": "থিম্পু"
+    },
+    {
+     "en": "Punakha",
+     "bn": "পুনাখা"
+    }
+   ]
+  },
+  {
+   "slug": "singapore-malaysia",
+   "img": "singapore",
+   "name": {
+    "en": "Singapore & Malaysia",
+    "bn": "সিঙ্গাপুর ও মালয়েশিয়া"
+   },
+   "country": {
+    "en": "Singapore · Malaysia",
+    "bn": "সিঙ্গাপুর · মালয়েশিয়া"
+   },
+   "region": "intl",
+   "tours": 7,
+   "best": {
+    "en": "Feb – Apr, Jul – Sep",
+    "bn": "ফেব্রুয়ারি – এপ্রিল, জুলাই – সেপ্টেম্বর"
+   },
+   "visa": {
+    "en": "e-Visa (both)",
+    "bn": "ই-ভিসা (দুই দেশেই)"
+   },
+   "cur": "SGD/MYR",
+   "fly": {
+    "en": "4 h direct",
+    "bn": "সরাসরি ৪ ঘণ্টা"
+   },
+   "desc": {
+    "en": "Two easy, family-friendly cities: Gardens by the Bay, Sentosa and Universal Studios, then the Petronas Towers, Genting Highlands and Malay street food.",
+    "bn": "পরিবারের জন্য দুটি সহজ শহর: গার্ডেনস বাই দ্য বে, সেন্তোসা ও ইউনিভার্সাল স্টুডিওস, এরপর পেট্রোনাস টাওয়ার, গেন্টিং হাইল্যান্ডস আর মালয় স্ট্রিট ফুড।"
+   },
+   "things": [
+    {
+     "en": "Gardens by the Bay",
+     "bn": "গার্ডেনস বাই দ্য বে"
+    },
+    {
+     "en": "Sentosa Island",
+     "bn": "সেন্তোসা দ্বীপ"
+    },
+    {
+     "en": "Petronas Twin Towers",
+     "bn": "পেট্রোনাস টুইন টাওয়ার"
+    },
+    {
+     "en": "Genting Highlands",
+     "bn": "গেন্টিং হাইল্যান্ডস"
+    }
+   ]
+  }
+ ],
+ "DEST_TOURS": {
+  "coxs-bazar": [
+   "coxs-bazar-saint-martin"
+  ],
+  "sajek-valley": [
+   "sajek-rangamati",
+   "bandarban-nilgiri"
+  ],
+  "sylhet": [
+   "sylhet-srimangal"
+  ],
+  "sundarbans": [
+   "sundarbans-cruise"
+  ],
+  "maldives": [
+   "maldives-honeymoon"
+  ],
+  "turkey": [
+   "turkey-classic"
+  ],
+  "bali": [
+   "bali-highlights"
+  ],
+  "dubai": [
+   "dubai-family"
+  ],
+  "nepal": [
+   "nepal-pokhara"
+  ],
+  "thailand": [
+   "thailand-phuket"
+  ],
+  "bhutan": [
+   "bhutan-happiness"
+  ],
+  "singapore-malaysia": [
+   "singapore-malaysia"
+  ]
+ },
+ "CRUISES": [
+  {
+   "slug": "singapore-penang-phuket",
+   "img": "cruise",
+   "title": {
+    "en": "Singapore · Penang · Phuket Cruise",
+    "bn": "সিঙ্গাপুর · পেনাং · ফুকেট ক্রুজ"
+   },
+   "ship": "Ocean Spectrum",
+   "line": "Spectrum Cruises",
+   "region": "asia",
+   "nights": 4,
+   "price": 68500,
+   "old": 74000,
+   "rating": 4.8,
+   "reviews": 412,
+   "depart": "2026-12-14",
+   "port": {
+    "en": "Singapore",
+    "bn": "সিঙ্গাপুর"
+   },
+   "ports": [
+    {
+     "en": "Singapore",
+     "bn": "সিঙ্গাপুর"
+    },
+    {
+     "en": "Penang",
+     "bn": "পেনাং"
+    },
+    {
+     "en": "Phuket",
+     "bn": "ফুকেট"
+    },
+    {
+     "en": "Singapore",
+     "bn": "সিঙ্গাপুর"
+    }
+   ],
+   "cabin": {
+    "en": "Ocean-view cabin",
+    "bn": "সমুদ্রমুখী কেবিন"
+   },
+   "hl": [
+    {
+     "en": "All main meals on board",
+     "bn": "জাহাজে সব প্রধান খাবার"
+    },
+    {
+     "en": "Broadway-style shows",
+     "bn": "ব্রডওয়ে-ধাঁচের শো"
+    },
+    {
+     "en": "Kids club & water park",
+     "bn": "কিডস ক্লাব ও ওয়াটার পার্ক"
+    }
+   ],
+   "badge": {
+    "en": "Bestseller",
+    "bn": "সেরা বিক্রিত"
+   },
+   "cancel": "partial"
+  },
+  {
+   "slug": "arabian-gulf-7-nights",
+   "img": "dubai",
+   "title": {
+    "en": "Arabian Gulf: Dubai, Abu Dhabi & Doha",
+    "bn": "আরব উপসাগর: দুবাই, আবুধাবি ও দোহা"
+   },
+   "ship": "Gulf Star",
+   "line": "Azure Line",
+   "region": "gulf",
+   "nights": 7,
+   "price": 112000,
+   "old": null,
+   "rating": 4.7,
+   "reviews": 268,
+   "depart": "2027-01-09",
+   "port": {
+    "en": "Dubai",
+    "bn": "দুবাই"
+   },
+   "ports": [
+    {
+     "en": "Dubai",
+     "bn": "দুবাই"
+    },
+    {
+     "en": "Abu Dhabi",
+     "bn": "আবুধাবি"
+    },
+    {
+     "en": "Sir Bani Yas",
+     "bn": "স্যার বানি ইয়াস"
+    },
+    {
+     "en": "Doha",
+     "bn": "দোহা"
+    },
+    {
+     "en": "Dubai",
+     "bn": "দুবাই"
+    }
+   ],
+   "cabin": {
+    "en": "Balcony cabin",
+    "bn": "ব্যালকনি কেবিন"
+   },
+   "hl": [
+    {
+     "en": "Private beach day",
+     "bn": "প্রাইভেট সৈকত দিবস"
+    },
+    {
+     "en": "Desert safari add-on",
+     "bn": "মরু সাফারি অ্যাড-অন"
+    },
+    {
+     "en": "Beachfront dining",
+     "bn": "সৈকতের ধারে ডাইনিং"
+    }
+   ],
+   "badge": null,
+   "cancel": "partial"
+  },
+  {
+   "slug": "greek-isles-turkey",
+   "img": "greece",
+   "title": {
+    "en": "Greek Isles & Türkiye",
+    "bn": "গ্রিক দ্বীপপুঞ্জ ও তুরস্ক"
+   },
+   "ship": "Aegean Pearl",
+   "line": "Azure Line",
+   "region": "europe",
+   "nights": 7,
+   "price": 189000,
+   "old": 205000,
+   "rating": 4.9,
+   "reviews": 156,
+   "depart": "2027-05-22",
+   "port": {
+    "en": "Athens",
+    "bn": "এথেন্স"
+   },
+   "ports": [
+    {
+     "en": "Athens",
+     "bn": "এথেন্স"
+    },
+    {
+     "en": "Mykonos",
+     "bn": "মিকোনোস"
+    },
+    {
+     "en": "Kuşadası",
+     "bn": "কুশাদাসি"
+    },
+    {
+     "en": "Santorini",
+     "bn": "সান্তোরিনি"
+    },
+    {
+     "en": "Athens",
+     "bn": "এথেন্স"
+    }
+   ],
+   "cabin": {
+    "en": "Balcony cabin",
+    "bn": "ব্যালকনি কেবিন"
+   },
+   "hl": [
+    {
+     "en": "Sunset in Santorini",
+     "bn": "সান্তোরিনিতে সূর্যাস্ত"
+    },
+    {
+     "en": "Ephesus excursion",
+     "bn": "এফেসাস ভ্রমণ"
+    },
+    {
+     "en": "Schengen visa support",
+     "bn": "শেনজেন ভিসা সহায়তা"
+    }
+   ],
+   "badge": {
+    "en": "New",
+    "bn": "নতুন"
+   },
+   "cancel": "partial"
+  },
+  {
+   "slug": "halong-bay-overnight",
+   "img": "halong",
+   "title": {
+    "en": "Ha Long Bay Overnight Junk Cruise",
+    "bn": "হা লং বে রাত্রিযাপন জাঙ্ক ক্রুজ"
+   },
+   "ship": "Jade Sail",
+   "line": "Bay Heritage",
+   "region": "asia",
+   "nights": 2,
+   "price": 38900,
+   "old": null,
+   "rating": 4.8,
+   "reviews": 334,
+   "depart": "2026-11-28",
+   "port": {
+    "en": "Hanoi",
+    "bn": "হ্যানয়"
+   },
+   "ports": [
+    {
+     "en": "Hanoi",
+     "bn": "হ্যানয়"
+    },
+    {
+     "en": "Ha Long Bay",
+     "bn": "হা লং বে"
+    },
+    {
+     "en": "Lan Ha Bay",
+     "bn": "লান হা বে"
+    },
+    {
+     "en": "Hanoi",
+     "bn": "হ্যানয়"
+    }
+   ],
+   "cabin": {
+    "en": "Deluxe cabin",
+    "bn": "ডিলাক্স কেবিন"
+   },
+   "hl": [
+    {
+     "en": "Kayaking among limestone karsts",
+     "bn": "চুনাপাথরের পাহাড়ের মাঝে কায়াকিং"
+    },
+    {
+     "en": "Sunrise tai chi on deck",
+     "bn": "ডেকে সূর্যোদয়ে তাই চি"
+    },
+    {
+     "en": "Cooking class",
+     "bn": "রান্নার ক্লাস"
+    }
+   ],
+   "badge": null,
+   "cancel": "partial"
+  },
+  {
+   "slug": "sundarbans-luxury-3-nights",
+   "img": "sundarbans",
+   "title": {
+    "en": "Sundarbans Luxury River Cruise",
+    "bn": "সুন্দরবন বিলাসবহুল নৌ-ক্রুজ"
+   },
+   "ship": "MV Bonolata",
+   "line": "Musafir River Cruises",
+   "region": "bd",
+   "nights": 3,
+   "price": 21500,
+   "old": 24000,
+   "rating": 4.9,
+   "reviews": 521,
+   "depart": "2026-12-04",
+   "port": {
+    "en": "Khulna",
+    "bn": "খুলনা"
+   },
+   "ports": [
+    {
+     "en": "Khulna",
+     "bn": "খুলনা"
+    },
+    {
+     "en": "Harbaria",
+     "bn": "হারবাড়িয়া"
+    },
+    {
+     "en": "Kotka",
+     "bn": "কটকা"
+    },
+    {
+     "en": "Kochikhali",
+     "bn": "কচিখালী"
+    },
+    {
+     "en": "Khulna",
+     "bn": "খুলনা"
+    }
+   ],
+   "cabin": {
+    "en": "AC twin cabin",
+    "bn": "এসি টুইন কেবিন"
+   },
+   "hl": [
+    {
+     "en": "Forest guard & naturalist",
+     "bn": "বনরক্ষী ও প্রকৃতিবিদ"
+    },
+    {
+     "en": "Fresh-catch seafood",
+     "bn": "টাটকা সামুদ্রিক খাবার"
+    },
+    {
+     "en": "Country boat safaris",
+     "bn": "দেশি নৌকায় সাফারি"
+    }
+   ],
+   "badge": {
+    "en": "Domestic",
+    "bn": "দেশীয়"
+   },
+   "cancel": "free7"
+  },
+  {
+   "slug": "maldives-island-hopper",
+   "img": "maldives",
+   "title": {
+    "en": "Maldives Island-Hopper Yacht",
+    "bn": "মালদ্বীপ আইল্যান্ড-হপার ইয়ট"
+   },
+   "ship": "Blue Manta",
+   "line": "Atoll Yachts",
+   "region": "asia",
+   "nights": 5,
+   "price": 145000,
+   "old": null,
+   "rating": 4.9,
+   "reviews": 98,
+   "depart": "2027-02-12",
+   "port": {
+    "en": "Malé",
+    "bn": "মালে"
+   },
+   "ports": [
+    {
+     "en": "Malé",
+     "bn": "মালে"
+    },
+    {
+     "en": "Maafushi",
+     "bn": "মাফুশি"
+    },
+    {
+     "en": "Rasdhoo",
+     "bn": "রাসধু"
+    },
+    {
+     "en": "Fulidhoo",
+     "bn": "ফুলিধু"
+    },
+    {
+     "en": "Malé",
+     "bn": "মালে"
+    }
+   ],
+   "cabin": {
+    "en": "Double cabin",
+    "bn": "ডাবল কেবিন"
+   },
+   "hl": [
+    {
+     "en": "Snorkelling with mantas",
+     "bn": "ম্যান্টার সাথে স্নরকেলিং"
+    },
+    {
+     "en": "Sandbank picnic",
+     "bn": "স্যান্ডব্যাঙ্কে পিকনিক"
+    },
+    {
+     "en": "All meals & soft drinks",
+     "bn": "সব খাবার ও কোমল পানীয়"
+    }
+   ],
+   "badge": null,
+   "cancel": "partial"
+  }
+ ],
+ "CRUISE_REGIONS": {
+  "asia": {
+   "en": "Southeast Asia",
+   "bn": "দক্ষিণ-পূর্ব এশিয়া"
+  },
+  "gulf": {
+   "en": "Arabian Gulf",
+   "bn": "আরব উপসাগর"
+  },
+  "europe": {
+   "en": "Mediterranean",
+   "bn": "ভূমধ্যসাগর"
+  },
+  "bd": {
+   "en": "Bangladesh",
+   "bn": "বাংলাদেশ"
+  }
+ },
+ "THEMES": [
+  {
+   "slug": "honeymoon",
+   "cat": "honeymoon",
+   "img": "maldives",
+   "icon": "heart",
+   "name": {
+    "en": "Honeymoon",
+    "bn": "হানিমুন"
+   },
+   "tag": {
+    "en": "Romantic escapes with private transfers, upgrades and candle-lit dinners.",
+    "bn": "প্রাইভেট ট্রান্সফার, আপগ্রেড আর মোমবাতির আলোয় ডিনারসহ রোমান্টিক ভ্রমণ।"
+   },
+   "perks": [
+    {
+     "en": "Free room upgrade on request",
+     "bn": "অনুরোধে ফ্রি রুম আপগ্রেড"
+    },
+    {
+     "en": "Flower & cake setup",
+     "bn": "ফুল ও কেক সাজসজ্জা"
+    },
+    {
+     "en": "Couple photoshoot add-on",
+     "bn": "কাপল ফটোশুট অ্যাড-অন"
+    }
+   ]
+  },
+  {
+   "slug": "family",
+   "cat": "family",
+   "img": "singapore",
+   "icon": "users",
+   "name": {
+    "en": "Family holidays",
+    "bn": "পারিবারিক ভ্রমণ"
+   },
+   "tag": {
+    "en": "Kid-friendly hotels, theme parks and relaxed pacing for all ages.",
+    "bn": "শিশুবান্ধব হোটেল, থিম পার্ক আর সব বয়সীদের জন্য আরামদায়ক গতি।"
+   },
+   "perks": [
+    {
+     "en": "Kids under 6 travel free on selected dates",
+     "bn": "নির্দিষ্ট তারিখে ৬ বছরের কম শিশু ফ্রি"
+    },
+    {
+     "en": "Family rooms & connecting rooms",
+     "bn": "ফ্যামিলি ও কানেক্টিং রুম"
+    },
+    {
+     "en": "Stroller-friendly itineraries",
+     "bn": "স্ট্রলার-বান্ধব ভ্রমণসূচি"
+    }
+   ]
+  },
+  {
+   "slug": "adventure",
+   "cat": "adventure",
+   "img": "nepal",
+   "icon": "mountain",
+   "name": {
+    "en": "Adventure",
+    "bn": "অ্যাডভেঞ্চার"
+   },
+   "tag": {
+    "en": "Treks, hikes, paragliding and off-the-beaten-path trails with certified guides.",
+    "bn": "সার্টিফায়েড গাইডের সাথে ট্রেক, হাইক, প্যারাগ্লাইডিং ও অচেনা পথ।"
+   },
+   "perks": [
+    {
+     "en": "Certified trek leaders",
+     "bn": "সার্টিফায়েড ট্রেক লিডার"
+    },
+    {
+     "en": "Gear rental included",
+     "bn": "সরঞ্জাম ভাড়া অন্তর্ভুক্ত"
+    },
+    {
+     "en": "Adventure insurance",
+     "bn": "অ্যাডভেঞ্চার বিমা"
+    }
+   ]
+  },
+  {
+   "slug": "beach",
+   "cat": "beach",
+   "img": "phuket",
+   "icon": "umbrella",
+   "name": {
+    "en": "Beach & islands",
+    "bn": "সৈকত ও দ্বীপ"
+   },
+   "tag": {
+    "en": "From Cox's Bazar and Saint Martin to Phuket, Bali and the Maldives.",
+    "bn": "কক্সবাজার ও সেন্ট মার্টিন থেকে ফুকেট, বালি ও মালদ্বীপ।"
+   },
+   "perks": [
+    {
+     "en": "Beachfront hotels",
+     "bn": "সৈকতঘেঁষা হোটেল"
+    },
+    {
+     "en": "Snorkel & island-hopping trips",
+     "bn": "স্নরকেল ও দ্বীপ ভ্রমণ"
+    },
+    {
+     "en": "Sunset dinners",
+     "bn": "সূর্যাস্তে ডিনার"
+    }
+   ]
+  },
+  {
+   "slug": "heritage",
+   "cat": "heritage",
+   "img": "cappadocia",
+   "icon": "landmark",
+   "name": {
+    "en": "Culture & heritage",
+    "bn": "সংস্কৃতি ও ঐতিহ্য"
+   },
+   "tag": {
+    "en": "Ancient cities, UNESCO sites, local food and stories told by expert guides.",
+    "bn": "প্রাচীন নগরী, ইউনেস্কো ঐতিহ্য, স্থানীয় খাবার আর বিশেষজ্ঞ গাইডের গল্প।"
+   },
+   "perks": [
+    {
+     "en": "Licensed historian guides",
+     "bn": "লাইসেন্সধারী ইতিহাসবিদ গাইড"
+    },
+    {
+     "en": "Skip-the-line tickets",
+     "bn": "লাইন ছাড়া প্রবেশ টিকিট"
+    },
+    {
+     "en": "Food walks",
+     "bn": "ফুড ওয়াক"
+    }
+   ]
+  },
+  {
+   "slug": "wildlife",
+   "cat": "wildlife",
+   "img": "sundarbans",
+   "icon": "trees",
+   "name": {
+    "en": "Wildlife & nature",
+    "bn": "বন্যপ্রাণী ও প্রকৃতি"
+   },
+   "tag": {
+    "en": "Mangroves, rainforests and national parks with naturalist guides.",
+    "bn": "প্রকৃতিবিদ গাইডের সাথে ম্যানগ্রোভ, রেইনফরেস্ট ও জাতীয় উদ্যান।"
+   },
+   "perks": [
+    {
+     "en": "Naturalist on every trip",
+     "bn": "প্রতিটি ট্রিপে প্রকৃতিবিদ"
+    },
+    {
+     "en": "Small groups (max 16)",
+     "bn": "ছোট দল (সর্বোচ্চ ১৬)"
+    },
+    {
+     "en": "Eco-certified stays",
+     "bn": "ইকো-সার্টিফায়েড আবাসন"
+    }
+   ]
+  }
+ ],
+ "HOTELS": [
+  {
+   "slug": "ocean-pearl-resort",
+   "img": "resort",
+   "name": {
+    "en": "Ocean Pearl Resort & Spa",
+    "bn": "ওশান পার্ল রিসোর্ট অ্যান্ড স্পা"
+   },
+   "city": {
+    "en": "Cox's Bazar",
+    "bn": "কক্সবাজার"
+   },
+   "stars": 5,
+   "price": 14500,
+   "old": 17800,
+   "rating": 9.1,
+   "reviews": 1284,
+   "dist": {
+    "en": "50 m from Inani beach",
+    "bn": "ইনানী সৈকত থেকে ৫০ মিটার"
+   },
+   "amen": [
+    "wifi",
+    "pool",
+    "spa",
+    "parking",
+    "restaurant"
+   ],
+   "kind": "hotel",
+   "refundable": true,
+   "breakfast": true
+  },
+  {
+   "slug": "cloud-valley-resort",
+   "img": "sajek",
+   "name": {
+    "en": "Cloud Valley Eco Resort",
+    "bn": "ক্লাউড ভ্যালি ইকো রিসোর্ট"
+   },
+   "city": {
+    "en": "Sajek Valley",
+    "bn": "সাজেক ভ্যালি"
+   },
+   "stars": 3,
+   "price": 6200,
+   "old": null,
+   "rating": 8.7,
+   "reviews": 412,
+   "dist": {
+    "en": "Ruilui Para, valley view",
+    "bn": "রুইলুই পাড়া, ভ্যালি ভিউ"
+   },
+   "amen": [
+    "wifi",
+    "restaurant",
+    "parking"
+   ],
+   "kind": "hotel",
+   "refundable": false,
+   "breakfast": true
+  },
+  {
+   "slug": "grand-tea-valley",
+   "img": "darjeeling",
+   "name": {
+    "en": "Grand Tea Valley Resort",
+    "bn": "গ্র্যান্ড টি ভ্যালি রিসোর্ট"
+   },
+   "city": {
+    "en": "Srimangal",
+    "bn": "শ্রীমঙ্গল"
+   },
+   "stars": 4,
+   "price": 9800,
+   "old": 11000,
+   "rating": 8.9,
+   "reviews": 655,
+   "dist": {
+    "en": "Inside a tea estate",
+    "bn": "চা-বাগানের ভেতরে"
+   },
+   "amen": [
+    "wifi",
+    "pool",
+    "restaurant",
+    "gym"
+   ],
+   "kind": "hotel",
+   "refundable": true,
+   "breakfast": true
+  },
+  {
+   "slug": "himalaya-view-pokhara",
+   "img": "nepal",
+   "name": {
+    "en": "Himalaya View Lakeside Hotel",
+    "bn": "হিমালয় ভিউ লেকসাইড হোটেল"
+   },
+   "city": {
+    "en": "Pokhara",
+    "bn": "পোখারা"
+   },
+   "stars": 4,
+   "price": 11800,
+   "old": 13500,
+   "rating": 9.0,
+   "reviews": 1210,
+   "dist": {
+    "en": "Lakeside, 3 min walk to Phewa Lake",
+    "bn": "লেকসাইড, ফেওয়া লেক থেকে ৩ মিনিট হাঁটা"
+   },
+   "amen": [
+    "wifi",
+    "restaurant",
+    "shuttle",
+    "family"
+   ],
+   "kind": "hotel",
+   "refundable": true,
+   "breakfast": true
+  },
+  {
+   "slug": "ubud-jungle-villas",
+   "img": "bali",
+   "name": {
+    "en": "Ubud Jungle Pool Villas",
+    "bn": "উবুদ জঙ্গল পুল ভিলা"
+   },
+   "city": {
+    "en": "Ubud, Bali",
+    "bn": "উবুদ, বালি"
+   },
+   "stars": 5,
+   "price": 21500,
+   "old": null,
+   "rating": 9.3,
+   "reviews": 980,
+   "dist": {
+    "en": "Rice-terrace view, 10 min to Ubud centre",
+    "bn": "ধানক্ষেতের ভিউ, উবুদ কেন্দ্র থেকে ১০ মিনিট"
+   },
+   "amen": [
+    "wifi",
+    "pool",
+    "spa",
+    "family"
+   ],
+   "kind": "hotel",
+   "refundable": true,
+   "breakfast": true
+  },
+  {
+   "slug": "bosphorus-boutique",
+   "img": "istanbul",
+   "name": {
+    "en": "Bosphorus Boutique Hotel",
+    "bn": "বসফরাস বুটিক হোটেল"
+   },
+   "city": {
+    "en": "Istanbul",
+    "bn": "ইস্তাম্বুল"
+   },
+   "stars": 4,
+   "price": 16800,
+   "old": 19500,
+   "rating": 9.2,
+   "reviews": 876,
+   "dist": {
+    "en": "Sultanahmet, 400 m to Blue Mosque",
+    "bn": "সুলতানাহমেত, ব্লু মস্ক থেকে ৪০০ মিটার"
+   },
+   "amen": [
+    "wifi",
+    "restaurant",
+    "spa"
+   ],
+   "kind": "hotel",
+   "refundable": true,
+   "breakfast": true
+  },
+  {
+   "slug": "lagoon-water-villas",
+   "img": "maldives",
+   "name": {
+    "en": "Lagoon Water Villas Maldives",
+    "bn": "লেগুন ওয়াটার ভিলাস মালদ্বীপ"
+   },
+   "city": {
+    "en": "South Malé Atoll",
+    "bn": "সাউথ মালে অ্যাটল"
+   },
+   "stars": 5,
+   "price": 58000,
+   "old": 64000,
+   "rating": 9.4,
+   "reviews": 742,
+   "dist": {
+    "en": "25 min speedboat from airport",
+    "bn": "বিমানবন্দর থেকে ২৫ মিনিট স্পিডবোটে"
+   },
+   "amen": [
+    "wifi",
+    "pool",
+    "spa",
+    "restaurant"
+   ],
+   "kind": "hotel",
+   "refundable": true,
+   "breakfast": true
+  },
+  {
+   "slug": "marina-skyline-dubai",
+   "img": "dubai",
+   "name": {
+    "en": "Marina Skyline Hotel Dubai",
+    "bn": "মেরিনা স্কাইলাইন হোটেল দুবাই"
+   },
+   "city": {
+    "en": "Dubai",
+    "bn": "দুবাই"
+   },
+   "stars": 4,
+   "price": 15200,
+   "old": null,
+   "rating": 8.6,
+   "reviews": 1932,
+   "dist": {
+    "en": "Dubai Marina, 2 min to metro",
+    "bn": "দুবাই মেরিনা, মেট্রো থেকে ২ মিনিট"
+   },
+   "amen": [
+    "wifi",
+    "pool",
+    "gym",
+    "parking"
+   ],
+   "kind": "hotel",
+   "refundable": true,
+   "breakfast": false
+  }
+ ],
+ "AMENITY": {
+  "wifi": [
+   "wifi",
+   {
+    "en": "Free Wi-Fi",
+    "bn": "ফ্রি ওয়াই-ফাই"
+   }
+  ],
+  "pool": [
+   "waves",
+   {
+    "en": "Swimming pool",
+    "bn": "সুইমিং পুল"
+   }
+  ],
+  "spa": [
+   "flower-2",
+   {
+    "en": "Spa",
+    "bn": "স্পা"
+   }
+  ],
+  "parking": [
+   "square-parking",
+   {
+    "en": "Parking",
+    "bn": "পার্কিং"
+   }
+  ],
+  "restaurant": [
+   "utensils",
+   {
+    "en": "Restaurant",
+    "bn": "রেস্তোরাঁ"
+   }
+  ],
+  "gym": [
+   "dumbbell",
+   {
+    "en": "Fitness centre",
+    "bn": "ফিটনেস সেন্টার"
+   }
+  ],
+  "shuttle": [
+   "bus",
+   {
+    "en": "Airport shuttle",
+    "bn": "এয়ারপোর্ট শাটল"
+   }
+  ],
+  "family": [
+   "baby",
+   {
+    "en": "Family rooms",
+    "bn": "পারিবারিক রুম"
+   }
+  ]
+ },
+ "AIRLINES": [
+  [
+   "BG",
+   "Biman Bangladesh",
+   "#0C6E3F"
+  ],
+  [
+   "BS",
+   "US-Bangla Airlines",
+   "#1D4E9E"
+  ],
+  [
+   "EK",
+   "Emirates",
+   "#C8102E"
+  ],
+  [
+   "QR",
+   "Qatar Airways",
+   "#5C0632"
+  ],
+  [
+   "SV",
+   "Saudia",
+   "#006C35"
+  ],
+  [
+   "TK",
+   "Turkish Airlines",
+   "#C70A0C"
+  ],
+  [
+   "SQ",
+   "Singapore Airlines",
+   "#0B2A5B"
+  ],
+  [
+   "XY",
+   "flynas",
+   "#4B2C83"
+  ],
+  [
+   "G9",
+   "Air Arabia",
+   "#E2231A"
+  ],
+  [
+   "UL",
+   "SriLankan",
+   "#18275B"
+  ]
+ ],
+ "FLIGHTS": [
+  {
+   "code": "BS",
+   "no": "BS 341",
+   "dep": "09:15",
+   "arr": "12:35",
+   "dur": {
+    "en": "5h 20m",
+    "bn": "৫ ঘ ২০ মি"
+   },
+   "stops": 0,
+   "price": 38450,
+   "seats": 7,
+   "refundable": true,
+   "bag": "30 kg"
+  },
+  {
+   "code": "EK",
+   "no": "EK 585",
+   "dep": "10:45",
+   "arr": "13:55",
+   "dur": {
+    "en": "5h 10m",
+    "bn": "৫ ঘ ১০ মি"
+   },
+   "stops": 0,
+   "price": 52900,
+   "seats": 4,
+   "refundable": true,
+   "bag": "35 kg"
+  },
+  {
+   "code": "BG",
+   "no": "BG 047",
+   "dep": "20:30",
+   "arr": "23:50",
+   "dur": {
+    "en": "5h 20m",
+    "bn": "৫ ঘ ২০ মি"
+   },
+   "stops": 0,
+   "price": 41200,
+   "seats": 12,
+   "refundable": false,
+   "bag": "40 kg"
+  },
+  {
+   "code": "G9",
+   "no": "G9 513",
+   "dep": "04:10",
+   "arr": "07:10",
+   "dur": {
+    "en": "5h 00m",
+    "bn": "৫ ঘ ০০ মি"
+   },
+   "stops": 0,
+   "price": 33780,
+   "seats": 3,
+   "refundable": false,
+   "bag": "20 kg"
+  },
+  {
+   "code": "QR",
+   "no": "QR 641",
+   "dep": "03:55",
+   "arr": "11:20",
+   "dur": {
+    "en": "9h 25m",
+    "bn": "৯ ঘ ২৫ মি"
+   },
+   "stops": 1,
+   "via": "DOH",
+   "price": 47350,
+   "seats": 9,
+   "refundable": true,
+   "bag": "30 kg"
+  },
+  {
+   "code": "SV",
+   "no": "SV 805",
+   "dep": "12:20",
+   "arr": "19:05",
+   "dur": {
+    "en": "8h 45m",
+    "bn": "৮ ঘ ৪৫ মি"
+   },
+   "stops": 1,
+   "via": "RUH",
+   "price": 44100,
+   "seats": 6,
+   "refundable": true,
+   "bag": "46 kg"
+  }
+ ],
+ "VISAS": [
+  {
+   "slug": "thailand",
+   "flag": "🇹🇭",
+   "country": {
+    "en": "Thailand",
+    "bn": "থাইল্যান্ড"
+   },
+   "vtype": {
+    "en": "Tourist e-Visa",
+    "bn": "ট্যুরিস্ট ই-ভিসা"
+   },
+   "days": {
+    "en": "10–14 working days",
+    "bn": "১০–১৪ কর্মদিবস"
+   },
+   "fee": 6500,
+   "validity": {
+    "en": "90 days",
+    "bn": "৯০ দিন"
+   },
+   "stay": {
+    "en": "60 days",
+    "bn": "৬০ দিন"
+   },
+   "entry": {
+    "en": "Single",
+    "bn": "একক"
+   },
+   "img": "phuket",
+   "docs_extra": []
+  },
+  {
+   "slug": "malaysia",
+   "flag": "🇲🇾",
+   "country": {
+    "en": "Malaysia",
+    "bn": "মালয়েশিয়া"
+   },
+   "vtype": {
+    "en": "eVisa",
+    "bn": "ই-ভিসা"
+   },
+   "days": {
+    "en": "5–7 working days",
+    "bn": "৫–৭ কর্মদিবস"
+   },
+   "fee": 5800,
+   "validity": {
+    "en": "3 months",
+    "bn": "৩ মাস"
+   },
+   "stay": {
+    "en": "30 days",
+    "bn": "৩০ দিন"
+   },
+   "entry": {
+    "en": "Single",
+    "bn": "একক"
+   },
+   "img": "malaysia",
+   "docs_extra": []
+  },
+  {
+   "slug": "singapore",
+   "flag": "🇸🇬",
+   "country": {
+    "en": "Singapore",
+    "bn": "সিঙ্গাপুর"
+   },
+   "vtype": {
+    "en": "Tourist visa",
+    "bn": "ট্যুরিস্ট ভিসা"
+   },
+   "days": {
+    "en": "7–10 working days",
+    "bn": "৭–১০ কর্মদিবস"
+   },
+   "fee": 7200,
+   "validity": {
+    "en": "63 days",
+    "bn": "৬৩ দিন"
+   },
+   "stay": {
+    "en": "30 days",
+    "bn": "৩০ দিন"
+   },
+   "entry": {
+    "en": "Multiple",
+    "bn": "একাধিক"
+   },
+   "img": "singapore",
+   "docs_extra": []
+  },
+  {
+   "slug": "uae",
+   "flag": "🇦🇪",
+   "country": {
+    "en": "United Arab Emirates",
+    "bn": "সংযুক্ত আরব আমিরাত"
+   },
+   "vtype": {
+    "en": "30-day e-Visa",
+    "bn": "৩০ দিনের ই-ভিসা"
+   },
+   "days": {
+    "en": "3–5 working days",
+    "bn": "৩–৫ কর্মদিবস"
+   },
+   "fee": 14500,
+   "validity": {
+    "en": "58 days",
+    "bn": "৫৮ দিন"
+   },
+   "stay": {
+    "en": "30 days",
+    "bn": "৩০ দিন"
+   },
+   "entry": {
+    "en": "Single",
+    "bn": "একক"
+   },
+   "img": "dubai",
+   "docs_extra": []
+  },
+  {
+   "slug": "vietnam",
+   "flag": "🇻🇳",
+   "country": {
+    "en": "Vietnam",
+    "bn": "ভিয়েতনাম"
+   },
+   "vtype": {
+    "en": "Tourist e-Visa",
+    "bn": "ট্যুরিস্ট ই-ভিসা"
+   },
+   "days": {
+    "en": "5–7 working days",
+    "bn": "৫–৭ কর্মদিবস"
+   },
+   "fee": 7800,
+   "validity": {
+    "en": "90 days",
+    "bn": "৯০ দিন"
+   },
+   "stay": {
+    "en": "90 days",
+    "bn": "৯০ দিন"
+   },
+   "entry": {
+    "en": "Single / Multiple",
+    "bn": "একক / একাধিক"
+   },
+   "img": "halong",
+   "docs_extra": []
+  },
+  {
+   "slug": "turkey",
+   "flag": "🇹🇷",
+   "country": {
+    "en": "Türkiye",
+    "bn": "তুরস্ক"
+   },
+   "vtype": {
+    "en": "Sticker visa",
+    "bn": "স্টিকার ভিসা"
+   },
+   "days": {
+    "en": "15–20 working days",
+    "bn": "১৫–২০ কর্মদিবস"
+   },
+   "fee": 11000,
+   "validity": {
+    "en": "180 days",
+    "bn": "১৮০ দিন"
+   },
+   "stay": {
+    "en": "30 days",
+    "bn": "৩০ দিন"
+   },
+   "entry": {
+    "en": "Single",
+    "bn": "একক"
+   },
+   "img": "cappadocia",
+   "docs_extra": []
+  },
+  {
+   "slug": "india",
+   "flag": "🇮🇳",
+   "country": {
+    "en": "India",
+    "bn": "ভারত"
+   },
+   "vtype": {
+    "en": "Tourist visa (IVAC)",
+    "bn": "ট্যুরিস্ট ভিসা (আইভ্যাক)"
+   },
+   "days": {
+    "en": "7–15 working days",
+    "bn": "৭–১৫ কর্মদিবস"
+   },
+   "fee": 2500,
+   "validity": {
+    "en": "Up to 1 year",
+    "bn": "সর্বোচ্চ ১ বছর"
+   },
+   "stay": {
+    "en": "90 days per visit",
+    "bn": "প্রতিবার ৯০ দিন"
+   },
+   "entry": {
+    "en": "Multiple",
+    "bn": "একাধিক"
+   },
+   "img": "kashmir",
+   "docs_extra": []
+  },
+  {
+   "slug": "schengen",
+   "flag": "🇪🇺",
+   "country": {
+    "en": "Schengen (Europe)",
+    "bn": "শেনজেন (ইউরোপ)"
+   },
+   "vtype": {
+    "en": "Short-stay C visa",
+    "bn": "স্বল্পমেয়াদি সি ভিসা"
+   },
+   "days": {
+    "en": "15–45 days",
+    "bn": "১৫–৪৫ দিন"
+   },
+   "fee": 16500,
+   "validity": {
+    "en": "As granted",
+    "bn": "অনুমোদন অনুযায়ী"
+   },
+   "stay": {
+    "en": "Up to 90 days",
+    "bn": "সর্বোচ্চ ৯০ দিন"
+   },
+   "entry": {
+    "en": "Single / Multiple",
+    "bn": "একক / একাধিক"
+   },
+   "img": "swiss",
+   "docs_extra": []
+  },
+  {
+   "slug": "japan",
+   "flag": "🇯🇵",
+   "country": {
+    "en": "Japan",
+    "bn": "জাপান"
+   },
+   "vtype": {
+    "en": "Temporary visitor visa",
+    "bn": "টেম্পোরারি ভিজিটর ভিসা"
+   },
+   "days": {
+    "en": "7–10 working days",
+    "bn": "৭–১০ কর্মদিবস"
+   },
+   "fee": 4500,
+   "validity": {
+    "en": "90 days",
+    "bn": "৯০ দিন"
+   },
+   "stay": {
+    "en": "15 days",
+    "bn": "১৫ দিন"
+   },
+   "entry": {
+    "en": "Single",
+    "bn": "একক"
+   },
+   "img": "japan",
+   "docs_extra": []
+  },
+  {
+   "slug": "egypt",
+   "flag": "🇪🇬",
+   "country": {
+    "en": "Egypt",
+    "bn": "মিশর"
+   },
+   "vtype": {
+    "en": "Tourist visa",
+    "bn": "ট্যুরিস্ট ভিসা"
+   },
+   "days": {
+    "en": "10–15 working days",
+    "bn": "১০–১৫ কর্মদিবস"
+   },
+   "fee": 9500,
+   "validity": {
+    "en": "3 months",
+    "bn": "৩ মাস"
+   },
+   "stay": {
+    "en": "30 days",
+    "bn": "৩০ দিন"
+   },
+   "entry": {
+    "en": "Single",
+    "bn": "একক"
+   },
+   "img": "egypt",
+   "docs_extra": []
+  }
+ ],
+ "VISA_DOCS": {
+  "general": [
+   {
+    "en": "Original passport (6+ months validity, 2 blank pages)",
+    "bn": "মূল পাসপোর্ট (৬ মাসের বেশি মেয়াদ, ২টি ফাঁকা পাতা)"
+   },
+   {
+    "en": "Old passports (if any)",
+    "bn": "পুরোনো পাসপোর্ট (যদি থাকে)"
+   },
+   {
+    "en": "2 photos 35×45 mm, white background",
+    "bn": "সাদা ব্যাকগ্রাউন্ডে ৩৫×৪৫ মিমি মাপের ২টি ছবি"
+   },
+   {
+    "en": "NID copy",
+    "bn": "এনআইডির কপি"
+   },
+   {
+    "en": "Bank statement (last 6 months) & solvency certificate",
+    "bn": "ব্যাংক স্টেটমেন্ট (গত ৬ মাস) ও সলভেন্সি সনদ"
+   },
+   {
+    "en": "Return air-ticket booking & hotel booking",
+    "bn": "রিটার্ন টিকিট ও হোটেল বুকিং"
+   }
+  ],
+  "job": [
+   {
+    "en": "NOC / leave letter from employer",
+    "bn": "নিয়োগকর্তার এনওসি / ছুটির চিঠি"
+   },
+   {
+    "en": "Visiting card & office ID",
+    "bn": "ভিজিটিং কার্ড ও অফিস আইডি"
+   },
+   {
+    "en": "Last 3 months salary slips",
+    "bn": "গত ৩ মাসের বেতন স্লিপ"
+   }
+  ],
+  "business": [
+   {
+    "en": "Trade licence (notarised English translation)",
+    "bn": "ট্রেড লাইসেন্স (নোটারিকৃত ইংরেজি অনুবাদ)"
+   },
+   {
+    "en": "Company bank statement",
+    "bn": "প্রতিষ্ঠানের ব্যাংক স্টেটমেন্ট"
+   },
+   {
+    "en": "TIN / tax return certificate",
+    "bn": "টিআইএন / আয়কর রিটার্ন সনদ"
+   }
+  ],
+  "student": [
+   {
+    "en": "Student ID & institution letter",
+    "bn": "শিক্ষার্থী আইডি ও প্রতিষ্ঠানের চিঠি"
+   },
+   {
+    "en": "Parents' bank statement & sponsorship letter",
+    "bn": "অভিভাবকের ব্যাংক স্টেটমেন্ট ও স্পনসরশিপ চিঠি"
+   }
+  ]
+ },
+ "REVIEWS": [
+  {
+   "name": {
+    "en": "Tanvir & Nusrat Ahmed",
+    "bn": "তানভীর ও নুসরাত আহমেদ"
+   },
+   "city": {
+    "en": "Dhaka",
+    "bn": "ঢাকা"
+   },
+   "trip": {
+    "en": "Maldives Water-Villa Honeymoon",
+    "bn": "মালদ্বীপ ওয়াটার-ভিলা হানিমুন"
+   },
+   "rating": 5,
+   "date": "2026-09-14",
+   "text": {
+    "en": "Everything was seamless — the speedboat was waiting, our villa was upgraded and the team checked on us every day on WhatsApp. Worth every taka.",
+    "bn": "সবকিছু একদম নিখুঁত ছিল — স্পিডবোট অপেক্ষা করছিল, আমাদের ভিলা আপগ্রেড করে দেওয়া হয়েছিল, আর টিম প্রতিদিন হোয়াটসঅ্যাপে খোঁজ নিয়েছে। প্রতিটি টাকা সার্থক।"
+   },
+   "ini": "TN"
+  },
+  {
+   "name": {
+    "en": "Mahmud & Shirin Hasan",
+    "bn": "মাহমুদ ও শিরিন হাসান"
+   },
+   "city": {
+    "en": "Narayanganj",
+    "bn": "নারায়ণগঞ্জ"
+   },
+   "trip": {
+    "en": "Singapore · Penang · Phuket Cruise",
+    "bn": "সিঙ্গাপুর · পেনাং · ফুকেট ক্রুজ"
+   },
+   "rating": 5,
+   "date": "2026-07-02",
+   "text": {
+    "en": "Our first cruise with two kids — the cabin upgrade, the shows and the water park made it unforgettable. Musafir handled visas and boarding papers perfectly.",
+    "bn": "দুই সন্তানকে নিয়ে প্রথম ক্রুজ — কেবিন আপগ্রেড, শো আর ওয়াটার পার্ক মিলিয়ে অবিস্মরণীয়। ভিসা ও বোর্ডিংয়ের কাগজপত্র মুসাফির নিখুঁতভাবে সামলেছে।"
+   },
+   "ini": "MH"
+  },
+  {
+   "name": {
+    "en": "Farhana Rahman",
+    "bn": "ফারহানা রহমান"
+   },
+   "city": {
+    "en": "Chattogram",
+    "bn": "চট্টগ্রাম"
+   },
+   "trip": {
+    "en": "Turkey Classic",
+    "bn": "তুরস্ক ক্লাসিক"
+   },
+   "rating": 5,
+   "date": "2026-06-21",
+   "text": {
+    "en": "The Cappadocia balloon ride at sunrise was magical. Visa processing was quick and the guide in Istanbul was brilliant with my parents.",
+    "bn": "কাপাদোকিয়ায় সূর্যোদয়ের বেলুন রাইড ছিল জাদুকরী। ভিসা প্রসেসিং দ্রুত হয়েছে, আর ইস্তাম্বুলের গাইড আমার মা-বাবার সাথে চমৎকার ছিলেন।"
+   },
+   "ini": "FR"
+  },
+  {
+   "name": {
+    "en": "Rashed Karim",
+    "bn": "রাশেদ করিম"
+   },
+   "city": {
+    "en": "Sylhet",
+    "bn": "সিলেট"
+   },
+   "trip": {
+    "en": "Corporate retreat — Sajek",
+    "bn": "কর্পোরেট রিট্রিট — সাজেক"
+   },
+   "rating": 4,
+   "date": "2026-05-30",
+   "text": {
+    "en": "Handled 64 colleagues without a hitch. Invoicing and the VAT breakdown made our finance team happy too.",
+    "bn": "৬৪ জন সহকর্মীর ভ্রমণ কোনো ঝামেলা ছাড়াই সামলেছেন। ইনভয়েস ও ভ্যাটের বিস্তারিত হিসাবে আমাদের ফিন্যান্স টিমও খুশি।"
+   },
+   "ini": "RK"
+  },
+  {
+   "name": {
+    "en": "Sumaiya Islam",
+    "bn": "সুমাইয়া ইসলাম"
+   },
+   "city": {
+    "en": "Rajshahi",
+    "bn": "রাজশাহী"
+   },
+   "trip": {
+    "en": "Nepal: Kathmandu & Pokhara",
+    "bn": "নেপাল: কাঠমান্ডু ও পোখারা"
+   },
+   "rating": 5,
+   "date": "2026-04-11",
+   "text": {
+    "en": "Took my mother to see the Himalayas. The installment plan made it affordable and our guide was so caring and patient.",
+    "bn": "মাকে নিয়ে হিমালয় দেখতে গিয়েছিলাম। কিস্তির সুবিধায় খরচ সাধ্যের মধ্যে ছিল, আর গাইড ছিলেন খুবই যত্নশীল ও ধৈর্যশীল।"
+   },
+   "ini": "SI"
+  },
+  {
+   "name": {
+    "en": "Imran Chowdhury",
+    "bn": "ইমরান চৌধুরী"
+   },
+   "city": {
+    "en": "Khulna",
+    "bn": "খুলনা"
+   },
+   "trip": {
+    "en": "Sundarbans Mangrove Cruise",
+    "bn": "সুন্দরবন ম্যানগ্রোভ ক্রুজ"
+   },
+   "rating": 5,
+   "date": "2026-02-08",
+   "text": {
+    "en": "Spotted deer, crocodiles and even fresh tiger pug-marks at Kotka! The food on the boat was outstanding.",
+    "bn": "কটকায় হরিণ, কুমির, এমনকি বাঘের টাটকা পায়ের ছাপও দেখেছি! জাহাজের খাবার ছিল অসাধারণ।"
+   },
+   "ini": "IC"
+  }
+ ],
+ "TEAM": [
+  {
+   "name": {
+    "en": "Ahmed Zubair",
+    "bn": "আহমেদ জুবায়ের"
+   },
+   "role": {
+    "en": "Founder & CEO",
+    "bn": "প্রতিষ্ঠাতা ও প্রধান নির্বাহী"
+   },
+   "ini": "AZ",
+   "c": "from-brand-500 to-brand-800"
+  },
+  {
+   "name": {
+    "en": "Nazia Haque",
+    "bn": "নাজিয়া হক"
+   },
+   "role": {
+    "en": "Head of Holidays",
+    "bn": "হলিডে বিভাগের প্রধান"
+   },
+   "ini": "NH",
+   "c": "from-accent-400 to-accent-700"
+  },
+  {
+   "name": {
+    "en": "Arif Rahman",
+    "bn": "আরিফ রহমান"
+   },
+   "role": {
+    "en": "Head of Cruises & Luxury",
+    "bn": "ক্রুজ ও লাক্সারি বিভাগের প্রধান"
+   },
+   "ini": "AR",
+   "c": "from-gold-400 to-gold-700"
+  },
+  {
+   "name": {
+    "en": "Shafiqul Alam",
+    "bn": "শফিকুল আলম"
+   },
+   "role": {
+    "en": "Head of Air Ticketing",
+    "bn": "এয়ার টিকেটিং বিভাগের প্রধান"
+   },
+   "ini": "SA",
+   "c": "from-sky-400 to-sky-700"
+  },
+  {
+   "name": {
+    "en": "Tasnim Akter",
+    "bn": "তাসনিম আক্তার"
+   },
+   "role": {
+    "en": "Visa Processing Lead",
+    "bn": "ভিসা প্রসেসিং লিড"
+   },
+   "ini": "TA",
+   "c": "from-violet-400 to-violet-700"
+  },
+  {
+   "name": {
+    "en": "Rafiq Uddin",
+    "bn": "রফিক উদ্দিন"
+   },
+   "role": {
+    "en": "Corporate & MICE",
+    "bn": "কর্পোরেট ও মাইস"
+   },
+   "ini": "RU",
+   "c": "from-emerald-400 to-emerald-700"
+  },
+  {
+   "name": {
+    "en": "Mehjabin Sultana",
+    "bn": "মেহজাবিন সুলতানা"
+   },
+   "role": {
+    "en": "Customer Experience",
+    "bn": "কাস্টমার এক্সপেরিয়েন্স"
+   },
+   "ini": "MS",
+   "c": "from-rose-400 to-rose-700"
+  },
+  {
+   "name": {
+    "en": "Kamrul Hasan",
+    "bn": "কামরুল হাসান"
+   },
+   "role": {
+    "en": "Technology & Product",
+    "bn": "প্রযুক্তি ও প্রোডাক্ট"
+   },
+   "ini": "KH",
+   "c": "from-ink-400 to-ink-700"
+  }
+ ],
+ "FAQS": [
+  [
+   {
+    "en": "How do I book a tour with Musafir?",
+    "bn": "মুসাফিরের সাথে কীভাবে ট্যুর বুক করব?"
+   },
+   {
+    "en": "Choose a package, pick your date and travellers, then pay a deposit online with bKash, Nagad, card or bank transfer. You get an instant e-voucher by email and SMS.",
+    "bn": "প্যাকেজ বেছে নিয়ে তারিখ ও যাত্রীর সংখ্যা নির্বাচন করুন, এরপর বিকাশ, নগদ, কার্ড বা ব্যাংক ট্রান্সফারে অনলাইনে অগ্রিম পরিশোধ করুন। সঙ্গে সঙ্গে ইমেইল ও এসএমএসে ই-ভাউচার পেয়ে যাবেন।"
+   },
+   "booking"
+  ],
+  [
+   {
+    "en": "Can I pay in installments?",
+    "bn": "কিস্তিতে কি পরিশোধ করা যায়?"
+   },
+   {
+    "en": "Yes. International holidays and cruises can be paid in up to 4 installments. Selected bank cards also offer 0% EMI for 3–12 months.",
+    "bn": "হ্যাঁ। আন্তর্জাতিক ট্যুর ও ক্রুজ সর্বোচ্চ ৪ কিস্তিতে পরিশোধ করা যায়। নির্দিষ্ট ব্যাংকের কার্ডে ৩–১২ মাসের ০% ইএমআই সুবিধাও আছে।"
+   },
+   "payment"
+  ],
+  [
+   {
+    "en": "Is Musafir a licensed travel agency?",
+    "bn": "মুসাফির কি লাইসেন্সপ্রাপ্ত ট্রাভেল এজেন্সি?"
+   },
+   {
+    "en": "Yes. We are IATA accredited, members of ATAB and TOAB, and registered with the Bangladesh Tourism Board (BTB-2214).",
+    "bn": "হ্যাঁ। আমরা আইএটিএ স্বীকৃত, আটাব ও টোয়াবের সদস্য এবং বাংলাদেশ ট্যুরিজম বোর্ডে নিবন্ধিত (BTB-2214)।"
+   },
+   "booking"
+  ],
+  [
+   {
+    "en": "What is your cancellation and refund policy?",
+    "bn": "বাতিল ও রিফান্ড নীতিমালা কী?"
+   },
+   {
+    "en": "Cancellations 30+ days before departure get a full refund minus non-refundable airline, visa and government fees. See the Refund Policy page for the full slab.",
+    "bn": "যাত্রার ৩০ দিনের বেশি আগে বাতিল করলে অফেরতযোগ্য এয়ারলাইন, ভিসা ও সরকারি ফি বাদে পুরো টাকা ফেরত। বিস্তারিত স্ল্যাব রিফান্ড নীতিমালা পাতায় দেখুন।"
+   },
+   "booking"
+  ],
+  [
+   {
+    "en": "Do you help with visa processing?",
+    "bn": "আপনারা কি ভিসা প্রসেসিংয়ে সাহায্য করেন?"
+   },
+   {
+    "en": "Yes — document checklists, appointment booking, form filling and submission for 40+ countries. Our visa desk shows your application status in your account.",
+    "bn": "হ্যাঁ — ৪০টিরও বেশি দেশের জন্য কাগজপত্রের তালিকা, অ্যাপয়েন্টমেন্ট, ফরম পূরণ ও জমা দেওয়া। আপনার অ্যাকাউন্টে আবেদনের অবস্থা দেখা যায়।"
+   },
+   "visa"
+  ],
+  [
+   {
+    "en": "Are flights included in tour prices?",
+    "bn": "ট্যুরের দামে কি ফ্লাইট অন্তর্ভুক্ত?"
+   },
+   {
+    "en": "Packages marked \"Flight included\" have return economy tickets. Others are land-only and you can add flights during booking.",
+    "bn": "\"ফ্লাইটসহ\" চিহ্নিত প্যাকেজে রিটার্ন ইকোনমি টিকিট থাকে। বাকিগুলো ল্যান্ড-অনলি; বুকিংয়ের সময় ফ্লাইট যোগ করা যায়।"
+   },
+   "booking"
+  ],
+  [
+   {
+    "en": "Do I need travel insurance?",
+    "bn": "ভ্রমণ বিমা কি দরকার?"
+   },
+   {
+    "en": "It is mandatory for Schengen and strongly recommended everywhere else. Our plans start at ৳600 and cover medical costs, delays and lost baggage.",
+    "bn": "শেনজেনের জন্য বাধ্যতামূলক, অন্য সব জায়গায়ও জোরালোভাবে প্রস্তাবিত। আমাদের প্ল্যান ৳৬০০ থেকে শুরু, যাতে চিকিৎসা খরচ, বিলম্ব ও ব্যাগেজ হারানো কভার করা হয়।"
+   },
+   "visa"
+  ],
+  [
+   {
+    "en": "Can you cater for dietary needs abroad?",
+    "bn": "বিদেশে কি বিশেষ খাদ্যাভ্যাসের ব্যবস্থা করেন?"
+   },
+   {
+    "en": "Yes. Tell us your needs (vegetarian, allergies, diabetic and more) and we brief hotels and restaurants in advance.",
+    "bn": "হ্যাঁ। আপনার চাহিদা (নিরামিষ, অ্যালার্জি, ডায়াবেটিক ইত্যাদি) জানালে আমরা আগেই হোটেল ও রেস্তোরাঁকে জানিয়ে রাখি।"
+   },
+   "booking"
+  ],
+  [
+   {
+    "en": "Which payment methods do you accept?",
+    "bn": "কোন কোন পেমেন্ট মাধ্যম গ্রহণ করেন?"
+   },
+   {
+    "en": "bKash, Nagad, Rocket, Visa, Mastercard, American Express, internet banking through SSLCommerz, and bank deposit.",
+    "bn": "বিকাশ, নগদ, রকেট, ভিসা, মাস্টারকার্ড, আমেরিকান এক্সপ্রেস, এসএসএলকমার্জের মাধ্যমে ইন্টারনেট ব্যাংকিং এবং ব্যাংক ডিপোজিট।"
+   },
+   "payment"
+  ],
+  [
+   {
+    "en": "How can I check my booking status?",
+    "bn": "বুকিংয়ের অবস্থা কীভাবে দেখব?"
+   },
+   {
+    "en": "Log in to My Account to see bookings, invoices, documents and visa application status, or call our 24/7 hotline.",
+    "bn": "মাই অ্যাকাউন্টে লগইন করে বুকিং, ইনভয়েস, ডকুমেন্ট ও ভিসা আবেদনের অবস্থা দেখুন, অথবা ২৪/৭ হটলাইনে কল করুন।"
+   },
+   "booking"
+  ]
+ ],
+ "OFFERS": [
+  {
+   "code": "WINTER26",
+   "img": "coxsbazar",
+   "title": {
+    "en": "Winter beach sale — Cox's Bazar",
+    "bn": "শীতের সৈকত অফার — কক্সবাজার"
+   },
+   "off": {
+    "en": "Up to 20% off",
+    "bn": "সর্বোচ্চ ২০% ছাড়"
+   },
+   "ends": "2026-11-30",
+   "tag": {
+    "en": "Domestic",
+    "bn": "দেশীয়"
+   },
+   "link": "tours/coxs-bazar-saint-martin.html"
+  },
+  {
+   "code": "BKASH1500",
+   "img": "maldives",
+   "title": {
+    "en": "৳1,500 instant cashback with bKash",
+    "bn": "বিকাশে ৳১,৫০০ তাৎক্ষণিক ক্যাশব্যাক"
+   },
+   "off": {
+    "en": "৳1,500 cashback",
+    "bn": "৳১,৫০০ ক্যাশব্যাক"
+   },
+   "ends": "2026-12-15",
+   "tag": {
+    "en": "Payment",
+    "bn": "পেমেন্ট"
+   },
+   "link": "tours.html"
+  },
+  {
+   "code": "CRUISE-EMI",
+   "img": "cruise",
+   "title": {
+    "en": "Cruises on 0% EMI for 12 months",
+    "bn": "১২ মাসের ০% ইএমআইতে ক্রুজ"
+   },
+   "off": {
+    "en": "0% EMI",
+    "bn": "০% ইএমআই"
+   },
+   "ends": "2027-01-31",
+   "tag": {
+    "en": "Cruise",
+    "bn": "ক্রুজ"
+   },
+   "link": "cruises.html"
+  },
+  {
+   "code": "FLYDXB",
+   "img": "plane",
+   "title": {
+    "en": "Dhaka → Dubai fares from ৳33,780",
+    "bn": "ঢাকা → দুবাই ভাড়া ৳৩৩,৭৮০ থেকে"
+   },
+   "off": {
+    "en": "Save ৳4,000",
+    "bn": "৳৪,০০০ সাশ্রয়"
+   },
+   "ends": "2026-11-10",
+   "tag": {
+    "en": "Flights",
+    "bn": "ফ্লাইট"
+   },
+   "link": "flights.html"
+  },
+  {
+   "code": "HONEY10",
+   "img": "bali",
+   "title": {
+    "en": "Honeymoon specials: Bali & Maldives",
+    "bn": "হানিমুন স্পেশাল: বালি ও মালদ্বীপ"
+   },
+   "off": {
+    "en": "10% off + free upgrade",
+    "bn": "১০% ছাড় + ফ্রি আপগ্রেড"
+   },
+   "ends": "2026-12-31",
+   "tag": {
+    "en": "Honeymoon",
+    "bn": "হানিমুন"
+   },
+   "link": "tours.html?type=honeymoon"
+  },
+  {
+   "code": "GROUP15",
+   "img": "sajek",
+   "title": {
+    "en": "Groups of 15+ save more",
+    "bn": "১৫+ জনের গ্রুপে বেশি সাশ্রয়"
+   },
+   "off": {
+    "en": "15% group discount",
+    "bn": "১৫% গ্রুপ ছাড়"
+   },
+   "ends": "2027-03-31",
+   "tag": {
+    "en": "Groups",
+    "bn": "গ্রুপ"
+   },
+   "link": "group-tours.html"
+  }
+ ],
+ "BLOG": [
+  {
+   "slug": "first-cruise-guide",
+   "img": "cruise",
+   "cat": {
+    "en": "Cruises",
+    "bn": "ক্রুজ"
+   },
+   "date": "2026-10-12",
+   "mins": 8,
+   "author": {
+    "en": "Arif Rahman",
+    "bn": "আরিফ রহমান"
+   },
+   "title": {
+    "en": "Your first cruise from Bangladesh: costs, cabins and what to pack",
+    "bn": "বাংলাদেশ থেকে প্রথম ক্রুজ: খরচ, কেবিন ও যা সাথে নেবেন"
+   },
+   "ex": {
+    "en": "Inside vs balcony cabins, what is included on board, visas for Singapore cruises and a packing list you can print.",
+    "bn": "ইনসাইড নাকি ব্যালকনি কেবিন, জাহাজে কী কী অন্তর্ভুক্ত, সিঙ্গাপুর ক্রুজের ভিসা এবং প্রিন্টযোগ্য প্যাকিং তালিকা।"
+   }
+  },
+  {
+   "slug": "sajek-travel-guide",
+   "img": "sajek",
+   "cat": {
+    "en": "Bangladesh",
+    "bn": "বাংলাদেশ"
+   },
+   "date": "2026-09-28",
+   "mins": 6,
+   "author": {
+    "en": "Nazia Haque",
+    "bn": "নাজিয়া হক"
+   },
+   "title": {
+    "en": "Sajek Valley in 2026: the complete first-timer guide",
+    "bn": "সাজেক ভ্যালি ২০২৬: প্রথমবার যাওয়ার পূর্ণাঙ্গ গাইড"
+   },
+   "ex": {
+    "en": "When to go for the cloud sea, where to stay, jeep costs from Khagrachari and responsible-travel tips.",
+    "bn": "মেঘের সমুদ্র দেখতে কখন যাবেন, কোথায় থাকবেন, খাগড়াছড়ি থেকে জিপ ভাড়া এবং দায়িত্বশীল ভ্রমণের টিপস।"
+   }
+  },
+  {
+   "slug": "maldives-on-a-budget",
+   "img": "maldives",
+   "cat": {
+    "en": "Honeymoon",
+    "bn": "হানিমুন"
+   },
+   "date": "2026-09-09",
+   "mins": 7,
+   "author": {
+    "en": "Nazia Haque",
+    "bn": "নাজিয়া হক"
+   },
+   "title": {
+    "en": "Maldives on a budget: local islands vs resorts",
+    "bn": "কম খরচে মালদ্বীপ: লোকাল আইল্যান্ড নাকি রিসোর্ট"
+   },
+   "ex": {
+    "en": "How Bangladeshi couples can do the Maldives for under ৳1 lakh — and when a water villa is worth it.",
+    "bn": "বাংলাদেশি দম্পতিরা কীভাবে ১ লাখ টাকার কমে মালদ্বীপ ঘুরতে পারেন — আর কখন ওয়াটার ভিলা সত্যিই মূল্যবান।"
+   }
+  },
+  {
+   "slug": "schengen-visa-checklist",
+   "img": "swiss",
+   "cat": {
+    "en": "Visa",
+    "bn": "ভিসা"
+   },
+   "date": "2026-08-22",
+   "mins": 9,
+   "author": {
+    "en": "Tasnim Akter",
+    "bn": "তাসনিম আক্তার"
+   },
+   "title": {
+    "en": "Schengen visa from Dhaka: a 2026 checklist that actually works",
+    "bn": "ঢাকা থেকে শেনজেন ভিসা: ২০২৬ সালের কার্যকর চেকলিস্ট"
+   },
+   "ex": {
+    "en": "Bank statements, cover letters, travel insurance and the mistakes that cause most refusals.",
+    "bn": "ব্যাংক স্টেটমেন্ট, কভার লেটার, ভ্রমণ বিমা এবং যেসব ভুলে বেশিরভাগ আবেদন বাতিল হয়।"
+   }
+  },
+  {
+   "slug": "family-holiday-singapore",
+   "img": "singapore",
+   "cat": {
+    "en": "Family",
+    "bn": "পরিবার"
+   },
+   "date": "2026-08-03",
+   "mins": 7,
+   "author": {
+    "en": "Nazia Haque",
+    "bn": "নাজিয়া হক"
+   },
+   "title": {
+    "en": "Singapore with kids: a 5-day family plan that works",
+    "bn": "শিশুদের নিয়ে সিঙ্গাপুর: ৫ দিনের কার্যকর পারিবারিক পরিকল্পনা"
+   },
+   "ex": {
+    "en": "Sentosa, Universal Studios, the zoo and Gardens by the Bay — with budgets, MRT tips and kid-friendly food.",
+    "bn": "সেন্তোসা, ইউনিভার্সাল স্টুডিওস, চিড়িয়াখানা ও গার্ডেনস বাই দ্য বে — বাজেট, এমআরটি টিপস ও শিশুবান্ধব খাবারসহ।"
+   }
+  },
+  {
+   "slug": "turkey-itinerary-10-days",
+   "img": "cappadocia",
+   "cat": {
+    "en": "International",
+    "bn": "আন্তর্জাতিক"
+   },
+   "date": "2026-07-18",
+   "mins": 8,
+   "author": {
+    "en": "Farhan Kabir",
+    "bn": "ফারহান কবির"
+   },
+   "title": {
+    "en": "The perfect 10-day Türkiye itinerary for Bangladeshi travellers",
+    "bn": "বাংলাদেশি ভ্রমণকারীদের জন্য ১০ দিনের আদর্শ তুরস্ক ভ্রমণসূচি"
+   },
+   "ex": {
+    "en": "Istanbul, Bursa, Cappadocia and Pamukkale — with food spots, budgets and visa tips.",
+    "bn": "ইস্তাম্বুল, বুরসা, কাপাদোকিয়া ও পামুক্কালে — খাবারের ঠিকানা, বাজেট ও ভিসা টিপসসহ।"
+   }
+  }
+ ],
+ "CAREERS": [
+  {
+   "title": {
+    "en": "Senior Travel Consultant (International)",
+    "bn": "সিনিয়র ট্রাভেল কনসালট্যান্ট (আন্তর্জাতিক)"
+   },
+   "dept": {
+    "en": "Holidays",
+    "bn": "হলিডে"
+   },
+   "loc": {
+    "en": "Banani, Dhaka",
+    "bn": "বনানী, ঢাকা"
+   },
+   "type": {
+    "en": "Full-time",
+    "bn": "পূর্ণকালীন"
+   },
+   "exp": {
+    "en": "3+ years",
+    "bn": "৩+ বছর"
+   }
+  },
+  {
+   "title": {
+    "en": "Air Ticketing Executive (GDS — Sabre/Amadeus)",
+    "bn": "এয়ার টিকেটিং এক্সিকিউটিভ (জিডিএস — সেবার/অ্যামাডিউস)"
+   },
+   "dept": {
+    "en": "Air Ticketing",
+    "bn": "এয়ার টিকেটিং"
+   },
+   "loc": {
+    "en": "Banani, Dhaka",
+    "bn": "বনানী, ঢাকা"
+   },
+   "type": {
+    "en": "Full-time",
+    "bn": "পূর্ণকালীন"
+   },
+   "exp": {
+    "en": "2+ years",
+    "bn": "২+ বছর"
+   }
+  },
+  {
+   "title": {
+    "en": "Cruise & Holidays Sales Executive",
+    "bn": "ক্রুজ ও হলিডে সেলস এক্সিকিউটিভ"
+   },
+   "dept": {
+    "en": "Cruises",
+    "bn": "ক্রুজ"
+   },
+   "loc": {
+    "en": "Banani, Dhaka",
+    "bn": "বনানী, ঢাকা"
+   },
+   "type": {
+    "en": "Full-time",
+    "bn": "পূর্ণকালীন"
+   },
+   "exp": {
+    "en": "2+ years",
+    "bn": "২+ বছর"
+   }
+  },
+  {
+   "title": {
+    "en": "Visa Documentation Officer",
+    "bn": "ভিসা ডকুমেন্টেশন অফিসার"
+   },
+   "dept": {
+    "en": "Visa",
+    "bn": "ভিসা"
+   },
+   "loc": {
+    "en": "Chattogram",
+    "bn": "চট্টগ্রাম"
+   },
+   "type": {
+    "en": "Full-time",
+    "bn": "পূর্ণকালীন"
+   },
+   "exp": {
+    "en": "1+ year",
+    "bn": "১+ বছর"
+   }
+  },
+  {
+   "title": {
+    "en": "Frontend Engineer (Next.js)",
+    "bn": "ফ্রন্টএন্ড ইঞ্জিনিয়ার (নেক্সট.জেএস)"
+   },
+   "dept": {
+    "en": "Technology",
+    "bn": "প্রযুক্তি"
+   },
+   "loc": {
+    "en": "Hybrid, Dhaka",
+    "bn": "হাইব্রিড, ঢাকা"
+   },
+   "type": {
+    "en": "Full-time",
+    "bn": "পূর্ণকালীন"
+   },
+   "exp": {
+    "en": "3+ years",
+    "bn": "৩+ বছর"
+   }
+  }
+ ],
+ "STATS": [
+  [
+   120000,
+   "+",
+   {
+    "en": "Happy travellers",
+    "bn": "সন্তুষ্ট ভ্রমণকারী"
+   }
+  ],
+  [
+   14,
+   "",
+   {
+    "en": "Years of service",
+    "bn": "বছরের সেবা"
+   }
+  ],
+  [
+   18500,
+   "+",
+   {
+    "en": "Visas processed",
+    "bn": "ভিসা প্রসেস"
+   }
+  ],
+  [
+   48,
+   "",
+   {
+    "en": "Countries covered",
+    "bn": "দেশে সেবা"
+   }
+  ]
+ ],
+ "ACT_CATS": {
+  "tour": [
+   "map",
+   {
+    "en": "Day tours",
+    "bn": "ডে-ট্যুর"
+   }
+  ],
+  "water": [
+   "waves",
+   {
+    "en": "Water & boats",
+    "bn": "পানি ও নৌকা"
+   }
+  ],
+  "adventure": [
+   "mountain",
+   {
+    "en": "Adventure",
+    "bn": "অ্যাডভেঞ্চার"
+   }
+  ],
+  "tickets": [
+   "ticket",
+   {
+    "en": "Attractions & tickets",
+    "bn": "আকর্ষণ ও টিকিট"
+   }
+  ],
+  "food": [
+   "utensils",
+   {
+    "en": "Food & culture",
+    "bn": "খাবার ও সংস্কৃতি"
+   }
+  ],
+  "transfer": [
+   "car",
+   {
+    "en": "Transfers",
+    "bn": "ট্রান্সফার"
+   }
+  ]
+ },
+ "CANCEL": {
+  "free24": [
+   "free",
+   {
+    "en": "Free cancellation · 24 h",
+    "bn": "ফ্রি বাতিল · ২৪ ঘণ্টা"
+   }
+  ],
+  "free72": [
+   "free",
+   {
+    "en": "Free cancellation · 72 h",
+    "bn": "ফ্রি বাতিল · ৭২ ঘণ্টা"
+   }
+  ],
+  "free30": [
+   "free",
+   {
+    "en": "Free cancellation · 30 days",
+    "bn": "ফ্রি বাতিল · ৩০ দিন"
+   }
+  ],
+  "free7": [
+   "free",
+   {
+    "en": "Free cancellation · 7 days",
+    "bn": "ফ্রি বাতিল · ৭ দিন"
+   }
+  ],
+  "partial": [
+   "partial",
+   {
+    "en": "Partial refund",
+    "bn": "আংশিক রিফান্ড"
+   }
+  ],
+  "none": [
+   "none",
+   {
+    "en": "Non-refundable",
+    "bn": "অফেরতযোগ্য"
+   }
+  ]
+ },
+ "ACTIVITIES": [
+  {
+   "slug": "cappadocia-balloon-sunrise",
+   "img": "cappadocia",
+   "title": {
+    "en": "Cappadocia hot-air balloon flight at sunrise",
+    "bn": "সূর্যোদয়ে কাপাদোকিয়ার হট-এয়ার বেলুন ফ্লাইট"
+   },
+   "city": {
+    "en": "Cappadocia, Türkiye",
+    "bn": "কাপাদোকিয়া, তুরস্ক"
+   },
+   "cat": "adventure",
+   "dur": {
+    "en": "3–4 hours",
+    "bn": "৩–৪ ঘণ্টা"
+   },
+   "price": 24500,
+   "old": 27500,
+   "rating": 4.9,
+   "reviews": 3812,
+   "cancel": "free24",
+   "hl": [
+    {
+     "en": "1 hour flight over fairy chimneys",
+     "bn": "পরী-চিমনির ওপর ১ ঘণ্টার ফ্লাইট"
+    },
+    {
+     "en": "Hotel pickup & champagne-free toast",
+     "bn": "হোটেল পিকআপ ও উদ্‌যাপন"
+    },
+    {
+     "en": "Flight certificate",
+     "bn": "ফ্লাইট সার্টিফিকেট"
+    }
+   ],
+   "langs": [
+    "en",
+    "bn"
+   ],
+   "instant": true,
+   "badge": {
+    "en": "Likely to sell out",
+    "bn": "দ্রুত শেষ হতে পারে"
+   },
+   "pickup": true,
+   "dest": "turkey",
+   "region": "intl"
+  },
+  {
+   "slug": "saint-martin-day-cruise",
+   "img": "stmartin",
+   "title": {
+    "en": "Saint Martin's Island day cruise from Teknaf",
+    "bn": "টেকনাফ থেকে সেন্ট মার্টিন দ্বীপ ডে-ক্রুজ"
+   },
+   "city": {
+    "en": "Cox's Bazar, Bangladesh",
+    "bn": "কক্সবাজার, বাংলাদেশ"
+   },
+   "cat": "water",
+   "dur": {
+    "en": "12 hours",
+    "bn": "১২ ঘণ্টা"
+   },
+   "price": 3200,
+   "old": null,
+   "rating": 4.6,
+   "reviews": 1240,
+   "cancel": "free24",
+   "hl": [
+    {
+     "en": "Return ship ticket",
+     "bn": "যাওয়া-আসার জাহাজের টিকিট"
+    },
+    {
+     "en": "Seafood lunch",
+     "bn": "সামুদ্রিক খাবারে দুপুরের খাবার"
+    },
+    {
+     "en": "Chera Dwip by van",
+     "bn": "ভ্যানে ছেঁড়া দ্বীপ"
+    }
+   ],
+   "langs": [
+    "en",
+    "bn"
+   ],
+   "instant": true,
+   "badge": null,
+   "pickup": true,
+   "dest": "coxs-bazar",
+   "region": "bd"
+  },
+  {
+   "slug": "sundarbans-day-safari",
+   "img": "sundarbans",
+   "title": {
+    "en": "Sundarbans day safari from Mongla",
+    "bn": "মোংলা থেকে সুন্দরবন ডে-সাফারি"
+   },
+   "city": {
+    "en": "Khulna, Bangladesh",
+    "bn": "খুলনা, বাংলাদেশ"
+   },
+   "cat": "tour",
+   "dur": {
+    "en": "9 hours",
+    "bn": "৯ ঘণ্টা"
+   },
+   "price": 4500,
+   "old": 5200,
+   "rating": 4.7,
+   "reviews": 688,
+   "cancel": "free72",
+   "hl": [
+    {
+     "en": "Karamjal wildlife centre",
+     "bn": "করমজল বন্যপ্রাণী কেন্দ্র"
+    },
+    {
+     "en": "Armed forest guard",
+     "bn": "সশস্ত্র বনরক্ষী"
+    },
+    {
+     "en": "Lunch on boat",
+     "bn": "নৌকায় দুপুরের খাবার"
+    }
+   ],
+   "langs": [
+    "en",
+    "bn"
+   ],
+   "instant": true,
+   "badge": null,
+   "pickup": false,
+   "dest": "sundarbans",
+   "region": "bd"
+  },
+  {
+   "slug": "dubai-desert-safari",
+   "img": "dubai",
+   "title": {
+    "en": "Dubai evening desert safari with BBQ dinner",
+    "bn": "বারবিকিউ ডিনারসহ দুবাই সন্ধ্যার মরু সাফারি"
+   },
+   "city": {
+    "en": "Dubai, UAE",
+    "bn": "দুবাই, সংযুক্ত আরব আমিরাত"
+   },
+   "cat": "adventure",
+   "dur": {
+    "en": "6 hours",
+    "bn": "৬ ঘণ্টা"
+   },
+   "price": 6900,
+   "old": 8500,
+   "rating": 4.8,
+   "reviews": 9214,
+   "cancel": "free24",
+   "hl": [
+    {
+     "en": "Dune bashing in 4x4",
+     "bn": "৪x৪-এ ডিউন ব্যাশিং"
+    },
+    {
+     "en": "Camel ride & sandboarding",
+     "bn": "উটের পিঠে চড়া ও স্যান্ডবোর্ডিং"
+    },
+    {
+     "en": "Live shows & BBQ",
+     "bn": "লাইভ শো ও বারবিকিউ"
+    }
+   ],
+   "langs": [
+    "en",
+    "bn"
+   ],
+   "instant": true,
+   "badge": {
+    "en": "Bestseller",
+    "bn": "সেরা বিক্রিত"
+   },
+   "pickup": true,
+   "dest": "dubai",
+   "region": "intl"
+  },
+  {
+   "slug": "bali-ubud-swing-waterfalls",
+   "img": "bali",
+   "title": {
+    "en": "Ubud jungle swing, rice terraces & waterfalls",
+    "bn": "উবুদ জঙ্গল সুইং, ধানক্ষেত ও ঝরনা"
+   },
+   "city": {
+    "en": "Bali, Indonesia",
+    "bn": "বালি, ইন্দোনেশিয়া"
+   },
+   "cat": "tour",
+   "dur": {
+    "en": "10 hours",
+    "bn": "১০ ঘণ্টা"
+   },
+   "price": 7400,
+   "old": null,
+   "rating": 4.8,
+   "reviews": 5120,
+   "cancel": "free24",
+   "hl": [
+    {
+     "en": "Tegallalang rice terraces",
+     "bn": "তেগাল্লালাং ধানক্ষেত"
+    },
+    {
+     "en": "Tegenungan waterfall",
+     "bn": "তেগেনুংগান ঝরনা"
+    },
+    {
+     "en": "Private driver-guide",
+     "bn": "প্রাইভেট ড্রাইভার-গাইড"
+    }
+   ],
+   "langs": [
+    "en",
+    "bn"
+   ],
+   "instant": true,
+   "badge": null,
+   "pickup": true,
+   "dest": "bali",
+   "region": "intl"
+  },
+  {
+   "slug": "singapore-universal-studios",
+   "img": "singapore",
+   "title": {
+    "en": "Universal Studios Singapore — 1-day ticket",
+    "bn": "ইউনিভার্সাল স্টুডিওস সিঙ্গাপুর — ১ দিনের টিকিট"
+   },
+   "city": {
+    "en": "Sentosa, Singapore",
+    "bn": "সেন্তোসা, সিঙ্গাপুর"
+   },
+   "cat": "tickets",
+   "dur": {
+    "en": "Full day",
+    "bn": "সারাদিন"
+   },
+   "price": 8900,
+   "old": 9600,
+   "rating": 4.7,
+   "reviews": 12840,
+   "cancel": "none",
+   "hl": [
+    {
+     "en": "Instant e-ticket",
+     "bn": "তাৎক্ষণিক ই-টিকিট"
+    },
+    {
+     "en": "All rides & shows",
+     "bn": "সব রাইড ও শো"
+    },
+    {
+     "en": "Skip the ticket queue",
+     "bn": "টিকিটের লাইন এড়িয়ে"
+    }
+   ],
+   "langs": [
+    "en",
+    "bn"
+   ],
+   "instant": true,
+   "badge": null,
+   "pickup": false,
+   "dest": "singapore-malaysia",
+   "region": "intl"
+  },
+  {
+   "slug": "phuket-phi-phi-speedboat",
+   "img": "phuket",
+   "title": {
+    "en": "Phi Phi & Maya Bay speedboat tour with snorkelling",
+    "bn": "স্নরকেলিংসহ ফি ফি ও মায়া বে স্পিডবোট ট্যুর"
+   },
+   "city": {
+    "en": "Phuket, Thailand",
+    "bn": "ফুকেট, থাইল্যান্ড"
+   },
+   "cat": "water",
+   "dur": {
+    "en": "8 hours",
+    "bn": "৮ ঘণ্টা"
+   },
+   "price": 6200,
+   "old": 7000,
+   "rating": 4.6,
+   "reviews": 7322,
+   "cancel": "free24",
+   "hl": [
+    {
+     "en": "Maya Bay & Pileh Lagoon",
+     "bn": "মায়া বে ও পিলেহ লেগুন"
+    },
+    {
+     "en": "Snorkel gear included",
+     "bn": "স্নরকেল সরঞ্জাম অন্তর্ভুক্ত"
+    },
+    {
+     "en": "Thai buffet lunch",
+     "bn": "থাই বুফে লাঞ্চ"
+    }
+   ],
+   "langs": [
+    "en",
+    "bn"
+   ],
+   "instant": true,
+   "badge": null,
+   "pickup": true,
+   "dest": "thailand",
+   "region": "intl"
+  },
+  {
+   "slug": "old-dhaka-food-walk",
+   "img": "dhaka",
+   "title": {
+    "en": "Old Dhaka food & heritage walk",
+    "bn": "পুরান ঢাকার খাবার ও ঐতিহ্য হাঁটা"
+   },
+   "city": {
+    "en": "Dhaka, Bangladesh",
+    "bn": "ঢাকা, বাংলাদেশ"
+   },
+   "cat": "food",
+   "dur": {
+    "en": "4 hours",
+    "bn": "৪ ঘণ্টা"
+   },
+   "price": 2800,
+   "old": null,
+   "rating": 4.9,
+   "reviews": 864,
+   "cancel": "free24",
+   "hl": [
+    {
+     "en": "10+ tastings incl. biryani & lassi",
+     "bn": "বিরিয়ানি ও লাচ্ছিসহ ১০+ স্বাদ"
+    },
+    {
+     "en": "Ahsan Manzil & Shankhari Bazar",
+     "bn": "আহসান মঞ্জিল ও শাঁখারীবাজার"
+    },
+    {
+     "en": "Rickshaw ride",
+     "bn": "রিকশা ভ্রমণ"
+    }
+   ],
+   "langs": [
+    "en",
+    "bn"
+   ],
+   "instant": true,
+   "badge": {
+    "en": "Local favourite",
+    "bn": "স্থানীয়দের প্রিয়"
+   },
+   "pickup": false,
+   "dest": null,
+   "region": "bd"
+  },
+  {
+   "slug": "pokhara-paragliding",
+   "img": "nepal",
+   "title": {
+    "en": "Pokhara tandem paragliding over Phewa Lake",
+    "bn": "ফেওয়া লেকের ওপর পোখারা ট্যান্ডেম প্যারাগ্লাইডিং"
+   },
+   "city": {
+    "en": "Pokhara, Nepal",
+    "bn": "পোখারা, নেপাল"
+   },
+   "cat": "adventure",
+   "dur": {
+    "en": "30 min flight",
+    "bn": "৩০ মিনিটের ফ্লাইট"
+   },
+   "price": 9800,
+   "old": null,
+   "rating": 4.9,
+   "reviews": 2210,
+   "cancel": "free72",
+   "hl": [
+    {
+     "en": "Himalaya views on clear days",
+     "bn": "পরিষ্কার দিনে হিমালয়ের দৃশ্য"
+    },
+    {
+     "en": "Licensed pilot",
+     "bn": "লাইসেন্সধারী পাইলট"
+    },
+    {
+     "en": "GoPro video add-on",
+     "bn": "গোপ্রো ভিডিও অ্যাড-অন"
+    }
+   ],
+   "langs": [
+    "en",
+    "bn"
+   ],
+   "instant": true,
+   "badge": null,
+   "pickup": true,
+   "dest": "nepal",
+   "region": "intl"
+  },
+  {
+   "slug": "istanbul-bosphorus-dinner-cruise",
+   "img": "istanbul",
+   "title": {
+    "en": "Bosphorus dinner cruise with Turkish night show",
+    "bn": "টার্কিশ নাইট শোসহ বসফরাস ডিনার ক্রুজ"
+   },
+   "city": {
+    "en": "Istanbul, Türkiye",
+    "bn": "ইস্তাম্বুল, তুরস্ক"
+   },
+   "cat": "water",
+   "dur": {
+    "en": "3.5 hours",
+    "bn": "৩.৫ ঘণ্টা"
+   },
+   "price": 5600,
+   "old": 6400,
+   "rating": 4.5,
+   "reviews": 4108,
+   "cancel": "free24",
+   "hl": [
+    {
+     "en": "3-course dinner",
+     "bn": "৩-কোর্স ডিনার"
+    },
+    {
+     "en": "Whirling dervish & folk dance",
+     "bn": "ঘূর্ণি দরবেশ ও লোকনৃত্য"
+    },
+    {
+     "en": "Hotel transfers",
+     "bn": "হোটেল ট্রান্সফার"
+    }
+   ],
+   "langs": [
+    "en",
+    "bn"
+   ],
+   "instant": true,
+   "badge": null,
+   "pickup": true,
+   "dest": "turkey",
+   "region": "intl"
+  },
+  {
+   "slug": "ratargul-boat-ride",
+   "img": "ratargul",
+   "title": {
+    "en": "Ratargul swamp forest boat ride",
+    "bn": "রাতারগুল জলাবনে নৌকা ভ্রমণ"
+   },
+   "city": {
+    "en": "Sylhet, Bangladesh",
+    "bn": "সিলেট, বাংলাদেশ"
+   },
+   "cat": "water",
+   "dur": {
+    "en": "5 hours",
+    "bn": "৫ ঘণ্টা"
+   },
+   "price": 2400,
+   "old": null,
+   "rating": 4.7,
+   "reviews": 532,
+   "cancel": "free24",
+   "hl": [
+    {
+     "en": "Country boat with boatman",
+     "bn": "মাঝিসহ দেশি নৌকা"
+    },
+    {
+     "en": "Watchtower view",
+     "bn": "ওয়াচটাওয়ার থেকে দৃশ্য"
+    },
+    {
+     "en": "Return car from Sylhet",
+     "bn": "সিলেট থেকে যাওয়া-আসার গাড়ি"
+    }
+   ],
+   "langs": [
+    "en",
+    "bn"
+   ],
+   "instant": true,
+   "badge": null,
+   "pickup": true,
+   "dest": "sylhet",
+   "region": "bd"
+  },
+  {
+   "slug": "dhaka-airport-transfer",
+   "img": "plane",
+   "title": {
+    "en": "Dhaka airport private transfer (HSIA)",
+    "bn": "ঢাকা এয়ারপোর্ট প্রাইভেট ট্রান্সফার (শাহজালাল বিমানবন্দর)"
+   },
+   "city": {
+    "en": "Dhaka, Bangladesh",
+    "bn": "ঢাকা, বাংলাদেশ"
+   },
+   "cat": "transfer",
+   "dur": {
+    "en": "Up to 1.5 hours",
+    "bn": "সর্বোচ্চ ১.৫ ঘণ্টা"
+   },
+   "price": 1800,
+   "old": null,
+   "rating": 4.8,
+   "reviews": 3120,
+   "cancel": "free24",
+   "hl": [
+    {
+     "en": "Meet & greet with name board",
+     "bn": "নাম-বোর্ডসহ অভ্যর্থনা"
+    },
+    {
+     "en": "60 min free waiting",
+     "bn": "৬০ মিনিট ফ্রি অপেক্ষা"
+    },
+    {
+     "en": "AC sedan or microbus",
+     "bn": "এসি সেডান বা মাইক্রোবাস"
+    }
+   ],
+   "langs": [
+    "en",
+    "bn"
+   ],
+   "instant": true,
+   "badge": null,
+   "pickup": false,
+   "dest": null,
+   "region": "bd"
+  }
+ ],
+ "ACT_DEST": {
+  "cappadocia-balloon-sunrise": "turkey",
+  "saint-martin-day-cruise": "coxs-bazar",
+  "sundarbans-day-safari": "sundarbans",
+  "dubai-desert-safari": "dubai",
+  "bali-ubud-swing-waterfalls": "bali",
+  "singapore-universal-studios": "singapore-malaysia",
+  "phuket-phi-phi-speedboat": "thailand",
+  "old-dhaka-food-walk": null,
+  "pokhara-paragliding": "nepal",
+  "istanbul-bosphorus-dinner-cruise": "turkey",
+  "ratargul-boat-ride": "sylhet",
+  "dhaka-airport-transfer": null
+ },
+ "PLAN_COST": {
+  "coxs-bazar": [
+   6500,
+   5500
+  ],
+  "sajek-valley": [
+   5500,
+   3000
+  ],
+  "sylhet": [
+   6000,
+   4500
+  ],
+  "sundarbans": [
+   7500,
+   2500
+  ],
+  "maldives": [
+   28000,
+   38000
+  ],
+  "turkey": [
+   16000,
+   75000
+  ],
+  "bali": [
+   14000,
+   52000
+  ],
+  "dubai": [
+   18000,
+   42000
+  ],
+  "nepal": [
+   9000,
+   24000
+  ],
+  "thailand": [
+   12000,
+   32000
+  ],
+  "bhutan": [
+   13000,
+   30000
+  ],
+  "singapore-malaysia": [
+   17000,
+   40000
+  ]
+ }
+}

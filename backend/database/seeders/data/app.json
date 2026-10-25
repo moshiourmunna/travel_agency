@@ -1,0 +1,6638 @@
+{
+ "USER": {
+  "name": {
+   "en": "Farhana Rahman",
+   "bn": "ফারহানা রহমান"
+  },
+  "first": {
+   "en": "Farhana",
+   "bn": "ফারহানা"
+  },
+  "ini": "FR",
+  "email": "farhana.rahman@gmail.com",
+  "phone": "+880 1712-345678",
+  "city": {
+   "en": "Dhanmondi, Dhaka",
+   "bn": "ধানমন্ডি, ঢাকা"
+  },
+  "since": "2021-03-14",
+  "tier": {
+   "en": "Gold",
+   "bn": "গোল্ড"
+  },
+  "miles": 18450,
+  "next_tier": 25000,
+  "wallet": 6800,
+  "dob": "1991-07-22",
+  "nid": "•••• •••• 4821",
+  "passport": "EH0•••••7",
+  "passport_exp": "2031-02-18",
+  "gender": {
+   "en": "Female",
+   "bn": "নারী"
+  },
+  "referral": "FARHANA500"
+ },
+ "ST": {
+  "confirmed": [
+   {
+    "en": "Confirmed",
+    "bn": "নিশ্চিত"
+   },
+   "bg-emerald-50 text-emerald-800 ring-emerald-600/20 dark:bg-emerald-900/30 dark:text-emerald-300"
+  ],
+  "pending": [
+   {
+    "en": "Pending payment",
+    "bn": "পেমেন্ট বাকি"
+   },
+   "bg-amber-50 text-amber-800 ring-amber-600/20 dark:bg-amber-900/30 dark:text-amber-300"
+  ],
+  "partial": [
+   {
+    "en": "Part-paid",
+    "bn": "আংশিক পরিশোধিত"
+   },
+   "bg-sky-50 text-sky-800 ring-sky-600/20 dark:bg-sky-900/30 dark:text-sky-300"
+  ],
+  "completed": [
+   {
+    "en": "Completed",
+    "bn": "সম্পন্ন"
+   },
+   "bg-ink-100 text-ink-700 ring-ink-500/20 dark:bg-ink-800 dark:text-ink-200"
+  ],
+  "cancelled": [
+   {
+    "en": "Cancelled",
+    "bn": "বাতিল"
+   },
+   "bg-rose-50 text-rose-800 ring-rose-600/20 dark:bg-rose-900/30 dark:text-rose-300"
+  ],
+  "refunded": [
+   {
+    "en": "Refunded",
+    "bn": "রিফান্ড হয়েছে"
+   },
+   "bg-violet-50 text-violet-800 ring-violet-600/20 dark:bg-violet-900/30 dark:text-violet-300"
+  ],
+  "new": [
+   {
+    "en": "New",
+    "bn": "নতুন"
+   },
+   "bg-sky-50 text-sky-800 ring-sky-600/20 dark:bg-sky-900/30 dark:text-sky-300"
+  ],
+  "contacted": [
+   {
+    "en": "Contacted",
+    "bn": "যোগাযোগ হয়েছে"
+   },
+   "bg-amber-50 text-amber-800 ring-amber-600/20 dark:bg-amber-900/30 dark:text-amber-300"
+  ],
+  "quoted": [
+   {
+    "en": "Quoted",
+    "bn": "কোটেশন পাঠানো"
+   },
+   "bg-violet-50 text-violet-800 ring-violet-600/20 dark:bg-violet-900/30 dark:text-violet-300"
+  ],
+  "won": [
+   {
+    "en": "Won",
+    "bn": "সফল"
+   },
+   "bg-emerald-50 text-emerald-800 ring-emerald-600/20 dark:bg-emerald-900/30 dark:text-emerald-300"
+  ],
+  "lost": [
+   {
+    "en": "Lost",
+    "bn": "হাতছাড়া"
+   },
+   "bg-rose-50 text-rose-800 ring-rose-600/20 dark:bg-rose-900/30 dark:text-rose-300"
+  ],
+  "published": [
+   {
+    "en": "Published",
+    "bn": "প্রকাশিত"
+   },
+   "bg-emerald-50 text-emerald-800 ring-emerald-600/20 dark:bg-emerald-900/30 dark:text-emerald-300"
+  ],
+  "draft": [
+   {
+    "en": "Draft",
+    "bn": "খসড়া"
+   },
+   "bg-ink-100 text-ink-700 ring-ink-500/20 dark:bg-ink-800 dark:text-ink-200"
+  ],
+  "active": [
+   {
+    "en": "Active",
+    "bn": "সক্রিয়"
+   },
+   "bg-emerald-50 text-emerald-800 ring-emerald-600/20 dark:bg-emerald-900/30 dark:text-emerald-300"
+  ],
+  "expired": [
+   {
+    "en": "Expired",
+    "bn": "মেয়াদোত্তীর্ণ"
+   },
+   "bg-ink-100 text-ink-700 ring-ink-500/20 dark:bg-ink-800 dark:text-ink-200"
+  ],
+  "scheduled": [
+   {
+    "en": "Scheduled",
+    "bn": "নির্ধারিত"
+   },
+   "bg-sky-50 text-sky-800 ring-sky-600/20 dark:bg-sky-900/30 dark:text-sky-300"
+  ],
+  "open": [
+   {
+    "en": "Open",
+    "bn": "খোলা"
+   },
+   "bg-amber-50 text-amber-800 ring-amber-600/20 dark:bg-amber-900/30 dark:text-amber-300"
+  ],
+  "resolved": [
+   {
+    "en": "Resolved",
+    "bn": "সমাধান হয়েছে"
+   },
+   "bg-emerald-50 text-emerald-800 ring-emerald-600/20 dark:bg-emerald-900/30 dark:text-emerald-300"
+  ],
+  "awaiting": [
+   {
+    "en": "Awaiting reply",
+    "bn": "উত্তরের অপেক্ষায়"
+   },
+   "bg-sky-50 text-sky-800 ring-sky-600/20 dark:bg-sky-900/30 dark:text-sky-300"
+  ],
+  "success": [
+   {
+    "en": "Successful",
+    "bn": "সফল"
+   },
+   "bg-emerald-50 text-emerald-800 ring-emerald-600/20 dark:bg-emerald-900/30 dark:text-emerald-300"
+  ],
+  "failed": [
+   {
+    "en": "Failed",
+    "bn": "ব্যর্থ"
+   },
+   "bg-rose-50 text-rose-800 ring-rose-600/20 dark:bg-rose-900/30 dark:text-rose-300"
+  ],
+  "review": [
+   {
+    "en": "In review",
+    "bn": "পর্যালোচনায়"
+   },
+   "bg-amber-50 text-amber-800 ring-amber-600/20 dark:bg-amber-900/30 dark:text-amber-300"
+  ],
+  "approved": [
+   {
+    "en": "Approved",
+    "bn": "অনুমোদিত"
+   },
+   "bg-emerald-50 text-emerald-800 ring-emerald-600/20 dark:bg-emerald-900/30 dark:text-emerald-300"
+  ],
+  "hidden": [
+   {
+    "en": "Hidden",
+    "bn": "লুকানো"
+   },
+   "bg-rose-50 text-rose-800 ring-rose-600/20 dark:bg-rose-900/30 dark:text-rose-300"
+  ],
+  "suspended": [
+   {
+    "en": "Suspended",
+    "bn": "স্থগিত"
+   },
+   "bg-rose-50 text-rose-800 ring-rose-600/20 dark:bg-rose-900/30 dark:text-rose-300"
+  ],
+  "submitted": [
+   {
+    "en": "Submitted",
+    "bn": "জমা হয়েছে"
+   },
+   "bg-sky-50 text-sky-800 ring-sky-600/20 dark:bg-sky-900/30 dark:text-sky-300"
+  ],
+  "docs": [
+   {
+    "en": "Documents needed",
+    "bn": "কাগজ প্রয়োজন"
+   },
+   "bg-amber-50 text-amber-800 ring-amber-600/20 dark:bg-amber-900/30 dark:text-amber-300"
+  ],
+  "embassy": [
+   {
+    "en": "At embassy",
+    "bn": "দূতাবাসে"
+   },
+   "bg-violet-50 text-violet-800 ring-violet-600/20 dark:bg-violet-900/30 dark:text-violet-300"
+  ]
+ },
+ "KIND": {
+  "tour": [
+   "map",
+   {
+    "en": "Holiday package",
+    "bn": "হলিডে প্যাকেজ"
+   }
+  ],
+  "cruise": [
+   "ship",
+   {
+    "en": "Cruise",
+    "bn": "ক্রুজ"
+   }
+  ],
+  "flight": [
+   "plane",
+   {
+    "en": "Flight",
+    "bn": "ফ্লাইট"
+   }
+  ],
+  "hotel": [
+   "hotel",
+   {
+    "en": "Hotel",
+    "bn": "হোটেল"
+   }
+  ],
+  "visa": [
+   "stamp",
+   {
+    "en": "Visa",
+    "bn": "ভিসা"
+   }
+  ],
+  "activity": [
+   "ticket",
+   {
+    "en": "Activity",
+    "bn": "অ্যাক্টিভিটি"
+   }
+  ]
+ },
+ "CR": {
+  "singapore-penang-phuket": {
+   "slug": "singapore-penang-phuket",
+   "img": "cruise",
+   "title": {
+    "en": "Singapore · Penang · Phuket Cruise",
+    "bn": "সিঙ্গাপুর · পেনাং · ফুকেট ক্রুজ"
+   },
+   "ship": "Ocean Spectrum",
+   "line": "Spectrum Cruises",
+   "region": "asia",
+   "nights": 4,
+   "price": 68500,
+   "old": 74000,
+   "rating": 4.8,
+   "reviews": 412,
+   "depart": "2026-12-14",
+   "port": {
+    "en": "Singapore",
+    "bn": "সিঙ্গাপুর"
+   },
+   "ports": [
+    {
+     "en": "Singapore",
+     "bn": "সিঙ্গাপুর"
+    },
+    {
+     "en": "Penang",
+     "bn": "পেনাং"
+    },
+    {
+     "en": "Phuket",
+     "bn": "ফুকেট"
+    },
+    {
+     "en": "Singapore",
+     "bn": "সিঙ্গাপুর"
+    }
+   ],
+   "cabin": {
+    "en": "Ocean-view cabin",
+    "bn": "সমুদ্রমুখী কেবিন"
+   },
+   "hl": [
+    {
+     "en": "All main meals on board",
+     "bn": "জাহাজে সব প্রধান খাবার"
+    },
+    {
+     "en": "Broadway-style shows",
+     "bn": "ব্রডওয়ে-ধাঁচের শো"
+    },
+    {
+     "en": "Kids club & water park",
+     "bn": "কিডস ক্লাব ও ওয়াটার পার্ক"
+    }
+   ],
+   "badge": {
+    "en": "Bestseller",
+    "bn": "সেরা বিক্রিত"
+   },
+   "cancel": "partial"
+  },
+  "arabian-gulf-7-nights": {
+   "slug": "arabian-gulf-7-nights",
+   "img": "dubai",
+   "title": {
+    "en": "Arabian Gulf: Dubai, Abu Dhabi & Doha",
+    "bn": "আরব উপসাগর: দুবাই, আবুধাবি ও দোহা"
+   },
+   "ship": "Gulf Star",
+   "line": "Azure Line",
+   "region": "gulf",
+   "nights": 7,
+   "price": 112000,
+   "old": null,
+   "rating": 4.7,
+   "reviews": 268,
+   "depart": "2027-01-09",
+   "port": {
+    "en": "Dubai",
+    "bn": "দুবাই"
+   },
+   "ports": [
+    {
+     "en": "Dubai",
+     "bn": "দুবাই"
+    },
+    {
+     "en": "Abu Dhabi",
+     "bn": "আবুধাবি"
+    },
+    {
+     "en": "Sir Bani Yas",
+     "bn": "স্যার বানি ইয়াস"
+    },
+    {
+     "en": "Doha",
+     "bn": "দোহা"
+    },
+    {
+     "en": "Dubai",
+     "bn": "দুবাই"
+    }
+   ],
+   "cabin": {
+    "en": "Balcony cabin",
+    "bn": "ব্যালকনি কেবিন"
+   },
+   "hl": [
+    {
+     "en": "Private beach day",
+     "bn": "প্রাইভেট সৈকত দিবস"
+    },
+    {
+     "en": "Desert safari add-on",
+     "bn": "মরু সাফারি অ্যাড-অন"
+    },
+    {
+     "en": "Beachfront dining",
+     "bn": "সৈকতের ধারে ডাইনিং"
+    }
+   ],
+   "badge": null,
+   "cancel": "partial"
+  },
+  "greek-isles-turkey": {
+   "slug": "greek-isles-turkey",
+   "img": "greece",
+   "title": {
+    "en": "Greek Isles & Türkiye",
+    "bn": "গ্রিক দ্বীপপুঞ্জ ও তুরস্ক"
+   },
+   "ship": "Aegean Pearl",
+   "line": "Azure Line",
+   "region": "europe",
+   "nights": 7,
+   "price": 189000,
+   "old": 205000,
+   "rating": 4.9,
+   "reviews": 156,
+   "depart": "2027-05-22",
+   "port": {
+    "en": "Athens",
+    "bn": "এথেন্স"
+   },
+   "ports": [
+    {
+     "en": "Athens",
+     "bn": "এথেন্স"
+    },
+    {
+     "en": "Mykonos",
+     "bn": "মিকোনোস"
+    },
+    {
+     "en": "Kuşadası",
+     "bn": "কুশাদাসি"
+    },
+    {
+     "en": "Santorini",
+     "bn": "সান্তোরিনি"
+    },
+    {
+     "en": "Athens",
+     "bn": "এথেন্স"
+    }
+   ],
+   "cabin": {
+    "en": "Balcony cabin",
+    "bn": "ব্যালকনি কেবিন"
+   },
+   "hl": [
+    {
+     "en": "Sunset in Santorini",
+     "bn": "সান্তোরিনিতে সূর্যাস্ত"
+    },
+    {
+     "en": "Ephesus excursion",
+     "bn": "এফেসাস ভ্রমণ"
+    },
+    {
+     "en": "Schengen visa support",
+     "bn": "শেনজেন ভিসা সহায়তা"
+    }
+   ],
+   "badge": {
+    "en": "New",
+    "bn": "নতুন"
+   },
+   "cancel": "partial"
+  },
+  "halong-bay-overnight": {
+   "slug": "halong-bay-overnight",
+   "img": "halong",
+   "title": {
+    "en": "Ha Long Bay Overnight Junk Cruise",
+    "bn": "হা লং বে রাত্রিযাপন জাঙ্ক ক্রুজ"
+   },
+   "ship": "Jade Sail",
+   "line": "Bay Heritage",
+   "region": "asia",
+   "nights": 2,
+   "price": 38900,
+   "old": null,
+   "rating": 4.8,
+   "reviews": 334,
+   "depart": "2026-11-28",
+   "port": {
+    "en": "Hanoi",
+    "bn": "হ্যানয়"
+   },
+   "ports": [
+    {
+     "en": "Hanoi",
+     "bn": "হ্যানয়"
+    },
+    {
+     "en": "Ha Long Bay",
+     "bn": "হা লং বে"
+    },
+    {
+     "en": "Lan Ha Bay",
+     "bn": "লান হা বে"
+    },
+    {
+     "en": "Hanoi",
+     "bn": "হ্যানয়"
+    }
+   ],
+   "cabin": {
+    "en": "Deluxe cabin",
+    "bn": "ডিলাক্স কেবিন"
+   },
+   "hl": [
+    {
+     "en": "Kayaking among limestone karsts",
+     "bn": "চুনাপাথরের পাহাড়ের মাঝে কায়াকিং"
+    },
+    {
+     "en": "Sunrise tai chi on deck",
+     "bn": "ডেকে সূর্যোদয়ে তাই চি"
+    },
+    {
+     "en": "Cooking class",
+     "bn": "রান্নার ক্লাস"
+    }
+   ],
+   "badge": null,
+   "cancel": "partial"
+  },
+  "sundarbans-luxury-3-nights": {
+   "slug": "sundarbans-luxury-3-nights",
+   "img": "sundarbans",
+   "title": {
+    "en": "Sundarbans Luxury River Cruise",
+    "bn": "সুন্দরবন বিলাসবহুল নৌ-ক্রুজ"
+   },
+   "ship": "MV Bonolata",
+   "line": "Musafir River Cruises",
+   "region": "bd",
+   "nights": 3,
+   "price": 21500,
+   "old": 24000,
+   "rating": 4.9,
+   "reviews": 521,
+   "depart": "2026-12-04",
+   "port": {
+    "en": "Khulna",
+    "bn": "খুলনা"
+   },
+   "ports": [
+    {
+     "en": "Khulna",
+     "bn": "খুলনা"
+    },
+    {
+     "en": "Harbaria",
+     "bn": "হারবাড়িয়া"
+    },
+    {
+     "en": "Kotka",
+     "bn": "কটকা"
+    },
+    {
+     "en": "Kochikhali",
+     "bn": "কচিখালী"
+    },
+    {
+     "en": "Khulna",
+     "bn": "খুলনা"
+    }
+   ],
+   "cabin": {
+    "en": "AC twin cabin",
+    "bn": "এসি টুইন কেবিন"
+   },
+   "hl": [
+    {
+     "en": "Forest guard & naturalist",
+     "bn": "বনরক্ষী ও প্রকৃতিবিদ"
+    },
+    {
+     "en": "Fresh-catch seafood",
+     "bn": "টাটকা সামুদ্রিক খাবার"
+    },
+    {
+     "en": "Country boat safaris",
+     "bn": "দেশি নৌকায় সাফারি"
+    }
+   ],
+   "badge": {
+    "en": "Domestic",
+    "bn": "দেশীয়"
+   },
+   "cancel": "free7"
+  },
+  "maldives-island-hopper": {
+   "slug": "maldives-island-hopper",
+   "img": "maldives",
+   "title": {
+    "en": "Maldives Island-Hopper Yacht",
+    "bn": "মালদ্বীপ আইল্যান্ড-হপার ইয়ট"
+   },
+   "ship": "Blue Manta",
+   "line": "Atoll Yachts",
+   "region": "asia",
+   "nights": 5,
+   "price": 145000,
+   "old": null,
+   "rating": 4.9,
+   "reviews": 98,
+   "depart": "2027-02-12",
+   "port": {
+    "en": "Malé",
+    "bn": "মালে"
+   },
+   "ports": [
+    {
+     "en": "Malé",
+     "bn": "মালে"
+    },
+    {
+     "en": "Maafushi",
+     "bn": "মাফুশি"
+    },
+    {
+     "en": "Rasdhoo",
+     "bn": "রাসধু"
+    },
+    {
+     "en": "Fulidhoo",
+     "bn": "ফুলিধু"
+    },
+    {
+     "en": "Malé",
+     "bn": "মালে"
+    }
+   ],
+   "cabin": {
+    "en": "Double cabin",
+    "bn": "ডাবল কেবিন"
+   },
+   "hl": [
+    {
+     "en": "Snorkelling with mantas",
+     "bn": "ম্যান্টার সাথে স্নরকেলিং"
+    },
+    {
+     "en": "Sandbank picnic",
+     "bn": "স্যান্ডব্যাঙ্কে পিকনিক"
+    },
+    {
+     "en": "All meals & soft drinks",
+     "bn": "সব খাবার ও কোমল পানীয়"
+    }
+   ],
+   "badge": null,
+   "cancel": "partial"
+  }
+ },
+ "AC": {
+  "cappadocia-balloon-sunrise": {
+   "slug": "cappadocia-balloon-sunrise",
+   "img": "cappadocia",
+   "title": {
+    "en": "Cappadocia hot-air balloon flight at sunrise",
+    "bn": "সূর্যোদয়ে কাপাদোকিয়ার হট-এয়ার বেলুন ফ্লাইট"
+   },
+   "city": {
+    "en": "Cappadocia, Türkiye",
+    "bn": "কাপাদোকিয়া, তুরস্ক"
+   },
+   "cat": "adventure",
+   "dur": {
+    "en": "3–4 hours",
+    "bn": "৩–৪ ঘণ্টা"
+   },
+   "price": 24500,
+   "old": 27500,
+   "rating": 4.9,
+   "reviews": 3812,
+   "cancel": "free24",
+   "hl": [
+    {
+     "en": "1 hour flight over fairy chimneys",
+     "bn": "পরী-চিমনির ওপর ১ ঘণ্টার ফ্লাইট"
+    },
+    {
+     "en": "Hotel pickup & champagne-free toast",
+     "bn": "হোটেল পিকআপ ও উদ্‌যাপন"
+    },
+    {
+     "en": "Flight certificate",
+     "bn": "ফ্লাইট সার্টিফিকেট"
+    }
+   ],
+   "langs": [
+    "en",
+    "bn"
+   ],
+   "instant": true,
+   "badge": {
+    "en": "Likely to sell out",
+    "bn": "দ্রুত শেষ হতে পারে"
+   },
+   "pickup": true,
+   "dest": "turkey",
+   "region": "intl"
+  },
+  "saint-martin-day-cruise": {
+   "slug": "saint-martin-day-cruise",
+   "img": "stmartin",
+   "title": {
+    "en": "Saint Martin's Island day cruise from Teknaf",
+    "bn": "টেকনাফ থেকে সেন্ট মার্টিন দ্বীপ ডে-ক্রুজ"
+   },
+   "city": {
+    "en": "Cox's Bazar, Bangladesh",
+    "bn": "কক্সবাজার, বাংলাদেশ"
+   },
+   "cat": "water",
+   "dur": {
+    "en": "12 hours",
+    "bn": "১২ ঘণ্টা"
+   },
+   "price": 3200,
+   "old": null,
+   "rating": 4.6,
+   "reviews": 1240,
+   "cancel": "free24",
+   "hl": [
+    {
+     "en": "Return ship ticket",
+     "bn": "যাওয়া-আসার জাহাজের টিকিট"
+    },
+    {
+     "en": "Seafood lunch",
+     "bn": "সামুদ্রিক খাবারে দুপুরের খাবার"
+    },
+    {
+     "en": "Chera Dwip by van",
+     "bn": "ভ্যানে ছেঁড়া দ্বীপ"
+    }
+   ],
+   "langs": [
+    "en",
+    "bn"
+   ],
+   "instant": true,
+   "badge": null,
+   "pickup": true,
+   "dest": "coxs-bazar",
+   "region": "bd"
+  },
+  "sundarbans-day-safari": {
+   "slug": "sundarbans-day-safari",
+   "img": "sundarbans",
+   "title": {
+    "en": "Sundarbans day safari from Mongla",
+    "bn": "মোংলা থেকে সুন্দরবন ডে-সাফারি"
+   },
+   "city": {
+    "en": "Khulna, Bangladesh",
+    "bn": "খুলনা, বাংলাদেশ"
+   },
+   "cat": "tour",
+   "dur": {
+    "en": "9 hours",
+    "bn": "৯ ঘণ্টা"
+   },
+   "price": 4500,
+   "old": 5200,
+   "rating": 4.7,
+   "reviews": 688,
+   "cancel": "free72",
+   "hl": [
+    {
+     "en": "Karamjal wildlife centre",
+     "bn": "করমজল বন্যপ্রাণী কেন্দ্র"
+    },
+    {
+     "en": "Armed forest guard",
+     "bn": "সশস্ত্র বনরক্ষী"
+    },
+    {
+     "en": "Lunch on boat",
+     "bn": "নৌকায় দুপুরের খাবার"
+    }
+   ],
+   "langs": [
+    "en",
+    "bn"
+   ],
+   "instant": true,
+   "badge": null,
+   "pickup": false,
+   "dest": "sundarbans",
+   "region": "bd"
+  },
+  "dubai-desert-safari": {
+   "slug": "dubai-desert-safari",
+   "img": "dubai",
+   "title": {
+    "en": "Dubai evening desert safari with BBQ dinner",
+    "bn": "বারবিকিউ ডিনারসহ দুবাই সন্ধ্যার মরু সাফারি"
+   },
+   "city": {
+    "en": "Dubai, UAE",
+    "bn": "দুবাই, সংযুক্ত আরব আমিরাত"
+   },
+   "cat": "adventure",
+   "dur": {
+    "en": "6 hours",
+    "bn": "৬ ঘণ্টা"
+   },
+   "price": 6900,
+   "old": 8500,
+   "rating": 4.8,
+   "reviews": 9214,
+   "cancel": "free24",
+   "hl": [
+    {
+     "en": "Dune bashing in 4x4",
+     "bn": "৪x৪-এ ডিউন ব্যাশিং"
+    },
+    {
+     "en": "Camel ride & sandboarding",
+     "bn": "উটের পিঠে চড়া ও স্যান্ডবোর্ডিং"
+    },
+    {
+     "en": "Live shows & BBQ",
+     "bn": "লাইভ শো ও বারবিকিউ"
+    }
+   ],
+   "langs": [
+    "en",
+    "bn"
+   ],
+   "instant": true,
+   "badge": {
+    "en": "Bestseller",
+    "bn": "সেরা বিক্রিত"
+   },
+   "pickup": true,
+   "dest": "dubai",
+   "region": "intl"
+  },
+  "bali-ubud-swing-waterfalls": {
+   "slug": "bali-ubud-swing-waterfalls",
+   "img": "bali",
+   "title": {
+    "en": "Ubud jungle swing, rice terraces & waterfalls",
+    "bn": "উবুদ জঙ্গল সুইং, ধানক্ষেত ও ঝরনা"
+   },
+   "city": {
+    "en": "Bali, Indonesia",
+    "bn": "বালি, ইন্দোনেশিয়া"
+   },
+   "cat": "tour",
+   "dur": {
+    "en": "10 hours",
+    "bn": "১০ ঘণ্টা"
+   },
+   "price": 7400,
+   "old": null,
+   "rating": 4.8,
+   "reviews": 5120,
+   "cancel": "free24",
+   "hl": [
+    {
+     "en": "Tegallalang rice terraces",
+     "bn": "তেগাল্লালাং ধানক্ষেত"
+    },
+    {
+     "en": "Tegenungan waterfall",
+     "bn": "তেগেনুংগান ঝরনা"
+    },
+    {
+     "en": "Private driver-guide",
+     "bn": "প্রাইভেট ড্রাইভার-গাইড"
+    }
+   ],
+   "langs": [
+    "en",
+    "bn"
+   ],
+   "instant": true,
+   "badge": null,
+   "pickup": true,
+   "dest": "bali",
+   "region": "intl"
+  },
+  "singapore-universal-studios": {
+   "slug": "singapore-universal-studios",
+   "img": "singapore",
+   "title": {
+    "en": "Universal Studios Singapore — 1-day ticket",
+    "bn": "ইউনিভার্সাল স্টুডিওস সিঙ্গাপুর — ১ দিনের টিকিট"
+   },
+   "city": {
+    "en": "Sentosa, Singapore",
+    "bn": "সেন্তোসা, সিঙ্গাপুর"
+   },
+   "cat": "tickets",
+   "dur": {
+    "en": "Full day",
+    "bn": "সারাদিন"
+   },
+   "price": 8900,
+   "old": 9600,
+   "rating": 4.7,
+   "reviews": 12840,
+   "cancel": "none",
+   "hl": [
+    {
+     "en": "Instant e-ticket",
+     "bn": "তাৎক্ষণিক ই-টিকিট"
+    },
+    {
+     "en": "All rides & shows",
+     "bn": "সব রাইড ও শো"
+    },
+    {
+     "en": "Skip the ticket queue",
+     "bn": "টিকিটের লাইন এড়িয়ে"
+    }
+   ],
+   "langs": [
+    "en",
+    "bn"
+   ],
+   "instant": true,
+   "badge": null,
+   "pickup": false,
+   "dest": "singapore-malaysia",
+   "region": "intl"
+  },
+  "phuket-phi-phi-speedboat": {
+   "slug": "phuket-phi-phi-speedboat",
+   "img": "phuket",
+   "title": {
+    "en": "Phi Phi & Maya Bay speedboat tour with snorkelling",
+    "bn": "স্নরকেলিংসহ ফি ফি ও মায়া বে স্পিডবোট ট্যুর"
+   },
+   "city": {
+    "en": "Phuket, Thailand",
+    "bn": "ফুকেট, থাইল্যান্ড"
+   },
+   "cat": "water",
+   "dur": {
+    "en": "8 hours",
+    "bn": "৮ ঘণ্টা"
+   },
+   "price": 6200,
+   "old": 7000,
+   "rating": 4.6,
+   "reviews": 7322,
+   "cancel": "free24",
+   "hl": [
+    {
+     "en": "Maya Bay & Pileh Lagoon",
+     "bn": "মায়া বে ও পিলেহ লেগুন"
+    },
+    {
+     "en": "Snorkel gear included",
+     "bn": "স্নরকেল সরঞ্জাম অন্তর্ভুক্ত"
+    },
+    {
+     "en": "Thai buffet lunch",
+     "bn": "থাই বুফে লাঞ্চ"
+    }
+   ],
+   "langs": [
+    "en",
+    "bn"
+   ],
+   "instant": true,
+   "badge": null,
+   "pickup": true,
+   "dest": "thailand",
+   "region": "intl"
+  },
+  "old-dhaka-food-walk": {
+   "slug": "old-dhaka-food-walk",
+   "img": "dhaka",
+   "title": {
+    "en": "Old Dhaka food & heritage walk",
+    "bn": "পুরান ঢাকার খাবার ও ঐতিহ্য হাঁটা"
+   },
+   "city": {
+    "en": "Dhaka, Bangladesh",
+    "bn": "ঢাকা, বাংলাদেশ"
+   },
+   "cat": "food",
+   "dur": {
+    "en": "4 hours",
+    "bn": "৪ ঘণ্টা"
+   },
+   "price": 2800,
+   "old": null,
+   "rating": 4.9,
+   "reviews": 864,
+   "cancel": "free24",
+   "hl": [
+    {
+     "en": "10+ tastings incl. biryani & lassi",
+     "bn": "বিরিয়ানি ও লাচ্ছিসহ ১০+ স্বাদ"
+    },
+    {
+     "en": "Ahsan Manzil & Shankhari Bazar",
+     "bn": "আহসান মঞ্জিল ও শাঁখারীবাজার"
+    },
+    {
+     "en": "Rickshaw ride",
+     "bn": "রিকশা ভ্রমণ"
+    }
+   ],
+   "langs": [
+    "en",
+    "bn"
+   ],
+   "instant": true,
+   "badge": {
+    "en": "Local favourite",
+    "bn": "স্থানীয়দের প্রিয়"
+   },
+   "pickup": false,
+   "dest": null,
+   "region": "bd"
+  },
+  "pokhara-paragliding": {
+   "slug": "pokhara-paragliding",
+   "img": "nepal",
+   "title": {
+    "en": "Pokhara tandem paragliding over Phewa Lake",
+    "bn": "ফেওয়া লেকের ওপর পোখারা ট্যান্ডেম প্যারাগ্লাইডিং"
+   },
+   "city": {
+    "en": "Pokhara, Nepal",
+    "bn": "পোখারা, নেপাল"
+   },
+   "cat": "adventure",
+   "dur": {
+    "en": "30 min flight",
+    "bn": "৩০ মিনিটের ফ্লাইট"
+   },
+   "price": 9800,
+   "old": null,
+   "rating": 4.9,
+   "reviews": 2210,
+   "cancel": "free72",
+   "hl": [
+    {
+     "en": "Himalaya views on clear days",
+     "bn": "পরিষ্কার দিনে হিমালয়ের দৃশ্য"
+    },
+    {
+     "en": "Licensed pilot",
+     "bn": "লাইসেন্সধারী পাইলট"
+    },
+    {
+     "en": "GoPro video add-on",
+     "bn": "গোপ্রো ভিডিও অ্যাড-অন"
+    }
+   ],
+   "langs": [
+    "en",
+    "bn"
+   ],
+   "instant": true,
+   "badge": null,
+   "pickup": true,
+   "dest": "nepal",
+   "region": "intl"
+  },
+  "istanbul-bosphorus-dinner-cruise": {
+   "slug": "istanbul-bosphorus-dinner-cruise",
+   "img": "istanbul",
+   "title": {
+    "en": "Bosphorus dinner cruise with Turkish night show",
+    "bn": "টার্কিশ নাইট শোসহ বসফরাস ডিনার ক্রুজ"
+   },
+   "city": {
+    "en": "Istanbul, Türkiye",
+    "bn": "ইস্তাম্বুল, তুরস্ক"
+   },
+   "cat": "water",
+   "dur": {
+    "en": "3.5 hours",
+    "bn": "৩.৫ ঘণ্টা"
+   },
+   "price": 5600,
+   "old": 6400,
+   "rating": 4.5,
+   "reviews": 4108,
+   "cancel": "free24",
+   "hl": [
+    {
+     "en": "3-course dinner",
+     "bn": "৩-কোর্স ডিনার"
+    },
+    {
+     "en": "Whirling dervish & folk dance",
+     "bn": "ঘূর্ণি দরবেশ ও লোকনৃত্য"
+    },
+    {
+     "en": "Hotel transfers",
+     "bn": "হোটেল ট্রান্সফার"
+    }
+   ],
+   "langs": [
+    "en",
+    "bn"
+   ],
+   "instant": true,
+   "badge": null,
+   "pickup": true,
+   "dest": "turkey",
+   "region": "intl"
+  },
+  "ratargul-boat-ride": {
+   "slug": "ratargul-boat-ride",
+   "img": "ratargul",
+   "title": {
+    "en": "Ratargul swamp forest boat ride",
+    "bn": "রাতারগুল জলাবনে নৌকা ভ্রমণ"
+   },
+   "city": {
+    "en": "Sylhet, Bangladesh",
+    "bn": "সিলেট, বাংলাদেশ"
+   },
+   "cat": "water",
+   "dur": {
+    "en": "5 hours",
+    "bn": "৫ ঘণ্টা"
+   },
+   "price": 2400,
+   "old": null,
+   "rating": 4.7,
+   "reviews": 532,
+   "cancel": "free24",
+   "hl": [
+    {
+     "en": "Country boat with boatman",
+     "bn": "মাঝিসহ দেশি নৌকা"
+    },
+    {
+     "en": "Watchtower view",
+     "bn": "ওয়াচটাওয়ার থেকে দৃশ্য"
+    },
+    {
+     "en": "Return car from Sylhet",
+     "bn": "সিলেট থেকে যাওয়া-আসার গাড়ি"
+    }
+   ],
+   "langs": [
+    "en",
+    "bn"
+   ],
+   "instant": true,
+   "badge": null,
+   "pickup": true,
+   "dest": "sylhet",
+   "region": "bd"
+  },
+  "dhaka-airport-transfer": {
+   "slug": "dhaka-airport-transfer",
+   "img": "plane",
+   "title": {
+    "en": "Dhaka airport private transfer (HSIA)",
+    "bn": "ঢাকা এয়ারপোর্ট প্রাইভেট ট্রান্সফার (শাহজালাল বিমানবন্দর)"
+   },
+   "city": {
+    "en": "Dhaka, Bangladesh",
+    "bn": "ঢাকা, বাংলাদেশ"
+   },
+   "cat": "transfer",
+   "dur": {
+    "en": "Up to 1.5 hours",
+    "bn": "সর্বোচ্চ ১.৫ ঘণ্টা"
+   },
+   "price": 1800,
+   "old": null,
+   "rating": 4.8,
+   "reviews": 3120,
+   "cancel": "free24",
+   "hl": [
+    {
+     "en": "Meet & greet with name board",
+     "bn": "নাম-বোর্ডসহ অভ্যর্থনা"
+    },
+    {
+     "en": "60 min free waiting",
+     "bn": "৬০ মিনিট ফ্রি অপেক্ষা"
+    },
+    {
+     "en": "AC sedan or microbus",
+     "bn": "এসি সেডান বা মাইক্রোবাস"
+    }
+   ],
+   "langs": [
+    "en",
+    "bn"
+   ],
+   "instant": true,
+   "badge": null,
+   "pickup": false,
+   "dest": null,
+   "region": "bd"
+  }
+ },
+ "HO": {
+  "ocean-pearl-resort": {
+   "slug": "ocean-pearl-resort",
+   "img": "resort",
+   "name": {
+    "en": "Ocean Pearl Resort & Spa",
+    "bn": "ওশান পার্ল রিসোর্ট অ্যান্ড স্পা"
+   },
+   "city": {
+    "en": "Cox's Bazar",
+    "bn": "কক্সবাজার"
+   },
+   "stars": 5,
+   "price": 14500,
+   "old": 17800,
+   "rating": 9.1,
+   "reviews": 1284,
+   "dist": {
+    "en": "50 m from Inani beach",
+    "bn": "ইনানী সৈকত থেকে ৫০ মিটার"
+   },
+   "amen": [
+    "wifi",
+    "pool",
+    "spa",
+    "parking",
+    "restaurant"
+   ],
+   "kind": "hotel",
+   "refundable": true,
+   "breakfast": true
+  },
+  "cloud-valley-resort": {
+   "slug": "cloud-valley-resort",
+   "img": "sajek",
+   "name": {
+    "en": "Cloud Valley Eco Resort",
+    "bn": "ক্লাউড ভ্যালি ইকো রিসোর্ট"
+   },
+   "city": {
+    "en": "Sajek Valley",
+    "bn": "সাজেক ভ্যালি"
+   },
+   "stars": 3,
+   "price": 6200,
+   "old": null,
+   "rating": 8.7,
+   "reviews": 412,
+   "dist": {
+    "en": "Ruilui Para, valley view",
+    "bn": "রুইলুই পাড়া, ভ্যালি ভিউ"
+   },
+   "amen": [
+    "wifi",
+    "restaurant",
+    "parking"
+   ],
+   "kind": "hotel",
+   "refundable": false,
+   "breakfast": true
+  },
+  "grand-tea-valley": {
+   "slug": "grand-tea-valley",
+   "img": "darjeeling",
+   "name": {
+    "en": "Grand Tea Valley Resort",
+    "bn": "গ্র্যান্ড টি ভ্যালি রিসোর্ট"
+   },
+   "city": {
+    "en": "Srimangal",
+    "bn": "শ্রীমঙ্গল"
+   },
+   "stars": 4,
+   "price": 9800,
+   "old": 11000,
+   "rating": 8.9,
+   "reviews": 655,
+   "dist": {
+    "en": "Inside a tea estate",
+    "bn": "চা-বাগানের ভেতরে"
+   },
+   "amen": [
+    "wifi",
+    "pool",
+    "restaurant",
+    "gym"
+   ],
+   "kind": "hotel",
+   "refundable": true,
+   "breakfast": true
+  },
+  "himalaya-view-pokhara": {
+   "slug": "himalaya-view-pokhara",
+   "img": "nepal",
+   "name": {
+    "en": "Himalaya View Lakeside Hotel",
+    "bn": "হিমালয় ভিউ লেকসাইড হোটেল"
+   },
+   "city": {
+    "en": "Pokhara",
+    "bn": "পোখারা"
+   },
+   "stars": 4,
+   "price": 11800,
+   "old": 13500,
+   "rating": 9.0,
+   "reviews": 1210,
+   "dist": {
+    "en": "Lakeside, 3 min walk to Phewa Lake",
+    "bn": "লেকসাইড, ফেওয়া লেক থেকে ৩ মিনিট হাঁটা"
+   },
+   "amen": [
+    "wifi",
+    "restaurant",
+    "shuttle",
+    "family"
+   ],
+   "kind": "hotel",
+   "refundable": true,
+   "breakfast": true
+  },
+  "ubud-jungle-villas": {
+   "slug": "ubud-jungle-villas",
+   "img": "bali",
+   "name": {
+    "en": "Ubud Jungle Pool Villas",
+    "bn": "উবুদ জঙ্গল পুল ভিলা"
+   },
+   "city": {
+    "en": "Ubud, Bali",
+    "bn": "উবুদ, বালি"
+   },
+   "stars": 5,
+   "price": 21500,
+   "old": null,
+   "rating": 9.3,
+   "reviews": 980,
+   "dist": {
+    "en": "Rice-terrace view, 10 min to Ubud centre",
+    "bn": "ধানক্ষেতের ভিউ, উবুদ কেন্দ্র থেকে ১০ মিনিট"
+   },
+   "amen": [
+    "wifi",
+    "pool",
+    "spa",
+    "family"
+   ],
+   "kind": "hotel",
+   "refundable": true,
+   "breakfast": true
+  },
+  "bosphorus-boutique": {
+   "slug": "bosphorus-boutique",
+   "img": "istanbul",
+   "name": {
+    "en": "Bosphorus Boutique Hotel",
+    "bn": "বসফরাস বুটিক হোটেল"
+   },
+   "city": {
+    "en": "Istanbul",
+    "bn": "ইস্তাম্বুল"
+   },
+   "stars": 4,
+   "price": 16800,
+   "old": 19500,
+   "rating": 9.2,
+   "reviews": 876,
+   "dist": {
+    "en": "Sultanahmet, 400 m to Blue Mosque",
+    "bn": "সুলতানাহমেত, ব্লু মস্ক থেকে ৪০০ মিটার"
+   },
+   "amen": [
+    "wifi",
+    "restaurant",
+    "spa"
+   ],
+   "kind": "hotel",
+   "refundable": true,
+   "breakfast": true
+  },
+  "lagoon-water-villas": {
+   "slug": "lagoon-water-villas",
+   "img": "maldives",
+   "name": {
+    "en": "Lagoon Water Villas Maldives",
+    "bn": "লেগুন ওয়াটার ভিলাস মালদ্বীপ"
+   },
+   "city": {
+    "en": "South Malé Atoll",
+    "bn": "সাউথ মালে অ্যাটল"
+   },
+   "stars": 5,
+   "price": 58000,
+   "old": 64000,
+   "rating": 9.4,
+   "reviews": 742,
+   "dist": {
+    "en": "25 min speedboat from airport",
+    "bn": "বিমানবন্দর থেকে ২৫ মিনিট স্পিডবোটে"
+   },
+   "amen": [
+    "wifi",
+    "pool",
+    "spa",
+    "restaurant"
+   ],
+   "kind": "hotel",
+   "refundable": true,
+   "breakfast": true
+  },
+  "marina-skyline-dubai": {
+   "slug": "marina-skyline-dubai",
+   "img": "dubai",
+   "name": {
+    "en": "Marina Skyline Hotel Dubai",
+    "bn": "মেরিনা স্কাইলাইন হোটেল দুবাই"
+   },
+   "city": {
+    "en": "Dubai",
+    "bn": "দুবাই"
+   },
+   "stars": 4,
+   "price": 15200,
+   "old": null,
+   "rating": 8.6,
+   "reviews": 1932,
+   "dist": {
+    "en": "Dubai Marina, 2 min to metro",
+    "bn": "দুবাই মেরিনা, মেট্রো থেকে ২ মিনিট"
+   },
+   "amen": [
+    "wifi",
+    "pool",
+    "gym",
+    "parking"
+   ],
+   "kind": "hotel",
+   "refundable": true,
+   "breakfast": false
+  }
+ },
+ "VI": {
+  "thailand": {
+   "slug": "thailand",
+   "flag": "🇹🇭",
+   "country": {
+    "en": "Thailand",
+    "bn": "থাইল্যান্ড"
+   },
+   "vtype": {
+    "en": "Tourist e-Visa",
+    "bn": "ট্যুরিস্ট ই-ভিসা"
+   },
+   "days": {
+    "en": "10–14 working days",
+    "bn": "১০–১৪ কর্মদিবস"
+   },
+   "fee": 6500,
+   "validity": {
+    "en": "90 days",
+    "bn": "৯০ দিন"
+   },
+   "stay": {
+    "en": "60 days",
+    "bn": "৬০ দিন"
+   },
+   "entry": {
+    "en": "Single",
+    "bn": "একক"
+   },
+   "img": "phuket",
+   "docs_extra": []
+  },
+  "malaysia": {
+   "slug": "malaysia",
+   "flag": "🇲🇾",
+   "country": {
+    "en": "Malaysia",
+    "bn": "মালয়েশিয়া"
+   },
+   "vtype": {
+    "en": "eVisa",
+    "bn": "ই-ভিসা"
+   },
+   "days": {
+    "en": "5–7 working days",
+    "bn": "৫–৭ কর্মদিবস"
+   },
+   "fee": 5800,
+   "validity": {
+    "en": "3 months",
+    "bn": "৩ মাস"
+   },
+   "stay": {
+    "en": "30 days",
+    "bn": "৩০ দিন"
+   },
+   "entry": {
+    "en": "Single",
+    "bn": "একক"
+   },
+   "img": "malaysia",
+   "docs_extra": []
+  },
+  "singapore": {
+   "slug": "singapore",
+   "flag": "🇸🇬",
+   "country": {
+    "en": "Singapore",
+    "bn": "সিঙ্গাপুর"
+   },
+   "vtype": {
+    "en": "Tourist visa",
+    "bn": "ট্যুরিস্ট ভিসা"
+   },
+   "days": {
+    "en": "7–10 working days",
+    "bn": "৭–১০ কর্মদিবস"
+   },
+   "fee": 7200,
+   "validity": {
+    "en": "63 days",
+    "bn": "৬৩ দিন"
+   },
+   "stay": {
+    "en": "30 days",
+    "bn": "৩০ দিন"
+   },
+   "entry": {
+    "en": "Multiple",
+    "bn": "একাধিক"
+   },
+   "img": "singapore",
+   "docs_extra": []
+  },
+  "uae": {
+   "slug": "uae",
+   "flag": "🇦🇪",
+   "country": {
+    "en": "United Arab Emirates",
+    "bn": "সংযুক্ত আরব আমিরাত"
+   },
+   "vtype": {
+    "en": "30-day e-Visa",
+    "bn": "৩০ দিনের ই-ভিসা"
+   },
+   "days": {
+    "en": "3–5 working days",
+    "bn": "৩–৫ কর্মদিবস"
+   },
+   "fee": 14500,
+   "validity": {
+    "en": "58 days",
+    "bn": "৫৮ দিন"
+   },
+   "stay": {
+    "en": "30 days",
+    "bn": "৩০ দিন"
+   },
+   "entry": {
+    "en": "Single",
+    "bn": "একক"
+   },
+   "img": "dubai",
+   "docs_extra": []
+  },
+  "vietnam": {
+   "slug": "vietnam",
+   "flag": "🇻🇳",
+   "country": {
+    "en": "Vietnam",
+    "bn": "ভিয়েতনাম"
+   },
+   "vtype": {
+    "en": "Tourist e-Visa",
+    "bn": "ট্যুরিস্ট ই-ভিসা"
+   },
+   "days": {
+    "en": "5–7 working days",
+    "bn": "৫–৭ কর্মদিবস"
+   },
+   "fee": 7800,
+   "validity": {
+    "en": "90 days",
+    "bn": "৯০ দিন"
+   },
+   "stay": {
+    "en": "90 days",
+    "bn": "৯০ দিন"
+   },
+   "entry": {
+    "en": "Single / Multiple",
+    "bn": "একক / একাধিক"
+   },
+   "img": "halong",
+   "docs_extra": []
+  },
+  "turkey": {
+   "slug": "turkey",
+   "flag": "🇹🇷",
+   "country": {
+    "en": "Türkiye",
+    "bn": "তুরস্ক"
+   },
+   "vtype": {
+    "en": "Sticker visa",
+    "bn": "স্টিকার ভিসা"
+   },
+   "days": {
+    "en": "15–20 working days",
+    "bn": "১৫–২০ কর্মদিবস"
+   },
+   "fee": 11000,
+   "validity": {
+    "en": "180 days",
+    "bn": "১৮০ দিন"
+   },
+   "stay": {
+    "en": "30 days",
+    "bn": "৩০ দিন"
+   },
+   "entry": {
+    "en": "Single",
+    "bn": "একক"
+   },
+   "img": "cappadocia",
+   "docs_extra": []
+  },
+  "india": {
+   "slug": "india",
+   "flag": "🇮🇳",
+   "country": {
+    "en": "India",
+    "bn": "ভারত"
+   },
+   "vtype": {
+    "en": "Tourist visa (IVAC)",
+    "bn": "ট্যুরিস্ট ভিসা (আইভ্যাক)"
+   },
+   "days": {
+    "en": "7–15 working days",
+    "bn": "৭–১৫ কর্মদিবস"
+   },
+   "fee": 2500,
+   "validity": {
+    "en": "Up to 1 year",
+    "bn": "সর্বোচ্চ ১ বছর"
+   },
+   "stay": {
+    "en": "90 days per visit",
+    "bn": "প্রতিবার ৯০ দিন"
+   },
+   "entry": {
+    "en": "Multiple",
+    "bn": "একাধিক"
+   },
+   "img": "kashmir",
+   "docs_extra": []
+  },
+  "schengen": {
+   "slug": "schengen",
+   "flag": "🇪🇺",
+   "country": {
+    "en": "Schengen (Europe)",
+    "bn": "শেনজেন (ইউরোপ)"
+   },
+   "vtype": {
+    "en": "Short-stay C visa",
+    "bn": "স্বল্পমেয়াদি সি ভিসা"
+   },
+   "days": {
+    "en": "15–45 days",
+    "bn": "১৫–৪৫ দিন"
+   },
+   "fee": 16500,
+   "validity": {
+    "en": "As granted",
+    "bn": "অনুমোদন অনুযায়ী"
+   },
+   "stay": {
+    "en": "Up to 90 days",
+    "bn": "সর্বোচ্চ ৯০ দিন"
+   },
+   "entry": {
+    "en": "Single / Multiple",
+    "bn": "একক / একাধিক"
+   },
+   "img": "swiss",
+   "docs_extra": []
+  },
+  "japan": {
+   "slug": "japan",
+   "flag": "🇯🇵",
+   "country": {
+    "en": "Japan",
+    "bn": "জাপান"
+   },
+   "vtype": {
+    "en": "Temporary visitor visa",
+    "bn": "টেম্পোরারি ভিজিটর ভিসা"
+   },
+   "days": {
+    "en": "7–10 working days",
+    "bn": "৭–১০ কর্মদিবস"
+   },
+   "fee": 4500,
+   "validity": {
+    "en": "90 days",
+    "bn": "৯০ দিন"
+   },
+   "stay": {
+    "en": "15 days",
+    "bn": "১৫ দিন"
+   },
+   "entry": {
+    "en": "Single",
+    "bn": "একক"
+   },
+   "img": "japan",
+   "docs_extra": []
+  },
+  "egypt": {
+   "slug": "egypt",
+   "flag": "🇪🇬",
+   "country": {
+    "en": "Egypt",
+    "bn": "মিশর"
+   },
+   "vtype": {
+    "en": "Tourist visa",
+    "bn": "ট্যুরিস্ট ভিসা"
+   },
+   "days": {
+    "en": "10–15 working days",
+    "bn": "১০–১৫ কর্মদিবস"
+   },
+   "fee": 9500,
+   "validity": {
+    "en": "3 months",
+    "bn": "৩ মাস"
+   },
+   "stay": {
+    "en": "30 days",
+    "bn": "৩০ দিন"
+   },
+   "entry": {
+    "en": "Single",
+    "bn": "একক"
+   },
+   "img": "egypt",
+   "docs_extra": []
+  }
+ },
+ "MY_BOOKINGS": [
+  {
+   "ref": "MSF-26-48213",
+   "kind": "tour",
+   "slug": "maldives-honeymoon",
+   "title": {
+    "en": "Maldives Water-Villa Honeymoon",
+    "bn": "মালদ্বীপ ওয়াটার-ভিলা হানিমুন"
+   },
+   "img": "maldives",
+   "start": "2026-12-12",
+   "end": "2026-12-16",
+   "pax": 2,
+   "total": 289000,
+   "paid": 86700,
+   "status": "partial",
+   "sub": {
+    "en": "Water villa · 4 nights · 2 adults",
+    "bn": "ওয়াটার ভিলা · ৪ রাত · ২ প্রাপ্তবয়স্ক"
+   },
+   "booked": "2026-09-28",
+   "upcoming": true
+  },
+  {
+   "ref": "MSF-26-48377",
+   "kind": "flight",
+   "slug": null,
+   "title": {
+    "en": "Dhaka → Malé (BS 341)",
+    "bn": "ঢাকা → মালে (BS 341)"
+   },
+   "img": "maldives",
+   "start": "2026-12-12",
+   "end": "2026-12-12",
+   "pax": 2,
+   "total": 76900,
+   "paid": 76900,
+   "status": "confirmed",
+   "sub": {
+    "en": "US-Bangla · 09:15 → 12:35 · PNR K7Q2ZM",
+    "bn": "ইউএস-বাংলা · ০৯:১৫ → ১২:৩৫ · পিএনআর K7Q2ZM"
+   },
+   "booked": "2026-09-28",
+   "upcoming": true
+  },
+  {
+   "ref": "MSF-26-49102",
+   "kind": "cruise",
+   "slug": "singapore-penang-phuket",
+   "title": {
+    "en": "Singapore · Penang · Phuket Cruise",
+    "bn": "সিঙ্গাপুর · পেনাং · ফুকেট ক্রুজ"
+   },
+   "img": "cruise",
+   "start": "2027-02-14",
+   "end": "2027-02-18",
+   "pax": 3,
+   "total": 205500,
+   "paid": 61650,
+   "status": "partial",
+   "sub": {
+    "en": "Ocean-view cabin · 4 nights · 2 adults, 1 child",
+    "bn": "সমুদ্রমুখী কেবিন · ৪ রাত · ২ প্রাপ্তবয়স্ক, ১ শিশু"
+   },
+   "booked": "2026-10-11",
+   "upcoming": true
+  },
+  {
+   "ref": "MSF-26-49388",
+   "kind": "visa",
+   "slug": "thailand",
+   "title": {
+    "en": "Thailand tourist e-Visa",
+    "bn": "থাইল্যান্ড ট্যুরিস্ট ই-ভিসা"
+   },
+   "img": "phuket",
+   "start": "2026-11-02",
+   "end": "2026-11-14",
+   "pax": 2,
+   "total": 13000,
+   "paid": 13000,
+   "status": "confirmed",
+   "sub": {
+    "en": "2 applicants · Stage 3 of 5 — at embassy",
+    "bn": "২ জন আবেদনকারী · ধাপ ৩/৫ — দূতাবাসে"
+   },
+   "booked": "2026-10-20",
+   "upcoming": true
+  },
+  {
+   "ref": "MSF-26-49415",
+   "kind": "activity",
+   "slug": "saint-martin-day-cruise",
+   "title": {
+    "en": "Saint Martin's Island day cruise from Teknaf",
+    "bn": "টেকনাফ থেকে সেন্ট মার্টিন দ্বীপ ডে-ক্রুজ"
+   },
+   "img": "stmartin",
+   "start": "2026-11-21",
+   "end": "2026-11-21",
+   "pax": 4,
+   "total": 12800,
+   "paid": 0,
+   "status": "pending",
+   "sub": {
+    "en": "4 travellers · Free cancellation until 20 Nov",
+    "bn": "৪ জন · ২০ নভেম্বর পর্যন্ত ফ্রি বাতিল"
+   },
+   "booked": "2026-10-24",
+   "upcoming": true
+  },
+  {
+   "ref": "MSF-26-41020",
+   "kind": "tour",
+   "slug": "sajek-rangamati",
+   "title": {
+    "en": "Sajek Valley & Rangamati Hill Retreat",
+    "bn": "সাজেক ভ্যালি ও রাঙামাটি পাহাড়ি অবকাশ"
+   },
+   "img": "sajek",
+   "start": "2026-07-18",
+   "end": "2026-07-21",
+   "pax": 2,
+   "total": 19600,
+   "paid": 19600,
+   "status": "completed",
+   "sub": {
+    "en": "3 nights · 2 adults",
+    "bn": "৩ রাত · ২ প্রাপ্তবয়স্ক"
+   },
+   "booked": "2026-06-02",
+   "upcoming": false
+  },
+  {
+   "ref": "MSF-26-39811",
+   "kind": "hotel",
+   "slug": "ocean-pearl-resort",
+   "title": {
+    "en": "Ocean Pearl Resort & Spa",
+    "bn": "ওশান পার্ল রিসোর্ট অ্যান্ড স্পা"
+   },
+   "img": "resort",
+   "start": "2026-04-10",
+   "end": "2026-04-13",
+   "pax": 2,
+   "total": 43500,
+   "paid": 43500,
+   "status": "completed",
+   "sub": {
+    "en": "Deluxe sea view · 3 nights · breakfast",
+    "bn": "ডিলাক্স সি-ভিউ · ৩ রাত · নাশতা"
+   },
+   "booked": "2026-03-01",
+   "upcoming": false
+  },
+  {
+   "ref": "MSF-25-31207",
+   "kind": "tour",
+   "slug": "bali-highlights",
+   "title": {
+    "en": "Bali Highlights: Ubud, Rice Terraces & Beaches",
+    "bn": "বালি হাইলাইটস: উবুদ, ধানখেত ও সৈকত"
+   },
+   "img": "bali",
+   "start": "2025-12-20",
+   "end": "2025-12-25",
+   "pax": 2,
+   "total": 179000,
+   "paid": 179000,
+   "status": "completed",
+   "sub": {
+    "en": "5 nights · 2 adults",
+    "bn": "৫ রাত · ২ প্রাপ্তবয়স্ক"
+   },
+   "booked": "2025-10-04",
+   "upcoming": false
+  },
+  {
+   "ref": "MSF-26-44590",
+   "kind": "flight",
+   "slug": null,
+   "title": {
+    "en": "Dhaka → Kathmandu (BG 701)",
+    "bn": "ঢাকা → কাঠমান্ডু (BG 701)"
+   },
+   "img": "nepal",
+   "start": "2026-08-30",
+   "end": "2026-08-30",
+   "pax": 1,
+   "total": 21400,
+   "paid": 21400,
+   "status": "refunded",
+   "sub": {
+    "en": "Cancelled by traveller · refunded to bKash",
+    "bn": "ভ্রমণকারী বাতিল করেছেন · বিকাশে রিফান্ড"
+   },
+   "booked": "2026-07-12",
+   "upcoming": false
+  },
+  {
+   "ref": "MSF-26-45102",
+   "kind": "activity",
+   "slug": "dubai-desert-safari",
+   "title": {
+    "en": "Dubai evening desert safari with BBQ dinner",
+    "bn": "বারবিকিউ ডিনারসহ দুবাই সন্ধ্যার মরু সাফারি"
+   },
+   "img": "dubai",
+   "start": "2026-09-05",
+   "end": "2026-09-05",
+   "pax": 2,
+   "total": 13800,
+   "paid": 0,
+   "status": "cancelled",
+   "sub": {
+    "en": "Cancelled within free window — no charge",
+    "bn": "ফ্রি সময়ের মধ্যে বাতিল — কোনো চার্জ নেই"
+   },
+   "booked": "2026-08-10",
+   "upcoming": false
+  }
+ ],
+ "TRAVELLERS": [
+  {
+   "name": {
+    "en": "Farhana Rahman",
+    "bn": "ফারহানা রহমান"
+   },
+   "rel": {
+    "en": "You",
+    "bn": "আপনি"
+   },
+   "dob": "1991-07-22",
+   "passport": "EH0•••••7",
+   "exp": "2031-02-18",
+   "ini": "FR",
+   "ok": true
+  },
+  {
+   "name": {
+    "en": "Shafiqul Islam",
+    "bn": "শফিকুল ইসলাম"
+   },
+   "rel": {
+    "en": "Spouse",
+    "bn": "স্বামী"
+   },
+   "dob": "1988-01-09",
+   "passport": "EG9•••••2",
+   "exp": "2027-03-30",
+   "ini": "SI",
+   "ok": true
+  },
+  {
+   "name": {
+    "en": "Ayaan Islam",
+    "bn": "আয়ান ইসলাম"
+   },
+   "rel": {
+    "en": "Child (8)",
+    "bn": "সন্তান (৮)"
+   },
+   "dob": "2018-05-17",
+   "passport": "EJ1•••••4",
+   "exp": "2026-12-30",
+   "ini": "AI",
+   "ok": false
+  }
+ ],
+ "INSTALMENTS": [
+  [
+   "2026-09-28",
+   86700,
+   "paid",
+   "bKash"
+  ],
+  [
+   "2026-10-28",
+   101150,
+   "due",
+   null
+  ],
+  [
+   "2026-11-27",
+   101150,
+   "upcoming",
+   null
+  ]
+ ],
+ "VISA_STAGES": [
+  [
+   {
+    "en": "Application submitted",
+    "bn": "আবেদন জমা"
+   },
+   "2026-10-20",
+   "done"
+  ],
+  [
+   {
+    "en": "Documents verified",
+    "bn": "কাগজপত্র যাচাই"
+   },
+   "2026-10-22",
+   "done"
+  ],
+  [
+   {
+    "en": "Submitted to embassy",
+    "bn": "দূতাবাসে জমা"
+   },
+   "2026-10-24",
+   "current"
+  ],
+  [
+   {
+    "en": "Decision",
+    "bn": "সিদ্ধান্ত"
+   },
+   null,
+   "todo"
+  ],
+  [
+   {
+    "en": "Passport / e-Visa delivered",
+    "bn": "পাসপোর্ট / ই-ভিসা হস্তান্তর"
+   },
+   null,
+   "todo"
+  ]
+ ],
+ "VISA_APPS": [
+  {
+   "ref": "VSA-26-1182",
+   "country": {
+    "en": "Thailand",
+    "bn": "থাইল্যান্ড"
+   },
+   "flag": "🇹🇭",
+   "vtype": {
+    "en": "Tourist e-Visa",
+    "bn": "ট্যুরিস্ট ই-ভিসা"
+   },
+   "who": {
+    "en": "Farhana Rahman",
+    "bn": "ফারহানা রহমান"
+   },
+   "status": "embassy",
+   "eta": "2026-11-04",
+   "stage": 3
+  },
+  {
+   "ref": "VSA-26-1183",
+   "country": {
+    "en": "Thailand",
+    "bn": "থাইল্যান্ড"
+   },
+   "flag": "🇹🇭",
+   "vtype": {
+    "en": "Tourist e-Visa",
+    "bn": "ট্যুরিস্ট ই-ভিসা"
+   },
+   "who": {
+    "en": "Shafiqul Islam",
+    "bn": "শফিকুল ইসলাম"
+   },
+   "status": "docs",
+   "eta": "2026-11-06",
+   "stage": 2
+  },
+  {
+   "ref": "VSA-26-0874",
+   "country": {
+    "en": "Malaysia",
+    "bn": "মালয়েশিয়া"
+   },
+   "flag": "🇲🇾",
+   "vtype": {
+    "en": "eVISA (tourist)",
+    "bn": "ই-ভিসা (ট্যুরিস্ট)"
+   },
+   "who": {
+    "en": "Farhana Rahman",
+    "bn": "ফারহানা রহমান"
+   },
+   "status": "approved",
+   "eta": "2026-06-12",
+   "stage": 5
+  }
+ ],
+ "WALLET_TX": [
+  [
+   "2026-10-24",
+   {
+    "en": "Referral bonus — Nabila joined",
+    "bn": "রেফারেল বোনাস — নাবিলা যোগ দিয়েছেন"
+   },
+   500,
+   "credit",
+   "gift"
+  ],
+  [
+   "2026-09-28",
+   {
+    "en": "Paid toward MSF-26-48213",
+    "bn": "MSF-26-48213-এ পরিশোধ"
+   },
+   -2000,
+   "debit",
+   "wallet"
+  ],
+  [
+   "2026-09-02",
+   {
+    "en": "Refund — MSF-26-44590 (flight)",
+    "bn": "রিফান্ড — MSF-26-44590 (ফ্লাইট)"
+   },
+   4200,
+   "credit",
+   "rotate-ccw"
+  ],
+  [
+   "2026-07-25",
+   {
+    "en": "Cashback — Sajek tour review",
+    "bn": "ক্যাশব্যাক — সাজেক ট্যুর রিভিউ"
+   },
+   300,
+   "credit",
+   "star"
+  ],
+  [
+   "2026-04-14",
+   {
+    "en": "Gift card redeemed GC-7781",
+    "bn": "গিফট কার্ড রিডিম GC-7781"
+   },
+   3000,
+   "credit",
+   "gift"
+  ],
+  [
+   "2026-03-01",
+   {
+    "en": "Paid toward MSF-26-39811",
+    "bn": "MSF-26-39811-এ পরিশোধ"
+   },
+   -1200,
+   "debit",
+   "wallet"
+  ]
+ ],
+ "MILES_TX": [
+  [
+   "2026-10-11",
+   {
+    "en": "Cruise booking MSF-26-49102",
+    "bn": "ক্রুজ বুকিং MSF-26-49102"
+   },
+   2055
+  ],
+  [
+   "2026-09-28",
+   {
+    "en": "Maldives honeymoon MSF-26-48213",
+    "bn": "মালদ্বীপ হানিমুন MSF-26-48213"
+   },
+   2890
+  ],
+  [
+   "2026-07-21",
+   {
+    "en": "Sajek & Rangamati trip completed",
+    "bn": "সাজেক ও রাঙামাটি ট্রিপ সম্পন্ন"
+   },
+   1240
+  ],
+  [
+   "2026-07-21",
+   {
+    "en": "Review bonus",
+    "bn": "রিভিউ বোনাস"
+   },
+   250
+  ],
+  [
+   "2026-04-13",
+   {
+    "en": "Ocean Pearl Resort stay",
+    "bn": "ওশান পার্ল রিসোর্টে অবস্থান"
+   },
+   435
+  ]
+ ],
+ "TIERS": [
+  [
+   {
+    "en": "Blue",
+    "bn": "ব্লু"
+   },
+   0,
+   {
+    "en": "Member prices, Miles on every booking",
+    "bn": "সদস্য মূল্য, প্রতিটি বুকিংয়ে মাইলস"
+   }
+  ],
+  [
+   {
+    "en": "Silver",
+    "bn": "সিলভার"
+   },
+   8000,
+   {
+    "en": "+2% extra Miles, priority WhatsApp",
+    "bn": "+২% অতিরিক্ত মাইলস, অগ্রাধিকার হোয়াটসঅ্যাপ"
+   }
+  ],
+  [
+   {
+    "en": "Gold",
+    "bn": "গোল্ড"
+   },
+   15000,
+   {
+    "en": "Free date change once per trip, lounge deals",
+    "bn": "প্রতি ট্রিপে একবার ফ্রি তারিখ পরিবর্তন, লাউঞ্জ অফার"
+   }
+  ],
+  [
+   {
+    "en": "Platinum",
+    "bn": "প্লাটিনাম"
+   },
+   25000,
+   {
+    "en": "Dedicated travel manager, room upgrades",
+    "bn": "ডেডিকেটেড ট্রাভেল ম্যানেজার, রুম আপগ্রেড"
+   }
+  ]
+ ],
+ "SAVED_PAY": [
+  [
+   "bkash",
+   "bKash",
+   "017••••5678",
+   true
+  ],
+  [
+   "visa",
+   "Visa · City Bank",
+   "•••• 4421 · 08/28",
+   false
+  ],
+  [
+   "nagad",
+   "Nagad",
+   "018••••9012",
+   false
+  ]
+ ],
+ "NOTIFS": [
+  [
+   "wallet",
+   {
+    "en": "Instalment 2 of 3 due on 28 Oct",
+    "bn": "কিস্তি ২/৩ — ২৮ অক্টোবর পরিশোধযোগ্য"
+   },
+   {
+    "en": "৳ 1,01,150 for Maldives Water-Villa Honeymoon. Pay with bKash, Nagad or card.",
+    "bn": "মালদ্বীপ ওয়াটার-ভিলা হানিমুনের জন্য ৳ ১,০১,১৫০। বিকাশ, নগদ বা কার্ডে পরিশোধ করুন।"
+   },
+   "2 h",
+   true,
+   "booking"
+  ],
+  [
+   "stamp",
+   {
+    "en": "Thailand visa reached the embassy",
+    "bn": "থাইল্যান্ড ভিসা দূতাবাসে পৌঁছেছে"
+   },
+   {
+    "en": "Farhana Rahman · VSA-26-1182 · expected decision 4 Nov",
+    "bn": "ফারহানা রহমান · VSA-26-1182 · সম্ভাব্য সিদ্ধান্ত ৪ নভেম্বর"
+   },
+   "1 d",
+   true,
+   "visa"
+  ],
+  [
+   "file-warning",
+   {
+    "en": "Shafiqul’s bank statement is needed",
+    "bn": "শফিকুলের ব্যাংক স্টেটমেন্ট প্রয়োজন"
+   },
+   {
+    "en": "Upload a 6-month statement with seal to keep VSA-26-1183 on schedule.",
+    "bn": "VSA-26-1183 সময়মতো রাখতে সিলসহ ৬ মাসের স্টেটমেন্ট আপলোড করুন।"
+   },
+   "1 d",
+   true,
+   "visa"
+  ],
+  [
+   "passport",
+   {
+    "en": "Ayaan’s passport expires in 2 months",
+    "bn": "আয়ানের পাসপোর্টের মেয়াদ ২ মাসে শেষ"
+   },
+   {
+    "en": "Most countries need 6 months’ validity. Renew before the February cruise.",
+    "bn": "বেশিরভাগ দেশে ৬ মাস মেয়াদ লাগে। ফেব্রুয়ারির ক্রুজের আগে নবায়ন করুন।"
+   },
+   "3 d",
+   false,
+   "traveller"
+  ],
+  [
+   "tag",
+   {
+    "en": "Members-only: 12% off Nepal & Bhutan",
+    "bn": "শুধু সদস্যদের জন্য: নেপাল ও ভুটানে ১২% ছাড়"
+   },
+   {
+    "en": "Gold members get an extra 2,000 Miles until 30 Nov.",
+    "bn": "গোল্ড সদস্যরা ৩০ নভেম্বর পর্যন্ত অতিরিক্ত ২,০০০ মাইলস পাবেন।"
+   },
+   "5 d",
+   false,
+   "offer"
+  ],
+  [
+   "star",
+   {
+    "en": "How was Sajek & Rangamati?",
+    "bn": "সাজেক ও রাঙামাটি কেমন লেগেছে?"
+   },
+   {
+    "en": "Thanks — your review earned 250 Miles.",
+    "bn": "ধন্যবাদ — আপনার রিভিউ থেকে ২৫০ মাইলস পেয়েছেন।"
+   },
+   "3 mo",
+   false,
+   "review"
+  ]
+ ],
+ "TICKETS": [
+  {
+   "ref": "TKT-8812",
+   "subj": {
+    "en": "Change Maldives villa to overwater sunset villa",
+    "bn": "মালদ্বীপের ভিলা সানসেট ওভারওয়াটার ভিলায় পরিবর্তন"
+   },
+   "status": "awaiting",
+   "upd": "2026-10-24",
+   "agent": {
+    "en": "Nadia Islam",
+    "bn": "নাদিয়া ইসলাম"
+   }
+  },
+  {
+   "ref": "TKT-8650",
+   "subj": {
+    "en": "Seat selection for BS 341",
+    "bn": "BS 341-এর সিট নির্বাচন"
+   },
+   "status": "resolved",
+   "upd": "2026-10-02",
+   "agent": {
+    "en": "Rafi Ahmed",
+    "bn": "রাফি আহমেদ"
+   }
+  },
+  {
+   "ref": "TKT-8104",
+   "subj": {
+    "en": "Refund status — Kathmandu flight",
+    "bn": "রিফান্ড স্ট্যাটাস — কাঠমান্ডু ফ্লাইট"
+   },
+   "status": "resolved",
+   "upd": "2026-09-02",
+   "agent": {
+    "en": "Rafi Ahmed",
+    "bn": "রাফি আহমেদ"
+   }
+  }
+ ],
+ "CHAT": [
+  [
+   "agent",
+   {
+    "en": "Hi Farhana! I have checked the resort: a sunset overwater villa is available for 12–16 Dec for ৳ 18,000 extra in total. Shall I hold it for 24 hours?",
+    "bn": "হাই ফারহানা! রিসোর্টে দেখেছি: ১২–১৬ ডিসেম্বর সানসেট ওভারওয়াটার ভিলা পাওয়া যাচ্ছে, মোট ৳ ১৮,০০০ অতিরিক্ত। ২৪ ঘণ্টার জন্য হোল্ড করব?"
+   },
+   "24 Oct, 4:12 PM"
+  ],
+  [
+   "me",
+   {
+    "en": "Yes please, hold it. Can the extra be added to the next instalment?",
+    "bn": "হ্যাঁ, হোল্ড করুন। অতিরিক্ত টাকা কি পরের কিস্তিতে যোগ করা যাবে?"
+   },
+   "24 Oct, 4:20 PM"
+  ],
+  [
+   "agent",
+   {
+    "en": "Done — held until 25 Oct, 4:20 PM. I will send the revised invoice in a moment.",
+    "bn": "হয়ে গেছে — ২৫ অক্টোবর বিকেল ৪:২০ পর্যন্ত হোল্ড। সংশোধিত ইনভয়েস এখনই পাঠাচ্ছি।"
+   },
+   "24 Oct, 4:23 PM"
+  ]
+ ],
+ "MY_REVIEWS": [
+  {
+   "ref": "MSF-26-41020",
+   "title": {
+    "en": "Sajek Valley & Rangamati Hill Retreat",
+    "bn": "সাজেক ভ্যালি ও রাঙামাটি পাহাড়ি অবকাশ"
+   },
+   "rating": 5,
+   "date": "2026-07-25",
+   "text": {
+    "en": "Cottage above the clouds, great guide, perfectly timed jeep rides.",
+    "bn": "মেঘের ওপর কটেজ, দারুণ গাইড, জিপ যাত্রার সময় একদম ঠিকঠাক।"
+   }
+  },
+  {
+   "ref": "MSF-26-39811",
+   "title": {
+    "en": "Ocean Pearl Resort & Spa",
+    "bn": "ওশান পার্ল রিসোর্ট অ্যান্ড স্পা"
+   },
+   "rating": 4,
+   "date": "2026-04-15",
+   "text": {
+    "en": "Lovely pool and breakfast; check-in took a while.",
+    "bn": "চমৎকার পুল ও নাশতা; চেক-ইনে একটু সময় লেগেছে।"
+   }
+  }
+ ],
+ "REFERRALS": [
+  [
+   {
+    "en": "Nabila Chowdhury",
+    "bn": "নাবিলা চৌধুরী"
+   },
+   "2026-10-24",
+   "won",
+   500
+  ],
+  [
+   {
+    "en": "Imran Hossain",
+    "bn": "ইমরান হোসেন"
+   },
+   "2026-09-18",
+   "won",
+   500
+  ],
+  [
+   {
+    "en": "Sadia Akter",
+    "bn": "সাদিয়া আক্তার"
+   },
+   "2026-10-21",
+   "pending",
+   0
+  ]
+ ],
+ "SAVED_TRIPS": [
+  {
+   "name": {
+    "en": "Nepal + Bhutan, 9 days",
+    "bn": "নেপাল + ভুটান, ৯ দিন"
+   },
+   "dests": [
+    "nepal",
+    "bhutan"
+   ],
+   "days": 9,
+   "pax": {
+    "en": "2 adults",
+    "bn": "২ প্রাপ্তবয়স্ক"
+   },
+   "est": 212000,
+   "upd": "2026-10-19"
+  },
+  {
+   "name": {
+    "en": "Family Bali escape, 6 days",
+    "bn": "পরিবার নিয়ে বালি, ৬ দিন"
+   },
+   "dests": [
+    "bali"
+   ],
+   "days": 6,
+   "pax": {
+    "en": "2 adults, 1 child",
+    "bn": "২ প্রাপ্তবয়স্ক, ১ শিশু"
+   },
+   "est": 231500,
+   "upd": "2026-09-30"
+  }
+ ],
+ "FIRST": [
+  "Tanvir",
+  "Nusrat",
+  "Rakib",
+  "Sumaiya",
+  "Mahmud",
+  "Farzana",
+  "Arif",
+  "Tasnim",
+  "Shakil",
+  "Mehjabin",
+  "Imran",
+  "Rumana",
+  "Sabbir",
+  "Lamia",
+  "Kamrul",
+  "Nabila",
+  "Zahid",
+  "Ishrat",
+  "Rezaul",
+  "Anika"
+ ],
+ "FIRST_BN": [
+  "তানভীর",
+  "নুসরাত",
+  "রাকিব",
+  "সুমাইয়া",
+  "মাহমুদ",
+  "ফারজানা",
+  "আরিফ",
+  "তাসনিম",
+  "শাকিল",
+  "মেহজাবিন",
+  "ইমরান",
+  "রুমানা",
+  "সাব্বির",
+  "লামিয়া",
+  "কামরুল",
+  "নাবিলা",
+  "জাহিদ",
+  "ইশরাত",
+  "রেজাউল",
+  "আনিকা"
+ ],
+ "LAST": [
+  [
+   "Ahmed",
+   "আহমেদ"
+  ],
+  [
+   "Hossain",
+   "হোসেন"
+  ],
+  [
+   "Chowdhury",
+   "চৌধুরী"
+  ],
+  [
+   "Rahman",
+   "রহমান"
+  ],
+  [
+   "Islam",
+   "ইসলাম"
+  ],
+  [
+   "Khan",
+   "খান"
+  ],
+  [
+   "Sarker",
+   "সরকার"
+  ],
+  [
+   "Akter",
+   "আক্তার"
+  ],
+  [
+   "Mollah",
+   "মোল্লা"
+  ],
+  [
+   "Talukder",
+   "তালুকদার"
+  ]
+ ],
+ "CITIES": [
+  {
+   "en": "Dhaka",
+   "bn": "ঢাকা"
+  },
+  {
+   "en": "Chattogram",
+   "bn": "চট্টগ্রাম"
+  },
+  {
+   "en": "Sylhet",
+   "bn": "সিলেট"
+  },
+  {
+   "en": "Khulna",
+   "bn": "খুলনা"
+  },
+  {
+   "en": "Rajshahi",
+   "bn": "রাজশাহী"
+  },
+  {
+   "en": "Gazipur",
+   "bn": "গাজীপুর"
+  },
+  {
+   "en": "Cumilla",
+   "bn": "কুমিল্লা"
+  }
+ ],
+ "CHANNELS": [
+  [
+   "web",
+   {
+    "en": "Website",
+    "bn": "ওয়েবসাইট"
+   }
+  ],
+  [
+   "app",
+   {
+    "en": "App",
+    "bn": "অ্যাপ"
+   }
+  ],
+  [
+   "wa",
+   {
+    "en": "WhatsApp",
+    "bn": "হোয়াটসঅ্যাপ"
+   }
+  ],
+  [
+   "agent",
+   {
+    "en": "B2B agent",
+    "bn": "বিটুবি এজেন্ট"
+   }
+  ],
+  [
+   "walkin",
+   {
+    "en": "Branch",
+    "bn": "শাখা"
+   }
+  ]
+ ],
+ "METHODS": [
+  "bKash",
+  "Nagad",
+  "Card · SSLCommerz",
+  "Bank transfer",
+  "Rocket",
+  "EMI · City Bank"
+ ],
+ "PRODUCTS": [
+  [
+   "tour",
+   "coxs-bazar-saint-martin",
+   {
+    "en": "Cox's Bazar & Saint Martin Island Escape",
+    "bn": "কক্সবাজার ও সেন্ট মার্টিন দ্বীপ ভ্রমণ"
+   },
+   18500,
+   "coxsbazar"
+  ],
+  [
+   "tour",
+   "sajek-rangamati",
+   {
+    "en": "Sajek Valley & Rangamati Hill Retreat",
+    "bn": "সাজেক ভ্যালি ও রাঙামাটি পাহাড়ি অবকাশ"
+   },
+   9800,
+   "sajek"
+  ],
+  [
+   "tour",
+   "sylhet-srimangal",
+   {
+    "en": "Sylhet Tea Trails: Jaflong, Ratargul & Srimangal",
+    "bn": "সিলেটের চা-পথে: জাফলং, রাতারগুল ও শ্রীমঙ্গল"
+   },
+   11500,
+   "jaflong"
+  ],
+  [
+   "tour",
+   "sundarbans-cruise",
+   {
+    "en": "Sundarbans Mangrove Cruise (3 Days on Deck)",
+    "bn": "সুন্দরবন ম্যানগ্রোভ ক্রুজ (৩ দিন জলযানে)"
+   },
+   14900,
+   "sundarbans"
+  ],
+  [
+   "tour",
+   "bandarban-nilgiri",
+   {
+    "en": "Bandarban Nilgiri & Nafakhum Trek",
+    "bn": "বান্দরবান নীলগিরি ও নাফাখুম ট্রেক"
+   },
+   12500,
+   "bandarban"
+  ],
+  [
+   "tour",
+   "maldives-honeymoon",
+   {
+    "en": "Maldives Water-Villa Honeymoon",
+    "bn": "মালদ্বীপ ওয়াটার-ভিলা হানিমুন"
+   },
+   145000,
+   "maldives"
+  ],
+  [
+   "tour",
+   "bali-highlights",
+   {
+    "en": "Bali Highlights: Ubud, Rice Terraces & Beaches",
+    "bn": "বালি হাইলাইটস: উবুদ, ধানখেত ও সৈকত"
+   },
+   89500,
+   "bali"
+  ],
+  [
+   "tour",
+   "dubai-family",
+   {
+    "en": "Dubai Family Fun with Desert Safari",
+    "bn": "ডেজার্ট সাফারিসহ দুবাই পারিবারিক ভ্রমণ"
+   },
+   78000,
+   "dubai"
+  ],
+  [
+   "tour",
+   "turkey-classic",
+   {
+    "en": "Turkey Classic: Istanbul, Cappadocia & Pamukkale",
+    "bn": "তুরস্ক ক্লাসিক: ইস্তাম্বুল, কাপাদোকিয়া ও পামুক্কালে"
+   },
+   165000,
+   "istanbul"
+  ],
+  [
+   "tour",
+   "nepal-pokhara",
+   {
+    "en": "Nepal: Kathmandu & Pokhara Mountain Escape",
+    "bn": "নেপাল: কাঠমান্ডু ও পোখারা পাহাড়ি অবকাশ"
+   },
+   42500,
+   "nepal"
+  ],
+  [
+   "tour",
+   "bhutan-happiness",
+   {
+    "en": "Bhutan Happiness Trail: Thimphu, Punakha & Paro",
+    "bn": "ভুটান হ্যাপিনেস ট্রেইল: থিম্পু, পুনাখা ও পারো"
+   },
+   68000,
+   "bhutan"
+  ],
+  [
+   "tour",
+   "thailand-phuket",
+   {
+    "en": "Thailand: Bangkok, Phuket & Phi Phi",
+    "bn": "থাইল্যান্ড: ব্যাংকক, ফুকেট ও ফি ফি"
+   },
+   62000,
+   "phuket"
+  ],
+  [
+   "tour",
+   "kashmir-paradise",
+   {
+    "en": "Kashmir Paradise: Srinagar, Gulmarg & Pahalgam",
+    "bn": "ভূস্বর্গ কাশ্মীর: শ্রীনগর, গুলমার্গ ও পহেলগাম"
+   },
+   58500,
+   "kashmir"
+  ],
+  [
+   "tour",
+   "singapore-malaysia",
+   {
+    "en": "Singapore & Malaysia Twin-City Holiday",
+    "bn": "সিঙ্গাপুর ও মালয়েশিয়া টুইন-সিটি হলিডে"
+   },
+   98000,
+   "singapore"
+  ],
+  [
+   "tour",
+   "egypt-wonders",
+   {
+    "en": "Egypt Wonders: Cairo, Giza & Nile Cruise",
+    "bn": "মিশরের বিস্ময়: কায়রো, গিজা ও নীল নদ ক্রুজ"
+   },
+   138000,
+   "egypt"
+  ],
+  [
+   "tour",
+   "srilanka-culture",
+   {
+    "en": "Sri Lanka Cultural Triangle & Kandy",
+    "bn": "শ্রীলঙ্কা কালচারাল ট্রায়াঙ্গল ও ক্যান্ডি"
+   },
+   72000,
+   "srilanka"
+  ],
+  [
+   "cruise",
+   "singapore-penang-phuket",
+   {
+    "en": "Singapore · Penang · Phuket Cruise",
+    "bn": "সিঙ্গাপুর · পেনাং · ফুকেট ক্রুজ"
+   },
+   68500,
+   "cruise"
+  ],
+  [
+   "cruise",
+   "arabian-gulf-7-nights",
+   {
+    "en": "Arabian Gulf: Dubai, Abu Dhabi & Doha",
+    "bn": "আরব উপসাগর: দুবাই, আবুধাবি ও দোহা"
+   },
+   112000,
+   "dubai"
+  ],
+  [
+   "cruise",
+   "greek-isles-turkey",
+   {
+    "en": "Greek Isles & Türkiye",
+    "bn": "গ্রিক দ্বীপপুঞ্জ ও তুরস্ক"
+   },
+   189000,
+   "greece"
+  ],
+  [
+   "cruise",
+   "halong-bay-overnight",
+   {
+    "en": "Ha Long Bay Overnight Junk Cruise",
+    "bn": "হা লং বে রাত্রিযাপন জাঙ্ক ক্রুজ"
+   },
+   38900,
+   "halong"
+  ],
+  [
+   "cruise",
+   "sundarbans-luxury-3-nights",
+   {
+    "en": "Sundarbans Luxury River Cruise",
+    "bn": "সুন্দরবন বিলাসবহুল নৌ-ক্রুজ"
+   },
+   21500,
+   "sundarbans"
+  ],
+  [
+   "cruise",
+   "maldives-island-hopper",
+   {
+    "en": "Maldives Island-Hopper Yacht",
+    "bn": "মালদ্বীপ আইল্যান্ড-হপার ইয়ট"
+   },
+   145000,
+   "maldives"
+  ],
+  [
+   "activity",
+   "cappadocia-balloon-sunrise",
+   {
+    "en": "Cappadocia hot-air balloon flight at sunrise",
+    "bn": "সূর্যোদয়ে কাপাদোকিয়ার হট-এয়ার বেলুন ফ্লাইট"
+   },
+   24500,
+   "cappadocia"
+  ],
+  [
+   "activity",
+   "saint-martin-day-cruise",
+   {
+    "en": "Saint Martin's Island day cruise from Teknaf",
+    "bn": "টেকনাফ থেকে সেন্ট মার্টিন দ্বীপ ডে-ক্রুজ"
+   },
+   3200,
+   "stmartin"
+  ],
+  [
+   "activity",
+   "sundarbans-day-safari",
+   {
+    "en": "Sundarbans day safari from Mongla",
+    "bn": "মোংলা থেকে সুন্দরবন ডে-সাফারি"
+   },
+   4500,
+   "sundarbans"
+  ],
+  [
+   "activity",
+   "dubai-desert-safari",
+   {
+    "en": "Dubai evening desert safari with BBQ dinner",
+    "bn": "বারবিকিউ ডিনারসহ দুবাই সন্ধ্যার মরু সাফারি"
+   },
+   6900,
+   "dubai"
+  ],
+  [
+   "activity",
+   "bali-ubud-swing-waterfalls",
+   {
+    "en": "Ubud jungle swing, rice terraces & waterfalls",
+    "bn": "উবুদ জঙ্গল সুইং, ধানক্ষেত ও ঝরনা"
+   },
+   7400,
+   "bali"
+  ],
+  [
+   "activity",
+   "singapore-universal-studios",
+   {
+    "en": "Universal Studios Singapore — 1-day ticket",
+    "bn": "ইউনিভার্সাল স্টুডিওস সিঙ্গাপুর — ১ দিনের টিকিট"
+   },
+   8900,
+   "singapore"
+  ],
+  [
+   "activity",
+   "phuket-phi-phi-speedboat",
+   {
+    "en": "Phi Phi & Maya Bay speedboat tour with snorkelling",
+    "bn": "স্নরকেলিংসহ ফি ফি ও মায়া বে স্পিডবোট ট্যুর"
+   },
+   6200,
+   "phuket"
+  ],
+  [
+   "activity",
+   "old-dhaka-food-walk",
+   {
+    "en": "Old Dhaka food & heritage walk",
+    "bn": "পুরান ঢাকার খাবার ও ঐতিহ্য হাঁটা"
+   },
+   2800,
+   "dhaka"
+  ],
+  [
+   "activity",
+   "pokhara-paragliding",
+   {
+    "en": "Pokhara tandem paragliding over Phewa Lake",
+    "bn": "ফেওয়া লেকের ওপর পোখারা ট্যান্ডেম প্যারাগ্লাইডিং"
+   },
+   9800,
+   "nepal"
+  ],
+  [
+   "activity",
+   "istanbul-bosphorus-dinner-cruise",
+   {
+    "en": "Bosphorus dinner cruise with Turkish night show",
+    "bn": "টার্কিশ নাইট শোসহ বসফরাস ডিনার ক্রুজ"
+   },
+   5600,
+   "istanbul"
+  ],
+  [
+   "activity",
+   "ratargul-boat-ride",
+   {
+    "en": "Ratargul swamp forest boat ride",
+    "bn": "রাতারগুল জলাবনে নৌকা ভ্রমণ"
+   },
+   2400,
+   "ratargul"
+  ],
+  [
+   "activity",
+   "dhaka-airport-transfer",
+   {
+    "en": "Dhaka airport private transfer (HSIA)",
+    "bn": "ঢাকা এয়ারপোর্ট প্রাইভেট ট্রান্সফার (শাহজালাল বিমানবন্দর)"
+   },
+   1800,
+   "plane"
+  ],
+  [
+   "hotel",
+   "ocean-pearl-resort",
+   {
+    "en": "Ocean Pearl Resort & Spa",
+    "bn": "ওশান পার্ল রিসোর্ট অ্যান্ড স্পা"
+   },
+   43500,
+   "resort"
+  ],
+  [
+   "hotel",
+   "cloud-valley-resort",
+   {
+    "en": "Cloud Valley Eco Resort",
+    "bn": "ক্লাউড ভ্যালি ইকো রিসোর্ট"
+   },
+   18600,
+   "sajek"
+  ],
+  [
+   "hotel",
+   "grand-tea-valley",
+   {
+    "en": "Grand Tea Valley Resort",
+    "bn": "গ্র্যান্ড টি ভ্যালি রিসোর্ট"
+   },
+   29400,
+   "darjeeling"
+  ],
+  [
+   "hotel",
+   "himalaya-view-pokhara",
+   {
+    "en": "Himalaya View Lakeside Hotel",
+    "bn": "হিমালয় ভিউ লেকসাইড হোটেল"
+   },
+   35400,
+   "nepal"
+  ],
+  [
+   "hotel",
+   "ubud-jungle-villas",
+   {
+    "en": "Ubud Jungle Pool Villas",
+    "bn": "উবুদ জঙ্গল পুল ভিলা"
+   },
+   64500,
+   "bali"
+  ],
+  [
+   "hotel",
+   "bosphorus-boutique",
+   {
+    "en": "Bosphorus Boutique Hotel",
+    "bn": "বসফরাস বুটিক হোটেল"
+   },
+   50400,
+   "istanbul"
+  ],
+  [
+   "hotel",
+   "lagoon-water-villas",
+   {
+    "en": "Lagoon Water Villas Maldives",
+    "bn": "লেগুন ওয়াটার ভিলাস মালদ্বীপ"
+   },
+   174000,
+   "maldives"
+  ],
+  [
+   "hotel",
+   "marina-skyline-dubai",
+   {
+    "en": "Marina Skyline Hotel Dubai",
+    "bn": "মেরিনা স্কাইলাইন হোটেল দুবাই"
+   },
+   45600,
+   "dubai"
+  ],
+  [
+   "visa",
+   "thailand",
+   {
+    "en": "Thailand visa",
+    "bn": "থাইল্যান্ড ভিসা"
+   },
+   6500,
+   "phuket"
+  ],
+  [
+   "visa",
+   "malaysia",
+   {
+    "en": "Malaysia visa",
+    "bn": "মালয়েশিয়া ভিসা"
+   },
+   5800,
+   "malaysia"
+  ],
+  [
+   "visa",
+   "singapore",
+   {
+    "en": "Singapore visa",
+    "bn": "সিঙ্গাপুর ভিসা"
+   },
+   7200,
+   "singapore"
+  ],
+  [
+   "visa",
+   "uae",
+   {
+    "en": "United Arab Emirates visa",
+    "bn": "সংযুক্ত আরব আমিরাত ভিসা"
+   },
+   14500,
+   "dubai"
+  ],
+  [
+   "visa",
+   "vietnam",
+   {
+    "en": "Vietnam visa",
+    "bn": "ভিয়েতনাম ভিসা"
+   },
+   7800,
+   "halong"
+  ],
+  [
+   "visa",
+   "turkey",
+   {
+    "en": "Türkiye visa",
+    "bn": "তুরস্ক ভিসা"
+   },
+   11000,
+   "cappadocia"
+  ],
+  [
+   "visa",
+   "india",
+   {
+    "en": "India visa",
+    "bn": "ভারত ভিসা"
+   },
+   2500,
+   "kashmir"
+  ],
+  [
+   "visa",
+   "schengen",
+   {
+    "en": "Schengen (Europe) visa",
+    "bn": "শেনজেন (ইউরোপ) ভিসা"
+   },
+   16500,
+   "swiss"
+  ],
+  [
+   "visa",
+   "japan",
+   {
+    "en": "Japan visa",
+    "bn": "জাপান ভিসা"
+   },
+   4500,
+   "japan"
+  ],
+  [
+   "visa",
+   "egypt",
+   {
+    "en": "Egypt visa",
+    "bn": "মিশর ভিসা"
+   },
+   9500,
+   "egypt"
+  ]
+ ],
+ "ADMIN_BOOKINGS": [
+  {
+   "ref": "MSF-26-48213",
+   "kind": "tour",
+   "slug": "maldives-honeymoon",
+   "title": {
+    "en": "Maldives Water-Villa Honeymoon",
+    "bn": "মালদ্বীপ ওয়াটার-ভিলা হানিমুন"
+   },
+   "img": "maldives",
+   "cust": {
+    "en": "Farhana Rahman",
+    "bn": "ফারহানা রহমান"
+   },
+   "ini": "FR",
+   "phone": "+880 1710-100000",
+   "city": {
+    "en": "Dhaka",
+    "bn": "ঢাকা"
+   },
+   "pax": 2,
+   "total": 289000,
+   "paid": 86700,
+   "status": "partial",
+   "created": "2026-09-28",
+   "travel": "2026-12-12",
+   "channel": [
+    "web",
+    {
+     "en": "Website",
+     "bn": "ওয়েবসাইট"
+    }
+   ],
+   "method": "bKash",
+   "agent": "Nadia Islam"
+  },
+  {
+   "ref": "MSF-26-49413",
+   "kind": "tour",
+   "slug": "dubai-family",
+   "title": {
+    "en": "Dubai Family Fun with Desert Safari",
+    "bn": "ডেজার্ট সাফারিসহ দুবাই পারিবারিক ভ্রমণ"
+   },
+   "img": "dubai",
+   "cust": {
+    "en": "Nusrat Ahmed",
+    "bn": "নুসরাত আহমেদ"
+   },
+   "ini": "NA",
+   "phone": "+880 1747-107919",
+   "city": {
+    "en": "Chattogram",
+    "bn": "চট্টগ্রাম"
+   },
+   "pax": 2,
+   "total": 156000,
+   "paid": 156000,
+   "status": "confirmed",
+   "created": "2026-10-23",
+   "travel": "2026-12-04",
+   "channel": [
+    "app",
+    {
+     "en": "App",
+     "bn": "অ্যাপ"
+    }
+   ],
+   "method": "Nagad",
+   "agent": "Rafi Ahmed"
+  },
+  {
+   "ref": "MSF-26-49376",
+   "kind": "tour",
+   "slug": "kashmir-paradise",
+   "title": {
+    "en": "Kashmir Paradise: Srinagar, Gulmarg & Pahalgam",
+    "bn": "ভূস্বর্গ কাশ্মীর: শ্রীনগর, গুলমার্গ ও পহেলগাম"
+   },
+   "img": "kashmir",
+   "cust": {
+    "en": "Rakib Akter",
+    "bn": "রাকিব আক্তার"
+   },
+   "ini": "RA",
+   "phone": "+880 1784-115838",
+   "city": {
+    "en": "Sylhet",
+    "bn": "সিলেট"
+   },
+   "pax": 4,
+   "total": 234000,
+   "paid": 234000,
+   "status": "confirmed",
+   "created": "2026-10-22",
+   "travel": "2026-11-07",
+   "channel": [
+    "wa",
+    {
+     "en": "WhatsApp",
+     "bn": "হোয়াটসঅ্যাপ"
+    }
+   ],
+   "method": "Card · SSLCommerz",
+   "agent": "Sohel Rana"
+  },
+  {
+   "ref": "MSF-26-49339",
+   "kind": "cruise",
+   "slug": "arabian-gulf-7-nights",
+   "title": {
+    "en": "Arabian Gulf: Dubai, Abu Dhabi & Doha",
+    "bn": "আরব উপসাগর: দুবাই, আবুধাবি ও দোহা"
+   },
+   "img": "dubai",
+   "cust": {
+    "en": "Sumaiya Islam",
+    "bn": "সুমাইয়া ইসলাম"
+   },
+   "ini": "SI",
+   "phone": "+880 1731-123757",
+   "city": {
+    "en": "Khulna",
+    "bn": "খুলনা"
+   },
+   "pax": 2,
+   "total": 224000,
+   "paid": 224000,
+   "status": "confirmed",
+   "created": "2026-10-21",
+   "travel": "2026-12-10",
+   "channel": [
+    "agent",
+    {
+     "en": "B2B agent",
+     "bn": "বিটুবি এজেন্ট"
+    }
+   ],
+   "method": "Bank transfer",
+   "agent": "Mitu Akter"
+  },
+  {
+   "ref": "MSF-26-49302",
+   "kind": "activity",
+   "slug": "cappadocia-balloon-sunrise",
+   "title": {
+    "en": "Cappadocia hot-air balloon flight at sunrise",
+    "bn": "সূর্যোদয়ে কাপাদোকিয়ার হট-এয়ার বেলুন ফ্লাইট"
+   },
+   "img": "cappadocia",
+   "cust": {
+    "en": "Mahmud Hossain",
+    "bn": "মাহমুদ হোসেন"
+   },
+   "ini": "MH",
+   "phone": "+880 1768-131676",
+   "city": {
+    "en": "Rajshahi",
+    "bn": "রাজশাহী"
+   },
+   "pax": 2,
+   "total": 49000,
+   "paid": 49000,
+   "status": "confirmed",
+   "created": "2026-10-20",
+   "travel": "2026-11-13",
+   "channel": [
+    "walkin",
+    {
+     "en": "Branch",
+     "bn": "শাখা"
+    }
+   ],
+   "method": "Rocket",
+   "agent": "Nadia Islam"
+  },
+  {
+   "ref": "MSF-26-49265",
+   "kind": "activity",
+   "slug": "singapore-universal-studios",
+   "title": {
+    "en": "Universal Studios Singapore — 1-day ticket",
+    "bn": "ইউনিভার্সাল স্টুডিওস সিঙ্গাপুর — ১ দিনের টিকিট"
+   },
+   "img": "singapore",
+   "cust": {
+    "en": "Farzana Mollah",
+    "bn": "ফারজানা মোল্লা"
+   },
+   "ini": "FM",
+   "phone": "+880 1715-139595",
+   "city": {
+    "en": "Gazipur",
+    "bn": "গাজীপুর"
+   },
+   "pax": 3,
+   "total": 26700,
+   "paid": 26700,
+   "status": "confirmed",
+   "created": "2026-10-19",
+   "travel": "2026-12-16",
+   "channel": [
+    "web",
+    {
+     "en": "Website",
+     "bn": "ওয়েবসাইট"
+    }
+   ],
+   "method": "EMI · City Bank",
+   "agent": "Rafi Ahmed"
+  },
+  {
+   "ref": "MSF-26-49228",
+   "kind": "activity",
+   "slug": "ratargul-boat-ride",
+   "title": {
+    "en": "Ratargul swamp forest boat ride",
+    "bn": "রাতারগুল জলাবনে নৌকা ভ্রমণ"
+   },
+   "img": "ratargul",
+   "cust": {
+    "en": "Arif Khan",
+    "bn": "আরিফ খান"
+   },
+   "ini": "AK",
+   "phone": "+880 1752-147514",
+   "city": {
+    "en": "Cumilla",
+    "bn": "কুমিল্লা"
+   },
+   "pax": 3,
+   "total": 7200,
+   "paid": 0,
+   "status": "pending",
+   "created": "2026-10-18",
+   "travel": "2026-11-19",
+   "channel": [
+    "app",
+    {
+     "en": "App",
+     "bn": "অ্যাপ"
+    }
+   ],
+   "method": "bKash",
+   "agent": "Sohel Rana"
+  },
+  {
+   "ref": "MSF-26-49191",
+   "kind": "hotel",
+   "slug": "himalaya-view-pokhara",
+   "title": {
+    "en": "Himalaya View Lakeside Hotel",
+    "bn": "হিমালয় ভিউ লেকসাইড হোটেল"
+   },
+   "img": "nepal",
+   "cust": {
+    "en": "Tasnim Chowdhury",
+    "bn": "তাসনিম চৌধুরী"
+   },
+   "ini": "TC",
+   "phone": "+880 1789-155433",
+   "city": {
+    "en": "Dhaka",
+    "bn": "ঢাকা"
+   },
+   "pax": 1,
+   "total": 35400,
+   "paid": 0,
+   "status": "pending",
+   "created": "2026-10-17",
+   "travel": "2026-12-22",
+   "channel": [
+    "wa",
+    {
+     "en": "WhatsApp",
+     "bn": "হোয়াটসঅ্যাপ"
+    }
+   ],
+   "method": "Nagad",
+   "agent": "Mitu Akter"
+  },
+  {
+   "ref": "MSF-26-49154",
+   "kind": "visa",
+   "slug": "thailand",
+   "title": {
+    "en": "Thailand visa",
+    "bn": "থাইল্যান্ড ভিসা"
+   },
+   "img": "phuket",
+   "cust": {
+    "en": "Shakil Talukder",
+    "bn": "শাকিল তালুকদার"
+   },
+   "ini": "ST",
+   "phone": "+880 1736-163352",
+   "city": {
+    "en": "Chattogram",
+    "bn": "চট্টগ্রাম"
+   },
+   "pax": 2,
+   "total": 13000,
+   "paid": 0,
+   "status": "pending",
+   "created": "2026-10-16",
+   "travel": "2026-11-25",
+   "channel": [
+    "agent",
+    {
+     "en": "B2B agent",
+     "bn": "বিটুবি এজেন্ট"
+    }
+   ],
+   "method": "Card · SSLCommerz",
+   "agent": "Nadia Islam"
+  },
+  {
+   "ref": "MSF-26-49117",
+   "kind": "visa",
+   "slug": "turkey",
+   "title": {
+    "en": "Türkiye visa",
+    "bn": "তুরস্ক ভিসা"
+   },
+   "img": "cappadocia",
+   "cust": {
+    "en": "Mehjabin Sarker",
+    "bn": "মেহজাবিন সরকার"
+   },
+   "ini": "MS",
+   "phone": "+880 1773-171271",
+   "city": {
+    "en": "Sylhet",
+    "bn": "সিলেট"
+   },
+   "pax": 5,
+   "total": 55000,
+   "paid": 16500,
+   "status": "partial",
+   "created": "2026-10-15",
+   "travel": "2026-12-01",
+   "channel": [
+    "walkin",
+    {
+     "en": "Branch",
+     "bn": "শাখা"
+    }
+   ],
+   "method": "Bank transfer",
+   "agent": "Rafi Ahmed"
+  },
+  {
+   "ref": "MSF-26-49080",
+   "kind": "tour",
+   "slug": "coxs-bazar-saint-martin",
+   "title": {
+    "en": "Cox's Bazar & Saint Martin Island Escape",
+    "bn": "কক্সবাজার ও সেন্ট মার্টিন দ্বীপ ভ্রমণ"
+   },
+   "img": "coxsbazar",
+   "cust": {
+    "en": "Imran Rahman",
+    "bn": "ইমরান রহমান"
+   },
+   "ini": "IR",
+   "phone": "+880 1720-179190",
+   "city": {
+    "en": "Khulna",
+    "bn": "খুলনা"
+   },
+   "pax": 5,
+   "total": 92500,
+   "paid": 27750,
+   "status": "partial",
+   "created": "2026-10-14",
+   "travel": "2026-11-04",
+   "channel": [
+    "web",
+    {
+     "en": "Website",
+     "bn": "ওয়েবসাইট"
+    }
+   ],
+   "method": "Rocket",
+   "agent": "Sohel Rana"
+  },
+  {
+   "ref": "MSF-26-49043",
+   "kind": "tour",
+   "slug": "maldives-honeymoon",
+   "title": {
+    "en": "Maldives Water-Villa Honeymoon",
+    "bn": "মালদ্বীপ ওয়াটার-ভিলা হানিমুন"
+   },
+   "img": "maldives",
+   "cust": {
+    "en": "Rumana Ahmed",
+    "bn": "রুমানা আহমেদ"
+   },
+   "ini": "RA",
+   "phone": "+880 1757-187109",
+   "city": {
+    "en": "Rajshahi",
+    "bn": "রাজশাহী"
+   },
+   "pax": 2,
+   "total": 290000,
+   "paid": 87000,
+   "status": "partial",
+   "created": "2026-10-13",
+   "travel": "2026-12-07",
+   "channel": [
+    "app",
+    {
+     "en": "App",
+     "bn": "অ্যাপ"
+    }
+   ],
+   "method": "EMI · City Bank",
+   "agent": "Mitu Akter"
+  },
+  {
+   "ref": "MSF-26-49006",
+   "kind": "tour",
+   "slug": "bhutan-happiness",
+   "title": {
+    "en": "Bhutan Happiness Trail: Thimphu, Punakha & Paro",
+    "bn": "ভুটান হ্যাপিনেস ট্রেইল: থিম্পু, পুনাখা ও পারো"
+   },
+   "img": "bhutan",
+   "cust": {
+    "en": "Sabbir Akter",
+    "bn": "সাব্বির আক্তার"
+   },
+   "ini": "SA",
+   "phone": "+880 1794-195028",
+   "city": {
+    "en": "Gazipur",
+    "bn": "গাজীপুর"
+   },
+   "pax": 1,
+   "total": 68000,
+   "paid": 20400,
+   "status": "partial",
+   "created": "2026-10-12",
+   "travel": "2026-11-10",
+   "channel": [
+    "wa",
+    {
+     "en": "WhatsApp",
+     "bn": "হোয়াটসঅ্যাপ"
+    }
+   ],
+   "method": "bKash",
+   "agent": "Nadia Islam"
+  },
+  {
+   "ref": "MSF-26-48969",
+   "kind": "tour",
+   "slug": "srilanka-culture",
+   "title": {
+    "en": "Sri Lanka Cultural Triangle & Kandy",
+    "bn": "শ্রীলঙ্কা কালচারাল ট্রায়াঙ্গল ও ক্যান্ডি"
+   },
+   "img": "srilanka",
+   "cust": {
+    "en": "Lamia Islam",
+    "bn": "লামিয়া ইসলাম"
+   },
+   "ini": "LI",
+   "phone": "+880 1741-202947",
+   "city": {
+    "en": "Cumilla",
+    "bn": "কুমিল্লা"
+   },
+   "pax": 4,
+   "total": 288000,
+   "paid": 288000,
+   "status": "completed",
+   "created": "2026-10-11",
+   "travel": "2026-06-13",
+   "channel": [
+    "agent",
+    {
+     "en": "B2B agent",
+     "bn": "বিটুবি এজেন্ট"
+    }
+   ],
+   "method": "Nagad",
+   "agent": "Rafi Ahmed"
+  },
+  {
+   "ref": "MSF-26-48932",
+   "kind": "cruise",
+   "slug": "sundarbans-luxury-3-nights",
+   "title": {
+    "en": "Sundarbans Luxury River Cruise",
+    "bn": "সুন্দরবন বিলাসবহুল নৌ-ক্রুজ"
+   },
+   "img": "sundarbans",
+   "cust": {
+    "en": "Kamrul Hossain",
+    "bn": "কামরুল হোসেন"
+   },
+   "ini": "KH",
+   "phone": "+880 1778-210866",
+   "city": {
+    "en": "Dhaka",
+    "bn": "ঢাকা"
+   },
+   "pax": 4,
+   "total": 86000,
+   "paid": 86000,
+   "status": "completed",
+   "created": "2026-10-10",
+   "travel": "2026-07-16",
+   "channel": [
+    "walkin",
+    {
+     "en": "Branch",
+     "bn": "শাখা"
+    }
+   ],
+   "method": "Card · SSLCommerz",
+   "agent": "Sohel Rana"
+  },
+  {
+   "ref": "MSF-26-48895",
+   "kind": "activity",
+   "slug": "dubai-desert-safari",
+   "title": {
+    "en": "Dubai evening desert safari with BBQ dinner",
+    "bn": "বারবিকিউ ডিনারসহ দুবাই সন্ধ্যার মরু সাফারি"
+   },
+   "img": "dubai",
+   "cust": {
+    "en": "Nabila Mollah",
+    "bn": "নাবিলা মোল্লা"
+   },
+   "ini": "NM",
+   "phone": "+880 1725-218785",
+   "city": {
+    "en": "Chattogram",
+    "bn": "চট্টগ্রাম"
+   },
+   "pax": 3,
+   "total": 20700,
+   "paid": 20700,
+   "status": "completed",
+   "created": "2026-10-09",
+   "travel": "2026-08-19",
+   "channel": [
+    "web",
+    {
+     "en": "Website",
+     "bn": "ওয়েবসাইট"
+    }
+   ],
+   "method": "Bank transfer",
+   "agent": "Mitu Akter"
+  },
+  {
+   "ref": "MSF-26-48858",
+   "kind": "activity",
+   "slug": "pokhara-paragliding",
+   "title": {
+    "en": "Pokhara tandem paragliding over Phewa Lake",
+    "bn": "ফেওয়া লেকের ওপর পোখারা ট্যান্ডেম প্যারাগ্লাইডিং"
+   },
+   "img": "nepal",
+   "cust": {
+    "en": "Zahid Khan",
+    "bn": "জাহিদ খান"
+   },
+   "ini": "ZK",
+   "phone": "+880 1762-226704",
+   "city": {
+    "en": "Sylhet",
+    "bn": "সিলেট"
+   },
+   "pax": 3,
+   "total": 29400,
+   "paid": 0,
+   "status": "cancelled",
+   "created": "2026-10-08",
+   "travel": "2026-11-22",
+   "channel": [
+    "app",
+    {
+     "en": "App",
+     "bn": "অ্যাপ"
+    }
+   ],
+   "method": "Rocket",
+   "agent": "Nadia Islam"
+  },
+  {
+   "ref": "MSF-26-48821",
+   "kind": "hotel",
+   "slug": "cloud-valley-resort",
+   "title": {
+    "en": "Cloud Valley Eco Resort",
+    "bn": "ক্লাউড ভ্যালি ইকো রিসোর্ট"
+   },
+   "img": "sajek",
+   "cust": {
+    "en": "Ishrat Chowdhury",
+    "bn": "ইশরাত চৌধুরী"
+   },
+   "ini": "IC",
+   "phone": "+880 1799-234623",
+   "city": {
+    "en": "Khulna",
+    "bn": "খুলনা"
+   },
+   "pax": 1,
+   "total": 18600,
+   "paid": 18600,
+   "status": "refunded",
+   "created": "2026-10-07",
+   "travel": "2026-12-25",
+   "channel": [
+    "wa",
+    {
+     "en": "WhatsApp",
+     "bn": "হোয়াটসঅ্যাপ"
+    }
+   ],
+   "method": "EMI · City Bank",
+   "agent": "Rafi Ahmed"
+  },
+  {
+   "ref": "MSF-26-48784",
+   "kind": "hotel",
+   "slug": "lagoon-water-villas",
+   "title": {
+    "en": "Lagoon Water Villas Maldives",
+    "bn": "লেগুন ওয়াটার ভিলাস মালদ্বীপ"
+   },
+   "img": "maldives",
+   "cust": {
+    "en": "Rezaul Talukder",
+    "bn": "রেজাউল তালুকদার"
+   },
+   "ini": "RT",
+   "phone": "+880 1746-242542",
+   "city": {
+    "en": "Rajshahi",
+    "bn": "রাজশাহী"
+   },
+   "pax": 2,
+   "total": 348000,
+   "paid": 348000,
+   "status": "confirmed",
+   "created": "2026-10-06",
+   "travel": "2026-11-01",
+   "channel": [
+    "agent",
+    {
+     "en": "B2B agent",
+     "bn": "বিটুবি এজেন্ট"
+    }
+   ],
+   "method": "bKash",
+   "agent": "Sohel Rana"
+  },
+  {
+   "ref": "MSF-26-48747",
+   "kind": "visa",
+   "slug": "uae",
+   "title": {
+    "en": "United Arab Emirates visa",
+    "bn": "সংযুক্ত আরব আমিরাত ভিসা"
+   },
+   "img": "dubai",
+   "cust": {
+    "en": "Anika Sarker",
+    "bn": "আনিকা সরকার"
+   },
+   "ini": "AS",
+   "phone": "+880 1783-250461",
+   "city": {
+    "en": "Gazipur",
+    "bn": "গাজীপুর"
+   },
+   "pax": 2,
+   "total": 29000,
+   "paid": 29000,
+   "status": "confirmed",
+   "created": "2026-10-05",
+   "travel": "2026-12-04",
+   "channel": [
+    "walkin",
+    {
+     "en": "Branch",
+     "bn": "শাখা"
+    }
+   ],
+   "method": "Nagad",
+   "agent": "Mitu Akter"
+  },
+  {
+   "ref": "MSF-26-48710",
+   "kind": "visa",
+   "slug": "japan",
+   "title": {
+    "en": "Japan visa",
+    "bn": "জাপান ভিসা"
+   },
+   "img": "japan",
+   "cust": {
+    "en": "Tanvir Rahman",
+    "bn": "তানভীর রহমান"
+   },
+   "ini": "TR",
+   "phone": "+880 1730-258380",
+   "city": {
+    "en": "Cumilla",
+    "bn": "কুমিল্লা"
+   },
+   "pax": 4,
+   "total": 18000,
+   "paid": 18000,
+   "status": "confirmed",
+   "created": "2026-10-04",
+   "travel": "2026-11-07",
+   "channel": [
+    "web",
+    {
+     "en": "Website",
+     "bn": "ওয়েবসাইট"
+    }
+   ],
+   "method": "Card · SSLCommerz",
+   "agent": "Nadia Islam"
+  },
+  {
+   "ref": "MSF-26-48673",
+   "kind": "tour",
+   "slug": "sundarbans-cruise",
+   "title": {
+    "en": "Sundarbans Mangrove Cruise (3 Days on Deck)",
+    "bn": "সুন্দরবন ম্যানগ্রোভ ক্রুজ (৩ দিন জলযানে)"
+   },
+   "img": "sundarbans",
+   "cust": {
+    "en": "Nusrat Ahmed",
+    "bn": "নুসরাত আহমেদ"
+   },
+   "ini": "NA",
+   "phone": "+880 1767-266299",
+   "city": {
+    "en": "Dhaka",
+    "bn": "ঢাকা"
+   },
+   "pax": 2,
+   "total": 29800,
+   "paid": 29800,
+   "status": "confirmed",
+   "created": "2026-10-03",
+   "travel": "2026-12-10",
+   "channel": [
+    "app",
+    {
+     "en": "App",
+     "bn": "অ্যাপ"
+    }
+   ],
+   "method": "Bank transfer",
+   "agent": "Rafi Ahmed"
+  },
+  {
+   "ref": "MSF-26-48636",
+   "kind": "tour",
+   "slug": "turkey-classic",
+   "title": {
+    "en": "Turkey Classic: Istanbul, Cappadocia & Pamukkale",
+    "bn": "তুরস্ক ক্লাসিক: ইস্তাম্বুল, কাপাদোকিয়া ও পামুক্কালে"
+   },
+   "img": "istanbul",
+   "cust": {
+    "en": "Rakib Akter",
+    "bn": "রাকিব আক্তার"
+   },
+   "ini": "RA",
+   "phone": "+880 1714-274218",
+   "city": {
+    "en": "Chattogram",
+    "bn": "চট্টগ্রাম"
+   },
+   "pax": 4,
+   "total": 660000,
+   "paid": 660000,
+   "status": "confirmed",
+   "created": "2026-10-02",
+   "travel": "2026-11-13",
+   "channel": [
+    "wa",
+    {
+     "en": "WhatsApp",
+     "bn": "হোয়াটসঅ্যাপ"
+    }
+   ],
+   "method": "Rocket",
+   "agent": "Sohel Rana"
+  },
+  {
+   "ref": "MSF-26-48599",
+   "kind": "tour",
+   "slug": "singapore-malaysia",
+   "title": {
+    "en": "Singapore & Malaysia Twin-City Holiday",
+    "bn": "সিঙ্গাপুর ও মালয়েশিয়া টুইন-সিটি হলিডে"
+   },
+   "img": "singapore",
+   "cust": {
+    "en": "Sumaiya Islam",
+    "bn": "সুমাইয়া ইসলাম"
+   },
+   "ini": "SI",
+   "phone": "+880 1751-282137",
+   "city": {
+    "en": "Sylhet",
+    "bn": "সিলেট"
+   },
+   "pax": 5,
+   "total": 490000,
+   "paid": 490000,
+   "status": "confirmed",
+   "created": "2026-10-01",
+   "travel": "2026-12-16",
+   "channel": [
+    "agent",
+    {
+     "en": "B2B agent",
+     "bn": "বিটুবি এজেন্ট"
+    }
+   ],
+   "method": "EMI · City Bank",
+   "agent": "Mitu Akter"
+  },
+  {
+   "ref": "MSF-26-48562",
+   "kind": "cruise",
+   "slug": "greek-isles-turkey",
+   "title": {
+    "en": "Greek Isles & Türkiye",
+    "bn": "গ্রিক দ্বীপপুঞ্জ ও তুরস্ক"
+   },
+   "img": "greece",
+   "cust": {
+    "en": "Mahmud Hossain",
+    "bn": "মাহমুদ হোসেন"
+   },
+   "ini": "MH",
+   "phone": "+880 1788-290056",
+   "city": {
+    "en": "Khulna",
+    "bn": "খুলনা"
+   },
+   "pax": 2,
+   "total": 378000,
+   "paid": 0,
+   "status": "pending",
+   "created": "2026-09-24",
+   "travel": "2026-11-19",
+   "channel": [
+    "walkin",
+    {
+     "en": "Branch",
+     "bn": "শাখা"
+    }
+   ],
+   "method": "bKash",
+   "agent": "Nadia Islam"
+  },
+  {
+   "ref": "MSF-26-48525",
+   "kind": "activity",
+   "slug": "saint-martin-day-cruise",
+   "title": {
+    "en": "Saint Martin's Island day cruise from Teknaf",
+    "bn": "টেকনাফ থেকে সেন্ট মার্টিন দ্বীপ ডে-ক্রুজ"
+   },
+   "img": "stmartin",
+   "cust": {
+    "en": "Farzana Mollah",
+    "bn": "ফারজানা মোল্লা"
+   },
+   "ini": "FM",
+   "phone": "+880 1735-297975",
+   "city": {
+    "en": "Rajshahi",
+    "bn": "রাজশাহী"
+   },
+   "pax": 5,
+   "total": 16000,
+   "paid": 0,
+   "status": "pending",
+   "created": "2026-09-23",
+   "travel": "2026-12-22",
+   "channel": [
+    "web",
+    {
+     "en": "Website",
+     "bn": "ওয়েবসাইট"
+    }
+   ],
+   "method": "Nagad",
+   "agent": "Rafi Ahmed"
+  },
+  {
+   "ref": "MSF-26-48488",
+   "kind": "activity",
+   "slug": "phuket-phi-phi-speedboat",
+   "title": {
+    "en": "Phi Phi & Maya Bay speedboat tour with snorkelling",
+    "bn": "স্নরকেলিংসহ ফি ফি ও মায়া বে স্পিডবোট ট্যুর"
+   },
+   "img": "phuket",
+   "cust": {
+    "en": "Arif Khan",
+    "bn": "আরিফ খান"
+   },
+   "ini": "AK",
+   "phone": "+880 1772-305894",
+   "city": {
+    "en": "Gazipur",
+    "bn": "গাজীপুর"
+   },
+   "pax": 4,
+   "total": 24800,
+   "paid": 0,
+   "status": "pending",
+   "created": "2026-09-22",
+   "travel": "2026-11-25",
+   "channel": [
+    "app",
+    {
+     "en": "App",
+     "bn": "অ্যাপ"
+    }
+   ],
+   "method": "Card · SSLCommerz",
+   "agent": "Sohel Rana"
+  },
+  {
+   "ref": "MSF-26-48451",
+   "kind": "activity",
+   "slug": "dhaka-airport-transfer",
+   "title": {
+    "en": "Dhaka airport private transfer (HSIA)",
+    "bn": "ঢাকা এয়ারপোর্ট প্রাইভেট ট্রান্সফার (শাহজালাল বিমানবন্দর)"
+   },
+   "img": "plane",
+   "cust": {
+    "en": "Tasnim Chowdhury",
+    "bn": "তাসনিম চৌধুরী"
+   },
+   "ini": "TC",
+   "phone": "+880 1719-313813",
+   "city": {
+    "en": "Cumilla",
+    "bn": "কুমিল্লা"
+   },
+   "pax": 5,
+   "total": 9000,
+   "paid": 2700,
+   "status": "partial",
+   "created": "2026-09-21",
+   "travel": "2026-12-01",
+   "channel": [
+    "wa",
+    {
+     "en": "WhatsApp",
+     "bn": "হোয়াটসঅ্যাপ"
+    }
+   ],
+   "method": "Bank transfer",
+   "agent": "Mitu Akter"
+  },
+  {
+   "ref": "MSF-26-48414",
+   "kind": "hotel",
+   "slug": "ubud-jungle-villas",
+   "title": {
+    "en": "Ubud Jungle Pool Villas",
+    "bn": "উবুদ জঙ্গল পুল ভিলা"
+   },
+   "img": "bali",
+   "cust": {
+    "en": "Shakil Talukder",
+    "bn": "শাকিল তালুকদার"
+   },
+   "ini": "ST",
+   "phone": "+880 1756-321732",
+   "city": {
+    "en": "Dhaka",
+    "bn": "ঢাকা"
+   },
+   "pax": 1,
+   "total": 64500,
+   "paid": 19350,
+   "status": "partial",
+   "created": "2026-09-20",
+   "travel": "2026-11-04",
+   "channel": [
+    "agent",
+    {
+     "en": "B2B agent",
+     "bn": "বিটুবি এজেন্ট"
+    }
+   ],
+   "method": "Rocket",
+   "agent": "Nadia Islam"
+  },
+  {
+   "ref": "MSF-26-48377",
+   "kind": "visa",
+   "slug": "malaysia",
+   "title": {
+    "en": "Malaysia visa",
+    "bn": "মালয়েশিয়া ভিসা"
+   },
+   "img": "malaysia",
+   "cust": {
+    "en": "Mehjabin Sarker",
+    "bn": "মেহজাবিন সরকার"
+   },
+   "ini": "MS",
+   "phone": "+880 1793-329651",
+   "city": {
+    "en": "Chattogram",
+    "bn": "চট্টগ্রাম"
+   },
+   "pax": 4,
+   "total": 23200,
+   "paid": 6960,
+   "status": "partial",
+   "created": "2026-09-19",
+   "travel": "2026-12-07",
+   "channel": [
+    "walkin",
+    {
+     "en": "Branch",
+     "bn": "শাখা"
+    }
+   ],
+   "method": "EMI · City Bank",
+   "agent": "Rafi Ahmed"
+  },
+  {
+   "ref": "MSF-26-48340",
+   "kind": "visa",
+   "slug": "india",
+   "title": {
+    "en": "India visa",
+    "bn": "ভারত ভিসা"
+   },
+   "img": "kashmir",
+   "cust": {
+    "en": "Imran Rahman",
+    "bn": "ইমরান রহমান"
+   },
+   "ini": "IR",
+   "phone": "+880 1740-337570",
+   "city": {
+    "en": "Sylhet",
+    "bn": "সিলেট"
+   },
+   "pax": 5,
+   "total": 12500,
+   "paid": 3750,
+   "status": "partial",
+   "created": "2026-09-18",
+   "travel": "2026-11-10",
+   "channel": [
+    "web",
+    {
+     "en": "Website",
+     "bn": "ওয়েবসাইট"
+    }
+   ],
+   "method": "bKash",
+   "agent": "Sohel Rana"
+  },
+  {
+   "ref": "MSF-26-48303",
+   "kind": "tour",
+   "slug": "sajek-rangamati",
+   "title": {
+    "en": "Sajek Valley & Rangamati Hill Retreat",
+    "bn": "সাজেক ভ্যালি ও রাঙামাটি পাহাড়ি অবকাশ"
+   },
+   "img": "sajek",
+   "cust": {
+    "en": "Rumana Ahmed",
+    "bn": "রুমানা আহমেদ"
+   },
+   "ini": "RA",
+   "phone": "+880 1777-345489",
+   "city": {
+    "en": "Khulna",
+    "bn": "খুলনা"
+   },
+   "pax": 2,
+   "total": 19600,
+   "paid": 19600,
+   "status": "completed",
+   "created": "2026-09-17",
+   "travel": "2026-08-13",
+   "channel": [
+    "app",
+    {
+     "en": "App",
+     "bn": "অ্যাপ"
+    }
+   ],
+   "method": "Nagad",
+   "agent": "Mitu Akter"
+  },
+  {
+   "ref": "MSF-26-48266",
+   "kind": "tour",
+   "slug": "bali-highlights",
+   "title": {
+    "en": "Bali Highlights: Ubud, Rice Terraces & Beaches",
+    "bn": "বালি হাইলাইটস: উবুদ, ধানখেত ও সৈকত"
+   },
+   "img": "bali",
+   "cust": {
+    "en": "Sabbir Akter",
+    "bn": "সাব্বির আক্তার"
+   },
+   "ini": "SA",
+   "phone": "+880 1724-353408",
+   "city": {
+    "en": "Rajshahi",
+    "bn": "রাজশাহী"
+   },
+   "pax": 2,
+   "total": 179000,
+   "paid": 179000,
+   "status": "completed",
+   "created": "2026-09-16",
+   "travel": "2026-01-16",
+   "channel": [
+    "wa",
+    {
+     "en": "WhatsApp",
+     "bn": "হোয়াটসঅ্যাপ"
+    }
+   ],
+   "method": "Card · SSLCommerz",
+   "agent": "Nadia Islam"
+  },
+  {
+   "ref": "MSF-26-48229",
+   "kind": "tour",
+   "slug": "thailand-phuket",
+   "title": {
+    "en": "Thailand: Bangkok, Phuket & Phi Phi",
+    "bn": "থাইল্যান্ড: ব্যাংকক, ফুকেট ও ফি ফি"
+   },
+   "img": "phuket",
+   "cust": {
+    "en": "Lamia Islam",
+    "bn": "লামিয়া ইসলাম"
+   },
+   "ini": "LI",
+   "phone": "+880 1761-361327",
+   "city": {
+    "en": "Gazipur",
+    "bn": "গাজীপুর"
+   },
+   "pax": 2,
+   "total": 124000,
+   "paid": 124000,
+   "status": "completed",
+   "created": "2026-09-15",
+   "travel": "2026-02-19",
+   "channel": [
+    "agent",
+    {
+     "en": "B2B agent",
+     "bn": "বিটুবি এজেন্ট"
+    }
+   ],
+   "method": "Bank transfer",
+   "agent": "Rafi Ahmed"
+  },
+  {
+   "ref": "MSF-26-48192",
+   "kind": "cruise",
+   "slug": "singapore-penang-phuket",
+   "title": {
+    "en": "Singapore · Penang · Phuket Cruise",
+    "bn": "সিঙ্গাপুর · পেনাং · ফুকেট ক্রুজ"
+   },
+   "img": "cruise",
+   "cust": {
+    "en": "Kamrul Hossain",
+    "bn": "কামরুল হোসেন"
+   },
+   "ini": "KH",
+   "phone": "+880 1798-369246",
+   "city": {
+    "en": "Cumilla",
+    "bn": "কুমিল্লা"
+   },
+   "pax": 2,
+   "total": 137000,
+   "paid": 0,
+   "status": "cancelled",
+   "created": "2026-09-14",
+   "travel": "2026-11-22",
+   "channel": [
+    "walkin",
+    {
+     "en": "Branch",
+     "bn": "শাখা"
+    }
+   ],
+   "method": "Rocket",
+   "agent": "Sohel Rana"
+  },
+  {
+   "ref": "MSF-26-48155",
+   "kind": "cruise",
+   "slug": "maldives-island-hopper",
+   "title": {
+    "en": "Maldives Island-Hopper Yacht",
+    "bn": "মালদ্বীপ আইল্যান্ড-হপার ইয়ট"
+   },
+   "img": "maldives",
+   "cust": {
+    "en": "Nabila Mollah",
+    "bn": "নাবিলা মোল্লা"
+   },
+   "ini": "NM",
+   "phone": "+880 1745-377165",
+   "city": {
+    "en": "Dhaka",
+    "bn": "ঢাকা"
+   },
+   "pax": 3,
+   "total": 435000,
+   "paid": 435000,
+   "status": "refunded",
+   "created": "2026-09-13",
+   "travel": "2026-12-25",
+   "channel": [
+    "web",
+    {
+     "en": "Website",
+     "bn": "ওয়েবসাইট"
+    }
+   ],
+   "method": "EMI · City Bank",
+   "agent": "Mitu Akter"
+  }
+ ],
+ "CUSTOMERS": [
+  {
+   "id": "CU-10240",
+   "name": {
+    "en": "Farhana Rahman",
+    "bn": "ফারহানা রহমান"
+   },
+   "ini": "FR",
+   "email": "farhana.rahman@gmail.com",
+   "phone": "+880 1712-345678",
+   "city": {
+    "en": "Dhaka",
+    "bn": "ঢাকা"
+   },
+   "trips": 9,
+   "spend": 812400,
+   "tier": {
+    "en": "Gold",
+    "bn": "গোল্ড"
+   },
+   "since": "2021-03-14",
+   "status": "active",
+   "seg": "Couple"
+  },
+  {
+   "id": "CU-10253",
+   "name": {
+    "en": "Mahmud Hossain",
+    "bn": "মাহমুদ হোসেন"
+   },
+   "ini": "MH",
+   "email": "mahmud.hossain@yahoo.com",
+   "phone": "+880 1863-107213",
+   "city": {
+    "en": "Chattogram",
+    "bn": "চট্টগ্রাম"
+   },
+   "trips": 8,
+   "spend": 389500,
+   "tier": {
+    "en": "Silver",
+    "bn": "সিলভার"
+   },
+   "since": "2021-02-11",
+   "status": "active",
+   "seg": "Couple"
+  },
+  {
+   "id": "CU-10266",
+   "name": {
+    "en": "Farzana Mollah",
+    "bn": "ফারজানা মোল্লা"
+   },
+   "ini": "FM",
+   "email": "farzana.mollah@outlook.com",
+   "phone": "+880 1926-114426",
+   "city": {
+    "en": "Sylhet",
+    "bn": "সিলেট"
+   },
+   "trips": 6,
+   "spend": 361000,
+   "tier": {
+    "en": "Gold",
+    "bn": "গোল্ড"
+   },
+   "since": "2022-03-12",
+   "status": "active",
+   "seg": "Solo"
+  },
+  {
+   "id": "CU-10279",
+   "name": {
+    "en": "Arif Khan",
+    "bn": "আরিফ খান"
+   },
+   "ini": "AK",
+   "email": "arif.khan@musafir.test",
+   "phone": "+880 1579-121639",
+   "city": {
+    "en": "Khulna",
+    "bn": "খুলনা"
+   },
+   "trips": 4,
+   "spend": 332500,
+   "tier": {
+    "en": "Platinum",
+    "bn": "প্লাটিনাম"
+   },
+   "since": "2023-04-13",
+   "status": "active",
+   "seg": "Corporate"
+  },
+  {
+   "id": "CU-10292",
+   "name": {
+    "en": "Tasnim Chowdhury",
+    "bn": "তাসনিম চৌধুরী"
+   },
+   "ini": "TC",
+   "email": "tasnim.chowdhury@gmail.com",
+   "phone": "+880 1642-128852",
+   "city": {
+    "en": "Rajshahi",
+    "bn": "রাজশাহী"
+   },
+   "trips": 2,
+   "spend": 304000,
+   "tier": {
+    "en": "Blue",
+    "bn": "ব্লু"
+   },
+   "since": "2024-05-14",
+   "status": "active",
+   "seg": "Group"
+  },
+  {
+   "id": "CU-10305",
+   "name": {
+    "en": "Shakil Talukder",
+    "bn": "শাকিল তালুকদার"
+   },
+   "ini": "ST",
+   "email": "shakil.talukder@yahoo.com",
+   "phone": "+880 1395-136065",
+   "city": {
+    "en": "Gazipur",
+    "bn": "গাজীপুর"
+   },
+   "trips": 9,
+   "spend": 275500,
+   "tier": {
+    "en": "Silver",
+    "bn": "সিলভার"
+   },
+   "since": "2025-06-15",
+   "status": "active",
+   "seg": "Family"
+  },
+  {
+   "id": "CU-10318",
+   "name": {
+    "en": "Mehjabin Sarker",
+    "bn": "মেহজাবিন সরকার"
+   },
+   "ini": "MS",
+   "email": "mehjabin.sarker@outlook.com",
+   "phone": "+880 1758-143278",
+   "city": {
+    "en": "Cumilla",
+    "bn": "কুমিল্লা"
+   },
+   "trips": 7,
+   "spend": 247000,
+   "tier": {
+    "en": "Gold",
+    "bn": "গোল্ড"
+   },
+   "since": "2020-07-16",
+   "status": "active",
+   "seg": "Couple"
+  },
+  {
+   "id": "CU-10331",
+   "name": {
+    "en": "Imran Rahman",
+    "bn": "ইমরান রহমান"
+   },
+   "ini": "IR",
+   "email": "imran.rahman@musafir.test",
+   "phone": "+880 1821-150491",
+   "city": {
+    "en": "Dhaka",
+    "bn": "ঢাকা"
+   },
+   "trips": 5,
+   "spend": 218500,
+   "tier": {
+    "en": "Platinum",
+    "bn": "প্লাটিনাম"
+   },
+   "since": "2021-08-17",
+   "status": "active",
+   "seg": "Solo"
+  },
+  {
+   "id": "CU-10344",
+   "name": {
+    "en": "Rumana Ahmed",
+    "bn": "রুমানা আহমেদ"
+   },
+   "ini": "RA",
+   "email": "rumana.ahmed@gmail.com",
+   "phone": "+880 1974-157704",
+   "city": {
+    "en": "Chattogram",
+    "bn": "চট্টগ্রাম"
+   },
+   "trips": 3,
+   "spend": 190000,
+   "tier": {
+    "en": "Blue",
+    "bn": "ব্লু"
+   },
+   "since": "2022-09-18",
+   "status": "active",
+   "seg": "Corporate"
+  },
+  {
+   "id": "CU-10357",
+   "name": {
+    "en": "Sabbir Akter",
+    "bn": "সাব্বির আক্তার"
+   },
+   "ini": "SA",
+   "email": "sabbir.akter@yahoo.com",
+   "phone": "+880 1537-164917",
+   "city": {
+    "en": "Sylhet",
+    "bn": "সিলেট"
+   },
+   "trips": 1,
+   "spend": 161500,
+   "tier": {
+    "en": "Silver",
+    "bn": "সিলভার"
+   },
+   "since": "2023-01-10",
+   "status": "active",
+   "seg": "Group"
+  },
+  {
+   "id": "CU-10370",
+   "name": {
+    "en": "Lamia Islam",
+    "bn": "লামিয়া ইসলাম"
+   },
+   "ini": "LI",
+   "email": "lamia.islam@outlook.com",
+   "phone": "+880 1690-172130",
+   "city": {
+    "en": "Khulna",
+    "bn": "খুলনা"
+   },
+   "trips": 8,
+   "spend": 133000,
+   "tier": {
+    "en": "Gold",
+    "bn": "গোল্ড"
+   },
+   "since": "2024-02-11",
+   "status": "active",
+   "seg": "Family"
+  },
+  {
+   "id": "CU-10383",
+   "name": {
+    "en": "Kamrul Hossain",
+    "bn": "কামরুল হোসেন"
+   },
+   "ini": "KH",
+   "email": "kamrul.hossain@musafir.test",
+   "phone": "+880 1353-179343",
+   "city": {
+    "en": "Rajshahi",
+    "bn": "রাজশাহী"
+   },
+   "trips": 6,
+   "spend": 104500,
+   "tier": {
+    "en": "Platinum",
+    "bn": "প্লাটিনাম"
+   },
+   "since": "2025-03-12",
+   "status": "suspended",
+   "seg": "Couple"
+  },
+  {
+   "id": "CU-10396",
+   "name": {
+    "en": "Nabila Mollah",
+    "bn": "নাবিলা মোল্লা"
+   },
+   "ini": "NM",
+   "email": "nabila.mollah@gmail.com",
+   "phone": "+880 1716-186556",
+   "city": {
+    "en": "Gazipur",
+    "bn": "গাজীপুর"
+   },
+   "trips": 4,
+   "spend": 76000,
+   "tier": {
+    "en": "Blue",
+    "bn": "ব্লু"
+   },
+   "since": "2020-04-13",
+   "status": "active",
+   "seg": "Solo"
+  },
+  {
+   "id": "CU-10409",
+   "name": {
+    "en": "Zahid Khan",
+    "bn": "জাহিদ খান"
+   },
+   "ini": "ZK",
+   "email": "zahid.khan@yahoo.com",
+   "phone": "+880 1869-193769",
+   "city": {
+    "en": "Cumilla",
+    "bn": "কুমিল্লা"
+   },
+   "trips": 2,
+   "spend": 47500,
+   "tier": {
+    "en": "Silver",
+    "bn": "সিলভার"
+   },
+   "since": "2021-05-14",
+   "status": "active",
+   "seg": "Corporate"
+  },
+  {
+   "id": "CU-10422",
+   "name": {
+    "en": "Ishrat Chowdhury",
+    "bn": "ইশরাত চৌধুরী"
+   },
+   "ini": "IC",
+   "email": "ishrat.chowdhury@outlook.com",
+   "phone": "+880 1932-200982",
+   "city": {
+    "en": "Dhaka",
+    "bn": "ঢাকা"
+   },
+   "trips": 9,
+   "spend": 399000,
+   "tier": {
+    "en": "Gold",
+    "bn": "গোল্ড"
+   },
+   "since": "2022-06-15",
+   "status": "active",
+   "seg": "Group"
+  },
+  {
+   "id": "CU-10435",
+   "name": {
+    "en": "Rezaul Talukder",
+    "bn": "রেজাউল তালুকদার"
+   },
+   "ini": "RT",
+   "email": "rezaul.talukder@musafir.test",
+   "phone": "+880 1585-208195",
+   "city": {
+    "en": "Chattogram",
+    "bn": "চট্টগ্রাম"
+   },
+   "trips": 7,
+   "spend": 370500,
+   "tier": {
+    "en": "Platinum",
+    "bn": "প্লাটিনাম"
+   },
+   "since": "2023-07-16",
+   "status": "active",
+   "seg": "Family"
+  },
+  {
+   "id": "CU-10448",
+   "name": {
+    "en": "Anika Sarker",
+    "bn": "আনিকা সরকার"
+   },
+   "ini": "AS",
+   "email": "anika.sarker@gmail.com",
+   "phone": "+880 1648-215408",
+   "city": {
+    "en": "Sylhet",
+    "bn": "সিলেট"
+   },
+   "trips": 5,
+   "spend": 342000,
+   "tier": {
+    "en": "Blue",
+    "bn": "ব্লু"
+   },
+   "since": "2024-08-17",
+   "status": "active",
+   "seg": "Couple"
+  },
+  {
+   "id": "CU-10461",
+   "name": {
+    "en": "Tanvir Rahman",
+    "bn": "তানভীর রহমান"
+   },
+   "ini": "TR",
+   "email": "tanvir.rahman@yahoo.com",
+   "phone": "+880 1311-222621",
+   "city": {
+    "en": "Khulna",
+    "bn": "খুলনা"
+   },
+   "trips": 3,
+   "spend": 313500,
+   "tier": {
+    "en": "Silver",
+    "bn": "সিলভার"
+   },
+   "since": "2025-09-18",
+   "status": "active",
+   "seg": "Solo"
+  },
+  {
+   "id": "CU-10474",
+   "name": {
+    "en": "Nusrat Ahmed",
+    "bn": "নুসরাত আহমেদ"
+   },
+   "ini": "NA",
+   "email": "nusrat.ahmed@outlook.com",
+   "phone": "+880 1764-229834",
+   "city": {
+    "en": "Rajshahi",
+    "bn": "রাজশাহী"
+   },
+   "trips": 1,
+   "spend": 285000,
+   "tier": {
+    "en": "Gold",
+    "bn": "গোল্ড"
+   },
+   "since": "2020-01-10",
+   "status": "active",
+   "seg": "Corporate"
+  },
+  {
+   "id": "CU-10487",
+   "name": {
+    "en": "Rakib Akter",
+    "bn": "রাকিব আক্তার"
+   },
+   "ini": "RA",
+   "email": "rakib.akter@musafir.test",
+   "phone": "+880 1827-237047",
+   "city": {
+    "en": "Gazipur",
+    "bn": "গাজীপুর"
+   },
+   "trips": 8,
+   "spend": 256500,
+   "tier": {
+    "en": "Platinum",
+    "bn": "প্লাটিনাম"
+   },
+   "since": "2021-02-11",
+   "status": "active",
+   "seg": "Group"
+  },
+  {
+   "id": "CU-10500",
+   "name": {
+    "en": "Sumaiya Islam",
+    "bn": "সুমাইয়া ইসলাম"
+   },
+   "ini": "SI",
+   "email": "sumaiya.islam@gmail.com",
+   "phone": "+880 1980-244260",
+   "city": {
+    "en": "Cumilla",
+    "bn": "কুমিল্লা"
+   },
+   "trips": 6,
+   "spend": 228000,
+   "tier": {
+    "en": "Blue",
+    "bn": "ব্লু"
+   },
+   "since": "2022-03-12",
+   "status": "active",
+   "seg": "Family"
+  },
+  {
+   "id": "CU-10513",
+   "name": {
+    "en": "Mahmud Hossain",
+    "bn": "মাহমুদ হোসেন"
+   },
+   "ini": "MH",
+   "email": "mahmud.hossain@yahoo.com",
+   "phone": "+880 1543-251473",
+   "city": {
+    "en": "Dhaka",
+    "bn": "ঢাকা"
+   },
+   "trips": 4,
+   "spend": 199500,
+   "tier": {
+    "en": "Silver",
+    "bn": "সিলভার"
+   },
+   "since": "2023-04-13",
+   "status": "active",
+   "seg": "Couple"
+  },
+  {
+   "id": "CU-10526",
+   "name": {
+    "en": "Farzana Mollah",
+    "bn": "ফারজানা মোল্লা"
+   },
+   "ini": "FM",
+   "email": "farzana.mollah@outlook.com",
+   "phone": "+880 1696-258686",
+   "city": {
+    "en": "Chattogram",
+    "bn": "চট্টগ্রাম"
+   },
+   "trips": 2,
+   "spend": 171000,
+   "tier": {
+    "en": "Gold",
+    "bn": "গোল্ড"
+   },
+   "since": "2024-05-14",
+   "status": "active",
+   "seg": "Solo"
+  },
+  {
+   "id": "CU-10539",
+   "name": {
+    "en": "Arif Khan",
+    "bn": "আরিফ খান"
+   },
+   "ini": "AK",
+   "email": "arif.khan@musafir.test",
+   "phone": "+880 1359-265899",
+   "city": {
+    "en": "Sylhet",
+    "bn": "সিলেট"
+   },
+   "trips": 9,
+   "spend": 142500,
+   "tier": {
+    "en": "Platinum",
+    "bn": "প্লাটিনাম"
+   },
+   "since": "2025-06-15",
+   "status": "active",
+   "seg": "Corporate"
+  }
+ ],
+ "LEADS": [
+  {
+   "id": "LD-3301",
+   "name": {
+    "en": "Mehjabin Sarker",
+    "bn": "মেহজাবিন সরকার"
+   },
+   "ini": "MS",
+   "need": {
+    "en": "Maldives honeymoon, Dec, 2 pax",
+    "bn": "মালদ্বীপ হানিমুন, ডিসেম্বর, ২ জন"
+   },
+   "src": {
+    "en": "Website enquiry",
+    "bn": "ওয়েবসাইট অনুসন্ধান"
+   },
+   "value": 289000,
+   "stage": "new",
+   "owner": "Nadia",
+   "age": "12 m"
+  },
+  {
+   "id": "LD-3302",
+   "name": {
+    "en": "Imran Rahman",
+    "bn": "ইমরান রহমান"
+   },
+   "ini": "IR",
+   "need": {
+    "en": "Bhutan family trip, 4 pax",
+    "bn": "ভুটান পারিবারিক ট্রিপ, ৪ জন"
+   },
+   "src": {
+    "en": "Trip planner",
+    "bn": "ট্রিপ প্ল্যানার"
+   },
+   "value": 196000,
+   "stage": "new",
+   "owner": "Rafi",
+   "age": "1 h"
+  },
+  {
+   "id": "LD-3303",
+   "name": {
+    "en": "Rumana Ahmed",
+    "bn": "রুমানা আহমেদ"
+   },
+   "ini": "RA",
+   "need": {
+    "en": "Corporate retreat Cox’s Bazar, 40 pax",
+    "bn": "কর্পোরেট রিট্রিট কক্সবাজার, ৪০ জন"
+   },
+   "src": {
+    "en": "WhatsApp",
+    "bn": "হোয়াটসঅ্যাপ"
+   },
+   "value": 720000,
+   "stage": "contacted",
+   "owner": "Sohel",
+   "age": "3 h"
+  },
+  {
+   "id": "LD-3304",
+   "name": {
+    "en": "Sabbir Akter",
+    "bn": "সাব্বির আক্তার"
+   },
+   "ini": "SA",
+   "need": {
+    "en": "Singapore cruise, Feb, 3 pax",
+    "bn": "সিঙ্গাপুর ক্রুজ, ফেব্রুয়ারি, ৩ জন"
+   },
+   "src": {
+    "en": "Facebook ad",
+    "bn": "ফেসবুক বিজ্ঞাপন"
+   },
+   "value": 205500,
+   "stage": "quoted",
+   "owner": "Mitu",
+   "age": "1 d"
+  },
+  {
+   "id": "LD-3305",
+   "name": {
+    "en": "Lamia Islam",
+    "bn": "লামিয়া ইসলাম"
+   },
+   "ini": "LI",
+   "need": {
+    "en": "Japan sakura tour, Apr, 2 pax",
+    "bn": "জাপান সাকুরা ট্যুর, এপ্রিল, ২ জন"
+   },
+   "src": {
+    "en": "Walk-in",
+    "bn": "সরাসরি"
+   },
+   "value": 398000,
+   "stage": "contacted",
+   "owner": "Nadia",
+   "age": "2 d"
+  },
+  {
+   "id": "LD-3306",
+   "name": {
+    "en": "Kamrul Hossain",
+    "bn": "কামরুল হোসেন"
+   },
+   "ini": "KH",
+   "need": {
+    "en": "Schengen visa + Europe tour",
+    "bn": "শেনজেন ভিসা + ইউরোপ ট্যুর"
+   },
+   "src": {
+    "en": "Corporate RFQ",
+    "bn": "কর্পোরেট আরএফকিউ"
+   },
+   "value": 455000,
+   "stage": "quoted",
+   "owner": "Rafi",
+   "age": "3 d"
+  },
+  {
+   "id": "LD-3307",
+   "name": {
+    "en": "Nabila Mollah",
+    "bn": "নাবিলা মোল্লা"
+   },
+   "ini": "NM",
+   "need": {
+    "en": "Nepal trekking, 6 pax",
+    "bn": "নেপাল ট্রেকিং, ৬ জন"
+   },
+   "src": {
+    "en": "Website enquiry",
+    "bn": "ওয়েবসাইট অনুসন্ধান"
+   },
+   "value": 168000,
+   "stage": "won",
+   "owner": "Sohel",
+   "age": "4 d"
+  },
+  {
+   "id": "LD-3308",
+   "name": {
+    "en": "Zahid Khan",
+    "bn": "জাহিদ খান"
+   },
+   "ini": "ZK",
+   "need": {
+    "en": "Thailand visa only, 2 pax",
+    "bn": "শুধু থাইল্যান্ড ভিসা, ২ জন"
+   },
+   "src": {
+    "en": "Trip planner",
+    "bn": "ট্রিপ প্ল্যানার"
+   },
+   "value": 13000,
+   "stage": "new",
+   "owner": "Mitu",
+   "age": "6 d"
+  },
+  {
+   "id": "LD-3309",
+   "name": {
+    "en": "Ishrat Chowdhury",
+    "bn": "ইশরাত চৌধুরী"
+   },
+   "ini": "IC",
+   "need": {
+    "en": "Sundarbans school trip, 55 pax",
+    "bn": "সুন্দরবন স্কুল ট্রিপ, ৫৫ জন"
+   },
+   "src": {
+    "en": "WhatsApp",
+    "bn": "হোয়াটসঅ্যাপ"
+   },
+   "value": 247500,
+   "stage": "lost",
+   "owner": "Nadia",
+   "age": "12 m"
+  },
+  {
+   "id": "LD-3310",
+   "name": {
+    "en": "Rezaul Talukder",
+    "bn": "রেজাউল তালুকদার"
+   },
+   "ini": "RT",
+   "need": {
+    "en": "Dubai shopping trip, 5 pax",
+    "bn": "দুবাই শপিং ট্রিপ, ৫ জন"
+   },
+   "src": {
+    "en": "Facebook ad",
+    "bn": "ফেসবুক বিজ্ঞাপন"
+   },
+   "value": 320000,
+   "stage": "quoted",
+   "owner": "Rafi",
+   "age": "1 h"
+  },
+  {
+   "id": "LD-3311",
+   "name": {
+    "en": "Anika Sarker",
+    "bn": "আনিকা সরকার"
+   },
+   "ini": "AS",
+   "need": {
+    "en": "Maldives honeymoon, Dec, 2 pax",
+    "bn": "মালদ্বীপ হানিমুন, ডিসেম্বর, ২ জন"
+   },
+   "src": {
+    "en": "Walk-in",
+    "bn": "সরাসরি"
+   },
+   "value": 289000,
+   "stage": "contacted",
+   "owner": "Sohel",
+   "age": "3 h"
+  },
+  {
+   "id": "LD-3312",
+   "name": {
+    "en": "Tanvir Rahman",
+    "bn": "তানভীর রহমান"
+   },
+   "ini": "TR",
+   "need": {
+    "en": "Bhutan family trip, 4 pax",
+    "bn": "ভুটান পারিবারিক ট্রিপ, ৪ জন"
+   },
+   "src": {
+    "en": "Corporate RFQ",
+    "bn": "কর্পোরেট আরএফকিউ"
+   },
+   "value": 196000,
+   "stage": "won",
+   "owner": "Mitu",
+   "age": "1 d"
+  },
+  {
+   "id": "LD-3313",
+   "name": {
+    "en": "Nusrat Ahmed",
+    "bn": "নুসরাত আহমেদ"
+   },
+   "ini": "NA",
+   "need": {
+    "en": "Corporate retreat Cox’s Bazar, 40 pax",
+    "bn": "কর্পোরেট রিট্রিট কক্সবাজার, ৪০ জন"
+   },
+   "src": {
+    "en": "Website enquiry",
+    "bn": "ওয়েবসাইট অনুসন্ধান"
+   },
+   "value": 720000,
+   "stage": "new",
+   "owner": "Nadia",
+   "age": "2 d"
+  },
+  {
+   "id": "LD-3314",
+   "name": {
+    "en": "Rakib Akter",
+    "bn": "রাকিব আক্তার"
+   },
+   "ini": "RA",
+   "need": {
+    "en": "Singapore cruise, Feb, 3 pax",
+    "bn": "সিঙ্গাপুর ক্রুজ, ফেব্রুয়ারি, ৩ জন"
+   },
+   "src": {
+    "en": "Trip planner",
+    "bn": "ট্রিপ প্ল্যানার"
+   },
+   "value": 205500,
+   "stage": "quoted",
+   "owner": "Rafi",
+   "age": "3 d"
+  },
+  {
+   "id": "LD-3315",
+   "name": {
+    "en": "Sumaiya Islam",
+    "bn": "সুমাইয়া ইসলাম"
+   },
+   "ini": "SI",
+   "need": {
+    "en": "Japan sakura tour, Apr, 2 pax",
+    "bn": "জাপান সাকুরা ট্যুর, এপ্রিল, ২ জন"
+   },
+   "src": {
+    "en": "WhatsApp",
+    "bn": "হোয়াটসঅ্যাপ"
+   },
+   "value": 398000,
+   "stage": "contacted",
+   "owner": "Sohel",
+   "age": "4 d"
+  }
+ ],
+ "PAYMENTS": [
+  {
+   "txn": "TXN88412060",
+   "ref": "MSF-26-48213",
+   "cust": {
+    "en": "Farhana Rahman",
+    "bn": "ফারহানা রহমান"
+   },
+   "amount": 86700,
+   "method": "bKash",
+   "date": "2026-09-28",
+   "status": "success",
+   "fee": 1604
+  },
+  {
+   "txn": "TXN88404729",
+   "ref": "MSF-26-49413",
+   "cust": {
+    "en": "Nusrat Ahmed",
+    "bn": "নুসরাত আহমেদ"
+   },
+   "amount": 156000,
+   "method": "Nagad",
+   "date": "2026-10-23",
+   "status": "success",
+   "fee": 2886
+  },
+  {
+   "txn": "TXN88397398",
+   "ref": "MSF-26-49376",
+   "cust": {
+    "en": "Rakib Akter",
+    "bn": "রাকিব আক্তার"
+   },
+   "amount": 234000,
+   "method": "Card · SSLCommerz",
+   "date": "2026-10-22",
+   "status": "success",
+   "fee": 4329
+  },
+  {
+   "txn": "TXN88390067",
+   "ref": "MSF-26-49339",
+   "cust": {
+    "en": "Sumaiya Islam",
+    "bn": "সুমাইয়া ইসলাম"
+   },
+   "amount": 224000,
+   "method": "Bank transfer",
+   "date": "2026-10-21",
+   "status": "success",
+   "fee": 4144
+  },
+  {
+   "txn": "TXN88382736",
+   "ref": "MSF-26-49302",
+   "cust": {
+    "en": "Mahmud Hossain",
+    "bn": "মাহমুদ হোসেন"
+   },
+   "amount": 49000,
+   "method": "Rocket",
+   "date": "2026-10-20",
+   "status": "success",
+   "fee": 906
+  },
+  {
+   "txn": "TXN88375405",
+   "ref": "MSF-26-49265",
+   "cust": {
+    "en": "Farzana Mollah",
+    "bn": "ফারজানা মোল্লা"
+   },
+   "amount": 26700,
+   "method": "EMI · City Bank",
+   "date": "2026-10-19",
+   "status": "failed",
+   "fee": 494
+  },
+  {
+   "txn": "TXN88368074",
+   "ref": "MSF-26-49228",
+   "cust": {
+    "en": "Arif Khan",
+    "bn": "আরিফ খান"
+   },
+   "amount": 2160,
+   "method": "bKash",
+   "date": "2026-10-18",
+   "status": "pending",
+   "fee": 40
+  },
+  {
+   "txn": "TXN88360743",
+   "ref": "MSF-26-49191",
+   "cust": {
+    "en": "Tasnim Chowdhury",
+    "bn": "তাসনিম চৌধুরী"
+   },
+   "amount": 10620,
+   "method": "Nagad",
+   "date": "2026-10-17",
+   "status": "pending",
+   "fee": 196
+  },
+  {
+   "txn": "TXN88353412",
+   "ref": "MSF-26-49154",
+   "cust": {
+    "en": "Shakil Talukder",
+    "bn": "শাকিল তালুকদার"
+   },
+   "amount": 3900,
+   "method": "Card · SSLCommerz",
+   "date": "2026-10-16",
+   "status": "pending",
+   "fee": 72
+  },
+  {
+   "txn": "TXN88346081",
+   "ref": "MSF-26-49117",
+   "cust": {
+    "en": "Mehjabin Sarker",
+    "bn": "মেহজাবিন সরকার"
+   },
+   "amount": 16500,
+   "method": "Bank transfer",
+   "date": "2026-10-15",
+   "status": "success",
+   "fee": 305
+  },
+  {
+   "txn": "TXN88338750",
+   "ref": "MSF-26-49080",
+   "cust": {
+    "en": "Imran Rahman",
+    "bn": "ইমরান রহমান"
+   },
+   "amount": 27750,
+   "method": "Rocket",
+   "date": "2026-10-14",
+   "status": "success",
+   "fee": 513
+  },
+  {
+   "txn": "TXN88331419",
+   "ref": "MSF-26-49043",
+   "cust": {
+    "en": "Rumana Ahmed",
+    "bn": "রুমানা আহমেদ"
+   },
+   "amount": 87000,
+   "method": "EMI · City Bank",
+   "date": "2026-10-13",
+   "status": "success",
+   "fee": 1610
+  },
+  {
+   "txn": "TXN88324088",
+   "ref": "MSF-26-49006",
+   "cust": {
+    "en": "Sabbir Akter",
+    "bn": "সাব্বির আক্তার"
+   },
+   "amount": 20400,
+   "method": "bKash",
+   "date": "2026-10-12",
+   "status": "success",
+   "fee": 377
+  },
+  {
+   "txn": "TXN88316757",
+   "ref": "MSF-26-48969",
+   "cust": {
+    "en": "Lamia Islam",
+    "bn": "লামিয়া ইসলাম"
+   },
+   "amount": 288000,
+   "method": "Nagad",
+   "date": "2026-10-11",
+   "status": "success",
+   "fee": 5328
+  },
+  {
+   "txn": "TXN88309426",
+   "ref": "MSF-26-48932",
+   "cust": {
+    "en": "Kamrul Hossain",
+    "bn": "কামরুল হোসেন"
+   },
+   "amount": 86000,
+   "method": "Card · SSLCommerz",
+   "date": "2026-10-10",
+   "status": "success",
+   "fee": 1591
+  },
+  {
+   "txn": "TXN88302095",
+   "ref": "MSF-26-48895",
+   "cust": {
+    "en": "Nabila Mollah",
+    "bn": "নাবিলা মোল্লা"
+   },
+   "amount": 20700,
+   "method": "Bank transfer",
+   "date": "2026-10-09",
+   "status": "success",
+   "fee": 383
+  },
+  {
+   "txn": "TXN88287433",
+   "ref": "MSF-26-48821",
+   "cust": {
+    "en": "Ishrat Chowdhury",
+    "bn": "ইশরাত চৌধুরী"
+   },
+   "amount": 18600,
+   "method": "EMI · City Bank",
+   "date": "2026-10-07",
+   "status": "refunded",
+   "fee": 344
+  },
+  {
+   "txn": "TXN88280102",
+   "ref": "MSF-26-48784",
+   "cust": {
+    "en": "Rezaul Talukder",
+    "bn": "রেজাউল তালুকদার"
+   },
+   "amount": 348000,
+   "method": "bKash",
+   "date": "2026-10-06",
+   "status": "success",
+   "fee": 6438
+  },
+  {
+   "txn": "TXN88272771",
+   "ref": "MSF-26-48747",
+   "cust": {
+    "en": "Anika Sarker",
+    "bn": "আনিকা সরকার"
+   },
+   "amount": 29000,
+   "method": "Nagad",
+   "date": "2026-10-05",
+   "status": "success",
+   "fee": 536
+  },
+  {
+   "txn": "TXN88265440",
+   "ref": "MSF-26-48710",
+   "cust": {
+    "en": "Tanvir Rahman",
+    "bn": "তানভীর রহমান"
+   },
+   "amount": 18000,
+   "method": "Card · SSLCommerz",
+   "date": "2026-10-04",
+   "status": "success",
+   "fee": 333
+  },
+  {
+   "txn": "TXN88258109",
+   "ref": "MSF-26-48673",
+   "cust": {
+    "en": "Nusrat Ahmed",
+    "bn": "নুসরাত আহমেদ"
+   },
+   "amount": 29800,
+   "method": "Bank transfer",
+   "date": "2026-10-03",
+   "status": "success",
+   "fee": 551
+  },
+  {
+   "txn": "TXN88250778",
+   "ref": "MSF-26-48636",
+   "cust": {
+    "en": "Rakib Akter",
+    "bn": "রাকিব আক্তার"
+   },
+   "amount": 660000,
+   "method": "Rocket",
+   "date": "2026-10-02",
+   "status": "success",
+   "fee": 12210
+  },
+  {
+   "txn": "TXN88243447",
+   "ref": "MSF-26-48599",
+   "cust": {
+    "en": "Sumaiya Islam",
+    "bn": "সুমাইয়া ইসলাম"
+   },
+   "amount": 490000,
+   "method": "EMI · City Bank",
+   "date": "2026-10-01",
+   "status": "success",
+   "fee": 9065
+  },
+  {
+   "txn": "TXN88236116",
+   "ref": "MSF-26-48562",
+   "cust": {
+    "en": "Mahmud Hossain",
+    "bn": "মাহমুদ হোসেন"
+   },
+   "amount": 113400,
+   "method": "bKash",
+   "date": "2026-09-24",
+   "status": "pending",
+   "fee": 2098
+  },
+  {
+   "txn": "TXN88228785",
+   "ref": "MSF-26-48525",
+   "cust": {
+    "en": "Farzana Mollah",
+    "bn": "ফারজানা মোল্লা"
+   },
+   "amount": 4800,
+   "method": "Nagad",
+   "date": "2026-09-23",
+   "status": "pending",
+   "fee": 89
+  },
+  {
+   "txn": "TXN88221454",
+   "ref": "MSF-26-48488",
+   "cust": {
+    "en": "Arif Khan",
+    "bn": "আরিফ খান"
+   },
+   "amount": 7440,
+   "method": "Card · SSLCommerz",
+   "date": "2026-09-22",
+   "status": "pending",
+   "fee": 138
+  },
+  {
+   "txn": "TXN88214123",
+   "ref": "MSF-26-48451",
+   "cust": {
+    "en": "Tasnim Chowdhury",
+    "bn": "তাসনিম চৌধুরী"
+   },
+   "amount": 2700,
+   "method": "Bank transfer",
+   "date": "2026-09-21",
+   "status": "success",
+   "fee": 50
+  }
+ ],
+ "COUPONS": [
+  [
+   "WINTER26",
+   {
+    "en": "Winter beach sale",
+    "bn": "শীতের সৈকত সেল"
+   },
+   "20%",
+   412,
+   1000,
+   "2026-11-30",
+   "active"
+  ],
+  [
+   "MUSAFIR10",
+   {
+    "en": "Welcome — first booking",
+    "bn": "স্বাগত — প্রথম বুকিং"
+   },
+   "10%",
+   2860,
+   null,
+   "2026-12-31",
+   "active"
+  ],
+  [
+   "CRUISE10",
+   {
+    "en": "Cruise season",
+    "bn": "ক্রুজ সিজন"
+   },
+   "10%",
+   133,
+   500,
+   "2026-12-15",
+   "active"
+  ],
+  [
+   "BKASH1500",
+   {
+    "en": "bKash cashback",
+    "bn": "বিকাশ ক্যাশব্যাক"
+   },
+   "৳ 1,500",
+   980,
+   2000,
+   "2026-11-15",
+   "active"
+  ],
+  [
+   "MONSOON26",
+   {
+    "en": "Monsoon flash sale",
+    "bn": "বর্ষার ফ্ল্যাশ সেল"
+   },
+   "12%",
+   1500,
+   1500,
+   "2026-06-20",
+   "expired"
+  ],
+  [
+   "NEWYEAR27",
+   {
+    "en": "New Year 2027",
+    "bn": "নববর্ষ ২০২৭"
+   },
+   "15%",
+   0,
+   800,
+   "2027-01-05",
+   "scheduled"
+  ],
+  [
+   "CORP8",
+   {
+    "en": "Corporate partners",
+    "bn": "কর্পোরেট পার্টনার"
+   },
+   "8%",
+   76,
+   null,
+   "2027-06-30",
+   "active"
+  ]
+ ],
+ "ADMIN_REVIEWS": [
+  [
+   {
+    "en": "Tanvir & Nusrat Ahmed",
+    "bn": "তানভীর ও নুসরাত আহমেদ"
+   },
+   {
+    "en": "Maldives Water-Villa Honeymoon",
+    "bn": "মালদ্বীপ ওয়াটার-ভিলা হানিমুন"
+   },
+   5,
+   "2026-09-14",
+   {
+    "en": "Everything was seamless — the speedboat was waiting, our villa was upgraded and the team checked on us every day on WhatsApp. Worth every taka.",
+    "bn": "সবকিছু একদম নিখুঁত ছিল — স্পিডবোট অপেক্ষা করছিল, আমাদের ভিলা আপগ্রেড করে দেওয়া হয়েছিল, আর টিম প্রতিদিন হোয়াটসঅ্যাপে খোঁজ নিয়েছে। প্রতিটি টাকা সার্থক।"
+   },
+   "published",
+   "TN"
+  ],
+  [
+   {
+    "en": "Mahmud & Shirin Hasan",
+    "bn": "মাহমুদ ও শিরিন হাসান"
+   },
+   {
+    "en": "Singapore · Penang · Phuket Cruise",
+    "bn": "সিঙ্গাপুর · পেনাং · ফুকেট ক্রুজ"
+   },
+   5,
+   "2026-07-02",
+   {
+    "en": "Our first cruise with two kids — the cabin upgrade, the shows and the water park made it unforgettable. Musafir handled visas and boarding papers perfectly.",
+    "bn": "দুই সন্তানকে নিয়ে প্রথম ক্রুজ — কেবিন আপগ্রেড, শো আর ওয়াটার পার্ক মিলিয়ে অবিস্মরণীয়। ভিসা ও বোর্ডিংয়ের কাগজপত্র মুসাফির নিখুঁতভাবে সামলেছে।"
+   },
+   "published",
+   "MH"
+  ],
+  [
+   {
+    "en": "Farhana Rahman",
+    "bn": "ফারহানা রহমান"
+   },
+   {
+    "en": "Turkey Classic",
+    "bn": "তুরস্ক ক্লাসিক"
+   },
+   5,
+   "2026-06-21",
+   {
+    "en": "The Cappadocia balloon ride at sunrise was magical. Visa processing was quick and the guide in Istanbul was brilliant with my parents.",
+    "bn": "কাপাদোকিয়ায় সূর্যোদয়ের বেলুন রাইড ছিল জাদুকরী। ভিসা প্রসেসিং দ্রুত হয়েছে, আর ইস্তাম্বুলের গাইড আমার মা-বাবার সাথে চমৎকার ছিলেন।"
+   },
+   "review",
+   "FR"
+  ],
+  [
+   {
+    "en": "Rashed Karim",
+    "bn": "রাশেদ করিম"
+   },
+   {
+    "en": "Corporate retreat — Sajek",
+    "bn": "কর্পোরেট রিট্রিট — সাজেক"
+   },
+   4,
+   "2026-05-30",
+   {
+    "en": "Handled 64 colleagues without a hitch. Invoicing and the VAT breakdown made our finance team happy too.",
+    "bn": "৬৪ জন সহকর্মীর ভ্রমণ কোনো ঝামেলা ছাড়াই সামলেছেন। ইনভয়েস ও ভ্যাটের বিস্তারিত হিসাবে আমাদের ফিন্যান্স টিমও খুশি।"
+   },
+   "published",
+   "RK"
+  ],
+  [
+   {
+    "en": "Sumaiya Islam",
+    "bn": "সুমাইয়া ইসলাম"
+   },
+   {
+    "en": "Nepal: Kathmandu & Pokhara",
+    "bn": "নেপাল: কাঠমান্ডু ও পোখারা"
+   },
+   5,
+   "2026-04-11",
+   {
+    "en": "Took my mother to see the Himalayas. The installment plan made it affordable and our guide was so caring and patient.",
+    "bn": "মাকে নিয়ে হিমালয় দেখতে গিয়েছিলাম। কিস্তির সুবিধায় খরচ সাধ্যের মধ্যে ছিল, আর গাইড ছিলেন খুবই যত্নশীল ও ধৈর্যশীল।"
+   },
+   "review",
+   "SI"
+  ],
+  [
+   {
+    "en": "Imran Chowdhury",
+    "bn": "ইমরান চৌধুরী"
+   },
+   {
+    "en": "Sundarbans Mangrove Cruise",
+    "bn": "সুন্দরবন ম্যানগ্রোভ ক্রুজ"
+   },
+   5,
+   "2026-02-08",
+   {
+    "en": "Spotted deer, crocodiles and even fresh tiger pug-marks at Kotka! The food on the boat was outstanding.",
+    "bn": "কটকায় হরিণ, কুমির, এমনকি বাঘের টাটকা পায়ের ছাপও দেখেছি! জাহাজের খাবার ছিল অসাধারণ।"
+   },
+   "hidden",
+   "IC"
+  ]
+ ],
+ "AGENTS": [
+  [
+   "AG-118",
+   {
+    "en": "Sky Route Travels",
+    "bn": "স্কাই রুট ট্রাভেলস"
+   },
+   {
+    "en": "Chattogram",
+    "bn": "চট্টগ্রাম"
+   },
+   182,
+   4210000,
+   "7%",
+   "active",
+   85000
+  ],
+  [
+   "AG-121",
+   {
+    "en": "Green Valley Tours",
+    "bn": "গ্রিন ভ্যালি ট্যুরস"
+   },
+   {
+    "en": "Sylhet",
+    "bn": "সিলেট"
+   },
+   96,
+   1980000,
+   "6%",
+   "active",
+   12000
+  ],
+  [
+   "AG-133",
+   {
+    "en": "Padma Holidays",
+    "bn": "পদ্মা হলিডেজ"
+   },
+   {
+    "en": "Rajshahi",
+    "bn": "রাজশাহী"
+   },
+   54,
+   1120000,
+   "6%",
+   "active",
+   4500
+  ],
+  [
+   "AG-140",
+   {
+    "en": "Blue Bay Travel Desk",
+    "bn": "ব্লু বে ট্রাভেল ডেস্ক"
+   },
+   {
+    "en": "Khulna",
+    "bn": "খুলনা"
+   },
+   31,
+   640000,
+   "5%",
+   "review",
+   0
+  ],
+  [
+   "AG-145",
+   {
+    "en": "Metro Trip Point",
+    "bn": "মেট্রো ট্রিপ পয়েন্ট"
+   },
+   {
+    "en": "Dhaka",
+    "bn": "ঢাকা"
+   },
+   12,
+   210000,
+   "5%",
+   "suspended",
+   -6500
+  ]
+ ],
+ "STAFF": [
+  [
+   "Ahmed Zubair",
+   "AZ",
+   {
+    "en": "Owner",
+    "bn": "মালিক"
+   },
+   "owner",
+   {
+    "en": "Head office",
+    "bn": "প্রধান কার্যালয়"
+   },
+   "2 min"
+  ],
+  [
+   "Nadia Islam",
+   "NI",
+   {
+    "en": "Sales manager",
+    "bn": "সেলস ম্যানেজার"
+   },
+   "manager",
+   {
+    "en": "Banani",
+    "bn": "বনানী"
+   },
+   "5 min"
+  ],
+  [
+   "Rafi Ahmed",
+   "RA",
+   {
+    "en": "Reservations",
+    "bn": "রিজারভেশন"
+   },
+   "agent",
+   {
+    "en": "Banani",
+    "bn": "বনানী"
+   },
+   "12 min"
+  ],
+  [
+   "Sohel Rana",
+   "SR",
+   {
+    "en": "Visa officer",
+    "bn": "ভিসা অফিসার"
+   },
+   "visa",
+   {
+    "en": "Banani",
+    "bn": "বনানী"
+   },
+   "1 h"
+  ],
+  [
+   "Mitu Akter",
+   "MA",
+   {
+    "en": "Customer care",
+    "bn": "কাস্টমার কেয়ার"
+   },
+   "support",
+   {
+    "en": "Chattogram",
+    "bn": "চট্টগ্রাম"
+   },
+   "3 h"
+  ],
+  [
+   "Kazi Fahim",
+   "KF",
+   {
+    "en": "Accounts",
+    "bn": "হিসাব"
+   },
+   "finance",
+   {
+    "en": "Head office",
+    "bn": "প্রধান কার্যালয়"
+   },
+   "1 d"
+  ],
+  [
+   "Tania Sultana",
+   "TS",
+   {
+    "en": "Content editor",
+    "bn": "কনটেন্ট এডিটর"
+   },
+   "editor",
+   {
+    "en": "Remote",
+    "bn": "রিমোট"
+   },
+   "2 d"
+  ]
+ ],
+ "ROLES": [
+  [
+   "owner",
+   {
+    "en": "Owner",
+    "bn": "মালিক"
+   }
+  ],
+  [
+   "manager",
+   {
+    "en": "Manager",
+    "bn": "ম্যানেজার"
+   }
+  ],
+  [
+   "agent",
+   {
+    "en": "Reservations",
+    "bn": "রিজারভেশন"
+   }
+  ],
+  [
+   "visa",
+   {
+    "en": "Visa officer",
+    "bn": "ভিসা অফিসার"
+   }
+  ],
+  [
+   "support",
+   {
+    "en": "Support",
+    "bn": "সাপোর্ট"
+   }
+  ],
+  [
+   "finance",
+   {
+    "en": "Finance",
+    "bn": "ফাইন্যান্স"
+   }
+  ],
+  [
+   "editor",
+   {
+    "en": "Editor",
+    "bn": "এডিটর"
+   }
+  ]
+ ],
+ "PERMS": [
+  [
+   {
+    "en": "Bookings",
+    "bn": "বুকিং"
+   },
+   "owner manager agent support finance"
+  ],
+  [
+   {
+    "en": "Refunds & payments",
+    "bn": "রিফান্ড ও পেমেন্ট"
+   },
+   "owner manager finance"
+  ],
+  [
+   {
+    "en": "Catalog (tours, cruises, activities)",
+    "bn": "ক্যাটালগ (ট্যুর, ক্রুজ, অ্যাক্টিভিটি)"
+   },
+   "owner manager editor"
+  ],
+  [
+   {
+    "en": "Visa applications",
+    "bn": "ভিসা আবেদন"
+   },
+   "owner manager visa"
+  ],
+  [
+   {
+    "en": "Customers & PII",
+    "bn": "গ্রাহক ও ব্যক্তিগত তথ্য"
+   },
+   "owner manager agent support"
+  ],
+  [
+   {
+    "en": "Content & media",
+    "bn": "কনটেন্ট ও মিডিয়া"
+   },
+   "owner editor"
+  ],
+  [
+   {
+    "en": "Coupons & pricing",
+    "bn": "কুপন ও মূল্য"
+   },
+   "owner manager"
+  ],
+  [
+   {
+    "en": "Reports",
+    "bn": "রিপোর্ট"
+   },
+   "owner manager finance"
+  ],
+  [
+   {
+    "en": "Staff & settings",
+    "bn": "স্টাফ ও সেটিংস"
+   },
+   "owner"
+  ]
+ ],
+ "LOGS": [
+  [
+   "10:42",
+   "Nadia Islam",
+   {
+    "en": "changed status of MSF-26-48213 to Part-paid",
+    "bn": "MSF-26-48213-এর স্ট্যাটাস আংশিক পরিশোধিত করেছেন"
+   },
+   "booking",
+   "103.112.x.x"
+  ],
+  [
+   "10:31",
+   "Kazi Fahim",
+   {
+    "en": "issued refund ৳ 21,400 for MSF-26-44590",
+    "bn": "MSF-26-44590-এর জন্য ৳ ২১,৪০০ রিফান্ড দিয়েছেন"
+   },
+   "payment",
+   "103.112.x.x"
+  ],
+  [
+   "10:05",
+   "Tania Sultana",
+   {
+    "en": "published blog post “Your first cruise from Bangladesh”",
+    "bn": "ব্লগ পোস্ট “বাংলাদেশ থেকে প্রথম ক্রুজ” প্রকাশ করেছেন"
+   },
+   "cms",
+   "37.111.x.x"
+  ],
+  [
+   "09:58",
+   "Ahmed Zubair",
+   {
+    "en": "created coupon NEWYEAR27 (15%)",
+    "bn": "কুপন NEWYEAR27 (১৫%) তৈরি করেছেন"
+   },
+   "coupon",
+   "103.112.x.x"
+  ],
+  [
+   "09:40",
+   "Sohel Rana",
+   {
+    "en": "moved VSA-26-1182 to “At embassy”",
+    "bn": "VSA-26-1182 “দূতাবাসে” ধাপে নিয়েছেন"
+   },
+   "visa",
+   "103.112.x.x"
+  ],
+  [
+   "09:12",
+   "System",
+   {
+    "en": "nightly backup completed (2.4 GB)",
+    "bn": "রাতের ব্যাকআপ সম্পন্ন (২.৪ জিবি)"
+   },
+   "system",
+   "—"
+  ],
+  [
+   "08:55",
+   "Rafi Ahmed",
+   {
+    "en": "signed in with 2FA",
+    "bn": "২এফএ দিয়ে সাইন ইন করেছেন"
+   },
+   "auth",
+   "103.112.x.x"
+  ],
+  [
+   "Yesterday",
+   "Mitu Akter",
+   {
+    "en": "replied to ticket TKT-8812",
+    "bn": "টিকিট TKT-8812-এর উত্তর দিয়েছেন"
+   },
+   "support",
+   "45.248.x.x"
+  ],
+  [
+   "Yesterday",
+   "System",
+   {
+    "en": "5 failed sign-in attempts blocked for ops@… (rate limit)",
+    "bn": "ops@…-এর ৫টি ব্যর্থ সাইন-ইন প্রচেষ্টা আটকানো হয়েছে (রেট লিমিট)"
+   },
+   "security",
+   "182.160.x.x"
+  ]
+ ],
+ "ADMIN_TICKETS": [
+  [
+   "TKT-8812",
+   {
+    "en": "Farhana Rahman",
+    "bn": "ফারহানা রহমান"
+   },
+   {
+    "en": "Change Maldives villa type",
+    "bn": "মালদ্বীপের ভিলার ধরন পরিবর্তন"
+   },
+   "high",
+   "awaiting",
+   "Nadia Islam",
+   "2 h"
+  ],
+  [
+   "TKT-8820",
+   {
+    "en": "Rakib Chowdhury",
+    "bn": "রাকিব চৌধুরী"
+   },
+   {
+    "en": "Refund for cancelled Dubai safari",
+    "bn": "বাতিল দুবাই সাফারির রিফান্ড"
+   },
+   "normal",
+   "open",
+   "Mitu Akter",
+   "35 m"
+  ],
+  [
+   "TKT-8819",
+   {
+    "en": "Sumaiya Rahman",
+    "bn": "সুমাইয়া রহমান"
+   },
+   {
+    "en": "Name spelling on e-ticket",
+    "bn": "ই-টিকিটে নামের বানান"
+   },
+   "urgent",
+   "open",
+   "Rafi Ahmed",
+   "50 m"
+  ],
+  [
+   "TKT-8815",
+   {
+    "en": "Imran Khan",
+    "bn": "ইমরান খান"
+   },
+   {
+    "en": "Schengen appointment date",
+    "bn": "শেনজেন অ্যাপয়েন্টমেন্টের তারিখ"
+   },
+   "normal",
+   "awaiting",
+   "Sohel Rana",
+   "5 h"
+  ],
+  [
+   "TKT-8801",
+   {
+    "en": "Lamia Akter",
+    "bn": "লামিয়া আক্তার"
+   },
+   {
+    "en": "Invoice with company BIN",
+    "bn": "কোম্পানির বিআইএনসহ ইনভয়েস"
+   },
+   "low",
+   "resolved",
+   "Kazi Fahim",
+   "1 d"
+  ]
+ ],
+ "VISA_QUEUE": [
+  [
+   "VSA-26-1182",
+   {
+    "en": "Farhana Rahman",
+    "bn": "ফারহানা রহমান"
+   },
+   "🇹🇭",
+   {
+    "en": "Thailand",
+    "bn": "থাইল্যান্ড"
+   },
+   "embassy",
+   "2026-11-04",
+   "Sohel Rana"
+  ],
+  [
+   "VSA-26-1183",
+   {
+    "en": "Shafiqul Islam",
+    "bn": "শফিকুল ইসলাম"
+   },
+   "🇹🇭",
+   {
+    "en": "Thailand",
+    "bn": "থাইল্যান্ড"
+   },
+   "docs",
+   "2026-11-06",
+   "Sohel Rana"
+  ],
+  [
+   "VSA-26-1190",
+   {
+    "en": "Tasnim Hossain",
+    "bn": "তাসনিম হোসেন"
+   },
+   "🇪🇺",
+   {
+    "en": "Schengen (France)",
+    "bn": "শেনজেন (ফ্রান্স)"
+   },
+   "submitted",
+   "2026-11-20",
+   "Sohel Rana"
+  ],
+  [
+   "VSA-26-1176",
+   {
+    "en": "Kamrul Sarker",
+    "bn": "কামরুল সরকার"
+   },
+   "🇯🇵",
+   {
+    "en": "Japan",
+    "bn": "জাপান"
+   },
+   "embassy",
+   "2026-11-02",
+   "Sohel Rana"
+  ],
+  [
+   "VSA-26-1171",
+   {
+    "en": "Anika Talukder",
+    "bn": "আনিকা তালুকদার"
+   },
+   "🇲🇾",
+   {
+    "en": "Malaysia",
+    "bn": "মালয়েশিয়া"
+   },
+   "approved",
+   "2026-10-23",
+   "Mitu Akter"
+  ],
+  [
+   "VSA-26-1168",
+   {
+    "en": "Zahid Khan",
+    "bn": "জাহিদ খান"
+   },
+   "🇦🇪",
+   {
+    "en": "UAE",
+    "bn": "সংযুক্ত আরব আমিরাত"
+   },
+   "approved",
+   "2026-10-22",
+   "Mitu Akter"
+  ],
+  [
+   "VSA-26-1160",
+   {
+    "en": "Ishrat Mollah",
+    "bn": "ইশরাত মোল্লা"
+   },
+   "🇬🇧",
+   {
+    "en": "United Kingdom",
+    "bn": "যুক্তরাজ্য"
+   },
+   "failed",
+   "2026-10-18",
+   "Sohel Rana"
+  ]
+ ],
+ "MONTHS_EN": [
+  "Nov",
+  "Dec",
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct"
+ ],
+ "MONTHS_BN": [
+  "নভে",
+  "ডিসে",
+  "জানু",
+  "ফেব্রু",
+  "মার্চ",
+  "এপ্রি",
+  "মে",
+  "জুন",
+  "জুলা",
+  "আগ",
+  "সেপ্টে",
+  "অক্টো"
+ ],
+ "REV": [
+  182,
+  246,
+  231,
+  168,
+  152,
+  139,
+  171,
+  158,
+  149,
+  176,
+  214,
+  238
+ ],
+ "REV_LY": [
+  151,
+  205,
+  198,
+  150,
+  131,
+  122,
+  140,
+  133,
+  128,
+  147,
+  181,
+  196
+ ],
+ "MIX": [
+  [
+   {
+    "en": "Holidays",
+    "bn": "হলিডে"
+   },
+   46,
+   "#0D6B65"
+  ],
+  [
+   {
+    "en": "Cruises",
+    "bn": "ক্রুজ"
+   },
+   14,
+   "#14A497"
+  ],
+  [
+   {
+    "en": "Flights",
+    "bn": "ফ্লাইট"
+   },
+   21,
+   "#F6A33B"
+  ],
+  [
+   {
+    "en": "Hotels",
+    "bn": "হোটেল"
+   },
+   9,
+   "#6366F1"
+  ],
+  [
+   {
+    "en": "Visa",
+    "bn": "ভিসা"
+   },
+   6,
+   "#E11D48"
+  ],
+  [
+   {
+    "en": "Activities",
+    "bn": "অ্যাক্টিভিটি"
+   },
+   4,
+   "#64748B"
+  ]
+ ],
+ "TOP_DEST": [
+  [
+   "maldives",
+   412
+  ],
+  [
+   "coxs-bazar",
+   388
+  ],
+  [
+   "bali",
+   265
+  ],
+  [
+   "thailand",
+   241
+  ],
+  [
+   "nepal",
+   198
+  ],
+  [
+   "dubai",
+   176
+  ]
+ ],
+ "MEDIA": [
+  "maldives",
+  "coxsbazar",
+  "bali",
+  "cruise",
+  "sajek",
+  "resort",
+  "cappadocia",
+  "nepal",
+  "stmartin",
+  "kuakata",
+  "japan",
+  "santorini"
+ ]
+}
