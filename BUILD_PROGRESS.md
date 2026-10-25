@@ -112,3 +112,13 @@ console errors; security checks. Then repeat key browser E2E on the user's PC (c
 - Gotcha: CopyFromBox only writes under C:\Users\m (the local-exec root). Copy there, then Move-Item into F:\projects\tour_travel.
 - Gotcha: in PowerShell scripts, don't name a function `rv` (it's the alias for Remove-Variable).
 - NEXT: M4 checkout + payments (4-step booking, coupons, deposit/instalments, mock + SSLCommerz/bKash/Nagad sandbox drivers, IPN, confirmation, mail/SMS log, PDFs).
+
+## M4 — IN PROGRESS (checkout + payments)  started 05:30 BDT
+- 05:45 backend done (commit above): app/Services/Checkout/{Pricer,FlightFare,CouponService,BookingService}, app/Services/Payments/* (Gateway interface,
+  GatewayManager: enabled in settings `payments.gateways`; sandbox + no credentials → MockGateway branded as that gateway; live → only configured drivers),
+  SslCommerz (init v4 + validation API), bKash tokenized (grant/create/execute/status/refund), Nagad (RSA init/complete/verify), BankTransfer (pending, admin verifies).
+  API: POST checkout/quote, coupons/validate, bookings, bookings/{ref}/pay; GET bookings/{ref}?key=, bookings/{ref}/{invoice|voucher}.pdf; POST payments/{gw}/ipn.
+  Web: /pay/{gw}/return/{payment} (GET|POST), /pay/mock/{payment} (signed). Laravel 13 CSRF middleware is PreventRequestForgery → except pay/*.
+  Guest access key = booking ULID (hash_equals). Settle is idempotent (row lock). Hold: seats_held/booked incremented under lockForUpdate; `bookings:expire-holds` every minute.
+  Data migration 2026_10_26_001000 inserts new settings/add-ons only if missing (PC data safe). PDFs English-only (dompdf has no Bangla shaping).
+- Smoke: Maldives deposit 84,000 via simulated bKash → partial/partial, instalment 1 paid, 2 due, docs created, email+SMS logged; tampered signature 403; replay idempotent.
