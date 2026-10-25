@@ -46,6 +46,12 @@ export function Chat({ s, waNumber, tel, icons }: {
   const logRef = useRef<HTMLDivElement>(null);
   useEffect(() => { if (open) input.current?.focus(); }, [open]);
   useEffect(() => { logRef.current?.scrollTo({ top: 1e6 }); }, [log]);
+  // any `[data-open-chat]` link on the page (help centre, contact) opens the panel
+  useEffect(() => {
+    const on = (e: MouseEvent) => { if ((e.target as HTMLElement).closest('[data-open-chat]')) { e.preventDefault(); setOpen(true); } };
+    document.addEventListener('click', on);
+    return () => document.removeEventListener('click', on);
+  }, []);
   const send = (text: string) => {
     if (!text.trim()) return;
     setLog((l) => [...l, { me: true, text }]);

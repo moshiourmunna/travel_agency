@@ -5,12 +5,12 @@ import { useSite } from './SiteContext';
 import { toast } from './store';
 
 /** Coupon code chip: copies to the clipboard and confirms with a toast. */
-export function CopyCode({ code, className, label, children }: { code: string; className: string; label: string; children?: React.ReactNode }) {
+export function CopyCode({ code, className, label, children, iconOnly = false }: { code: string; className: string; label: string; children?: React.ReactNode; iconOnly?: boolean }) {
   const { msg } = useSite();
   return (
-    <button type="button" className={className} aria-label={`${label} ${code}`} onClick={async () => {
-      try { await navigator.clipboard.writeText(code); toast(`${msg.copied} ${code}`); } catch { toast(code); }
-    }}>{code} {children}</button>
+    <button type="button" className={className} aria-label={iconOnly ? label : `${label} ${code}`} onClick={async () => {
+      try { await navigator.clipboard.writeText(code); toast(iconOnly ? msg.copied : `${msg.copied} ${code}`); } catch { toast(code); }
+    }}>{iconOnly ? children : <>{code} {children}</>}</button>
   );
 }
 

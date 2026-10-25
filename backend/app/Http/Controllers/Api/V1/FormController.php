@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Models\Inquiry;
+use App\Models\JobApplication;
+use App\Models\JobPost;
 use App\Models\Lead;
 use App\Models\NewsletterSubscriber;
 use Illuminate\Http\JsonResponse;
@@ -81,5 +83,24 @@ class FormController extends Controller
         $sub->fill(['locale' => app()->getLocale(), 'status' => 'subscribed', 'confirmed_at' => $sub->confirmed_at ?? now()])->save();
 
         return response()->json(['data' => ['status' => $already ? 'already_subscribed' : 'subscribed']], $already ? 200 : 201);
+    }
+
+    /** Job application (multipart): the CV is kept on the private disk, never publicly served. */
+    public function careerApply(Request $request, string $slug): JsonResponse
+    {
+        $job = JobPost::where('status', 'published')->where('slug', $slug)->firstOrFail();
+        if ($request->filled('website')) {
+            return response()->json(['data' => ['reference' => 'MSF-JOB-'.random_int(10000, 99999)]], 201);
+        }
+        $v = $request->validate([
+            'name' => ['required', 'string', 'min:2', 'max:120'], 'email' => ['required', 'email:rfc', 'max:190'],
+            'phone' => ['nullable', 'string', 'regex:/^\+?[0-9 \-]{8,20}$/'], 'cover_letter' => ['nullable', 'string', 'max:5000'],
+            'cv' => ['nullable', 'file', 'mimes:pdf', 'mimetypes:application/pdf', 'max:5120'],
+        ]);
+        $path = $request->file('cv')?->store('cvs/'.now()->format('Y/m'), 'local');
+        $app = JobApplication::create(['job_post_id' => $job->id, 'name' => $v['name'], 'email' => mb_strtolower($v['email']), 'phone' => $v['phone'] ?? null,
+            'cover_letter' => $v['cover_letter'] ?? null, 'cv_path' => $path, 'status' => 'new']);
+
+        return response()->json(['data' => ['reference' => 'MSF-JOB-'.str_pad((string) $app->id, 5, '0', STR_PAD_LEFT)]], 201);
     }
 }

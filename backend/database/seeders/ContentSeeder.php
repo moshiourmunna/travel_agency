@@ -48,7 +48,8 @@ class ContentSeeder extends Seeder
 
         TeamMember::query()->delete();
         foreach (S::public('TEAM') as $i => $t) {
-            TeamMember::create(['name' => S::b($t['name']), 'role' => S::b($t['role']), 'initials' => $t['ini'], 'gradient' => $t['c'], 'sort' => $i + 1]);
+            TeamMember::create(['name' => S::b($t['name']), 'role' => S::b($t['role']), 'initials' => $t['ini'], 'gradient' => $t['c'], 'countries_visited' => 15 + $i * 3, 'sort' => $i + 1,
+                'socials' => ['linkedin' => 'https://www.linkedin.com/company/musafir-travels', 'email' => 'hello@musafir.com.bd']]);
         }
 
         Stat::query()->delete();
@@ -79,9 +80,17 @@ class ContentSeeder extends Seeder
             ]);
             $tagIds = [];
             foreach ($page['ctx']['en']['tags'] as $k => $tag) {
-                $tagIds[] = Tag::updateOrCreate(['slug' => Str::slug($tag)], ['name' => ['en' => $tag, 'bn' => $page['ctx']['bn']['tags'][$k] ?? $tag]])->id;
+                if (isset($tagIds[Str::slug($tag)])) {
+                    continue; // mockup lists the category twice (category + destination); first one carries the translation
+                }
+                $bn = $page['ctx']['bn']['tags'][$k] ?? $tag;
+                $prev = Tag::where('slug', Str::slug($tag))->first();
+                if ($bn === $tag && $prev) { // untranslated in this post: keep a translation another post provided
+                    $bn = $prev->getTranslation('name', 'bn', false) ?: $bn;
+                }
+                $tagIds[Str::slug($tag)] = Tag::updateOrCreate(['slug' => Str::slug($tag)], ['name' => ['en' => $tag, 'bn' => $bn]])->id;
             }
-            $post->tags()->sync($tagIds);
+            $post->tags()->sync(array_values($tagIds));
         }
 
         // Careers
@@ -105,13 +114,17 @@ class ContentSeeder extends Seeder
             Page::updateOrCreate(['slug' => $slug], ['template' => 'legal', 'title' => S::b($ctx['heading']), 'body' => $html, 'data' => ['updated' => '2026-10-01'], 'status' => 'published', 'published_at' => '2026-10-01']);
         }
 
-        // Gallery
-        $album = GalleryAlbum::updateOrCreate(['slug' => 'destinations'], ['title' => ['en' => 'Destinations', 'bn' => 'গন্তব্য'], 'sort' => 1]);
-        $album->items()->delete();
+        // Gallery: one album per filter chip (Bangladesh / International)
+        GalleryAlbum::where('slug', 'destinations')->delete(); // pre-M3 single album
+        $albums = [];
+        foreach (['bd' => ['bangladesh', 'Bangladesh', 'বাংলাদেশ'], 'intl' => ['international', 'International', 'আন্তর্জাতিক']] as $region => [$slug, $en, $bnName]) {
+            $albums[$region] = GalleryAlbum::updateOrCreate(['slug' => $slug], ['title' => ['en' => $en, 'bn' => $bnName], 'sort' => count($albums) + 1, 'is_active' => true]);
+            $albums[$region]->items()->delete();
+        }
         $bn = S::page('gallery.html')['ctx']['bn']['photos'];
         foreach (S::page('gallery.html')['ctx']['en']['photos'] as $i => [$key, $caption, $region]) {
             if ($id = S::asset($key)) {
-                $album->items()->create(['media_asset_id' => $id, 'caption' => ['en' => $caption, 'bn' => $bn[$i][1] ?? $caption], 'sort' => $i + 1]);
+                $albums[$region === 'bd' ? 'bd' : 'intl']->items()->create(['media_asset_id' => $id, 'caption' => ['en' => $caption, 'bn' => $bn[$i][1] ?? $caption], 'sort' => $i + 1]);
             }
         }
     }

@@ -88,7 +88,7 @@ class ContentController extends Controller
 
         return response()->json(['data' => [
             'slug' => $page->slug, 'template' => $page->template, 'title' => $page->tr('title'), 'subtitle' => $page->tr('subtitle'), 'body' => $page->tr('body'),
-            'image' => Img::of($page->image), 'data' => Settings::localise($page->data ?? []), 'updated_at' => $page->updated_at?->toIso8601String(),
+            'image' => Img::of($page->image), 'data' => Sections::images(Settings::localise($page->data ?? [])), 'updated_at' => $page->updated_at?->toIso8601String(),
             'sections' => $page->sections->map(fn ($s) => Sections::resolve($s))->filter()->values()->all(),
             'seo' => P::seo($page->seo),
         ]]);
@@ -124,7 +124,7 @@ class ContentController extends Controller
             $base->where('reviewable_type', $model::class)->where('reviewable_id', $model->id);
         }
         $hist = (clone $base)->selectRaw('rating, count(*) c')->groupBy('rating')->pluck('c', 'rating');
-        $page = (clone $base)->when($v['rating'] ?? null, fn ($q, $r) => $q->where('rating', $r))->orderByDesc('travelled_on')->orderByDesc('id')->paginate($v['per_page'] ?? 12);
+        $page = (clone $base)->with('reviewable')->when($v['rating'] ?? null, fn ($q, $r) => $q->where('rating', $r))->orderByDesc('travelled_on')->orderByDesc('id')->paginate($v['per_page'] ?? 12);
 
         return response()->json([
             'data' => collect($page->items())->map(fn ($r) => P::review($r))->all(),
@@ -137,7 +137,7 @@ class ContentController extends Controller
     public function team(): JsonResponse
     {
         return response()->json(['data' => TeamMember::with('photo.media')->where('is_active', true)->orderBy('sort')->get()->map(fn ($m) => [
-            'name' => $m->tr('name'), 'role' => $m->tr('role'), 'bio' => $m->tr('bio'), 'initials' => $m->initials, 'gradient' => $m->gradient, 'photo' => Img::of($m->photo), 'socials' => $m->socials,
+            'name' => $m->tr('name'), 'role' => $m->tr('role'), 'bio' => $m->tr('bio'), 'initials' => $m->initials, 'gradient' => $m->gradient, 'photo' => Img::of($m->photo), 'socials' => $m->socials, 'countries_visited' => $m->countries_visited,
         ])]);
     }
 
@@ -146,8 +146,12 @@ class ContentController extends Controller
         $q = BlogPost::published()->with(['image.media', 'category'])->where('published_at', '<=', now())->orderByDesc('published_at')
             ->when($request->query('category'), fn ($q, $v) => $q->whereHas('category', fn ($c) => $c->where('slug', $v)))->search($request->query('q'));
 
-        return response()->json(['data' => $q->get()->map(fn ($p) => P::postCard($p))->all(),
-            'meta' => ['categories' => BlogCategory::orderBy('sort')->get()->map(fn ($c) => ['slug' => $c->slug, 'name' => $c->tr('name')])]]);
+        $per = max(1, min(48, (int) $request->query('per_page', 12)));
+        $page = $q->paginate($per, ['*'], 'page', max(1, (int) $request->query('page', 1)));
+
+        return response()->json(['data' => $page->getCollection()->map(fn ($p) => P::postCard($p))->all(),
+            'meta' => ['total' => $page->total(), 'current_page' => $page->currentPage(), 'last_page' => $page->lastPage(), 'per_page' => $per,
+                'categories' => BlogCategory::orderBy('sort')->get()->map(fn ($c) => ['slug' => $c->slug, 'name' => $c->tr('name')])]]);
     }
 
     public function post(string $slug): JsonResponse
@@ -162,7 +166,7 @@ class ContentController extends Controller
     {
         return response()->json(['data' => GalleryAlbum::with('items.asset.media')->where('is_active', true)->orderBy('sort')->get()->map(fn ($a) => [
             'slug' => $a->slug, 'title' => $a->tr('title'),
-            'items' => $a->items->map(fn ($i) => ['caption' => $i->tr('caption'), 'image' => Img::of($i->asset)])->all(),
+            'items' => $a->items->map(fn ($i) => ['caption' => $i->tr('caption'), 'sort' => $i->sort, 'image' => Img::of($i->asset)])->all(),
         ])]);
     }
 

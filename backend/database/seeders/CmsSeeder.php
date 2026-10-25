@@ -48,7 +48,7 @@ class CmsSeeder extends Seeder
     {
         foreach (json_decode(file_get_contents(database_path('seeders/data/static_pages.json')), true) as $slug => $p) {
             Page::updateOrCreate(['slug' => $slug], ['template' => $p['template'], 'title' => $p['title'], 'subtitle' => $p['subtitle'],
-                'image_id' => S::asset($p['image']), 'body' => $p['body'] ?? null, 'data' => $p['data'] ?? null, 'status' => 'published', 'published_at' => '2026-10-01']);
+                'image_id' => S::asset($p['image']), 'body' => $p['body'] ?? null, 'data' => isset($p['data']) ? self::imageKeys($p['data']) : null, 'status' => 'published', 'published_at' => '2026-10-01']);
         }
     }
 
@@ -205,5 +205,23 @@ class CmsSeeder extends Seeder
         foreach ($sections as $i => [$type, $data]) {
             PageSection::create(['page_id' => $page->id, 'type' => $type, 'sort' => ($i + 1) * 10, 'is_active' => true, 'data' => $data]);
         }
+    }
+
+    /** Seed files reference images by media key (`hero_image_key`); the DB stores ids (`hero_image_id`) like the admin does. */
+    private static function imageKeys(array $data): array
+    {
+        foreach ($data as $k => $v) {
+            if (is_string($k) && str_ends_with($k, 'image_key')) {
+                unset($data[$k]);
+                $data[substr($k, 0, -3).'id'] = S::asset($v);
+            } elseif (is_string($k) && str_ends_with($k, 'image_keys')) {
+                unset($data[$k]);
+                $data[substr($k, 0, -4).'ids'] = array_map(fn ($x) => S::asset($x), $v);
+            } elseif (is_array($v)) {
+                $data[$k] = self::imageKeys($v);
+            }
+        }
+
+        return $data;
     }
 }

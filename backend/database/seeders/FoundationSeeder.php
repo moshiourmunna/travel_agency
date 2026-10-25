@@ -154,6 +154,12 @@ class FoundationSeeder extends Seeder
             ['from' => 'DAC', 'to' => 'SIN', 'image' => 'singapore'], ['from' => 'CGP', 'to' => 'DXB', 'image' => 'dubai'],
         ], 'json');
         $set('catalog', 'visa_approval_note', ['en' => '98.4% approval rate in 2025', 'bn' => '২০২৫ সালে ৯৮.৪% অনুমোদনের হার'], 'json');
+        // Reviews page summary: aggregated across all channels (admin-editable), plus external platform ratings
+        $set('reviews', 'summary', ['histogram' => ['5' => 78, '4' => 15, '3' => 4, '2' => 2, '1' => 1], 'recommend' => 97,
+            'scores' => [['label' => ['en' => 'Trip planning', 'bn' => 'পরিকল্পনা'], 'value' => 4.9], ['label' => ['en' => 'Support', 'bn' => 'সাপোর্ট'], 'value' => 4.8],
+                ['label' => ['en' => 'Hotels', 'bn' => 'হোটেল'], 'value' => 4.7], ['label' => ['en' => 'Value', 'bn' => 'মূল্যমান'], 'value' => 4.7]]], 'json');
+        $set('reviews', 'platforms', [['name' => 'Google', 'rating' => 4.8, 'count' => 3120, 'url' => 'https://www.google.com/maps'], ['name' => 'Facebook', 'rating' => 4.9, 'count' => 5640, 'url' => 'https://www.facebook.com/'],
+            ['name' => 'Trustpilot', 'rating' => 4.6, 'count' => 412, 'url' => 'https://www.trustpilot.com/']], 'json');
         $set('catalog', 'compare_default', ['maldives-honeymoon', 'bali-highlights', 'coxs-bazar-saint-martin'], 'json'); // tours shown on /compare before the visitor picks any
         $set('commerce', 'pax_factors', ['adults' => 1, 'children' => 0.7, 'infants' => 0.1], 'json');
         $set('payments', 'gateways', ['mock' => true, 'sslcommerz' => true, 'bkash' => true, 'nagad' => true, 'bank_transfer' => true, 'wallet' => true], 'json');

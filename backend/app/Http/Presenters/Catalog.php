@@ -227,7 +227,7 @@ final class Catalog
     public static function postCard(BlogPost $p): array
     {
         return ['slug' => $p->slug, 'title' => $p->tr('title'), 'excerpt' => $p->tr('excerpt'), 'category' => $p->category?->tr('name'), 'category_slug' => $p->category?->slug,
-            'author' => $p->tr('author_name') ?? $p->author?->name, 'published_at' => $p->published_at?->toDateString(), 'reading_mins' => $p->reading_mins, 'image' => Img::of($p->image)];
+            'author' => $p->tr('author_name') ?? $p->author?->name, 'published_at' => $p->published_at?->toDateString(), 'reading_mins' => (int) $p->reading_mins, 'is_featured' => (bool) $p->is_featured, 'image' => Img::of($p->image)];
     }
 
     public static function post(BlogPost $p): array
@@ -240,6 +240,19 @@ final class Catalog
     {
         return ['id' => $r->id, 'name' => $r->tr('author_name'), 'city' => $r->tr('author_city'), 'initials' => $r->initials, 'trip' => $r->tr('trip_title'),
             'rating' => $r->rating, 'title' => $r->tr('title'), 'body' => $r->tr('body'), 'reply' => $r->tr('reply'), 'date' => ($r->travelled_on ?? $r->created_at)?->toDateString(),
-            'scores' => $r->category_scores];
+            'scores' => $r->category_scores, 'region' => self::reviewRegion($r)];
+    }
+
+    /** bd | intl of the reviewed product (hotels inherit it from their destination). */
+    private static function reviewRegion(Review $r): ?string
+    {
+        $m = $r->relationLoaded('reviewable') ? $r->reviewable : null;
+        if (! $m) {
+            return null;
+        }
+
+        $region = $m->getAttributes()['region'] ?? ($m instanceof Hotel ? $m->destination?->region : null);
+
+        return $region === null ? null : ($region === 'bd' ? 'bd' : 'intl'); // cruise regions (asia, gulf…) count as international
     }
 }

@@ -69,5 +69,6 @@ Route::prefix('v1')->name('api.v1.')->middleware(['api.locale'])->group(function
         Route::post('inquiries', [Form::class, 'inquiry'])->name('inquiries.store');
         Route::post('newsletter', [Form::class, 'newsletter'])->name('newsletter.store');
         Route::post('planner/quote', [Planner::class, 'quote'])->name('planner.quote');
+        Route::post('careers/{slug}/apply', [Form::class, 'careerApply'])->name('careers.apply');
     });
 });

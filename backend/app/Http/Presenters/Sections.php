@@ -39,7 +39,7 @@ final class Sections
     }
 
     /** Swap image id references for image payloads, recursively. */
-    private static function images(array $data): array
+    public static function images(array $data): array
     {
         foreach ($data as $k => $v) {
             if (is_string($k) && str_ends_with($k, 'image_id')) {

@@ -17,7 +17,7 @@ export function LightboxScope({ labels, className, children, closeIcon, prevIcon
       const a = (e.target as HTMLElement).closest<HTMLAnchorElement>('a[data-lightbox]');
       if (!a || !root.contains(a) || e.metaKey || e.ctrlKey) return;
       e.preventDefault();
-      const all = [...root.querySelectorAll<HTMLAnchorElement>('a[data-lightbox]')];
+      const all = [...root.querySelectorAll<HTMLAnchorElement>('a[data-lightbox]')].filter((x) => !x.closest('[hidden]'));
       setItems(all.map((x) => ({ src: x.href, cap: x.dataset.caption ?? '' })));
       setIdx(all.indexOf(a));
       dlg.current?.showModal();

@@ -8,7 +8,7 @@ type L = { open: string; title: string; rating: string; ratingErr: string; title
  * "Write a review": validates like the mockup, posts to the BFF (/api/reviews). Only travellers with a completed
  * booking may review — a 401 from the API shows a sign-in prompt instead of a fake success.
  */
-export function ReviewDialog({ l, subject, loginHref, openIcon, closeIcon, starIcon }: { l: L; subject: { type: string; slug: string }; loginHref: string; openIcon: React.ReactNode; closeIcon: React.ReactNode; starIcon: React.ReactNode }) {
+export function ReviewDialog({ l, subject, loginHref, openIcon, closeIcon, starIcon, buttonClass = 'btn btn-outline btn-sm' }: { l: L; subject: { type: string; slug: string }; loginHref: string; openIcon: React.ReactNode; closeIcon: React.ReactNode; starIcon: React.ReactNode; buttonClass?: string }) {
   const dlg = useRef<HTMLDialogElement>(null);
   const { lang } = useSite();
   const [rating, setRating] = useState(0);
@@ -29,7 +29,7 @@ export function ReviewDialog({ l, subject, loginHref, openIcon, closeIcon, starI
   };
   return (
     <>
-      <button type="button" className="btn btn-outline btn-sm" onClick={() => { setState('idle'); dlg.current?.showModal(); }}>{openIcon} {l.open}</button>
+      <button type="button" className={buttonClass} onClick={() => { setState('idle'); dlg.current?.showModal(); }}>{openIcon} {l.open}</button>
       <dialog ref={dlg} className="w-[calc(100%-2rem)] max-w-lg rounded-3xl bg-white p-0 text-ink-800 shadow-2xl backdrop:bg-ink-950/60 dark:bg-ink-900 dark:text-ink-100" aria-labelledby="rv-h">
         <form className="space-y-4 p-6" noValidate onSubmit={submit}>
           <div className="flex items-center justify-between"><h2 id="rv-h" className="text-xl font-bold">{l.title}</h2><button type="button" className="icon-btn" onClick={() => dlg.current?.close()} aria-label={l.close}>{closeIcon}</button></div>

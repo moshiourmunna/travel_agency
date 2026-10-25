@@ -9,7 +9,157 @@
    "bn": "ঢাকায় জন্ম নেওয়া, বিশ্বমানের একটি ট্রাভেল কোম্পানি — ২০১২ সাল থেকে।"
   },
   "image": "sajek",
-  "template": "hero"
+  "template": "hero",
+  "data": {
+   "story_eyebrow": {
+    "en": "Our story",
+    "bn": "আমাদের গল্প"
+   },
+   "story_title": {
+    "en": "Travel planned with care, in your language",
+    "bn": "আপনার ভাষায়, যত্ন নিয়ে সাজানো ভ্রমণ"
+   },
+   "story": [
+    {
+     "en": "Musafir started in 2012 as a two-desk ticketing office in Banani. Our founders saw Bangladeshi travellers paying hidden fees, chasing visa files and getting little help once abroad. We set out to fix that with transparent BDT prices, real humans on WhatsApp and trips designed by people who have walked every route.",
+     "bn": "২০১২ সালে বনানীতে দুই টেবিলের একটি টিকিটিং অফিস হিসেবে মুসাফিরের যাত্রা শুরু। প্রতিষ্ঠাতারা দেখেছিলেন, বাংলাদেশি ভ্রমণকারীরা লুকানো ফি দিচ্ছেন, ভিসা ফাইলের পেছনে ছুটছেন আর বিদেশে গিয়ে সাহায্য পাচ্ছেন না। আমরা তা বদলাতে চেয়েছি — স্বচ্ছ টাকায় মূল্য, হোয়াটসঅ্যাপে সত্যিকারের মানুষ আর প্রতিটি রুট নিজে ঘুরে দেখা মানুষের তৈরি ট্রিপ।"
+    },
+    {
+     "en": "Today 85 travel experts across Dhaka, Chattogram and Sylhet plan holidays, cruises, flights and visas for more than 1,20,000 travellers.",
+     "bn": "আজ ঢাকা, চট্টগ্রাম ও সিলেটে ৮৫ জন ট্রাভেল বিশেষজ্ঞ ১,২০,০০০-এর বেশি ভ্রমণকারীর জন্য হলিডে, ক্রুজ, ফ্লাইট ও ভিসা পরিকল্পনা করেন।"
+    }
+   ],
+   "photos": [
+    {
+     "image_key": "bandarban",
+     "alt": {
+      "en": "Nilgiri hills, Bandarban",
+      "bn": "নীলগিরি, বান্দরবান"
+     }
+    },
+    {
+     "image_key": "maldives",
+     "alt": {
+      "en": "Maldives water villas",
+      "bn": "মালদ্বীপের ওয়াটার ভিলা"
+     }
+    }
+   ],
+   "values_eyebrow": {
+    "en": "What we stand for",
+    "bn": "আমরা যা বিশ্বাস করি"
+   },
+   "values_title": {
+    "en": "Our values",
+    "bn": "আমাদের মূল্যবোধ"
+   },
+   "values": [
+    {
+     "icon": "eye",
+     "title": {
+      "en": "Transparent",
+      "bn": "স্বচ্ছতা"
+     },
+     "text": {
+      "en": "All-in BDT prices. No surprise fees at checkout.",
+      "bn": "সব খরচসহ টাকায় মূল্য। চেকআউটে কোনো চমক নেই।"
+     }
+    },
+    {
+     "icon": "heart-handshake",
+     "title": {
+      "en": "Human",
+      "bn": "মানবিক"
+     },
+     "text": {
+      "en": "A named trip manager and 24/7 WhatsApp support.",
+      "bn": "নির্দিষ্ট ট্রিপ ম্যানেজার ও ২৪/৭ হোয়াটসঅ্যাপ সাপোর্ট।"
+     }
+    },
+    {
+     "icon": "shield-check",
+     "title": {
+      "en": "Safe",
+      "bn": "নিরাপদ"
+     },
+     "text": {
+      "en": "Licensed partners, insured trips, vetted hotels.",
+      "bn": "লাইসেন্সপ্রাপ্ত পার্টনার, বিমাকৃত ট্রিপ, যাচাইকৃত হোটেল।"
+     }
+    },
+    {
+     "icon": "leaf",
+     "title": {
+      "en": "Responsible",
+      "bn": "দায়িত্বশীল"
+     },
+     "text": {
+      "en": "Local guides, plastic-free Sundarbans trips, fair wages.",
+      "bn": "স্থানীয় গাইড, প্লাস্টিকমুক্ত সুন্দরবন ট্রিপ, ন্যায্য মজুরি।"
+     }
+    }
+   ],
+   "milestones_eyebrow": {
+    "en": "Milestones",
+    "bn": "মাইলফলক"
+   },
+   "milestones_title": {
+    "en": "Our journey so far",
+    "bn": "এ পর্যন্ত আমাদের পথচলা"
+   },
+   "milestones": [
+    {
+     "year": 2012,
+     "text": {
+      "en": "Founded in Banani with ticketing and visa desks",
+      "bn": "বনানীতে টিকিটিং ও ভিসা ডেস্ক নিয়ে যাত্রা শুরু"
+     }
+    },
+    {
+     "year": 2015,
+     "text": {
+      "en": "IATA accreditation; first Thailand & Malaysia group tours",
+      "bn": "আইএটিএ স্বীকৃতি; প্রথম থাইল্যান্ড ও মালয়েশিয়া গ্রুপ ট্যুর"
+     }
+    },
+    {
+     "year": 2018,
+     "text": {
+      "en": "Chattogram branch; Sundarbans luxury cruise partnership",
+      "bn": "চট্টগ্রাম শাখা; সুন্দরবন লাক্সারি ক্রুজ পার্টনারশিপ"
+     }
+    },
+    {
+     "year": 2021,
+     "text": {
+      "en": "Online booking with bKash, Nagad and card EMI",
+      "bn": "বিকাশ, নগদ ও কার্ড ইএমআইসহ অনলাইন বুকিং"
+     }
+    },
+    {
+     "year": 2024,
+     "text": {
+      "en": "Sylhet branch; 1 lakh travellers milestone",
+      "bn": "সিলেট শাখা; ১ লাখ ভ্রমণকারীর মাইলফলক"
+     }
+    },
+    {
+     "year": 2026,
+     "text": {
+      "en": "Cruises, activities marketplace and the trip planner launch",
+      "bn": "ক্রুজ, অ্যাক্টিভিটি মার্কেটপ্লেস ও ট্রিপ প্ল্যানার চালু"
+     }
+    }
+   ],
+   "licences_eyebrow": {
+    "en": "Accreditations",
+    "bn": "স্বীকৃতি"
+   },
+   "licences_title": {
+    "en": "Licensed & accountable",
+    "bn": "লাইসেন্সপ্রাপ্ত ও জবাবদিহিমূলক"
+   }
+  }
  },
  "activities": {
   "title": {
@@ -45,7 +195,43 @@
    "bn": "১ লাখের বেশি বাংলাদেশিকে বিশ্ব দেখাতে সাহায্য করুন। হাইব্রিড কাজ, ভ্রমণ সুবিধা ও সত্যিকারের উন্নতি।"
   },
   "image": "swiss",
-  "template": "hero"
+  "template": "hero",
+  "data": {
+   "perks": [
+    {
+     "icon": "plane",
+     "text": {
+      "en": "Annual fam trip abroad",
+      "bn": "বার্ষিক বিদেশ ফ্যাম ট্রিপ"
+     }
+    },
+    {
+     "icon": "heart-pulse",
+     "text": {
+      "en": "Family health cover",
+      "bn": "পারিবারিক স্বাস্থ্য বিমা"
+     }
+    },
+    {
+     "icon": "graduation-cap",
+     "text": {
+      "en": "IATA & destination training",
+      "bn": "আইএটিএ ও গন্তব্য প্রশিক্ষণ"
+     }
+    },
+    {
+     "icon": "laptop",
+     "text": {
+      "en": "Hybrid: 2 days from home",
+      "bn": "হাইব্রিড: সপ্তাহে ২ দিন বাসা থেকে"
+     }
+    }
+   ],
+   "success": {
+    "en": "Application received — we reply within 7 days.",
+    "bn": "আবেদন পেয়েছি — ৭ দিনের মধ্যে উত্তর দেব।"
+   }
+  }
  },
  "compare": {
   "title": {
@@ -69,7 +255,55 @@
    "bn": "কল, হোয়াটসঅ্যাপ, ইমেইল বা সরাসরি আসুন — অফিস সময়ে ১৫ মিনিটের মধ্যে একজন বিশেষজ্ঞ উত্তর দেন।"
   },
   "image": "dhaka",
-  "template": "hero"
+  "template": "hero",
+  "data": {
+   "form_title": {
+    "en": "Send us a message",
+    "bn": "আমাদের বার্তা পাঠান"
+   },
+   "topics": [
+    {
+     "en": "Holiday package",
+     "bn": "হলিডে প্যাকেজ"
+    },
+    {
+     "en": "Cruise",
+     "bn": "ক্রুজ"
+    },
+    {
+     "en": "Flight",
+     "bn": "ফ্লাইট"
+    },
+    {
+     "en": "Hotel",
+     "bn": "হোটেল"
+    },
+    {
+     "en": "Visa",
+     "bn": "ভিসা"
+    },
+    {
+     "en": "Existing booking",
+     "bn": "বিদ্যমান বুকিং"
+    },
+    {
+     "en": "Complaint",
+     "bn": "অভিযোগ"
+    },
+    {
+     "en": "Corporate / group",
+     "bn": "কর্পোরেট / গ্রুপ"
+    }
+   ],
+   "success": {
+    "en": "Thanks! A travel expert will reply within 15 minutes (office hours).",
+    "bn": "ধন্যবাদ! অফিস সময়ে ১৫ মিনিটের মধ্যে একজন বিশেষজ্ঞ উত্তর দেবেন।"
+   },
+   "video_call": {
+    "en": "15-min free slot",
+    "bn": "১৫ মিনিট ফ্রি"
+   }
+  }
  },
  "cruises": {
   "title": {
@@ -402,7 +636,17 @@
    "bn": "যাঁরা নিজেরা ঘুরে এসেছেন — আর প্রয়োজনে রাত ২টায়ও ফোন ধরবেন।"
   },
   "image": "nepal",
-  "template": "hero"
+  "template": "hero",
+  "data": {
+   "cta_title": {
+    "en": "Love travel? Work with us.",
+    "bn": "ভ্রমণ ভালোবাসেন? আমাদের সাথে কাজ করুন।"
+   },
+   "cta_text": {
+    "en": "We are hiring consultants, cruise specialists and engineers.",
+    "bn": "আমরা কনসালট্যান্ট, ক্রুজ বিশেষজ্ঞ ও ইঞ্জিনিয়ার নিয়োগ দিচ্ছি।"
+   }
+  }
  },
  "tours": {
   "title": {
