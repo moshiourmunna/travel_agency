@@ -51,6 +51,7 @@ Route::prefix('v1')->name('api.v1.')->middleware(['api.locale'])->group(function
         Route::get('gift-card-designs', [Cat::class, 'giftCardDesigns'])->name('gift-cards');
 
         Route::get('airports', [Search::class, 'airports'])->name('airports');
+        Route::get('flights/routes', [Search::class, 'flightRoutes'])->name('flights.routes');
         Route::get('planner/config', [Planner::class, 'config'])->name('planner.config');
     });
 

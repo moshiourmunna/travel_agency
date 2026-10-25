@@ -47,19 +47,19 @@ export default async function HotelsPage({ params, searchParams }: PageProps<'/[
   const fs = fields(i);
   const labels = { aria: t('Filter hotels', 'হোটেল ফিল্টার'), clear: t('Reset', 'রিসেট'), show: t('Show results', 'ফলাফল দেখুন'), any: t('Any', 'যেকোনো') };
   const active = fs.filter((f) => one(sp[f.name])).length;
-  const checkin = one(sp.checkin) ?? iso(plusDays(30));
-  const checkout = one(sp.checkout) ?? iso(plusDays(33));
+  const checkin = one(sp.in) ?? iso(plusDays(30));
+  const checkout = one(sp.out) ?? iso(plusDays(33));
   const flat = Object.fromEntries(Object.entries(sp).map(([k, v]) => [k, one(v)]));
-  const guests: [string, string][] = [['2-0-1', t('2 adults · 1 room', '২ প্রাপ্তবয়স্ক · ১ রুম')], ['2-1-1', t('2 adults, 1 child · 1 room', '২ প্রাপ্তবয়স্ক, ১ শিশু · ১ রুম')], ['4-0-2', t('4 adults · 2 rooms', '৪ প্রাপ্তবয়স্ক · ২ রুম')]];
+  const guests: [string, string][] = [['1-2', t('2 adults · 1 room', '২ প্রাপ্তবয়স্ক · ১ রুম')], ['1-3', t('2 adults, 1 child · 1 room', '২ প্রাপ্তবয়স্ক, ১ শিশু · ১ রুম')], ['2-4', t('4 adults · 2 rooms', '৪ প্রাপ্তবয়স্ক · ২ রুম')]];
   return (
     <>
       <JsonLd data={breadcrumbJsonLd(siteUrl(site), crumbs)} />
       <SearchHero i={i} title={page.title} sub={page.subtitle} crumbs={crumbs} image={page.image}>
         <form method="get" action={i.u('/hotels')} role="search" className="mt-6 grid gap-3 rounded-3xl bg-white p-4 shadow-xl dark:bg-ink-900 sm:p-5 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr_auto] lg:items-end">
           <div><label className="label" htmlFor="ht-where">{t('City, hotel or area', 'শহর, হোটেল বা এলাকা')}</label><input id="ht-where" name="q" className="input" defaultValue={one(sp.q) ?? ''} placeholder={t("e.g. Cox's Bazar", 'যেমন কক্সবাজার')} /></div>
-          <div><label className="label" htmlFor="ht-in">{t('Check-in', 'চেক-ইন')}</label><input id="ht-in" name="checkin" type="date" className="input" min={iso(new Date())} defaultValue={checkin} /></div>
-          <div><label className="label" htmlFor="ht-out">{t('Check-out', 'চেক-আউট')}</label><input id="ht-out" name="checkout" type="date" className="input" min={iso(plusDays(1))} defaultValue={checkout} /></div>
-          <div><label className="label" htmlFor="ht-g">{t('Guests & rooms', 'অতিথি ও রুম')}</label><select id="ht-g" name="guests" className="input" defaultValue={one(sp.guests) ?? '2-0-1'}>{guests.map(([v, l]) => <option key={v} value={v}>{l}</option>)}</select></div>
+          <div><label className="label" htmlFor="ht-in">{t('Check-in', 'চেক-ইন')}</label><input id="ht-in" name="in" type="date" className="input" min={iso(new Date())} defaultValue={checkin} /></div>
+          <div><label className="label" htmlFor="ht-out">{t('Check-out', 'চেক-আউট')}</label><input id="ht-out" name="out" type="date" className="input" min={iso(plusDays(1))} defaultValue={checkout} /></div>
+          <div><label className="label" htmlFor="ht-g">{t('Guests & rooms', 'অতিথি ও রুম')}</label><select id="ht-g" name="guests" className="input" defaultValue={one(sp.guests) ?? '1-2'}>{guests.map(([v, l]) => <option key={v} value={v}>{l}</option>)}</select></div>
           <button className="btn btn-accent h-[46px]"><Icon name="search" className="h-4 w-4" /> {t('Search', 'খুঁজুন')}</button>
         </form>
       </SearchHero>

@@ -146,6 +146,13 @@ class FoundationSeeder extends Seeder
             ['icon' => 'id-card', 'title' => ['en' => 'ID required', 'bn' => 'পরিচয়পত্র আবশ্যক'], 'text' => ['en' => 'NID or passport for all adults', 'bn' => 'সব প্রাপ্তবয়স্কের এনআইডি বা পাসপোর্ট']],
             ['icon' => 'users', 'title' => ['en' => 'Couples', 'bn' => 'দম্পতি'], 'text' => ['en' => 'Marriage certificate may be requested (BD law)', 'bn' => 'বিবাহের সনদ চাওয়া হতে পারে (বাংলাদেশের আইন)']],
         ], 'json');
+        // Indicative fares: weekday multipliers (Mon..Sun), share of the fare that is taxes, date-change fee
+        $set('flights', 'pricing', ['weekday_factors' => [1.217, 1.024, 1.092, 1.048, 1.119, 1.0, 1.16], 'tax_share' => 0.22, 'change_fee' => 3500], 'json', false);
+        $set('flights', 'popular_routes', [
+            ['from' => 'DAC', 'to' => 'DXB', 'image' => 'dubai'], ['from' => 'DAC', 'to' => 'MLE', 'image' => 'maldives'], ['from' => 'DAC', 'to' => 'KUL', 'image' => 'malaysia'],
+            ['from' => 'DAC', 'to' => 'BKK', 'image' => 'phuket'], ['from' => 'DAC', 'to' => 'CXB', 'image' => 'coxsbazar'], ['from' => 'DAC', 'to' => 'IST', 'image' => 'istanbul'],
+            ['from' => 'DAC', 'to' => 'SIN', 'image' => 'singapore'], ['from' => 'CGP', 'to' => 'DXB', 'image' => 'dubai'],
+        ], 'json');
         $set('commerce', 'pax_factors', ['adults' => 1, 'children' => 0.7, 'infants' => 0.1], 'json');
         $set('payments', 'gateways', ['mock' => true, 'sslcommerz' => true, 'bkash' => true, 'nagad' => true, 'bank_transfer' => true, 'wallet' => true], 'json');
         $set('payments', 'mode', 'sandbox', 'text', false);
