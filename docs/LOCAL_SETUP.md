@@ -34,6 +34,19 @@ npm ci                        (admin panel assets; first time and after updates)
 npm run build                 (builds backend/public/build — without it /admin pages return 500 "Vite manifest not found")
 php artisan serve --host=127.0.0.1 --port=8000
 ```
+Run the scheduler too (seat-hold expiry every minute, completing past trips + referral rewards daily) — in a second window:
+`php artisan schedule:work`
+
+### PHP upload limits (visa documents up to 10 MB)
+PHP's defaults (`upload_max_filesize=2M`, `post_max_size=8M`) reject large visa documents and ticket attachments. In Laragon:
+**Menu → PHP → php.ini**, set the following, save, then restart `php artisan serve` (and Laragon's Apache/Nginx if you use a vhost):
+```
+upload_max_filesize = 12M
+post_max_size = 14M
+```
+Or for a one-off run without editing php.ini:
+`php -d upload_max_filesize=12M -d post_max_size=14M artisan serve --host=127.0.0.1 --port=8000`
+Check with `php -i | findstr upload_max_filesize`.
 Check it works: http://127.0.0.1:8000/api/v1/health should return `{"status":"ok"...}`.
 
 Keep this window open: the website build and the running website both need the API.
@@ -63,7 +76,13 @@ For development with hot reload, use `npm run dev` instead of build + start.
 - **Traveller:** farhana@example.com
 - **B2B agent:** agent@example.com
 
-The admin panel arrives in M6. The traveller portal and real sign-in arrive in M5; until then the login, register and reset pages are UI only.
+**Traveller portal (M5):** sign in at http://localhost:3000/en/login (Email tab → farhana@example.com / `password`), or with mobile OTP `01712345678`.
+OTP codes are written to `backend/storage/logs/laravel.log`; with `OTP_DEBUG=true` (local only) they are also shown on the page.
+The portal is at `/en/account` (or `/bn/account`): bookings, e-ticket, visa tracker, trips & wishlist, wallet & Miles, payments, referrals, travellers,
+notifications, support chat, reviews, profile and settings (password, two-step sign-in, sessions, data export, delete account).
+Payments use the built-in **test gateway** in sandbox mode (pick bKash/Nagad/card → simulator page → Success).
+
+The admin panel arrives in M6.
 
 ## 6. Everyday tasks
 - **Reset demo data:**
@@ -74,7 +93,10 @@ The admin panel arrives in M6. The traveller portal and real sign-in arrive in M
      ```
 - **Run the backend tests:** `cd backend && php artisan test` (needs the `musafir_test` database from step 2; Laragon's client is `C:\laragon\bin\mysql\mysql-8.4.3-winx64\bin\mysql.exe` if `mysql` is not on PATH). This uses the `musafir_test` database; the demo seed runs once per run.
 - **Read e-mails, SMS and OTP codes:** they are written to `backend/storage/logs/laravel.log` (`MAIL_MAILER=log`, `SMS_DRIVER=log`).
-- **Uploaded CVs:** these are private, stored in `backend/storage/app/private/cvs/` and never publicly reachable.
+- **Uploaded CVs, visa documents, ticket attachments:** private, stored under `backend/storage/app/private/` and never publicly reachable (served only to the owner).
+- **Browser end-to-end tests** (optional, needs `npm i` in `tooling` and Chrome): with a fresh seed and both servers running,
+  `node tooling/tests/checkout_e2e.mjs http://localhost:3000` and `node tooling/tests/portal_e2e.mjs http://localhost:3000`.
+  Set `ME_RATE_PER_MIN=2000` in `backend/.env` for the portal run (it clicks faster than any person; default limit 240/min).
 
 ## 7. Troubleshooting
 | Symptom | Fix |
@@ -86,4 +108,6 @@ The admin panel arrives in M6. The traveller portal and real sign-in arrive in M
 | `/admin` shows a 500 "Vite manifest not found" | Run `npm ci` and `npm run build` inside `backend`. |
 | Edited content is not on the page yet | Pages refresh in the background: the first visit after a change can still show the old version, and the next visit (a few seconds later) shows the new one. |
 | `php artisan test` says `tests/Unit not found` | Create an empty `backend\tests\Unit` folder (fixed in later deliveries). |
+| Visa upload fails with "The file failed to upload" | Raise the PHP upload limits (section 3). |
+| Payment return lands on the login page | `FRONTEND_URL` in `backend/.env` must be the address you browse the site on (e.g. http://localhost:3000). |
 | Port 3000 or 8000 is busy | Use `php artisan serve --port=8001` and `npm run start -- -p 3001`, then update `API_URL`, `APP_URL`, `FRONTEND_URL` and `NEXT_PUBLIC_SITE_URL`. |
