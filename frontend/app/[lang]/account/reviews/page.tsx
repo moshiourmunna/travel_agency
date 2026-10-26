@@ -60,7 +60,7 @@ export default async function Reviews({ params }: PageProps<'/[lang]/account/rev
           <ul className="mt-3 grid gap-4 md:grid-cols-2">
             {x.published.map((r: any) => (
               <li key={r.id} className="card p-4 sm:p-5" data-review={r.status}>
-                <div className="flex items-center justify-between gap-2"><Stars i={i} rating={r.rating} /><Status t={t} s={r.status === 'pending' ? 'pending_review' : r.status} /></div>
+                <div className="flex items-center justify-between gap-2"><Stars i={i} rating={r.rating} /><Status t={t} s={({ review: 'pending_review', hidden: 'rejected' } as Record<string, string>)[r.status] ?? r.status} /></div>
                 <p className="mt-2 font-semibold">{r.title}</p>
                 <p className="mt-1 text-sm muted">“{r.body}”</p>
                 {r.reply ? <p className="mt-3 rounded-xl bg-ink-50 p-3 text-sm dark:bg-ink-850"><span className="font-semibold">{t('Reply from the team', 'টিমের উত্তর')}:</span> {r.reply}</p> : null}

@@ -8,11 +8,6 @@ use Illuminate\Support\Facades\Hash;
 
 /* Traveller auth for the BFF: register (+ referral), password sign-in, OTP sign-in, two-step, reset, guards. */
 
-function farhana(): User
-{
-    return User::where('email', 'farhana@example.com')->firstOrFail();
-}
-
 beforeEach(function () {
     config(['musafir.otp_debug' => true]);
 });

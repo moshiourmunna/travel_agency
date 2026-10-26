@@ -591,9 +591,9 @@ class MeController extends Controller
         $review = Review::create(['reviewable_type' => $b->product_type, 'reviewable_id' => $b->product_id, 'user_id' => $u->id, 'booking_id' => $b->id,
             'author_name' => self::bi($parts[0].' '.mb_substr(end($parts) ?: '', 0, 1).'.'), 'author_city' => self::bi((string) ($u->city ?? 'Dhaka')), 'initials' => $u->initials(),
             'trip_title' => $b->getTranslations('title'), 'rating' => $v['rating'], 'category_scores' => $v['scores'] ?? null,
-            'title' => $v['title'] ? self::bi($v['title']) : null, 'body' => self::bi(strip_tags($v['body'])), 'status' => 'pending', 'travelled_on' => $b->travel_start]);
+            'title' => $v['title'] ? self::bi($v['title']) : null, 'body' => self::bi(strip_tags($v['body'])), 'status' => 'review', 'travelled_on' => $b->travel_start]);
 
-        return $this->ok(['id' => $review->id, 'status' => 'pending'], 201);
+        return $this->ok(['id' => $review->id, 'status' => 'review'], 201);
     }
 
     /* ───────────── Referrals ───────────── */
