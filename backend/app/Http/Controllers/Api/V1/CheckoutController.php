@@ -111,7 +111,9 @@ class CheckoutController extends Controller
     public function pay(Request $r, string $ref): JsonResponse
     {
         $b = $this->find($r, $ref);
-        $v = $r->validate(['gateway' => ['required', 'string', Rule::in($this->gateways->enabled())], 'instalment_id' => ['nullable', 'integer'],
+        $user = $r->user('sanctum');
+        $walletOk = $user && $b->user_id === $user->id && ! empty(((array) \App\Support\Settings::get('payments.gateways', []))['wallet']);
+        $v = $r->validate(['gateway' => ['required', 'string', Rule::in(array_merge($this->gateways->enabled(), $walletOk ? ['wallet'] : []))], 'instalment_id' => ['nullable', 'integer'],
             'slip_ref' => [Rule::requiredIf($r->input('gateway') === 'bank_transfer'), 'nullable', 'string', 'max:64',
                 Rule::unique('payments', 'gateway_txn')->where('gateway', 'bank_transfer')], ], ['slip_ref.unique' => __('This transfer reference has already been submitted. Please check it or contact us.')]);
         if (in_array($b->status, ['cancelled', 'refunded', 'completed'], true)) {
@@ -125,6 +127,9 @@ class CheckoutController extends Controller
         $due = $this->bookings->amountDue($b, $v['instalment_id'] ?? null);
         if ($due['amount'] <= 0) {
             return response()->json(['message' => __('Nothing is due on this booking.')], 409);
+        }
+        if ($v['gateway'] === 'wallet') {
+            return $this->payFromWallet($b, $user, $due);
         }
         $gw = $this->gateways->resolve($v['gateway']);
         $p = Payment::create(['booking_id' => $b->id, 'user_id' => $b->user_id, 'purpose' => $due['instalment'] ? 'instalment' : 'booking', 'gateway' => $v['gateway'],
@@ -145,6 +150,27 @@ class CheckoutController extends Controller
         }
 
         return response()->json(['data' => ['payment' => $p->ulid, 'amount' => $due['amount'], 'gateway' => $v['gateway']] + $res]);
+    }
+
+    /** Wallet credit pays the due amount at once (signed-in owner only; balance must cover it). */
+    private function payFromWallet(Booking $b, \App\Models\User $user, array $due): JsonResponse
+    {
+        $p = \Illuminate\Support\Facades\DB::transaction(function () use ($b, $user, $due) {
+            $u = \App\Models\User::whereKey($user->id)->lockForUpdate()->first();
+            if ((float) $u->wallet_balance + 0.001 < $due['amount']) {
+                throw \Illuminate\Validation\ValidationException::withMessages(['gateway' => __('Your wallet balance is not enough for this payment.')]);
+            }
+            $p = Payment::create(['booking_id' => $b->id, 'user_id' => $u->id, 'purpose' => $due['instalment'] ? 'instalment' : 'booking', 'gateway' => 'wallet', 'method' => 'Wallet',
+                'amount' => $due['amount'], 'status' => 'initiated', 'raw' => ['instalment_id' => $due['instalment']?->id, 'lang' => app()->getLocale()]]);
+            MeController::credit($u, -$due['amount'], ['en' => 'Paid toward '.$b->ref, 'bn' => $b->ref.'-এ পরিশোধ'], 'wallet', $p);
+            $p->update(['gateway_txn' => 'WAL'.$p->id]);
+
+            return $p;
+        });
+        $this->bookings->settle($p);
+
+        return response()->json(['data' => ['payment' => $p->ulid, 'amount' => $due['amount'], 'gateway' => 'wallet', 'paid' => true,
+            'redirect' => config('musafir.frontend_url').'/'.app()->getLocale()."/booking-confirmed?ref={$b->ref}&key={$b->ulid}"]]);
     }
 
     public function pdf(Request $r, string $ref, string $doc): Response

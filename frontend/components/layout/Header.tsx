@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Icon } from '@/components/icons/Icon';
 import { ActiveLink } from '@/components/client/ActiveLink';
-import { CurrencySelect, Drawer, Dropdown, HeaderShadow, LangLink, ThemeToggle } from '@/components/client/HeaderBits';
+import { CurrencySelect, Drawer, Dropdown, HeaderShadow, LangLink, ThemeToggle, AccountLink } from '@/components/client/HeaderBits';
 import { WishCount } from '@/components/client/Wish';
 import { Picture } from '@/components/ui/Picture';
 import type { I18n } from '@/lib/i18n';
@@ -97,7 +97,7 @@ export function Header({ i, company, menus, themes, cruiseImage }: { i: I18n; co
             <LangLink to={i.other} className="icon-btn w-auto px-2.5 text-sm font-bold" label={t('বাংলায় দেখুন', 'View in English')}>{i.lang === 'en' ? 'বাং' : 'EN'}</LangLink>
             <ThemeToggle className="icon-btn" label={t('Toggle dark mode', 'ডার্ক মোড চালু/বন্ধ')}><Icon name="moon" className="h-5 w-5 dark:hidden" /><Icon name="sun" className="hidden h-5 w-5 dark:block" /></ThemeToggle>
             <Link href={u('/wishlist')} className="icon-btn relative hidden sm:inline-flex" aria-label={t('Wishlist', 'উইশলিস্ট')}><Icon name="heart" /><WishCount className="absolute right-1 top-1 min-w-[18px] rounded-full bg-accent-500 px-1 text-center text-[10px] font-bold leading-[18px] text-white" /></Link>
-            <Link href={u('/login')} className="btn btn-ghost btn-sm hidden xl:inline-flex"><Icon name="circle-user-round" className="h-[18px] w-[18px]" /> {t('Sign in', 'সাইন ইন')}</Link>
+            <AccountLink signInHref={u('/login')} accountHref={u('/account')} signIn={t('Sign in', 'সাইন ইন')} hi={t('My account', 'আমার অ্যাকাউন্ট')} className="btn btn-ghost btn-sm hidden xl:inline-flex"><Icon name="circle-user-round" className="h-[18px] w-[18px]" /></AccountLink>
             <Link href={u('/custom-tour')} className="btn btn-primary btn-sm hidden xl:inline-flex">{t('Get a quote', 'কোটেশন নিন')}</Link>
             <Drawer
               openLabel={t('Open menu', 'মেনু খুলুন')}
@@ -118,7 +118,7 @@ export function Header({ i, company, menus, themes, cruiseImage }: { i: I18n; co
                     <ThemeToggle className="btn btn-outline btn-sm" label={t('Theme', 'থিম')}><Icon name="moon" className="h-4 w-4 dark:hidden" /><Icon name="sun" className="hidden h-4 w-4 dark:block" /> {t('Theme', 'থিম')}</ThemeToggle>
                   </div>
                   <div className="flex items-center justify-between gap-3 rounded-xl border border-ink-200 px-3 py-2 dark:border-ink-700"><label htmlFor="cur-m" className="flex items-center gap-2 text-sm font-semibold"><Icon name="coins" className="h-4 w-4" /> {t('Currency', 'মুদ্রা')}</label><CurrencySelect id="cur-m" className="input w-auto py-1.5 text-sm" /></div>
-                  <Link href={u('/login')} className="btn btn-primary w-full">{t('Sign in / Register', 'সাইন ইন / রেজিস্টার')}</Link>
+                  <AccountLink signInHref={u('/login')} accountHref={u('/account')} signIn={t('Sign in / Register', 'সাইন ইন / রেজিস্টার')} hi={t('My account', 'আমার অ্যাকাউন্ট')} className="btn btn-primary w-full"><Icon name="circle-user-round" className="h-[18px] w-[18px]" /></AccountLink>
                   <a href={`tel:${company.hotline_tel}`} className="flex items-center justify-center gap-2 text-sm font-semibold text-ink-600 dark:text-ink-300"><Icon name="phone" className="h-4 w-4" /> {d(company.hotline)}</a>
                 </div>
               }

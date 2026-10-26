@@ -136,3 +136,9 @@ console errors; security checks. Then repeat key browser E2E on the user's PC (c
   Browser E2E tooling/tests/checkout_e2e.mjs (playwright-core + Chrome): tour deposit+coupon, cruise bn 390px Nagad, activity card, hotel failed→retry,
   hotel bank transfer, visa from visa page, gift card → 52/52 checks, no JS errors.
 ## M4 — DONE 06:10 BDT. NEXT: M5 traveller portal (Sanctum auth API + BFF cookie + /account pages).
+
+## M5 — IN PROGRESS (traveller portal)  resumed 06:21 BDT by a new worker
+- Found uncommitted M5 work from an interrupted worker (06:08–06:19): AuthController (register/login/OTP send+verify/reset/logout/me), Services/Auth/Otp,
+  EnsureTraveller middleware (alias `traveller`), Presenters/Account, MeController (~684 lines, routes /api/v1/me/*), wallet payment in CheckoutController,
+  throttles `auth`/`me`, OTP_DEBUG env; frontend: (site) route group, BFF app/api/auth/[action] + app/api/me/[...path], lib/session.ts (setSession/clearSession/sameOrigin),
+  proxy.ts guard for /account, components/account/{ui,client}.tsx, lib/account.ts. Reviewing + finishing now.

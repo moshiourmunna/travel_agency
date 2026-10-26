@@ -27,7 +27,9 @@ export async function AuthPage({ lang, mode }: { lang: Lang; mode: AuthMode }) {
     first: t('First name', 'নামের প্রথম অংশ'), last: t('Last name', 'নামের শেষ অংশ'), newPw8: t('Password (8+ characters)', 'পাসওয়ার্ড (৮+ অক্ষর)'),
     agree: t('I agree to the', 'আমি সম্মত'), terms: t('Terms', 'শর্তাবলিতে'), and: t('and', 'ও'), privacy: t('Privacy policy', 'গোপনীয়তা নীতিতে'), create: t('Create account', 'অ্যাকাউন্ট খুলুন'),
     mobileOrEmail: t('Mobile or email', 'মোবাইল বা ইমেইল'), sendCode: t('Send code', 'কোড পাঠান'), newPw: t('New password', 'নতুন পাসওয়ার্ড'), update: t('Update password', 'পাসওয়ার্ড হালনাগাদ করুন'),
-    soon: t('Traveller accounts are opening soon — meanwhile call or WhatsApp us to manage a booking.', 'ট্রাভেলার অ্যাকাউন্ট শিগগিরই চালু হচ্ছে — এর মধ্যে বুকিং ম্যানেজ করতে কল বা হোয়াটসঅ্যাপ করুন।'),
+    sentTo: t('Code sent to', 'কোড পাঠানো হয়েছে'), changeNo: t('Change number', 'নম্বর বদলান'), wait: t('Please wait…', 'অপেক্ষা করুন…'),
+    devCode: t('Test mode — your code', 'টেস্ট মোড — আপনার কোড'), error: t('Something went wrong. Please try again.', 'কিছু একটা সমস্যা হয়েছে। আবার চেষ্টা করুন।'),
+    tooMany: t('Too many attempts. Please wait a minute and try again.', 'অনেকবার চেষ্টা করা হয়েছে। এক মিনিট পর আবার চেষ্টা করুন।'),
   };
   const heading = { login: [t('Welcome back', 'আবার স্বাগতম'), t('Sign in with mobile OTP or email.', 'মোবাইল ওটিপি বা ইমেইল দিয়ে সাইন ইন করুন।')], register: [t('Create your account', 'অ্যাকাউন্ট খুলুন'), t('Free. Takes 30 seconds.', 'ফ্রি। ৩০ সেকেন্ড লাগে।')], forgot: [t('Reset password', 'পাসওয়ার্ড রিসেট'), t('We will send a 6-digit code to your mobile or email.', 'আপনার মোবাইল বা ইমেইলে ৬ সংখ্যার কোড পাঠাব।')] }[mode];
   const perks: [string, string][] = [['Member-only prices up to 8% off', 'সদস্যদের জন্য সর্বোচ্চ ৮% কম দাম'], ['Musafir Miles on every booking', 'প্রতিটি বুকিংয়ে মুসাফির মাইলস'], ['Offline e-tickets & itineraries', 'অফলাইন ই-টিকিট ও ভ্রমণসূচি']];

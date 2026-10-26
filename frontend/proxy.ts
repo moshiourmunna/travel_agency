@@ -13,7 +13,19 @@ export function proxy(req: NextRequest) {
     return NextResponse.redirect(new URL(clean + search, req.url), 301);
   }
   const first = pathname.split('/')[1];
-  if (LOCALES.includes(first)) return NextResponse.next();
+  if (LOCALES.includes(first)) {
+    const signedIn = !!req.cookies.get('musafir_session')?.value;
+    const rest = pathname.slice(first.length + 1);
+    // Traveller portal needs a session; the auth pages send signed-in travellers straight to their account.
+    if (/^\/account(\/|$)/.test(rest) && !signedIn) {
+      return NextResponse.redirect(new URL(`/${first}/login?next=${encodeURIComponent(pathname + search)}`, req.url));
+    }
+    if (/^\/(login|register)\/?$/.test(rest) && signedIn) {
+      const next = req.nextUrl.searchParams.get('next');
+      return NextResponse.redirect(new URL(next && next.startsWith(`/${first}/`) ? next : `/${first}/account`, req.url));
+    }
+    return NextResponse.next();
+  }
   const cookie = req.cookies.get('musafir-lang')?.value;
   const accept = req.headers.get('accept-language') ?? '';
   const lang = cookie && LOCALES.includes(cookie) ? cookie : /^\s*bn\b/i.test(accept) ? 'bn' : 'en';

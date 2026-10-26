@@ -32,6 +32,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'api.locale' => SetApiLocale::class,
             'public.cache' => PublicCache::class,
+            'traveller' => \App\Http\Middleware\EnsureTraveller::class,
         ]);
         // Gateways POST back to /pay/* from their own domains (verified via their APIs / signed URLs instead).
         $middleware->preventRequestForgery(except: ['pay/*']);

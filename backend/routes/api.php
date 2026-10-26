@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\Api\V1\AuthController as Auth;
 use App\Http\Controllers\Api\V1\CatalogController as Cat;
 use App\Http\Controllers\Api\V1\CheckoutController as Checkout;
 use App\Http\Controllers\Api\V1\ContentController as Content;
 use App\Http\Controllers\Api\V1\FormController as Form;
 use App\Http\Controllers\Api\V1\HealthController;
+use App\Http\Controllers\Api\V1\MeController as Me;
 use App\Http\Controllers\Api\V1\PlannerController as Planner;
 use App\Http\Controllers\Api\V1\SearchController as Search;
 use App\Http\Controllers\Pay\PaymentReturnController as PayReturn;
@@ -84,6 +86,58 @@ Route::prefix('v1')->name('api.v1.')->middleware(['api.locale'])->group(function
         Route::post('bookings/{ref}/pay', [Checkout::class, 'pay'])->name('bookings.pay')->where('ref', '[A-Z]{3}-\d{2}-\d{5}');
         Route::get('bookings/{ref}/{doc}.pdf', [Checkout::class, 'pdf'])->name('bookings.pdf')->where(['ref' => '[A-Z]{3}-\d{2}-\d{5}', 'doc' => 'invoice|voucher']);
     });
+    // Traveller authentication (tokens are kept in an httpOnly cookie by the Next.js BFF).
+    Route::middleware('throttle:auth')->prefix('auth')->name('auth.')->group(function () {
+        Route::post('register', [Auth::class, 'register'])->name('register');
+        Route::post('login', [Auth::class, 'login'])->name('login');
+        Route::post('otp/send', [Auth::class, 'otpSend'])->name('otp.send');
+        Route::post('otp/verify', [Auth::class, 'otpVerify'])->name('otp.verify');
+        Route::post('reset', [Auth::class, 'reset'])->name('reset');
+    });
+
+    // Traveller portal
+    Route::middleware(['auth:sanctum', 'traveller', 'throttle:me'])->group(function () {
+        Route::post('auth/logout', [Auth::class, 'logout'])->name('auth.logout');
+        Route::get('auth/me', [Auth::class, 'me'])->name('auth.me');
+        Route::prefix('me')->name('me.')->group(function () {
+            Route::get('dashboard', [Me::class, 'dashboard'])->name('dashboard');
+            Route::get('summary', [Me::class, 'summary'])->name('summary');
+            Route::get('bookings', [Me::class, 'bookings'])->name('bookings');
+            Route::get('bookings/{ref}', [Me::class, 'booking'])->name('booking')->where('ref', '[A-Z]{3}-\d{2}-\d{5}');
+            Route::post('bookings/{ref}/request', [Me::class, 'bookingRequest'])->name('booking.request')->where('ref', '[A-Z]{3}-\d{2}-\d{5}');
+            Route::get('bookings/{ref}/ticket', [Me::class, 'ticket'])->name('booking.ticket')->where('ref', '[A-Z]{3}-\d{2}-\d{5}');
+            Route::get('payments', [Me::class, 'payments'])->name('payments');
+            Route::delete('payment-methods/{id}', [Me::class, 'deleteMethod'])->name('methods.delete')->whereNumber('id');
+            Route::get('wallet', [Me::class, 'wallet'])->name('wallet');
+            Route::post('wallet/redeem', [Me::class, 'redeemGift'])->name('wallet.redeem');
+            Route::get('trips', [Me::class, 'trips'])->name('trips');
+            Route::post('wishlist', [Me::class, 'wishlist'])->name('wishlist');
+            Route::delete('trips/{id}', [Me::class, 'deletePlan'])->name('trips.delete');
+            Route::get('travellers', [Me::class, 'travellers'])->name('travellers');
+            Route::post('travellers', [Me::class, 'storeTraveller'])->name('travellers.store');
+            Route::put('travellers/{id}', [Me::class, 'updateTraveller'])->name('travellers.update')->whereNumber('id');
+            Route::delete('travellers/{id}', [Me::class, 'deleteTraveller'])->name('travellers.delete')->whereNumber('id');
+            Route::get('visa', [Me::class, 'visas'])->name('visa');
+            Route::post('visa/{ref}/documents', [Me::class, 'uploadVisaDoc'])->name('visa.upload');
+            Route::get('reviews', [Me::class, 'reviews'])->name('reviews');
+            Route::post('reviews', [Me::class, 'storeReview'])->name('reviews.store');
+            Route::get('referrals', [Me::class, 'referrals'])->name('referrals');
+            Route::get('notifications', [Me::class, 'notifications'])->name('notifications');
+            Route::post('notifications/read', [Me::class, 'readNotifications'])->name('notifications.read');
+            Route::get('profile', [Me::class, 'profile'])->name('profile');
+            Route::put('profile', [Me::class, 'updateProfile'])->name('profile.update');
+            Route::get('settings', [Me::class, 'settings'])->name('settings');
+            Route::put('settings', [Me::class, 'updateSettings'])->name('settings.update');
+            Route::put('password', [Me::class, 'password'])->name('password');
+            Route::delete('sessions/{id}', [Me::class, 'revokeSession'])->name('sessions.delete')->whereNumber('id');
+            Route::get('export', [Me::class, 'export'])->name('export');
+            Route::delete('account', [Me::class, 'deleteAccount'])->name('account.delete');
+            Route::get('tickets', [Me::class, 'tickets'])->name('tickets');
+            Route::post('tickets', [Me::class, 'storeTicket'])->name('tickets.store');
+            Route::post('tickets/{ref}/messages', [Me::class, 'replyTicket'])->name('tickets.reply');
+        });
+    });
+
     // Server-to-server payment notifications (verified with the gateway's own API before anything changes).
     Route::post('payments/{gateway}/ipn', [PayReturn::class, 'ipn'])->name('payments.ipn')->where('gateway', '[a-z_]+');
 });

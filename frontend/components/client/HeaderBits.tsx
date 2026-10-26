@@ -156,3 +156,14 @@ export function Drawer({ openLabel, closeLabel, title, header, children, footer,
     </>
   );
 }
+
+/** "Sign in" for guests; "Hi, Farhana" → account for signed-in travellers (reads the non-sensitive name cookie, so pages stay static). */
+export function AccountLink({ signInHref, accountHref, signIn, hi, className, children }: { signInHref: string; accountHref: string; signIn: string; hi: string; className: string; children: React.ReactNode }) {
+  const [name, setName] = useState<string | null>(null);
+  useEffect(() => {
+    const m = document.cookie.match(/(?:^|;\s*)musafir_name=([^;]*)/);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setName(m ? decodeURIComponent(m[1]) || '' : null);
+  }, []);
+  return <a href={name !== null ? accountHref : signInHref} className={className} data-account-link={name !== null ? 'in' : 'out'}>{children} {name !== null ? (name ? `${hi}, ${name}` : hi) : signIn}</a>;
+}

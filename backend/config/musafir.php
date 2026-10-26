@@ -19,6 +19,8 @@ return [
     'revalidate_enabled' => (bool) env('REVALIDATE_ENABLED', true),
 
     'payment_mode' => env('PAYMENT_MODE', 'sandbox'), // sandbox | live
+    // Local development only: return the sign-in code in the API response so you can test without an SMS provider.
+    'otp_debug' => (bool) env('OTP_DEBUG', false),
     'sms_driver' => env('SMS_DRIVER', 'log'),          // log | ssl_wireless | bulksmsbd
 
     'locales' => ['en', 'bn'],

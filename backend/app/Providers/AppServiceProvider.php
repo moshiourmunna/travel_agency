@@ -29,6 +29,8 @@ class AppServiceProvider extends ServiceProvider
         RateLimiter::for('public', fn (Request $r) => $ssr($r) ? Limit::none() : Limit::perMinute(240)->by($r->ip()));
         RateLimiter::for('search', fn (Request $r) => $ssr($r) ? Limit::perMinute(600) : Limit::perMinute(60)->by($r->ip()));
         RateLimiter::for('checkout', fn (Request $r) => $ssr($r) ? Limit::perMinute(600) : Limit::perMinute(40)->by('c:'.$r->ip()));
+        RateLimiter::for('auth', fn (Request $r) => [Limit::perMinute(12)->by('a:'.$r->ip()), Limit::perHour(120)->by('ah:'.$r->ip())]);
+        RateLimiter::for('me', fn (Request $r) => Limit::perMinute(180)->by('me:'.($r->user()?->id ?? $r->ip())));
         RateLimiter::for('forms', fn (Request $r) => [Limit::perMinute(6)->by('f:'.$r->ip()), Limit::perDay(60)->by('fd:'.$r->ip())]);
 
         Setting::saved(fn () => Settings::forget());
