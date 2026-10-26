@@ -8,7 +8,7 @@ export type Plan = { code: 'full' | 'deposit' | 'instalments'; now: number; disc
 export type Quote = {
   kind: string; slug: string; title: string; subtitle: string; image: { src: string; srcset?: { w: number; url: string }[]; alt?: string } | null;
   travel_start: string | null; travel_end: string | null; pax: { adults: number; children: number; infants: number }; pax_count: number; options: Record<string, any>;
-  lines: Line[]; addons: { code: string; label: string; price: number; per: string }[]; subtotal: number; discount: number; coupon: { code: string; label: string; discount: number } | null; total: number;
+  lines: Line[]; addons: { code: string; label: string; price: number; per: string }[]; subtotal: number; discount: number; coupon: { code: string; label: string; discount: number } | null; referral?: { label: string; discount: number } | null; total: number;
   plans: Plan[]; cancellation: { label: string; kind: string } | null; refundable: boolean | null; gateways: string[]; payment_mode: string; needs_passport: boolean;
   choices: { dates?: { date: string; price: number; seats_left: number }[]; rooms?: { code?: string; id?: number; label: string; price?: number }[]; cabins?: { code: string; label: string; price: number }[]; options?: { id: number; label: string; price: number }[]; max?: number; max_rooms?: number };
 };
@@ -364,6 +364,7 @@ export function Checkout({ initial, sel: sel0, L, icons, links, user, resume }: 
             <dl className="mt-4 space-y-2 border-t border-ink-100 pt-4 text-sm dark:border-ink-800" aria-live="polite" aria-busy={busy}>
               {q.lines.map((l) => <div key={l.code} className="flex justify-between gap-3"><dt className="muted">{l.label}{l.qty > 1 ? ` × ${d(l.qty)}` : ''}</dt><dd className="shrink-0"><Price value={l.total} /></dd></div>)}
               {q.coupon ? <div className="flex justify-between text-emerald-700 dark:text-emerald-400"><dt>{L.promo} {q.coupon.code}</dt><dd>−<Price value={q.coupon.discount} /></dd></div> : null}
+              {q.referral ? <div className="flex justify-between text-emerald-700 dark:text-emerald-400" data-referral-discount><dt>{q.referral.label}</dt><dd>−<Price value={q.referral.discount} /></dd></div> : null}
               {active?.discount ? <div className="flex justify-between text-emerald-700 dark:text-emerald-400"><dt>{L.fullDiscount}</dt><dd>−<Price value={active.discount} /></dd></div> : null}
               <div className="flex justify-between"><dt className="muted">{L.vat}</dt><dd>{L.included}</dd></div>
               <div className="flex justify-between border-t border-ink-100 pt-3 text-base dark:border-ink-800"><dt className="font-bold">{L.total}</dt><dd className="text-xl font-extrabold" data-ck-total><Price value={active?.total ?? q.total} /></dd></div>

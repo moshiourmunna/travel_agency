@@ -19,6 +19,10 @@ export function WishButton({ id, kind = 'tour', label, className = '', children 
         e.stopPropagation();
         write(KEYS.wish, on ? list.filter((x) => x !== key) : [...list, key]);
         toast(on ? msg.removed : msg.added);
+        // Signed in → keep the account wishlist in step (best effort; the portal re-syncs on the next visit).
+        if (/(?:^|;\s*)musafir_name=[^;]+/.test(document.cookie) && ['tour', 'cruise', 'activity', 'hotel'].includes(kind)) {
+          void fetch('/api/me/wishlist', { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(on ? { remove: { kind, slug: id } } : { items: [{ kind, slug: id }] }) }).catch(() => null);
+        }
       }}
     >
       {children}

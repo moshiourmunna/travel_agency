@@ -63,7 +63,7 @@ class AuthController extends Controller
         }
         $u->save();
         if ($u->referred_by) {
-            Referral::create(['referrer_id' => $u->referred_by, 'referred_user_id' => $u->id, 'referred_name' => $u->name, 'status' => 'joined', 'reward' => 500]);
+            Referral::create(['referrer_id' => $u->referred_by, 'referred_user_id' => $u->id, 'referred_name' => $u->name, 'status' => 'joined', 'reward' => (int) \App\Support\Settings::get('commerce.referral_reward', 500)]);
         }
 
         return $this->issue($u, $r, true, $u->email);

@@ -59,6 +59,16 @@ final class Pricer
             $q['discount'] = $c['discount'];
             $q['coupon'] = ['code' => $c['coupon']->code, 'id' => $c['coupon']->id, 'label' => $c['coupon']->tr('name'), 'discount' => $c['discount']];
         }
+        // Friend referral: a signed-in traveller who joined with a code gets money off their first holiday or cruise (not with a coupon).
+        $q['referral'] = null;
+        if (! $q['coupon'] && $user?->referred_by && in_array($kind, ['tour', 'cruise'], true)) {
+            $off = (int) Settings::get('commerce.referral_friend_discount', 500);
+            $first = ! \App\Models\Booking::where('user_id', $user->id)->where('paid', '>', 0)->exists();
+            if ($off > 0 && $first && $q['subtotal'] >= (int) Settings::get('commerce.referral_min_total', 15000)) {
+                $q['referral'] = ['discount' => min($off, $q['subtotal']), 'label' => app()->getLocale() === 'bn' ? 'বন্ধুর রেফারেল ছাড়' : 'Friend referral discount'];
+                $q['discount'] += $q['referral']['discount'];
+            }
+        }
         $q['total'] = max(0, $q['subtotal'] - $q['discount']);
         $q['plans'] = $this->plans($q);
 

@@ -20,7 +20,7 @@ final class Checkout
             'travel_start' => $q['travel_start'], 'travel_end' => $q['travel_end'], 'pax' => $q['pax'], 'pax_count' => $q['pax_count'], 'options' => $q['options'],
             'lines' => array_map(fn ($x) => ['code' => $x['code'], 'label' => tr_pick($x['label'], $l), 'qty' => $x['qty'], 'unit' => $x['unit'], 'total' => $x['total']], $q['lines']),
             'addons' => array_map(fn ($a) => ['code' => $a['code'], 'label' => tr_pick($a['label'], $l), 'price' => (int) $a['price'], 'per' => $a['per'] ?? 'booking'], $q['addons_catalogue'] ?? []),
-            'subtotal' => $q['subtotal'], 'discount' => $q['discount'], 'coupon' => $q['coupon'] ? array_diff_key($q['coupon'], ['id' => 1]) : null, 'total' => $q['total'],
+            'subtotal' => $q['subtotal'], 'discount' => $q['discount'], 'coupon' => $q['coupon'] ? array_diff_key($q['coupon'], ['id' => 1]) : null, 'referral' => $q['referral'] ?? null, 'total' => $q['total'],
             'plans' => array_values($q['plans']),
             'cancellation' => $q['policy'] ? Catalog::policy($q['policy']) : null, 'refundable' => $q['refundable'] ?? null,
             'gateways' => app(GatewayManager::class)->enabled(), 'payment_mode' => config('musafir.payment_mode'),

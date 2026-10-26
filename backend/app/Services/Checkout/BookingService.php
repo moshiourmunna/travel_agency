@@ -85,8 +85,13 @@ final class BookingService
             if ($plan['discount'] > 0) {
                 $b->items()->create(['label' => ['en' => 'Pay-in-full discount', 'bn' => 'পূর্ণ পরিশোধ ছাড়'], 'qty' => 1, 'unit_price' => -$plan['discount'], 'line_total' => -$plan['discount'], 'meta' => ['code' => 'discount:full']]);
             }
-            if ($quote['discount'] > 0) {
-                $b->items()->create(['label' => ['en' => 'Promo '.$quote['coupon']['code'], 'bn' => 'প্রোমো '.$quote['coupon']['code']], 'qty' => 1, 'unit_price' => -$quote['discount'], 'line_total' => -$quote['discount'], 'meta' => ['code' => 'discount:coupon']]);
+            if (! empty($quote['coupon']) && $quote['coupon']['discount'] > 0) {
+                $cd = $quote['coupon']['discount'];
+                $b->items()->create(['label' => ['en' => 'Promo '.$quote['coupon']['code'], 'bn' => 'প্রোমো '.$quote['coupon']['code']], 'qty' => 1, 'unit_price' => -$cd, 'line_total' => -$cd, 'meta' => ['code' => 'discount:coupon']]);
+            }
+            if (! empty($quote['referral'])) {
+                $rd = $quote['referral']['discount'];
+                $b->items()->create(['label' => ['en' => 'Friend referral discount', 'bn' => 'বন্ধুর রেফারেল ছাড়'], 'qty' => 1, 'unit_price' => -$rd, 'line_total' => -$rd, 'meta' => ['code' => 'discount:referral']]);
             }
             foreach ($data['travellers'] ?? [] as $t) {
                 $b->travellers()->create(['name' => $t['name'], 'type' => $t['type'] ?? 'adult', 'traveller_id' => $t['traveller_id'] ?? null]);

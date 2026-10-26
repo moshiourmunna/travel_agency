@@ -257,6 +257,17 @@ class CatalogueSeeder extends Seeder
             ]);
         }
 
+        // Per-visa upload checklist the traveller sees in the portal (admin edits it per product). Seeded once.
+        $req = [['Passport bio page', 'পাসপোর্টের তথ্য পাতা'], ['Photo 35×45 mm, white background', 'ছবি ৩৫×৪৫ মিমি, সাদা ব্যাকগ্রাউন্ড'],
+            ['6-month bank statement with seal', 'সিলসহ ৬ মাসের ব্যাংক স্টেটমেন্ট'], ['NOC from employer', 'নিয়োগকর্তার এনওসি']];
+        foreach (VisaProduct::all() as $vp) {
+            if (! $vp->requirements()->exists()) {
+                foreach ($req as $k => [$en, $bn]) {
+                    $vp->requirements()->create(['item' => ['en' => $en, 'bn' => $bn], 'required' => true, 'sort' => $k]);
+                }
+            }
+        }
+
         // Insurance plans (mockup insurance page)
         $plans = [
             ['asia-basic', 'Asia Basic', 'এশিয়া বেসিক', 650, 'US$ 30,000', [['Medical & hospital', 'চিকিৎসা ও হাসপাতাল'], ['Emergency evacuation', 'জরুরি স্থানান্তর']], false],

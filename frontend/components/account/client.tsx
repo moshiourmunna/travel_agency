@@ -2,7 +2,9 @@
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { useSite } from '@/components/client/SiteContext';
-import { toast } from '@/components/client/store';
+import { KEYS, read, toast, write } from '@/components/client/store';
+
+const WISH_KINDS = ['tour', 'cruise', 'activity', 'hotel'];
 
 export type MeRes = { ok: boolean; status: number; data?: any; message?: string; errors?: Record<string, string[]> };
 
@@ -166,7 +168,8 @@ export function SignOutButton({ className, label, children }: { className: strin
   return (
     <button type="button" className={className} data-sign-out onClick={async () => {
       await fetch(`/api/auth/logout?lang=${lang}`, { method: 'POST', headers: { Accept: 'application/json' } }).catch(() => null);
-      try { localStorage.removeItem('musafir-wish-synced'); } catch {}
+      // The account keeps the wishlist; clear this device's copy so the next person on a shared device starts clean.
+      write(KEYS.wish, []);
       window.location.assign(`/${lang}/login`);
     }}>{children}<span>{label}</span></button>
   );
@@ -247,20 +250,46 @@ export function ShareLink({ link, text, copyLabel, shareLabel, copied }: { link:
   );
 }
 
-/** Once per sign-in: merge this device's wishlist (localStorage) into the account, so saved items follow the traveller. */
+/**
+ * Each portal visit: merge this device's wishlist (localStorage) into the account, then mirror the account list back to
+ * the device so hearts on public pages match on every browser the traveller signs in on.
+ */
 export function WishSync() {
   const call = useMe();
   useEffect(() => {
     try {
-      if (localStorage.getItem('musafir-wish-synced')) return;
-      const raw = JSON.parse(localStorage.getItem('musafir-wishlist') || '[]') as string[];
-      const items = raw.map((k) => k.split(':')).filter(([kind, slug]) => slug && ['tour', 'cruise', 'activity', 'hotel'].includes(kind)).map(([kind, slug]) => ({ kind, slug }));
-      localStorage.setItem('musafir-wish-synced', '1');
-      if (items.length) void call('POST', 'wishlist', { items });
+      const raw = read<string[]>(KEYS.wish, []);
+      const items = raw.map((k) => k.split(':')).filter(([kind, slug]) => slug && WISH_KINDS.includes(kind)).map(([kind, slug]) => ({ kind, slug }));
+      void call('POST', 'wishlist', { items }).then((r) => {
+        if (!r.ok || !Array.isArray(r.data?.keys)) return;
+        const merged = Array.from(new Set([...read<string[]>(KEYS.wish, []), ...r.data.keys]));
+        write(KEYS.wish, merged);
+      });
     } catch {}
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return null;
+}
+
+/** Remove a saved item from the account and from this device. */
+export function WishRemove({ kind, slug, label, done, className }: { kind: string; slug: string; label: string; done: string; className: string }) {
+  const call = useMe();
+  const router = useRouter();
+  const { msg } = useSite();
+  const [busy, setBusy] = useState(false);
+  return (
+    <button type="button" className={className} aria-label={label} disabled={busy} data-wish-remove={`${kind}:${slug}`} onClick={async () => {
+      setBusy(true);
+      const r = await call('POST', 'wishlist', { remove: { kind, slug } });
+      setBusy(false);
+      if (!r.ok) { if (r.status !== 401) toast(msg.error, 'error'); return; }
+      write(KEYS.wish, read<string[]>(KEYS.wish, []).filter((k) => k !== `${kind}:${slug}`));
+      toast(done);
+      router.refresh();
+    }}>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-[18px] w-[18px]" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" /></svg>
+    </button>
+  );
 }
 
 /** On/off switch that saves immediately (PUT …settings with {[group]: {[name]: value}} or {[name]: value}). */

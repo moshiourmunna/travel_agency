@@ -106,7 +106,11 @@ class CommerceSeeder extends Seeder
         $farhana->walletTransactions()->delete();
         $balance = (float) S::app('USER')['wallet'];
         foreach (S::app('WALLET_TX') as [$date, $desc, $amount, $dir, $icon]) {
-            $farhana->walletTransactions()->create(['direction' => $dir, 'amount' => $amount, 'balance_after' => $balance, 'description' => S::b($desc), 'icon' => $icon, 'created_at' => $date.' 10:00:00']);
+            // "Gift card redeemed GC-7781" → a redeemed card record, so the wallet can show how much came from gift cards.
+            $gift = preg_match('/^Gift card redeemed (\S+)/', (string) $desc['en'], $gm)
+                ? \App\Models\GiftCard::updateOrCreate(['code' => $gm[1]], ['amount' => abs((float) $amount), 'balance' => 0, 'buyer_id' => null, 'recipient_name' => 'Farhana Rahman', 'status' => 'redeemed']) : null;
+            $farhana->walletTransactions()->create(['direction' => $dir, 'amount' => $amount, 'balance_after' => $balance, 'description' => S::b($desc), 'icon' => $icon, 'created_at' => $date.' 10:00:00',
+                'source_type' => $gift ? \App\Models\GiftCard::class : null, 'source_id' => $gift?->id]);
             $balance += $dir === 'credit' ? -$amount : $amount;
         }
         $farhana->milesTransactions()->delete();
@@ -181,6 +185,15 @@ class CommerceSeeder extends Seeder
                 // The featured application uses the mockup's stage dates; others are dated back from their ETA.
                 $when = $v['ref'] === 'VSA-26-1182' ? $date : CarbonImmutable::parse($v['eta'])->subDays([14, 12, 10, 0, 0][$k] ?? 0)->toDateString();
                 $app->events()->create(['label' => S::b($label), 'state' => $v['ref'] === 'VSA-26-1182' ? $state : $st, 'happened_on' => ($v['ref'] === 'VSA-26-1182' ? $state : $st) === 'todo' ? null : $when]);
+            }
+            // Documents already received and verified by the visa desk; at the "docs" stage the bank statement is still missing.
+            $req = $app->product?->requirements()->get() ?? collect();
+            foreach ($req as $n => $q) {
+                if ($v['status'] === 'docs' && $n === 2) {
+                    continue;
+                }
+                \App\Models\Document::create(['owner_type' => VisaApplication::class, 'owner_id' => $app->id, 'kind' => 'visa_doc', 'label' => $q->getTranslation('item', 'en'), 'disk' => 'local',
+                    'path' => "visa/{$app->ulid}/seed-{$n}.pdf", 'mime' => 'application/pdf', 'size' => 0, 'status' => 'verified', 'uploaded_by' => $farhana->id]);
             }
         }
         foreach ($queue as $ref => [$r, $name, $flag, $country, $stage, $eta, $assignee]) {

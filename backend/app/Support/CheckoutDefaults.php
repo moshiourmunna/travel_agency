@@ -15,6 +15,11 @@ final class CheckoutDefaults
             ['commerce', 'bank_hold_hours', 24, 'number', false],
             ['commerce', 'gift_min', 1000, 'number', true],
             ['commerce', 'gift_max', 500000, 'number', true],
+            // Refer & earn: friend's discount on a first holiday/cruise over the minimum, and the referrer's wallet reward after that trip.
+            ['commerce', 'referral_friend_discount', 500, 'number', true],
+            ['commerce', 'referral_min_total', 15000, 'number', true],
+            ['commerce', 'referral_reward', 500, 'number', true],
+            ['commerce', 'cancellation_fee', 2000, 'number', true],
             ['company', 'bin', '004567891-0101', 'text', true],
         ];
     }

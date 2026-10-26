@@ -280,6 +280,7 @@ class MeController extends Controller
                 ->map(fn ($p) => ['id' => $p->ulid, 'ref' => $p->booking?->ref, 'title' => $p->booking?->tr('title'), 'method' => $p->method, 'gateway' => $p->gateway, 'amount' => (int) round((float) $p->amount), 'status' => $p->status, 'date' => ($p->paid_at ?? $p->created_at)?->toDateString()])->values(),
             'methods' => SavedPaymentMethod::where('user_id', $u->id)->orderByDesc('is_default')->get()->map(fn ($m) => ['id' => $m->id, 'gateway' => $m->gateway, 'label' => $m->label, 'masked' => $m->masked, 'is_default' => (bool) $m->is_default])->values(),
             'gateways' => app(GatewayManager::class)->enabled(), 'wallet' => (int) round((float) $u->wallet_balance),
+            'wallet_enabled' => ! empty(((array) \App\Support\Settings::get('payments.gateways', []))['wallet']),
         ]);
     }
 
@@ -301,7 +302,9 @@ class MeController extends Controller
             'tiers' => LoyaltyTier::orderBy('min_miles')->get()->map(fn ($t) => ['code' => $t->code, 'name' => $t->tr('name'), 'min_miles' => (int) $t->min_miles, 'perks' => collect($t->perks ?? [])->map(fn ($p) => tr_pick($p))->all(), 'current' => $t->id === $u->tier_id])->values(),
             'wallet_tx' => WalletTransaction::where('user_id', $u->id)->orderByDesc('created_at')->orderByDesc('id')->limit(50)->get()->map(fn ($w) => ['amount' => (int) round((float) $w->amount), 'direction' => $w->direction, 'text' => $w->tr('description'), 'icon' => $w->icon, 'date' => $w->created_at?->toDateString()])->values(),
             'miles_tx' => MilesTransaction::where('user_id', $u->id)->orderByDesc('created_at')->limit(50)->get()->map(fn ($m) => ['miles' => (int) $m->miles, 'text' => $m->tr('description'), 'date' => $m->created_at?->toDateString()])->values(),
-            'gift_credit' => (int) round((float) WalletTransaction::where('user_id', $u->id)->where('icon', 'gift-card')->sum('amount')),
+            'gift_credit' => (int) round((float) WalletTransaction::where('user_id', $u->id)->where('source_type', GiftCard::class)->where('direction', 'credit')->sum('amount')),
+            // Online top-up methods (bank transfer is booking-only: it needs a human to match the slip).
+            'topup_gateways' => array_values(array_diff(app(GatewayManager::class)->enabled(), ['bank_transfer', 'wallet'])),
         ]);
     }
 
@@ -323,7 +326,7 @@ class MeController extends Controller
             }
             $amt = (float) $g->balance;
             $g->update(['balance' => 0, 'status' => 'redeemed']);
-            $this->credit($u, $amt, ['en' => 'Gift card redeemed '.$g->code, 'bn' => 'গিফট কার্ড রিডিম '.$g->code], 'gift-card', $g);
+            $this->credit($u, $amt, ['en' => 'Gift card redeemed '.$g->code, 'bn' => 'গিফট কার্ড রিডিম '.$g->code], 'gift', $g);
 
             return $amt;
         });
@@ -388,9 +391,14 @@ class MeController extends Controller
 
         usort($items, fn ($a, $b) => $a['order'] <=> $b['order']);
 
+        $plans = TripPlan::where('user_id', $u->id)->orderByDesc('updated_at')->get();
+        $dests = \App\Models\Destination::with('image')->whereIn('slug', $plans->flatMap(fn ($p) => (array) ($p->data['destinations'] ?? []))->unique()->values())->get()->keyBy('slug');
+
         return $this->ok([
-            'plans' => TripPlan::where('user_id', $u->id)->orderByDesc('updated_at')->get()->map(fn ($p) => ['id' => $p->ulid, 'name' => $p->tr('name'), 'estimate' => (int) round((float) $p->estimate), 'days' => $p->data['days'] ?? null,
-                'pax' => tr_pick($p->data['pax_label'] ?? null), 'destinations' => $p->data['destinations'] ?? [], 'updated' => $p->updated_at?->toDateString(), 'share' => $p->share_token])->values(),
+            'plans' => $plans->map(fn ($p) => ['id' => $p->ulid, 'name' => $p->tr('name'), 'estimate' => (int) round((float) $p->estimate), 'days' => $p->data['days'] ?? null,
+                'pax' => tr_pick($p->data['pax_label'] ?? null), 'destinations' => $p->data['destinations'] ?? [],
+                'places' => collect($p->data['destinations'] ?? [])->map(fn ($s) => isset($dests[$s]) ? ['slug' => $s, 'name' => $dests[$s]->tr('name'), 'image' => Img::of($dests[$s]->image)] : null)->filter()->values(),
+                'updated' => $p->updated_at?->toDateString(), 'share' => $p->share_token])->values(),
             'wishlist' => $items,
         ]);
     }
@@ -411,7 +419,12 @@ class MeController extends Controller
             Wishlist::where(['user_id' => $u->id, 'wishable_type' => $m::class, 'wishable_id' => $m->id])->delete();
         }
 
-        return $this->ok(['count' => Wishlist::where('user_id', $u->id)->count()]);
+        // Account list as "kind:slug" keys so the device copy (hearts on public pages) can match it.
+        $flip = array_flip($types);
+        $keys = Wishlist::where('user_id', $u->id)->with('wishable')->orderBy('id')->get()
+            ->map(fn ($w) => $w->wishable && isset($flip[$w->wishable_type]) ? $flip[$w->wishable_type].':'.$w->wishable->slug : null)->filter()->values();
+
+        return $this->ok(['count' => $keys->count(), 'keys' => $keys]);
     }
 
     public function deletePlan(Request $r, string $id): JsonResponse
@@ -449,6 +462,16 @@ class MeController extends Controller
         return $this->ok(['items' => Traveller::where('user_id', $this->u($r)->id)->orderByDesc('is_self')->orderBy('id')->get()->map(fn ($t) => $this->travellerShape($t))->values()]);
     }
 
+    /** The portal form sends the passport's given name and surname separately; store them as one name. */
+    private function travellerInput(Request $r): array
+    {
+        if ($r->has('given_name') || $r->has('surname')) {
+            $r->merge(['name' => trim(preg_replace('/\s+/u', ' ', $r->input('given_name', '').' '.$r->input('surname', '')))]);
+        }
+
+        return $r->validate($this->travellerRules() + ['given_name' => ['nullable', 'string', 'max:80'], 'surname' => ['nullable', 'string', 'max:60']]);
+    }
+
     private function travellerRules(): array
     {
         return [
@@ -464,7 +487,8 @@ class MeController extends Controller
     {
         $rel = $v['relation'] ?? 'Other';
         $bn = ['Self' => 'নিজে', 'Spouse' => 'স্বামী/স্ত্রী', 'Child' => 'সন্তান', 'Parent' => 'মা-বাবা', 'Sibling' => 'ভাই-বোন', 'Friend' => 'বন্ধু', 'Colleague' => 'সহকর্মী', 'Other' => 'অন্যান্য'][$rel];
-        $t->fill(collect($v)->only(['name', 'dob', 'gender', 'passport_expiry', 'meal_pref', 'seat_pref', 'frequent_flyer'])->all());
+        // A blank frequent-flyer box on edit keeps the saved number (the form only shows it masked).
+        $t->fill(collect($v)->only(['name', 'dob', 'gender', 'passport_expiry', 'meal_pref', 'seat_pref', 'frequent_flyer'])->reject(fn ($x, $k) => $k === 'frequent_flyer' && $x === null && $t->exists)->all());
         $t->nationality = strtoupper($v['nationality'] ?? $t->nationality ?? 'BD');
         $t->setTranslations('relation', ['en' => $rel, 'bn' => $bn]);
         $t->is_self = $rel === 'Self';
@@ -477,7 +501,7 @@ class MeController extends Controller
 
     public function storeTraveller(Request $r): JsonResponse
     {
-        $v = $r->validate($this->travellerRules());
+        $v = $this->travellerInput($r);
         abort_if(Traveller::where('user_id', $this->u($r)->id)->count() >= 20, 422, __('You can save up to 20 travellers.'));
         $t = new Traveller(['user_id' => $this->u($r)->id]);
         $this->fillTraveller($t, $v);
@@ -489,7 +513,7 @@ class MeController extends Controller
     public function updateTraveller(Request $r, int $id): JsonResponse
     {
         $t = Traveller::where('user_id', $this->u($r)->id)->findOrFail($id);
-        $this->fillTraveller($t, $r->validate($this->travellerRules()));
+        $this->fillTraveller($t, $this->travellerInput($r));
         $t->save();
 
         return $this->ok($this->travellerShape($t));
@@ -509,13 +533,20 @@ class MeController extends Controller
         $apps = VisaApplication::with(['product.requirements', 'events', 'documents'])->where('user_id', $this->u($r)->id)->orderByDesc('id')->get();
 
         return $this->ok(['items' => $apps->map(function ($a) {
-            $uploaded = $a->documents->pluck('label')->all();
-            $needed = $a->stage === 'docs' ? $a->product?->requirements->where('required', true)->sortBy('sort')->map(fn ($q) => tr_pick($q->item))->reject(fn ($x) => in_array($x, $uploaded, true))->values()->all() ?? [] : [];
+            // Checklist = the product's required uploads; an item is done once a matching upload isn't rejected (labels match in either language).
+            $docs = $a->documents->reject(fn ($d) => $d->status === 'rejected');
+            $checklist = ($a->product?->requirements ?? collect())->where('required', true)->sortBy('sort')->map(function ($q) use ($docs) {
+                $names = array_filter([$q->getTranslation('item', 'en'), $q->getTranslation('item', 'bn')]);
+                $doc = $docs->first(fn ($d) => in_array($d->label, $names, true));
+
+                return ['label' => $q->tr('item'), 'key' => $q->getTranslation('item', 'en'), 'done' => (bool) $doc, 'status' => $doc?->status];
+            })->values();
+            $needed = $a->stage === 'docs' ? $checklist->where('done', false)->pluck('label')->values()->all() : [];
 
             return ['ref' => $a->ref, 'name' => $a->applicant_name, 'country' => $a->product?->tr('country_name'), 'flag' => $a->product?->flag, 'type' => $a->product?->tr('type'),
                 'stage' => $a->stage, 'stage_no' => $a->stage_no, 'eta' => $a->eta?->toDateString(), 'booking' => $a->booking_id ? Booking::whereKey($a->booking_id)->value('ref') : null,
                 'events' => $a->events->sortBy('id')->map(fn ($e) => ['label' => $e->tr('label'), 'state' => $e->state, 'date' => $e->happened_on?->toDateString()])->values(),
-                'needed' => $needed, 'documents' => $a->documents->map(fn ($d) => ['label' => $d->label, 'status' => $d->status, 'reason' => $d->rejected_reason, 'at' => $d->created_at?->toDateString()])->values()];
+                'needed' => $needed, 'checklist' => $checklist, 'documents' => $a->documents->map(fn ($d) => ['label' => $d->label, 'status' => $d->status, 'reason' => $d->rejected_reason, 'at' => $d->created_at?->toDateString()])->values()];
         })->values()]);
     }
 
@@ -571,7 +602,8 @@ class MeController extends Controller
         $u = $this->u($r);
         $refs = Referral::where('referrer_id', $u->id)->orderByDesc('created_at')->get();
 
-        return $this->ok(['code' => $u->referral_code, 'link' => rtrim((string) config('musafir.frontend_url'), '/').'/'.app()->getLocale().'/register?ref='.$u->referral_code,
+        return $this->ok(['reward' => (int) \App\Support\Settings::get('commerce.referral_reward', 500), 'friend_discount' => (int) \App\Support\Settings::get('commerce.referral_friend_discount', 500),
+            'min_total' => (int) \App\Support\Settings::get('commerce.referral_min_total', 15000), 'code' => $u->referral_code, 'link' => rtrim((string) config('musafir.frontend_url'), '/').'/'.app()->getLocale().'/register?ref='.$u->referral_code,
             'stats' => ['invited' => $refs->count(), 'travelled' => $refs->where('status', 'won')->count(), 'earned' => (int) round((float) $refs->where('status', 'won')->sum('reward'))],
             'items' => $refs->map(fn ($x) => ['name' => $x->referred_name, 'status' => $x->status, 'reward' => (int) round((float) $x->reward), 'date' => $x->created_at?->toDateString(),
                 'initials' => mb_strtoupper(collect(preg_split('/\s+/u', (string) $x->referred_name))->map(fn ($p) => mb_substr($p, 0, 1))->take(2)->join(''))])->values()]);

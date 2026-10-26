@@ -5,7 +5,7 @@ import { useSyncExternalStore } from 'react';
 const listeners = new Map<string, Set<() => void>>();
 const cache = new Map<string, { raw: string | null; val: unknown }>();
 
-function read<T>(key: string, fallback: T): T {
+export function read<T>(key: string, fallback: T): T {
   if (typeof window === 'undefined') return fallback;
   let raw: string | null = null;
   try { raw = localStorage.getItem(key); } catch {}
