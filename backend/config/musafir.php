@@ -21,6 +21,8 @@ return [
     'payment_mode' => env('PAYMENT_MODE', 'sandbox'), // sandbox | live
     // Local development only: return the sign-in code in the API response so you can test without an SMS provider.
     'otp_debug' => (bool) env('OTP_DEBUG', false),
+    // Portal API requests per minute per traveller (each page view makes 2–3).
+    'me_rate' => (int) env('ME_RATE_PER_MIN', 240),
     'sms_driver' => env('SMS_DRIVER', 'log'),          // log | ssl_wireless | bulksmsbd
 
     'locales' => ['en', 'bn'],
