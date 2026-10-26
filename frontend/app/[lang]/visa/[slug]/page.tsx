@@ -77,6 +77,11 @@ export default async function VisaDetail({ params }: PageProps<'/[lang]/visa/[sl
                 { name: 'adults', label: t('Applicants', 'আবেদনকারী'), type: 'number', min: 1, max: 20, defaultValue: '1' },
               ]} />
           </div>
+          {v.fee ? <div className="card mt-4 p-5 text-center">
+            <p className="text-sm font-bold">{t('Know what you need?', 'কী লাগবে জানেন?')}</p>
+            <p className="mt-1 text-xs muted">{t('Pay the service fee online now and upload documents from My Account.', 'এখনই অনলাইনে সার্ভিস ফি দিন, ডকুমেন্ট মাই অ্যাকাউন্ট থেকে আপলোড করুন।')}</p>
+            <Link href={`${i.u('/booking')}?visa=${v.slug}&adults=1`} className="btn btn-primary mt-3 w-full" data-visa-pay><Icon name="credit-card" className="h-4 w-4" /> {t('Apply & pay online', 'অনলাইনে আবেদন ও পেমেন্ট')}</Link>
+          </div> : null}
         </aside>
       </div>
       {v.similar?.length ? <section className="wrap pb-16"><h2 className="mb-4 text-xl font-bold">{t('Other popular visas', 'অন্যান্য জনপ্রিয় ভিসা')}</h2><ul className="flex flex-wrap gap-2">{v.similar.map((s: any) => <li key={s.slug}><Link href={i.u(`/visa/${s.slug}`)} className="chip hover:border-brand-500"><span className="text-[10px] font-extrabold tracking-wider">{s.iso2}</span> {s.country} · <Price value={s.fee} /></Link></li>)}</ul></section> : null}

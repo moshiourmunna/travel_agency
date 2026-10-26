@@ -1,6 +1,7 @@
 import 'server-only';
 import { NextResponse, type NextRequest } from 'next/server';
 import { isLang } from './format';
+import { authHeaders } from './session';
 
 const API = (process.env.API_URL || 'http://127.0.0.1:8000').replace(/\/$/, '');
 
@@ -12,7 +13,7 @@ export async function forward(req: NextRequest, path: string) {
   const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || req.headers.get('x-real-ip') || '';
   const res = await fetch(`${API}/api/v1/${path}?lang=${isLang(lang) ? lang : 'en'}`, {
     method: 'POST',
-    headers: { Accept: 'application/json', 'Content-Type': 'application/json', ...(ip ? { 'X-Forwarded-For': ip } : {}), 'User-Agent': req.headers.get('user-agent') ?? '' },
+    headers: { Accept: 'application/json', 'Content-Type': 'application/json', ...(ip ? { 'X-Forwarded-For': ip } : {}), 'User-Agent': req.headers.get('user-agent') ?? '', ...(await authHeaders()) },
     body,
     cache: 'no-store',
   });

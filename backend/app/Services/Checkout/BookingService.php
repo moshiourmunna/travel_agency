@@ -187,12 +187,13 @@ final class BookingService
             $b->update(['contact' => $b->contact + ['pnr' => $pnr]]);
         }
         if ($b->kind === 'gift_card') {
-            GiftCard::create([
+            $gc = GiftCard::create([
                 'code' => 'MSF-'.strtoupper(Str::random(4)).'-'.strtoupper(Str::random(4)), 'gift_card_design_id' => $b->product_id,
                 'amount' => $opts['amount'] ?? $b->total, 'balance' => $opts['amount'] ?? $b->total, 'buyer_id' => $b->user_id,
                 'recipient_name' => $opts['to'] ?? null, 'recipient_email' => $opts['email'] ?? null, 'message' => $opts['message'] ?? null,
                 'expires_at' => now()->addYear()->toDateString(), 'status' => 'active',
             ]);
+            $b->update(['contact' => $b->contact + ['gift_code' => $gc->code]]);
         }
         if ($b->kind === 'visa') {
             foreach ($b->travellers as $t) {

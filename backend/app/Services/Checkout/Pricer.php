@@ -147,7 +147,8 @@ final class Pricer
     {
         $t = Tour::published()->with(['departures', 'priceTiers', 'cancellationPolicy'])->where('slug', (string) ($in['slug'] ?? ''))->first() ?? self::fail('slug', __('This trip is not available.'));
         $p = self::pax($in);
-        $dep = $t->departures->first(fn ($d) => $d->date->toDateString() === ($in['date'] ?? null));
+        $open = $t->departures->filter(fn ($d) => $d->date->gte(today()) && $d->status !== 'sold_out' && $d->seatsLeft() > 0)->sortBy('date');
+        $dep = empty($in['date']) ? $open->first() : $t->departures->first(fn ($d) => $d->date->toDateString() === $in['date']);
         if (! $dep || $dep->date->lt(today()) || $dep->status === 'sold_out') {
             self::fail('date', __('Please pick an available departure date.'));
         }
@@ -190,7 +191,8 @@ final class Pricer
         if ($guests < 1 || $guests > 8) {
             self::fail('adults', __('Please check the number of travellers.'));
         }
-        $s = $c->sailings->first(fn ($x) => $x->date->toDateString() === ($in['date'] ?? null) && $x->date->gte(today())) ?? self::fail('date', __('Please pick an available sailing.'));
+        $s = (empty($in['date']) ? $c->sailings->filter(fn ($x) => $x->date->gte(today()) && $x->seats_total > $x->seats_held)->sortBy('date')->first()
+            : $c->sailings->first(fn ($x) => $x->date->toDateString() === $in['date'] && $x->date->gte(today()))) ?? self::fail('date', __('Please pick an available sailing.'));
         if ($s->seats_total - $s->seats_held < $guests) {
             self::fail('date', __('Only :n berths are left on this sailing.', ['n' => max(0, $s->seats_total - $s->seats_held)]));
         }
@@ -214,7 +216,13 @@ final class Pricer
         $a = Activity::published()->with(['options', 'cancellationPolicy'])->where('slug', (string) ($in['slug'] ?? ''))->first() ?? self::fail('slug', __('This activity is not available.'));
         $p = self::pax($in, 1, 10);
         $date = (string) ($in['date'] ?? '');
-        $slot = ActivitySlot::where('activity_id', $a->id)->whereDate('starts_at', $date)->get()->first(fn ($s) => $s->starts_at->format('H:i') === ($in['time'] ?? ''));
+        if ($date === '' || empty($in['time'])) {
+            // No time chosen yet: first open slot on that date (or from tomorrow).
+            $slot = ActivitySlot::where('activity_id', $a->id)->where('starts_at', '>', now()->addHours(2))->when($date !== '', fn ($q) => $q->whereDate('starts_at', $date))
+                ->whereColumn('booked', '<', 'capacity')->orderBy('starts_at')->first();
+        } else {
+            $slot = ActivitySlot::where('activity_id', $a->id)->whereDate('starts_at', $date)->get()->first(fn ($s) => $s->starts_at->format('H:i') === $in['time']);
+        }
         if (! $slot || $slot->starts_at->lt(now())) {
             self::fail('time', __('Please pick an available time slot.'));
         }
@@ -241,8 +249,8 @@ final class Pricer
     {
         $h = Hotel::published()->with('roomTypes')->where('slug', (string) ($in['slug'] ?? ''))->first() ?? self::fail('slug', __('This hotel is not available.'));
         try {
-            $din = Carbon::parse((string) ($in['in'] ?? ''))->startOfDay();
-            $dout = Carbon::parse((string) ($in['out'] ?? ''))->startOfDay();
+            $din = Carbon::parse((string) (($in['in'] ?? '') ?: today()->addDays(7)->toDateString()))->startOfDay();
+            $dout = Carbon::parse((string) (($in['out'] ?? '') ?: $din->copy()->addDays(2)->toDateString()))->startOfDay();
         } catch (\Throwable) {
             self::fail('in', __('Please pick your stay dates.'));
         }

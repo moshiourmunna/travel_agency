@@ -24,8 +24,26 @@ final class Checkout
             'plans' => array_values($q['plans']),
             'cancellation' => $q['policy'] ? Catalog::policy($q['policy']) : null, 'refundable' => $q['refundable'] ?? null,
             'gateways' => app(GatewayManager::class)->enabled(), 'payment_mode' => config('musafir.payment_mode'),
+            'choices' => self::choices($q),
             'needs_passport' => ($q['product']->region ?? null) === 'intl' || in_array($q['kind'], ['flight', 'visa'], true),
         ];
+    }
+
+    /** What the traveller can change on step 1 (dates, rooms, cabins…), localised. */
+    private static function choices(array $q): array
+    {
+        $p = $q['product'];
+
+        return match ($q['kind']) {
+            'tour' => ['dates' => $p->departures->filter(fn ($d) => $d->date->gte(today()) && $d->status !== 'sold_out' && $d->seatsLeft() > 0)->values()->map(fn ($d) => ['date' => $d->date->toDateString(), 'price' => (int) round((float) $d->price), 'seats_left' => $d->seatsLeft()])->all(),
+                'rooms' => $p->priceTiers->map(fn ($t) => ['code' => $t->code, 'label' => $t->tr('label')])->all(), 'max' => 9],
+            'cruise' => ['dates' => $p->sailings->filter(fn ($s) => $s->date->gte(today()) && $s->seats_total > $s->seats_held)->values()->map(fn ($s) => ['date' => $s->date->toDateString(), 'price' => (int) round((float) $s->price), 'seats_left' => $s->seats_total - $s->seats_held])->all(),
+                'cabins' => $p->cabins->map(fn ($c) => ['code' => $c->code, 'label' => $c->tr('name'), 'price' => (int) round((float) $c->price)])->all(), 'max' => 8],
+            'activity' => ['options' => $p->options->map(fn ($o) => ['id' => $o->id, 'label' => $o->tr('name'), 'price' => (int) round((float) $o->price)])->all(), 'max' => 10],
+            'hotel' => ['rooms' => $p->roomTypes->map(fn ($r) => ['id' => $r->id, 'label' => $r->tr('name'), 'price' => (int) round((float) $r->price)])->all(), 'max_rooms' => 5],
+            'visa' => ['max' => 9],
+            default => [],
+        };
     }
 
     public static function booking(Booking $b): array
@@ -38,7 +56,7 @@ final class Checkout
             'ref' => $b->ref, 'key' => $b->ulid, 'kind' => $b->kind, 'status' => $b->status, 'payment_status' => $b->payment_status, 'payment_plan' => $b->payment_plan,
             'title' => $b->tr('title'), 'subtitle' => $b->tr('subtitle'), 'image' => Img::key($b->image_key),
             'travel_start' => $b->travel_start?->toDateString(), 'travel_end' => $b->travel_end?->toDateString(), 'pax' => $b->pax, 'pax_count' => $b->pax_count,
-            'contact' => ['first_name' => $c['first_name'] ?? null, 'last_name' => $c['last_name'] ?? null, 'email' => $c['email'] ?? null, 'phone' => $c['phone'] ?? null, 'pnr' => $c['pnr'] ?? null],
+            'contact' => ['first_name' => $c['first_name'] ?? null, 'last_name' => $c['last_name'] ?? null, 'email' => $c['email'] ?? null, 'phone' => $c['phone'] ?? null, 'pnr' => $c['pnr'] ?? null, 'gift_code' => $c['gift_code'] ?? null],
             'items' => $b->items->map(fn ($i) => ['label' => $i->tr('label'), 'qty' => $i->qty, 'unit' => (int) round((float) $i->unit_price), 'total' => (int) round((float) $i->line_total), 'code' => $i->meta['code'] ?? null])->values(),
             'travellers' => $b->travellers->map(fn ($t) => ['name' => $t->name, 'type' => $t->type, 'ticket_no' => $t->ticket_no, 'seat' => $t->seat])->values(),
             'subtotal' => (int) round((float) $b->subtotal), 'discount' => (int) round((float) $b->discount), 'total' => (int) round((float) $b->total),

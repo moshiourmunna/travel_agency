@@ -28,6 +28,13 @@ class CheckoutController extends Controller
 
     private function selection(Request $r): array
     {
+        // Room ids / cabin codes may arrive as numbers from JSON clients — normalise to strings before validating.
+        foreach (['room', 'cabin', 'time', 'date', 'pax'] as $k) {
+            if (is_int($r->input($k)) || is_float($r->input($k))) {
+                $r->merge([$k => (string) $r->input($k)]);
+            }
+        }
+
         return $r->validate([
             'kind' => ['required', Rule::in(Pricer::KINDS)],
             'slug' => ['nullable', 'string', 'max:160'], 'date' => ['nullable', 'string', 'max:10'], 'time' => ['nullable', 'string', 'max:5'],
@@ -105,7 +112,8 @@ class CheckoutController extends Controller
     {
         $b = $this->find($r, $ref);
         $v = $r->validate(['gateway' => ['required', 'string', Rule::in($this->gateways->enabled())], 'instalment_id' => ['nullable', 'integer'],
-            'slip_ref' => [Rule::requiredIf($r->input('gateway') === 'bank_transfer'), 'nullable', 'string', 'max:64']]);
+            'slip_ref' => [Rule::requiredIf($r->input('gateway') === 'bank_transfer'), 'nullable', 'string', 'max:64',
+                Rule::unique('payments', 'gateway_txn')->where('gateway', 'bank_transfer')], ], ['slip_ref.unique' => __('This transfer reference has already been submitted. Please check it or contact us.')]);
         if (in_array($b->status, ['cancelled', 'refunded', 'completed'], true)) {
             return response()->json(['message' => __('This booking can no longer be paid.')], 409);
         }

@@ -25,7 +25,7 @@ final class BookingPdf
             'paidPayments' => $b->payments->where('status', 'success')->values(),
         ];
 
-        return Pdf::loadView("pdf.$doc", $data)->setPaper('a4')->setOption(['defaultFont' => 'DejaVu Sans', 'isRemoteEnabled' => false])->output();
+        return Pdf::loadView("pdf.$doc", $data)->setPaper('a4')->setOption(['defaultFont' => 'DejaVu Sans', 'isRemoteEnabled' => false, 'isFontSubsettingEnabled' => true])->output();
     }
 
     public function download(Booking $b, string $doc): Response

@@ -49,3 +49,12 @@ export async function apiPost<T = any>(path: string, body: unknown, lang: Lang, 
   });
   return { status: res.status, body: (await res.json().catch(() => ({}))) as T };
 }
+
+/** Uncached GET (live data such as a booking receipt); returns null on 404 instead of the not-found page. */
+export async function apiFresh<T = any>(path: string, lang: Lang, query: Record<string, string> = {}, extraHeaders: Record<string, string> = {}): Promise<T | null> {
+  const qs = new URLSearchParams({ lang, ...query });
+  const res = await fetch(`${API}/api/v1/${path.replace(/^\//, '')}?${qs}`, { headers: { Accept: 'application/json', 'Accept-Language': lang, ...extraHeaders }, cache: 'no-store' });
+  if (res.status === 404 || res.status === 403) return null;
+  if (!res.ok) throw new ApiError(res.status, `API ${res.status} for ${path}`);
+  return res.json() as Promise<T>;
+}

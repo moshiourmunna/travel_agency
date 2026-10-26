@@ -57,3 +57,8 @@ export function Sheet({ trigger, triggerClass, title, closeLabel, closeIcon, chi
     </>
   );
 }
+
+/** Copy a value (e.g. a booking reference) to the clipboard with a toast. */
+export function CopyButton({ value, label, copied, className, children }: { value: string; label: string; copied: string; className: string; children: React.ReactNode }) {
+  return <button type="button" className={className} aria-label={label} onClick={async () => { try { await navigator.clipboard.writeText(value); toast(copied); } catch { /* clipboard blocked */ } }}>{children}</button>;
+}

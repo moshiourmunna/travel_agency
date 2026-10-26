@@ -122,3 +122,17 @@ console errors; security checks. Then repeat key browser E2E on the user's PC (c
   Guest access key = booking ULID (hash_equals). Settle is idempotent (row lock). Hold: seats_held/booked incremented under lockForUpdate; `bookings:expire-holds` every minute.
   Data migration 2026_10_26_001000 inserts new settings/add-ons only if missing (PC data safe). PDFs English-only (dompdf has no Bangla shaping).
 - Smoke: Maldives deposit 84,000 via simulated bKash → partial/partial, instalment 1 paid, 2 due, docs created, email+SMS logged; tampered signature 403; replay idempotent.
+- 06:10 frontend done. /[lang]/booking = 4-step <Checkout> (Trip → Travellers → Extras → Payment), server-side first quote, re-quote on every change,
+  query → selection for tour/cruise/activity/hotel/flight/visa/gift; missing date → first open departure/slot; error card on 422; resume mode
+  (?ref&key&payment=failed|cancelled) opens straight on Payment. /[lang]/booking-confirmed (noindex): invoice like the mockup, badge, balance, next steps,
+  invoice/e-voucher PDF links (BFF /api/bookings/{ref}/{doc}), PNR + gift code. BFF: /api/checkout/{quote,book}, /api/bookings/{ref}/pay (forward() now
+  sends the httpOnly session token when present — lib/session.ts, used by M5). Visa page: "Apply & pay online" → /booking?visa=.
+  Fixes found by E2E: JSON room id (int) rejected → normalised to string; duplicate bank slip → 422 not 500 (unique per gateway); dompdf font subsetting.
+- Tests: Pest tests/Feature/Checkout (20 tests: pricing for all kinds, client-price tampering ignored, coupons scope/min/validity/limits/case, plan rules,
+  validation + honeypot, holds/oversell/expiry, deposit→balance lifecycle, idempotent replay, signed simulator tampering, key checks, PDFs,
+  failed/cancelled → retry, coupon redeemed only on payment, bank slip, flight PNR/tickets, gift code, live mode hides simulator; Http::fake drivers:
+  SSLCommerz validation-only confirm + amount tamper + IPN-only settle + outage 502, bKash grant/create/execute→status fallback + paymentID mismatch,
+  Nagad RSA sign/encrypt round-trip + ref mismatch). Full suite 84 passed / 737 assertions.
+  Browser E2E tooling/tests/checkout_e2e.mjs (playwright-core + Chrome): tour deposit+coupon, cruise bn 390px Nagad, activity card, hotel failed→retry,
+  hotel bank transfer, visa from visa page, gift card → 52/52 checks, no JS errors.
+## M4 — DONE 06:10 BDT. NEXT: M5 traveller portal (Sanctum auth API + BFF cookie + /account pages).
