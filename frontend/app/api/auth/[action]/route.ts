@@ -3,7 +3,7 @@ import { isLang } from '@/lib/format';
 import { authHeaders, clearSession, sameOrigin, setSession } from '@/lib/session';
 
 const API = (process.env.API_URL || 'http://127.0.0.1:8000').replace(/\/$/, '');
-const MAP: Record<string, string> = { login: 'auth/login', register: 'auth/register', 'otp-send': 'auth/otp/send', 'otp-verify': 'auth/otp/verify', reset: 'auth/reset' };
+const MAP: Record<string, string> = { login: 'auth/login', register: 'auth/register', 'otp-send': 'auth/otp/send', 'otp-verify': 'auth/otp/verify', reset: 'auth/reset', 'login-verify': 'auth/login/verify', 'login-resend': 'auth/login/resend' };
 const json = (body: unknown, status = 200) => NextResponse.json(body, { status, headers: { 'Cache-Control': 'no-store' } });
 
 /** Sign-in / register / OTP / reset: Laravel returns a token which we keep in an httpOnly cookie; the browser only gets the user. */

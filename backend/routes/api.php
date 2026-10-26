@@ -90,6 +90,8 @@ Route::prefix('v1')->name('api.v1.')->middleware(['api.locale'])->group(function
     Route::middleware('throttle:auth')->prefix('auth')->name('auth.')->group(function () {
         Route::post('register', [Auth::class, 'register'])->name('register');
         Route::post('login', [Auth::class, 'login'])->name('login');
+        Route::post('login/verify', [Auth::class, 'loginVerify'])->name('login.verify');
+        Route::post('login/resend', [Auth::class, 'loginResend'])->name('login.resend');
         Route::post('otp/send', [Auth::class, 'otpSend'])->name('otp.send');
         Route::post('otp/verify', [Auth::class, 'otpVerify'])->name('otp.verify');
         Route::post('reset', [Auth::class, 'reset'])->name('reset');

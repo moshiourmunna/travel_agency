@@ -60,6 +60,11 @@ class CrmSeeder extends Seeder
             $chat->messages()->create(['user_id' => $who === 'agent' ? ($byName['Nadia Islam']->id ?? null) : $farhana->id, 'author_type' => $who === 'agent' ? 'agent' : 'customer',
                 'body' => S::b($text), 'created_at' => CarbonImmutable::parse('2026-10-24 16:12:00')->addMinutes($k * 6)]);
         }
+        // The traveller's opening message comes before the chat replies.
+        if ($chat && ($first = $chat->messages()->orderBy('id')->first())) {
+            $first->forceFill(['created_at' => '2026-10-24 15:58:00'])->save();
+            $chat->forceFill(['created_at' => '2026-10-24 15:58:00'])->save();
+        }
 
         Agent::query()->forceDelete();
         foreach (S::app('AGENTS') as [$code, $company, $city, $bookingsCount, $sales, $commission, $status, $balance]) {

@@ -571,6 +571,7 @@ class MeController extends Controller
         $pending = Booking::where('user_id', $u->id)->where('status', 'completed')->whereNotIn('id', $reviewed)->whereIn('kind', ['tour', 'hotel', 'cruise', 'activity'])->orderByDesc('travel_start')->get();
 
         return $this->ok([
+            'miles' => (int) \App\Support\Settings::get('commerce.review_miles', 250),
             'pending' => $pending->map(fn ($b) => ['ref' => $b->ref, 'title' => $b->tr('title'), 'date' => $b->travel_start?->toDateString(), 'kind' => $b->kind, 'image' => Img::key($b->image_key)])->values(),
             'published' => Review::where('user_id', $u->id)->orderByDesc('id')->get()->map(fn ($v) => ['id' => $v->id, 'title' => $v->tr('trip_title'), 'rating' => (int) $v->rating, 'body' => $v->tr('body'), 'status' => $v->status,
                 'ref' => $v->booking_id ? Booking::whereKey($v->booking_id)->value('ref') : null, 'date' => ($v->travelled_on ?? $v->created_at)?->toDateString(), 'reply' => $v->tr('reply')])->values(),
@@ -644,11 +645,15 @@ class MeController extends Controller
     {
         $u = $this->u($r);
         $p = $u->preferences ?? [];
-        $filled = collect([$u->name, $u->email, $u->phone, $u->dob, $u->gender, $u->city, $p['emergency']['name'] ?? null, $u->nid_enc])->filter()->count();
+        $travel = ($p['travel'] ?? []) + ['interests' => [], 'seat' => $p['seat'] ?? null, 'meal' => $p['meal'] ?? null, 'room' => null];
+        // Ten things make a complete profile; the first missing one becomes the hint under the bar.
+        $checks = ['name' => $u->name, 'email' => $u->email, 'phone' => $u->phone, 'dob' => $u->dob, 'gender' => $u->gender, 'address' => $p['address'] ?? null,
+            'nid' => $u->nid_enc, 'interests' => $travel['interests'] ?? [], 'emergency' => ($p['emergency']['name'] ?? null) && ($p['emergency']['phone'] ?? null), 'photo' => $u->avatar_path];
+        $missing = collect($checks)->filter(fn ($v) => empty($v))->keys()->values();
 
-        return $this->ok(P::user($u) + ['address' => $p['address'] ?? null, 'nid_masked' => $u->nid_enc ? '•••••'.substr((string) $u->nid_enc, -4) : null,
-            'emergency' => $p['emergency'] ?? ['name' => null, 'phone' => null], 'travel' => $p['travel'] ?? ['interests' => [], 'seat' => null, 'meal' => null, 'room' => null],
-            'completeness' => (int) round(100 * $filled / 8)]);
+        return $this->ok(P::user($u) + ['address' => $p['address'] ?? null, 'nid_masked' => $u->nid_enc ? '•••• '.substr(preg_replace('/\D/', '', (string) $u->nid_enc), -4) : null,
+            'emergency' => ($p['emergency'] ?? []) + ['name' => null, 'phone' => null], 'travel' => $travel,
+            'completeness' => (int) round(100 * (count($checks) - $missing->count()) / count($checks)), 'missing' => $missing]);
     }
 
     public function updateProfile(Request $r): JsonResponse
@@ -673,7 +678,9 @@ class MeController extends Controller
         if (! empty($v['nid'])) {
             $u->nid_enc = $v['nid'];
         }
-        $u->preferences = array_merge($u->preferences ?? [], ['address' => $v['address'] ?? null, 'emergency' => $v['emergency'] ?? null, 'travel' => $v['travel'] ?? null]);
+        // meal / seat also live at the top level, where checkout pre-fills the lead traveller from.
+        $u->preferences = array_merge($u->preferences ?? [], ['address' => $v['address'] ?? null, 'emergency' => $v['emergency'] ?? null, 'travel' => $v['travel'] ?? null,
+            'meal' => $v['travel']['meal'] ?? null, 'seat' => $v['travel']['seat'] ?? null]);
         $u->forceFill(['initials' => null])->save();
 
         return $this->profile($r);
@@ -712,7 +719,9 @@ class MeController extends Controller
         $p = $u->preferences ?? [];
 
         return $this->ok([
-            'notify' => array_merge(['alerts' => true, 'email' => true, 'deals' => false, 'newsletter' => false], $p['notify'] ?? []),
+            // The newsletter switch mirrors the subscriber list (the footer form writes there too).
+            'notify' => array_merge(['alerts' => true, 'email' => true, 'deals' => false], $p['notify'] ?? [], ['alerts' => true,
+                'newsletter' => $u->email ? \App\Models\NewsletterSubscriber::where('email', mb_strtolower($u->email))->where('status', 'subscribed')->exists() : false]),
             'locale' => $u->locale ?? 'en', 'currency' => $p['currency'] ?? 'BDT', 'two_factor' => (bool) ($p['otp_login'] ?? false),
             'password_changed' => $p['password_changed_at'] ?? $u->created_at?->toDateString(),
             'sessions' => $u->tokens()->where(fn ($q) => $q->whereNull('expires_at')->orWhere('expires_at', '>', now()))->orderByDesc('last_used_at')->get()
@@ -732,13 +741,21 @@ class MeController extends Controller
     public function updateSettings(Request $r): JsonResponse
     {
         $u = $this->u($r);
-        $v = $r->validate(['notify' => ['nullable', 'array'], 'notify.*' => ['boolean'], 'locale' => ['nullable', 'in:en,bn'], 'currency' => ['nullable', 'in:BDT,USD,EUR,GBP,INR,MYR,SGD,AED,SAR'], 'two_factor' => ['nullable', 'boolean']]);
+        $v = $r->validate(['notify' => ['nullable', 'array'], 'notify.*' => ['boolean'], 'locale' => ['nullable', 'in:en,bn'], 'currency' => ['nullable', 'string', Rule::exists('currencies', 'code')->where('is_active', true)], 'two_factor' => ['nullable', 'boolean']]);
         $p = $u->preferences ?? [];
         if (isset($v['notify'])) {
-            $p['notify'] = array_merge(['alerts' => true, 'email' => true, 'deals' => false, 'newsletter' => false], collect($v['notify'])->only(['email', 'deals', 'newsletter'])->all(), ['alerts' => true]);
+            $p['notify'] = array_merge(['alerts' => true, 'email' => true, 'deals' => false], $p['notify'] ?? [], collect($v['notify'])->only(['email', 'deals'])->all(), ['alerts' => true]);
+            unset($p['notify']['newsletter']);
+            if (array_key_exists('newsletter', $v['notify']) && $u->email) {
+                $sub = \App\Models\NewsletterSubscriber::firstOrNew(['email' => mb_strtolower($u->email)]);
+                $sub->fill(['locale' => $u->locale ?? 'en', 'status' => $v['notify']['newsletter'] ? 'subscribed' : 'unsubscribed', 'confirmed_at' => $sub->confirmed_at ?? now()])->save();
+            }
         }
         if (isset($v['currency'])) {
             $p['currency'] = $v['currency'];
+        }
+        if (! empty($v['two_factor']) && (! $u->phone || ! $u->phone_verified_at)) {
+            throw ValidationException::withMessages(['two_factor' => __('Verify your mobile number first — two-step codes go there.')]);
         }
         if (isset($v['two_factor'])) {
             $p['otp_login'] = $v['two_factor'];
@@ -803,7 +820,16 @@ class MeController extends Controller
             return response()->json(['message' => __('Your wallet still has a balance. Contact us to have it refunded first.')], 409);
         }
         $u->tokens()->delete();
-        $u->forceFill(['email' => 'deleted+'.$u->ulid.'@invalid', 'phone' => null, 'name' => 'Deleted user', 'status' => 'deleted', 'nid_enc' => null, 'preferences' => null])->save();
+        Traveller::where('user_id', $u->id)->delete();
+        \App\Models\Wishlist::where('user_id', $u->id)->delete();
+        \App\Models\TripPlan::where('user_id', $u->id)->delete();
+        if ($u->email) {
+            \App\Models\NewsletterSubscriber::where('email', mb_strtolower($u->email))->update(['status' => 'unsubscribed']);
+        }
+        if ($u->avatar_path) {
+            Storage::disk('public')->delete($u->avatar_path);
+        }
+        $u->forceFill(['avatar_path' => null, 'city' => null, 'dob' => null, 'email' => 'deleted+'.$u->ulid.'@invalid', 'phone' => null, 'name' => 'Deleted user', 'status' => 'deleted', 'nid_enc' => null, 'preferences' => null])->save();
         $u->delete();
 
         return $this->ok(['ok' => true]);

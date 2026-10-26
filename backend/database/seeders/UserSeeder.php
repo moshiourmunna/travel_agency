@@ -38,9 +38,10 @@ class UserSeeder extends Seeder
             'name' => $me['name']['en'], 'password' => $password, 'type' => 'customer', 'initials' => $me['ini'], 'code' => 'CU-10240',
             'phone' => '+8801712345678', 'city' => $me['city']['en'], 'segment' => 'Couple', 'dob' => $me['dob'], 'gender' => 'female',
             'tier_id' => $tiers['gold'] ?? null, 'miles' => $me['miles'], 'wallet_balance' => $me['wallet'], 'referral_code' => $me['referral'],
-            'email_verified_at' => now(), 'phone_verified_at' => now(), 'nid_enc' => '1991 2694 8214 821',
-            'preferences' => ['name_bn' => $me['name']['bn'], 'city_bn' => $me['city']['bn'], 'meal' => 'halal', 'seat' => 'window', 'newsletter' => true,
-                'notify' => ['email' => true, 'sms' => true, 'whatsapp' => true, 'push' => false], 'member_since' => $me['since']],
+            'email_verified_at' => now(), 'phone_verified_at' => now(), 'nid_enc' => '19912694821400821',
+            'preferences' => ['name_bn' => $me['name']['bn'], 'city_bn' => $me['city']['bn'], 'meal' => 'halal', 'seat' => 'window',
+                'address' => 'House 12, Road 7, Dhanmondi, Dhaka 1205', 'travel' => ['interests' => ['beaches', 'mountains', 'cruises', 'luxury', 'family'], 'seat' => 'window', 'meal' => 'halal', 'room' => 'king'],
+                'notify' => ['alerts' => true, 'email' => true, 'deals' => true, 'newsletter' => false], 'otp_login' => false, 'password_changed_at' => '2026-07-20', 'member_since' => $me['since']],
         ]);
         $farhana->forceFill(['created_at' => $me['since'].' 10:00:00'])->save();
         $farhana->syncRoles(['traveller']);

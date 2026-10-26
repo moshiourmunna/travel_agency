@@ -48,8 +48,9 @@ class User extends Authenticatable
 
     public function initials(): string
     {
-        if ($this->initials) {
-            return $this->initials;
+        $set = $this->getAttributes()['initials'] ?? null; // not $this->initials: that name is also this method
+        if ($set) {
+            return $set;
         }
         $parts = preg_split('/\s+/u', trim($this->name)) ?: [];
 

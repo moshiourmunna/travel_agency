@@ -2,7 +2,7 @@
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { useSite } from '@/components/client/SiteContext';
-import { KEYS, read, toast, write } from '@/components/client/store';
+import { KEYS, read, toast, useCurrency, write } from '@/components/client/store';
 
 const WISH_KINDS = ['tour', 'cruise', 'activity', 'hotel'];
 
@@ -454,7 +454,7 @@ export function AvatarUpload({ label, saved, tooBig }: { label: string; saved: s
   const { msg } = useSite();
   const [busy, setBusy] = useState(false);
   return (
-    <label className={`absolute bottom-0 right-0 grid h-8 w-8 cursor-pointer place-items-center rounded-full bg-brand-700 text-white ring-4 ring-white dark:ring-ink-900 ${busy ? 'opacity-60' : ''}`} title={label}>
+    <label className={`absolute bottom-0 right-0 grid h-8 w-8 cursor-pointer place-items-center rounded-full bg-brand-700 text-white ring-4 ring-white has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-brand-500 dark:ring-ink-900 ${busy ? 'opacity-60' : ''}`} title={label}>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4" aria-hidden="true"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z" /><circle cx="12" cy="13" r="3" /></svg>
       <span className="sr-only">{label}</span>
       <input type="file" accept="image/jpeg,image/png,image/webp" className="sr-only" data-avatar-input disabled={busy} onChange={async (e) => {
@@ -503,5 +503,39 @@ export function DepartCountdown({ to, label, units }: { to: string; label: strin
     <div className="grid grid-cols-4 gap-2 text-center" role="timer" aria-label={label}>
       {units.map((u, k) => <div key={u} className="min-w-[3.25rem] rounded-xl bg-ink-950/50 px-2 py-2"><b className="block text-xl tabular-nums" data-cd={'dhms'[k]}>{parts ? fmt(parts[k]) : '–'}</b><span className="text-[11px] text-ink-100">{u}</span></div>)}
     </div>
+  );
+}
+
+/** Account language: saved to the profile (emails/SMS use it), then the same page opens in that language. */
+export function LanguageSelect({ id, current }: { id: string; current: 'en' | 'bn' }) {
+  const call = useMe();
+  const pathname = usePathname() || '/';
+  const [busy, setBusy] = useState(false);
+  return (
+    <select id={id} className="input" defaultValue={current} disabled={busy} data-account-lang onChange={async (e) => {
+      const v = e.target.value as 'en' | 'bn';
+      setBusy(true);
+      await call('PUT', 'settings', { locale: v });
+      window.location.assign(pathname.replace(/^\/(en|bn)(?=\/|$)/, `/${v}`) + window.location.hash);
+    }}>
+      <option value="en">English</option><option value="bn">বাংলা</option>
+    </select>
+  );
+}
+
+/** Display currency: this device shows it at once; the account remembers it for other devices. */
+export function AccountCurrency({ id, saved }: { id: string; saved: string }) {
+  const call = useMe();
+  const cur = useCurrency();
+  const { currencies } = useSite();
+  return (
+    <select id={id} className="input" value={cur} data-account-currency onChange={async (e) => {
+      const v = e.target.value;
+      write(KEYS.currency, v);
+      const r = await call('PUT', 'settings', { currency: v });
+      if (r.ok) toast(saved);
+    }}>
+      {currencies.map((c) => <option key={c.code} value={c.code}>{c.code} {c.code === 'USD' ? '$' : c.symbol}</option>)}
+    </select>
   );
 }

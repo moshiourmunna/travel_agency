@@ -27,7 +27,7 @@ export async function AuthPage({ lang, mode }: { lang: Lang; mode: AuthMode }) {
     first: t('First name', 'নামের প্রথম অংশ'), last: t('Last name', 'নামের শেষ অংশ'), newPw8: t('Password (8+ characters)', 'পাসওয়ার্ড (৮+ অক্ষর)'),
     agree: t('I agree to the', 'আমি সম্মত'), terms: t('Terms', 'শর্তাবলিতে'), and: t('and', 'ও'), privacy: t('Privacy policy', 'গোপনীয়তা নীতিতে'), create: t('Create account', 'অ্যাকাউন্ট খুলুন'),
     mobileOrEmail: t('Mobile or email', 'মোবাইল বা ইমেইল'), sendCode: t('Send code', 'কোড পাঠান'), newPw: t('New password', 'নতুন পাসওয়ার্ড'), update: t('Update password', 'পাসওয়ার্ড হালনাগাদ করুন'),
-    sentTo: t('Code sent to', 'কোড পাঠানো হয়েছে'), changeNo: t('Change number', 'নম্বর বদলান'), wait: t('Please wait…', 'অপেক্ষা করুন…'),
+    sentTo: t('Code sent to', 'কোড পাঠানো হয়েছে'), twoStep: t('Two-step sign-in is on for this account. Enter the code we sent by SMS to', 'এই অ্যাকাউন্টে টু-স্টেপ সাইন-ইন চালু। এসএমএসে পাঠানো কোডটি দিন —'), back: t('Back', 'ফিরে যান'), changeNo: t('Change number', 'নম্বর বদলান'), wait: t('Please wait…', 'অপেক্ষা করুন…'),
     devCode: t('Test mode — your code', 'টেস্ট মোড — আপনার কোড'), error: t('Something went wrong. Please try again.', 'কিছু একটা সমস্যা হয়েছে। আবার চেষ্টা করুন।'),
     tooMany: t('Too many attempts. Please wait a minute and try again.', 'অনেকবার চেষ্টা করা হয়েছে। এক মিনিট পর আবার চেষ্টা করুন।'),
   };

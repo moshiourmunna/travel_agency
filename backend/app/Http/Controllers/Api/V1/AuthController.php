@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Services\Auth\Otp;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
@@ -62,6 +63,7 @@ class AuthController extends Controller
             $u->forceFill(['referred_by' => $ref->id]);
         }
         $u->save();
+        $u->refresh(); // load column defaults (miles, tier, …) the presenter reads
         if ($u->referred_by) {
             Referral::create(['referrer_id' => $u->referred_by, 'referred_user_id' => $u->id, 'referred_name' => $u->name, 'status' => 'joined', 'reward' => (int) \App\Support\Settings::get('commerce.referral_reward', 500)]);
         }
@@ -80,8 +82,60 @@ class AuthController extends Controller
             throw ValidationException::withMessages(['email' => __('Email or password is incorrect.')]);
         }
         RateLimiter::clear($key);
+        $remember = (bool) ($v['remember'] ?? true);
+        // Two-step sign-in: the password is right, now prove you hold the phone. The challenge is an encrypted,
+        // 10-minute ticket naming the user, so the second call never needs the password again.
+        if (($u->preferences['otp_login'] ?? false) && $u->phone) {
+            try {
+                $code = $this->otp->send('sms', $u->phone, 'login2', app()->getLocale());
+            } catch (ValidationException) {
+                $code = null; // a code went out under a minute ago — it is still valid, so just ask for it
+            }
+            $challenge = Crypt::encryptString(json_encode(['u' => $u->id, 'r' => $remember, 'e' => now()->addMinutes(10)->timestamp]));
 
-        return $this->issue($u, $r, (bool) ($v['remember'] ?? true), $u->email);
+            return response()->json(['data' => ['two_factor' => true, 'challenge' => $challenge, 'to' => substr($u->phone, 0, 7).'•••'.substr($u->phone, -3), 'ttl' => Otp::TTL_MIN * 60]
+                + (app()->environment('local', 'testing') && config('musafir.otp_debug') && $code ? ['dev_code' => $code] : [])], 200, ['Cache-Control' => 'no-store']);
+        }
+
+        return $this->issue($u, $r, $remember, $u->email);
+    }
+
+    /** Second step of a password sign-in with two-step on: the SMS code for the challenge from login(). */
+    public function loginVerify(Request $r): JsonResponse
+    {
+        $v = $r->validate(['challenge' => ['required', 'string', 'max:2000'], 'code' => ['required', 'digits:6'], 'resend' => ['nullable', 'boolean']]);
+        $this->throttle('login2:'.$r->ip(), 10);
+        try {
+            $c = json_decode(Crypt::decryptString($v['challenge']), true, 4, JSON_THROW_ON_ERROR);
+        } catch (\Throwable) {
+            $c = null;
+        }
+        $u = is_array($c) && ($c['e'] ?? 0) >= now()->timestamp ? $this->traveller(User::find($c['u'] ?? 0)) : null;
+        if (! $u || ! $u->phone) {
+            throw ValidationException::withMessages(['code' => __('This sign-in has expired. Please enter your password again.')]);
+        }
+        $this->otp->verify($u->phone, 'login2', $v['code']);
+
+        return $this->issue($u, $r, (bool) ($c['r'] ?? true), $u->email);
+    }
+
+    /** Send the two-step code again for a live challenge. */
+    public function loginResend(Request $r): JsonResponse
+    {
+        $v = $r->validate(['challenge' => ['required', 'string', 'max:2000']]);
+        $this->throttle('otp:'.$r->ip(), 10);
+        try {
+            $c = json_decode(Crypt::decryptString($v['challenge']), true, 4, JSON_THROW_ON_ERROR);
+        } catch (\Throwable) {
+            $c = null;
+        }
+        $u = is_array($c) && ($c['e'] ?? 0) >= now()->timestamp ? $this->traveller(User::find($c['u'] ?? 0)) : null;
+        if (! $u || ! $u->phone) {
+            throw ValidationException::withMessages(['code' => __('This sign-in has expired. Please enter your password again.')]);
+        }
+        $code = $this->otp->send('sms', $u->phone, 'login2', app()->getLocale());
+
+        return response()->json(['data' => ['sent' => true] + (app()->environment('local', 'testing') && config('musafir.otp_debug') ? ['dev_code' => $code] : [])]);
     }
 
     /** Send a code by SMS (sign-in) — or by SMS/email for a password reset. Never reveals whether an account exists. */

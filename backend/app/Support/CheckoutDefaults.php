@@ -19,6 +19,7 @@ final class CheckoutDefaults
             ['commerce', 'referral_friend_discount', 500, 'number', true],
             ['commerce', 'referral_min_total', 15000, 'number', true],
             ['commerce', 'referral_reward', 500, 'number', true],
+            ['commerce', 'review_miles', 250, 'number', true],
             ['commerce', 'cancellation_fee', 2000, 'number', true],
             ['company', 'bin', '004567891-0101', 'text', true],
         ];

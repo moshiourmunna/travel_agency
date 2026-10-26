@@ -12,6 +12,7 @@ import { Picture } from '@/components/ui/Picture';
 import { me } from '@/lib/account';
 import type { Lang } from '@/lib/format';
 import { getI18n } from '@/lib/i18n';
+import { pathMetadata } from '@/lib/page';
 import { getSite } from '@/lib/site';
 
 const REF = /^[A-Z]{3}-\d{2}-\d{5}$/;
@@ -19,7 +20,7 @@ const REF = /^[A-Z]{3}-\d{2}-\d{5}$/;
 export async function generateMetadata({ params }: PageProps<'/[lang]/account/bookings/[ref]'>): Promise<Metadata> {
   const { lang, ref } = await params;
   const i = await getI18n(lang as Lang);
-  return { title: `${i.t('Booking', 'বুকিং')} ${ref}`, robots: { index: false, follow: false } };
+  return pathMetadata(lang as Lang, `/account/bookings/${ref}`, `${i.t('Booking', 'বুকিং')} ${ref}`, { noindex: true });
 }
 
 export default async function BookingDetail({ params }: PageProps<'/[lang]/account/bookings/[ref]'>) {

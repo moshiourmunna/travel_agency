@@ -10,11 +10,12 @@ import { Icon } from '@/components/icons/Icon';
 import { me } from '@/lib/account';
 import type { Lang } from '@/lib/format';
 import { getI18n } from '@/lib/i18n';
+import { pathMetadata } from '@/lib/page';
 
 export async function generateMetadata({ params }: PageProps<'/[lang]/account/bookings/[ref]/ticket'>): Promise<Metadata> {
   const { lang, ref } = await params;
   const i = await getI18n(lang as Lang);
-  return { title: `${i.t('E-ticket', 'ই-টিকিট')} ${ref}`, robots: { index: false, follow: false } };
+  return pathMetadata(lang as Lang, `/account/bookings/${ref}/ticket`, `${i.t('E-ticket', 'ই-টিকিট')} ${ref}`, { noindex: true });
 }
 
 /** Real, scannable QR (SVG, rendered on the server) with the boarding details the gate agent needs. */

@@ -67,6 +67,7 @@ export function AuthForm({ mode, L, links, eye }: { mode: AuthMode; L: L; links:
   const [err, setErr] = useState<Record<string, string>>({});
   const [info, setInfo] = useState('');
   const [devCode, setDevCode] = useState('');
+  const [challenge, setChallenge] = useState('');
 
   const fail = (r: Res) => {
     if (r.status === 429) { setErr({ form: L.tooMany }); return; }
@@ -142,8 +143,36 @@ export function AuthForm({ mode, L, links, eye }: { mode: AuthMode; L: L; links:
             </form>
           )}
         </div>
-        <form id="lg-pw" role="tabpanel" aria-labelledby="tb-pw" hidden={tab !== 'pw'} className="mt-6 space-y-4"
-          onSubmit={submit((f) => call('login', lang, { email: val(f, 'email'), password: (f.elements.namedItem('password') as HTMLInputElement).value, remember: (f.elements.namedItem('remember') as HTMLInputElement).checked }))}>
+        {challenge ? (
+          <form id="lg-2fa" role="tabpanel" aria-labelledby="tb-pw" hidden={tab !== 'pw'} className="mt-6 space-y-4" data-two-step noValidate
+            onSubmit={submit((f) => call('login-verify', lang, { challenge, code: readOtp(f) }))}>
+            <p className="text-sm muted" aria-live="polite">{info}</p>
+            {dev}
+            <OtpBoxes L={L} first />
+            {formErr}
+            {btn(L.verify)}
+            <div className="flex gap-2"><button type="button" className="btn btn-ghost btn-sm flex-1" onClick={() => { setChallenge(''); setDevCode(''); setErr({}); }}>{L.back}</button>
+              <button type="button" className="btn btn-ghost btn-sm flex-1" disabled={busy} onClick={async () => {
+                setBusy(true); const r = await call('login-resend', lang, { challenge }); setBusy(false);
+                if (!r.ok) { fail(r); return; }
+                setDevCode(r.data?.dev_code ?? ''); toast(L.resent);
+              }}>{L.resend}</button></div>
+          </form>
+        ) : null}
+        <form id="lg-pw" role="tabpanel" aria-labelledby="tb-pw" hidden={tab !== 'pw' || !!challenge} className="mt-6 space-y-4"
+          onSubmit={async (e) => {
+            e.preventDefault();
+            const f = e.currentTarget;
+            if (!f.checkValidity()) { f.reportValidity(); return; }
+            setBusy(true); setErr({});
+            const r = await call('login', lang, { email: val(f, 'email'), password: (f.elements.namedItem('password') as HTMLInputElement).value, remember: (f.elements.namedItem('remember') as HTMLInputElement).checked });
+            if (r.ok && r.data?.two_factor) {
+              setBusy(false); setChallenge(r.data.challenge); setDevCode(r.data.dev_code ?? ''); setInfo(`${L.twoStep} ${r.data.to ?? ''}.`);
+              return;
+            }
+            if (r.ok) { done(); return; }
+            setBusy(false); fail(r);
+          }}>
           <div className="field"><label className="label" htmlFor="lg-em">{L.email}</label><input id="lg-em" name="email" type="email" className="input" required autoComplete="email" /></div>
           <Password id="lg-pass" label={L.password} L={L} eye={eye} autoComplete="current-password" extra={<a href={links.forgot} className="link text-sm">{L.forgotQ}</a>} />
           <label className="flex items-center gap-2 text-sm"><input type="checkbox" name="remember" className="check" defaultChecked /> {L.keep}</label>
