@@ -150,3 +150,18 @@ console errors; security checks. Then repeat key browser E2E on the user's PC (c
   Seed fixes: flight booking MSF-26-48377 → new offer BS 341 DAC→MLE 09:15–12:35 with PNR K7Q2ZM, seats 14A/14B, tickets 179-2468013579/80; traveller relation codes
   (Self/Spouse/Child) + FF number; Farhana wishlist (4 tours, Turkey saved ৳4,500 higher); visa events dated from ETA.
 - Box tooling: /tmp/login.sh writes a Farhana token to /tmp/tok (re-run after any reseed).
+- 07:03 frontend portal pages ALL written (app/[lang]/account/*): dashboard, bookings, bookings/[ref] (tabs, change/cancel modals → tickets, PayDue),
+  bookings/[ref]/ticket (server QR), visa (checklist + upload), trips (plans + wishlist), wallet (top-up/redeem), payments, referrals, travellers (add/edit/delete),
+  notifications (filter, mark read), support (list, ?t=TKT-…, chat + attachments, new request), reviews (star radios, scores), profile (avatar, completeness hint),
+  settings (password modal, two-step switch, sessions, recent sign-ins, language/currency, notification switches, JSON export, delete account).
+  Legacy /account/booking and /account/e-ticket redirect to the real booking / ticket. Helpers: components/account/page.tsx (accountMetadata/AccountHead/ago…).
+- Backend additions this session: referral system (friend discount in Pricer + `discount:referral` line, ReferralService reward, `bookings:complete-past` daily 00:20),
+  ReviewService (publish → Miles once via setting commerce.review_miles=250, incremental rating/reviews_count fold — keeps imported aggregates),
+  REAL two-step sign-in (preferences.otp_login): POST auth/login returns {two_factor, challenge(encrypted 10-min), to}; POST auth/login/verify + auth/login/resend;
+  BFF actions login-verify/login-resend; AuthForm shows the code step. Turning it on needs a verified phone. Newsletter switch mirrors newsletter_subscribers.
+  Notification switch merge keeps other values. Currency validated against active currencies. Profile completeness = 10 checks + `missing[]`.
+  Delete account erases travellers/wishlist/plans/avatar, unsubscribes. Review status 'review' (was wrongly 'pending'). User::initials() bug on new users fixed.
+  New settings rows (code defaults apply if missing): commerce.referral_friend_discount/referral_min_total/referral_reward/review_miles/cancellation_fee — M6 settings UI must expose.
+- KNOWN: php.ini upload_max_filesize=2M/post_max_size=8M by default but visa upload allows 10 MB → run scripts/docs must set upload_max_filesize=12M, post_max_size=14M.
+- Tests: tests/Feature/Account/{AuthApiTest (10), MeApiTest (21)} → full suite 115 passed. Shared helpers farhana()/asTraveller()/newTraveller() in tests/Pest.php.
+- NEXT: portal browser E2E (tooling/tests/portal_e2e.mjs), npm run build, then M6 admin.
