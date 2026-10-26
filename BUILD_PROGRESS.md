@@ -165,3 +165,23 @@ console errors; security checks. Then repeat key browser E2E on the user's PC (c
 - KNOWN: php.ini upload_max_filesize=2M/post_max_size=8M by default but visa upload allows 10 MB → run scripts/docs must set upload_max_filesize=12M, post_max_size=14M.
 - Tests: tests/Feature/Account/{AuthApiTest (10), MeApiTest (21)} → full suite 115 passed. Shared helpers farhana()/asTraveller()/newTraveller() in tests/Pest.php.
 - NEXT: portal browser E2E (tooling/tests/portal_e2e.mjs), npm run build, then M6 admin.
+
+## M5 — DONE + verified on PC (2026-10-26 ~08:05 BDT). PAUSED (owner's weekly usage limit nearly used up).
+- Box: Pest 115 passed; portal browser E2E tooling/tests/portal_e2e.mjs 78/78; checkout E2E 52/52; `next build` OK (07:14).
+- PC sync #2 (07:29): 14×4 MB chunks via C:\Users\m → F:\projects\tour_travel (robocopy merge, .env untouched). PC file hashes = box HEAD 8ac8395
+  (spot-checked routes/api.php, proxy.ts, LOCAL_SETUP.md, composer.lock, package-lock.json). `migrate --force` (not fresh): all migrations through
+  2026_10_26_002010 Ran. optimize:clear; next build 07:46. NOTE: PC DB was NOT reseeded, so M5 seed-fidelity fixes (flight booking BS 341/PNR K7Q2ZM, FF numbers,
+  wishlist saved price) only appear after `php artisan migrate:fresh --seed` on the PC — optional, it wipes local data.
+- PC smoke (%LOCALAPPDATA%\musafir-smoke\pc_portal_smoke.mjs, headless Chrome): 15/15 — login, 10 account pages, bn account, activity checkout via
+  simulated bKash → booking-confirmed MSF-26-22630, no JS errors. Servers stopped afterwards (php serve, next start); Laragon MySQL and codex node PID 3328 left alone.
+- docs/LOCAL_SETUP.md already covers php.ini upload limits (upload_max_filesize=12M, post_max_size=14M) and the portal login.
+
+## RESUME HERE (when owner says "continue")
+1. M6 — Admin panel (Laravel + React, admin.<domain> configurable): RBAC roles from seeded staff logins, CRUD for every CMS/catalogue/commerce/CRM table,
+   settings UI (incl. commerce.referral_*, review_miles, cancellation_fee, payments.gateways), media library, bookings/payments ops (bank-slip verify, refunds),
+   tickets, reviews moderation, translations, menus/home sections, SEO/redirects. Admin save → POST frontend /api/revalidate with `{ expire: 0 }` for instant updates.
+2. M7 — security + performance hardening (headers/CSP, rate limits review, queues, caching, image optimisation).
+3. M8 — full test campaign (scope recorded above) on box + PC, TEST_REPORT.md.
+4. M9 — deployment guides (VPS: Nginx + PM2 + php-fpm + MySQL + SSL; non-VPS: cPanel Laravel + Node app / Vercel for Next.js), production .env checklists.
+- PC transfer rules: 4 MB chunks, sequential, CopyFromBox into C:\Users\m then move into F:\projects\tour_travel; never overwrite .env; sha256 verify.
+- Run on PC: backend `php -d upload_max_filesize=12M -d post_max_size=14M artisan serve --host=127.0.0.1 --port=8000`; frontend `npm run start` → http://localhost:3000
