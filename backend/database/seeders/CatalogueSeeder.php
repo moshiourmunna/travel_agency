@@ -240,6 +240,10 @@ class CatalogueSeeder extends Seeder
             }
         }
 
+        // The flight on Farhana's Maldives honeymoon (mockup e-ticket): BS 341 DAC 09:15 → MLE 12:35.
+        FlightOffer::create(['airline_id' => $airlineIds['BS'], 'origin' => 'DAC', 'destination' => 'MLE', 'flight_no' => 'BS 341', 'dep_time' => '09:15', 'arr_time' => '12:35',
+            'duration_min' => 260, 'stops' => 0, 'fare' => 38450, 'baggage' => '30 kg', 'refundable' => true, 'seats' => 6]);
+
         // Visa
         foreach (S::public('VISA_DOCS') as $k => $items) {
             $names = ['general' => ['All applicants', 'সব আবেদনকারী'], 'job' => ['Job holders', 'চাকরিজীবী'], 'business' => ['Business owners', 'ব্যবসায়ী'], 'student' => ['Students', 'শিক্ষার্থী']][$k] ?? [$k, $k];

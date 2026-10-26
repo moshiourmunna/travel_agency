@@ -21,8 +21,20 @@ class PaymentReturnController extends Controller
     private function finish(Payment $p, array $res): RedirectResponse
     {
         $b = $p->booking;
-        $lang = $p->raw['lang'] ?? ($b->contact['locale'] ?? 'en');
+        $lang = $p->raw['lang'] ?? ($b?->contact['locale'] ?? 'en');
         $fe = config('musafir.frontend_url')."/{$lang}";
+        if (! $b) { // wallet top-up → back to the wallet page with the outcome
+            if ($res['status'] === 'success') {
+                if (! empty($res['txn']) && ! Payment::where('gateway', $p->gateway)->where('gateway_txn', $res['txn'])->whereKeyNot($p->id)->exists()) {
+                    $p->update(['gateway_txn' => $res['txn']]);
+                }
+                $this->bookings->settle($p, $res['raw'] ?? []);
+            } elseif ($p->status !== 'success') {
+                $p->update(['status' => $res['status'] === 'cancelled' ? 'cancelled' : 'failed']);
+            }
+
+            return redirect()->away("{$fe}/account/wallet?topup=".($res['status'] === 'success' ? 'success' : $res['status']));
+        }
         if ($res['status'] === 'success') {
             if (! empty($res['txn']) && ! Payment::where('gateway', $p->gateway)->where('gateway_txn', $res['txn'])->whereKeyNot($p->id)->exists()) {
                 $p->update(['gateway_txn' => $res['txn'], 'val_id' => $res['val_id'] ?? null]);

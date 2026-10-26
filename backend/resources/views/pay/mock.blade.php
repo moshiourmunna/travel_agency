@@ -21,7 +21,7 @@
 <main class="card">
  <div class="top"><small>Musafir · sandbox</small><h1>{{ $p->method }} — payment simulator</h1></div>
  <div class="body">
-  <div class="row"><span>Booking</span><b>{{ $b->ref }}</b></div>
+  <div class="row"><span>{{ $b ? 'Booking' : 'Wallet top-up' }}</span><b>{{ $b?->ref ?? ($p->user?->name ?? '') }}</b></div>
   <div class="row"><span>Merchant</span><span>{{ config('app.name') }}</span></div>
   <div class="amt">৳ {{ number_format((float) $p->amount) }}</div>
   <div class="note">This is a test payment page. No real money moves. Live gateways replace it when merchant credentials are added in <code>.env</code> and PAYMENT_MODE=live.</div>

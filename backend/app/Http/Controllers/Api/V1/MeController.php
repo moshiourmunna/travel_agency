@@ -72,27 +72,35 @@ class MeController extends Controller
         $u = $this->u($r);
         $bookings = Booking::where('user_id', $u->id)->orderBy('travel_start')->get();
         $upcoming = $bookings->filter(fn ($b) => P::group($b) === 'upcoming')->values();
-        $next = $upcoming->first(fn ($b) => in_array($b->status, ['confirmed', 'partial'], true)) ?? $upcoming->first();
+        // "Next trip" = the soonest real trip (visas and gift cards are not trips); a package beats its own flight on the same day.
+        $prio = ['tour' => 0, 'cruise' => 1, 'hotel' => 2, 'activity' => 3, 'flight' => 4];
+        $trips = $upcoming->filter(fn ($b) => isset($prio[$b->kind]))->sortBy(fn ($b) => [$b->travel_start?->toDateString() ?? '9999', in_array($b->status, ['confirmed', 'partial'], true) ? 0 : 1, $prio[$b->kind]])->values();
+        $next = $trips->first(fn ($b) => in_array($b->status, ['confirmed', 'partial'], true)) ?? $trips->first() ?? $upcoming->first();
         $due = DB::table('instalments')->join('bookings', 'bookings.id', '=', 'instalments.booking_id')->where('bookings.user_id', $u->id)
             ->whereIn('instalments.status', ['due', 'overdue'])->whereNotIn('bookings.status', ['cancelled', 'refunded'])->orderBy('instalments.due_date')
             ->select('instalments.id', 'instalments.amount', 'instalments.due_date', 'instalments.seq', 'bookings.ref')->first();
         $visas = VisaApplication::with('product')->where('user_id', $u->id)->whereNotIn('stage', ['approved', 'rejected', 'delivered'])->orderByDesc('id')->get();
         $milesMonth = (int) MilesTransaction::where('user_id', $u->id)->where('created_at', '>=', now()->startOfMonth())->where('miles', '>', 0)->sum('miles');
+        // To-do items are data (type + params); the portal words them in the visitor's language.
         $todo = [];
         if ($due) {
-            $todo[] = ['key' => 'pay', 'label' => __('Pay instalment :n — :a', ['n' => $due->seq, 'a' => '৳ '.number_format((float) $due->amount)]), 'href' => '/account/payments', 'done' => false];
+            $todo[] = ['key' => 'pay', 'type' => 'pay', 'n' => (int) $due->seq, 'amount' => (int) round((float) $due->amount), 'href' => '/account/payments', 'done' => false];
         }
         foreach ($visas->where('stage', 'docs') as $v) {
-            $todo[] = ['key' => 'visa-'.$v->ref, 'label' => __('Upload documents for :name', ['name' => $v->applicant_name]), 'href' => '/account/visa', 'done' => false];
+            $todo[] = ['key' => 'visa-'.$v->ref, 'type' => 'visa', 'name' => explode(' ', (string) $v->applicant_name)[0], 'href' => '/account/visa', 'done' => false];
         }
         $soon = $next?->travel_start;
         foreach (Traveller::where('user_id', $u->id)->whereNotNull('passport_expiry')->get() as $t) {
             if ($soon && $t->passport_expiry->lt($soon->copy()->addMonths(6))) {
-                $todo[] = ['key' => 'pp-'.$t->id, 'label' => __('Renew :name’s passport', ['name' => explode(' ', $t->name)[0]]), 'href' => '/account/travellers', 'done' => false];
+                $todo[] = ['key' => 'pp-'.$t->id, 'type' => 'passport', 'name' => explode(' ', $t->name)[0], 'href' => '/account/travellers', 'done' => false];
             }
         }
-        $todo[] = ['key' => 'profile', 'label' => __('Complete your profile'), 'href' => '/account/profile', 'done' => (bool) ($u->dob && $u->gender && $u->city)];
-        $todo[] = ['key' => 'travellers', 'label' => __('Save your co-travellers'), 'href' => '/account/travellers', 'done' => Traveller::where('user_id', $u->id)->count() > 1];
+        $todo[] = ['key' => 'profile', 'type' => 'profile', 'href' => '/account/profile', 'done' => (bool) ($u->dob && $u->gender && $u->city)];
+        $todo[] = ['key' => 'travellers', 'type' => 'travellers', 'href' => '/account/travellers', 'done' => Traveller::where('user_id', $u->id)->count() > 1];
+        if ($next && in_array($next->kind, ['tour', 'cruise'], true)) {
+            $todo[] = ['key' => 'insurance', 'type' => 'insurance', 'href' => '/insurance', 'done' => collect($next->contact['options']['addons'] ?? [])->contains(fn ($a) => str_contains((string) $a, 'insur'))
+                || \App\Models\BookingItem::where('booking_id', $next->id)->where('label->en', 'like', '%insurance%')->exists()];
+        }
 
         return $this->ok([
             'user' => P::user($u),
@@ -152,14 +160,52 @@ class MeController extends Controller
         $open = SupportTicket::where('booking_id', $b->id)->whereNotIn('status', ['resolved', 'closed'])->orderByDesc('id')->get(['ref', 'subject', 'status']);
 
         return $this->ok($data + ['itinerary' => $itinerary, 'travellers' => $travellers, 'activity' => $activity, 'can_cancel' => $canCancel,
+            'policy' => $this->policy($b), 'agent' => $b->owner_staff_id ? (fn ($s) => $s ? ['name' => $s->name, 'initials' => $s->initials()] : null)(User::find($b->owner_staff_id)) : null,
+            'nights' => $b->travel_start && $b->travel_end ? $b->travel_start->diffInDays($b->travel_end) : null,
+            'miles_earn' => (int) ($b->miles_earned ?: floor((float) $b->total / 100)),
             'open_requests' => $open->map(fn ($t) => ['ref' => $t->ref, 'subject' => $t->tr('subject'), 'status' => $t->status])->values()]);
+    }
+
+    /**
+     * Cancellation windows for this booking (from the product's policy) with calendar dates, and the refund the traveller
+     * would get today. Refunds are confirmed by the sales team; this is an estimate shown before they ask.
+     */
+    private function policy(Booking $b): ?array
+    {
+        $product = $b->product_type && class_exists($b->product_type) && method_exists($b->product_type, 'cancellationPolicy')
+            ? $b->product_type::with('cancellationPolicy')->find($b->product_id) : null;
+        $pol = $product?->cancellationPolicy;
+        if (! $pol || ! $b->travel_start) {
+            return null;
+        }
+        $start = $b->travel_start->copy()->setTime(9, 0);
+        $rules = collect($pol->rules ?? [])->map(fn ($r) => ['pct' => (int) $r['refund_pct'], 'until' => isset($r['hours_before']) ? $start->copy()->subHours((int) $r['hours_before']) : $start->copy()->subDays((int) ($r['days_before'] ?? 0))])
+            ->sortBy(fn ($r) => $r['until']->timestamp)->values();
+        // [{pct, from, until}] in time order: "until 12 Nov → 100%", "13 Nov – 2 Dec → 50%", "after 2 Dec → 0%".
+        $windows = [];
+        $from = null;
+        foreach ($rules as $n => $r) {
+            $last = $n === $rules->count() - 1;
+            $windows[] = ['pct' => $r['pct'], 'from' => $from?->copy()->addDay()->toDateString(), 'after' => $last ? $from?->toDateString() : null, 'until' => $last ? null : $r['until']->toDateString(),
+                'tone' => $r['pct'] >= 100 ? 'emerald' : ($r['pct'] > 0 ? 'amber' : 'rose')];
+            $from = $r['until'];
+        }
+        // windows: pct applies while now <= until (the first rule whose cut-off is still ahead)
+        $nowPct = (int) ($rules->first(fn ($r) => now()->lte($r['until']))['pct'] ?? 0);
+        $fee = $nowPct >= 100 ? (float) \App\Support\Settings::get('commerce.cancellation_fee', 2000) : 0;
+
+        return ['name' => $pol->tr('name'), 'code' => $pol->code, 'windows' => $windows, 'refund_pct' => $nowPct, 'fee' => (int) $fee,
+            'refund_estimate' => (int) max(0, round((float) $b->paid * $nowPct / 100 - $fee))];
     }
 
     /** Change / cancellation requests become support tickets for the sales team (cancellations need a human: refunds depend on the policy). */
     public function bookingRequest(Request $r, string $ref): JsonResponse
     {
         $b = $this->own($r, $ref);
-        $v = $r->validate(['type' => ['required', 'in:change,cancel'], 'message' => ['required', 'string', 'min:5', 'max:2000']]);
+        $v = $r->validate(['type' => ['required', 'in:change,cancel'], 'message' => ['required', 'string', 'min:5', 'max:2000'], 'refund_to' => ['nullable', 'in:wallet,original']]);
+        if ($v['type'] === 'cancel' && ! empty($v['refund_to'])) {
+            $v['message'] .= "\n\nRefund to: ".($v['refund_to'] === 'wallet' ? 'Musafir wallet' : 'original payment method');
+        }
         if ($v['type'] === 'cancel' && ! in_array($b->status, ['pending', 'confirmed', 'partial'], true)) {
             return response()->json(['message' => __('This booking cannot be cancelled online.')], 409);
         }
@@ -178,7 +224,8 @@ class MeController extends Controller
         $dep = $o?->dep_time ? substr((string) $o->dep_time, 0, 5) : null;
 
         return $this->ok(['ref' => $b->ref, 'pnr' => $b->contact['pnr'] ?? null, 'date' => $b->travel_start?->toDateString(), 'cabin' => $b->contact['options']['cabin'] ?? $o?->cabin ?? 'economy',
-            'flight' => $o ? ['no' => $o->flight_no, 'airline' => $o->airline?->name, 'from' => $o->origin, 'to' => $o->destination, 'dep' => $dep, 'arr' => substr((string) $o->arr_time, 0, 5),
+            'flight' => $o ? ['no' => $o->flight_no, 'airline' => $o->airline?->name, 'color' => $o->airline?->color, 'from' => $o->origin, 'to' => $o->destination,
+                'from_city' => \App\Models\Airport::where('iata', $o->origin)->first()?->tr('city'), 'to_city' => \App\Models\Airport::where('iata', $o->destination)->first()?->tr('city'), 'dep' => $dep, 'arr' => substr((string) $o->arr_time, 0, 5),
                 'duration_min' => $o->duration_min, 'stops' => $o->stops, 'baggage' => $o->baggage, 'boarding' => $dep ? now()->setTimeFromTimeString($dep)->subMinutes(40)->format('H:i') : null] : null,
             'passengers' => $b->travellers()->get()->map(fn ($t) => ['name' => $t->name, 'ticket_no' => $t->ticket_no, 'seat' => $t->seat])->values()]);
     }
@@ -259,6 +306,30 @@ class MeController extends Controller
         return $this->ok(['amount' => (int) round($amount), 'balance' => (int) round((float) $u->fresh()->wallet_balance)]);
     }
 
+    /** Add money to the wallet through an online gateway (the same drivers and verification as bookings). */
+    public function topup(Request $r): JsonResponse
+    {
+        $u = $this->u($r);
+        $gws = array_values(array_diff(app(GatewayManager::class)->enabled(), ['bank_transfer']));
+        $v = $r->validate(['amount' => ['required', 'integer', 'min:500', 'max:200000'], 'gateway' => ['required', Rule::in($gws)]]);
+        $gw = app(GatewayManager::class)->resolve($v['gateway']);
+        $p = Payment::create(['booking_id' => null, 'user_id' => $u->id, 'purpose' => 'wallet_topup', 'gateway' => $v['gateway'], 'method' => $gw->label(),
+            'amount' => $v['amount'], 'status' => 'initiated', 'raw' => ['lang' => app()->getLocale()]]);
+        // Drivers read the reference/contact/title from a booking; a top-up uses an unsaved stand-in.
+        $stand = new Booking(['ref' => 'TOP-'.$p->id, 'title' => ['en' => 'Musafir wallet top-up', 'bn' => 'মুসাফির ওয়ালেট টপ-আপ'], 'total' => $v['amount'],
+            'contact' => ['name' => $u->name, 'email' => $u->email, 'phone' => $u->phone, 'city' => $u->city]]);
+        try {
+            $res = $gw->initiate($p, $stand);
+        } catch (\Throwable $e) {
+            report($e);
+            $p->update(['status' => 'failed']);
+
+            return response()->json(['message' => __('The payment gateway is not responding. Please try again in a minute.')], 502);
+        }
+
+        return $this->ok(['payment' => $p->ulid, 'redirect' => $res['redirect'] ?? null]);
+    }
+
     public static function credit(User $u, float $amount, array $text, string $icon, $source = null): void
     {
         $locked = User::whereKey($u->id)->lockForUpdate()->first();
@@ -281,10 +352,16 @@ class MeController extends Controller
             if ($ids->isEmpty()) {
                 continue;
             }
-            foreach ($cls::whereIn('id', $ids)->get() as $m) {
-                $items[] = ['kind' => $k, 'slug' => $m->slug, 'title' => $m->tr($k === 'hotel' ? 'name' : 'title') ?? $m->tr('name'), 'price' => (int) round((float) ($m->price_from ?? $m->price ?? 0)), 'image' => $m->image_id ? Img::of(\App\Models\MediaAsset::find($m->image_id)) : null];
+            $saved = $wish->where('wishable_type', $cls)->keyBy('wishable_id');
+            foreach ($cls::published()->whereIn('id', $ids)->get() as $m) {
+                $price = (int) round((float) ($m->price_from ?? $m->price ?? 0));
+                $was = (int) round((float) ($saved[$m->id]->saved_price ?? 0));
+                $items[] = ['kind' => $k, 'slug' => $m->slug, 'title' => $m->tr($k === 'hotel' ? 'name' : 'title') ?? $m->tr('name'), 'price' => $price, 'days' => $m->days ?? null,
+                    'price_drop' => $was > $price ? $was - $price : 0, 'image' => $m->image_id ? Img::of(\App\Models\MediaAsset::find($m->image_id)) : null, 'order' => $saved[$m->id]->id ?? 0];
             }
         }
+
+        usort($items, fn ($a, $b) => $a['order'] <=> $b['order']);
 
         return $this->ok([
             'plans' => TripPlan::where('user_id', $u->id)->orderByDesc('updated_at')->get()->map(fn ($p) => ['id' => $p->ulid, 'name' => $p->tr('name'), 'estimate' => (int) round((float) $p->estimate), 'days' => $p->data['days'] ?? null,
@@ -302,7 +379,7 @@ class MeController extends Controller
         $u = $this->u($r);
         foreach ($v['items'] ?? [] as $it) {
             if ($m = $types[$it['kind']]::where('slug', $it['slug'])->first()) {
-                Wishlist::firstOrCreate(['user_id' => $u->id, 'wishable_type' => $m::class, 'wishable_id' => $m->id]);
+                Wishlist::firstOrCreate(['user_id' => $u->id, 'wishable_type' => $m::class, 'wishable_id' => $m->id], ['saved_price' => $m->price_from ?? $m->price ?? null]);
             }
         }
         if (! empty($v['remove']) && ($m = $types[$v['remove']['kind']]::where('slug', $v['remove']['slug'])->first())) {
@@ -324,9 +401,22 @@ class MeController extends Controller
     private function travellerShape(Traveller $t): array
     {
         return ['id' => $t->id, 'name' => $t->name, 'relation' => $t->tr('relation'), 'relation_code' => $t->getTranslation('relation', 'en', true), 'dob' => $t->dob?->toDateString(),
-            'age' => $t->dob?->age, 'gender' => $t->gender, 'nationality' => $t->nationality, 'passport_masked' => $t->passport_last4 ? str_repeat('•', 5).$t->passport_last4 : null,
+            'age' => $t->dob?->age, 'gender' => $t->gender, 'nationality' => $t->nationality, 'passport_masked' => self::maskPassport($t),
+            'frequent_flyer' => $t->frequent_flyer ? mb_substr($t->frequent_flyer, 0, 5).'•••'.mb_substr($t->frequent_flyer, -2) : null,
             'passport_expiry' => $t->passport_expiry?->toDateString(), 'expires_soon' => $t->passport_expiry?->lt(today()->addMonths(6)) ?? false,
             'meal_pref' => $t->meal_pref, 'seat_pref' => $t->seat_pref, 'is_self' => (bool) $t->is_self];
+    }
+
+    /** "EH0•••••7": first 3 and last character only (the number itself is encrypted at rest). */
+    private static function maskPassport(Traveller $t): ?string
+    {
+        try {
+            $pp = (string) $t->passport_no_enc;
+        } catch (\Throwable) {
+            $pp = '';
+        }
+
+        return $pp !== '' ? substr($pp, 0, 3).'•••••'.substr($pp, -1) : ($t->passport_last4 ? '•••••'.$t->passport_last4 : null);
     }
 
     public function travellers(Request $r): JsonResponse
@@ -338,7 +428,8 @@ class MeController extends Controller
     {
         return [
             'name' => ['required', 'string', 'min:2', 'max:120'], 'relation' => ['nullable', 'in:Self,Spouse,Child,Parent,Sibling,Friend,Colleague,Other'],
-            'dob' => ['nullable', 'date', 'before:today', 'after:1900-01-01'], 'gender' => ['nullable', 'in:male,female,other'], 'nationality' => ['nullable', 'string', 'max:60'],
+            'dob' => ['nullable', 'date', 'before:today', 'after:1900-01-01'], 'gender' => ['nullable', 'in:male,female,other'], 'nationality' => ['nullable', 'string', 'size:2', 'alpha'],
+            'frequent_flyer' => ['nullable', 'string', 'max:32', 'regex:/^[A-Za-z0-9 -]+$/'],
             'passport_no' => ['nullable', 'string', 'regex:/^[A-Z0-9]{6,12}$/i'], 'passport_expiry' => ['nullable', 'date', 'after:today'],
             'meal_pref' => ['nullable', 'in:none,vegetarian,halal,diabetic'], 'seat_pref' => ['nullable', 'in:window,aisle,none'],
         ];
@@ -348,7 +439,8 @@ class MeController extends Controller
     {
         $rel = $v['relation'] ?? 'Other';
         $bn = ['Self' => 'নিজে', 'Spouse' => 'স্বামী/স্ত্রী', 'Child' => 'সন্তান', 'Parent' => 'মা-বাবা', 'Sibling' => 'ভাই-বোন', 'Friend' => 'বন্ধু', 'Colleague' => 'সহকর্মী', 'Other' => 'অন্যান্য'][$rel];
-        $t->fill(collect($v)->only(['name', 'dob', 'gender', 'nationality', 'passport_expiry', 'meal_pref', 'seat_pref'])->all());
+        $t->fill(collect($v)->only(['name', 'dob', 'gender', 'passport_expiry', 'meal_pref', 'seat_pref', 'frequent_flyer'])->all());
+        $t->nationality = strtoupper($v['nationality'] ?? $t->nationality ?? 'BD');
         $t->setTranslations('relation', ['en' => $rel, 'bn' => $bn]);
         $t->is_self = $rel === 'Self';
         if (! empty($v['passport_no'])) {
@@ -530,6 +622,32 @@ class MeController extends Controller
         return $this->profile($r);
     }
 
+    /** Profile photo: square-cropped JPEG/PNG/WebP up to 2 MB on the public disk (old file removed). */
+    public function avatar(Request $r): JsonResponse
+    {
+        $u = $this->u($r);
+        $v = $r->validate(['photo' => ['required', 'file', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048', 'dimensions:min_width=96,min_height=96,max_width=6000,max_height=6000']]);
+        $old = $u->avatar_path;
+        $path = $v['photo']->store('avatars', 'public');
+        $u->forceFill(['avatar_path' => $path])->save();
+        if ($old && $old !== $path) {
+            Storage::disk('public')->delete($old);
+        }
+
+        return $this->ok(P::user($u->fresh()));
+    }
+
+    public function deleteAvatar(Request $r): JsonResponse
+    {
+        $u = $this->u($r);
+        if ($u->avatar_path) {
+            Storage::disk('public')->delete($u->avatar_path);
+            $u->forceFill(['avatar_path' => null])->save();
+        }
+
+        return $this->ok(P::user($u));
+    }
+
     public function settings(Request $r): JsonResponse
     {
         $u = $this->u($r);
@@ -650,12 +768,13 @@ class MeController extends Controller
         $u = $this->u($r);
         $list = SupportTicket::with('assignee:id,name')->where('user_id', $u->id)->orderByDesc('last_activity_at')->get();
         $open = $r->query('ticket') ? $list->firstWhere('ref', $r->query('ticket')) : $list->first();
-        $messages = $open ? TicketMessage::where('support_ticket_id', $open->id)->where('internal', false)->orderBy('id')->get() : collect();
+        $messages = $open ? TicketMessage::with('user:id,name')->where('support_ticket_id', $open->id)->where('internal', false)->orderBy('id')->get() : collect();
 
         return $this->ok([
             'items' => $list->map(fn ($t) => ['ref' => $t->ref, 'subject' => $t->tr('subject'), 'status' => $t->status, 'agent' => $t->assignee?->name, 'date' => ($t->last_activity_at ?? $t->created_at)?->toDateString()])->values(),
             'open' => $open ? ['ref' => $open->ref, 'subject' => $open->tr('subject'), 'status' => $open->status, 'agent' => $open->assignee?->name,
-                'messages' => $messages->map(fn ($m) => ['mine' => $m->author_type === 'customer', 'body' => $m->tr('body'), 'at' => $m->created_at?->toIso8601String(), 'attachments' => $m->attachments ?? []])->values()] : null,
+                'messages' => $messages->map(fn ($m) => ['id' => $m->id, 'mine' => $m->author_type === 'customer', 'author' => $m->author_type === 'customer' ? null : ($m->user?->name ?? $open->assignee?->name), 'body' => $m->tr('body'), 'at' => $m->created_at?->toIso8601String(),
+                    'attachments' => collect($m->attachments ?? [])->map(fn ($a, $i) => ['name' => $a['name'] ?? 'file', 'size' => $a['size'] ?? null, 'url' => isset($a['path']) ? "tickets/{$open->ref}/files/{$m->id}/{$i}" : null])->values()])->values()] : null,
             'bookings' => Booking::where('user_id', $u->id)->whereIn('status', ['pending', 'confirmed', 'partial'])->orderBy('travel_start')->get()->map(fn ($b) => ['ref' => $b->ref, 'title' => $b->tr('title')])->values(),
         ]);
     }
@@ -671,12 +790,28 @@ class MeController extends Controller
         return $this->ok(['ref' => $t->ref], 201);
     }
 
+    /** Download a ticket attachment (owner only; internal notes never). */
+    public function ticketFile(Request $r, string $ref, int $msg, int $i)
+    {
+        $t = SupportTicket::where('user_id', $this->u($r)->id)->where('ref', $ref)->firstOrFail();
+        $m = TicketMessage::where('support_ticket_id', $t->id)->where('internal', false)->findOrFail($msg);
+        $a = ($m->attachments ?? [])[$i] ?? abort(404);
+        abort_unless(isset($a['path']) && Storage::disk('local')->exists($a['path']), 404);
+
+        return Storage::disk('local')->download($a['path'], $a['name'] ?? 'attachment', ['Cache-Control' => 'no-store, private']);
+    }
+
     public function replyTicket(Request $r, string $ref): JsonResponse
     {
         $u = $this->u($r);
         $t = SupportTicket::where('user_id', $u->id)->where('ref', $ref)->firstOrFail();
-        $v = $r->validate(['message' => ['required', 'string', 'min:1', 'max:3000']]);
-        TicketMessage::create(['support_ticket_id' => $t->id, 'user_id' => $u->id, 'author_type' => 'customer', 'body' => self::bi(strip_tags($v['message'])), 'internal' => false]);
+        $v = $r->validate(['message' => ['required_without:file', 'nullable', 'string', 'max:3000'], 'file' => ['nullable', 'file', 'mimes:pdf,jpg,jpeg,png', 'max:5120']]);
+        $att = [];
+        if ($r->hasFile('file')) { // private disk; downloaded through the owner-checked endpoint below
+            $f = $r->file('file');
+            $att[] = ['name' => Str::limit(preg_replace('/[^\w.\- ]+/u', '_', $f->getClientOriginalName()), 80, ''), 'size' => $f->getSize(), 'mime' => $f->getMimeType(), 'path' => $f->store("tickets/{$t->ref}", 'local')];
+        }
+        TicketMessage::create(['support_ticket_id' => $t->id, 'user_id' => $u->id, 'author_type' => 'customer', 'body' => self::bi(strip_tags((string) ($v['message'] ?? ''))), 'internal' => false, 'attachments' => $att ?: null]);
         $t->update(['status' => in_array($t->status, ['resolved', 'closed'], true) ? 'open' : ($t->status === 'awaiting' ? 'open' : $t->status), 'last_activity_at' => now()]);
 
         return $this->ok(['ok' => true], 201);

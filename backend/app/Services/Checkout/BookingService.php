@@ -124,6 +124,13 @@ final class BookingService
                 return $p;
             }
             $p->update(['status' => 'success', 'paid_at' => now(), 'raw' => array_merge((array) $p->raw, $raw)]);
+            if ($p->purpose === 'wallet_topup') { // money into the traveller's wallet, no booking involved
+                if ($p->user_id && ($u = \App\Models\User::find($p->user_id))) {
+                    \App\Http\Controllers\Api\V1\MeController::credit($u, (float) $p->amount, ['en' => 'Wallet top-up via '.$p->method, 'bn' => $p->method.' দিয়ে ওয়ালেট টপ-আপ'], 'plus', $p);
+                }
+
+                return $p->fresh();
+            }
             $b = Booking::whereKey($p->booking_id)->lockForUpdate()->first();
             if (! $b) {
                 return $p;

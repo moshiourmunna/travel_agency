@@ -23,7 +23,7 @@ final class Account
             'tier' => $u->tier ? ['code' => $u->tier->code, 'name' => $u->tier->tr('name')] : null,
             'next_tier' => $next ? ['code' => $next->code, 'name' => $next->tr('name'), 'min_miles' => (int) $next->min_miles, 'to_go' => (int) $next->min_miles - (int) $u->miles,
                 'progress' => (int) round(100 * ((int) $u->miles - (int) ($u->tier->min_miles ?? 0)) / max(1, (int) $next->min_miles - (int) ($u->tier->min_miles ?? 0)))] : null,
-            'member_since' => $u->created_at?->toDateString(), 'preferences' => $u->preferences ?? (object) [],
+            'member_since' => $u->created_at?->toDateString(), 'avatar' => $u->avatar_path ? \Illuminate\Support\Facades\Storage::disk('public')->url($u->avatar_path) : null, 'preferences' => $u->preferences ?? (object) [],
         ];
     }
 

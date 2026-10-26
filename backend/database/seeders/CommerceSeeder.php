@@ -37,9 +37,11 @@ class CommerceSeeder extends Seeder
         $travellers = [];
         foreach (S::app('TRAVELLERS') as $i => $t) {
             $travellers[] = $farhana->travellers()->create([
-                'name' => $t['name']['en'], 'relation' => S::b($t['rel']), 'dob' => $t['dob'], 'gender' => $i === 0 ? 'female' : 'male', 'is_self' => $i === 0,
-                'passport_no_enc' => str_replace('•••••', (string) (10000 + $i * 1111), $t['passport']), 'passport_last4' => substr($t['passport'], -1), 'passport_expiry' => $t['exp'],
-                'meal_pref' => $i === 0 ? 'halal' : null, 'seat_pref' => $i === 0 ? 'window' : null,
+                // relation is stored as a code (Self/Spouse/Child…) with its Bangla label; the portal words "You" / "Child (8)".
+                'name' => $t['name']['en'], 'relation' => [['en' => 'Self', 'bn' => 'নিজে'], ['en' => 'Spouse', 'bn' => 'স্বামী/স্ত্রী'], ['en' => 'Child', 'bn' => 'সন্তান']][$i] ?? ['en' => 'Other', 'bn' => 'অন্যান্য'],
+                'dob' => $t['dob'], 'gender' => $i === 0 ? 'female' : 'male', 'is_self' => $i === 0,
+                'passport_no_enc' => $pp = str_replace('•••••', (string) (10000 + $i * 1111), $t['passport']), 'passport_last4' => substr($pp, -4), 'passport_expiry' => $t['exp'],
+                'meal_pref' => $i === 0 ? 'halal' : null, 'seat_pref' => $i === 0 ? 'window' : null, 'frequent_flyer' => $i === 0 ? 'BS 3014 7781' : null,
             ]);
         }
 
@@ -125,6 +127,15 @@ class CommerceSeeder extends Seeder
                 'estimate' => $t['est'], 'share_token' => Str::random(24), 'updated_at' => $t['upd'].' 10:00:00', 'created_at' => $t['upd'].' 09:00:00']);
         }
 
+        // Farhana's account wishlist (mockup trips page); Turkey was saved before a ৳ 4,500 price drop.
+        \App\Models\Wishlist::where('user_id', $farhana->id)->delete();
+        foreach (['bhutan-happiness' => 0, 'turkey-classic' => 4500, 'kashmir-paradise' => 0, 'egypt-wonders' => 0] as $slug => $drop) {
+            if ($t = Tour::where('slug', $slug)->first()) {
+                \App\Models\Wishlist::create(['user_id' => $farhana->id, 'wishable_type' => Tour::class, 'wishable_id' => $t->id, 'saved_price' => (float) $t->price_from + $drop,
+                    'created_at' => now()->subDays(20), 'updated_at' => now()->subDays(20)]);
+            }
+        }
+
         // Reviews: product reviews (testimonial set attached to products) + Farhana's own reviews + moderation queue states
         Review::query()->delete();
         $products = [Tour::where('slug', 'maldives-honeymoon')->first(), Cruise::first(), Tour::where('slug', 'sajek-rangamati')->first(), Tour::where('slug', 'turkey-classic')->first(), Tour::where('slug', 'nepal-pokhara')->first(), Tour::where('slug', 'bali-highlights')->first()];
@@ -167,7 +178,9 @@ class CommerceSeeder extends Seeder
                 'assignee_id' => $staff[$q[6] ?? 'Sohel Rana']->id ?? null, 'applicant_name' => $v['who']['en'], 'stage' => $v['status'], 'stage_no' => $v['stage'], 'eta' => $v['eta']]);
             foreach (S::app('VISA_STAGES') as $k => [$label, $date, $state]) {
                 $st = $k + 1 < $v['stage'] ? 'done' : ($k + 1 === $v['stage'] ? ($v['stage'] >= 5 ? 'done' : 'current') : 'todo');
-                $app->events()->create(['label' => S::b($label), 'state' => $v['ref'] === 'VSA-26-1182' ? $state : $st, 'happened_on' => $st === 'todo' ? null : ($date ?? $v['eta'])]);
+                // The featured application uses the mockup's stage dates; others are dated back from their ETA.
+                $when = $v['ref'] === 'VSA-26-1182' ? $date : CarbonImmutable::parse($v['eta'])->subDays([14, 12, 10, 0, 0][$k] ?? 0)->toDateString();
+                $app->events()->create(['label' => S::b($label), 'state' => $v['ref'] === 'VSA-26-1182' ? $state : $st, 'happened_on' => ($v['ref'] === 'VSA-26-1182' ? $state : $st) === 'todo' ? null : $when]);
             }
         }
         foreach ($queue as $ref => [$r, $name, $flag, $country, $stage, $eta, $assignee]) {
@@ -188,15 +201,21 @@ class CommerceSeeder extends Seeder
         $model = self::MODEL[$b['kind']] ?? null;
         $product = $model && $b['slug'] ? $model::where('slug', $b['slug'])->first() : null;
         if (! $product && $b['kind'] === 'flight') {
-            $product = FlightOffer::where('origin', 'DAC')->where('destination', 'DXB')->orderBy('fare')->first();
+            // "Dhaka → Malé (BS 341)" → that offer; otherwise the cheapest Dubai fare.
+            $no = preg_match('/\(([A-Z0-9]{2} \d{2,4})\)/', (string) $b['title']['en'], $m) ? $m[1] : null;
+            $city = preg_match('/→\s*([^(]+)/u', (string) $b['title']['en'], $cm) ? trim($cm[1]) : null;
+            $iata = $city ? \App\Models\Airport::where('city->en', $city)->value('iata') : null;
+            $product = ($no ? FlightOffer::where('flight_no', $no)->when($iata, fn ($q) => $q->where('destination', $iata))->first() : null)
+                ?? FlightOffer::where('origin', 'DAC')->where('destination', 'DXB')->orderBy('fare')->first();
         }
+        $pnr = $b['kind'] === 'flight' && preg_match('/PNR ([A-Z0-9]{6})/', (string) ($b['sub']['en'] ?? ''), $pm) ? $pm[1] : null;
         $total = (float) $b['total'];
         $paid = (float) $b['paid'];
         $booking = Booking::create([
             'ref' => $b['ref'], 'user_id' => $user->id, 'owner_staff_id' => $owner?->id, 'kind' => $b['kind'],
             'product_type' => $product ? $product::class : null, 'product_id' => $product?->id, 'title' => S::b($b['title']), 'subtitle' => S::b($b['sub'] ?? null),
             'image_key' => $b['img'] ?? null, 'status' => $b['status'], 'payment_status' => $paid <= 0 ? 'unpaid' : ($paid + 0.5 >= $total ? ($b['status'] === 'refunded' ? 'refunded' : 'paid') : 'partial'),
-            'channel' => $channel, 'contact' => ['name' => $user->name, 'email' => $user->email, 'phone' => $admin['phone'] ?? $user->phone, 'city' => $admin['city']['en'] ?? $user->city],
+            'channel' => $channel, 'contact' => ['name' => $user->name, 'email' => $user->email, 'phone' => $admin['phone'] ?? $user->phone, 'city' => $admin['city']['en'] ?? $user->city] + ($pnr ? ['pnr' => $pnr, 'options' => ['cabin' => 'economy']] : []),
             'travel_start' => $b['start'], 'travel_end' => $b['end'], 'pax' => ['adults' => $b['pax'], 'children' => 0, 'infants' => 0], 'pax_count' => $b['pax'],
             'subtotal' => $total, 'total' => $total, 'paid' => min($paid, $total), 'cost' => round($total * 0.82), 'payment_plan' => $paid > 0 && $paid < $total ? 'deposit' : 'full',
             'miles_earned' => (int) floor($total / 100), 'cancelled_at' => in_array($b['status'], ['cancelled', 'refunded'], true) ? CarbonImmutable::parse($created)->addDays(3) : null,
@@ -207,7 +226,8 @@ class CommerceSeeder extends Seeder
         $names = $travellers ? array_map(fn ($t) => $t->name, array_slice($travellers, 0, max(1, $b['pax']))) : [$user->name];
         for ($k = 0; $k < $b['pax']; $k++) {
             $booking->travellers()->create(['traveller_id' => $travellers[$k]->id ?? null, 'name' => $names[$k] ?? ($user->name.' +'.$k), 'type' => 'adult',
-                'ticket_no' => $b['kind'] === 'flight' ? '997'.str_pad((string) mt_rand(0, 9999999999), 10, '0', STR_PAD_LEFT) : null]);
+                'ticket_no' => $b['kind'] === 'flight' ? ($pnr ? '179-'.(2468013579 + $k) : '997'.str_pad((string) mt_rand(0, 9999999999), 10, '0', STR_PAD_LEFT)) : null,
+                'seat' => $pnr ? '14'.chr(65 + $k) : null]);
         }
         $booking->activities()->create(['type' => 'created', 'body' => ['en' => 'Booking created via '.$channel, 'bn' => $channel.' মাধ্যমে বুকিং তৈরি'], 'created_at' => $created.' 11:30:00']);
         if ($paid > 0) {

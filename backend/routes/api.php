@@ -110,6 +110,7 @@ Route::prefix('v1')->name('api.v1.')->middleware(['api.locale'])->group(function
             Route::delete('payment-methods/{id}', [Me::class, 'deleteMethod'])->name('methods.delete')->whereNumber('id');
             Route::get('wallet', [Me::class, 'wallet'])->name('wallet');
             Route::post('wallet/redeem', [Me::class, 'redeemGift'])->name('wallet.redeem');
+            Route::post('wallet/topup', [Me::class, 'topup'])->name('wallet.topup');
             Route::get('trips', [Me::class, 'trips'])->name('trips');
             Route::post('wishlist', [Me::class, 'wishlist'])->name('wishlist');
             Route::delete('trips/{id}', [Me::class, 'deletePlan'])->name('trips.delete');
@@ -135,6 +136,9 @@ Route::prefix('v1')->name('api.v1.')->middleware(['api.locale'])->group(function
             Route::get('tickets', [Me::class, 'tickets'])->name('tickets');
             Route::post('tickets', [Me::class, 'storeTicket'])->name('tickets.store');
             Route::post('tickets/{ref}/messages', [Me::class, 'replyTicket'])->name('tickets.reply');
+            Route::get('tickets/{ref}/files/{msg}/{i}', [Me::class, 'ticketFile'])->name('tickets.file')->whereNumber(['msg', 'i']);
+            Route::post('avatar', [Me::class, 'avatar'])->name('avatar');
+            Route::delete('avatar', [Me::class, 'deleteAvatar'])->name('avatar.delete');
         });
     });
 

@@ -142,3 +142,11 @@ console errors; security checks. Then repeat key browser E2E on the user's PC (c
   EnsureTraveller middleware (alias `traveller`), Presenters/Account, MeController (~684 lines, routes /api/v1/me/*), wallet payment in CheckoutController,
   throttles `auth`/`me`, OTP_DEBUG env; frontend: (site) route group, BFF app/api/auth/[action] + app/api/me/[...path], lib/session.ts (setSession/clearSession/sameOrigin),
   proxy.ts guard for /account, components/account/{ui,client}.tsx, lib/account.ts. Reviewing + finishing now.
+- 06:55 backend M5 additions: booking detail now returns `policy` (cancellation windows with dates + refund estimate, fee setting `commerce.cancellation_fee` default 2000),
+  `agent`, `nights`, `miles_earn`; cancel request accepts `refund_to`. Dashboard next trip = soonest real trip (not visa/gift), to-do items are data (`type` + params, worded by
+  the portal). Wallet top-up (POST /me/wallet/topup → gateway; Payment.purpose `wallet_topup`, booking_id null; settle credits wallet; return → /account/wallet?topup=…;
+  mock simulator handles no booking). Avatar upload/delete (/me/avatar, public disk), ticket attachments (reply multipart `file`, GET /me/tickets/{ref}/files/{msg}/{i}, private disk).
+  Migrations 2026_10_26_002000 (wishlists.saved_price → "price dropped" note) and 002010 (travellers.frequent_flyer) — additive, guarded with hasColumn.
+  Seed fixes: flight booking MSF-26-48377 → new offer BS 341 DAC→MLE 09:15–12:35 with PNR K7Q2ZM, seats 14A/14B, tickets 179-2468013579/80; traveller relation codes
+  (Self/Spouse/Child) + FF number; Farhana wishlist (4 tours, Turkey saved ৳4,500 higher); visa events dated from ETA.
+- Box tooling: /tmp/login.sh writes a Farhana token to /tmp/tok (re-run after any reseed).
