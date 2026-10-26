@@ -185,3 +185,14 @@ console errors; security checks. Then repeat key browser E2E on the user's PC (c
 4. M9 — deployment guides (VPS: Nginx + PM2 + php-fpm + MySQL + SSL; non-VPS: cPanel Laravel + Node app / Vercel for Next.js), production .env checklists.
 - PC transfer rules: 4 MB chunks, sequential, CopyFromBox into C:\Users\m then move into F:\projects\tour_travel; never overwrite .env; sha256 verify.
 - Run on PC: backend `php -d upload_max_filesize=12M -d post_max_size=14M artisan serve --host=127.0.0.1 --port=8000`; frontend `npm run start` → http://localhost:3000
+
+## PC #2 delivery — DESKTOP-JIBO2KJ (6cbf210c), E:\projects\tour_travel_full (2026-10-26 15:52–16:20 BDT)
+- Old mockup copy E:\projects\tour_travel left untouched. Package = `git archive HEAD` (bd2734e, 55 MB tar.gz, 1228 files) → 14×4 MB chunks
+  into C:\Users\m\msfchunks (parallel CopyFromBox worked here), merged, sha256 d7f39ad3… matched, extracted with bsdtar.
+- PC: Laragon PHP 8.4.25 (all needed exts present), MySQL 8.4.3 already running, Node 22.16. .env from .env.example (database cache/queue/session, no Redis).
+  Setup script C:\Users\m\msf_setup.ps1 (log msf_setup.log): composer install 4.3 min, key:generate, CREATE DB musafir, migrate --seed, storage:link,
+  backend npm ci+build, artisan serve, frontend .env.local from .env.example, npm ci, next build 2.5 min, next start.
+- Smoke (%LOCALAPPDATA%\musafir-smoke, headless Chrome): pc_smoke 27/27, pc_portal_smoke 15/15 (checkout MSF-26-45535). HTTP health/admin/en/bn/tours/sitemap 200.
+- Pest on PC (DB musafir_test): 114/115; the Nagad RSA test fails only because Windows PHP lacks OPENSSL_CONF for openssl_pkey_new in the test's key
+  generation. With OPENSSL_CONF=C:\laragon\bin\php\php-8.4.25-Win32-vs17-x64\extras\ssl\openssl.cnf GatewaysTest 6/6 passes. Not a code bug.
+- Servers left RUNNING on this PC (php artisan serve :8000, next start :3000).
