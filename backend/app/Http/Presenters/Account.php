@@ -39,6 +39,9 @@ final class Account
             'total' => (int) round((float) $b->total), 'paid' => (int) round((float) $b->paid), 'balance' => $balance,
             'booked_on' => $b->created_at?->toDateString(), 'pnr' => $b->contact['pnr'] ?? null,
             'group' => self::group($b), 'needs_action' => $balance > 0 && ! in_array($b->status, ['cancelled', 'refunded'], true),
+            // Public page of what was booked ("Book again") — only when the product was eager-loaded and still has a page.
+            'product' => $b->relationLoaded('product') && $b->product && in_array($b->kind, ['tour', 'cruise', 'activity', 'hotel'], true)
+                ? ['kind' => $b->kind, 'slug' => $b->product->getAttributes()['slug'] ?? null] : null,
         ];
     }
 

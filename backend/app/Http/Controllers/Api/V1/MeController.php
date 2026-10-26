@@ -112,8 +112,28 @@ class MeController extends Controller
             'todo' => $todo,
             'visas' => $visas->take(3)->map(fn ($v) => ['ref' => $v->ref, 'name' => $v->applicant_name, 'country' => $v->product?->tr('country_name'), 'flag' => $v->product?->flag, 'stage' => $v->stage, 'stage_no' => $v->stage_no, 'eta' => $v->eta?->toDateString()])->values(),
             'notifications' => $u->notifications()->latest()->limit(4)->get()->map(fn ($n) => $this->notif($n))->values(),
+            'picks' => $this->picks($u, $bookings),
             'counts' => $this->counts($u),
         ]);
+    }
+
+    /**
+     * "Picked for you": published tours in the regions of the traveller's past tours (most recent first), never one they
+     * already booked; topped up with featured tours. based_on names the past trips the picks come from.
+     */
+    private function picks(User $u, $bookings): array
+    {
+        $tourIds = $bookings->where('product_type', Tour::class)->pluck('product_id')->filter()->unique();
+        $past = Tour::whereIn('id', $bookings->where('product_type', Tour::class)->where('status', 'completed')->sortByDesc('travel_start')->pluck('product_id'))->get();
+        $regions = $past->pluck('region')->filter()->unique()->values();
+        $q = fn () => Tour::published()->with(['image', 'cancellationPolicy', 'destination', 'categories'])->whereNotIn('id', $tourIds);
+        $picks = $regions->isEmpty() ? collect() : $q()->whereIn('region', $regions)->orderByDesc('is_featured')->orderByDesc('rating')->limit(4)->get();
+        if ($picks->count() < 4) {
+            $picks = $picks->concat($q()->whereNotIn('id', $picks->pluck('id'))->orderByDesc('is_featured')->orderByDesc('rating')->limit(4 - $picks->count())->get());
+        }
+
+        return ['based_on' => $past->take(2)->map(fn ($t) => $t->tr('location') ?: $t->tr('title'))->values(),
+            'items' => $picks->map(fn ($t) => \App\Http\Presenters\Catalog::tourCard($t))->values()];
     }
 
     /** Sidebar badges. */
@@ -136,7 +156,7 @@ class MeController extends Controller
 
     public function bookings(Request $r): JsonResponse
     {
-        $all = Booking::where('user_id', $this->u($r)->id)->orderByDesc('created_at')->get();
+        $all = Booking::with('product')->where('user_id', $this->u($r)->id)->orderByDesc('created_at')->get();
         $q = Str::lower(trim((string) $r->query('q')));
         $group = (string) $r->query('status', 'all');
         $list = $all->filter(fn ($b) => ($group === 'all' || P::group($b) === $group)
@@ -163,7 +183,12 @@ class MeController extends Controller
             'policy' => $this->policy($b), 'agent' => $b->owner_staff_id ? (fn ($s) => $s ? ['name' => $s->name, 'initials' => $s->initials()] : null)(User::find($b->owner_staff_id)) : null,
             'nights' => $b->travel_start && $b->travel_end ? $b->travel_start->diffInDays($b->travel_end) : null,
             'miles_earn' => (int) ($b->miles_earned ?: floor((float) $b->total / 100)),
-            'open_requests' => $open->map(fn ($t) => ['ref' => $t->ref, 'subject' => $t->tr('subject'), 'status' => $t->status])->values()]);
+            'open_requests' => $open->map(fn ($t) => ['ref' => $t->ref, 'subject' => $t->tr('subject'), 'status' => $t->status])->values(),
+            // Owner-only: wallet credit can pay a due amount when the wallet "gateway" is switched on in admin.
+            'wallet' => ['enabled' => ! empty(((array) \App\Support\Settings::get('payments.gateways', []))['wallet']), 'balance' => (int) round((float) $this->u($r)->wallet_balance)],
+            'next_due' => (fn ($i) => $i ? ['id' => $i->id, 'seq' => $i->seq, 'amount' => (int) round((float) $i->amount), 'due_date' => $i->due_date?->toDateString()] : null)(
+                $b->instalments()->whereIn('status', ['due', 'overdue', 'upcoming'])->orderBy('seq')->first()),
+        ]);
     }
 
     /**
