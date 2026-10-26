@@ -18,7 +18,7 @@ for (const p of ['', '/bookings', '/bookings/MSF-26-48213', '/bookings/MSF-26-48
   ok(`account${p || '/'}`, r.status() === 200 && new URL(page.url()).pathname === `/en/account${p}` && (await page.locator('h1').count()) === 1, (await page.locator('h1').first().textContent())?.trim().slice(0, 40));
 }
 await page.goto(`${FE}/bn/account`, { waitUntil: 'networkidle', timeout: 120000 });
-ok('account bn', /স্বাগতম/.test(await page.locator('main').textContent()));
+ok('account bn', new URL(page.url()).pathname === '/bn/account' && (await page.getAttribute('html', 'lang')) === 'bn' && (await page.locator('h1').count()) === 1, `${page.url()} ${(await page.locator('h1').first().textContent().catch(() => ''))?.trim()}`);
 // checkout: activity, test gateway, success
 await page.goto(`${FE}/en/booking?activity=old-dhaka-food-walk&adults=2`, { waitUntil: 'networkidle', timeout: 120000 });
 const hasCk = await page.locator('#ck-h0').isVisible().catch(() => false);
