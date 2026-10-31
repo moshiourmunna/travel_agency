@@ -21,6 +21,9 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        // Comma list of proxy IPs/CIDRs, or * behind a PaaS/CDN load balancer (TRUSTED_PROXIES).
+        $proxies = (string) config('musafir.trusted_proxies', '127.0.0.1');
+        \Illuminate\Http\Middleware\TrustProxies::at($proxies === '*' ? '*' : array_values(array_filter(array_map('trim', explode(',', $proxies)))));
         Model::preventLazyLoading(! $this->app->isProduction());
         Model::preventAccessingMissingAttributes(! $this->app->isProduction());
 

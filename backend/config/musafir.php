@@ -35,4 +35,5 @@ return [
     'default_locale' => 'en',
     'currency' => 'BDT',
     'timezone_display' => 'Asia/Dhaka',
+    'trusted_proxies' => env('TRUSTED_PROXIES', '127.0.0.1'),
 ];

@@ -23,3 +23,26 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
+
+# Static asset caching (Apache / cPanel). Nginx equivalents are in DEPLOYMENT.md.
+<IfModule mod_headers.c>
+    # Vite build output is content-hashed
+    <If "%{REQUEST_URI} =~ m#^/build/assets/#">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </If>
+    # Fonts and brand files
+    <If "%{REQUEST_URI} =~ m#^/(fonts|brand)/#">
+        Header set Cache-Control "public, max-age=2592000"
+    </If>
+    # Uploaded media: a replaced file gets a new media id, so its URL changes
+    <If "%{REQUEST_URI} =~ m#^/storage/#">
+        Header set Cache-Control "public, max-age=2592000"
+        Header set X-Content-Type-Options "nosniff"
+        # defence in depth for uploaded SVG/PDF opened directly
+        Header set Content-Security-Policy "default-src 'none'; img-src data:; style-src 'unsafe-inline'; sandbox"
+    </If>
+</IfModule>
+<IfModule mod_mime.c>
+    AddType image/webp .webp
+    AddType font/woff2 .woff2
+</IfModule>

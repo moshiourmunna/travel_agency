@@ -37,7 +37,7 @@ return Application::configure(basePath: dirname(__DIR__))
         // Gateways POST back to /pay/* from their own domains (verified via their APIs / signed URLs instead).
         $middleware->append(\App\Http\Middleware\SecurityHeaders::class);
         $middleware->preventRequestForgery(except: ['pay/*']);
-        $middleware->trustProxies(at: env('TRUSTED_PROXIES', '127.0.0.1'));
+        // Trusted proxies come from config (musafir.trusted_proxies) in AppServiceProvider so `config:cache` keeps working.
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(
