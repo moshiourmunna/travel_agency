@@ -35,6 +35,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'traveller' => \App\Http\Middleware\EnsureTraveller::class,
         ]);
         // Gateways POST back to /pay/* from their own domains (verified via their APIs / signed URLs instead).
+        $middleware->append(\App\Http\Middleware\SecurityHeaders::class);
         $middleware->preventRequestForgery(except: ['pay/*']);
         $middleware->trustProxies(at: env('TRUSTED_PROXIES', '127.0.0.1'));
     })
