@@ -40,6 +40,8 @@ const security = [
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   trailingSlash: false,
+  // NEXT_OUTPUT=standalone → self-contained .next/standalone/server.js (Passenger/cPanel "Node.js app", Docker, PaaS); default keeps `next start`.
+  ...(process.env.NEXT_OUTPUT === 'standalone' ? { output: 'standalone' as const } : {}),
   compress: true,
   turbopack: { root: path.resolve(__dirname, '..') },
   // Images come pre-sized from the media library (webp 480/800/1600 srcset, see components/ui/Picture.tsx), so the Next

@@ -1,3 +1,4 @@
+import { usePage } from '@inertiajs/react';
 import { useEffect, useRef, useState } from 'react';
 import { Icon } from '@/components/Icon';
 import { Switch, cx, useConfirm } from '@/components/ui';
@@ -227,10 +228,11 @@ function SeoField({ value, onChange, path }: { value: any; onChange: (v: any) =>
   const set = (k: string, x: any) => onChange({ ...v, [k]: x });
   const title = v.meta_title?.en || data.title?.en || data.name?.en || '';
   const desc = v.meta_description?.en || data.summary?.en || data.excerpt?.en || '';
+  const host = (() => { try { return new URL((usePage().props as any).app?.frontend ?? '').host; } catch { return 'example.com'; } })();
   return (
     <div className="space-y-5">
       <div className="rounded-xl border border-ink-100 bg-white p-4 dark:border-ink-800 dark:bg-ink-900" aria-label={t('Google preview', 'গুগল প্রিভিউ')}>
-        <p className="text-xs text-emerald-700 dark:text-emerald-400">musafir.com.bd › {data.slug || '…'}</p>
+        <p className="text-xs text-emerald-700 dark:text-emerald-400">{host} › {data.slug || '…'}</p>
         <p className="mt-0.5 truncate text-lg text-[#1a0dab] dark:text-sky-300">{(title || t('Page title', 'পেজের শিরোনাম')).slice(0, 60)} | Musafir</p>
         <p className="mt-0.5 line-clamp-2 text-sm text-ink-600 dark:text-ink-300">{desc.slice(0, 160) || t('Description shown under the title in search results.', 'সার্চ ফলাফলে শিরোনামের নিচে দেখানো বিবরণ।')}</p>
       </div>

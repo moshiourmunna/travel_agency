@@ -49,7 +49,9 @@ return [
 
         'public' => [
             'driver' => 'local',
-            'root' => storage_path('app/public'),
+            // Hosts that forbid symlinks (some shared hosting): PUBLIC_DISK_ROOT=/abs/path/to/public/storage writes uploads straight
+            // into the web root instead of needing `php artisan storage:link`.
+            'root' => env('PUBLIC_DISK_ROOT') ?: storage_path('app/public'),
             'url' => rtrim(env('APP_URL', 'http://localhost'), '/').'/storage',
             'visibility' => 'public',
             'throw' => false,

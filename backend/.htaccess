@@ -1,0 +1,10 @@
+# Only used when the host's document root must point at this backend folder (e.g. cPanel without a custom docroot):
+# everything is served from public/, and nothing else (.env, vendor, storage …) is reachable.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    # every URL maps into public/ (so /storage/… is public/storage/…, never the private storage/ folder)
+    RewriteRule ^((?!public/).*)$ public/$1 [L]
+</IfModule>
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
