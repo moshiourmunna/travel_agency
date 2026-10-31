@@ -14,6 +14,10 @@ import { getI18n } from '@/lib/i18n';
 import { breadcrumbJsonLd, buildMetadata, JsonLd } from '@/lib/seo';
 import { getSite, siteUrl } from '@/lib/site';
 
+// Slugs not known at build (new admin content, or a build without the API) render on first request, then cache (ISR).
+// Explicit because the [lang] layout sets dynamicParams = false for the locale segment.
+export const dynamicParams = true;
+
 export async function generateStaticParams() {
   try { return (await api<{ data: { slug: string }[] }>('hotels', { lang: 'en', tags: ['hotels'], query: { per_page: 60 } })).data.map((d) => ({ slug: d.slug })); } catch { return []; }
 }

@@ -18,7 +18,8 @@ export const viewport: Viewport = {
 };
 
 export const generateStaticParams = () => LOCALES.map((lang) => ({ lang }));
-export const dynamicParams = false;
+// No `dynamicParams = false` here: it would also apply to every child [slug] and 404 content created after the build.
+// Unknown locales are redirected by proxy.ts and rejected below (isLang → notFound).
 
 /* Runs before paint: applies the saved/system theme (no flash) and remembers the language. */
 const THEME_JS = `(function(){try{var d=document.documentElement,t=localStorage.getItem('musafir-theme');if(t)t=t.replace(/"/g,'');if(t==='dark'||(!t&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches))d.classList.add('dark');localStorage.setItem('musafir-lang',d.lang)}catch(e){}})();`;

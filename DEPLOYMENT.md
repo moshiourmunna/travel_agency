@@ -34,10 +34,10 @@ No Redis, root or supervisor needed: cache, sessions and queue use the database,
   - `NEXT_PUBLIC_SITE_URL`
   - `REVALIDATE_SECRET`
   - `MEDIA_ORIGINS` (only when media is served from another origin or a CDN)
-- [ ] With the backend reachable: `bash scripts/build-frontend.sh`. Pages are pre-rendered from the API, and admin edits refresh them instantly through `/api/revalidate`.
+- [ ] With the backend reachable: `bash scripts/build-frontend.sh`. Pages are pre-rendered from the API (if the API can't be reached, the build still passes and pages render on first request), and admin edits refresh them instantly through `/api/revalidate`.
 - [ ] Run it:
   - VPS: `npm run start` (`PORT=3000`) behind nginx/Apache, kept alive by pm2 or systemd
-  - cPanel/Passenger/PaaS: build with `NEXT_OUTPUT=standalone` and start file `.next/standalone/server.js`
+  - cPanel/Passenger/PaaS: build with `NEXT_OUTPUT=standalone` and start file `.next/standalone/frontend/server.js`
   - Upload-only hosts: use `dist/musafir-frontend-*.tar.gz` from `scripts/package-release.sh`
 - [ ] Rebuild after every frontend code change. Content changes don't need a rebuild.
 

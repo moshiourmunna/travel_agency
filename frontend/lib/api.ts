@@ -1,5 +1,6 @@
 import 'server-only';
 import { notFound } from 'next/navigation';
+import { connection } from 'next/server';
 import type { Lang } from './format';
 
 const API = (process.env.API_URL || 'http://127.0.0.1:8000').replace(/\/$/, '');
@@ -21,10 +22,18 @@ export async function api<T = any>(path: string, { lang, tags = [], revalidate =
   const qs = new URLSearchParams({ lang });
   for (const [k, v] of Object.entries(query ?? {})) if (v !== undefined && v !== null && v !== '') qs.set(k, String(v));
   const url = `${API}/api/v1/${path.replace(/^\//, '')}${path.includes('?') ? '&' : '?'}${qs}`;
-  const res = await fetch(url, {
-    headers: { Accept: 'application/json', 'Accept-Language': lang, 'X-Musafir-Ssr': SSR },
-    next: { tags: ['all', ...tags], revalidate },
-  });
+  let res: Response;
+  try {
+    res = await fetch(url, {
+      headers: { Accept: 'application/json', 'Accept-Language': lang, 'X-Musafir-Ssr': SSR },
+      next: { tags: ['all', ...tags], revalidate },
+    });
+  } catch (e) {
+    // API not reachable while building (CI / build machine without the backend): don't fail the build — this page
+    // opts into request-time rendering instead (fetches stay cached by tag). Rebuild with the API up to pre-render again.
+    if (process.env.NEXT_PHASE === 'phase-production-build') await connection();
+    throw e;
+  }
   if (res.status === 404) {
     if (allow404) return null as T;
     notFound();

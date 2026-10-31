@@ -14,6 +14,10 @@ import { getSite, siteUrl } from '@/lib/site';
 
 const load = cache((slug: string, lang: Lang) => apiData<any>(`posts/${slug}`, { lang, tags: ['posts', `post:${slug}`] }));
 
+// Slugs not known at build (new admin content, or a build without the API) render on first request, then cache (ISR).
+// Explicit because the [lang] layout sets dynamicParams = false for the locale segment.
+export const dynamicParams = true;
+
 export async function generateStaticParams() {
   const r = await api<{ data: { slug: string }[] }>('posts', { lang: 'en', tags: ['posts'], query: { per_page: 48 } }).catch(() => ({ data: [] }));
   return r.data.flatMap((p) => ['en', 'bn'].map((lang) => ({ lang, slug: p.slug })));
