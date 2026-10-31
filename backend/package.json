@@ -6,7 +6,8 @@
         "build": "vite build",
         "dev": "vite",
         "types": "tsc --noEmit",
-        "test": "vitest run"
+        "test": "vitest run",
+        "icons": "node ../tooling/gen_admin_icons.mjs"
     },
     "devDependencies": {
         "@testing-library/jest-dom": "^6.9.1",
