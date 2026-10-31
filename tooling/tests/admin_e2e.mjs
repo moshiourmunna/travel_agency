@@ -6,6 +6,7 @@
 import { chromium } from 'playwright-core';
 import { execFileSync } from 'node:child_process';
 import path from 'node:path';
+import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 const ADMIN = process.argv[2] || 'http://127.0.0.1:8000/admin';
 const SITE = process.argv[3] || 'http://localhost:3000';
@@ -168,6 +169,39 @@ const portal = async (p) => { await tp.goto(SITE + p, { waitUntil: 'networkidle'
   await page.context().close();
 }
 await tctx.close();
+
+// two-step sign-in (TOTP): set up from My profile, sign in with a code, then turn it off again
+{
+  const totp = (b32) => {
+    const A = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567'; let bits = '';
+    for (const c of b32.replace(/[^A-Z2-7]/gi, '').toUpperCase()) bits += A.indexOf(c).toString(2).padStart(5, '0');
+    const key = Buffer.from(bits.match(/.{8}/g).map((b) => parseInt(b, 2)));
+    const msg = Buffer.alloc(8); msg.writeUInt32BE(Math.floor(Date.now() / 30000), 4);
+    const h = crypto.createHmac('sha1', key).update(msg).digest(); const o = h[19] & 15;
+    return String(((h.readUInt32BE(o) & 0x7fffffff) % 1e6)).padStart(6, '0');
+  };
+  const page = await staff('support');
+  await page.goto(`${ADMIN}/profile`, { waitUntil: 'networkidle' });
+  await page.click('[data-2fa-enable]'); await page.fill('[data-2fa-card] input[type=password]', 'password'); await page.click('[data-2fa-password-submit]');
+  const secret = (await page.locator('[data-2fa-secret]').textContent({ timeout: 10000 })).trim();
+  ok('2fa: QR + key shown', secret.replace(/\s/g, '').length === 32 && (await page.locator('img[src^="data:image/svg"]').count()) === 1);
+  await page.locator('[data-2fa-card] input[autocomplete=one-time-code]').fill(totp(secret)); await page.click('[data-2fa-confirm]');
+  await page.locator('[data-recovery-codes]').waitFor({ timeout: 10000 }).catch(() => {});
+  ok('2fa: enabled with 8 recovery codes', (await page.locator('[data-recovery-codes] li').count()) === 8);
+  const ctx2 = await browser.newContext(); const p2 = await ctx2.newPage();
+  await p2.goto(`${ADMIN}/login`); await p2.fill('#email', 'support@musafir.test'); await p2.fill('#password', 'password');
+  await Promise.all([p2.waitForURL(/two-factor/), p2.click('button[type=submit]')]);
+  ok('2fa: password step leads to code step', p2.url().includes('/login/two-factor'));
+  await new Promise((r) => setTimeout(r, (30 - (Date.now() / 1000) % 30 + 1) * 1000)); // next 30-s step (the set-up code is single-use)
+  await p2.fill('#code', totp(secret));
+  await Promise.all([p2.waitForURL((u) => !u.pathname.includes('/login')), p2.click('[data-2fa-submit]')]);
+  ok('2fa: signed in with the app code', (await p2.locator('[data-nav]').count()) > 0);
+  await ctx2.close();
+  await page.goto(`${ADMIN}/profile`, { waitUntil: 'networkidle' });
+  await page.getByRole('button', { name: /Turn off/ }).click(); await page.fill('[data-2fa-card] input[type=password]', 'password'); await page.click('[data-2fa-password-submit]');
+  ok('2fa: turned off again', await page.locator('[data-2fa-card=off]').waitFor({ timeout: 10000 }).then(() => true, () => false));
+  await page.context().close();
+}
 console.log(fails ? `FAILS ${fails}` : 'ALL PASS');
 await browser.close();
 process.exit(fails ? 1 : 0);

@@ -38,7 +38,13 @@ class User extends Authenticatable
             'miles' => 'integer',
             'nid_enc' => 'encrypted',
             'two_factor_secret' => 'encrypted',
+            'two_factor_recovery_codes' => 'encrypted:array',
         ];
+    }
+
+    public function hasTwoFactor(): bool
+    {
+        return $this->two_factor_secret && $this->two_factor_confirmed_at;
     }
 
     public function isStaff(): bool

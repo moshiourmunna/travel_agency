@@ -46,10 +46,24 @@ class AuthController extends Controller
             throw ValidationException::withMessages(['email' => __('admin.no_access')]);
         }
         RateLimiter::clear($key);
-        Auth::guard('web')->login($u, (bool) ($data['remember'] ?? false));
+        if ($u->hasTwoFactor()) { // password OK → second step; nothing is signed in yet
+            $r->session()->regenerate();
+            $r->session()->put('admin_2fa', ['id' => $u->id, 'remember' => (bool) ($data['remember'] ?? false), 'until' => now()->addMinutes(5)->timestamp]);
+
+            return redirect()->route('admin.2fa');
+        }
+
+        return self::complete($r, $u, (bool) ($data['remember'] ?? false));
+    }
+
+    /** Final step of a staff sign-in (after password, and the authenticator code when enabled). */
+    public static function complete(Request $r, User $u, bool $remember, string $via = 'password'): RedirectResponse
+    {
+        Auth::guard('web')->login($u, $remember);
         $r->session()->regenerate();
+        $r->session()->put('admin_seen', now()->timestamp);
         $u->forceFill(['last_login_at' => now()])->save();
-        activity('admin')->causedBy($u)->performedOn($u)->event('login')->withProperties(['ip' => $r->ip()])->log('login');
+        activity('admin')->causedBy($u)->performedOn($u)->event('login')->withProperties(['ip' => $r->ip(), 'via' => $via])->log('login');
 
         return redirect()->intended(route('admin.dashboard'));
     }
@@ -80,6 +94,7 @@ class AuthController extends Controller
         $u = $r->user();
 
         return Inertia::render('Profile', [
+            'two_factor' => ['enabled' => $u->hasTwoFactor(), 'required' => $u->getRoleNames()->intersect(config('musafir.admin_2fa_roles'))->isNotEmpty(), 'recovery_left' => count($u->two_factor_recovery_codes ?? [])],
             'profile' => ['name' => $u->name, 'email' => $u->email, 'phone' => $u->phone, 'title' => $u->title, 'branch' => $u->branch, 'role' => $u->getRoleNames()->first(), 'last_login_at' => $u->last_login_at?->format('Y-m-d H:i')],
             'logins' => LoginActivity::where('user_id', $u->id)->latest('created_at')->limit(10)->get()->map(fn ($l) => ['at' => $l->created_at?->timezone(config('app.timezone'))->format('Y-m-d H:i'), 'ip' => $l->ip, 'agent' => Str::limit((string) $l->user_agent, 80), 'success' => $l->success, 'guard' => $l->guard]),
         ]);

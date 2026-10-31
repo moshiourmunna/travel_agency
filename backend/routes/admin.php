@@ -13,6 +13,8 @@ Route::get('health', Admin\HealthController::class)->name('health');
 Route::middleware(AdminLocale::class)->group(function () {
     Route::get('login', [Admin\AuthController::class, 'show'])->name('login');
     Route::post('login', [Admin\AuthController::class, 'login'])->middleware('throttle:20,1')->name('login.attempt');
+    Route::get('login/two-factor', [Admin\TwoFactorController::class, 'show'])->name('2fa');
+    Route::post('login/two-factor', [Admin\TwoFactorController::class, 'verify'])->middleware('throttle:20,1')->name('2fa.verify');
 });
 
 Route::middleware([AdminAuthenticate::class, AdminLocale::class, FlushRevalidation::class])->group(function () {
@@ -21,6 +23,10 @@ Route::middleware([AdminAuthenticate::class, AdminLocale::class, FlushRevalidati
     Route::get('profile', [Admin\AuthController::class, 'profile'])->name('profile');
     Route::put('profile', [Admin\AuthController::class, 'updateProfile'])->name('profile.update');
     Route::put('profile/password', [Admin\AuthController::class, 'password'])->name('profile.password');
+    Route::post('profile/two-factor', [Admin\TwoFactorController::class, 'setup'])->middleware('throttle:10,1')->name('profile.2fa.setup');
+    Route::post('profile/two-factor/confirm', [Admin\TwoFactorController::class, 'confirm'])->middleware('throttle:10,1')->name('profile.2fa.confirm');
+    Route::post('profile/two-factor/recovery', [Admin\TwoFactorController::class, 'recovery'])->middleware('throttle:10,1')->name('profile.2fa.recovery');
+    Route::delete('profile/two-factor', [Admin\TwoFactorController::class, 'disable'])->middleware('throttle:10,1')->name('profile.2fa.disable');
 
     Route::get('/', Admin\DashboardController::class)->name('dashboard');
     Route::get('search', [Admin\DashboardController::class, 'search'])->name('search');

@@ -43,6 +43,8 @@ class HandleInertiaRequests extends Middleware
                 'error' => $request->session()->get('error'),
                 'warning' => $request->session()->get('warning'),
                 'revalidated' => $request->session()->get('revalidated'),
+                'two_factor_setup' => $request->session()->get('two_factor_setup'),
+                'recovery_codes' => $request->session()->get('recovery_codes'),
             ]),
         ];
     }

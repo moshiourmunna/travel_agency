@@ -18,4 +18,11 @@ return [
     'logged_out' => 'You have been signed out.',
     'forbidden' => 'You do not have permission for that.',
     'purged' => 'The whole public website cache was refreshed.',
+    '2fa_expired' => 'Your sign-in step expired. Please enter your password again.',
+    '2fa_invalid' => 'That code is not valid. Check the time on your phone and try again.',
+    '2fa_enabled' => 'Two-step sign-in is on. Keep your recovery codes somewhere safe.',
+    '2fa_disabled' => 'Two-step sign-in is off.',
+    '2fa_required_role' => 'Your role must use two-step sign-in, so it cannot be turned off.',
+    '2fa_must_setup' => 'Your role must use two-step sign-in. Set up an authenticator app below to continue.',
+    'session_idle' => 'You were signed out after a period of inactivity.',
 ];
