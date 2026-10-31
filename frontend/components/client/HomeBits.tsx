@@ -58,7 +58,7 @@ export function QuickFilter({ label, options, header, children, rowClass = 'mb-8
 }
 
 /** Animated number (counts up once when visible). SSR renders the final value. */
-export function CountUp({ value, suffix = '', format }: { value: number; suffix?: string; format: 'lakh' | 'plain' }) {
+export function CountUp({ value, suffix = '', format, className = 'text-2xl text-brand-700 dark:text-brand-300' }: { value: number; suffix?: string; format: 'lakh' | 'plain'; className?: string }) {
   const { lang } = useSite();
   const ref = useRef<HTMLElement>(null);
   const [n, setN] = useState(value);
@@ -76,5 +76,5 @@ export function CountUp({ value, suffix = '', format }: { value: number; suffix?
     return () => io.disconnect();
   }, [value]);
   const s = format === 'lakh' ? String(n).replace(/(\d)(?=(\d\d)+\d$)/g, '$1,') : String(n);
-  return <b ref={ref} className="block text-2xl font-extrabold text-brand-700 dark:text-brand-300" suppressHydrationWarning>{digits(s, lang)}{suffix}</b>;
+  return <b ref={ref} className={`block font-extrabold ${className}`} suppressHydrationWarning>{digits(s, lang)}{suffix}</b>;
 }

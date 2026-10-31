@@ -41,7 +41,7 @@ function Hero({ i, s }: P) {
 function TrustStrip({ s }: P) {
   return (
     <section className="border-b border-ink-100 bg-white dark:border-ink-800 dark:bg-ink-900" aria-label={s.data.label}>
-      <div className="wrap no-scrollbar flex gap-8 overflow-x-auto py-5 lg:justify-between">
+      <div className="wrap no-scrollbar flex gap-8 overflow-x-auto py-5 focus-visible:outline-2 focus-visible:outline-brand-600 lg:justify-between" tabIndex={0}>
         {s.data.items.map((x: any, k: number) => (
           <div key={k} className="flex shrink-0 items-center gap-3"><span className="grid h-11 w-11 place-items-center rounded-xl bg-brand-50 text-brand-700 dark:bg-brand-900/40 dark:text-brand-300"><Icon name={x.icon} /></span><div><p className="text-sm font-bold text-ink-900 dark:text-white">{x.title}</p><p className="text-xs muted">{x.text}</p></div></div>
         ))}
@@ -279,7 +279,7 @@ function Testimonials({ i, s }: P) {
           <div><p className="eyebrow text-brand-300">{d.eyebrow}</p><h2 className="h-section text-white">{d.title}</h2></div>
           <div className="flex flex-wrap gap-3">{(d.platforms ?? []).map((p: any) => <div key={p.name} className="rounded-2xl border border-white/10 bg-white/5 px-4 py-2.5"><p className="text-xs text-brand-200">{p.name}</p><p className="flex items-center gap-1.5"><b className="text-lg">{i.d(p.rating)}</b><Stars i={i} rating={p.rating} className="h-3.5 w-3.5" /><span className="text-xs text-brand-200">({i.num(p.count)})</span></p></div>)}</div>
         </div>
-        <div className="no-scrollbar -mx-4 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-px-4 px-4 pb-2 md:mx-0 md:grid md:scroll-px-0 md:grid-cols-3 md:px-0 [&_.card]:border-white/10 [&_.card]:bg-white/5 [&_blockquote]:text-ink-100 [&_figcaption]:border-white/10 [&_p.font-bold]:text-white [&_.muted]:text-brand-200">
+        <div tabIndex={0} className="no-scrollbar -mx-4 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-px-4 px-4 pb-2 md:mx-0 md:grid md:scroll-px-0 md:grid-cols-3 md:px-0 [&_.card]:border-white/10 [&_.card]:bg-white/5 [&_blockquote]:text-ink-100 [&_figcaption]:border-white/10 [&_p.font-bold]:text-white [&_.muted]:text-brand-200">
           {(s.items ?? []).map((r: any) => <div key={r.id} className="w-[85%] shrink-0 snap-start md:w-auto"><ReviewCard i={i} r={r} /></div>)}
         </div>
         {d.link ? <div className="mt-8 text-center"><Link className="btn btn-white" href={i.u(d.link.url)}>{d.link.label}</Link></div> : null}

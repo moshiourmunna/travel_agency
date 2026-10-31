@@ -33,7 +33,7 @@ export default async function AboutPage({ params }: PageProps<'/[lang]/about'>) 
         <div className="grid grid-cols-2 gap-4">{(d.photos ?? []).slice(0, 2).map((p: any, k: number) => <Picture key={k} img={p.image} alt={p.alt} className={`aspect-[3/4] w-full rounded-3xl object-cover ${k ? 'mt-10' : ''}`} sizes="(min-width: 1024px) 25vw, 50vw" width={480} height={640} />)}</div>
       </div></section>
       {site.stats?.length ? <section className="bg-brand-900 py-14 text-white"><dl className="wrap grid grid-cols-2 gap-8 text-center md:grid-cols-4">{site.stats.map((s: any, k: number) => (
-        <div key={k} className="flex flex-col-reverse"><dt className="mt-1 text-sm text-brand-200">{s.label}</dt><dd className="text-4xl font-extrabold"><CountUp value={s.value} suffix={s.suffix ?? ''} format="lakh" /></dd></div>
+        <div key={k} className="flex flex-col-reverse"><dt className="mt-1 text-sm text-brand-200">{s.label}</dt><dd><CountUp value={s.value} suffix={s.suffix ?? ''} format="lakh" className="text-4xl text-white" /></dd></div>
       ))}</dl></section> : null}
       <section className="section"><div className="wrap"><SecHead eyebrow={d.values_eyebrow} title={d.values_title} center />
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{(d.values ?? []).map((v: any, k: number) => <div key={k} className="card p-6"><span className="grid h-12 w-12 place-items-center rounded-2xl bg-brand-50 text-brand-700 dark:bg-brand-900/40 dark:text-brand-300"><Icon name={v.icon} className="h-6 w-6" /></span><h3 className="mt-4 text-lg font-bold">{v.title}</h3><p className="mt-1 text-sm muted">{v.text}</p></div>)}</div>

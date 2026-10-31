@@ -38,7 +38,7 @@ it('imports demo photos into the media library with responsive conversions', fun
     $asset = MediaAsset::where('key', 'maldives')->firstOrFail();
     $img = $asset->toImage('en');
     expect($img['src'])->toContain('maldives')
-        ->and($img['srcset'])->toHaveCount(3)
+        ->and($img['srcset'])->toHaveCount(4)
         ->and($img['width'])->toBe(1600);
 });
 

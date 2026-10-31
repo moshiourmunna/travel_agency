@@ -11,7 +11,7 @@ it('lists published tours with card shape and facets', function () {
     expect($r->json('data'))->toHaveCount(16)
         ->and($r->json('meta.facets.region'))->toMatchArray(['bd' => 5, 'intl' => 11])
         ->and($r->json('data.0'))->toHaveKeys(['slug', 'title', 'price', 'days', 'rating', 'image', 'cancellation', 'categories']);
-    expect($r->json('data.0.image.srcset'))->toHaveCount(3);
+    expect($r->json('data.0.image.srcset'))->toHaveCount(4); // thumb, card, hero, wide
 });
 
 it('filters and sorts tours', function () {

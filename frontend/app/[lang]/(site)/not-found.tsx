@@ -16,5 +16,6 @@ export default async function NotFound() {
       home: t('Home', 'হোম'), deals: t('Deals', 'ডিল'), contact: t('Contact', 'যোগাযোগ'),
     }] as const;
   })));
-  return <NotFoundView copy={copy as any} icon={<Icon name="search" className="h-4 w-4" />} />;
+  // <title> rendered in the tree too: Next drops the metadata title of a not-found page after hydration (axe document-title).
+  return <><title>404 — Page not found · Musafir</title><NotFoundView copy={copy as any} icon={<Icon name="search" className="h-4 w-4" />} /></>;
 }
