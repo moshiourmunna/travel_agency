@@ -176,8 +176,22 @@ console errors; security checks. Then repeat key browser E2E on the user's PC (c
   simulated bKash → booking-confirmed MSF-26-22630, no JS errors. Servers stopped afterwards (php serve, next start); Laragon MySQL and codex node PID 3328 left alone.
 - docs/LOCAL_SETUP.md already covers php.ini upload limits (upload_max_filesize=12M, post_max_size=14M) and the portal login.
 
+## M6 — IN PROGRESS (admin panel)  started 2026-11-01 BDT
+Design: declarative resource engine (backend/app/Admin: Field, Col, Filter, Action, Resource, Registry) + generic Inertia pages
+(Resource/Index, Resource/Form) + custom pages (Dashboard, Media, Settings, Translations, Menus, Roles, Bookings/Show, Tickets/Show, Profile).
+- [x] Engine + 58 resources (app/Admin/Resources/*, slugs in Registry::RESOURCES; nav groups Sales/Catalog/Visa desk/Content/Organisation).
+- [x] Controllers: Resource (CRUD, bulk, actions, reorder, CSV export, activity log diff), Auth, Dashboard (+global search), Media (upload/replace/
+      usage-checked soft delete/folders), Settings (+"refresh website" purge), Translations (+CSV import/export), Menus (2-level tree), Roles (matrix),
+      Booking desk (status/assign/note/offline payment/refund/notify), Tickets (reply/internal note/status/assignee), private files.
+- [x] Revalidation: CacheTags::for(model) → Revalidator (collected per request by FlushRevalidation middleware) → POST {frontend}/api/revalidate
+      {tags, expire:0}. Frontend route now honours `expire` (revalidateTag(t,{expire:0})) with timing-safe secret check.
+- [x] Frontend [...missing]: admin Redirects (301/302) + admin-created pages at /{slug} rendered with the article (Legal) layout.
+- [ ] React admin UI (layout, field components, pages) + npm run build
+- [ ] Pest admin tests; browser E2E per role (tooling/tests/admin_e2e.mjs); docs; PC sync
+Checks: `php artisan tinker /tmp/chk.php`-style smoke (every resource: columns/filters/sections/hydrate/detail) passes; Pest 115/115 still green.
+
 ## RESUME HERE (when owner says "continue")
-1. M6 — Admin panel (Laravel + React, admin.<domain> configurable): RBAC roles from seeded staff logins, CRUD for every CMS/catalogue/commerce/CRM table,
+1. M6 — IN PROGRESS, see the M6 section above for what is done / left. Original scope: Admin panel (Laravel + React, admin.<domain> configurable): RBAC roles from seeded staff logins, CRUD for every CMS/catalogue/commerce/CRM table,
    settings UI (incl. commerce.referral_*, review_miles, cancellation_fee, payments.gateways), media library, bookings/payments ops (bank-slip verify, refunds),
    tickets, reviews moderation, translations, menus/home sections, SEO/redirects. Admin save → POST frontend /api/revalidate with `{ expire: 0 }` for instant updates.
 2. M7 — security + performance hardening (headers/CSP, rate limits review, queues, caching, image optimisation).

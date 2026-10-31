@@ -16,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        //
+        $this->app->singleton(\App\Support\Revalidator::class);
     }
 
     public function boot(): void
@@ -37,5 +37,20 @@ class AppServiceProvider extends ServiceProvider
         Setting::deleted(fn () => Settings::forget());
         Translation::saved(fn () => Cache::forget('musafir.translations.version'));
         Translation::deleted(fn () => Cache::forget('musafir.translations.version'));
+
+        // Admin saves -> purge the matching Next.js cache tags (collected per request, flushed by FlushRevalidation).
+        foreach (\App\Support\CacheTags::MODELS as $class) {
+            $hook = function (Model $m) {
+                $r = app(\App\Support\Revalidator::class);
+                if ($r->collecting()) {
+                    $r->add(\App\Support\CacheTags::for($m));
+                }
+            };
+            $class::saved($hook);
+            $class::deleted($hook);
+            if (method_exists($class, 'restored')) {
+                $class::restored($hook);
+            }
+        }
     }
 }
