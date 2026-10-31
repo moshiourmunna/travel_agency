@@ -64,7 +64,7 @@ class ResourceController extends Controller
         $key = ltrim($sort, '-');
         $col = collect($res->columns())->first(fn (Col $c) => $c->sortable && $c->sortKey === $key);
         if ($col) {
-            if ($col->type === 'tr' && ! str_contains($key, '.')) {
+            if ($col->type === 'tr' && ! str_contains($key, '.') && in_array($key, (new ($res->model))->translatable ?? [], true)) {
                 $q->orderByRaw("JSON_UNQUOTE(JSON_EXTRACT({$table}.{$key}, '$.\"".(app()->getLocale() === 'bn' ? 'bn' : 'en')."\"')) {$dir}");
             } else {
                 $q->orderBy(str_contains($key, '.') ? $key : "{$table}.{$key}", $dir);

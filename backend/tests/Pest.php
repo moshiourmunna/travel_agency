@@ -33,3 +33,4 @@ function newTraveller(array $attrs = []): App\Models\User
 
     return $u->refresh();
 }
+require_once __DIR__.'/Feature/Admin/AdminHelpers.php';

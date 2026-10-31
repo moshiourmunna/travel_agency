@@ -125,11 +125,16 @@ abstract class Resource
         $model = $q->getModel();
         $table = $model->getTable();
         $like = '%'.str_replace(['%', '_'], ['\%', '\_'], mb_strtolower($term)).'%';
-        $q->where(function ($w) use ($table, $like, $model) {
+        // no explicit search columns: translatable texts + the usual identifier columns
+        $cols = $this->search ?: array_values(array_unique(array_merge(
+            array_slice($model->translatable ?? [], 0, 3),
+            array_filter(['name', 'title', 'slug', 'email', 'code', 'ref', 'key'], fn ($c) => \Illuminate\Support\Facades\Schema::hasColumn($table, $c)),
+        )));
+        $q->where(function ($w) use ($table, $like, $model, $cols) {
             if (\Illuminate\Support\Facades\Schema::hasColumn($table, 'search_text')) {
                 $w->orWhereRaw("LOWER({$table}.search_text) LIKE ?", [$like]);
             }
-            foreach ($this->search as $col) {
+            foreach ($cols as $col) {
                 $cast = $model->getCasts()[$col] ?? null;
                 $isJson = in_array($col, $model->translatable ?? [], true) || in_array($cast, ['array', 'json', 'object'], true);
                 $isJson ? $w->orWhereRaw("LOWER(CAST({$table}.{$col} AS CHAR)) LIKE ?", [$like]) : $w->orWhereRaw("LOWER({$table}.{$col}) LIKE ?", [$like]);

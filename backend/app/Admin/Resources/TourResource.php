@@ -103,9 +103,9 @@ class TourResource extends Resource
                 Field::money('price_from', 'Price from (per person, BDT)', 'শুরু মূল্য (জনপ্রতি, টাকা)')->required()->half(),
                 Field::money('price_was', 'Was (strike-through)', 'আগের মূল্য')->half(),
                 Field::children('priceTiers', 'Room / traveller prices', 'রুম / ভ্রমণকারী মূল্য', [
-                    Field::select('code', 'Type', 'ধরন', ['adult_twin' => 'Adult (twin)', 'adult_single' => 'Adult (single)', 'adult_triple' => 'Adult (triple)', 'child' => 'Child', 'infant' => 'Infant'])->required()->third(),
+                    Field::select('code', 'Type', 'ধরন', ['twin' => 'Twin sharing', 'triple' => 'Triple sharing', 'single' => 'Single room'])->required()->third(),
                     Field::tr('label', 'Label', 'লেবেল')->span(5),
-                    Field::money('price', 'Price', 'মূল্য')->required()->quarter(),
+                    Field::money('price', 'Fixed price', 'নির্দিষ্ট মূল্য')->quarter(),
                     Field::number('factor', 'Factor', 'গুণক')->span(12)->help('Multiplier on the base price when no fixed price is set.', 'নির্দিষ্ট মূল্য না থাকলে মূল মূল্যের গুণক।'),
                 ], 'sort'),
                 Field::children('departures', 'Departures', 'যাত্রার তারিখ', [

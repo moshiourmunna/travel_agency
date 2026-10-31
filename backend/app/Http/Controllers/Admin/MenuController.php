@@ -57,7 +57,7 @@ class MenuController extends Controller
         }
         foreach ([\App\Models\Tour::class => '/tours/', \App\Models\Destination::class => '/destinations/', \App\Models\Theme::class => '/holidays/', \App\Models\Cruise::class => '/cruises/',
             \App\Models\Activity::class => '/activities/', \App\Models\Hotel::class => '/hotels/', \App\Models\VisaProduct::class => '/visa/'] as $class => $prefix) {
-            $col = in_array('title', (new $class)->translatable ?? [], true) ? 'title' : 'name';
+            $col = collect(['title', 'name', 'country_name'])->first(fn ($c) => in_array($c, (new $class)->translatable ?? [], true));
             foreach ($class::published()->orderBy('id')->get(['id', 'slug', $col]) as $m) {
                 $out[] = ['value' => $prefix.$m->slug, 'label' => $prefix.$m->slug.' — '.$m->tr($col)];
             }

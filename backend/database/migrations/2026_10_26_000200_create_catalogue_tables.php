@@ -172,7 +172,7 @@ return new class extends Migration
         Schema::create('tour_price_tiers', function (Blueprint $t) {
             $t->id();
             $t->foreignId('tour_id')->constrained()->cascadeOnDelete();
-            $t->string('code', 24); // adult_twin | adult_single | child | infant
+            $t->string('code', 24); // twin | triple | single (Pricer + commerce.room_factors)
             $t->json('label');
             $t->decimal('price', 12, 2)->nullable();
             $t->decimal('factor', 5, 3)->nullable(); // multiplier of the departure price

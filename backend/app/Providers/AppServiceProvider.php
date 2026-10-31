@@ -33,10 +33,11 @@ class AppServiceProvider extends ServiceProvider
         RateLimiter::for('me', fn (Request $r) => Limit::perMinute((int) config('musafir.me_rate', 240))->by('me:'.($r->user()?->id ?? $r->ip())));
         RateLimiter::for('forms', fn (Request $r) => [Limit::perMinute(6)->by('f:'.$r->ip()), Limit::perDay(60)->by('fd:'.$r->ip())]);
 
-        Setting::saved(fn () => Settings::forget());
-        Setting::deleted(fn () => Settings::forget());
-        Translation::saved(fn () => Cache::forget('musafir.translations.version'));
-        Translation::deleted(fn () => Cache::forget('musafir.translations.version'));
+        // NB: closures must not return false — that halts the remaining model-event listeners (revalidation hook below).
+        Setting::saved(function () { Settings::forget(); });
+        Setting::deleted(function () { Settings::forget(); });
+        Translation::saved(function () { Cache::forget('musafir.translations.version'); });
+        Translation::deleted(function () { Cache::forget('musafir.translations.version'); });
 
         // Admin saves -> purge the matching Next.js cache tags (collected per request, flushed by FlushRevalidation).
         foreach (\App\Support\CacheTags::MODELS as $class) {

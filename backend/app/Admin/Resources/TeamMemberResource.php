@@ -65,7 +65,7 @@ class TeamMemberResource extends Resource
                 Field::tr('role', 'Role', 'পদ')->required(),
                 Field::trtext('bio', 'Short bio', 'সংক্ষিপ্ত পরিচিতি'),
                 Field::text('initials', 'Initials', 'আদ্যক্ষর')->rule('max:3')->third(),
-                Field::select('gradient', 'Card colour', 'কার্ডের রং', ['brand' => 'Brand', 'teal' => 'Teal', 'gold' => 'Gold', 'rose' => 'Rose', 'violet' => 'Violet', 'sky' => 'Sky'])->third(),
+                Field::select('gradient', 'Card colour', 'কার্ডের রং', ['from-brand-500 to-brand-800' => 'Brand', 'from-accent-400 to-accent-700' => 'Teal', 'from-gold-400 to-gold-700' => 'Gold', 'from-sky-400 to-sky-700' => 'Sky', 'from-violet-400 to-violet-700' => 'Violet', 'from-emerald-400 to-emerald-700' => 'Emerald', 'from-rose-400 to-rose-700' => 'Rose', 'from-ink-400 to-ink-700' => 'Slate'])->third(),
                 Field::number('countries_visited', 'Countries visited', 'ভ্রমণকৃত দেশ')->rule('integer')->rule('min:0')->third(),
             ]],
             ['title' => ['en' => 'Social links', 'bn' => 'সোশ্যাল লিংক'], 'fields' => $socials],
