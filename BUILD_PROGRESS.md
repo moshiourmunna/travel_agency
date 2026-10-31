@@ -187,7 +187,11 @@ Design: declarative resource engine (backend/app/Admin: Field, Col, Filter, Acti
       {tags, expire:0}. Frontend route now honours `expire` (revalidateTag(t,{expire:0})) with timing-safe secret check.
 - [x] Frontend [...missing]: admin Redirects (301/302) + admin-created pages at /{slug} rendered with the article (Legal) layout.
 - [x] React admin UI part 1 (be71398): layout, fields (tr/trtext/trhtml rich text, trlist, list, checks, image/gallery media picker, JSON editor w/ section templates, repeater/children drag reorder, seo w/ Google preview, slug, icon picker = site SVGs), Resource Index/Form, Dashboard (chart.js), Media, Settings, Profile, Login
-- [ ] React admin UI part 2: Translations, Menus, Roles, Bookings/Show, Tickets/Show + npm run build
+- [x] React admin UI part 2: Translations, Menus, Roles, Bookings/Show, Tickets/Show + npm run build (tsc clean)
+- [ ] Browser crawl per role (tooling/tests/admin_crawl.mjs) — in progress
+- Box rebuilt 2026-11-01 ~02:40 BDT (workspace restored, /opt/box lost): reinstalled static PHP 8.4.23 (/opt/box/php → /usr/local/bin/php, static-php-cli bulk),
+  MySQL 8.4.9 minimal (/opt/box/mysql, data /opt/box/data, config /opt/box/my.cnf, client wrapper /opt/box/mysqlc), composer.phar in /opt/box; apt mirrors unusable from root.
+  Demo DB reseeded (migrate --seed); Pest 115/115.
 - [ ] Pest admin tests; browser E2E per role (tooling/tests/admin_e2e.mjs); docs; PC sync
 Checks: `php artisan tinker /tmp/chk.php`-style smoke (every resource: columns/filters/sections/hydrate/detail) passes; Pest 115/115 still green.
 
@@ -197,7 +201,7 @@ Checks: `php artisan tinker /tmp/chk.php`-style smoke (every resource: columns/f
    tickets, reviews moderation, translations, menus/home sections, SEO/redirects. Admin save → POST frontend /api/revalidate with `{ expire: 0 }` for instant updates.
 2. M7 — security + performance hardening (headers/CSP, rate limits review, queues, caching, image optimisation).
 3. M8 — full test campaign (scope recorded above) on box + PC, TEST_REPORT.md.
-4. M9 — deployment guides (VPS: Nginx + PM2 + php-fpm + MySQL + SSL; non-VPS: cPanel Laravel + Node app / Vercel for Next.js), production .env checklists.
+4. M9 — deployability (scope changed by owner 2026-11-01): make sure the project deploys on any hosting (VPS, shared/cPanel, PaaS) — production build works, env-driven config, no hardcoded hosts/paths, runs without Redis/root; plus a short DEPLOYMENT.md checklist only (no step-by-step guides).
 - PC transfer rules: 4 MB chunks, sequential, CopyFromBox into C:\Users\m then move into F:\projects\tour_travel; never overwrite .env; sha256 verify.
 - Run on PC: backend `php -d upload_max_filesize=12M -d post_max_size=14M artisan serve --host=127.0.0.1 --port=8000`; frontend `npm run start` → http://localhost:3000
 
