@@ -186,7 +186,8 @@ Design: declarative resource engine (backend/app/Admin: Field, Col, Filter, Acti
 - [x] Revalidation: CacheTags::for(model) → Revalidator (collected per request by FlushRevalidation middleware) → POST {frontend}/api/revalidate
       {tags, expire:0}. Frontend route now honours `expire` (revalidateTag(t,{expire:0})) with timing-safe secret check.
 - [x] Frontend [...missing]: admin Redirects (301/302) + admin-created pages at /{slug} rendered with the article (Legal) layout.
-- [ ] React admin UI (layout, field components, pages) + npm run build
+- [x] React admin UI part 1 (be71398): layout, fields (tr/trtext/trhtml rich text, trlist, list, checks, image/gallery media picker, JSON editor w/ section templates, repeater/children drag reorder, seo w/ Google preview, slug, icon picker = site SVGs), Resource Index/Form, Dashboard (chart.js), Media, Settings, Profile, Login
+- [ ] React admin UI part 2: Translations, Menus, Roles, Bookings/Show, Tickets/Show + npm run build
 - [ ] Pest admin tests; browser E2E per role (tooling/tests/admin_e2e.mjs); docs; PC sync
 Checks: `php artisan tinker /tmp/chk.php`-style smoke (every resource: columns/filters/sections/hydrate/detail) passes; Pest 115/115 still green.
 
