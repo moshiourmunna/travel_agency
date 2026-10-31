@@ -34,7 +34,7 @@ class TicketController extends Controller
 
         return Inertia::render('Tickets/Show', [
             'ticket' => [
-                'id' => $t->id, 'ref' => $t->ref, 'subject' => $t->tr('subject'), 'status' => $t->status, 'priority' => $t->priority, 'assignee_id' => $t->assignee_id,
+                'id' => $t->id, 'ref' => $t->ref, 'subject' => $t->tr('subject'), 'status' => $t->status, 'priority' => $t->priority, 'assignee_id' => $t->assignee_id, 'booking_id' => $t->booking_id,
                 'customer' => $t->user ? ['name' => $t->user->name, 'email' => $t->user->email, 'phone' => $t->user->phone, 'href' => $r->user()->can('customers.view') ? route('admin.resource.show', ['customers', $t->user->id], false) : null] : ['name' => $t->customer_name],
                 'booking' => $t->booking ? ['ref' => $t->booking->ref, 'title' => $t->booking->tr('title'), 'href' => $r->user()->can('bookings.view') ? route('admin.bookings.show', $t->booking->id, false) : null] : null,
                 'created_at' => $t->created_at?->toIso8601String(), 'last_activity_at' => $t->last_activity_at?->toIso8601String(),
