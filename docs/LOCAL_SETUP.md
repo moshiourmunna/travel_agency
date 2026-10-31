@@ -82,7 +82,23 @@ The portal is at `/en/account` (or `/bn/account`): bookings, e-ticket, visa trac
 notifications, support chat, reviews, profile and settings (password, two-step sign-in, sessions, data export, delete account).
 Payments use the built-in **test gateway** in sandbox mode (pick bKash/Nagad/card → simulator page → Success).
 
-The admin panel arrives in M6.
+**Admin panel (M6):** http://127.0.0.1:8000/admin — sign in with any staff login above (password `password`).
+Each login has a role that limits what it sees:
+
+| Login | Role | Can do |
+|---|---|---|
+| admin@musafir.test | owner | everything, including roles & permissions and all settings |
+| sales@musafir.test | manager | catalogue (tours, cruises, hotels, activities, flights, visas, offers), bookings, customers, reports |
+| reservations@musafir.test | agent | bookings desk (status, notes, offline payments), enquiries, customers |
+| visa@musafir.test | visa | visa applications and visa products |
+| support@musafir.test | support | support tickets, enquiries, review moderation |
+| accounts@musafir.test | finance | payments, bank-transfer verification, refunds, payment settings |
+| content@musafir.test | editor | pages, home sections, menus, blog, FAQs, media, translations, SEO & redirects |
+
+- English and Bangla are edited side by side on every form. Saving anything that shows on the website refreshes the affected pages at once
+  (the admin calls `POST {FRONTEND_URL}/api/revalidate` with the changed cache tags and `expire: 0`), so the change is visible on the next page load.
+- Put the admin on its own host by setting `ADMIN_DOMAIN=admin.example.com` (and optionally `ADMIN_PATH=`) in `backend/.env`.
+- Every save, delete and status change is recorded under **System → Activity log**.
 
 ## 6. Everyday tasks
 - **Reset demo data:**

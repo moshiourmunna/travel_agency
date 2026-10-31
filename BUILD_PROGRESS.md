@@ -188,11 +188,20 @@ Design: declarative resource engine (backend/app/Admin: Field, Col, Filter, Acti
 - [x] Frontend [...missing]: admin Redirects (301/302) + admin-created pages at /{slug} rendered with the article (Legal) layout.
 - [x] React admin UI part 1 (be71398): layout, fields (tr/trtext/trhtml rich text, trlist, list, checks, image/gallery media picker, JSON editor w/ section templates, repeater/children drag reorder, seo w/ Google preview, slug, icon picker = site SVGs), Resource Index/Form, Dashboard (chart.js), Media, Settings, Profile, Login
 - [x] React admin UI part 2: Translations, Menus, Roles, Bookings/Show, Tickets/Show + npm run build (tsc clean)
-- [ ] Browser crawl per role (tooling/tests/admin_crawl.mjs) — in progress
+- [x] Browser crawl per role (tooling/tests/admin_crawl.mjs): every nav page + first edit + create page, non-nav areas must 403
 - Box rebuilt 2026-11-01 ~02:40 BDT (workspace restored, /opt/box lost): reinstalled static PHP 8.4.23 (/opt/box/php → /usr/local/bin/php, static-php-cli bulk),
   MySQL 8.4.9 minimal (/opt/box/mysql, data /opt/box/data, config /opt/box/my.cnf, client wrapper /opt/box/mysqlc), composer.phar in /opt/box; apt mirrors unusable from root.
   Demo DB reseeded (migrate --seed); Pest 115/115.
-- [ ] Pest admin tests; browser E2E per role (tooling/tests/admin_e2e.mjs); docs; PC sync
+- [x] Pest admin tests (tests/Feature/Admin: access per role, every resource index/create/edit, form round-trip of every editable resource,
+  FAQ CRUD + revalidation + activity log, settings, media, booking desk, bank-transfer verify, tickets, translations, menus, roles) — suite 148/148
+- [x] Browser E2E per role (tooling/tests/admin_e2e.mjs) 25/25: owner setting→footer, editor FAQ + UI translation→site, manager tour title→detail+listing,
+  agent traveller-visible note→portal, finance bank-transfer verify→portal paid amount, visa stage→portal tracker, support reply→portal inbox (all restored after)
+- Bugs found+fixed by the tests: model-event closures returning false halted the revalidation hook (translations/settings never purged the site);
+  resources without explicit search columns ignored `q`; tour price-tier codes didn't match the Pricer (twin/triple/single); team card colours didn't
+  match stored gradients; portal booking activity exposed internal staff notes; React effect returning scrollIntoView's Promise crashed ticket reply;
+  media nav hidden for catalogue staff; portal visa 'verified'/'rejected' labels.
+- [x] docs/LOCAL_SETUP.md admin section (URL, logins/roles, revalidation, ADMIN_DOMAIN)
+- [ ] PC sync (both PCs) + PC smoke
 Checks: `php artisan tinker /tmp/chk.php`-style smoke (every resource: columns/filters/sections/hydrate/detail) passes; Pest 115/115 still green.
 
 ## RESUME HERE (when owner says "continue")
