@@ -54,6 +54,8 @@ export default async function RootLayout({ children, params }: LayoutProps<'/[la
         ) : (
           <link rel="preload" as="font" type="font/woff2" crossOrigin="anonymous" href="/fonts/plus-jakarta-sans-latin-wght-normal.woff2" />
         )}
+        {/* display headings (Latin italic serif) — only worth preloading on English pages; font-display: optional → no layout shift */}
+        {lang === 'en' ? <link rel="preload" as="font" type="font/woff2" crossOrigin="anonymous" href="/fonts/fraunces-latin-wght-italic.woff2" /> : null}
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/brand/icon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/brand/icon-180.png" />

@@ -49,6 +49,7 @@ const nextConfig: NextConfig = {
     return [
       { source: '/:path*', headers: security },
       { source: '/brand/:path*', headers: [{ key: 'Cache-Control', value: 'public, max-age=604800, stale-while-revalidate=86400' }] },
+      { source: '/icons.svg', headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }] }, // URL is versioned (?v=hash)
       { source: '/fonts/:path*', headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }] },
     ];
   },

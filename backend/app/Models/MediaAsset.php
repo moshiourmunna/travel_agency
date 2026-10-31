@@ -21,7 +21,8 @@ class MediaAsset extends Model implements HasMedia
     use HasPublicUlid, HasTr, InteractsWithMedia, SoftDeletes;
 
     /** name => max width */
-    public const SIZES = ['thumb' => 480, 'card' => 800, 'hero' => 1600];
+    /** webp variants (srcset). Order matters: [0] thumb and [1] card are used as fallbacks by the site; 'wide' was added in M7. */
+    public const SIZES = ['thumb' => 480, 'card' => 800, 'hero' => 1600, 'wide' => 1200];
 
     protected $guarded = ['id'];
 
@@ -48,7 +49,7 @@ class MediaAsset extends Model implements HasMedia
             return;
         }
         foreach (self::SIZES as $name => $w) {
-            $this->addMediaConversion($name)->fit(Fit::Max, $w, $w * 2)->format('webp')->quality(78)->nonQueued();
+            $this->addMediaConversion($name)->fit(Fit::Max, $w, $w * 2)->format('webp')->quality($w >= 1200 ? 68 : 72)->nonQueued(); // tuned in M7 (Lighthouse LCP) — visually identical on photos
         }
     }
 

@@ -4,7 +4,7 @@ import { Price } from '@/components/client/Price';
 import { CruiseBook } from '@/components/detail/MiniBook';
 import { ReviewsBlock } from '@/components/detail/Reviews';
 import { RouteMap } from '@/components/detail/RouteMap';
-import { Picture } from '@/components/ui/Picture';
+import { DIMMED_HERO_SIZES, Picture } from '@/components/ui/Picture';
 import { CancelBadge, Crumbs, SecHead, Stars, type Crumb } from '@/components/ui/basics';
 import { CruiseCard } from '@/components/ui/cards';
 import { api, apiData } from '@/lib/api';
@@ -49,7 +49,7 @@ export default async function CruisePage({ params }: PageProps<'/[lang]/cruises/
     <>
       {ld.map((d, k) => <JsonLd key={k} data={d} />)}
       <section className="relative isolate overflow-hidden bg-ink-950">
-        <Picture img={c.image} alt={c.title} className="img-cover absolute inset-0 -z-10 opacity-60" priority sizes="100vw" width={1600} height={1000} />
+        <Picture img={c.image} alt={c.title} className="img-cover absolute inset-0 -z-10 opacity-60" priority sizes={DIMMED_HERO_SIZES} width={1600} height={1000} />
         <div className="absolute inset-0 -z-10 bg-gradient-to-t from-ink-950 via-ink-950/50 to-ink-950/20" />
         <div className="wrap py-10 md:py-16">
           <Crumbs i={i} items={crumbs} light />
@@ -84,7 +84,7 @@ export default async function CruisePage({ params }: PageProps<'/[lang]/cruises/
         </aside>
       </div>
       {c.similar?.length ? <section className="border-t border-ink-100 bg-ink-50 py-14 dark:border-ink-800 dark:bg-ink-900/40"><div className="wrap"><SecHead eyebrow={t('More sailings', 'আরও ক্রুজ')} title={t('You may also like', 'আপনার পছন্দ হতে পারে')} link={i.u('/cruises')} linkLabel={t('All cruises', 'সব ক্রুজ')} /><div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{c.similar.map((s: any) => <CruiseCard key={s.slug} i={i} c={s} />)}</div></div></section> : null}
-      <div className="fixed inset-x-0 bottom-16 z-30 border-t border-ink-100 bg-white/95 p-3 backdrop-blur dark:border-ink-800 dark:bg-ink-900/95 lg:hidden"><div className="wrap flex items-center justify-between gap-3 !px-1"><div><p className="text-xs muted">{i.d(c.nights)} {t('nights', 'রাত')} · {c.ship}</p><p className="text-lg font-extrabold"><Price value={c.price} /></p></div><a href="#book" className="btn btn-accent">{t('Book now', 'বুক করুন')}</a></div></div>
+      <div className="fixed inset-x-0 bottom-16 z-30 border-t border-ink-100 bg-white/95 px-3 pb-7 pt-3 backdrop-blur dark:border-ink-800 dark:bg-ink-900/95 lg:hidden"><div className="wrap flex items-center justify-between gap-3 !px-1"><div><p className="text-xs muted">{i.d(c.nights)} {t('nights', 'রাত')} · {c.ship}</p><p className="text-lg font-extrabold"><Price value={c.price} /></p></div><a href="#book" className="btn btn-accent">{t('Book now', 'বুক করুন')}</a></div></div>
     </>
   );
 }

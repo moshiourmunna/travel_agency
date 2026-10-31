@@ -101,7 +101,7 @@ export default async function HotelPage({ params }: PageProps<'/[lang]/hotels/[s
         </aside>
       </div>
       {h.similar?.length ? <section className="wrap pb-16"><h2 className="mb-5 text-2xl font-bold">{t('Similar stays', 'একই ধরনের থাকার জায়গা')}</h2><div className="space-y-5">{h.similar.map((m: any) => <HotelCard key={m.slug} i={i} h={m} />)}</div></section> : null}
-      <div className="fixed inset-x-0 bottom-16 z-30 border-t border-ink-100 bg-white/95 p-3 backdrop-blur dark:border-ink-800 dark:bg-ink-900/95 lg:hidden"><div className="wrap flex items-center justify-between gap-3 !px-1"><div><p className="text-xs muted">{t('From', 'শুরু')} / {t('night', 'রাত')}</p><p className="text-lg font-extrabold"><Price value={h.price} /></p></div><a href="#book" className="btn btn-accent">{t('Select dates', 'তারিখ বাছুন')}</a></div></div>
+      <div className="fixed inset-x-0 bottom-16 z-30 border-t border-ink-100 bg-white/95 px-3 pb-7 pt-3 backdrop-blur dark:border-ink-800 dark:bg-ink-900/95 lg:hidden"><div className="wrap flex items-center justify-between gap-3 !px-1"><div><p className="text-xs muted">{t('From', 'শুরু')} / {t('night', 'রাত')}</p><p className="text-lg font-extrabold"><Price value={h.price} /></p></div><a href="#book" className="btn btn-accent">{t('Select dates', 'তারিখ বাছুন')}</a></div></div>
     </>
   );
 }

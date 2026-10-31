@@ -1,4 +1,3 @@
-import { Suspense } from 'react';
 import { Icon } from '@/components/icons/Icon';
 import { Chat, MobileBar } from '@/components/client/Widgets';
 import { Footer } from '@/components/layout/Footer';
@@ -22,9 +21,8 @@ export default async function SiteLayout({ children, params }: LayoutProps<'/[la
   const company = site.settings.company ?? {};
   return (
     <>
-      <Suspense fallback={null}>
-        <Header i={i} company={company} menus={site.menus as any} themes={themes} cruiseImage={cruiseImg} />
-      </Suspense>
+      {/* Not wrapped in Suspense: a pending boundary streams the header after <main> and shifts the page (CLS). */}
+      <Header i={i} company={company} menus={site.menus as any} themes={themes} cruiseImage={cruiseImg} />
       <main id="main" tabIndex={-1} className="outline-none">{children}</main>
       <Footer i={i} company={company} social={site.settings.social?.links ?? []} app={site.settings.app?.links ?? {}} menus={site.menus as any} menuNames={site.menu_names ?? {}} />
       <MobileBar

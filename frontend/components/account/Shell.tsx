@@ -90,8 +90,8 @@ export function AccountShell({ i, me, counts, company, children }: { i: I18n; me
             <p className="ml-1 hidden truncate text-sm font-semibold text-ink-700 dark:text-ink-200 md:block">{t('Welcome back,', 'আবার স্বাগতম,')} {me.first_name} 👋</p>
             <div className="ml-auto flex items-center gap-1">
               <a href={u('/tours')} className="btn btn-primary btn-sm mr-1 hidden sm:inline-flex"><Icon name="plus" className="h-4 w-4" /> {t('New trip', 'নতুন ট্রিপ')}</a>
-              <Suspense fallback={<span className="icon-btn w-auto px-2.5 text-sm font-bold">{i.lang === 'en' ? 'বাং' : 'EN'}</span>}>
-                <LangLink to={i.other} className="icon-btn w-auto px-2.5 text-sm font-bold" label={t('বাংলায় দেখুন', 'View in English')}>{i.lang === 'en' ? 'বাং' : 'EN'}</LangLink>
+              <Suspense fallback={<span className="icon-btn w-auto px-2.5 text-sm font-bold">{i.lang === 'en' ? <span lang="bn" className="font-[system-ui]">বাং</span> : 'EN'}</span>}>
+                <LangLink to={i.other} className="icon-btn w-auto px-2.5 text-sm font-bold" label={t('বাংলায় দেখুন', 'View in English')}>{i.lang === 'en' ? <span lang="bn" className="font-[system-ui]">বাং</span> : 'EN'}</LangLink>
               </Suspense>
               <ThemeToggle className="icon-btn" label={t('Toggle dark mode', 'ডার্ক মোড চালু/বন্ধ')}><Icon name="moon" className="h-5 w-5 dark:hidden" /><Icon name="sun" className="hidden h-5 w-5 dark:block" /></ThemeToggle>
               <a href={u('/account/notifications')} className="icon-btn relative" aria-label={`${t('Notifications', 'নোটিফিকেশন')} (${d(counts.notifications ?? 0)} ${t('unread', 'অপঠিত')})`} data-unread={counts.notifications ?? 0}>

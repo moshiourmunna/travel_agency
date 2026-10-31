@@ -1,5 +1,5 @@
 'use client';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { useSite } from './SiteContext';
 import { KEYS, toast, useCurrency, write } from './store';
@@ -89,13 +89,12 @@ export function CurrencySelect({ id, className }: { id: string; className: strin
   );
 }
 
-/** Language switch keeps the current path, query and hash. */
+/** Language switch keeps the current path, query and hash. The query is read at click time (not via useSearchParams)
+ *  so the header stays server-rendered on static pages — useSearchParams forces a client bail-out and a layout shift. */
 export function LangLink({ to, className, label, children }: { to: 'en' | 'bn'; className: string; label?: string; children: React.ReactNode }) {
   const pathname = usePathname() || '/';
-  const sp = useSearchParams();
   const rest = pathname.replace(/^\/(en|bn)(?=\/|$)/, '');
-  const q = sp?.toString();
-  const target = `/${to}${rest}${q ? '?' + q : ''}`;
+  const target = `/${to}${rest}`;
   return (
     <a
       href={target}
@@ -107,7 +106,7 @@ export function LangLink({ to, className, label, children }: { to: 'en' | 'bn'; 
       onClick={(e) => {
         try { localStorage.setItem('musafir-lang', to); } catch {}
         document.cookie = `musafir-lang=${to};path=/;max-age=31536000;samesite=lax`;
-        if (location.hash) (e.currentTarget as HTMLAnchorElement).href = target + location.hash;
+        (e.currentTarget as HTMLAnchorElement).href = target + location.search + location.hash;
       }}
     >
       {children}

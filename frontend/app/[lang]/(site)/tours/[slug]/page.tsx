@@ -172,7 +172,7 @@ export default async function TourPage({ params }: PageProps<'/[lang]/tours/[slu
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{x.similar.map((s: any) => <TourCard key={s.slug} i={i} x={s} />)}</div></div>
         </section>
       ) : null}
-      <div className="fixed inset-x-0 bottom-16 z-30 border-t border-ink-100 bg-white/95 px-4 py-3 shadow-[0_-8px_24px_-12px_rgba(0,0,0,.2)] backdrop-blur dark:border-ink-800 dark:bg-ink-900/95 lg:hidden">
+      <div className="fixed inset-x-0 bottom-16 z-30 border-t border-ink-100 bg-white/95 px-4 pb-7 pt-3 shadow-[0_-8px_24px_-12px_rgba(0,0,0,.2)] backdrop-blur dark:border-ink-800 dark:bg-ink-900/95 lg:hidden">
         <div className="mx-auto flex max-w-xl items-center justify-between gap-3">
           <div><p className="text-xs muted">{t('From, per person', 'শুরু, জনপ্রতি')}</p><p className="text-lg font-extrabold text-ink-900 dark:text-white"><Price value={x.price} /> {x.price_was ? <s className="text-xs font-normal text-ink-400"><Price value={x.price_was} /></s> : null}</p></div>
           <div className="flex gap-2"><a href={`https://wa.me/${c.whatsapp_number}`} className="btn btn-outline btn-sm" aria-label="WhatsApp" target="_blank" rel="noopener"><Icon name="whatsapp" className="h-4 w-4" /></a>

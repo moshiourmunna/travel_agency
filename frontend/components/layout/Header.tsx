@@ -94,7 +94,7 @@ export function Header({ i, company, menus, themes, cruiseImage }: { i: I18n; co
             })}
           </nav>
           <div className="ml-auto flex items-center gap-1">
-            <LangLink to={i.other} className="icon-btn w-auto px-2.5 text-sm font-bold" label={t('বাংলায় দেখুন', 'View in English')}>{i.lang === 'en' ? 'বাং' : 'EN'}</LangLink>
+            <LangLink to={i.other} className="icon-btn w-auto px-2.5 text-sm font-bold" label={t('বাংলায় দেখুন', 'View in English')}>{i.lang === 'en' ? <span lang="bn" className="font-[system-ui]">বাং</span> : 'EN'}</LangLink>
             <ThemeToggle className="icon-btn" label={t('Toggle dark mode', 'ডার্ক মোড চালু/বন্ধ')}><Icon name="moon" className="h-5 w-5 dark:hidden" /><Icon name="sun" className="hidden h-5 w-5 dark:block" /></ThemeToggle>
             <Link href={u('/wishlist')} className="icon-btn relative hidden sm:inline-flex" aria-label={t('Wishlist', 'উইশলিস্ট')}><Icon name="heart" /><WishCount className="absolute right-1 top-1 min-w-[18px] rounded-full bg-accent-500 px-1 text-center text-[10px] font-bold leading-[18px] text-white" /></Link>
             <AccountLink signInHref={u('/login')} accountHref={u('/account')} signIn={t('Sign in', 'সাইন ইন')} hi={t('My account', 'আমার অ্যাকাউন্ট')} className="btn btn-ghost btn-sm hidden xl:inline-flex"><Icon name="circle-user-round" className="h-[18px] w-[18px]" /></AccountLink>

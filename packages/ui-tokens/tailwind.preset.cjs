@@ -13,7 +13,7 @@ module.exports = {
         ink:   { 50:'#F4F6F9',100:'#E7ECF2',200:'#CBD5E1',300:'#94A3B8',400:'#64748B',500:'#475569',600:'#334155',700:'#1E293B',800:'#122033',850:'#0E1A2A',900:'#0B1B2B',950:'#07131F' },
       },
       fontFamily: {
-        sans: ['"Plus Jakarta Sans"', '"Hind Siliguri"', 'system-ui', 'Segoe UI', 'Roboto', 'sans-serif'],
+        sans: ['"Plus Jakarta Sans"', '"Musafir Taka"', '"Hind Siliguri"', 'system-ui', 'Segoe UI', 'Roboto', 'sans-serif'],
         bn: ['"Hind Siliguri"', '"Plus Jakarta Sans"', 'sans-serif'],
         display: ['"Fraunces"', 'Georgia', 'serif'],
       },

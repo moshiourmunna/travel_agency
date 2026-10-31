@@ -4,7 +4,7 @@ import { Icon } from '@/components/icons/Icon';
 import { Price } from '@/components/client/Price';
 import { Tabs } from '@/components/client/Tabs';
 import { InquiryForm } from '@/components/forms/QuoteForm';
-import { Picture } from '@/components/ui/Picture';
+import { DIMMED_HERO_SIZES, Picture } from '@/components/ui/Picture';
 import { Crumbs, FaqList, type Crumb } from '@/components/ui/basics';
 import { apiData } from '@/lib/api';
 import type { Lang } from '@/lib/format';
@@ -39,7 +39,7 @@ export default async function VisaDetail({ params }: PageProps<'/[lang]/visa/[sl
   return (
     <>
       {ld.map((d, k) => <JsonLd key={k} data={d} />)}
-      <section className="relative isolate overflow-hidden bg-ink-950"><Picture img={v.image} className="img-cover absolute inset-0 -z-10 opacity-50" priority sizes="100vw" width={1600} height={1000} /><div className="absolute inset-0 -z-10 bg-gradient-to-r from-ink-950 via-ink-950/70 to-transparent" />
+      <section className="relative isolate overflow-hidden bg-ink-950"><Picture img={v.image} className="img-cover absolute inset-0 -z-10 opacity-50" priority sizes={DIMMED_HERO_SIZES} width={1600} height={1000} /><div className="absolute inset-0 -z-10 bg-gradient-to-r from-ink-950 via-ink-950/70 to-transparent" />
         <div className="wrap py-12 md:py-16"><Crumbs i={i} items={crumbs} light />
           <p className="mt-5 inline-flex rounded-lg bg-white px-2 py-1 text-xs font-extrabold tracking-wider text-ink-900">{v.iso2}</p>
           <h1 className="mt-3 text-3xl font-extrabold text-white sm:text-5xl">{v.country} {t('visa from Bangladesh', 'ভিসা — বাংলাদেশ থেকে')}</h1><p className="mt-2 text-lg text-ink-200">{v.visa_type} · {v.processing}</p></div></section>

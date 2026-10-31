@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Icon } from '@/components/icons/Icon';
 import { RouteMap } from '@/components/detail/RouteMap';
 import { InquiryForm } from '@/components/forms/QuoteForm';
-import { Picture } from '@/components/ui/Picture';
+import { DIMMED_HERO_SIZES, Picture } from '@/components/ui/Picture';
 import { Crumbs, type Crumb } from '@/components/ui/basics';
 import { ActivityCard, TourCard } from '@/components/ui/cards';
 import { api, apiData } from '@/lib/api';
@@ -35,7 +35,7 @@ export default async function DestinationPage({ params }: PageProps<'/[lang]/des
     <>
       <JsonLd data={breadcrumbJsonLd(base, crumbs)} /><JsonLd data={ld} />
       <section className="relative isolate overflow-hidden bg-ink-950">
-        <Picture img={d.image} alt={d.name} className="img-cover absolute inset-0 -z-10 opacity-75" priority sizes="100vw" width={1600} height={1000} />
+        <Picture img={d.image} alt={d.name} className="img-cover absolute inset-0 -z-10 opacity-75" priority sizes={DIMMED_HERO_SIZES} width={1600} height={1000} />
         <div className="absolute inset-0 -z-10 bg-gradient-to-t from-ink-950 via-ink-950/40 to-ink-950/20" />
         <div className="wrap flex min-h-[420px] flex-col justify-end py-10 md:min-h-[520px]">
           <Crumbs i={i} items={crumbs} light />

@@ -3,7 +3,7 @@ import { Fragment } from 'react';
 import { Icon } from '@/components/icons/Icon';
 import type { I18n } from '@/lib/i18n';
 import type { Image, Policy } from '@/lib/types';
-import { Picture } from './Picture';
+import { DIMMED_HERO_SIZES, Picture } from './Picture';
 
 export function Stars({ i, rating, className = 'h-4 w-4' }: { i: I18n; rating: number; className?: string }) {
   return (
@@ -57,7 +57,7 @@ export function Crumbs({ i, items, light = false }: { i: I18n; items: Crumb[]; l
 export function PageHero({ i, title, sub, crumbs, image, children }: { i: I18n; title: string; sub?: string | null; crumbs: Crumb[]; image: Image | undefined; children?: React.ReactNode }) {
   return (
     <section className="relative isolate overflow-hidden bg-ink-950">
-      <Picture img={image} className="img-cover absolute inset-0 -z-10 opacity-60" priority sizes="100vw" width={1600} height={1000} />
+      <Picture img={image} className="img-cover absolute inset-0 -z-10 opacity-60" priority sizes={DIMMED_HERO_SIZES} width={1600} height={1000} />
       <div className="absolute inset-0 -z-10 bg-gradient-to-r from-ink-950/90 via-ink-950/60 to-ink-950/20" />
       <div className="wrap py-12 md:py-20">
         <Crumbs i={i} items={crumbs} light />
@@ -104,7 +104,7 @@ export function FaqList({ items, openFirst = true }: { items: { q: string; a: st
 export function SearchHero({ i, title, sub, crumbs, image, opacity = 'opacity-45', children }: { i: I18n; title: string; sub?: string | null; crumbs: Crumb[]; image: Image | undefined; opacity?: string; children?: React.ReactNode }) {
   return (
     <section className="relative isolate overflow-hidden bg-ink-950">
-      <Picture img={image} className={`img-cover absolute inset-0 -z-10 ${opacity}`} priority sizes="100vw" width={1600} height={1000} />
+      <Picture img={image} className={`img-cover absolute inset-0 -z-10 ${opacity}`} priority sizes={DIMMED_HERO_SIZES} width={1600} height={1000} />
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-ink-950/30 to-ink-950" />
       <div className="wrap py-10 md:py-14">
         <Crumbs i={i} items={crumbs} light />

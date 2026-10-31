@@ -68,7 +68,7 @@ export default async function ActivityPage({ params }: PageProps<'/[lang]/activi
             l={{ date: t('Date', 'তারিখ'), time: t('Time', 'সময়'), adult: t('Adult', 'প্রাপ্তবয়স্ক'), child: t('Child (3–11)', 'শিশু (৩–১১)'), dec: t('Decrease', 'কমান'), inc: t('Increase', 'বাড়ান'), total: t('Total', 'মোট'), book: t('Check availability & book', 'প্রাপ্যতা দেখে বুক করুন'), note: t('Reserve now & pay later available', 'এখন রিজার্ভ, পরে পরিশোধের সুবিধা আছে'), full: t('Full', 'পূর্ণ'), left: t('left', 'বাকি') }} />
         </aside>
       </div>
-      <div className="fixed inset-x-0 bottom-16 z-30 border-t border-ink-100 bg-white/95 p-3 backdrop-blur dark:border-ink-800 dark:bg-ink-900/95 lg:hidden"><div className="wrap flex items-center justify-between gap-3 !px-1"><div><p className="text-xs muted">{t('From', 'শুরু')}</p><p className="text-lg font-extrabold"><Price value={a.price} /></p></div><a href="#book" className="btn btn-accent">{t('Select date', 'তারিখ বাছুন')}</a></div></div>
+      <div className="fixed inset-x-0 bottom-16 z-30 border-t border-ink-100 bg-white/95 px-3 pb-7 pt-3 backdrop-blur dark:border-ink-800 dark:bg-ink-900/95 lg:hidden"><div className="wrap flex items-center justify-between gap-3 !px-1"><div><p className="text-xs muted">{t('From', 'শুরু')}</p><p className="text-lg font-extrabold"><Price value={a.price} /></p></div><a href="#book" className="btn btn-accent">{t('Select date', 'তারিখ বাছুন')}</a></div></div>
     </>
   );
 }

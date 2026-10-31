@@ -27,7 +27,7 @@ export default async function DestinationsPage({ params }: PageProps<'/[lang]/de
         <div className="wrap">
           <QuickFilter label={t('Filter destinations', 'গন্তব্য ফিল্টার')} rowClass="mb-8" options={[{ value: 'all', label: t('All destinations', 'সব গন্তব্য') }, { value: 'bd', label: t('Bangladesh', 'বাংলাদেশ') }, { value: 'intl', label: t('International', 'আন্তর্জাতিক') }]}>
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {list.map((d) => <div key={d.slug} data-item data-region={d.region}><DestCard i={i} d={d} /><p className="mt-3 line-clamp-2 px-1 text-sm muted">{d.excerpt}</p></div>)}
+              {list.map((d, k) => <div key={d.slug} data-item data-region={d.region}><DestCard i={i} d={d} priority={k === 0} /><p className="mt-3 line-clamp-2 px-1 text-sm muted">{d.excerpt}</p></div>)}
             </div>
           </QuickFilter>
         </div>
