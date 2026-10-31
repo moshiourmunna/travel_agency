@@ -258,7 +258,7 @@ abstract class Resource
     {
         return [
             'slug' => $this->slug, 'label' => tr_pick($this->label), 'singular' => tr_pick($this->singular), 'icon' => $this->icon,
-            'softDeletes' => $this->softDeletes(), 'reorder' => $this->reorder,
+            'softDeletes' => $this->softDeletes(), 'reorder' => $this->reorder, 'creatable' => $this->creatable, 'editable' => $this->editable, 'deletable' => $this->deletable, 'hasDetail' => $this->hasDetail(),
         ];
     }
 
