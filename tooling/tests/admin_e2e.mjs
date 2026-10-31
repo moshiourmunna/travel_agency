@@ -1,6 +1,7 @@
 // Admin → public site E2E: each staff role makes a real change through the admin UI and we check it shows up on
 // the public site / traveller portal (ISR revalidation with expire:0), then put the original value back.
 // Usage: node admin_e2e.mjs [adminBase=http://127.0.0.1:8000/admin] [siteBase=http://localhost:3000]
+// MUSAFIR_BACKEND=<path to backend> when the script is run from outside the repo; CHROME=<browser exe> off Linux.
 // Needs the demo seed (staff logins, Farhana / password) and php on PATH (used once to stage a pending bank transfer).
 import { chromium } from 'playwright-core';
 import { execFileSync } from 'node:child_process';
@@ -8,7 +9,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 const ADMIN = process.argv[2] || 'http://127.0.0.1:8000/admin';
 const SITE = process.argv[3] || 'http://localhost:3000';
-const BACKEND = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../backend');
+const BACKEND = process.env.MUSAFIR_BACKEND || path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../backend');
 const stamp = Date.now().toString(36);
 const browser = await chromium.launch({ executablePath: process.env.CHROME || '/usr/bin/google-chrome', args: ['--no-sandbox'] });
 let fails = 0; const ok = (name, pass, info = '') => { if (!pass) fails++; console.log(`${pass ? 'PASS' : 'FAIL'} ${name} ${info}`); };
