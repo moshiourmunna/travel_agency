@@ -16,6 +16,8 @@ return [
     'admin_2fa_roles' => array_values(array_filter(array_map('trim', explode(',', (string) env('ADMIN_2FA_REQUIRED_ROLES', ''))))),
     // Idle staff sessions end after this many minutes (0 = use SESSION_LIFETIME only).
     'admin_idle_minutes' => (int) env('ADMIN_IDLE_MINUTES', 120),
+    // Drain the database queue from the scheduler (cron `schedule:run`) — for hosts without a queue worker.
+    'queue_via_schedule' => (bool) env('QUEUE_VIA_SCHEDULE', true),
     'admin_path' => trim((string) env('ADMIN_PATH', 'admin'), '/'),
 
     // Shared secret for POST {frontend}/api/revalidate (HMAC-SHA256 of the body).

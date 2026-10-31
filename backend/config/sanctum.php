@@ -50,7 +50,7 @@ return [
     |
     */
 
-    'expiration' => null,
+    'expiration' => (int) env('SANCTUM_EXPIRATION', 60 * 24 * 30) ?: null, // traveller tokens expire after 30 days (minutes)
 
     /*
     |--------------------------------------------------------------------------

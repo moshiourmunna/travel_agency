@@ -44,3 +44,14 @@ Artisan::command('bookings:complete-past', function (\App\Services\ReferralServi
 Schedule::command('bookings:expire-holds')->everyMinute()->withoutOverlapping();
 Schedule::command('bookings:complete-past')->dailyAt('00:20');
 Schedule::command('instalments:mark-overdue')->dailyAt('00:10');
+
+// Queue fallback for hosts without a process supervisor (shared/cPanel, most PaaS cron add-ons): one cron line
+// `* * * * * php artisan schedule:run` drains the database queue every minute. Disable with QUEUE_VIA_SCHEDULE=false
+// when a real worker (`php artisan queue:work`, Supervisor/systemd) is running.
+if (config('queue.default') !== 'sync' && config('musafir.queue_via_schedule')) {
+    Schedule::command('queue:work --stop-when-empty --max-time=50 --tries=3')->everyMinute()->withoutOverlapping()->runInBackground();
+}
+Schedule::command('queue:prune-failed --hours=168')->daily();
+Schedule::command('model:prune')->daily();
+Schedule::command('auth:clear-resets')->everyFifteenMinutes();
+Schedule::command('sanctum:prune-expired --hours=24')->daily();

@@ -129,6 +129,9 @@ class MediaController extends Controller
             'alt_bn' => ['nullable', 'string', 'max:300'],
         ], [], ['files.*' => __('file')]);
         $created = [];
+        foreach ($r->file('files') as $i => $file) {
+            $this->screen($file, "files.$i");
+        }
         foreach ($r->file('files') as $file) {
             $created[] = self::present($this->createAsset($file, $r->integer('folder_id') ?: null, array_filter(['en' => $r->input('alt_en'), 'bn' => $r->input('alt_bn')]), $r->user()->id));
         }
@@ -154,6 +157,25 @@ class MediaController extends Controller
 
             return $asset->load('media');
         });
+    }
+
+    /** SVGs are sanitised in place (they are served from our own origin); raster images must be real and not absurdly large. */
+    private function screen(UploadedFile $file, string $field): void
+    {
+        $ext = strtolower($file->getClientOriginalExtension() ?: (string) $file->guessExtension());
+        if ($ext === 'svg' || $file->getMimeType() === 'image/svg+xml') {
+            $clean = \App\Support\SvgSanitizer::clean((string) file_get_contents($file->getRealPath()));
+            if ($clean === null) {
+                throw \Illuminate\Validation\ValidationException::withMessages([$field => __('validation.image', ['attribute' => $file->getClientOriginalName()])]);
+            }
+            file_put_contents($file->getRealPath(), $clean);
+
+            return;
+        }
+        $size = @getimagesize($file->getRealPath());
+        if (! $size || $size[0] < 1 || $size[0] > 12000 || $size[1] > 12000 || $size[0] * $size[1] > 60_000_000) {
+            throw \Illuminate\Validation\ValidationException::withMessages([$field => __('validation.dimensions', ['attribute' => $file->getClientOriginalName()])]);
+        }
     }
 
     private static function safeName(UploadedFile $file): string
@@ -213,6 +235,7 @@ class MediaController extends Controller
         $a = MediaAsset::findOrFail($asset);
         $r->validate(['file' => ['required', 'file', 'mimes:'.self::MIMES, 'max:10240']]);
         $file = $r->file('file');
+        $this->screen($file, 'file');
         [$w, $h] = $this->dimensions($file);
         $a->addMedia($file)->usingFileName(self::safeName($file))->toMediaCollection('file'); // singleFile() removes the old one
         $a->forceFill(['width' => $w, 'height' => $h])->save();

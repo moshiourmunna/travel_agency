@@ -49,7 +49,7 @@ final class Otp
             ? "মুসাফির কোড: {$code}। ".self::TTL_MIN.' মিনিট বৈধ। কাউকে জানাবেন না।'
             : "Your Musafir code is {$code}. Valid for ".self::TTL_MIN.' minutes. Never share it.';
         if ($channel === 'sms') {
-            $this->notifier->sms($destination, $msg);
+            $this->notifier->sms($destination, $msg, urgent: true);
         } else {
             Mail::raw($msg, fn ($m) => $m->to($destination)->subject($locale === 'bn' ? 'আপনার মুসাফির কোড' : 'Your Musafir code'));
         }

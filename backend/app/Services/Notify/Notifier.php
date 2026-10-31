@@ -2,17 +2,18 @@
 
 namespace App\Services\Notify;
 
+use App\Jobs\SendSms;
+use App\Jobs\SendTemplatedEmail;
 use App\Models\NotificationTemplate;
 use App\Models\SmsLog;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
 /**
  * Sends a templated message (notification_templates, editable in the admin, EN/BN) by email and SMS,
- * and stores an in-app notification for signed-in travellers. Locally MAIL_MAILER=log and SMS_DRIVER=log
+ * and stores an in-app notification for signed-in travellers. E-mail and SMS go through the queue (QUEUE_CONNECTION; `sync` sends inline). Locally MAIL_MAILER=log and SMS_DRIVER=log
  * write everything to storage/logs/laravel.log; production swaps the drivers in .env.
  */
 final class Notifier
@@ -31,17 +32,8 @@ final class Notifier
         if (($t = $tpls->get('email')) && ! empty($to['email'])) {
             $subject = $fill($pick($t, 'subject'));
             $body = $fill($pick($t, 'body'));
-            try {
-                Mail::send([], [], function ($m) use ($to, $subject, $body, $attachments, $link) {
-                    $m->to($to['email'], $to['name'] ?? null)->subject($subject)
-                        ->html('<div style="font-family:Arial,sans-serif;font-size:15px;line-height:1.6;color:#0f172a"><p>'.e($body).'</p>'.($link ? '<p><a href="'.e($link).'">'.e($link).'</a></p>' : '').'<p style="color:#64748b;font-size:12px">'.e(config('app.name')).'</p></div>');
-                    foreach ($attachments as $a) {
-                        $m->attachData($a['data'], $a['name'], ['mime' => $a['mime']]);
-                    }
-                });
-            } catch (\Throwable $e) {
-                Log::warning('notify.email_failed', ['key' => $key, 'error' => $e->getMessage()]);
-            }
+            SendTemplatedEmail::dispatch((string) $to['email'], $to['name'] ?? null, $subject, $body, $link,
+                array_map(fn ($a) => ['name' => $a['name'], 'mime' => $a['mime'], 'data' => base64_encode($a['data'])], $attachments), $key);
         }
 
         if (($t = $tpls->get('sms')) && ! empty($to['phone'])) {
@@ -57,7 +49,13 @@ final class Notifier
         }
     }
 
-    public function sms(string $phone, string $body): void
+    /** Queue an SMS; $urgent (sign-in codes) sends right after the HTTP response instead, so it never waits for a queue worker. */
+    public function sms(string $phone, string $body, bool $urgent = false): void
+    {
+        $urgent ? SendSms::dispatchAfterResponse($phone, $body) : SendSms::dispatch($phone, $body);
+    }
+
+    public function smsNow(string $phone, string $body): void
     {
         $driver = (string) config('musafir.sms_driver', 'log');
         $status = 'sent';
