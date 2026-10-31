@@ -213,6 +213,21 @@ Design: declarative resource engine (backend/app/Admin: Field, Col, Filter, Acti
   E:\projects\tour_travel not touched.
 Checks: `php artisan tinker /tmp/chk.php`-style smoke (every resource: columns/filters/sections/hydrate/detail) passes; Pest 115/115 still green.
 
+## M7 — IN PROGRESS (security + performance)  started 2026-11-01 04:35 BDT
+- [x] Security headers: Laravel SecurityHeaders middleware (nosniff, referrer, permissions, COOP, XFO, HSTS on https, X-Robots-Tag on API) + nonce CSP
+  for the admin (Vite::useCspNonce, inline theme script nonce'd); Next headers() CSP ('unsafe-inline' scripts required by ISR/static HTML), DENY framing,
+  media origins from API_URL + MEDIA_ORIGINS (build-time env). Brand/fonts cache headers.
+- [x] Admin 2FA (TOTP, RFC 6238 verified, own implementation + bacon/bacon-qr-code SVG QR): set-up from My profile (password → QR/key → code → 8 recovery
+  codes once), challenge step after password (5-min pending, 5 tries/min, single-use codes + replay guard), ADMIN_2FA_REQUIRED_ROLES enforcement,
+  ADMIN_IDLE_MINUTES idle sign-out. Pest AdminSecurityTest 8; admin_e2e +5 (2FA via the real UI) = 30/30.
+- [x] Session/auth: secure cookie automatically when APP_URL is https; Sanctum default expiration 30 d (tokens already per-token expiry); prune schedule.
+  Rate limits reviewed (public 240/min, search 60, checkout 40, auth 12/min+120/h, forms 6/min, admin login 5 per email+IP, 2FA 5/min) — kept.
+- [x] Uploads: SVG sanitiser (scripts/handlers/external refs/foreignObject/DOCTYPE removed) on media upload/replace; raster must be a real image ≤12000 px;
+  other uploads already mimes (content-sniffed) + size + private disk. composer audit clean (symfony/mime CVE-2026-45070 → 7.4.22); npm audit 0.
+- [x] Queue: e-mail + SMS through jobs (SendTemplatedEmail/SendSms, retries/backoff); OTP SMS dispatchAfterResponse (no worker needed);
+  scheduler drains the database queue every minute (QUEUE_VIA_SCHEDULE, for hosts without a worker). Pest QueueNotifyTest 3. Suite 161/161.
+- [ ] admin bundle trim, caching review, images/LCP, Lighthouse, SEO/structured data verify
+
 ## RESUME HERE (when owner says "continue")
 1. M6 — DONE (only open item: sync PC #2 DESKTOP-JIBO2KJ when it is online). Original scope: Admin panel (Laravel + React, admin.<domain> configurable): RBAC roles from seeded staff logins, CRUD for every CMS/catalogue/commerce/CRM table,
    settings UI (incl. commerce.referral_*, review_miles, cancellation_fee, payments.gateways), media library, bookings/payments ops (bank-slip verify, refunds),
