@@ -4,12 +4,13 @@
 set -euo pipefail
 cd "$(dirname "$0")/../backend"
 PHP=${PHP:-php}
-[ -f .env ] || { echo "backend/.env missing — copy .env.example, fill it, then: $PHP artisan key:generate"; exit 1; }
+[ -f .env ] || { echo "backend/.env missing — copy .env.example and fill it"; exit 1; }
 if [ -d vendor ] && [ "${SKIP_COMPOSER:-}" = 1 ]; then echo "• vendor/ kept (SKIP_COMPOSER=1)";
 elif [ -n "${COMPOSER_CMD:-}" ]; then $COMPOSER_CMD install --no-dev --optimize-autoloader --no-interaction;
 elif command -v composer >/dev/null 2>&1; then composer install --no-dev --optimize-autoloader --no-interaction;
 elif [ -f composer.phar ]; then $PHP composer.phar install --no-dev --optimize-autoloader --no-interaction;
 else [ -d vendor ] || { echo "composer not found and no vendor/ — upload a release built with scripts/package-release.sh"; exit 1; }; fi
+grep -q '^APP_KEY=.\+' .env || $PHP artisan key:generate --force   # first deploy only
 if [ ! -f public/build/manifest.json ]; then
   command -v npm >/dev/null 2>&1 || { echo "public/build missing and no npm — upload a release built with scripts/package-release.sh"; exit 1; }
   npm ci --no-audit --no-fund && npm run build

@@ -19,8 +19,7 @@ No Redis, root or supervisor needed: cache, sessions and queue use the database,
   - `MAIL_*`, SMS/payment keys (`PAYMENT_MODE=live` only once the gateways are configured)
   - `TRUSTED_PROXIES` (`*` behind a PaaS/CDN)
   - `ADMIN_DOMAIN` / `ADMIN_PATH`, `ADMIN_2FA_REQUIRED_ROLES=owner,finance` (recommended)
-- [ ] `php artisan key:generate` (first deploy only)
-- [ ] `bash scripts/deploy-backend.sh`. It runs composer, builds admin assets if missing, `migrate --force`, `storage:link` and `optimize`.
+- [ ] `bash scripts/deploy-backend.sh`. It runs composer, generates `APP_KEY` on the first deploy, builds admin assets if missing, `migrate --force`, `storage:link` and `optimize`.
 - [ ] First deploy only: `php artisan db:seed --force` for roles, settings and the demo catalogue. Then change the seeded staff passwords, or delete the demo staff accounts.
 - [ ] Cron, once: `* * * * * cd /path/backend && php artisan schedule:run >> /dev/null 2>&1`. The schedule runs the queue as well.
 - [ ] Optional, VPS only: a real worker (`php artisan queue:work --tries=3`, via systemd or supervisor), plus `QUEUE_VIA_SCHEDULE=false`.
