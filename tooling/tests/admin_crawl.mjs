@@ -28,7 +28,14 @@ for (const l of links) {
   if (edit) await visit(edit, ' edit');
   if (create) await visit(create, ' new ');
 }
-for (const p of ['/profile', '/settings?group=payments', '/media']) await visit(BASE + p, 'extra');
+const navPaths = links.map((l) => new URL(l, BASE).pathname);
+for (const p of ['/profile', '/settings?group=payments', '/media']) {
+  const path = new URL(BASE + p).pathname;
+  if (p === '/profile' || navPaths.includes(path)) { await visit(BASE + p, 'extra'); continue; }
+  // not in this role's nav -> must be denied (403), never a 500 or a silently-open page
+  const r = await page.goto(BASE + p, { waitUntil: 'networkidle' }).catch(() => null);
+  if (r && r.status() === 403) console.log('ok   denied', p, 403); else { fails++; console.log('FAIL not denied', p, r && r.status()); }
+}
 console.log('FAILS', fails);
 await browser.close();
 process.exit(fails ? 1 : 0);

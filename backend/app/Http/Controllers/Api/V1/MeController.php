@@ -175,7 +175,7 @@ class MeController extends Controller
             $itinerary = $t->itinerary->sortBy('day_no')->map(fn ($d) => ['day' => $d->day_no, 'date' => $b->travel_start?->copy()->addDays($d->day_no - 1)->toDateString(), 'title' => $d->tr('title'), 'body' => $d->tr('body')])->values();
         }
         $travellers = $b->travellers()->get()->map(fn ($t) => ['name' => $t->name, 'type' => $t->type, 'ticket_no' => $t->ticket_no, 'seat' => $t->seat]);
-        $activity = BookingActivity::where('booking_id', $b->id)->orderByDesc('id')->limit(20)->get()->map(fn ($a) => ['type' => $a->type, 'text' => is_array($a->body) ? ($a->body[app()->getLocale()] ?? $a->body['en'] ?? '') : $a->body, 'at' => $a->created_at?->toIso8601String()]);
+        $activity = BookingActivity::where('booking_id', $b->id)->where('internal', false)->orderByDesc('id')->limit(20)->get()->map(fn ($a) => ['type' => $a->type, 'text' => is_array($a->body) ? ($a->body[app()->getLocale()] ?? $a->body['en'] ?? '') : $a->body, 'at' => $a->created_at?->toIso8601String()]);
         $canCancel = in_array($b->status, ['pending', 'confirmed', 'partial'], true) && (! $b->travel_start || $b->travel_start->gt(today()));
         $open = SupportTicket::where('booking_id', $b->id)->whereNotIn('status', ['resolved', 'closed'])->orderByDesc('id')->get(['ref', 'subject', 'status']);
 

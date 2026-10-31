@@ -86,7 +86,7 @@ export default function ResourceForm({ resource: r, sections, values, record, ca
   const renderSection = (s: Section, i: number, isAside = false) => (
     <Card key={s.title + i} title={<span className="flex items-center gap-2">{s.title}{sectionHasError(s) ? <Icon name="circle-alert" size={16} className="text-rose-600" /> : null}</span>} className={cx(isAside && 'lg:shadow-none')}>
       <fieldset disabled={readOnly} className="field-grid">
-        {s.fields.map((f) => <div key={f.name} className={isAside ? 'col-span-12' : spanClass(f.span)}><FieldInput f={f} value={data[f.name]} onChange={(v) => set(f.name, v)} path={f.name} editing={!creating} /></div>)}
+        {s.fields.map((f) => <div key={f.name} data-field={f.name} className={isAside ? 'col-span-12' : spanClass(f.span)}><FieldInput f={f} value={data[f.name]} onChange={(v) => set(f.name, v)} path={f.name} editing={!creating} /></div>)}
       </fieldset>
     </Card>
   );

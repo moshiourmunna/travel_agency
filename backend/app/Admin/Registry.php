@@ -65,7 +65,7 @@ final class Registry
             ['label' => ['en' => 'Content', 'bn' => 'কনটেন্ট'], 'items' => [
                 $r('pages'),
                 $p('admin.menus', 'menu', ['en' => 'Menus', 'bn' => 'মেনু'], 'menus.manage'),
-                $p('admin.media', 'image', ['en' => 'Media library', 'bn' => 'মিডিয়া লাইব্রেরি'], 'content.view'),
+                $p('admin.media', 'image', ['en' => 'Media library', 'bn' => 'মিডিয়া লাইব্রেরি'], 'content.view|catalog.manage'),
                 $r('blog-posts'), $r('blog-categories'), $r('tags'), $r('faqs'), $r('faq-categories'), $r('reviews'), $r('testimonials'), $r('team'), $r('stats'), $r('partners'),
                 $r('jobs'), $r('job-applications'), $r('gallery'),
                 $p('admin.translations', 'languages', ['en' => 'Translations (UI text)', 'bn' => 'অনুবাদ (ইউআই লেখা)'], 'translations.manage'),
@@ -89,7 +89,7 @@ final class Registry
                         continue;
                     }
                     $items[] = ['key' => $res->slug, 'label' => tr_pick($res->label), 'icon' => $res->icon, 'href' => route('admin.resource.index', $res->slug, false), 'badge' => $badges[$res->slug] ?? null];
-                } elseif ($u->can($it['perm'])) {
+                } elseif (collect(explode('|', $it['perm']))->contains(fn ($perm) => $u->can($perm))) { // 'a|b' = any of
                     $items[] = ['key' => $it['route'], 'label' => tr_pick($it['label']), 'icon' => $it['icon'], 'href' => route($it['route'], [], false), 'badge' => $badges[$it['route']] ?? null];
                 }
             }

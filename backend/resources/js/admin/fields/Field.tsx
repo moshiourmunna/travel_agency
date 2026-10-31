@@ -185,7 +185,7 @@ function Rows({ f, value, onChange, path, editing }: { f: FieldDef; value: any[]
             {isOpen ? (
               <div className={cx('border-t border-ink-100 p-3 dark:border-ink-800', compact ? 'grid grid-cols-12 gap-3' : 'field-grid')}>
                 {fields.map((sf) => (
-                  <div key={sf.name} className={compact ? spanClass(sf.span && sf.span < 12 ? sf.span : 6) : spanClass(sf.span)}>
+                  <div key={sf.name} data-field={sf.name} className={compact ? spanClass(sf.span && sf.span < 12 ? sf.span : 6) : spanClass(sf.span)}>
                     <FieldInput f={sf} value={r?.[sf.name]} onChange={(v) => set(sf.name, v)} path={`${rowPath}.${sf.name}`} row={r} parentMeta={m} editing={editing} />
                   </div>
                 ))}
