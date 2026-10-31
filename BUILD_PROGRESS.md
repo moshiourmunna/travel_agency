@@ -176,7 +176,7 @@ console errors; security checks. Then repeat key browser E2E on the user's PC (c
   simulated bKash → booking-confirmed MSF-26-22630, no JS errors. Servers stopped afterwards (php serve, next start); Laragon MySQL and codex node PID 3328 left alone.
 - docs/LOCAL_SETUP.md already covers php.ini upload limits (upload_max_filesize=12M, post_max_size=14M) and the portal login.
 
-## M6 — IN PROGRESS (admin panel)  started 2026-11-01 BDT
+## M6 — DONE + verified on PC (admin panel)  started 2026-11-01 BDT
 Design: declarative resource engine (backend/app/Admin: Field, Col, Filter, Action, Resource, Registry) + generic Inertia pages
 (Resource/Index, Resource/Form) + custom pages (Dashboard, Media, Settings, Translations, Menus, Roles, Bookings/Show, Tickets/Show, Profile).
 - [x] Engine + 58 resources (app/Admin/Resources/*, slugs in Registry::RESOURCES; nav groups Sales/Catalog/Visa desk/Content/Organisation).
@@ -203,11 +203,18 @@ Design: declarative resource engine (backend/app/Admin: Field, Col, Filter, Acti
 - [x] docs/LOCAL_SETUP.md admin section (URL, logins/roles, revalidation, ADMIN_DOMAIN)
 - Box regression after M6 (03:5x BDT): Pest 148/148; admin crawl 7 roles 0 fails (nav links: owner 64, manager 38, editor 41, agent 8, support 8, finance 7, visa 3);
   admin_e2e 25/25; portal_e2e 78/78; checkout_e2e 52/52.
-- [ ] PC sync (both PCs) + PC smoke
+- [x] PC sync #3 (2026-11-01 03:43–04:35 BDT) → DESKTOP-JL5D1F4 (c81f2d4f) F:\projects\tour_travel: git archive 20ca0d8 (55 MB) → 14×4 MB chunks
+  sequentially via C:\Users\m\msfm6, every chunk + merged tar sha256 OK, robocopy /E merge (no deletes, .env/.env.local excluded, backend .env hash unchanged);
+  later admin_e2e.mjs copied so the tree = 5c8873f. Laragon MySQL 8.4.3 was stopped → started mysqld (InnoDB recovery ~50 s). composer install (lock unchanged),
+  `migrate --force` (nothing to migrate), optimize:clear, backend npm ci + build, artisan serve (must run BEFORE next build — SSG fetches the API), next build 297 s, next start.
+  PC smoke: admin_e2e 25/25 (all 7 roles, admin change → public site / portal), admin crawl owner 0 fails (64 nav) + editor 0 fails (41 nav), pc_smoke 27/27,
+  pc_portal_smoke 15/15. Servers left running (php artisan serve :8000, next start :3000).
+- DESKTOP-JIBO2KJ (6cbf210c, E:\projects\tour_travel_full) OFFLINE at 03:4x and 04:18 BDT → not synced; sync it the same way when it is online.
+  E:\projects\tour_travel not touched.
 Checks: `php artisan tinker /tmp/chk.php`-style smoke (every resource: columns/filters/sections/hydrate/detail) passes; Pest 115/115 still green.
 
 ## RESUME HERE (when owner says "continue")
-1. M6 — IN PROGRESS, see the M6 section above for what is done / left. Original scope: Admin panel (Laravel + React, admin.<domain> configurable): RBAC roles from seeded staff logins, CRUD for every CMS/catalogue/commerce/CRM table,
+1. M6 — DONE (only open item: sync PC #2 DESKTOP-JIBO2KJ when it is online). Original scope: Admin panel (Laravel + React, admin.<domain> configurable): RBAC roles from seeded staff logins, CRUD for every CMS/catalogue/commerce/CRM table,
    settings UI (incl. commerce.referral_*, review_miles, cancellation_fee, payments.gateways), media library, bookings/payments ops (bank-slip verify, refunds),
    tickets, reviews moderation, translations, menus/home sections, SEO/redirects. Admin save → POST frontend /api/revalidate with `{ expire: 0 }` for instant updates.
 2. M7 — security + performance hardening (headers/CSP, rate limits review, queues, caching, image optimisation).
