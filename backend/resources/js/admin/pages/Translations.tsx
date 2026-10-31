@@ -85,7 +85,7 @@ function TrRow({ r, base, onDelete, ago }: { r: Row; base: string; onDelete: () 
   const [v, setV] = useState({ en: r.en, bn: r.bn });
   const [state, setState] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
   const [err, setErr] = useState<string | null>(null);
-  useEffect(() => setV({ en: r.en, bn: r.bn }), [r.en, r.bn]);
+  useEffect(() => { setV({ en: r.en, bn: r.bn }); }, [r.en, r.bn]);
   const dirty = v.en !== r.en || v.bn !== r.bn;
   const save = () => {
     if (!dirty) return;

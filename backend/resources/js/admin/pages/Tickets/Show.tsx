@@ -25,8 +25,8 @@ export default function TicketShow({ ticket: tk, messages, options, can }: Props
   const [meta, setMeta] = useState({ status: tk.status, priority: tk.priority, assignee_id: tk.assignee_id, booking_id: tk.booking_id });
   const fileRef = useRef<HTMLInputElement>(null);
   const endRef = useRef<HTMLDivElement>(null);
-  useEffect(() => setMeta({ status: tk.status, priority: tk.priority, assignee_id: tk.assignee_id, booking_id: tk.booking_id }), [tk]);
-  useEffect(() => endRef.current?.scrollIntoView({ block: 'end' }), [messages.length]);
+  useEffect(() => { setMeta({ status: tk.status, priority: tk.priority, assignee_id: tk.assignee_id, booking_id: tk.booking_id }); }, [tk]);
+  useEffect(() => { endRef.current?.scrollIntoView({ block: 'end' }); }, [messages.length]); // block body: Chrome's scrollIntoView now returns a Promise, which React would call as cleanup
   const st = options.status.find((o) => o.value === tk.status);
   const pr = options.priority.find((o) => o.value === tk.priority);
   const send = (status?: string) => router.post(`${base}/reply`, { body, internal: internal ? 1 : 0, ...(status ? { status } : {}), files }, {

@@ -30,7 +30,7 @@ export default function Settings({ groups, active, revalidate, env }: Props) {
   const [vals, setVals] = useState<Record<string, any>>(initial);
   const [busy, setBusy] = useState(false);
   const [q, setQ] = useState('');
-  useEffect(() => setVals(initial), [initial]);
+  useEffect(() => { setVals(initial); }, [initial]);
   const dirty = JSON.stringify(vals) !== JSON.stringify(initial);
 
   const pick = async (k: string) => {

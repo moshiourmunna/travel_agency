@@ -22,7 +22,7 @@ export default function Roles({ roles, groups }: { roles: Role[]; groups: Group[
   const [busy, setBusy] = useState(false);
   const [adding, setAdding] = useState(false);
   const [nw, setNw] = useState<{ name: string; copy: number | null }>({ name: '', copy: null });
-  useEffect(() => setPerms(role?.permissions ?? []), [cur, roles]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => { setPerms(role?.permissions ?? []); }, [cur, roles]); // eslint-disable-line react-hooks/exhaustive-deps
   const dirty = !!role && JSON.stringify([...perms].sort()) !== JSON.stringify([...role.permissions].sort());
   const toggle = (p: string) => setPerms((s) => (s.includes(p) ? s.filter((x) => x !== p) : [...s, p]));
 

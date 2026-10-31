@@ -146,9 +146,9 @@ const portal = async (p) => { await tp.goto(SITE + p, { waitUntil: 'networkidle'
   const old = await sel.inputValue(); const next = old === 'verified' ? 'docs' : 'verified';
   await sel.selectOption(next); await page.click('[data-save]');
   ok('visa: stage saved', await toastOk(page));
-  const card = async () => { await portal('/en/account/visa'); return tp.locator('li, article, section, div').filter({ hasText: 'VSA-26-1183' }).last().innerText().catch(() => ''); };
-  const label = next === 'verified' ? /Documents verified|verified/i : /Documents needed|upload/i;
-  ok('visa: traveller tracker shows the new stage', label.test(await card()));
+  await portal('/en/account/visa');
+  const shown = await tp.locator('[data-visa="VSA-26-1183"] [data-status]').first().getAttribute('data-status').catch(() => null);
+  ok('visa: traveller tracker shows the new stage', shown === next, `${old} → ${shown}`);
   await sel.selectOption(old); await page.click('[data-save]'); await toastOk(page);
   await page.context().close();
 }

@@ -19,7 +19,7 @@ export function Status({ t, s, className = '' }: { t: T; s: string | null | unde
     open: [t('Open', 'খোলা'), amber], resolved: [t('Resolved', 'সমাধান হয়েছে'), ok], closed: [t('Closed', 'বন্ধ'), ink], awaiting: [t('Awaiting reply', 'উত্তরের অপেক্ষায়'), sky],
     success: [t('Successful', 'সফল'), ok], paid: [t('Paid', 'পরিশোধিত'), ok], failed: [t('Failed', 'ব্যর্থ'), rose], due: [t('Due', 'বাকি'), amber], upcoming: [t('Upcoming', 'আসন্ন'), ink],
     overdue: [t('Overdue', 'মেয়াদোত্তীর্ণ'), rose], review: [t('In review', 'পর্যালোচনায়'), amber], approved: [t('Approved', 'অনুমোদিত'), ok], submitted: [t('Submitted', 'জমা হয়েছে'), sky],
-    docs: [t('Documents needed', 'কাগজ প্রয়োজন'), amber], embassy: [t('At embassy', 'দূতাবাসে'), violet], decision: [t('Decision due', 'সিদ্ধান্তের অপেক্ষায়'), violet],
+    docs: [t('Documents needed', 'কাগজ প্রয়োজন'), amber], verified: [t('Documents verified', 'কাগজ যাচাই হয়েছে'), sky], visa_rejected: [t('Rejected', 'প্রত্যাখ্যাত'), rose], embassy: [t('At embassy', 'দূতাবাসে'), violet], decision: [t('Decision due', 'সিদ্ধান্তের অপেক্ষায়'), violet],
     delivered: [t('Delivered', 'হস্তান্তরিত'), ok], issued: [t('Issued', 'ইস্যু হয়েছে'), ok], unpaid: [t('Unpaid', 'অপরিশোধিত'), rose],
   };
   const key = s ?? '';

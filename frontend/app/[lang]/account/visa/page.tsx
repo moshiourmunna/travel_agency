@@ -94,7 +94,7 @@ export default async function Visa({ params }: PageProps<'/[lang]/account/visa'>
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div><p className="text-xs muted">{v.ref}{v.booking ? <> · {t('linked to', 'যুক্ত')} <a href={u(`/account/bookings/${v.booking}`)} className="hover:underline">{v.booking}</a></> : null}</p>
               <h2 id={`v-${v.ref}`} className="mt-1 text-xl font-bold"><span aria-hidden="true">{v.flag}</span> {v.country} {v.type} — {v.name}</h2></div>
-            <Status t={t} s={v.stage} />
+            <Status t={t} s={v.stage === 'rejected' ? 'visa_rejected' : v.stage} />
           </div>
           <Stages i={i} v={v} />
           <div className="mt-6 rounded-2xl bg-sky-50 p-4 text-sm text-sky-900 dark:bg-sky-900/30 dark:text-sky-100"><Icon name="info" className="mr-1 inline h-4 w-4" /> {note(v)}</div>
@@ -106,7 +106,7 @@ export default async function Visa({ params }: PageProps<'/[lang]/account/visa'>
             <section key={v.ref} className="card border-accent-300 p-4 ring-1 ring-accent-300 dark:ring-accent-400/40 sm:p-6" aria-labelledby={`v-${v.ref}`} data-visa={v.ref}>
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div><p className="text-xs muted">{v.ref}</p><h2 id={`v-${v.ref}`} className="mt-1 text-lg font-bold"><span aria-hidden="true">{v.flag}</span> {v.country} — {v.name}</h2></div>
-                <Status t={t} s={v.stage} />
+                <Status t={t} s={v.stage === 'rejected' ? 'visa_rejected' : v.stage} />
               </div>
               <Progress pct={v.stage_no * 20} label={`${v.name} — ${t('visa progress', 'ভিসার অগ্রগতি')}`} className="mt-4" />
               <Upload i={i} v={v} />
@@ -117,7 +117,7 @@ export default async function Visa({ params }: PageProps<'/[lang]/account/visa'>
             <ul className="mt-4 divide-y divide-ink-100 dark:divide-ink-800">
               {x.items.map((v: any) => (
                 <li key={v.ref} className="flex items-center gap-3 py-3"><span className="text-2xl" aria-hidden="true">{v.flag}</span>
-                  <div className="min-w-0 flex-1"><p className="truncate font-semibold">{v.country} · {v.type}</p><p className="text-xs muted">{v.ref} · {v.name}</p></div><Status t={t} s={v.stage} /></li>
+                  <div className="min-w-0 flex-1"><p className="truncate font-semibold">{v.country} · {v.type}</p><p className="text-xs muted">{v.ref} · {v.name}</p></div><Status t={t} s={v.stage === 'rejected' ? 'visa_rejected' : v.stage} /></li>
               ))}
             </ul>
             <div className="mt-4 rounded-2xl bg-ink-50 p-4 text-sm dark:bg-ink-850">
