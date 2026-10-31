@@ -88,12 +88,12 @@ Each login has a role that limits what it sees:
 | Login | Role | Can do |
 |---|---|---|
 | admin@musafir.test | owner | everything, including roles & permissions and all settings |
-| sales@musafir.test | manager | catalogue (tours, cruises, hotels, activities, flights, visas, offers), bookings, customers, reports |
-| reservations@musafir.test | agent | bookings desk (status, notes, offline payments), enquiries, customers |
+| sales@musafir.test | manager | catalogue, bookings, payments, visas, customers & enquiries, coupons, reports (no content or settings) |
+| reservations@musafir.test | agent | bookings desk (status, notes, offline payments) and customers / enquiries / tickets |
 | visa@musafir.test | visa | visa applications and visa products |
-| support@musafir.test | support | support tickets, enquiries, review moderation |
-| accounts@musafir.test | finance | payments, bank-transfer verification, refunds, payment settings |
-| content@musafir.test | editor | pages, home sections, menus, blog, FAQs, media, translations, SEO & redirects |
+| support@musafir.test | support | support tickets, enquiries, customers and bookings |
+| accounts@musafir.test | finance | payments, bank-transfer verification, refunds, bookings, reports |
+| content@musafir.test | editor | catalogue and website content: pages, home sections, menus, blog, FAQs, reviews, media, translations, SEO & redirects |
 
 - English and Bangla are edited side by side on every form. Saving anything that shows on the website refreshes the affected pages at once
   (the admin calls `POST {FRONTEND_URL}/api/revalidate` with the changed cache tags and `expire: 0`), so the change is visible on the next page load.
