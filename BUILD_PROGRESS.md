@@ -201,6 +201,8 @@ Design: declarative resource engine (backend/app/Admin: Field, Col, Filter, Acti
   match stored gradients; portal booking activity exposed internal staff notes; React effect returning scrollIntoView's Promise crashed ticket reply;
   media nav hidden for catalogue staff; portal visa 'verified'/'rejected' labels.
 - [x] docs/LOCAL_SETUP.md admin section (URL, logins/roles, revalidation, ADMIN_DOMAIN)
+- Box regression after M6 (03:5x BDT): Pest 148/148; admin crawl 7 roles 0 fails (nav links: owner 64, manager 38, editor 41, agent 8, support 8, finance 7, visa 3);
+  admin_e2e 25/25; portal_e2e 78/78; checkout_e2e 52/52.
 - [ ] PC sync (both PCs) + PC smoke
 Checks: `php artisan tinker /tmp/chk.php`-style smoke (every resource: columns/filters/sections/hydrate/detail) passes; Pest 115/115 still green.
 
