@@ -213,7 +213,7 @@ Design: declarative resource engine (backend/app/Admin: Field, Col, Filter, Acti
   E:\projects\tour_travel not touched.
 Checks: `php artisan tinker /tmp/chk.php`-style smoke (every resource: columns/filters/sections/hydrate/detail) passes; Pest 115/115 still green.
 
-## M7 — IN PROGRESS (security + performance)  started 2026-11-01 04:35 BDT
+## M7 — DONE (security + performance)  2026-11-01 04:35–05:40 BDT
 - [x] Security headers: Laravel SecurityHeaders middleware (nosniff, referrer, permissions, COOP, XFO, HSTS on https, X-Robots-Tag on API) + nonce CSP
   for the admin (Vite::useCspNonce, inline theme script nonce'd); Next headers() CSP ('unsafe-inline' scripts required by ISR/static HTML), DENY framing,
   media origins from API_URL + MEDIA_ORIGINS (build-time env). Brand/fonts cache headers.
@@ -226,13 +226,26 @@ Checks: `php artisan tinker /tmp/chk.php`-style smoke (every resource: columns/f
   other uploads already mimes (content-sniffed) + size + private disk. composer audit clean (symfony/mime CVE-2026-45070 → 7.4.22); npm audit 0.
 - [x] Queue: e-mail + SMS through jobs (SendTemplatedEmail/SendSms, retries/backoff); OTP SMS dispatchAfterResponse (no worker needed);
   scheduler drains the database queue every minute (QUEUE_VIA_SCHEDULE, for hosts without a worker). Pest QueueNotifyTest 3. Suite 161/161.
-- [ ] admin bundle trim, caching review, images/LCP, Lighthouse, SEO/structured data verify
+- [x] Admin bundle: generated icon map (tooling/gen_admin_icons.mjs → icons.gen.ts, `npm run icons`), ui chunk 680 → 93 KB.
+- [x] Site perf: SVG sprite /icons.svg (tooling/gen/sprite.mjs) instead of inline icon paths (~100 KB less HTML/page); header was client-rendered
+  (useSearchParams in LangLink + Suspense → streamed after <main>, CLS 0.08) → now SSR, CLS 0; Taka-only font subset (0.7 KB) so English pages no longer
+  pull Bengali fonts; Hind Siliguri 4 → 2 files + display:optional (Jakarta/Fraunces optional too); dimmed hero backgrounds use smaller phone variants;
+  media variants thumb/card/wide(1200, new)/hero webp q72/q68 (`php artisan media-library:regenerate --force` after deploy, done on box);
+  next/image deliberately not used (own srcset; no sharp/optimizer needed on any host).
+- [x] Caching: PublicCache ETag API (existing); Next immutable cache for /_next, /fonts, /brand, /icons.svg; Apache .htaccess cache headers + sandbox CSP
+  for /storage; TRUSTED_PROXIES moved to config so `php artisan optimize` (config/route/view/event cache) is safe.
+- [x] Lighthouse mobile (tooling/tests/lighthouse.mjs, summary tooling/lighthouse-summary.json): perf /en 92, /en/tours 90, tour detail 94, destinations 89–95,
+  visa 96, blog 91, contact 98, faq 98, hotels 94; /bn 84–87 (two 70 KB Bengali fonts compete with the hero on simulated slow 4G — accepted);
+  a11y 100, best practices 100, SEO 100 on all (tour detail target-size fixed: sticky bars pb-7).
+- [x] SEO verify (tooling/tests/seo_check.mjs): 208 sitemap URLs all 200, canonical = loc, hreflang en/bn/x-default, html lang, one h1, og:image,
+  JSON-LD valid (TravelAgency, BreadcrumbList, TouristTrip, Product, Hotel, FAQPage, JobPosting, BlogPosting …); robots.txt ok; 404 noindex; API X-Robots-Tag.
+  Only content note: 12 pages have short (<50 chars) meta descriptions (editable in admin → SEO).
 
 ## RESUME HERE (when owner says "continue")
 1. M6 — DONE (only open item: sync PC #2 DESKTOP-JIBO2KJ when it is online). Original scope: Admin panel (Laravel + React, admin.<domain> configurable): RBAC roles from seeded staff logins, CRUD for every CMS/catalogue/commerce/CRM table,
    settings UI (incl. commerce.referral_*, review_miles, cancellation_fee, payments.gateways), media library, bookings/payments ops (bank-slip verify, refunds),
    tickets, reviews moderation, translations, menus/home sections, SEO/redirects. Admin save → POST frontend /api/revalidate with `{ expire: 0 }` for instant updates.
-2. M7 — security + performance hardening (headers/CSP, rate limits review, queues, caching, image optimisation).
+2. M7 — DONE.
 3. M8 — full test campaign (scope recorded above) on box + PC, TEST_REPORT.md.
 4. M9 — deployability (scope changed by owner 2026-11-01): make sure the project deploys on any hosting (VPS, shared/cPanel, PaaS) — production build works, env-driven config, no hardcoded hosts/paths, runs without Redis/root; plus a short DEPLOYMENT.md checklist only (no step-by-step guides).
 - PC transfer rules: 4 MB chunks, sequential, CopyFromBox into C:\Users\m then move into F:\projects\tour_travel; never overwrite .env; sha256 verify.
