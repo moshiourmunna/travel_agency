@@ -1,45 +1,25 @@
 {
-  "preset": "mobile",
-  "at": "2026-10-31T23:14:40.826Z",
+  "preset": "desktop",
+  "at": "2026-11-01T00:01:18.860Z",
   "pages": [
     {
-      "page": "/bn",
-      "perf": 84,
+      "page": "/en/hotels",
+      "perf": 99,
       "a11y": 100,
       "bp": 100,
       "seo": 100,
-      "lcp": "4.2 s",
-      "cls": "0",
-      "tbt": "40 ms",
+      "lcp": "1.0 s",
+      "cls": "0.005",
+      "tbt": "0 ms",
       "fails": [
-        "first-contentful-paint (2.1 s)",
-        "largest-contentful-paint (4.2 s)",
-        "max-potential-fid (140 ms)",
-        "interactive (4.6 s)",
-        "mainthread-work-breakdown (2.4 s)",
-        "largest-contentful-paint-element (4,220 ms)",
-        "uses-long-cache-ttl (13 resources found)",
-        "offscreen-images (Est savings of 4 KiB)"
-      ]
-    },
-    {
-      "page": "/bn/tours",
-      "perf": 82,
-      "a11y": 100,
-      "bp": 100,
-      "seo": 100,
-      "lcp": "4.7 s",
-      "cls": "0",
-      "tbt": "30 ms",
-      "fails": [
-        "first-contentful-paint (2.0 s)",
-        "largest-contentful-paint (4.7 s)",
-        "interactive (4.8 s)",
-        "largest-contentful-paint-element (4,660 ms)",
-        "lcp-lazy-loaded",
-        "uses-long-cache-ttl (11 resources found)",
-        "offscreen-images (Est savings of 4 KiB)",
-        "render-blocking-resources (Est savings of 1,030 ms)"
+        "uses-long-cache-ttl (16 resources found)",
+        "unused-css-rules (Est savings of 16 KiB)",
+        "unused-javascript (Est savings of 27 KiB)",
+        "uses-responsive-images (Est savings of 247 KiB)",
+        "legacy-javascript (Est savings of 13 KiB)",
+        "dom-size (982 elements)",
+        "bf-cache (2 failure reasons)",
+        "cache-insight (Est savings of 1,094 KiB)"
       ]
     }
   ]

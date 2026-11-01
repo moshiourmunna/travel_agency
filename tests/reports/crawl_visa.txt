@@ -1,0 +1,10 @@
+visa@musafir.test nav links 3
+ok   index /admin | Good morning, Sohel
+ok   index /admin/visa-applications | Visa applications
+ok    edit /admin/visa-applications/10/edit | VSA-26-78768
+ok   index /admin/documents | Visa documents
+ok    edit /admin/documents/11 | #11
+ok   extra http://127.0.0.1:8000/admin/profile | My profile
+ok   denied /settings?group=payments 403
+ok   denied /media 403
+FAILS 0

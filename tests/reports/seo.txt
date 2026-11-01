@@ -1,0 +1,40 @@
+{
+ "base": "http://localhost:3000",
+ "sitemap_urls": 208,
+ "ok": 196,
+ "problems": 12,
+ "robots_sitemap": true,
+ "jsonld_types": {
+  "TravelAgency": 210,
+  "Organization": 208,
+  "BreadcrumbList": 206,
+  "AboutPage": 2,
+  "WebSite": 2,
+  "Blog": 2,
+  "JobPosting": 10,
+  "ContactPage": 2,
+  "FAQPage": 54,
+  "ImageGallery": 2,
+  "Service": 22,
+  "ItemList": 22,
+  "WebApplication": 2,
+  "TouristTrip": 44,
+  "Product": 68,
+  "TouristDestination": 24,
+  "TouristAttraction": 24,
+  "Hotel": 16,
+  "BlogPosting": 12
+ }
+}
+  ✗ http://localhost:3000/bn/credits → description(24)
+  ✗ http://localhost:3000/en/credits → description(27)
+  ✗ http://localhost:3000/en/terms → description(44)
+  ✗ http://localhost:3000/en/privacy → description(36)
+  ✗ http://localhost:3000/bn/terms → description(27)
+  ✗ http://localhost:3000/bn/privacy → description(33)
+  ✗ http://localhost:3000/bn/refund-policy → description(39)
+  ✗ http://localhost:3000/bn/custom-tour → description(47)
+  ✗ http://localhost:3000/bn/gallery → description(46)
+  ✗ http://localhost:3000/en/sitemap → description(28)
+  ✗ http://localhost:3000/bn/sitemap → description(26)
+  ✗ http://localhost:3000/bn/hotels/grand-tea-valley → description(46)

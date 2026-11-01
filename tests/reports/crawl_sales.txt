@@ -1,0 +1,108 @@
+sales@musafir.test nav links 38
+ok   index /admin | Good morning, Nadia
+ok   index /admin/bookings | Bookings
+ok    edit /admin/bookings/52 | MSF-26-84043ConfirmedPaid
+ok   index /admin/inquiries | Enquiries
+ok    edit /admin/inquiries/4/edit | E2E Site Test
+ok   index /admin/leads | Sales leads
+ok    edit /admin/leads/16/edit | E2E Site Test
+ok    new  /admin/leads/create | New lead
+ok   index /admin/customers | Customers
+ok    edit /admin/customers/31/edit | Arif Khan
+ok    new  /admin/customers/create | New customer
+ok   index /admin/payments | Payments
+ok    edit /admin/payments/52 | #52
+ok   index /admin/refunds | Refunds
+ok    edit /admin/bookings/45#refunds | MSF-26-48155RefundedRefunded
+ok   index /admin/coupons | Coupons
+ok    edit /admin/coupons/7/edit | Corporate partners
+ok    new  /admin/coupons/create | New coupon
+ok   index /admin/offers | Deals & offers
+ok    edit /admin/offers/1/edit | Winter beach sale — Cox's Bazar
+ok    new  /admin/offers/create | New offer
+ok   index /admin/gift-cards | Gift cards issued
+ok    edit /admin/gift-cards/2/edit | MSF-8Z3I-SBEJ
+ok    new  /admin/gift-cards/create | New gift card
+ok   index /admin/tours | Holiday packages
+ok    edit /admin/tours/1/edit | Cox's Bazar & Saint Martin Island Escape
+ok    new  /admin/tours/create | New holiday package
+ok   index /admin/destinations | Destinations
+ok    edit /admin/destinations/1/edit | Cox's Bazar
+ok    new  /admin/destinations/create | New destination
+ok   index /admin/themes | Holiday themes
+ok    edit /admin/themes/1/edit | Honeymoon
+ok    new  /admin/themes/create | New theme
+ok   index /admin/categories | Trip categories
+ok    edit /admin/categories/1/edit | Beach
+ok    new  /admin/categories/create | New category
+ok   index /admin/cruises | Cruises
+ok    edit /admin/cruises/1/edit | Singapore · Penang · Phuket Cruise
+ok    new  /admin/cruises/create | New cruise
+ok   index /admin/cruise-lines | Cruise lines
+ok    edit /admin/cruise-lines/5/edit | Atoll Yachts
+ok    new  /admin/cruise-lines/create | New cruise line
+ok   index /admin/ships | Ships
+ok    edit /admin/ships/6/edit | Blue Manta
+ok    new  /admin/ships/create | New ship
+ok   index /admin/activities | Activities
+ok    edit /admin/activities/1/edit | Cappadocia hot-air balloon flight at sunrise
+ok    new  /admin/activities/create | New activity
+ok   index /admin/activity-slots | Activity time slots
+ok    edit /admin/activity-slots/1/edit | #1
+ok    new  /admin/activity-slots/create | New time slot
+ok   index /admin/hotels | Hotels
+ok    edit /admin/hotels/1/edit | Ocean Pearl Resort & Spa
+ok    new  /admin/hotels/create | New hotel
+ok   index /admin/amenities | Hotel amenities
+ok    edit /admin/amenities/1/edit | Free Wi-Fi
+ok    new  /admin/amenities/create | New amenity
+ok   index /admin/flight-offers | Flight inventory
+ok    edit /admin/flight-offers/38/edit | #38
+ok    new  /admin/flight-offers/create | New flight
+ok   index /admin/airlines | Airlines
+ok    edit /admin/airlines/10/edit | SriLankan
+ok    new  /admin/airlines/create | New airline
+ok   index /admin/airports | Airports
+ok    edit /admin/airports/10/edit | Suvarnabhumi
+ok    new  /admin/airports/create | New airport
+ok   index /admin/insurance-plans | Travel insurance plans
+ok    edit /admin/insurance-plans/1/edit | Asia Basic
+ok    new  /admin/insurance-plans/create | New insurance plan
+ok   index /admin/gift-card-designs | Gift card designs
+ok    edit /admin/gift-card-designs/1/edit | Classic teal
+ok    new  /admin/gift-card-designs/create | New gift card design
+ok   index /admin/cancellation-policies | Cancellation policies
+ok    edit /admin/cancellation-policies/6/edit | Non-refundable
+ok    new  /admin/cancellation-policies/create | New cancellation policy
+ok   index /admin/planner-costs | Trip planner costs
+ok    edit /admin/planner-costs/12/edit | #12
+ok    new  /admin/planner-costs/create | New planner cost
+ok   index /admin/countries | Countries
+ok    edit /admin/countries/5/edit | United Arab Emirates
+ok    new  /admin/countries/create | New country
+ok   index /admin/regions | Regions
+ok    edit /admin/regions/1/edit | Bangladesh
+ok    new  /admin/regions/create | New region
+ok   index /admin/visa-applications | Visa applications
+ok    edit /admin/visa-applications/10/edit | VSA-26-78768
+ok   index /admin/documents | Visa documents
+ok    edit /admin/documents/11 | #11
+ok   index /admin/visa-products | Visa services
+ok    edit /admin/visa-products/1/edit | thailand
+ok    new  /admin/visa-products/create | New visa service
+ok   index /admin/visa-document-sets | Visa document checklists
+ok    edit /admin/visa-document-sets/1/edit | All applicants
+ok    new  /admin/visa-document-sets/create | New checklist
+ok   index /admin/media | Media library
+ok   index /admin/newsletter | Newsletter subscribers
+ok    edit /admin/newsletter/4/edit | e2e-site@musafir.test
+ok    new  /admin/newsletter/create | New subscriber
+ok   index /admin/tickets | Support tickets
+ok    edit /admin/tickets/8 | Special request — MSF-26-49388
+ok   index /admin/agents | B2B agents
+ok    edit /admin/agents/5/edit | AG-145
+ok    new  /admin/agents/create | New agent
+ok   extra http://127.0.0.1:8000/admin/profile | My profile
+ok   denied /settings?group=payments 403
+ok   extra http://127.0.0.1:8000/admin/media | Media library
+FAILS 0

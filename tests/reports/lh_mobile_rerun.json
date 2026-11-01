@@ -1,0 +1,46 @@
+{
+  "preset": "mobile",
+  "at": "2026-11-01T00:01:06.926Z",
+  "pages": [
+    {
+      "page": "/en",
+      "perf": 91,
+      "a11y": 100,
+      "bp": 100,
+      "seo": 100,
+      "lcp": "3.2 s",
+      "cls": "0",
+      "tbt": "170 ms",
+      "fails": [
+        "largest-contentful-paint (3.2 s)",
+        "max-potential-fid (340 ms)",
+        "interactive (4.5 s)",
+        "largest-contentful-paint-element (3,190 ms)",
+        "uses-long-cache-ttl (12 resources found)",
+        "offscreen-images (Est savings of 4 KiB)",
+        "render-blocking-resources (Est savings of 110 ms)",
+        "unused-css-rules (Est savings of 15 KiB)"
+      ]
+    },
+    {
+      "page": "/bn",
+      "perf": 85,
+      "a11y": 100,
+      "bp": 100,
+      "seo": 100,
+      "lcp": "4.2 s",
+      "cls": "0",
+      "tbt": "30 ms",
+      "fails": [
+        "largest-contentful-paint (4.2 s)",
+        "interactive (5.0 s)",
+        "largest-contentful-paint-element (4,200 ms)",
+        "uses-long-cache-ttl (13 resources found)",
+        "offscreen-images (Est savings of 4 KiB)",
+        "render-blocking-resources (Est savings of 470 ms)",
+        "unused-css-rules (Est savings of 15 KiB)",
+        "unused-javascript (Est savings of 27 KiB)"
+      ]
+    }
+  ]
+}

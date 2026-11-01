@@ -1,0 +1,118 @@
+content@musafir.test nav links 41
+ok   index /admin | Good morning, Tania
+ok   index /admin/tours | Holiday packages
+ok    edit /admin/tours/1/edit | Cox's Bazar & Saint Martin Island Escape
+ok    new  /admin/tours/create | New holiday package
+ok   index /admin/destinations | Destinations
+ok    edit /admin/destinations/1/edit | Cox's Bazar
+ok    new  /admin/destinations/create | New destination
+ok   index /admin/themes | Holiday themes
+ok    edit /admin/themes/1/edit | Honeymoon
+ok    new  /admin/themes/create | New theme
+ok   index /admin/categories | Trip categories
+ok    edit /admin/categories/1/edit | Beach
+ok    new  /admin/categories/create | New category
+ok   index /admin/cruises | Cruises
+ok    edit /admin/cruises/1/edit | Singapore · Penang · Phuket Cruise
+ok    new  /admin/cruises/create | New cruise
+ok   index /admin/cruise-lines | Cruise lines
+ok    edit /admin/cruise-lines/5/edit | Atoll Yachts
+ok    new  /admin/cruise-lines/create | New cruise line
+ok   index /admin/ships | Ships
+ok    edit /admin/ships/6/edit | Blue Manta
+ok    new  /admin/ships/create | New ship
+ok   index /admin/activities | Activities
+ok    edit /admin/activities/1/edit | Cappadocia hot-air balloon flight at sunrise
+ok    new  /admin/activities/create | New activity
+ok   index /admin/activity-slots | Activity time slots
+ok    edit /admin/activity-slots/1/edit | #1
+ok    new  /admin/activity-slots/create | New time slot
+ok   index /admin/hotels | Hotels
+ok    edit /admin/hotels/1/edit | Ocean Pearl Resort & Spa
+ok    new  /admin/hotels/create | New hotel
+ok   index /admin/amenities | Hotel amenities
+ok    edit /admin/amenities/1/edit | Free Wi-Fi
+ok    new  /admin/amenities/create | New amenity
+ok   index /admin/flight-offers | Flight inventory
+ok    edit /admin/flight-offers/38/edit | #38
+ok    new  /admin/flight-offers/create | New flight
+ok   index /admin/airlines | Airlines
+ok    edit /admin/airlines/10/edit | SriLankan
+ok    new  /admin/airlines/create | New airline
+ok   index /admin/airports | Airports
+ok    edit /admin/airports/10/edit | Suvarnabhumi
+ok    new  /admin/airports/create | New airport
+ok   index /admin/insurance-plans | Travel insurance plans
+ok    edit /admin/insurance-plans/1/edit | Asia Basic
+ok    new  /admin/insurance-plans/create | New insurance plan
+ok   index /admin/gift-card-designs | Gift card designs
+ok    edit /admin/gift-card-designs/1/edit | Classic teal
+ok    new  /admin/gift-card-designs/create | New gift card design
+ok   index /admin/cancellation-policies | Cancellation policies
+ok    edit /admin/cancellation-policies/6/edit | Non-refundable
+ok    new  /admin/cancellation-policies/create | New cancellation policy
+ok   index /admin/planner-costs | Trip planner costs
+ok    edit /admin/planner-costs/12/edit | #12
+ok    new  /admin/planner-costs/create | New planner cost
+ok   index /admin/countries | Countries
+ok    edit /admin/countries/5/edit | United Arab Emirates
+ok    new  /admin/countries/create | New country
+ok   index /admin/regions | Regions
+ok    edit /admin/regions/1/edit | Bangladesh
+ok    new  /admin/regions/create | New region
+ok   index /admin/visa-products | Visa services
+ok    edit /admin/visa-products/1/edit | thailand
+ok    new  /admin/visa-products/create | New visa service
+ok   index /admin/visa-document-sets | Visa document checklists
+ok    edit /admin/visa-document-sets/1/edit | All applicants
+ok    new  /admin/visa-document-sets/create | New checklist
+ok   index /admin/pages | Pages & home sections
+ok    edit /admin/pages/1/edit | Terms & conditions
+ok    new  /admin/pages/create | New page
+ok   index /admin/menus | Menus
+ok   index /admin/media | Media library
+ok   index /admin/blog-posts | Blog posts
+ok    edit /admin/blog-posts/1/edit | Your first cruise from Bangladesh: costs, cabins a
+ok    new  /admin/blog-posts/create | New blog post
+ok   index /admin/blog-categories | Blog categories
+ok    edit /admin/blog-categories/1/edit | Cruises
+ok    new  /admin/blog-categories/create | New category
+ok   index /admin/tags | Tags
+ok    edit /admin/tags/7/edit | International
+ok    new  /admin/tags/create | New tag
+ok   index /admin/faqs | FAQs
+ok    edit /admin/faqs/1/edit | #1
+ok    new  /admin/faqs/create | New question
+ok   index /admin/faq-categories | FAQ categories
+ok    edit /admin/faq-categories/1/edit | Booking
+ok    new  /admin/faq-categories/create | New faq category
+ok   index /admin/reviews | Reviews
+ok    edit /admin/reviews/12/edit | #12
+ok   index /admin/testimonials | Testimonials
+ok    edit /admin/testimonials/1/edit | Tanvir & Nusrat Ahmed
+ok    new  /admin/testimonials/create | New testimonial
+ok   index /admin/team | Team
+ok    edit /admin/team/1/edit | Ahmed Zubair
+ok    new  /admin/team/create | New team member
+ok   index /admin/stats | Stats (numbers)
+ok    edit /admin/stats/1/edit | #1
+ok    new  /admin/stats/create | New stat
+ok   index /admin/partners | Partners & logos
+ok    edit /admin/partners/1/edit | Biman Bangladesh
+ok    new  /admin/partners/create | New partner
+ok   index /admin/jobs | Careers (jobs)
+ok    edit /admin/jobs/1/edit | Senior Travel Consultant (International)
+ok    new  /admin/jobs/create | New job
+ok   index /admin/gallery | Photo gallery
+ok    edit /admin/gallery/1/edit | Bangladesh
+ok    new  /admin/gallery/create | New album
+ok   index /admin/translations | Website texts
+ok   index /admin/seo | SEO meta
+ok    edit /admin/seo/113/edit | Page · Sitemap
+ok    new  /admin/seo/create | New seo record
+ok   index /admin/redirects | Redirects
+ok    new  /admin/redirects/create | New redirect
+ok   extra http://127.0.0.1:8000/admin/profile | My profile
+ok   denied /settings?group=payments 403
+ok   extra http://127.0.0.1:8000/admin/media | Media library
+FAILS 0

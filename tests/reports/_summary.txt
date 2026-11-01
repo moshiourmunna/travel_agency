@@ -1,0 +1,20 @@
+pest exit=0 45s
+site exit=0 5s
+portal exit=0 135s
+checkout exit=0 23s
+crawl_admin exit=0 387s
+crawl_accounts exit=0 16s
+crawl_content exit=0 102s
+crawl_sales exit=0 92s
+crawl_support exit=0 20s
+crawl_reservations exit=0 19s
+crawl_visa exit=0 7s
+admin_e2e exit=0 81s
+matrix exit=0 41s
+axe exit=0 59s
+links exit=0 11s
+seo exit=1 1s
+lh_mobile exit=0 136s
+lh_desktop exit=0 85s
+cleanup exit=0 1s
+DONE

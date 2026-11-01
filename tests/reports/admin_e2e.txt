@@ -1,0 +1,31 @@
+PASS owner: settings saved 
+PASS owner: footer shows new e-mail after 2 hit(s)
+PASS owner: setting restored on site 
+PASS content: FAQ saved 
+PASS content: /en/faq shows edited question after 2 hit(s)
+PASS content: FAQ restored on site 
+PASS content: translation saved inline 
+PASS content: home page shows edited UI text after 2 hit(s)
+PASS content: translation restored on site 
+PASS content: bookings forbidden 
+PASS sales: tour saved 
+PASS sales: tour page shows new title after 2 hit(s)
+PASS sales: tours listing shows new title 
+PASS sales: title restored on site 
+PASS reservations: note added 
+PASS reservations: note in timeline 
+PASS reservations: traveller sees the note in the portal 
+PASS accounts: transfer verified 
+PASS accounts: booking paid +1000 61650 → 62650
+PASS accounts: traveller portal shows the new paid amount 62,650
+PASS visa: stage saved 
+PASS visa: traveller tracker shows the new stage docs → verified
+PASS support: reply sent 
+PASS support: reply in thread 
+PASS support: traveller sees the reply 
+PASS 2fa: QR + key shown 
+PASS 2fa: enabled with 8 recovery codes 
+PASS 2fa: password step leads to code step 
+PASS 2fa: signed in with the app code 
+PASS 2fa: turned off again 
+ALL PASS

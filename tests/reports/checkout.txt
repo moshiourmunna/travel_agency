@@ -1,0 +1,54 @@
+PASS tour deposit + coupon: step 1 renders ৳ 3,03,200
+PASS tour deposit + coupon: step 2 validation 
+PASS tour deposit + coupon: coupon MUSAFIR10 
+PASS tour deposit + coupon: plan deposit offered full,deposit,instalments
+PASS tour deposit + coupon: terms required 
+PASS tour deposit + coupon: gateway page bKash — payment simulator
+PASS tour deposit + coupon: confirmed MSF-26-44615 PARTIALLY PAID paid −৳ 83,460
+PASS tour deposit + coupon: invoice pdf 28647 bytes
+PASS tour deposit + coupon: no JS errors 
+PASS cruise full (bn, mobile): step 1 renders ৳ ১,৩৭,০০০
+PASS cruise full (bn, mobile): step 2 validation 
+PASS cruise full (bn, mobile): plan full offered full,deposit,instalments
+PASS cruise full (bn, mobile): terms required 
+PASS cruise full (bn, mobile): gateway page Nagad — payment simulator
+PASS cruise full (bn, mobile): confirmed MSF-26-67673 পরিশোধিত paid −৳ ১,৩৪,২৬০
+PASS cruise full (bn, mobile): invoice pdf 27358 bytes
+PASS cruise full (bn, mobile): no JS errors 
+PASS activity card: step 1 renders ৳ 5,600
+PASS activity card: step 2 validation 
+PASS activity card: terms required 
+PASS activity card: gateway page Card · SSLCommerz — payment simulator
+PASS activity card: confirmed MSF-26-69762 PAID paid −৳ 5,600
+PASS activity card: invoice pdf 27527 bytes
+PASS activity card: no JS errors 
+PASS hotel failed payment: step 1 renders ৳ 28,420
+PASS hotel failed payment: step 2 validation 
+PASS hotel failed payment: terms required 
+PASS hotel failed payment: gateway page bKash — payment simulator
+PASS hotel failed payment: back to checkout with failed /en/booking?ref=MSF-26-27691&key=01M6A5DJRP5GRVBE0GPQQZ5801&payment=failed
+PASS hotel failed payment: resume shows payment step 
+PASS hotel failed payment: retry after failure succeeds MSF-26-27691
+PASS hotel failed payment: no JS errors 
+PASS hotel bank transfer: step 1 renders ৳ 28,420
+PASS hotel bank transfer: step 2 validation 
+PASS hotel bank transfer: terms required 
+PASS hotel bank transfer: bank pending page http://localhost:3000/en/booking-confirmed?ref=MSF-26-64786&key=01M6A5DNMQ5JXPEE0VC0QQCNPX
+PASS hotel bank transfer: no JS errors 
+PASS visa: pay-online link on visa page /en/booking?visa=thailand&adults=1
+PASS visa 2 applicants: step 1 renders ৳ 13,000
+PASS visa 2 applicants: step 2 validation 
+PASS visa 2 applicants: terms required 
+PASS visa 2 applicants: gateway page Test gateway — payment simulator
+PASS visa 2 applicants: confirmed MSF-26-39688 PAID paid −৳ 13,000
+PASS visa 2 applicants: invoice pdf 27026 bytes
+PASS visa 2 applicants: no JS errors 
+PASS gift card: step 1 renders ৳ 5,000
+PASS gift card: step 2 validation 
+PASS gift card: terms required 
+PASS gift card: gateway page bKash — payment simulator
+PASS gift card: confirmed MSF-26-84043 PAID paid −৳ 5,000
+PASS gift card: invoice pdf 27028 bytes
+PASS gift card: no JS errors 
+
+52/52 passed

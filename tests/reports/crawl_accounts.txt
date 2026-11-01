@@ -1,0 +1,19 @@
+accounts@musafir.test nav links 7
+ok   index /admin | Good morning, Kazi
+ok   index /admin/bookings | Bookings
+ok    edit /admin/bookings/52 | MSF-26-84043ConfirmedPaid
+ok   index /admin/inquiries | Enquiries
+ok    edit /admin/inquiries/4/edit | E2E Site Test
+ok   index /admin/leads | Sales leads
+ok    edit /admin/leads/16/edit | E2E Site Test
+ok    new  /admin/leads/create | New lead
+ok   index /admin/payments | Payments
+ok    edit /admin/payments/52 | #52
+ok   index /admin/refunds | Refunds
+ok    edit /admin/bookings/45#refunds | MSF-26-48155RefundedRefunded
+ok   index /admin/tickets | Support tickets
+ok    edit /admin/tickets/8 | Special request — MSF-26-49388
+ok   extra http://127.0.0.1:8000/admin/profile | My profile
+ok   denied /settings?group=payments 403
+ok   denied /media 403
+FAILS 0

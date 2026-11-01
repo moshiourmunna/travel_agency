@@ -1,0 +1,81 @@
+PASS en-1440: signed-out redirect /en/login?next=%2Fen%2Faccount%2Fwallet
+PASS en-1440: password sign-in /en/account
+PASS en-1440: / renders My account h1s=1 overflow=0
+PASS en-1440: /bookings renders My bookings h1s=1 overflow=0
+PASS en-1440: /bookings/MSF-26-48213 renders Maldives Water-Villa Honeymoon h1s=1 overflow=0
+PASS en-1440: /bookings/MSF-26-48377/ticket renders E-ticket MSF-26-48377 h1s=1 overflow=0
+PASS en-1440: /visa renders Visa tracker h1s=1 overflow=0
+PASS en-1440: /trips renders Saved trips & wishlist h1s=1 overflow=0
+PASS en-1440: /wallet renders Wallet & Miles h1s=1 overflow=0
+PASS en-1440: /payments renders Payments & instalments h1s=1 overflow=0
+PASS en-1440: /referrals renders Refer & earn h1s=1 overflow=0
+PASS en-1440: /travellers renders Travellers & passports h1s=1 overflow=0
+PASS en-1440: /notifications renders Notifications h1s=1 overflow=0
+PASS en-1440: /support renders Help & support h1s=1 overflow=0
+PASS en-1440: /reviews renders My reviews h1s=1 overflow=0
+PASS en-1440: /profile renders Profile h1s=1 overflow=0
+PASS en-1440: /settings renders Settings & security h1s=1 overflow=0
+PASS en-1440: no JS errors 
+PASS bn-390: signed-out redirect /bn/login?next=%2Fbn%2Faccount%2Fwallet
+PASS bn-390: password sign-in /bn/account
+PASS bn-390: / renders মাই অ্যাকাউন্ট h1s=1 overflow=0
+PASS bn-390: /bookings renders আমার বুকিং h1s=1 overflow=0
+PASS bn-390: /bookings/MSF-26-48213 renders মালদ্বীপ ওয়াটার-ভিলা হানিমুন h1s=1 overflow=0
+PASS bn-390: /bookings/MSF-26-48377/ticket renders ই-টিকিট MSF-26-48377 h1s=1 overflow=0
+PASS bn-390: /visa renders ভিসা ট্র্যাকার h1s=1 overflow=0
+PASS bn-390: /trips renders সংরক্ষিত ট্রিপ ও উইশলিস্ট h1s=1 overflow=0
+PASS bn-390: /wallet renders ওয়ালেট ও মাইলস h1s=1 overflow=0
+PASS bn-390: /payments renders পেমেন্ট ও কিস্তি h1s=1 overflow=0
+PASS bn-390: /referrals renders রেফার করে আয় h1s=1 overflow=0
+PASS bn-390: /travellers renders ভ্রমণকারী ও পাসপোর্ট h1s=1 overflow=0
+PASS bn-390: /notifications renders নোটিফিকেশন h1s=1 overflow=0
+PASS bn-390: /support renders সাহায্য ও সাপোর্ট h1s=1 overflow=0
+PASS bn-390: /reviews renders আমার রিভিউ h1s=1 overflow=0
+PASS bn-390: /profile renders প্রোফাইল h1s=1 overflow=0
+PASS bn-390: /settings renders সেটিংস ও নিরাপত্তা h1s=1 overflow=0
+PASS bn-390: no JS errors 
+PASS en-390-dark: signed-out redirect /en/login?next=%2Fen%2Faccount%2Fwallet
+PASS en-390-dark: password sign-in /en/account
+PASS en-390-dark: / renders My account h1s=1 overflow=0
+PASS en-390-dark: /bookings renders My bookings h1s=1 overflow=0
+PASS en-390-dark: /bookings/MSF-26-48213 renders Maldives Water-Villa Honeymoon h1s=1 overflow=0
+PASS en-390-dark: /bookings/MSF-26-48377/ticket renders E-ticket MSF-26-48377 h1s=1 overflow=0
+PASS en-390-dark: /visa renders Visa tracker h1s=1 overflow=0
+PASS en-390-dark: /trips renders Saved trips & wishlist h1s=1 overflow=0
+PASS en-390-dark: /wallet renders Wallet & Miles h1s=1 overflow=0
+PASS en-390-dark: /payments renders Payments & instalments h1s=1 overflow=0
+PASS en-390-dark: /referrals renders Refer & earn h1s=1 overflow=0
+PASS en-390-dark: /travellers renders Travellers & passports h1s=1 overflow=0
+PASS en-390-dark: /notifications renders Notifications h1s=1 overflow=0
+PASS en-390-dark: /support renders Help & support h1s=1 overflow=0
+PASS en-390-dark: /reviews renders My reviews h1s=1 overflow=0
+PASS en-390-dark: /profile renders Profile h1s=1 overflow=0
+PASS en-390-dark: /settings renders Settings & security h1s=1 overflow=0
+PASS en-390-dark: no JS errors 
+PASS notifications: mark read 3→2→0
+PASS notifications: filter chips visa,visa
+PASS profile: save + completeness Add a profile photo to finish.
+PASS profile: NID validation 
+PASS profile: avatar upload 
+PASS settings: switch persists 
+PASS settings: alerts locked 
+PASS settings: wrong current password Your current password is not right.
+PASS settings: data export musafir-data-01M6A560FFAFE04Z7WHY7BZ9PV.json
+PASS travellers: add 3→4
+PASS travellers: passport masked 
+PASS travellers: delete 
+PASS support: new request opens Special request — MSF-26-49388
+PASS support: reply + attachment 
+PASS support: attachment download 200
+PASS reviews: submitted to moderation 
+PASS wallet: bad gift code error 
+PASS wallet: top-up credited /en/account/wallet
+PASS payments: instalment paid /en/booking-confirmed?ref=MSF-26-48213&key=01M6A56QAF8A9KDXGA4S7V23GV
+PASS trips: wishlist remove 4
+2fa switch true after sign-out http://localhost:3000/en/login
+PASS two-step: code step shown 980653 http://localhost:3000/en/login?next=/en/account
+PASS two-step: signed in with code 
+PASS legacy /account/e-ticket http://localhost:3000/en/account/bookings/MSF-26-48377/ticket
+PASS writes: no JS errors 
+
+78/78 checks passed

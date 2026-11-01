@@ -1,0 +1,26 @@
+{
+  "preset": "desktop",
+  "at": "2026-11-01T00:01:18.860Z",
+  "pages": [
+    {
+      "page": "/en/hotels",
+      "perf": 99,
+      "a11y": 100,
+      "bp": 100,
+      "seo": 100,
+      "lcp": "1.0 s",
+      "cls": "0.005",
+      "tbt": "0 ms",
+      "fails": [
+        "uses-long-cache-ttl (16 resources found)",
+        "unused-css-rules (Est savings of 16 KiB)",
+        "unused-javascript (Est savings of 27 KiB)",
+        "uses-responsive-images (Est savings of 247 KiB)",
+        "legacy-javascript (Est savings of 13 KiB)",
+        "dom-size (982 elements)",
+        "bf-cache (2 failure reasons)",
+        "cache-insight (Est savings of 1,094 KiB)"
+      ]
+    }
+  ]
+}

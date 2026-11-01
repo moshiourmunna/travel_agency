@@ -1,0 +1,206 @@
+{
+  "preset": "mobile",
+  "at": "2026-10-31T23:57:37.004Z",
+  "pages": [
+    {
+      "page": "/en",
+      "perf": 88,
+      "a11y": 100,
+      "bp": 100,
+      "seo": 100,
+      "lcp": "2.9 s",
+      "cls": "0",
+      "tbt": "320 ms",
+      "fails": [
+        "largest-contentful-paint (2.9 s)",
+        "total-blocking-time (320 ms)",
+        "max-potential-fid (300 ms)",
+        "interactive (4.5 s)",
+        "largest-contentful-paint-element (2,930 ms)",
+        "uses-long-cache-ttl (12 resources found)",
+        "offscreen-images (Est savings of 4 KiB)",
+        "render-blocking-resources (Est savings of 0 ms)"
+      ]
+    },
+    {
+      "page": "/bn",
+      "perf": 71,
+      "a11y": 100,
+      "bp": 100,
+      "seo": 100,
+      "lcp": "4.1 s",
+      "cls": "0",
+      "tbt": "570 ms",
+      "fails": [
+        "largest-contentful-paint (4.1 s)",
+        "total-blocking-time (570 ms)",
+        "max-potential-fid (340 ms)",
+        "interactive (5.4 s)",
+        "mainthread-work-breakdown (3.2 s)",
+        "largest-contentful-paint-element (4,130 ms)",
+        "uses-long-cache-ttl (13 resources found)",
+        "offscreen-images (Est savings of 4 KiB)"
+      ]
+    },
+    {
+      "page": "/en/tours",
+      "perf": 93,
+      "a11y": 100,
+      "bp": 100,
+      "seo": 100,
+      "lcp": "3.2 s",
+      "cls": "0.012",
+      "tbt": "50 ms",
+      "fails": [
+        "largest-contentful-paint (3.2 s)",
+        "max-potential-fid (150 ms)",
+        "interactive (4.4 s)",
+        "largest-contentful-paint-element (3,160 ms)",
+        "uses-long-cache-ttl (10 resources found)",
+        "offscreen-images (Est savings of 4 KiB)",
+        "render-blocking-resources (Est savings of 210 ms)",
+        "unused-css-rules (Est savings of 16 KiB)"
+      ]
+    },
+    {
+      "page": "/en/tours/coxs-bazar-saint-martin",
+      "perf": 93,
+      "a11y": 100,
+      "bp": 100,
+      "seo": 100,
+      "lcp": "3.1 s",
+      "cls": "0",
+      "tbt": "50 ms",
+      "fails": [
+        "largest-contentful-paint (3.1 s)",
+        "interactive (4.2 s)",
+        "largest-contentful-paint-element (3,130 ms)",
+        "uses-long-cache-ttl (7 resources found)",
+        "offscreen-images (Est savings of 4 KiB)",
+        "render-blocking-resources (Est savings of 130 ms)",
+        "unused-css-rules (Est savings of 16 KiB)",
+        "unused-javascript (Est savings of 27 KiB)"
+      ]
+    },
+    {
+      "page": "/en/destinations",
+      "perf": 95,
+      "a11y": 100,
+      "bp": 100,
+      "seo": 100,
+      "lcp": "3.0 s",
+      "cls": "0",
+      "tbt": "30 ms",
+      "fails": [
+        "largest-contentful-paint (3.0 s)",
+        "interactive (4.0 s)",
+        "largest-contentful-paint-element (3,010 ms)",
+        "uses-long-cache-ttl (12 resources found)",
+        "offscreen-images (Est savings of 4 KiB)",
+        "render-blocking-resources (Est savings of 110 ms)",
+        "unused-css-rules (Est savings of 17 KiB)",
+        "unused-javascript (Est savings of 28 KiB)"
+      ]
+    },
+    {
+      "page": "/en/visa",
+      "perf": 95,
+      "a11y": 100,
+      "bp": 100,
+      "seo": 100,
+      "lcp": "3.0 s",
+      "cls": "0",
+      "tbt": "30 ms",
+      "fails": [
+        "largest-contentful-paint (3.0 s)",
+        "interactive (4.6 s)",
+        "largest-contentful-paint-element (3,010 ms)",
+        "uses-long-cache-ttl (14 resources found)",
+        "offscreen-images (Est savings of 4 KiB)",
+        "render-blocking-resources (Est savings of 250 ms)",
+        "unused-css-rules (Est savings of 17 KiB)",
+        "unused-javascript (Est savings of 28 KiB)"
+      ]
+    },
+    {
+      "page": "/en/blog",
+      "perf": 93,
+      "a11y": 100,
+      "bp": 100,
+      "seo": 100,
+      "lcp": "3.2 s",
+      "cls": "0",
+      "tbt": "30 ms",
+      "fails": [
+        "largest-contentful-paint (3.2 s)",
+        "interactive (4.0 s)",
+        "largest-contentful-paint-element (3,230 ms)",
+        "uses-long-cache-ttl (10 resources found)",
+        "offscreen-images (Est savings of 4 KiB)",
+        "render-blocking-resources (Est savings of 260 ms)",
+        "unused-css-rules (Est savings of 17 KiB)",
+        "unused-javascript (Est savings of 28 KiB)"
+      ]
+    },
+    {
+      "page": "/en/contact",
+      "perf": 94,
+      "a11y": 100,
+      "bp": 100,
+      "seo": 100,
+      "lcp": "3.1 s",
+      "cls": "0",
+      "tbt": "30 ms",
+      "fails": [
+        "largest-contentful-paint (3.1 s)",
+        "largest-contentful-paint-element (3,070 ms)",
+        "uses-long-cache-ttl (4 resources found)",
+        "offscreen-images (Est savings of 4 KiB)",
+        "render-blocking-resources (Est savings of 140 ms)",
+        "unused-css-rules (Est savings of 17 KiB)",
+        "unused-javascript (Est savings of 27 KiB)",
+        "legacy-javascript (Est savings of 13 KiB)"
+      ]
+    },
+    {
+      "page": "/en/faq",
+      "perf": 98,
+      "a11y": 100,
+      "bp": 100,
+      "seo": 100,
+      "lcp": "2.5 s",
+      "cls": "0",
+      "tbt": "40 ms",
+      "fails": [
+        "max-potential-fid (130 ms)",
+        "uses-long-cache-ttl (4 resources found)",
+        "offscreen-images (Est savings of 4 KiB)",
+        "render-blocking-resources (Est savings of 110 ms)",
+        "unused-css-rules (Est savings of 17 KiB)",
+        "unused-javascript (Est savings of 28 KiB)",
+        "legacy-javascript (Est savings of 13 KiB)",
+        "cache-insight (Est savings of 48 KiB)"
+      ]
+    },
+    {
+      "page": "/en/hotels",
+      "perf": 94,
+      "a11y": 100,
+      "bp": 100,
+      "seo": 100,
+      "lcp": "3.1 s",
+      "cls": "0",
+      "tbt": "30 ms",
+      "fails": [
+        "largest-contentful-paint (3.1 s)",
+        "interactive (4.3 s)",
+        "largest-contentful-paint-element (3,100 ms)",
+        "uses-long-cache-ttl (10 resources found)",
+        "offscreen-images (Est savings of 4 KiB)",
+        "render-blocking-resources (Est savings of 380 ms)",
+        "unused-css-rules (Est savings of 16 KiB)",
+        "unused-javascript (Est savings of 27 KiB)"
+      ]
+    }
+  ]
+}

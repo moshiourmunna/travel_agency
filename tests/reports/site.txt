@@ -1,0 +1,15 @@
+PASS home: hero search → tours listing with query 1 results
+PASS tours: sort writes ?sort= and keeps results 
+PASS tours: list view toggle 
+PASS language switch keeps path + query 
+PASS theme toggle persists across reload 
+PASS currency switch → USD prices ok
+PASS wishlist: heart → count → wishlist page 
+PASS tour detail: h1, price, JSON-LD TouristTrip, lightbox 
+PASS contact form validation + submit 
+PASS newsletter signup (footer) 
+PASS 404: status + title + search 
+PASS mobile: drawer opens, Esc closes, body scroll lock 
+PASS mobile: bottom bar + booking sheet on tour detail 
+PASS no uncaught page errors 
+{"suite":"site_e2e","pass":14,"total":14}

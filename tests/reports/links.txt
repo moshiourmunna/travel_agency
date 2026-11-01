@@ -1,0 +1,7 @@
+{
+ "base": "http://localhost:3000",
+ "pages_crawled": 214,
+ "unique_internal_urls": 754,
+ "external_origins": 12,
+ "broken": 0
+}

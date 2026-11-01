@@ -1,0 +1,12 @@
+payments 8
+bookings (+items/travellers/documents/instalments by cascade) 7
+gift cards 1
+inquiries 1
+leads 1
+newsletter 1
+users 0
+ticket messages 2
+support tickets 1
+reviews 1
+travellers 1
+Removed 24 rows.

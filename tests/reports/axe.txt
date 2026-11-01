@@ -1,0 +1,7 @@
+{
+ "base": "http://localhost:3000",
+ "scans": 232,
+ "clean": 232,
+ "violating_scans": 0,
+ "rules": []
+}

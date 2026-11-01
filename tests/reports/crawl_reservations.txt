@@ -1,0 +1,24 @@
+reservations@musafir.test nav links 8
+ok   index /admin | Good morning, Rafi
+ok   index /admin/bookings | Bookings
+ok    edit /admin/bookings/52 | MSF-26-84043ConfirmedPaid
+ok   index /admin/inquiries | Enquiries
+ok    edit /admin/inquiries/4/edit | E2E Site Test
+ok   index /admin/leads | Sales leads
+ok    edit /admin/leads/16/edit | E2E Site Test
+ok    new  /admin/leads/create | New lead
+ok   index /admin/customers | Customers
+ok    edit /admin/customers/31/edit | Arif Khan
+ok    new  /admin/customers/create | New customer
+ok   index /admin/newsletter | Newsletter subscribers
+ok    edit /admin/newsletter/4/edit | e2e-site@musafir.test
+ok    new  /admin/newsletter/create | New subscriber
+ok   index /admin/tickets | Support tickets
+ok    edit /admin/tickets/8 | Special request — MSF-26-49388
+ok   index /admin/agents | B2B agents
+ok    edit /admin/agents/5/edit | AG-145
+ok    new  /admin/agents/create | New agent
+ok   extra http://127.0.0.1:8000/admin/profile | My profile
+ok   denied /settings?group=payments 403
+ok   denied /media 403
+FAILS 0

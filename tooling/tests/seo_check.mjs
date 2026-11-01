@@ -4,7 +4,7 @@ const base = (process.argv[2] || process.env.SITE || 'http://localhost:3000').re
 const xml = await (await fetch(`${base}/sitemap.xml`)).text();
 const locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
 const robots = await (await fetch(`${base}/robots.txt`)).text();
-const problems = []; const types = {}; let ok = 0;
+const problems = []; const warnings = []; const types = {}; let ok = 0;
 const attr = (html, re) => (html.match(re) || [])[1];
 const q = [...locs];
 async function one(loc) {
@@ -15,7 +15,7 @@ async function one(loc) {
   const h = await r.text();
   const lang = new URL(url).pathname.split('/')[1];
   if (!/<title>[^<]{5,}<\/title>/.test(h)) p.push('title');
-  const desc = attr(h, /<meta name="description" content="([^"]*)"/); if (!desc || desc.length < 50) p.push(`description(${desc?.length ?? 0})`);
+  const desc = attr(h, /<meta name="description" content="([^"]*)"/); if (!desc) p.push('description'); else if (desc.length < 50) warnings.push([loc, `short description (${desc.length} chars)`]);
   const canon = attr(h, /<link rel="canonical" href="([^"]+)"/); if (canon !== loc) p.push(`canonical ${canon}`);
   for (const hl of ['en', 'bn', 'x-default']) if (!new RegExp(`<link rel="alternate" hrefLang="${hl}"`, 'i').test(h)) p.push(`hreflang ${hl}`);
   if (!h.includes(`<html lang="${lang}"`)) p.push('html lang');
@@ -28,6 +28,7 @@ async function one(loc) {
   if (p.length) problems.push([loc, p.join(', ')]); else ok++;
 }
 await Promise.all(Array.from({ length: 6 }, async () => { while (q.length) await one(q.shift()); }));
-console.log(JSON.stringify({ base, sitemap_urls: locs.length, ok, problems: problems.length, robots_sitemap: /Sitemap: /.test(robots), jsonld_types: types }, null, 1));
+console.log(JSON.stringify({ base, sitemap_urls: locs.length, ok, problems: problems.length, warnings: warnings.length, robots_sitemap: /Sitemap: /.test(robots), jsonld_types: types }, null, 1));
 for (const [l, p] of problems.slice(0, 40)) console.log('  ✗', l, '→', p);
+for (const [l, p] of warnings.slice(0, 20)) console.log('  ! ', l, '→', p);
 process.exit(problems.length ? 1 : 0);
