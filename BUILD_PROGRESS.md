@@ -254,7 +254,12 @@ Checks: `php artisan tinker /tmp/chk.php`-style smoke (every resource: columns/f
   cron schedule:run drains queue (QUEUE_VIA_SCHEDULE); backend/.htaccess for docroot=backend; Apache cache headers; Next build works with API down.
 - Verified in a clean git worktree: deploy-backend.sh on a scratch DB (prod mode) → seed → API/admin 200 → schedule:run starts queue worker;
   standalone build with API unreachable → server.js serves home/detail pages on demand, unknown slug 404.
-## Final sync — NEXT: DESKTOP-JL5D1F4 (online 06:05), DESKTOP-JIBO2KJ offline. PC extra step: `php artisan media-library:regenerate --only-missing` (new 1200w variant).
+## Final sync — IN PROGRESS (06:02 BDT)
+- [x] DESKTOP-JL5D1F4: git archive f836a18 (55 MB) → 14×4 MB chunks → C:\Users\m\msfm9, all chunk + merged sha256 OK, extracted (1405 files),
+  robocopy /E /XF .env .env.local (no deletes) → F:\projects\tour_travel; .env 6BF10B2A… and .env.local A2311882… unchanged.
+- [x] PC rebuild script C:\Users\m\msfm9\rebuild.ps1 (log rebuild.log): composer install OK, migrate --force (nothing to migrate), optimize:clear,
+  media-library:regenerate --only-missing 36/36. [ ] admin build, restart serve, next build/start, PC tests (scripts copied to %LOCALAPPDATA%\musafir-smoke + axe.min.js).
+- DESKTOP-JIBO2KJ offline at 06:05 and 06:13 BDT → not synced (still needs M6+final).
 
 ## RESUME HERE (when owner says "continue")
 1. M6 — DONE (only open item: sync PC #2 DESKTOP-JIBO2KJ when it is online). Original scope: Admin panel (Laravel + React, admin.<domain> configurable): RBAC roles from seeded staff logins, CRUD for every CMS/catalogue/commerce/CRM table,
