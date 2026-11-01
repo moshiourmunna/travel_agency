@@ -241,22 +241,28 @@ Checks: `php artisan tinker /tmp/chk.php`-style smoke (every resource: columns/f
   JSON-LD valid (TravelAgency, BreadcrumbList, TouristTrip, Product, Hotel, FAQPage, JobPosting, BlogPosting …); robots.txt ok; 404 noindex; API X-Robots-Tag.
   Only content note: 12 pages have short (<50 chars) meta descriptions (editable in admin → SEO).
 
-## M8 — IN PROGRESS (test campaign)  started 2026-11-01 05:10 BDT
-- [x] Box dev DB re-seeded (migrate:fresh --seed — box only, never on PCs), next rebuilt.
-- [x] New suites in tooling/tests: site_e2e.mjs (14 interaction checks), matrix.mjs (11 pages × 6 widths × light/dark × en/bn = 264 loads),
-  axe_check.mjs (29 pages × light/dark × en/bn × desktop/mobile = 232 scans, axe-core injected → portable), links_check.mjs, seo_check.mjs.
-- [x] Fixes found: home scrollers not keyboard-focusable, About stats low contrast (CountUp className), 404 lost its <title> after hydration.
-- [ ] Box campaign running via /workspace/m8_run.sh → /tmp/m8/*.txt (so far: Pest 161/161, site 14/14, portal 78/78, checkout 52/52)
-- [ ] TEST_REPORT.md, e2e data cleanup, PC campaign
-## M9 — IN PROGRESS: scripts/{deploy-backend,build-frontend,package-release}.sh + DEPLOYMENT.md committed (0b14c0e); verify standalone + no-API build next.
+## M8 — box DONE (test campaign)  2026-11-01 05:10–06:05 BDT — see TEST_REPORT.md (counts) + tests/reports/ (raw)
+- Box: Pest 162/162 · site 14/14 · portal 78/78 · checkout 52/52 · admin_e2e 30/30 · admin crawl 7 roles 460 pages 0 errors · matrix 264/264 ·
+  axe 232/232 clean · links 754 URLs 0 broken · SEO 208/208 (12 short-description warnings) · Lighthouse mobile 85–98 (en ≥91), desktop 98–100, a11y/bp/SEO 100.
+- Fixed: focusable scrollers, About contrast, 404 title, new-slug 404 (dynamicParams). `php artisan musafir:e2e-cleanup` removes E2E rows (ran on box).
+- Runner: /workspace/m8_run.sh (box-only helper). [ ] PC campaign (after final sync).
+## M9 — DONE (deployability)  05:30–06:00 BDT
+- scripts/deploy-backend.sh (composer/COMPOSER_CMD/SKIP_COMPOSER, APP_KEY first time, admin build if missing, migrate --force, storage:link unless
+  PUBLIC_DISK_ROOT, optimize, queue:restart), scripts/build-frontend.sh (NEXT_OUTPUT=standalone → .next/standalone/frontend/server.js),
+  scripts/package-release.sh (upload-ready tarballs for hosts without build tools). DEPLOYMENT.md checklist.
+- Env-only config verified (no hardcoded hosts except dev defaults); TRUSTED_PROXIES via config (config:cache safe); database cache/session/queue +
+  cron schedule:run drains queue (QUEUE_VIA_SCHEDULE); backend/.htaccess for docroot=backend; Apache cache headers; Next build works with API down.
+- Verified in a clean git worktree: deploy-backend.sh on a scratch DB (prod mode) → seed → API/admin 200 → schedule:run starts queue worker;
+  standalone build with API unreachable → server.js serves home/detail pages on demand, unknown slug 404.
+## Final sync — NEXT: DESKTOP-JL5D1F4 (online 06:05), DESKTOP-JIBO2KJ offline. PC extra step: `php artisan media-library:regenerate --only-missing` (new 1200w variant).
 
 ## RESUME HERE (when owner says "continue")
 1. M6 — DONE (only open item: sync PC #2 DESKTOP-JIBO2KJ when it is online). Original scope: Admin panel (Laravel + React, admin.<domain> configurable): RBAC roles from seeded staff logins, CRUD for every CMS/catalogue/commerce/CRM table,
    settings UI (incl. commerce.referral_*, review_miles, cancellation_fee, payments.gateways), media library, bookings/payments ops (bank-slip verify, refunds),
    tickets, reviews moderation, translations, menus/home sections, SEO/redirects. Admin save → POST frontend /api/revalidate with `{ expire: 0 }` for instant updates.
 2. M7 — DONE.
-3. M8 — IN PROGRESS (see M8 section).
-4. M9 — deployability (scope changed by owner 2026-11-01): make sure the project deploys on any hosting (VPS, shared/cPanel, PaaS) — production build works, env-driven config, no hardcoded hosts/paths, runs without Redis/root; plus a short DEPLOYMENT.md checklist only (no step-by-step guides).
+3. M8 — box DONE; PC campaign pending final sync.
+4. M9 — DONE. Scope was: deployability (scope changed by owner 2026-11-01): make sure the project deploys on any hosting (VPS, shared/cPanel, PaaS) — production build works, env-driven config, no hardcoded hosts/paths, runs without Redis/root; plus a short DEPLOYMENT.md checklist only (no step-by-step guides).
 - PC transfer rules: 4 MB chunks, sequential, CopyFromBox into C:\Users\m then move into F:\projects\tour_travel; never overwrite .env; sha256 verify.
 - Run on PC: backend `php -d upload_max_filesize=12M -d post_max_size=14M artisan serve --host=127.0.0.1 --port=8000`; frontend `npm run start` → http://localhost:3000
 
