@@ -27,8 +27,25 @@ Notes
 - Lighthouse scores vary by ±3 between runs on the box. The first run gave /en 88 and /bn 71, with the box busy; a re-run on an idle box gave the numbers above. A single desktop /en/hotels run failed to load and scored 99 on re-run.
 - Fixed during M8: home scrollers were not keyboard-focusable; the About stats had low contrast; the 404 page lost its `<title>` after hydration; and slugs created after the build returned 404 (`dynamicParams`).
 
-## PC results (DESKTOP-JL5D1F4, Windows, Laragon PHP 8.3 / MySQL 8.4, Chrome)
-_Filled in after the final sync — see below._
+## PC results: all green (DESKTOP-JL5D1F4, Windows, Laragon PHP 8.3.30 / MySQL 8.4.3, Node 22, Chrome)
+Run on 1 Nov 2026, 06:30–07:30 (UTC+6), against the synced tree (f836a18) and the PC's own database (not re-seeded). The runner is `C:\Users\m\msfm9\pctests.ps1`, and its outputs are in `C:\Users\m\msfm9\t\`.
+
+| Suite | Result |
+|---|---|
+| Pest (DB musafir_test, `OPENSSL_CONF` set for the Nagad RSA test) | **162/162**, 3,067 assertions |
+| site_e2e | **14/14** |
+| checkout_e2e | **52/52** |
+| pc_portal_smoke (state-tolerant portal check; `portal_e2e` needs a fresh seed, and the PC DB is never re-seeded) | **15/15** |
+| pc_smoke (13 pages × desktop/mobile, dark mode) | **27/27** |
+| admin_e2e (all staff roles → site/portal, 2FA) | **30/30** |
+| admin crawl, 7 roles | **460 pages, 0 errors** (owner 169, editor 116, manager 106, support 22, agent 22, finance 17, visa 8) |
+| matrix | **264/264** |
+| axe | **232/232 scans, 0 violations** |
+| links | **754 URLs, 0 broken** |
+| SEO | **208/208** (the same 12 short-description warnings) |
+| E2E cleanup (`php artisan musafir:e2e-cleanup`) | 19 rows removed |
+
+Lighthouse was not run on the PC; the box numbers above are the reference. DESKTOP-JIBO2KJ was offline during the final sync, so it is not tested.
 
 ## How to run
 ```bash

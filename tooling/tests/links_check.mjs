@@ -23,10 +23,10 @@ function collect(page, html) {
   for (const m of html.matchAll(/<script\b[^>]*\ssrc="([^"]+)"/g)) add(m[1]);
 }
 const q = [...pages]; let crawled = 0;
-await Promise.all(Array.from({ length: 6 }, async () => { while (q.length) { const p = q.shift(); const r = await fetch(base + p); crawled++; seen.set(base + p, r.status); collect(p, await r.text()); } }));
+await Promise.all(Array.from({ length: 6 }, async () => { while (q.length) { const p = q.shift(); const r = await fetch(base + p, { signal: AbortSignal.timeout(120000) }); crawled++; seen.set(base + p, r.status); collect(p, await r.text()); } }));
 const todo = [...refs.keys()].filter((u) => !seen.has(u));
 await Promise.all(Array.from({ length: 8 }, async () => {
-  while (todo.length) { const u = todo.shift(); try { const r = await fetch(u, { redirect: 'follow' }); seen.set(u, r.status); await r.arrayBuffer(); } catch (e) { seen.set(u, 0); } }
+  while (todo.length) { const u = todo.shift(); try { const r = await fetch(u, { redirect: 'follow', signal: AbortSignal.timeout(60000) }); seen.set(u, r.status); await r.arrayBuffer(); } catch (e) { seen.set(u, 0); } }
 }));
 const broken = [...seen].filter(([, s]) => s >= 400 || s === 0).map(([u, s]) => ({ url: u, status: s, from: refs.get(u) || '(page)' }));
 console.log(JSON.stringify({ base, pages_crawled: crawled, unique_internal_urls: seen.size, external_origins: ext.size, broken: broken.length }, null, 1));
