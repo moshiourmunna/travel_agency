@@ -284,3 +284,16 @@ Checks: `php artisan tinker /tmp/chk.php`-style smoke (every resource: columns/f
 - Pest on PC (DB musafir_test): 114/115; the Nagad RSA test fails only because Windows PHP lacks OPENSSL_CONF for openssl_pkey_new in the test's key
   generation. With OPENSSL_CONF=C:\laragon\bin\php\php-8.4.25-Win32-vs17-x64\extras\ssl\openssl.cnf GatewaysTest 6/6 passes. Not a code bug.
 - Servers left RUNNING on this PC (php artisan serve :8000, next start :3000).
+
+## Final delivery — DESKTOP-JIBO2KJ (6cbf210c), E:\projects\haj_agency\musafir (2026-11-03 18:58–19:36 BDT)
+- New folder only; E:\projects\haj_agency\hajj_agency_laravel(.zip), tour_travel, tour_travel_full, furniture untouched. Old DBs musafir/musafir_test untouched.
+- git archive 62b86f6 (55 MB, sha256 940f6dda…) → 14×4 MB chunks (parallel CopyFromBox OK) → C:\Users\m\msffinal, all chunk + merged sha256 OK,
+  extracted 1405 files; chunks + tar deleted after.
+- Ports: :8000 is held by an unrelated app (E:\projects\inventory\pos-with-inventory), 3100/5173 Shekor, 3000 free → Musafir final on **8010 / 3010**.
+- Setup (tooling/pc/jibo2kj/setup.ps1, log C:\Users\m\msffinal\setup.log): DBs musafir_final + musafir_final_test, .env from .env.example
+  (APP_URL :8010, FRONTEND_URL :3010, new APP_KEY + random REVALIDATE_SECRET shared with frontend/.env.local), composer install 3 min,
+  migrate --seed 1.5 min, storage:link (junction), admin npm ci+build, artisan serve :8010, frontend npm ci, next build 2.5 min, next start -p 3010.
+  Start scripts in the folder: start-backend.cmd, start-frontend.cmd, rebuild-frontend.cmd.
+- PC tests (tests.ps1 → C:\Users\m\msffinal\t): Pest 162/162 (3,067 assertions, DB musafir_final_test, OPENSSL_CONF set), pc_smoke 27/27, site 14/14,
+  pc_portal_smoke 15/15, checkout 52/52, admin_e2e 30/30, admin crawl 7 roles 460 pages 0 fails; musafir:e2e-cleanup removed 19 rows.
+- Servers left running (artisan serve :8010, next start :3010).
